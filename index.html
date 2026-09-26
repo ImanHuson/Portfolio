@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Iman Huson Muhammed Kasim</title>
+<meta name="description" content="Landing page for Iman Kasim's portfolio and site projects." />
+<style>
+  :root {
+    --bg: #060D1E;
+    --bg2: #0A1529;
+    --card: rgba(255,255,255,0.040);
+    --card-hover: rgba(255,255,255,0.072);
+    --border: rgba(255,255,255,0.08);
+    --teal: #00CFC0;
+    --blue: #4F6EF7;
+    --amber: #FF9248;
+    --txt: #DDE4F0;
+    --txt2: #8090AA;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% -10%, var(--bg2), var(--bg) 60%);
+    color: var(--txt);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 24px;
+  }
+  main { max-width: 640px; width: 100%; text-align: center; }
+  h1 { font-size: 1.5rem; margin: 0 0 6px; letter-spacing: 0.5px; }
+  p.sub { color: var(--txt2); margin: 0 0 40px; font-size: 0.95rem; }
+  .links { display: grid; gap: 16px; }
+  a.card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--txt);
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  a.card:hover { background: var(--card-hover); border-color: var(--teal); }
+  a.card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; }
+  a.card .title { font-size: 1.1rem; font-weight: 600; }
+  a.card .desc { font-size: 0.88rem; color: var(--txt2); }
+  a.card.portfolio .label { color: var(--teal); }
+  a.card.book .label { color: var(--amber); }
+  footer { margin-top: 40px; font-size: 0.78rem; color: var(--txt2); }
+  footer a { color: var(--txt2); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Iman Huson Muhammed Kasim</h1>
+  <p class="sub">CS student portfolio &amp; project builds</p>
+  <div class="links">
+    <a class="card portfolio" href="Iman_Kasim_Portfolio.html">
+      <span class="label">Main Portfolio</span>
+      <span class="title">Iman Kasim — CS Student Portfolio →</span>
+      <span class="desc">Projects, skills, education, and certifications.</span>
+    </a>
+    <a class="card book" href="book-site/">
+      <span class="label">Template Exercise · Fan Site</span>
+      <span class="title">The Red Rising Saga (Book Site) →</span>
+      <span class="desc">A design-system build exercise — unofficial fan tribute, not academic work.</span>
+    </a>
+  </div>
+  <footer>
+    <a href="https://github.com/ImanHuson/Portfolio" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+  </footer>
+</main>
+</body>
+</html>
