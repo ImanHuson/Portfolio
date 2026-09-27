@@ -38,7 +38,7 @@ export default function TenFaces() {
       type="button"
       data-js-only
       onClick={openClearance}
-      className="font-mono text-meta tracking-[0.16em] whitespace-nowrap text-bone uppercase underline decoration-red underline-offset-4 hover:text-red"
+      className="-my-1.5 py-1.5 font-mono text-meta tracking-[0.16em] whitespace-nowrap text-bone uppercase underline decoration-red underline-offset-4 hover:text-red"
     >
       {label}
     </button>

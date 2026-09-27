@@ -18,7 +18,9 @@ export type Person = {
   hover?: string[]; // title cycle micro-interaction
   motif?: string;
   question: string;
-  intro: string[]; // safe at firstBook - 1
+  // Safe at firstBook - 1. A {text, book} entry is a sentence that spoils
+  // something inside the character’s first book; it gets its own seal.
+  intro: (string | { text: string; book: number })[];
   lenses: {
     person: string;
     belief: string;
@@ -32,6 +34,10 @@ export type Person = {
    * before their first book, same rule as `intro`). Only lenses that can be
    * answered without plot are filled; the rest stay sealed until lensBook.
    * Legacy is never here: it is the ending by definition. */
+  /** What to call them before clearance `book`: their full name or epithet
+   * would spoil a reveal (Mustang’s family, the Jackal’s identity, whose son
+   * Pax is). Static metadata always uses the cover. */
+  cover?: { name: string; epithet: string; book: number };
   early?: { book: number; lenses: Partial<Record<"person" | "belief" | "weapon" | "relationship" | "wound", string>> };
   dossier: Answer[];
   bonds?: { name: string; note: string; book: number }[];
@@ -101,9 +107,9 @@ export const PEOPLE: Person[] = [
     ],
     bonds: [
       { name: "Eo", note: "The beginning.", book: 1 },
-      { name: "Virginia", note: "Love, marriage, and the only equal in every room he enters.", book: 1 },
+      { name: "Mustang", note: "Love, marriage, and the only equal in every room he enters.", book: 3 },
       { name: "Sevro", note: "Brotherhood.", book: 1 },
-      { name: "Cassius", note: "Friendship, blood, forgiveness.", book: 1 },
+      { name: "Cassius", note: "Friendship, blood, forgiveness.", book: 3 },
       { name: "Ragnar", note: "Trust across a manufactured divide.", book: 2 },
       { name: "Lysander", note: "Opposing visions of civilization.", book: 4 },
       { name: "Pax", note: "The life he is fighting to preserve.", book: 4 },
@@ -111,6 +117,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "virginia",
+    cover: { name: "Mustang", epithet: "Of House Minerva", book: 1 },
     name: "Virginia au Augustus",
     epithet: "Mustang",
     color: "Gold",
@@ -122,7 +129,8 @@ export const PEOPLE: Person[] = [
     question: "Can you build a humane government with people trained by tyranny?",
     intro: [
       "Virginia is easy to flatten into the genius. Don’t. Her defining trait is not intelligence. It is understanding people: a room, a government, a family, an enemy. Sometimes Darrow.",
-      "She was born inside the machine Darrow wanted to destroy, the daughter of the ArchGovernor who hanged his wife. She understood its strength and its rot.",
+      "She was born inside the machine Darrow wanted to destroy, and she understood both its strength and its rot.",
+      { text: "She is the daughter of Nero au Augustus, the ArchGovernor who hanged Darrow’s wife.", book: 1 },
     ],
     lenses: {
       person: "Nero au Augustus’s daughter and the Jackal’s twin, who chose to be neither of them.",
@@ -170,7 +178,8 @@ export const PEOPLE: Person[] = [
     question: "What remains when honor outlives the people who taught you what honor meant?",
     intro: [
       "Cassius is contradiction. Beautiful. Arrogant. Funny. Vain. Loyal. Petty. Romantic. Grieving. And, eventually, capable of enormous grace.",
-      "He begins as Darrow’s friend in House Mars. Then Darrow kills his brother Julian in the Passage, and one fact destroys everything.",
+      "He begins as Darrow’s friend in House Mars.",
+      { text: "Then Darrow kills his brother Julian in the Passage, and one fact destroys everything.", book: 1 },
     ],
     lenses: {
       person: "A Bellona son raised to be a perfect knight, who had to learn which parts of that were worth keeping.",
@@ -253,6 +262,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "pax",
+    cover: { name: "Pax", epithet: "The First Child", book: 3 },
     name: "Pax au Augustus",
     epithet: "The First Child",
     color: "No Color designation",
@@ -488,6 +498,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "the-jackal",
+    cover: { name: "The Jackal", epithet: "Of House Pluto", book: 1 },
     name: "Adrius au Augustus",
     epithet: "The Jackal",
     color: "Gold",
@@ -498,8 +509,9 @@ export const PEOPLE: Person[] = [
     motif: "A chess piece swept off the board.",
     question: "What happens when someone learns every lesson of the Society except mercy?",
     intro: [
-      "Every revolution needs someone who shows what the old world produces when it works exactly as designed. Adrius au Augustus is that person.",
-      "Virginia’s twin. Nero’s son. The most intelligent monster in the saga.",
+      "Every revolution needs someone who shows what the old world produces when it works exactly as designed. The Jackal is that person.",
+      "The most intelligent monster in the saga.",
+      { text: "His name is Adrius au Augustus: Virginia’s twin, Nero’s son.", book: 1 },
     ],
     lenses: {
       person: "The son Nero au Augustus never loved enough, and who never forgave him for it.",
@@ -535,3 +547,9 @@ export const PEOPLE: Person[] = [
 ];
 
 export const getPerson = (slug: string) => PEOPLE.find((p) => p.slug === slug);
+
+/** Name and epithet as far as this clearance may know them. */
+export const shownAs = (p: Person, clearance: number) =>
+  p.cover && clearance < p.cover.book ? { name: p.cover.name, epithet: p.cover.epithet } : { name: p.name, epithet: p.epithet };
+/** The always-safe version, for static text (titles, alt, no-JS). */
+export const safeAs = (p: Person) => shownAs(p, 0);

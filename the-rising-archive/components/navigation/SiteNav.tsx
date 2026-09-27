@@ -50,7 +50,7 @@ export default function SiteNav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 h-[var(--nav-h)] border-b border-line/70 bg-void/80 backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-[1400px] items-center gap-8 px-5 md:px-8">
-        <Link href="/" className="font-display text-lg leading-none font-bold tracking-[0.08em] text-bone uppercase">
+        <Link href="/" className="-my-3 py-3 font-display text-lg leading-none font-bold tracking-[0.08em] text-bone uppercase">
           The Red Rising Archive
         </Link>
         <nav aria-label="Archive" className="hidden xl:block">

@@ -98,7 +98,7 @@ export default function Timeline() {
                       aria-controls={`node-${node.slug}`}
                       onClick={() => setOpen(isOpen ? null : node.slug)}
                       className={cn(
-                        "text-left font-display text-h3 leading-none font-bold uppercase transition-colors",
+                        "-my-1 py-1 text-left font-display text-h3 leading-none font-bold uppercase transition-colors",
                         isOpen ? "text-bone" : "text-bone/70 hover:text-bone",
                       )}
                     >

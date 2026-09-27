@@ -80,8 +80,10 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
                 <SpoilerGate book={m.book} compact>
                   <p className="font-serif text-3xl text-bone">{m.name}</p>
                   <p className="mt-1 text-ash">{m.note}</p>
+                  {/* Only seal the fate separately when it spoils a later book
+                      than the member does; otherwise it is one seal, not two. */}
                   {m.fate && (
-                    <SpoilerGate book={m.fate.book} compact className="mt-3">
+                    <SpoilerGate book={m.fate.book > m.book ? m.fate.book : 0} compact className="mt-3">
                       <p className="mt-3 border-l-2 border-red pl-4 text-bone/85">{m.fate.text}</p>
                     </SpoilerGate>
                   )}

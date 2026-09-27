@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PersonName from "@/components/people/PersonName";
 import Plate from "@/components/archive/Plate";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Stamp from "@/components/archive/Stamp";
-import { PEOPLE, getPerson, type Person } from "@/lib/data/people";
+import { PEOPLE, getPerson, safeAs, type Person } from "@/lib/data/people";
 import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
 import { cn } from "@/lib/utils";
 import Spotlight from "@/components/archive/Spotlight";
@@ -21,8 +22,8 @@ export async function generateMetadata({ params }: PageProps<"/people/[slug]">):
   const p = getPerson(slug);
   if (!p) return {};
   return {
-    title: `${p.name}, ${p.epithet}`,
-    description: `Archive dossier: ${p.name} (${p.epithet}) in the Red Rising Saga. ${p.face}. ${p.question}`,
+    title: `${safeAs(p).name}, ${safeAs(p).epithet}`,
+    description: `Archive dossier: ${safeAs(p).name} (${safeAs(p).epithet}) in the Red Rising Saga. ${p.face}. ${p.question}`,
     alternates: { canonical: "./" },
   };
 }
@@ -123,12 +124,12 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             <span>Dossier</span>
           </nav>
           {minotaur && (
-            <p className="mt-8 font-display text-2xl font-bold tracking-[0.3em] text-gold uppercase">{person.intro[0]}</p>
+            <p className="mt-8 font-display text-2xl font-bold tracking-[0.3em] text-gold uppercase">{person.intro[0] as string}</p>
           )}
-          <h1 className={cn("mt-6 max-w-[14ch] text-h1 leading-[0.88]", NAME_CLASS[person.register])}>{person.name}</h1>
+          <h1 className={cn("mt-6 max-w-[14ch] text-h1 leading-[0.88]", NAME_CLASS[person.register])}><PersonName person={person} /></h1>
           <div className="mt-6 flex items-center gap-4">
             <span aria-hidden className={cn("h-px w-12", RULE_CLASS[person.register])} />
-            <p className={cn("font-serif text-h3 italic", ACCENT_CLASS[person.register])}>{person.epithet}</p>
+            <p className={cn("font-serif text-h3 italic", ACCENT_CLASS[person.register])}><PersonName person={person} part="epithet" /></p>
           </div>
           <dl className="mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
             <div>
@@ -150,7 +151,7 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
           </dl>
           </div>
           <figure className="max-w-[560px] lg:justify-self-end">
-            <Plate src={`/images/people/${person.slug}.webp`} alt={`Archive relic for ${person.name}: ${person.motif}`} priority className="border border-line" sizes="(min-width: 1024px) 40vw, 100vw" />
+            <Plate src={`/images/people/${person.slug}.webp`} alt={`Archive relic for ${safeAs(person).name}: ${person.motif}`} priority className="border border-line" sizes="(min-width: 1024px) 40vw, 100vw" />
             <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive relic. {person.motif}</figcaption>
           </figure>
         </div>
@@ -160,11 +161,17 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
         <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[7fr_5fr]">
           <SpoilerGate book={person.firstBook - 1}>
             <div className="space-y-6">
-              {(minotaur ? person.intro.slice(1) : person.intro).map((p, i) => (
-                <Reveal key={i}>
-                  <p className="max-w-[58ch] text-lede text-bone/90">{p}</p>
-                </Reveal>
-              ))}
+              {(minotaur ? person.intro.slice(1) : person.intro).map((p, i) =>
+                typeof p === "string" ? (
+                  <Reveal key={i}>
+                    <p className="max-w-[58ch] text-lede text-bone/90">{p}</p>
+                  </Reveal>
+                ) : (
+                  <SpoilerGate key={i} book={p.book} compact>
+                    <p className="mt-4 max-w-[58ch] text-lede text-bone/90">{p.text}</p>
+                  </SpoilerGate>
+                ),
+              )}
             </div>
           </SpoilerGate>
           <aside className="space-y-10 md:border-l md:border-line md:pl-10">
@@ -229,11 +236,11 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
       <nav aria-label="Other dossiers" className="grid border-t border-line md:grid-cols-2">
         <Link href={`/people/${prev.slug}/`} className="group border-line p-8 transition-colors hover:bg-void-2 md:border-r md:p-12">
           <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Previous dossier</span>
-          <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[prev.register])}>{prev.name}</span>
+          <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[prev.register])}><PersonName person={prev} /></span>
         </Link>
         <Link href={`/people/${next.slug}/`} className="group p-8 text-right transition-colors hover:bg-void-2 md:p-12">
           <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Next dossier</span>
-          <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[next.register])}>{next.name}</span>
+          <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[next.register])}><PersonName person={next} /></span>
         </Link>
       </nav>
     </article>

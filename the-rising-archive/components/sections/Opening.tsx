@@ -193,7 +193,7 @@ export default function Opening() {
             e.preventDefault();
             lenis.scrollTo("#live-for-more", { immediate: true });
           }}
-          className="absolute right-5 bottom-5 font-mono text-meta tracking-[0.2em] text-ash-2 uppercase transition-colors hover:text-bone focus-visible:text-bone md:right-8 md:bottom-8"
+          className="absolute right-5 bottom-5 py-1.5 font-mono text-meta tracking-[0.2em] text-ash-2 uppercase transition-colors hover:text-bone focus-visible:text-bone md:right-8 md:bottom-8"
         >
           Skip the opening
         </a>

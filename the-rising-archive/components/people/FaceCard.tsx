@@ -4,7 +4,7 @@ import Link from "next/link";
 import Plate from "@/components/archive/Plate";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { LENSES, type LensKey, type Person } from "@/lib/data/people";
+import { LENSES, shownAs, type LensKey, type Person } from "@/lib/data/people";
 import { BOOK_TITLES } from "@/lib/data/spoilers";
 import { useArchive } from "@/components/providers/ArchiveProvider";
 import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
@@ -71,7 +71,8 @@ export default function FaceCard({
     setNoticed(false);
   };
 
-  const title = hover && active ? hover[cycle] : person.epithet;
+  const shown = shownAs(person, clearance);
+  const title = hover && active ? hover[cycle] : shown.epithet;
   const isApollonius = person.slug === "apollonius";
 
   return (
@@ -131,7 +132,7 @@ export default function FaceCard({
             {person.face}
           </span>
         </div>
-        <h3 className={cn("mt-5 text-4xl leading-[0.95] md:text-5xl", NAME_CLASS[person.register])}>{person.name}</h3>
+        <h3 className={cn("mt-5 text-4xl leading-[0.95] md:text-5xl", NAME_CLASS[person.register])}>{shown.name}</h3>
         <div className="mt-2 h-7 overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
             <motion.p

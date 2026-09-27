@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/typography/PageHeader";
 import TenFaces from "@/components/people/TenFaces";
-import { PEOPLE } from "@/lib/data/people";
+import { PEOPLE, safeAs } from "@/lib/data/people";
 
 export const metadata: Metadata = {
   title: "The Ten Faces of Power",
@@ -25,7 +25,7 @@ export default function PeoplePage() {
             {PEOPLE.map((p) => (
               <li key={p.slug}>
                 <a href={`/Portfolio/the-rising-archive/people/${p.slug}/`}>
-                  {p.name}, {p.epithet}: {p.face}
+                  {safeAs(p).name}, {safeAs(p).epithet}: {p.face}
                 </a>
               </li>
             ))}

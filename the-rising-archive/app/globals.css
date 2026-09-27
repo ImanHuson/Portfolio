@@ -210,3 +210,11 @@ details.spoiler[open] > summary { display: none; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Breadcrumb links are small mono text; pad them to a 24px+ tap target
+   without changing the line they sit on. */
+nav[aria-label="Breadcrumb"] a {
+  display: inline-block;
+  padding-block: 0.3rem;
+  margin-block: -0.3rem;
+}
