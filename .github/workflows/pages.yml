@@ -4,8 +4,8 @@ name: Deploy Pages
 # switched (Settings → Pages) from "Deploy from a branch" to "GitHub
 # Actions" — the two are mutually exclusive for a single Pages site.
 # This workflow then serves the WHOLE site, not just book-site-react:
-# the root landing page, the main portfolio, the static book-site, and
-# the built React app all get assembled into one artifact below.
+# the root landing page, the main portfolio, and the built React app all
+# get assembled into one artifact below.
 
 on:
   push:
@@ -44,7 +44,6 @@ jobs:
           mkdir -p _site
           cp index.html _site/
           cp Iman_Kasim_Portfolio.html _site/
-          cp -r book-site _site/book-site
           mkdir -p _site/book-site-react
           cp -r book-site-react/dist/. _site/book-site-react/
 
