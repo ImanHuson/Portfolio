@@ -1,3 +1,6 @@
 .playwright-cli/
 .claude/skills/*/scripts/__pycache__/
 **/__pycache__/
+# API keys for the image-generation skills (level-3, story-illustrator) are read from here; never commit it
+.env
+.env.*
