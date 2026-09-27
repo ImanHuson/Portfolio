@@ -26,7 +26,7 @@ export default function World() {
           </div>
           <p className="hierarchy-note">
             "The system was built to make inequality look natural."
-            <span className="tag">Fan commentary — not a canonical quotation</span>
+            <span className="tag">Fan commentary: not a canonical quotation</span>
           </p>
         </Reveal>
 
@@ -54,7 +54,7 @@ export default function World() {
                 <h3>{h.name}</h3>
                 {h.motto && <p className="motto">"{h.motto}" {h.mottoTranslation}</p>}
                 {h.sigil && <p className="sigil">Sigil: {h.sigil}</p>}
-                <p className="influence">{h.identity} — {h.influence}</p>
+                <p className="influence">{h.identity}, {h.influence}</p>
               </div>
             ))}
           </div>

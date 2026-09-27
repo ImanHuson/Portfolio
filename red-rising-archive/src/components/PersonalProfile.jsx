@@ -13,13 +13,13 @@ export default function PersonalProfile() {
         <Reveal as="div" className="section-head">
           <span className="eyebrow">My Red Rising</span>
           <h2>The Personal Fan Profile</h2>
-          <p>Placeholders below — for the site owner to fill in.</p>
+          <p>Placeholders below, for the site owner to fill in.</p>
         </Reveal>
         <Reveal as="div" className="profile-grid">
           {FIELDS.map((f) => (
             <div className="profile-field" key={f}>
               <div className="k">{f}</div>
-              <div className="v">— to be filled in —</div>
+              <div className="v">(to be filled in)</div>
             </div>
           ))}
         </Reveal>

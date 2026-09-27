@@ -33,7 +33,7 @@ export default function CharacterDossier({ character, onClose }) {
           {character.spoilerNote && <p className="note">{character.spoilerNote}</p>}
           {character.debated && (
             <div className="debate">
-              <strong>Fan debate:</strong> the community is sharply divided on {character.name} — some readers find
+              <strong>Fan debate:</strong> the community is sharply divided on {character.name}. Some readers find
               the complexity compelling, others strongly reject the ideology and actions. This dossier's framing is
               this archive's personal reading, not a consensus verdict.
             </div>

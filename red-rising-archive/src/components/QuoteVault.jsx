@@ -12,7 +12,7 @@ export default function QuoteVault() {
   )
 
   function copyQuote(q, i) {
-    const text = `"${q.text}" — ${q.speaker}`
+    const text = `"${q.text}" - ${q.speaker}`
     navigator.clipboard?.writeText(text).then(() => {
       setCopiedIndex(i)
       setTimeout(() => setCopiedIndex(null), 1500)
@@ -25,7 +25,7 @@ export default function QuoteVault() {
         <Reveal as="div" className="section-head">
           <span className="eyebrow">The Quote Vault</span>
           <h2>Words That Stay</h2>
-          <p>The fan archive's favorites — short, verified snippets only. Longer passages point to the book, not a full reprint.</p>
+          <p>The fan archive's favorites: short, verified snippets only. Longer passages point to the book, not a full reprint.</p>
         </Reveal>
 
         <div className="vault-filters" role="group" aria-label="Filter by theme">
@@ -44,7 +44,7 @@ export default function QuoteVault() {
                 {copiedIndex === i ? 'Copied' : 'Copy'}
               </button>
               <p className="text">&ldquo;{q.text}&rdquo;</p>
-              <p className="source">— {q.speaker}, {q.context}</p>
+              <p className="source">- {q.speaker}, {q.context}</p>
             </Reveal>
           ))}
           {filtered.length === 0 && <p style={{ color: 'var(--ash)', textAlign: 'center' }}>No quotes tagged with that theme yet.</p>}

@@ -6,7 +6,7 @@ export const FEATURED_QUOTES = [
   {
     text: 'Then you must live for more.',
     speaker: 'Eo',
-    context: 'to Darrow — Red Rising',
+    context: 'to Darrow, Red Rising',
     themes: ['Freedom', 'Love'],
   },
   {
@@ -24,7 +24,7 @@ export const FEATURED_QUOTES = [
   {
     text: 'Strength always fears speed.',
     speaker: 'Red Rising Saga',
-    context: 'attribution across editions varies — presented unattributed to avoid misattributing a specific speaker',
+    context: 'attribution across editions varies, presented unattributed to avoid misattributing a specific speaker',
     themes: ['War', 'Wisdom'],
   },
   {

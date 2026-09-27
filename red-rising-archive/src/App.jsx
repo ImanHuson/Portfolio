@@ -19,6 +19,8 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
+      <div className="ambient" aria-hidden="true" />
+      <div className="vignette" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
       <Nav />
       <main id="main">

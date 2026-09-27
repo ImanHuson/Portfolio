@@ -89,21 +89,43 @@ export default function SixBooksScroll() {
   const progressRef = useRef(0)
   const [activeIndex, setActiveIndex] = useState(0)
 
+  const stRef = useRef(null)
+
   useGSAP(
     () => {
-      ScrollTrigger.create({
+      stRef.current = ScrollTrigger.create({
         trigger: scrollHostRef.current,
         start: 'top top',
         end: 'bottom bottom',
         scrub: 1,
         onUpdate: (self) => {
           progressRef.current = self.progress
-          setActiveIndex(Math.min(COUNT - 1, Math.round(self.progress * (COUNT - 1))))
+          // Only touch React state when the ROUNDED index actually
+          // changes, not on every scrub tick (which fires on every
+          // animation frame while scrolling). Calling setState per-tick
+          // re-renders the caption + 6 nav buttons dozens of times a
+          // second — the real cause of the reported scroll jitter, not
+          // the 3D rendering itself.
+          const next = Math.min(COUNT - 1, Math.round(self.progress * (COUNT - 1)))
+          setActiveIndex((prev) => (prev === next ? prev : next))
         },
       })
     },
     { scope: scrollHostRef },
   )
+
+  function goToIndex(i) {
+    const clamped = Math.max(0, Math.min(COUNT - 1, i))
+    const st = stRef.current
+    if (!st) return
+    const targetProgress = clamped / (COUNT - 1)
+    const targetY = st.start + targetProgress * (st.end - st.start)
+    if (window.__lenis) {
+      window.__lenis.scrollTo(targetY, { duration: 1.1 })
+    } else {
+      window.scrollTo({ top: targetY, behavior: 'smooth' })
+    }
+  }
 
   useEffect(() => {
     const host = canvasHostRef.current
@@ -145,8 +167,8 @@ export default function SixBooksScroll() {
     const ro = new ResizeObserver(resize)
     ro.observe(host)
 
-    let raf
-    function frame() {
+    let raf = null
+    function renderFrame() {
       const progress = progressRef.current
       const carouselAngle = progress * Math.PI * 2
       meshes.forEach((mesh, i) => {
@@ -160,12 +182,34 @@ export default function SixBooksScroll() {
         mesh.scale.set(scale, scale, scale)
       })
       renderer.render({ scene, camera })
-      raf = requestAnimationFrame(frame)
     }
-    frame()
+    function loop() {
+      renderFrame()
+      raf = requestAnimationFrame(loop)
+    }
+
+    // This section is sticky-pinned inside a ~500vh scroll host, so it's
+    // only actually visible for a fraction of the page. Without this, the
+    // rAF render loop above ran continuously for the entire time the page
+    // was open — competing for the main thread and GPU everywhere else on
+    // the page too, not just here. Pause/resume based on real visibility.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (raf === null) loop()
+        } else if (raf !== null) {
+          cancelAnimationFrame(raf)
+          raf = null
+        }
+      },
+      { threshold: 0 },
+    )
+    io.observe(host)
+    renderFrame() // paint one frame immediately so it's never blank pre-intersection
 
     return () => {
-      cancelAnimationFrame(raf)
+      if (raf !== null) cancelAnimationFrame(raf)
+      io.disconnect()
       ro.disconnect()
       host.removeChild(gl.canvas)
     }
@@ -173,19 +217,49 @@ export default function SixBooksScroll() {
 
   const book = BOOKS[activeIndex]
 
+  function onTablistKeyDown(e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goToIndex(activeIndex + 1) }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); goToIndex(activeIndex - 1) }
+  }
+
   return (
     <div ref={scrollHostRef} className="books-3d-scrollhost">
       <div className="books-3d">
         <div ref={canvasHostRef} style={{ position: 'absolute', inset: 0 }} aria-hidden="true" />
+
+        <button
+          className="books-arrow prev"
+          onClick={() => goToIndex(activeIndex - 1)}
+          disabled={activeIndex === 0}
+          aria-label="Previous book"
+        >
+          ‹
+        </button>
+        <button
+          className="books-arrow next"
+          onClick={() => goToIndex(activeIndex + 1)}
+          disabled={activeIndex === COUNT - 1}
+          aria-label="Next book"
+        >
+          ›
+        </button>
+
         <div className="book-caption">
           <div className="num">{book.numeral}</div>
           <h3>{book.title}</h3>
           <p>{book.subtitle}</p>
-        </div>
-        <div className="books-scrub" role="tablist" aria-label="Book selector">
-          {BOOKS.map((b, i) => (
-            <button key={b.numeral} aria-current={i === activeIndex} aria-label={b.title} role="tab" tabIndex={-1} />
-          ))}
+          <div className="books-scrub" role="tablist" aria-label="Jump to a book" onKeyDown={onTablistKeyDown}>
+            {BOOKS.map((b, i) => (
+              <button
+                key={b.numeral}
+                aria-current={i === activeIndex}
+                aria-label={`${b.title} (${b.numeral})`}
+                role="tab"
+                tabIndex={i === activeIndex ? 0 : -1}
+                onClick={() => goToIndex(i)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ export default function OpeningStatement() {
           <p className="intro">
             Darrow is a Red, born into the lowest caste of a solar empire built on a rigid color hierarchy. When he
             learns the truth about the world he's sacrificed for, he infiltrates the Institute to challenge the
-            ruling Gold caste from within — and sets in motion a war that spans six books and the entire Solar
+            ruling Gold caste from within, setting in motion a war that spans six books and the entire Solar
             System. Science fiction. Space opera. Dystopian revolution. Military epic. Political tragedy. Character
             drama. Red Rising is all of these at once.
           </p>

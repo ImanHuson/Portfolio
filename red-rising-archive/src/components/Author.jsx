@@ -23,7 +23,7 @@ export default function Author() {
             </div>
             <p style={{ fontSize: '12px', color: 'var(--ash)', marginTop: 'var(--space-2)' }}>
               This fan archive is not endorsed by or affiliated with Pierce Brown. Social handles under his name
-              vary and weren't independently confirmed here, so none are linked — only the verified official site.
+              vary and weren't independently confirmed here, so none are linked here, only the verified official site.
             </p>
           </div>
         </Reveal>

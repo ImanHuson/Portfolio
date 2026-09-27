@@ -48,4 +48,4 @@ export const BOOKS = [
 
 // Presented only as an upcoming/unpublished continuation, per piercebrown.com
 // — never listed as a published book.
-export const UPCOMING = { title: 'Red God', status: 'Announced — not yet published' }
+export const UPCOMING = { title: 'Red God', status: 'Announced, not yet published' }

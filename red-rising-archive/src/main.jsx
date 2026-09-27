@@ -17,6 +17,10 @@ if (!prefersReducedMotion) {
     lenis.raf(time * 1000)
   })
   gsap.ticker.lagSmoothing(0)
+  // Exposed so components (e.g. the book-selector dots/arrows) can trigger
+  // a smooth programmatic scroll through the same Lenis instance instead
+  // of fighting it with a raw window.scrollTo.
+  window.__lenis = lenis
 }
 
 createRoot(document.getElementById('root')).render(

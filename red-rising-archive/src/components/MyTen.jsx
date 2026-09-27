@@ -12,7 +12,7 @@ export default function MyTen() {
         <Reveal as="div" className="section-head">
           <span className="eyebrow">My Ten</span>
           <h2>The Ten Faces of Power</h2>
-          <p>The characters I keep coming back to — not an objective ranking, just mine. Click a card to open the full dossier.</p>
+          <p>The characters I keep coming back to, not an objective ranking, just mine. Click a card to open the full dossier.</p>
         </Reveal>
         <div className="ten-grid">
           {CHARACTERS.map((c, i) => (
@@ -21,7 +21,7 @@ export default function MyTen() {
                 <div className="order">{c.order}</div>
                 <h3>{c.name}</h3>
                 <p className="epithet">{c.color}</p>
-                <p className="axis">{c.axis} — my reading of them</p>
+                <p className="axis">{c.axis}, my reading of them</p>
               </button>
             </Reveal>
           ))}
