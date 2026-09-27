@@ -43,6 +43,9 @@ export default function FaceCard({
   const cardRef = useRef<HTMLAnchorElement>(null);
 
   const unlocked = clearance >= person.lensBook;
+  // Below full clearance, fall back to the as-first-met reading if one is safe.
+  const early = !unlocked && person.early && clearance >= person.early.book ? person.early.lenses[lens as keyof typeof person.early.lenses] : undefined;
+  const reading = unlocked ? person.lenses[lens] : early;
   // The title cycles leak later titles ("Father", "Morning Knight"), so they
   // only run once the reader’s clearance covers this character’s lenses.
   const hover = unlocked ? person.hover : undefined;
@@ -152,7 +155,7 @@ export default function FaceCard({
       )}
 
       <div className="relative mt-8">
-        {unlocked ? (
+        {reading ? (
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={lens}
@@ -163,13 +166,16 @@ export default function FaceCard({
             >
               {/* Names the lens on the card itself, so the link between the
                   bar above and this line is visible without guessing. */}
-              <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">{LENSES.find((l) => l.key === lens)!.label}</p>
-              <p className="mt-2 max-w-[46ch] text-bone/85">{person.lenses[lens]}</p>
+              <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
+                {LENSES.find((l) => l.key === lens)!.label}
+                {early && <span className="text-ash-2/70"> · as first met</span>}
+              </p>
+              <p className="mt-2 max-w-[46ch] text-bone/85">{reading}</p>
             </motion.div>
           </AnimatePresence>
         ) : lensesLocked ? null : (
           <p className="font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">
-            Opens after {BOOK_TITLES[person.lensBook]}
+            {LENSES.find((l) => l.key === lens)!.label} opens after {BOOK_TITLES[person.lensBook]}
           </p>
         )}
         {isApollonius && (

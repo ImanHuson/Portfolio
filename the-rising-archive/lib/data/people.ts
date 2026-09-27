@@ -28,6 +28,11 @@ export type Person = {
     legacy: string;
   };
   lensBook: number; // clearance needed to read the lenses
+  /** Readings of the character as first met, safe at `book` (the clearance
+   * before their first book, same rule as `intro`). Only lenses that can be
+   * answered without plot are filled; the rest stay sealed until lensBook.
+   * Legacy is never here: it is the ending by definition. */
+  early?: { book: number; lenses: Partial<Record<"person" | "belief" | "weapon" | "relationship" | "wound", string>> };
   dossier: Answer[];
   bonds?: { name: string; note: string; book: number }[];
 };
@@ -71,6 +76,16 @@ export const PEOPLE: Person[] = [
       legacy: "A Republic, a son, and a question about whether the man survived the weapon.",
     },
     lensBook: 3,
+    early: {
+      book: 0,
+      lenses: {
+        person: "A sixteen-year-old Helldiver in the mines of Mars, trusted with the most dangerous drill in his clan.",
+        belief: "What every Red is taught: that their work underground is making Mars livable for the people who will come after.",
+        weapon: "A clawDrill, and hands quick enough to steer it through the deep.",
+        relationship: "Eo, his wife, who asks more of the world than he dares to.",
+        wound: "Being born Red, in a Society that ranks every person by Color and puts his at the bottom.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "A sixteen-year-old Helldiver in Lykos, married to Eo, proud of his speed in the mines and certain the Society’s story about Reds was true.", book: 1 },
       { q: "What does he believe?", a: "At first, that Eo was naive. Then, that she was right. The saga is the long work of finding out what her dream actually requires.", book: 1 },
@@ -118,6 +133,15 @@ export const PEOPLE: Person[] = [
       legacy: "The Solar Republic, fragile and hers.",
     },
     lensBook: 3,
+    early: {
+      book: 0,
+      lenses: {
+        person: "A Gold student at the Institute, known to everyone there as Mustang.",
+        belief: "That loyalty is earned, not taken.",
+        weapon: "Reading people: a room, an ally, an enemy.",
+        relationship: "Darrow, a rival from another house. What they become is the story.",
+      },
+    },
     dossier: [
       { q: "Who was she before the war?", a: "Primus of House Minerva at the Institute, and the only student there who seemed to think past the next battle.", book: 1 },
       { q: "What does she believe?", a: "That the question after victory matters more than the victory. Her political philosophy is patience in a family built on appetite.", book: 3 },
@@ -157,6 +181,15 @@ export const PEOPLE: Person[] = [
       legacy: "He protects a boy who might become the next Sovereign, and dies naming himself.",
     },
     lensBook: 6,
+    early: {
+      book: 0,
+      lenses: {
+        person: "A Bellona son at the Institute: handsome, arrogant, funny, and very good with a blade.",
+        belief: "In his family’s honor, which he was raised to carry as his own.",
+        weapon: "The razor, carried with more style than anyone in the saga.",
+        relationship: "Darrow, a friend from the first days in House Mars.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "The golden son of House Bellona, charming and sure of himself, with a brother, Julian, gentler than he was.", book: 1 },
       { q: "What does he believe?", a: "In honor, first as inheritance, later as a decision he makes alone.", book: 3 },
@@ -195,6 +228,15 @@ export const PEOPLE: Person[] = [
       legacy: "Victra, four children, and a war he never wanted to inherit.",
     },
     lensBook: 5,
+    early: {
+      book: 0,
+      lenses: {
+        person: "A small, feral Gold in House Mars whom nobody takes seriously. They should.",
+        belief: "That the people beside you are the only cause worth the name.",
+        weapon: "Surprise, filth, and not caring what anyone thinks of him.",
+        relationship: "Darrow, whose closest friend he becomes.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "A feral Gold at the Institute who everyone underestimated, born to Fitchner au Barca and Bryn of Cryssos, a Red woman.", book: 1 },
       { q: "What does he believe?", a: "In the Howlers. In Darrow. In the Sons of Ares his father built.", book: 2 },
@@ -233,6 +275,15 @@ export const PEOPLE: Person[] = [
       legacy: "Proof that the Republic produced something the Society never could.",
     },
     lensBook: 6,
+    early: {
+      book: 3,
+      lenses: {
+        person: "Darrow and Virginia’s ten-year-old son, the first child of the new Republic.",
+        belief: "That things can be built, not only fought for.",
+        weapon: "Engineering. He makes things with his hands.",
+        relationship: "Darrow, whom he knows as the Reaper and wants to know as Dad.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "There is no before. He was born into it.", book: 4 },
       { q: "What does he believe?", a: "That you can have the hoverbike if you build it yourself. His mother told him so, and he did.", book: 4 },
@@ -271,6 +322,14 @@ export const PEOPLE: Person[] = [
       legacy: "Proof that the Solar System is not culturally uniform.",
     },
     lensBook: 5,
+    early: {
+      book: 3,
+      lenses: {
+        person: "The second son of Romulus au Raa, raised in the Rim’s older idea of Gold.",
+        belief: "Duty, as the Rim understands it: to family, to people, to the oath.",
+        weapon: "The duel. Among the finest of his generation.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "A Rim knight, far from the Core’s politics, trained in the Raa family’s discipline.", book: 4 },
       { q: "What does he believe?", a: "In the Rim’s honor, which is older and stranger than the Core’s.", book: 4 },
@@ -309,6 +368,14 @@ export const PEOPLE: Person[] = [
       legacy: "A war fought with fear, and a lesson about what it cannot do.",
     },
     lensBook: 5,
+    early: {
+      book: 3,
+      lenses: {
+        person: "Romulus au Raa’s youngest brother, who holds the Society’s title of Fear Knight.",
+        belief: "That fear, understood precisely, is more efficient than force.",
+        weapon: "Patience. Psychology.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "A son of House Raa who left the Rim to serve the Society as its Fear Knight, commanding Legio Zero, the Pavor Nocturnus. Banished to the Kuiper Belt in 739 PCE.", book: 4 },
       { q: "What does he believe?", a: "That war is an exercise in understanding.", book: 5 },
@@ -347,6 +414,16 @@ export const PEOPLE: Person[] = [
       legacy: "The Society’s future, if it has one.",
     },
     lensBook: 6,
+    early: {
+      book: 3,
+      lenses: {
+        person: "Octavia au Lune’s grandson, carried out of the fall of her world as a boy.",
+        belief: "That civilization requires order, and order requires someone to hold it.",
+        weapon: "The Mind’s Eye, the training his grandmother gave him.",
+        relationship: "Cassius, the guardian who took him into exile.",
+        wound: "Growing up in the ruins of his family’s world.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "A child at Octavia’s court on Luna, the heir of House Lune.", book: 3 },
       { q: "What does he believe?", a: "Order. Continuity. Hierarchy. Responsibility. Civilization.", book: 4 },
@@ -385,6 +462,16 @@ export const PEOPLE: Person[] = [
       legacy: "A villain who made the saga decadent, and dangerous, and fun.",
     },
     lensBook: 5,
+    early: {
+      book: 3,
+      lenses: {
+        person: "The eldest Valii-Rath son, a tawny, enormous, overwhelming presence.",
+        belief: "In himself, as an unfinished masterpiece.",
+        weapon: "The razor, and the performance around it.",
+        relationship: "His own reflection. Nobody else has ever come close.",
+        wound: "Deepgrave, the prison where he was meant to be forgotten.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "Eldest brother of Tactus au Rath, heir of a proud Martian house, already famous for excess.", book: 4 },
       { q: "What does he believe?", a: "That he is a warrior-poet. He would want the archive to say so.", book: 4 },
@@ -423,6 +510,14 @@ export const PEOPLE: Person[] = [
       legacy: "The man who proved Darrow’s revolution was necessary.",
     },
     lensBook: 3,
+    early: {
+      book: 0,
+      lenses: {
+        person: "The Primus of House Pluto at the Institute, known only as the Jackal.",
+        belief: "That control is the only safety.",
+        weapon: "Patience, and a talent for knowing where everyone will stand.",
+      },
+    },
     dossier: [
       { q: "Who was he before the war?", a: "A slight, brilliant Augustus son at the Institute, underestimated by his father.", book: 1 },
       { q: "What does he believe?", a: "That everyone is a piece, and that he is the only player.", book: 2 },
