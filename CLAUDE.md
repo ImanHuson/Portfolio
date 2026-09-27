@@ -2,6 +2,21 @@
 
 `Iman_Kasim_Portfolio.html` is the main single-file site (inline CSS/JS, Google Fonts) — kept as plain static HTML on purpose, not converted to React. `KASIM_ImanHuson_BSCS-3B_cpu_scheduling.py` is a standalone coursework script, not part of the site. `book-site/index.html` is a static design-template worked example (unofficial Red Rising Saga fan tribute — not academic work, not linked from the main portfolio's project list). `book-site-react/` is a second build of the *same* book site, in React + Vite, added specifically to use react-bits/GSAP/Lenis/Framer-Motion-style tooling that needs a bundler — see its own section below. `index.html` at repo root is a landing page linking the sites, needed because GitHub Pages' root URL 404s without one. `docs/website-build-template.md` is the reusable 4-step prompt template these were built from.
 
+## Default approach when asked to build a new site here (read this first)
+
+Every tool listed in this file — skills and libraries both — is available. The point of this section is to make sure they're all *considered*, not that they're all *used*. Stacking every library onto one site is not what makes it look premium; the `web_cheatcodes.pdf` someone sent for this repo ends with the line that actually matters: *"Good design + typography + spacing + 2–3 intentional animations > 50 random effects."* Take that literally.
+
+1. **Direction before tools.** Start with `design-taste-frontend` (plus `brandkit` or `ui-ux-pro-max` if there's no direction yet) to get an actual point of view for *this* project — audience, tone, what "premium" means here — before reaching for any library. A restrained static page with 2–3 intentional touches beats one carrying every tool in this file.
+2. **Plain HTML/CSS/JS is the default.** Only add a bundler (Vite + React, per `book-site-react/`) when a specific chosen effect genuinely needs one (`react-bits`, `@react-three/fiber`, Framer Motion). Converting a project to React is a real architecture decision, not a tooling add — ask first, the way `book-site-react/` only happened after being asked directly.
+3. **Match the tool to the project, don't stack them all in:**
+   - *Landing/marketing page* → direction skill, maybe `Lenis` + GSAP `ScrollTrigger` for scroll feel, then `web-design-guidelines` + `playwright-cli` to verify. No 3D unless there's an actual 3D subject.
+   - *Portfolio / resume / academic work* → restraint over spectacle: clean typography, fast load, accessible. This is `emil-apple-design`'s "feedback, spatial consistency, restraint" and the PDF's "don't animate everything," applied hardest — a recruiter or professor isn't the audience for a WebGL showcase (this is why `Iman_Kasim_Portfolio.html` stayed plain HTML).
+   - *Deliberately cinematic/showcase project* (like `book-site-react/`) → the fuller stack is fair game, but still pick 2–3 signature moments, not every effect in the PDF's "Premium Website Effects" list. This repo's example used exactly three: one hero starfield, one headline reveal, one metallic-text accent.
+   - *3D* (Three.js / React Three Fiber / Drei / Spline) is only for a project with an actual 3D subject — a product, a model, a spatial concept. Bolting 3D onto a page with nothing 3D to show is the "don't load huge libraries for tiny effects" anti-pattern the PDF itself names.
+4. **Verify before calling it premium.** `web-design-guidelines` audit + `playwright-cli` screenshots at 320/375/1440px + an actual no-JS and reduced-motion check — not a skipped afterthought. Both real bugs this repo has hit so far (`book-site/`'s no-JS nav, `book-site-react/`'s opacity-gated content going invisible under a full-page screenshot) were caught exactly this way. Something that breaks under a screenshot tool or with JS off isn't premium, it's fragile.
+
+Full tool inventory — what each one is for, and its real caveats — is below.
+
 ## book-site-react (React + Vite build)
 
 Source lives in `book-site-react/`; `node_modules/` and `dist/` are gitignored — **the build output is not committed**. It's built and deployed by `.github/workflows/pages.yml`, which also assembles the plain files (root `index.html`, `Iman_Kasim_Portfolio.html`, `book-site/`) into the same Pages artifact. **This is a real, already-required change, not optional**: GitHub Pages allows only one deployment source per repo, so once this workflow exists, Settings → Pages → Source must be switched from "Deploy from a branch" to "GitHub Actions" — otherwise nothing here goes live. That's a Settings-UI toggle only the repo owner can do; no available tool can flip it remotely.
@@ -33,9 +48,10 @@ Suggested loop: direction (`design-taste-frontend` / `brandkit` / `ui-ux-pro-max
 ### Requested but not installed as skills — these are libraries and reference sites, not Claude skills
 
 - **Lenis** (darkroomengineering/lenis), **GSAP** (greensock/GSAP), **Vanta** (tengbao/vanta) — real JS animation/scroll libraries with CDN builds. Could be added to the static HTML via `<script>` tags if a future redesign wants scroll-smoothing or animated backgrounds — not wired in, since that's a real behavior change to the live site, not a tooling install.
-- **react-bits** (DavidHDev/react-bits) — real component library, but its components are React source files installed via a CLI (`jsrepo`) into a React project. This repo is plain HTML/CSS/JS with no bundler, so it doesn't fit without first adding a build step. Flagging the mismatch rather than forcing it in.
+- **react-bits** (DavidHDev/react-bits) — real component library; its components are React source files copied in (its own model, not npm-installed), which needs a bundler. Not usable against the plain-HTML main portfolio or `book-site/` as-is — this is exactly why `book-site-react/` exists as a separate build. Don't add a bundler to the plain-HTML pages just to reach for this; build (or ask about) a proper React target instead, same as that one was.
 - **daisyUI** (daisyui.com) — Tailwind CSS component classes; needs Tailwind (CDN Play mode works for prototyping, not recommended for production).
 - **OriginKit** (originkit.dev), **particles.casberry.in** — component/inspiration sites to browse, not installable packages.
+- **Three.js / React Three Fiber / Drei / GLSL shaders / Spline** (from `web_cheatcodes.pdf`) — real 3D tooling, same bundler requirement as react-bits, plus real payload weight. Only reach for these when a project has an actual 3D subject to render — see point 3 above.
 
 ## Running playwright-cli
 
