@@ -4,7 +4,8 @@ import Link from "next/link";
 import Plate from "@/components/archive/Plate";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import type { LensKey, Person } from "@/lib/data/people";
+import { LENSES, type LensKey, type Person } from "@/lib/data/people";
+import { BOOK_TITLES } from "@/lib/data/spoilers";
 import { useArchive } from "@/components/providers/ArchiveProvider";
 import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
 import { cssEase, duration } from "@/lib/animation/tokens";
@@ -22,7 +23,18 @@ const SPOT: Record<string, string> = {
  * from the brief (Darrow, Cassius, Lysander, Atlas, Apollonius); the rest
  * stay still on purpose. Everything that fires on hover also fires on
  * keyboard focus. */
-export default function FaceCard({ person, lens, className }: { person: Person; lens: LensKey; className?: string }) {
+export default function FaceCard({
+  person,
+  lens,
+  lensesLocked = false,
+  className,
+}: {
+  person: Person;
+  lens: LensKey;
+  /** Every card is sealed: the lens bar already explains why, so stay quiet. */
+  lensesLocked?: boolean;
+  className?: string;
+}) {
   const { clearance } = useArchive();
   const reduce = useReducedMotion();
   const [active, setActive] = useState(false);
@@ -56,7 +68,7 @@ export default function FaceCard({ person, lens, className }: { person: Person; 
     setNoticed(false);
   };
 
-  const title = hover ? hover[cycle] : person.epithet;
+  const title = hover && active ? hover[cycle] : person.epithet;
   const isApollonius = person.slug === "apollonius";
 
   return (
@@ -141,10 +153,23 @@ export default function FaceCard({ person, lens, className }: { person: Person; 
 
       <div className="relative mt-8">
         {unlocked ? (
-          <p className="max-w-[46ch] text-bone/85">{person.lenses[lens]}</p>
-        ) : (
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={lens}
+              initial={reduce ? false : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? undefined : { opacity: 0 }}
+              transition={{ duration: duration.micro, ease: cssEase.out }}
+            >
+              {/* Names the lens on the card itself, so the link between the
+                  bar above and this line is visible without guessing. */}
+              <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">{LENSES.find((l) => l.key === lens)!.label}</p>
+              <p className="mt-2 max-w-[46ch] text-bone/85">{person.lenses[lens]}</p>
+            </motion.div>
+          </AnimatePresence>
+        ) : lensesLocked ? null : (
           <p className="font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">
-            Lens sealed past your clearance. Open the dossier to choose.
+            Opens after {BOOK_TITLES[person.lensBook]}
           </p>
         )}
         {isApollonius && (
@@ -152,6 +177,10 @@ export default function FaceCard({ person, lens, className }: { person: Person; 
             The Minotaur approaches.
           </p>
         )}
+        {/* The whole card is a link; say so, for readers who don't hover. */}
+        <span className="mt-6 block font-mono text-meta tracking-[0.18em] text-ash uppercase transition-colors group-hover:text-red group-focus-visible:text-red">
+          Open dossier <span aria-hidden>→</span>
+        </span>
       </div>
 
       <AnimatePresence>

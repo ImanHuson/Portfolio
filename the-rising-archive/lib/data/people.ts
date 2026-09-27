@@ -32,13 +32,15 @@ export type Person = {
   bonds?: { name: string; note: string; book: number }[];
 };
 
+// `ask` is the plain-language question each lens answers, shown as the
+// caption under the lens bar so a first-time reader knows what switching does.
 export const LENSES = [
-  { key: "person", label: "The Person" },
-  { key: "belief", label: "The Belief" },
-  { key: "weapon", label: "The Weapon" },
-  { key: "relationship", label: "The Relationship" },
-  { key: "wound", label: "The Wound" },
-  { key: "legacy", label: "The Legacy" },
+  { key: "person", label: "The Person", ask: "Who are they, underneath the titles?" },
+  { key: "belief", label: "The Belief", ask: "What do they believe power is for?" },
+  { key: "weapon", label: "The Weapon", ask: "What do they fight with?" },
+  { key: "relationship", label: "The Relationship", ask: "Who matters most to them?" },
+  { key: "wound", label: "The Wound", ask: "What broke them?" },
+  { key: "legacy", label: "The Legacy", ask: "What do they leave behind?" },
 ] as const;
 
 export type LensKey = (typeof LENSES)[number]["key"];
