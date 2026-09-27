@@ -177,3 +177,41 @@ those get added when a build under this skill actually needs them, per Section
 1's rules, not as a blanket first step. Doesn't touch any existing project in
 this repo. Doesn't assume Vercel hosting - defaults to this repo's existing
 GitHub Pages Actions pipeline unless told otherwise.
+
+## 8. Deployment gotchas (GitHub Pages specifically — folded in from this repo's
+retired plain-HTML template, verified facts worth keeping even though that
+template itself is gone)
+
+- **Commercial use**: GitHub's own Pages limits documentation states Pages
+  "is not intended for or allowed to be used as a free web-hosting service to
+  run your online business, e-commerce site, or any other website that is
+  primarily directed at either facilitating commercial transactions or
+  providing commercial software as a service (SaaS)." Fine for a portfolio or
+  practice build; re-check docs.github.com yourself before relying on this for
+  a client-facing decision — policies change.
+- **Asset paths**: a project deployed at `username.github.io/repo-name` lives
+  at a subpath, not the domain root — any absolute path (`/images/hero.jpg`)
+  404s there. Use relative paths, or (for a Vite build) set `base` in
+  `vite.config.js` to match, the way `red-rising-archive/vite.config.js`
+  already does.
+- Naming a repo exactly `username.github.io` deploys it at the account's root
+  URL with no subpath — only works once per account, so reserve it for a main
+  portfolio, not a practice build.
+- Private repos need GitHub Pro/Team for Pages; a public repo doesn't.
+
+## 9. Optional media-generation add-ons (not a default — add only if the specific feature is actually wanted)
+
+- **Scroll-driven hero video / animated asset**: requires an MCP-connected
+  media generator. Higgsfield is a real, confirmed one — a real OAuth
+  connector at `https://mcp.higgsfield.ai/mcp` (per Higgsfield's own Creator
+  Hub docs) that lets Claude generate images/video/audio against an existing
+  Higgsfield account and credits. **Requires a paid Higgsfield plan** ($19/mo
+  Starter was the floor as last checked 2026-09-26 — re-verify against
+  Higgsfield's current pricing before relying on that number). Any other
+  MCP server exposing image/video generation tools substitutes equally.
+- **Interactive 3D object from a single reference photo**: likely tool is
+  **img2threejs**, an agent skill that converts one clean, plain-background
+  reference image into editable, animation-ready Three.js code. Needs a
+  single object on a plain background — busy/backgrounded photos produce
+  broken output. Verify the actual repo before installing; it was not
+  independently vetted here.
