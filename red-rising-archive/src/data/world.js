@@ -11,6 +11,7 @@ export const COLOR_HIERARCHY = [
   { name: 'Gray', hex: '#787C82', role: 'Soldiers and police' },
   { name: 'Brown', hex: '#6B5236', role: 'Servants and laborers' },
   { name: 'Obsidian', hex: '#2B2E33', role: 'Shock-troop warriors' },
+  { name: 'Pink', hex: '#C98A9B', role: 'Pleasure and companionship' },
   { name: 'Red', hex: '#7E1018', role: 'Miners, lowest caste, Darrow\'s origin' },
 ]
 

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Offline art scripts (three.js / Pillow renders), not app code.
+    "scripts/**",
   ]),
 ]);
 

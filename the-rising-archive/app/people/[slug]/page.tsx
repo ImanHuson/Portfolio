@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Plate from "@/components/archive/Plate";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
@@ -113,7 +114,8 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             minotaur && "bg-[radial-gradient(circle_at_75%_30%,rgba(200,169,106,0.22),transparent_45%),linear-gradient(160deg,rgba(122,15,23,0.45),transparent_60%)]",
           )}
         />
-        <div className="relative mx-auto max-w-[1400px]">
+        <div className="relative mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[7fr_5fr] lg:items-center">
+          <div>
           <nav aria-label="Breadcrumb" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
             <Link href="/people/" className="hover:text-bone">The People</Link>
             <span aria-hidden> / </span>
@@ -145,6 +147,11 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
               </dd>
             </div>
           </dl>
+          </div>
+          <figure className="max-w-[560px] lg:justify-self-end">
+            <Plate src={`/images/people/${person.slug}.webp`} alt={`Archive relic for ${person.name}: ${person.motif}`} priority className="border border-line" sizes="(min-width: 1024px) 40vw, 100vw" />
+            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive relic. {person.motif}</figcaption>
+          </figure>
         </div>
       </header>
 

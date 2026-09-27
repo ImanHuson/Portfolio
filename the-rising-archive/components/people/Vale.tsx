@@ -93,7 +93,13 @@ export default function Vale() {
                   </DialogDescription>
                   <DialogTitle className="mt-6 font-serif text-h1 leading-[0.95] font-medium text-bone italic">{open.name}</DialogTitle>
                   <p className="mt-8 text-lede text-ash">{open.how}</p>
-                  <dl className="mt-12 grid gap-8 border-t border-line pt-10 md:grid-cols-2">
+                  <dl className="mt-12 grid gap-8 border-t border-line pt-10 md:grid-cols-3">
+                    <div>
+                      <dt className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Age</dt>
+                      <dd className={open.age ? "mt-2 text-bone/90" : "mt-2 font-mono text-meta tracking-[0.18em] text-ash-2 uppercase"}>
+                        {open.age ?? "Not recorded"}
+                      </dd>
+                    </div>
                     <div>
                       <dt className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Who they left behind</dt>
                       <dd className="mt-2 text-bone/90">{open.leftBehind}</dd>

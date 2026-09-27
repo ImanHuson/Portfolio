@@ -1,6 +1,6 @@
 // The Vale: the Red afterlife, and this archive’s memorial. Every death here
-// is verified (who, which book, how). Ages are deliberately omitted: the
-// sources don’t fix most of them, and a memorial full of "unknown" is noise.
+// is verified (who, which book, how). Ages are recorded only where a source
+// fixes them; everywhere else the memorial says so instead of guessing.
 // Not sensationalized. The "how" is one plain sentence.
 
 export type Memorial = {
@@ -9,6 +9,7 @@ export type Memorial = {
   color: string;
   house?: string;
   book: number;
+  age?: string;
   how: string;
   leftBehind: string;
   changed: string;
@@ -131,6 +132,7 @@ export const VALE: Memorial[] = [
     color: "Gold",
     house: "Barca",
     book: 5,
+    age: "A newborn",
     how: "Killed as a newborn by Harmony’s Red Hand.",
     leftBehind: "Sevro. Victra. His sisters.",
     changed: "Sevro’s war becomes something he will never stop carrying.",

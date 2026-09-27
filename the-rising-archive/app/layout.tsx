@@ -34,13 +34,15 @@ export const metadata: Metadata = {
     "A personal record of the Rising, the people it made, and the people it broke. An unofficial fan archive of Pierce Brown’s Red Rising Saga.",
   openGraph: {
     type: "website",
+    images: [{ url: "og.jpg", width: 1200, height: 630, alt: "Red Rising, The Archive: Mars against the dark." }],
     siteName: "The Red Rising Archive",
     title: "The Red Rising Archive",
     description: "Six published novels. One unfinished revolution. A solar system full of ghosts.",
     url: `${SITE}/`,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: ["og.jpg"],
     title: "The Red Rising Archive",
     description: "Six published novels. One unfinished revolution. A solar system full of ghosts.",
   },
@@ -74,6 +76,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        {/* Controls that need JS (clearance, sound) are hidden when it's off. */}
+        <noscript dangerouslySetInnerHTML={{ __html: "<style>[data-js-only]{display:none!important}</style>" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <SmoothScroll>
           <ArchiveProvider>

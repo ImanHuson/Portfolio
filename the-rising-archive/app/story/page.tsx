@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/typography/PageHeader";
+import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import Stamp from "@/components/archive/Stamp";
 import { BOOKS } from "@/lib/data/books";
@@ -26,16 +27,17 @@ export default function StoryPage() {
             <Reveal as="li" key={b.slug} delay={i * 0.03} className="border-b border-line">
               <Link
                 href={`/story/books/${b.slug}/`}
-                className="group grid items-center gap-4 py-8 md:grid-cols-[9rem_1fr_auto] md:gap-10 md:py-10"
+                className="group grid grid-cols-[5rem_1fr] items-center gap-5 py-8 md:grid-cols-[7rem_9rem_1fr_auto] md:gap-10 md:py-10"
               >
-                <span className="font-display text-7xl leading-none font-extrabold text-line-strong transition-colors duration-300 group-hover:text-red md:text-8xl">
+                <Plate src={`/images/books/${b.slug}.webp`} alt="" width={900} height={1350} className="w-20 transition-transform duration-500 group-hover:-translate-y-1 md:w-28" sizes="112px" />
+                <span className="hidden font-display text-7xl leading-none font-extrabold text-line-strong transition-colors duration-300 group-hover:text-red md:block md:text-8xl">
                   {b.numeral}
                 </span>
                 <span>
                   <span className="block font-display text-h3 leading-none font-bold uppercase">{b.title}</span>
                   <span className="mt-2 block font-serif text-xl text-ash italic">{b.subtitle}</span>
                 </span>
-                <span className="flex gap-6 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase md:flex-col md:items-end md:gap-1">
+                <span className="col-start-2 flex gap-6 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase md:col-start-auto md:flex-col md:items-end md:gap-1">
                   <span>{b.published}</span>
                   <span>{b.narrators.length === 1 ? "Darrow narrates" : `${b.narrators.length} narrators`}</span>
                 </span>
@@ -43,14 +45,15 @@ export default function StoryPage() {
             </Reveal>
           ))}
           <li className="border-b border-line">
-            <div className="grid items-center gap-4 py-8 opacity-80 md:grid-cols-[9rem_1fr_auto] md:gap-10 md:py-10">
-              <span className="font-display text-7xl leading-none font-extrabold text-void-3 md:text-8xl">VII</span>
+            <Link href="/sealed/" className="group grid grid-cols-[5rem_1fr] items-center gap-5 py-8 opacity-80 transition-opacity hover:opacity-100 md:grid-cols-[7rem_9rem_1fr_auto] md:gap-10 md:py-10">
+              <span aria-hidden className="block aspect-[2/3] w-20 border border-dashed border-line-strong md:w-28" />
+              <span className="hidden font-display text-7xl leading-none font-extrabold text-void-3 group-hover:text-red-deep md:block md:text-8xl">VII</span>
               <span>
                 <span className="block font-display text-h3 leading-none font-bold text-ash-2 uppercase">Red God</span>
                 <span className="mt-2 block font-serif text-xl text-ash-2 italic">Status: incomplete</span>
               </span>
-              <Stamp kind="sealed" />
-            </div>
+              <Stamp kind="sealed" className="col-start-2 justify-self-start md:col-start-auto" />
+            </Link>
           </li>
         </ol>
       </section>

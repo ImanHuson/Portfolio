@@ -28,7 +28,7 @@ export const HOUSES = [
   {
     name: 'House Telemanus',
     sigil: 'Red fox',
-    influence: 'Earth',
+    influence: 'Mars, with an estate on Earth',
     identity: 'Ancient, honor-bound allies of House Augustus',
   },
   {

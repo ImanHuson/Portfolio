@@ -9,7 +9,7 @@ import { BOOK_TITLES } from "@/lib/data/spoilers";
 import { cssEase } from "@/lib/animation/tokens";
 import { cn } from "@/lib/utils";
 
-const R = 0.37; // node ring radius, as a fraction of the square
+const R = 0.34; // node ring radius, as a fraction of the square (leaves room for labels)
 const positions = BONDS.map((_, i) => {
   const a = -Math.PI / 2 + (i / BONDS.length) * Math.PI * 2;
   return { x: 0.5 + Math.cos(a) * R, y: 0.5 + Math.sin(a) * R };
@@ -131,10 +131,11 @@ export default function Constellation() {
                     sel === i && "border-red bg-red",
                   )}
                 />
-                <span className="mt-1.5 block font-display text-sm leading-none font-bold whitespace-nowrap uppercase md:text-base">
+                <span className="mt-1.5 block bg-void/85 px-1 py-0.5 font-display text-sm leading-none font-bold whitespace-nowrap uppercase md:text-base">
                   {known ? (
                     <>
-                      <span className="md:hidden">{b.name.split(" ")[0]}</span>
+                      {/* Short label on phones; "The Jackal" must not become "The". */}
+                      <span className="md:hidden">{b.name.startsWith("The ") ? b.name : b.name.split(" ")[0]}</span>
                       <span className="hidden md:inline">{b.name}</span>
                     </>
                   ) : (
@@ -142,7 +143,7 @@ export default function Constellation() {
                   )}
                 </span>
                 {known && (
-                  <span className="mt-1 hidden font-mono text-[0.6rem] tracking-[0.16em] text-ash uppercase md:block">{b.kind}</span>
+                  <span className="mt-1 hidden bg-void/85 px-1 font-mono text-[0.6rem] tracking-[0.16em] text-ash uppercase md:block">{b.kind}</span>
                 )}
               </button>
             );

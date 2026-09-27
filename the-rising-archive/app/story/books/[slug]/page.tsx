@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import { BOOKS, getBook } from "@/lib/data/books";
@@ -45,14 +46,9 @@ export default async function BookPage({ params }: PageProps<"/story/books/[slug
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="relative overflow-hidden px-5 pt-[calc(var(--nav-h)+4rem)] pb-20 md:px-8 md:pt-[calc(var(--nav-h)+6rem)] md:pb-28">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-[4vw] right-[-2vw] font-display text-[42vw] leading-[0.8] font-extrabold text-void-2 select-none md:text-[34vw]"
-        >
-          {book.numeral}
-        </span>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_15%_20%,rgba(122,15,23,0.25),transparent_70%)]" />
-        <div className="relative mx-auto max-w-[1400px]">
+        <div className="relative mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[8fr_4fr] md:items-end">
+          <div>
           <nav aria-label="Breadcrumb" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
             <Link href="/story/" className="hover:text-bone">The Story</Link>
             <span aria-hidden> / </span>
@@ -74,6 +70,11 @@ export default async function BookPage({ params }: PageProps<"/story/books/[slug
               <dd className="mt-1 text-bone">{book.settings.join(", ")}</dd>
             </div>
           </dl>
+          </div>
+          <figure className="mx-auto w-full max-w-[360px] md:mx-0 md:justify-self-end">
+            <Plate src={`/images/books/${book.slug}.webp`} alt={`Archive plate for ${book.title}: an original symbol, not the published cover.`} width={900} height={1350} priority className="border border-line" sizes="(min-width: 768px) 30vw, 80vw" />
+            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive plate, not the published cover</figcaption>
+          </figure>
         </div>
       </header>
 

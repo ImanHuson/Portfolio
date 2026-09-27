@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Plate from "@/components/archive/Plate";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { LensKey, Person } from "@/lib/data/people";
@@ -94,7 +95,15 @@ export default function FaceCard({ person, lens, className }: { person: Person; 
         </svg>
       )}
 
-      <div className="relative">
+      <Plate
+        src={`/images/people/${person.slug}.webp`}
+        alt=""
+        width={900}
+        height={900}
+        className="pointer-events-none absolute top-6 right-6 w-16 opacity-60 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 md:w-20"
+        sizes="80px"
+      />
+      <div className="relative pr-20">
         <div className="flex items-center gap-3">
           <span aria-hidden className={cn("h-px w-8", RULE_CLASS[person.register])} />
           <span className={cn("font-mono text-meta tracking-[0.18em] uppercase", ACCENT_CLASS[person.register])}>
