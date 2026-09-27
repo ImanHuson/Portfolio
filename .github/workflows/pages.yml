@@ -3,9 +3,8 @@ name: Deploy Pages
 # Once this workflow exists, the repo's Pages "Source" setting must be
 # switched (Settings → Pages) from "Deploy from a branch" to "GitHub
 # Actions" — the two are mutually exclusive for a single Pages site.
-# This workflow then serves the WHOLE site, not just book-site-react:
-# the root landing page, the main portfolio, and the built React app all
-# get assembled into one artifact below.
+# This workflow serves the WHOLE site: the root landing page, the main
+# portfolio, and both built React apps get assembled into one artifact.
 
 on:
   push:
@@ -31,10 +30,18 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: book-site-react/package-lock.json
+          cache-dependency-path: |
+            book-site-react/package-lock.json
+            red-rising-archive/package-lock.json
 
       - name: Build book-site-react
         working-directory: book-site-react
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build red-rising-archive
+        working-directory: red-rising-archive
         run: |
           npm ci
           npm run build
@@ -46,6 +53,8 @@ jobs:
           cp Iman_Kasim_Portfolio.html _site/
           mkdir -p _site/book-site-react
           cp -r book-site-react/dist/. _site/book-site-react/
+          mkdir -p _site/red-rising-archive
+          cp -r red-rising-archive/dist/. _site/red-rising-archive/
 
       - uses: actions/upload-pages-artifact@v3
         with:
