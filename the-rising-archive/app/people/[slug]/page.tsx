@@ -1,0 +1,233 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import Reveal from "@/components/archive/Reveal";
+import SpoilerGate from "@/components/archive/SpoilerGate";
+import Stamp from "@/components/archive/Stamp";
+import { PEOPLE, getPerson, type Person } from "@/lib/data/people";
+import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
+import { cn } from "@/lib/utils";
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return PEOPLE.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps<"/people/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const p = getPerson(slug);
+  if (!p) return {};
+  return {
+    title: `${p.name}, ${p.epithet}`,
+    description: `Archive dossier: ${p.name} (${p.epithet}) in the Red Rising Saga. ${p.face}. ${p.question}`,
+    alternates: { canonical: "./" },
+  };
+}
+
+// Brief-specific treatments for three dossiers.
+function Special({ person }: { person: Person }) {
+  if (person.slug === "lysander") {
+    return (
+      <section aria-label="Two readings" className="border-t border-line px-5 py-20 md:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 className="font-display text-h3 font-bold uppercase">The same man, two columns</h2>
+          <p className="mt-3 max-w-[56ch] text-ash">The archive does not tell you which column is true. Let the contradiction breathe.</p>
+          <SpoilerGate book={4} className="mt-10">
+            <div className="mt-10 grid gap-px bg-line md:grid-cols-2">
+              <div className="bg-void p-8">
+                <p className="font-mono text-meta tracking-[0.18em] text-gold uppercase">What Lysander believes</p>
+                <ul className="mt-6 space-y-3 font-serif text-3xl" role="list">
+                  {["Order", "Continuity", "Hierarchy", "Responsibility", "Civilization"].map((w) => <li key={w}>{w}</li>)}
+                </ul>
+              </div>
+              <div className="bg-void p-8">
+                <p className="font-mono text-meta tracking-[0.18em] text-red uppercase">What the reader sees</p>
+                <ul className="mt-6 space-y-3 font-display text-3xl font-bold uppercase" role="list">
+                  {["Privilege", "Paternalism", "Self-justification", "Ambition", "Violence"].map((w) => <li key={w}>{w}</li>)}
+                </ul>
+              </div>
+            </div>
+          </SpoilerGate>
+        </div>
+      </section>
+    );
+  }
+  if (person.slug === "atlas") {
+    const files = [
+      ["War philosophy", "Understanding over force. Fear as a precise instrument, not a mood."],
+      ["Psychological warfare", "He wins by knowing where his enemy’s mind will go before it goes there."],
+      ["The failure", "747 PCE, the Siege of Olympia: a Red spy, Daedre, spends a week earning his trust, then poisons 104 of his soldiers."],
+      ["The totems", "Afterward he begins carving meditation totems of the people who preyed on his prejudices. Daedre is among them."],
+      ["Family", "Brother of Romulus au Raa. Uncle of Diomedes. Father of Ajax."],
+      ["Status", "Banished from the Core to the Kuiper Belt in 739 PCE. Later returned."],
+    ];
+    return (
+      <section aria-label="The Atlas files" className="border-t border-line bg-void-2 px-5 py-20 md:px-8">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="flex flex-wrap items-center gap-4">
+            <h2 className="font-mono text-lg tracking-[0.3em] text-rim uppercase">The Atlas files</h2>
+          </div>
+          <p className="mt-3 max-w-[56ch] font-mono text-sm text-ash">Assembled from fragments. Where the record ends, so does the file.</p>
+          <SpoilerGate book={6} className="mt-10">
+            <dl className="mt-10 divide-y divide-line border-y border-line font-mono text-sm">
+              {files.map(([k, v]) => (
+                <div key={k} className="grid gap-2 py-5 md:grid-cols-[220px_1fr]">
+                  <dt className="tracking-[0.18em] text-rim-dim uppercase">{k}</dt>
+                  <dd className="text-bone/90">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </SpoilerGate>
+        </div>
+      </section>
+    );
+  }
+  return null;
+}
+
+export default async function DossierPage({ params }: PageProps<"/people/[slug]">) {
+  const { slug } = await params;
+  const person = getPerson(slug);
+  if (!person) notFound();
+  const idx = PEOPLE.findIndex((p) => p.slug === slug);
+  const prev = PEOPLE[(idx - 1 + PEOPLE.length) % PEOPLE.length];
+  const next = PEOPLE[(idx + 1) % PEOPLE.length];
+  const minotaur = person.slug === "apollonius";
+
+  return (
+    <article>
+      <header
+        className={cn(
+          "relative overflow-hidden px-5 pt-[calc(var(--nav-h)+4rem)] pb-20 md:px-8 md:pt-[calc(var(--nav-h)+6rem)] md:pb-28",
+        )}
+      >
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-0",
+            person.register === "red" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(122,15,23,0.32),transparent_70%)]",
+            person.register === "gold" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(140,116,70,0.2),transparent_70%)]",
+            person.register === "rim" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(170,178,186,0.16),transparent_70%)]",
+            person.register === "none" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(147,143,136,0.12),transparent_70%)]",
+            minotaur && "bg-[radial-gradient(circle_at_75%_30%,rgba(200,169,106,0.22),transparent_45%),linear-gradient(160deg,rgba(122,15,23,0.45),transparent_60%)]",
+          )}
+        />
+        <div className="relative mx-auto max-w-[1400px]">
+          <nav aria-label="Breadcrumb" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
+            <Link href="/people/" className="hover:text-bone">The People</Link>
+            <span aria-hidden> / </span>
+            <span>Dossier</span>
+          </nav>
+          {minotaur && (
+            <p className="mt-8 font-display text-2xl font-bold tracking-[0.3em] text-gold uppercase">{person.intro[0]}</p>
+          )}
+          <h1 className={cn("mt-6 max-w-[14ch] text-h1 leading-[0.88]", NAME_CLASS[person.register])}>{person.name}</h1>
+          <div className="mt-6 flex items-center gap-4">
+            <span aria-hidden className={cn("h-px w-12", RULE_CLASS[person.register])} />
+            <p className={cn("font-serif text-h3 italic", ACCENT_CLASS[person.register])}>{person.epithet}</p>
+          </div>
+          <dl className="mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
+            <div>
+              <dt className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Color</dt>
+              <dd className="mt-1 text-bone">{person.color}</dd>
+            </div>
+            <div className="md:col-span-2">
+              <dt className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Face of power</dt>
+              <dd className="mt-1 text-bone">{person.face}</dd>
+            </div>
+            <div className="md:col-span-3">
+              <dt className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Titles</dt>
+              <dd className="mt-1">
+                <SpoilerGate book={person.lensBook} compact>
+                  <span className="text-bone">{person.titles.join(", ")}</span>
+                </SpoilerGate>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </header>
+
+      <section aria-label="Introduction" className="border-t border-line px-5 py-20 md:px-8">
+        <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[7fr_5fr]">
+          <SpoilerGate book={person.firstBook - 1}>
+            <div className="space-y-6">
+              {(minotaur ? person.intro.slice(1) : person.intro).map((p, i) => (
+                <Reveal key={i}>
+                  <p className="max-w-[58ch] text-lede text-bone/90">{p}</p>
+                </Reveal>
+              ))}
+            </div>
+          </SpoilerGate>
+          <aside className="space-y-10 md:border-l md:border-line md:pl-10">
+            {person.motif && (
+              <div>
+                <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Archive motif</p>
+                <p className="mt-2 font-serif text-2xl text-bone italic">{person.motif}</p>
+              </div>
+            )}
+            <div>
+              <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Archive question</p>
+              <p className="mt-2 font-display text-2xl leading-tight font-semibold uppercase">{person.question}</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section aria-labelledby="dossier-title" className="border-t border-line px-5 py-20 md:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="flex flex-wrap items-center gap-4">
+            <h2 id="dossier-title" className="font-display text-h2 leading-none font-bold uppercase">The dossier</h2>
+            <Stamp kind="reading" />
+          </div>
+          <dl className="mt-12 border-t border-line">
+            {person.dossier.map((d) => (
+              <div key={d.q} className="grid gap-3 border-b border-line py-7 md:grid-cols-[4fr_8fr] md:gap-12">
+                <dt className="font-display text-xl leading-tight font-semibold text-bone/80 uppercase">{d.q}</dt>
+                <dd>
+                  <SpoilerGate book={d.book} compact>
+                    <p className="max-w-[62ch] text-lede text-bone/90">{d.a}</p>
+                  </SpoilerGate>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {person.bonds && (
+        <section aria-label="Core relationships" className="border-t border-line px-5 py-20 md:px-8">
+          <div className="mx-auto max-w-[1400px]">
+            <h2 className="font-display text-h3 font-bold uppercase">Core relationships</h2>
+            <ul className="mt-8 grid gap-px bg-line md:grid-cols-4" role="list">
+              {person.bonds.map((b) => (
+                <li key={b.name} className="bg-void p-6">
+                  <p className="font-display text-2xl font-bold uppercase">{b.name}</p>
+                  <SpoilerGate book={b.book} compact className="mt-2">
+                    <p className="mt-2 text-ash">{b.note}</p>
+                  </SpoilerGate>
+                </li>
+              ))}
+            </ul>
+            <Link href="/people/relationships/" className="mt-8 inline-block border-b border-red pb-1 font-mono text-meta tracking-[0.2em] uppercase hover:text-red">
+              Open the constellation
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <Special person={person} />
+
+      <nav aria-label="Other dossiers" className="grid border-t border-line md:grid-cols-2">
+        <Link href={`/people/${prev.slug}/`} className="group border-line p-8 transition-colors hover:bg-void-2 md:border-r md:p-12">
+          <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Previous dossier</span>
+          <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[prev.register])}>{prev.name}</span>
+        </Link>
+        <Link href={`/people/${next.slug}/`} className="group p-8 text-right transition-colors hover:bg-void-2 md:p-12">
+          <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Next dossier</span>
+          <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[next.register])}>{next.name}</span>
+        </Link>
+      </nav>
+    </article>
+  );
+}

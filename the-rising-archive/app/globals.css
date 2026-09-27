@@ -1,0 +1,212 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * THE RED RISING ARCHIVE — design tokens.
+ * Defined once here; components never improvise their own values.
+ *
+ * Color roles (from the brief, enforced as a rule, not a mood):
+ *   red   = the ONE accent: rebellion, active states, warnings, scars, Mars.
+ *   gold  = a typographic REGISTER for Gold/Society content (names, mottos,
+ *           seals), never a second glow color. Used sparingly on purpose.
+ *   void  = war, memory, the Vale. The page is dark-locked.
+ *   rim   = the Rim, Diomedes, silence. A cool off-white, used only there.
+ * Shape: radius 0 everywhere (dossier / military register). The only
+ * circles on the site are data marks (constellation nodes, timeline pips).
+ */
+
+:root {
+  color-scheme: dark;
+
+  --void: #07070a;
+  --void-2: #0d0d11;
+  --void-3: #14141a;
+  --line: #24242c;
+  --line-strong: #3a3a45;
+
+  --bone: #e9e4da;
+  --ash: #938f88;
+  --ash-2: #6b6862;
+
+  --red: #c41e2a;
+  --red-deep: #7a0f17;
+  --red-glow: rgba(196, 30, 42, 0.22);
+  --mars: #b5452a;
+
+  --gold: #c8a96a;
+  --gold-dim: #8c7446;
+
+  --rim: #eef0f2;
+  --rim-dim: #aab2ba;
+
+  /* shadcn semantic variables, mapped onto the archive palette */
+  --background: var(--void);
+  --foreground: var(--bone);
+  --card: var(--void-2);
+  --card-foreground: var(--bone);
+  --popover: var(--void-2);
+  --popover-foreground: var(--bone);
+  --primary: var(--red);
+  --primary-foreground: var(--bone);
+  --secondary: var(--void-3);
+  --secondary-foreground: var(--bone);
+  --muted: var(--void-3);
+  --muted-foreground: var(--ash);
+  --accent: var(--void-3);
+  --accent-foreground: var(--bone);
+  --destructive: var(--red);
+  --border: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--red);
+  --radius: 0rem;
+
+  /* motion tokens (mirrored in lib/animation/tokens.ts for GSAP) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 180ms;
+  --dur-ui: 320ms;
+  --dur-reveal: 900ms;
+
+  /* layout */
+  --nav-h: 64px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-void: var(--void);
+  --color-void-2: var(--void-2);
+  --color-void-3: var(--void-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-bone: var(--bone);
+  --color-ash: var(--ash);
+  --color-ash-2: var(--ash-2);
+  --color-red: var(--red);
+  --color-red-deep: var(--red-deep);
+  --color-mars: var(--mars);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-rim: var(--rim);
+  --color-rim-dim: var(--rim-dim);
+
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+  --radius-lg: 0rem;
+  --radius-xl: 0rem;
+
+  /* type families: set by next/font variables in app/layout.tsx */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display-face);
+  --font-serif: var(--font-serif-face);
+
+  /* type scale: editorial, dramatic at the top, calm in the body */
+  --text-eyebrow: 0.6875rem;
+  --text-meta: 0.75rem;
+  --text-body: 1.0625rem;
+  --text-lede: clamp(1.2rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-h3: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+  --text-h2: clamp(2.2rem, 1.6rem + 2.6vw, 4rem);
+  --text-h1: clamp(3.2rem, 2rem + 6vw, 8.5rem);
+  --text-colossal: clamp(4.5rem, 2rem + 13vw, 15rem);
+
+  --ease-out: var(--ease-out);
+  --ease-cinematic: var(--ease-cinematic);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    background: var(--void);
+  }
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--red);
+    color: var(--bone);
+  }
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, a, summary, [role="button"] {
+    touch-action: manipulation;
+  }
+  [role="dialog"] {
+    overscroll-behavior: contain;
+  }
+  [id] {
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+  }
+}
+
+/* Lenis recommended base styles */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Film grain: fixed, pointer-events-none, never on a scrolling container. */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Spoiler gate: a native <details>, so it works with JS off. JS only
+   auto-opens gates the reader's chosen clearance already covers. */
+details.spoiler > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details.spoiler > summary::-webkit-details-marker { display: none; }
+details.spoiler[open] > summary { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
