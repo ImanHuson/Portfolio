@@ -10,7 +10,6 @@ export default function MyTen() {
     <section className="alt" id="my-ten">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">My Ten</span>
           <h2>The Ten Faces of Power</h2>
           <p>The characters I keep coming back to, not an objective ranking, just mine. Click a card to open the full dossier.</p>
         </Reveal>

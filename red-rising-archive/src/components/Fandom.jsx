@@ -18,7 +18,6 @@ export default function Fandom() {
     <section className="alt" id="fandom">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">The Fandom</span>
           <h2>The Howler's Chorus</h2>
           <p>Community observation shown below is paraphrased and sourced. Never presented as canon, never invented.</p>
         </Reveal>

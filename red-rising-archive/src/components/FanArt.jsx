@@ -5,7 +5,6 @@ export default function FanArt() {
     <section id="archive">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">Fan Art</span>
           <h2>Community Gallery</h2>
           <p>No fan art is scraped or reproduced here without permission. This is the submission/attribution architecture, ready for real work to be added.</p>
         </Reveal>

@@ -11,7 +11,6 @@ export default function PersonalProfile() {
     <section className="alt" id="about">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">My Red Rising</span>
           <h2>The Personal Fan Profile</h2>
           <p>Placeholders below, for the site owner to fill in.</p>
         </Reveal>

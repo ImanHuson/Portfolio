@@ -140,6 +140,22 @@ export default function SixBooksScroll() {
     camera.position.set(0, 0.4, 6)
     camera.lookAt([0, 0, -RADIUS * 0.4])
 
+    // Camera choreography: close-up on the first book, orbiting plateau
+    // through the middle of the scroll, pulled-back wide shot for the
+    // finale — not just a spinning ring. Distance-only (no fov change) to
+    // keep this cheap and robust; smoothstep so the two transitions read
+    // as deliberate beats, not a linear zoom.
+    const smoothstep = (t) => t * t * (3 - 2 * t)
+    const lerp = (a, b, t) => a + (b - a) * t
+    function cameraDistance(p) {
+      if (p < 0.08) return lerp(4.0, 6.0, smoothstep(p / 0.08))
+      if (p > 0.9) return lerp(6.0, 9.0, smoothstep((p - 0.9) / 0.1))
+      return 6.0
+    }
+    function cameraHeight(p) {
+      return lerp(0.15, 0.55, smoothstep(Math.min(Math.max(p, 0), 1)))
+    }
+
     const scene = new Transform()
 
     const geometry = new Plane(gl, { width: 1.15, height: 1.7 })
@@ -171,6 +187,8 @@ export default function SixBooksScroll() {
     function renderFrame() {
       const progress = progressRef.current
       const carouselAngle = progress * Math.PI * 2
+      camera.position.set(0, cameraHeight(progress), cameraDistance(progress))
+      camera.lookAt([0, 0, -RADIUS * 0.4])
       meshes.forEach((mesh, i) => {
         const angle = (i / COUNT) * Math.PI * 2
         const a = angle - carouselAngle

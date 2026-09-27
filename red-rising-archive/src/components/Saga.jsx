@@ -8,7 +8,6 @@ export default function Saga() {
     <section id="saga">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">The Saga</span>
           <h2>The Six Books</h2>
           <p>Scroll through the carousel below, or read the full list underneath it.</p>
         </Reveal>

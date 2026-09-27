@@ -7,19 +7,20 @@ export default function Moments() {
     <section id="moments">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">The Moments</span>
           <h2>Scenes That Define the Saga</h2>
         </Reveal>
-        <div className="moments-grid">
+        <div className="moments-timeline">
           {MOMENTS.map((m, i) => (
-            <Reveal as="article" delay={i * 0.03} className="moment-card" key={m.order}>
+            <Reveal as="article" delay={i * 0.03} className="moment-row" key={m.order}>
               <div className="order">{m.order}</div>
-              <h3>{m.title}</h3>
-              <p className="book-tag">{m.book}</p>
-              <SpoilerGate minBook={m.minBook}>
-                <p className="why">{m.why}</p>
-                {m.quote && <p className="snippet">&ldquo;{m.quote}&rdquo;</p>}
-              </SpoilerGate>
+              <div>
+                <p className="book-tag">{m.book}</p>
+                <h3>{m.title}</h3>
+                <SpoilerGate minBook={m.minBook}>
+                  <p className="why">{m.why}</p>
+                  {m.quote && <p className="snippet">&ldquo;{m.quote}&rdquo;</p>}
+                </SpoilerGate>
+              </div>
             </Reveal>
           ))}
         </div>

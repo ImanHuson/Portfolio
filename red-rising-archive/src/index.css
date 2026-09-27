@@ -290,14 +290,47 @@ section.alt {
 .quote-card .copy-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--ash); cursor: pointer; font-size: 11px; }
 .quote-card .copy-btn:hover { color: var(--pale-gold); }
 
-/* ---------- Moments ---------- */
-.moments-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3); }
-.moment-card { border: 1px solid var(--iron); background: var(--charcoal); padding: var(--space-3); }
-.moment-card .order { font-family: var(--font-display); color: var(--blood); font-size: 1.6rem; }
-.moment-card h3 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-.moment-card .book-tag { font-family: var(--font-label); font-size: 11px; color: var(--pale-gold); text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 var(--space-1); }
-.moment-card p.why { font-size: 13px; color: var(--ash); }
-.moment-card .snippet { font-family: var(--font-display); font-style: italic; color: var(--bone); font-size: 0.95rem; margin-top: var(--space-2); }
+/* ---------- Moments (a vertical timeline, deliberately not another
+   bordered-card grid — this site already repeats that layout family for
+   My Ten / Fan Art / Buy, and the design-taste skill's repetition ban
+   caps how many sections may share one layout family) ---------- */
+.moments-timeline { max-width: 760px; margin: 0 auto; position: relative; }
+.moments-timeline::before {
+  content: ''; position: absolute; left: 27px; top: 8px; bottom: 8px; width: 1px;
+  background: linear-gradient(180deg, transparent, var(--iron) 8%, var(--iron) 92%, transparent);
+}
+.moment-row { display: grid; grid-template-columns: 56px 1fr; gap: var(--space-3); padding: var(--space-3) 0; }
+.moment-row .order {
+  font-family: var(--font-display); color: var(--blood); font-size: 1.5rem; text-align: center;
+  background: var(--obsidian); border: 1px solid var(--iron); border-radius: 50%;
+  width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; z-index: 1;
+}
+.moment-row .book-tag { font-family: var(--font-label); font-size: 11px; color: var(--pale-gold); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 4px; }
+.moment-row h3 { font-size: 1.15rem; text-transform: uppercase; letter-spacing: 1px; }
+.moment-row p.why { font-size: 0.95rem; color: var(--ash); margin-top: 6px; }
+.moment-row .snippet { font-family: var(--font-display); font-style: italic; color: var(--bone); font-size: 1.05rem; margin-top: var(--space-2); }
+@media (max-width: 560px) {
+  .moments-timeline::before { left: 21px; }
+  .moment-row { grid-template-columns: 44px 1fr; gap: var(--space-2); }
+  .moment-row .order { width: 44px; height: 44px; font-size: 1.15rem; }
+}
+
+/* ---------- Act dividers: the site's cinematic connective tissue between
+   Arrival / Revelation / Exploration / Immersion / Finale. One full-bleed
+   editorial line each, not a decorative "ACT II" label — the taste skill
+   explicitly bans generic stage/phase numbering as a Tell. ---------- */
+.act-divider {
+  position: relative; min-height: 46svh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: var(--space-6) var(--space-3); overflow: hidden;
+}
+.act-divider::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--act-tint, radial-gradient(ellipse 70% 60% at 50% 50%, rgba(126,16,24,0.18), transparent 70%));
+}
+.act-divider p {
+  position: relative; max-width: 780px; font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.3rem, 3.2vw, 2.1rem); line-height: 1.5; color: var(--bone);
+}
 
 /* ---------- Fandom / fan art / personal ---------- */
 .fandom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-2); }

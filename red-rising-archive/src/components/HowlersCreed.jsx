@@ -19,8 +19,7 @@ export default function HowlersCreed() {
     <section id="creed-section">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">The Howler's Creed</span>
-          <h2>A Fan Manifesto</h2>
+          <h2>The Howler's Creed</h2>
           <p>A fan-composed manifesto, not an official text. Each line's status is shown alongside it.</p>
         </Reveal>
         <Reveal as="div" className="creed-list">

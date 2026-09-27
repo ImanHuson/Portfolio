@@ -5,7 +5,6 @@ export default function Author() {
     <section className="alt" id="author">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">The Author</span>
           <h2>Pierce Brown</h2>
         </Reveal>
         <Reveal as="div" className="author-block">

@@ -8,7 +8,6 @@ export default function Buy() {
     <section id="buy">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">Buy the Books</span>
           <h2>Own the Saga</h2>
           <p>Retailer links below are placeholders. Swap in real URLs before publishing.</p>
         </Reveal>

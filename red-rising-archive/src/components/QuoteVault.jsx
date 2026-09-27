@@ -23,7 +23,6 @@ export default function QuoteVault() {
     <section className="alt" id="quotes">
       <div className="wrap">
         <Reveal as="div" className="section-head">
-          <span className="eyebrow">The Quote Vault</span>
           <h2>Words That Stay</h2>
           <p>The fan archive's favorites: short, verified snippets only. Longer passages point to the book, not a full reprint.</p>
         </Reveal>
