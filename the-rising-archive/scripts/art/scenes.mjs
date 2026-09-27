@@ -506,12 +506,15 @@ S['rising-movement'] = (R) => {
   for (let i = 0; i < n; i++) { const t = Math.pow(seededRandom(i * 1.3), 0.7); const z = -6 - t * 70; const spread = 8 + t * 40; const x = (seededRandom(i * 2.7) - 0.5) * spread; pos.push([x, 0.8 + (seededRandom(i * 4.1) - 0.5) * 0.25, z]); }
   const inst = new THREE.InstancedMesh(new THREE.SphereGeometry(0.03, 8, 6), lamp, n); const m = new THREE.Matrix4();
   pos.forEach((p, i) => { m.makeTranslation(...p); inst.setMatrixAt(i, m); }); scene.add(inst);
-  pos.slice(0, 60).forEach((p) => { const l = new THREE.PointLight(0xff3a3a, 1.2, 4, 2); l.position.set(...p); scene.add(l); });
+  pos.slice(0, 60).forEach((p) => { const l = new THREE.PointLight(0xff4a3a, 3.2, 7, 2); l.position.set(...p); scene.add(l); });
+  // each lamp gets a halo, so the crowd of lights actually reads at thumbnail size
+  pos.slice(0, 420).forEach((p, i) => scene.add(glowDisc(0xff5a44, 0.28 + (i % 5) * 0.06, 0.55, p)));
+  scene.add(glowDisc(0xff3a2a, 60, 0.18, [0, 0.4, -40]));
   const ceil = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), matte(0x0c0a09, 1)); ceil.rotation.x = Math.PI / 2; ceil.position.y = 7; scene.add(ceil);
-  scene.add(glowDisc(C.red, 30, 0.25, [0, 3, -60]));
-  const walls = matte(0x1a1512, 1);
+  scene.add(glowDisc(C.red, 40, 0.45, [0, 3, -60]));
+  const walls = matte(0x3a2a22, 1);
   [-1, 1].forEach((sg) => { for (let i = 0; i < 30; i++) { const w = new THREE.Mesh(new THREE.BoxGeometry(2, 4 + seededRandom(i) * 5, 4), walls); w.position.set(sg * (5 + i * 0.7 + seededRandom(i * 9) * 2), 2, -i * 4); w.rotation.y = seededRandom(i * 5) * 0.4; scene.add(w); } });
-  return { scene, camera: cam(R.W, R.H, [0, 2.4, 2], [0, 1.0, -30], 46), exposure: 1.25 };
+  return { scene, camera: cam(R.W, R.H, [0, 2.4, 2], [0, 1.0, -30], 46), exposure: 1.45 };
 };
 
 S['rising-war'] = (R) => {

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import Spotlight from "@/components/archive/Spotlight";
 
 const BRANCHES = [
-  { href: "/story/", title: "The Story", body: "Six books as six chapters in the history of a civilization, and the timeline they sit on.", cta: "Open the story", plate: "/images/books/red-rising.webp", w: 900, h: 1350, span: "md:col-span-4 md:row-span-2 md:min-h-[34rem]" },
+  { href: "/story/", title: "The Story", body: "Six books as six chapters in the history of a civilization, and the timeline they sit on.", cta: "Open the story", plate: "/images/books/shelf.webp", w: 1600, h: 900, span: "md:col-span-4 md:row-span-2 md:min-h-[34rem]" },
   { href: "/people/", title: "The People", body: "Ten faces of power, their dossiers, and what the war took from each of them.", cta: "Open the dossiers", plate: "/images/people/darrow.webp", w: 900, h: 900, span: "md:col-span-2 md:row-span-2" },
   { href: "/world/", title: "The World", body: "Fourteen Colors, five houses, the factions, the planets, the machines.", cta: "Enter the world", plate: "/images/places/mars.webp", w: 900, h: 900, span: "md:col-span-2" },
   { href: "/ideas/", title: "The Ideas", body: "Six questions the saga won’t stop asking.", cta: "Ask them", plate: "/images/rising/movement.webp", w: 1600, h: 900, span: "md:col-span-2" },
@@ -42,7 +42,7 @@ export default function ArchiveIndex() {
                       alt=""
                       width={b.w}
                       height={b.h}
-                      className="absolute inset-0 h-full object-cover opacity-60 transition-[opacity,transform] duration-700 group-hover:scale-[1.03] group-hover:opacity-85"
+                      className="absolute inset-0 h-full object-cover object-top opacity-60 transition-[opacity,transform] duration-700 group-hover:scale-[1.03] group-hover:opacity-85"
                       sizes="(min-width: 768px) 60vw, 100vw"
                     />
                     <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void via-void/55 to-transparent" />
