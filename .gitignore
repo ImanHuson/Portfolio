@@ -1,1 +1,3 @@
 .playwright-cli/
+.claude/skills/*/scripts/__pycache__/
+**/__pycache__/
