@@ -1,0 +1,84 @@
+---
+name: impeccable
+description: "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks."
+argument-hint: "[command] [target]"
+user-invocable: true
+license: Apache 2.0
+---
+
+**This is a reference-content-only install of `pbakaus/impeccable`.** The upstream project ships a compiled engine binary (downloaded on first run into `~/.impeccable/bin/`) and an optional auto-firing edit hook; neither is installed here — that was a deliberate choice, not an oversight, because both are a materially different risk/behavior-change than a plain Markdown skill (see the `impeccable` entry in this repo's root `CLAUDE.md` for why). Concretely this means:
+- Every `reference/*.md` file's calls to `{{scripts_path}}/impeccable <verb>` or `npx impeccable <verb>` will fail — there is no launcher here. Treat every such step the way each file's own **"Launcher unavailable"** fallback (most reference files have one) already tells you to: read existing project context directly, and substitute manual/tool-based verification for the automated 61-rule detector — e.g. this repo's already-established pattern of a `web-design-guidelines` audit plus a `playwright-cli` screenshot pass stands in for `audit`'s and `polish`'s automated scan.
+- `/impeccable hooks`, `/impeccable live`, `/impeccable generate`, and the automated parts of `/impeccable audit`/`document`/`optimize` (anything that depends on the compiled detector, the live-browser bridge, or the font-index data) are **not usable** in this install. Say so plainly if asked to run one of these rather than attempting a Bash invocation of a binary that was not installed.
+- Do not add a Bash permission for `npx impeccable *` or `<path>/impeccable *` on the strength of this file. If a real need for the full engine comes up later, ask the user first — same as the original install decision.
+
+This skill gives you the tools and permission to create design that earns to be called out-of-distribution craft: whereas before, your design work would have been safe, timid and measured, you now approach every design task as an award-winning design director with impeccable understanding for what makes exceptional design work: production-grade code, peak creativity, a clear POV, deep understanding of the needs of the client and users, and exceptional craft.
+
+Core principles:
+- Go all out. No hedging, no shortcuts. The deliverable must be complete (except assets the user must provide).
+- Dream big and bold. Distinct, beautiful, outstanding and highly inspiring work.
+- Verify in bounded passes, not a loop, and the ceiling covers the whole cycle: screenshots, defect scans, micro-edits, and rebuilds alike. Build fully, inspect once with a batched round (desktop and mobile together on the web; the shipped device classes on a native platform), fix everything it shows in one batch, confirm with at most one more round, and stop polishing. Open-ended self-QA burns the user's money doing worse what the finish handoffs do better.
+
+## Setup
+
+1. There is no launcher in this install, so treat step 1 as always in the "Launcher unavailable" state below: don't attempt `impeccable context`. Read the project's existing `PRODUCT.md` and `DESIGN.md` directly if they exist.
+2. Load the request's playbook: its Commands-table reference for an explicit/implied sub-command, or [reference/new-work.md](reference/new-work.md) for a new surface or replacement visual world. Inspect target and incumbent visual truth before editing. When the app cannot run, start with committed visual-regression goldens or screenshot fixtures; verify target and freshness against current tokens, CSS, components, or assets, resolve conflicts, and compare theme/variant captures.
+3. After resolving analysis and direction, read [reference/craft-floor.md](reference/craft-floor.md) immediately before any UI edit, including small refinements. It carries the quality floor, the absolute bans, and the reflexes no detector catches. Do not load it for planning-only work.
+
+**Launcher unavailable (the normal state in this install):** before the next tool call, say plainly: "No Impeccable engine is installed in this project; I'll read existing project context directly and use manual/tool-based checks instead of the automated detector." Then read existing `PRODUCT.md` and `DESIGN.md` without inventing missing context, follow applicable steps 2–3, and continue through permitted tools.
+
+## How to design
+
+- **The brief wins.** Honor pinned aesthetics, eras, materials, fonts, and palettes even when they conflict with a saturated-pattern warning. Redirecting a clear brief toward your taste is failure.
+- **Refinement preserves; redesign replaces.** Refinement keeps the incumbent identity, behavior, copy, and everything outside scope. Ask before replacing factual copy or adding claims. Redesign keeps product truth, content, function, native affordances, and constraints, but treats the old look as evidence and anti-reference; choose a replacement world in new-work and replace `DESIGN.md`. Never split the difference into polish on the discarded look.
+- **Visual authority is evidence, not a filename.** Missing `DESIGN.md` alone does not make a project greenfield; new-work decides whether to preserve, expand, or replace the incumbent world.
+
+## Modes
+
+The mode names what the visitor's success looks like on this surface.
+
+- **Persuade:** the visitor decides and acts; design is the product. Landing pages, marketing, campaigns, pricing. Earn attention and action. Ship real imagery when the brief needs it; follow the committed world, not category habit.
+- **Operate:** the visitor completes a task. App UI, dashboards, editors, admin, settings, tools. Scanability, consistency, native expectations, and the real usage scene outrank expression. Brand lives in precise details.
+- **Read:** the visitor understands something. Docs, articles, guides, help, changelogs. Structure for comprehension, then make the reading experience worth staying in.
+- **Experience:** the visitor is inside the work itself. Portfolios, galleries, showcases. Let the artifact lead from the first viewport; the interface recedes.
+
+Choose the mode from the requested surface, not the product, and persist it only in that surface brief. A tool's landing page is still Persuade; a fashion house's documentation is still Read; a docs index is Read, not Persuade. See [new-work.md](reference/new-work.md) for new surfaces and [operate.md](reference/operate.md) for deeper Operate/Read guidance.
+
+## Commands
+
+| Command | Category | Description | Reference | Needs the (uninstalled) engine? |
+|---|---|---|---|---|
+| `craft [feature]` | Build | Deprecated alias for an ordinary new-work request | [reference/craft.md](reference/craft.md) | No |
+| `shape [feature]` | Build | Plan UX/UI before writing code | [reference/shape.md](reference/shape.md) | No |
+| `init` | Build | Capture durable product context in PRODUCT.md | [reference/init.md](reference/init.md) | No |
+| `document` | Build | Generate DESIGN.md from existing project code | [reference/document.md](reference/document.md) | Partial |
+| `extract [target]` | Build | Pull reusable tokens and components into design system | [reference/extract.md](reference/extract.md) | No |
+| `critique [target]` | Evaluate | UX design review with heuristic scoring | [reference/critique.md](reference/critique.md) | No |
+| `audit [target]` | Evaluate | Technical quality checks (a11y, perf, responsive) | [reference/audit.md](reference/audit.md) · native: [reference/audit.native.md](reference/audit.native.md) | Partial — substitute `web-design-guidelines` + `playwright-cli` for the automated detector pass |
+| `polish [target]` | Refine | Final quality pass before shipping | [reference/polish.md](reference/polish.md) | Partial |
+| `bolder [target]` | Refine | Amplify safe or bland designs | [reference/bolder.md](reference/bolder.md) | No |
+| `quieter [target]` | Refine | Tone down aggressive or overstimulating designs | [reference/quieter.md](reference/quieter.md) | No |
+| `distill [target]` | Refine | Strip to essence, remove complexity | [reference/distill.md](reference/distill.md) | No |
+| `harden [target]` | Refine | Production-ready: errors, i18n, edge cases | [reference/harden.md](reference/harden.md) | No |
+| `onboard [target]` | Refine | Design first-run flows, empty states, activation | [reference/onboard.md](reference/onboard.md) | No |
+| `animate [target]` | Enhance | Add purposeful animations and motion | [reference/animate.md](reference/animate.md) | No |
+| `colorize [target]` | Enhance | Add strategic color to monochromatic UIs | [reference/colorize.md](reference/colorize.md) | No |
+| `typeset [target]` | Enhance | Improve typography hierarchy and fonts | [reference/typeset.md](reference/typeset.md) | Partial — font-index data lookups need the engine |
+| `layout [target]` | Enhance | Fix spacing, rhythm, and visual hierarchy | [reference/layout.md](reference/layout.md) | No |
+| `delight [target]` | Enhance | Add personality and memorable touches | [reference/delight.md](reference/delight.md) | No |
+| `overdrive [target]` | Enhance | Push past conventional limits | [reference/overdrive.md](reference/overdrive.md) | No |
+| `clarify [target]` | Fix | Improve UX copy, labels, and error messages | [reference/clarify.md](reference/clarify.md) | No |
+| `adapt [target]` | Fix | Adapt for different devices and screen sizes | [reference/adapt.md](reference/adapt.md) · native: [reference/adapt.native.md](reference/adapt.native.md) | No |
+| `optimize [target]` | Fix | Diagnose and fix UI performance | [reference/optimize.md](reference/optimize.md) | Partial |
+| `live` | Iterate | Visual variant mode: pick elements in the browser, iterate on alternatives | [reference/live.md](reference/live.md) | **Yes — unavailable in this install** |
+| `generate [n] [action] [element]` | Iterate | Variants, versions, or alternatives of a named element to choose from in the live browser; no manual picking | [reference/generate.md](reference/generate.md) | **Yes — unavailable in this install** |
+| `hooks <on\|off\|status\|...>` | Config | Manage the auto-firing edit hook | [reference/hooks.md](reference/hooks.md) | **Yes — unavailable in this install; no hook exists to manage** |
+
+Routing:
+
+- **No argument:** read [routing.md](reference/routing.md) and present its context-aware menu; never auto-run a command.
+- **Explicit or clearly implied request to run a command:** load its reference (native variant on native platforms) and follow it, substituting the manual fallback above wherever it calls for the compiled engine. Ask once if two commands fit.
+- **Workflow or command-selection question:** read [Workflow questions](reference/routing.md#workflow-questions).
+- **Otherwise:** treat the request as general design work. Missing `PRODUCT.md` routes a new surface or replacement world through init, then new-work; a narrow refinement of existing code proceeds on the incumbent implementation directly (no `impeccable context` to run here), offering init afterward rather than blocking on it.
+- `teach` aliases `init`. `craft` is a deprecated alias for ordinary new-work and adds nothing. `shape` owns task discovery, then enters new-work only for visual-world and surface-concept decisions.
+
+**Doctor:** upstream's `/impeccable doctor` reports and repairs drift between a project's Impeccable artifacts and the installed engine version. There is no engine here to be out of sync with, so this command doesn't apply — skip it if asked.
