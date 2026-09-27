@@ -1,18 +1,36 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import SpoilerGate from './SpoilerGate.jsx'
 
 export default function CharacterDossier({ character, onClose }) {
+  const dialogRef = useRef(null)
+  const previouslyFocused = useRef(null)
+
   useEffect(() => {
     function onKey(e) {
       if (e.key === 'Escape') onClose()
     }
+    previouslyFocused.current = document.activeElement
+    dialogRef.current?.focus()
+    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+      previouslyFocused.current?.focus?.()
+    }
   }, [onClose])
 
   return (
     <div className="dossier-backdrop" onClick={onClose}>
-      <div className="dossier" role="dialog" aria-modal="true" aria-label={character.name} onClick={(e) => e.stopPropagation()}>
+      <div
+        className="dossier"
+        role="dialog"
+        aria-modal="true"
+        aria-label={character.name}
+        tabIndex={-1}
+        ref={dialogRef}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button className="close" onClick={onClose} aria-label="Close dossier">✕</button>
         <div className="order">{character.order}</div>
         <h3>{character.name}</h3>

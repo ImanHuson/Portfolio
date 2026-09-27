@@ -4,11 +4,15 @@ import { useGSAP } from '@gsap/react'
 
 /** Fades/lifts a block in on scroll. Never touches opacity — only the lift
  * transform animates, so content stays visible (readable, screenshot-safe)
- * even if the scroll trigger never fires. See design.md's motion note. */
+ * even if the scroll trigger never fires. See design.md's motion note.
+ * The global CSS prefers-reduced-motion rule only zeroes CSS
+ * transition/animation durations, not this GSAP tween, so it's gated here
+ * too — otherwise every reveal on the page ignores the OS setting. */
 export default function Reveal({ children, as: Tag = 'div', delay = 0, className = '' }) {
   const ref = useRef(null)
   useGSAP(
     () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
       gsap.fromTo(
         ref.current,
         { y: 24 },
