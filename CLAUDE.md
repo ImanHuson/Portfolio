@@ -90,6 +90,13 @@ What this round deliberately did *not* do: re-verify the already fact-checked ch
 
 Suggested loop: direction (`design-taste-frontend` / `brandkit` / `ui-ux-pro-max`, optionally `design-md-reference` or `extract-design`) → edit HTML, consulting `emil-*` only where motion is actually warranted → verify with `playwright-cli` screenshots at 375px and 1440px → audit with `web-design-guidelines`.
 
+## MCP servers (`.mcp.json`, project scope)
+
+| Server | Use it for | Caveats |
+|---|---|---|
+| `threejsresources` (`https://threejsresources.com/api/mcp`) | Three.js reference/docs lookup, added specifically to support re-evaluating three.js/R3F for a future 3D build | Not a canonical/official Three.js domain (that's `threejs.org`) — added on the user's explicit call, not vetted independently. Registering it here doesn't change the `ogl` decision for `red-rising-archive` by itself; that's a separate call, see the re-verification note in the `red-rising-archive` section above. Like any project-scope MCP server, it only takes effect for sessions that (re)connect after this file was written — not retroactively for a session already running. |
+
+
 ### Requested but not installed as skills — these are libraries and reference sites, not Claude skills
 
 - **Lenis** (darkroomengineering/lenis), **GSAP** (greensock/GSAP), **Vanta** (tengbao/vanta) — real JS animation/scroll libraries with CDN builds. Could be added to the static HTML via `<script>` tags if a future redesign wants scroll-smoothing or animated backgrounds — not wired in, since that's a real behavior change to the live site, not a tooling install.
