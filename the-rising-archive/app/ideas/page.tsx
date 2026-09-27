@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHeader from "@/components/typography/PageHeader";
 import Reveal from "@/components/archive/Reveal";
 import { IDEAS } from "@/lib/data/ideas";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The Ideas",
@@ -22,10 +23,12 @@ export default function IdeasPage() {
         <ol role="list" className="mx-auto max-w-[1400px] border-t border-line">
           {IDEAS.map((idea, i) => (
             <Reveal as="li" key={idea.slug} delay={i * 0.03} className="border-b border-line">
+              <Spotlight tone="rim" className="h-full">
               <Link href={`/ideas/${idea.slug}/`} className="group grid gap-3 py-10 md:grid-cols-[18rem_1fr] md:gap-12 md:py-14">
                 <span className="font-display text-h2 leading-none font-bold uppercase transition-colors group-hover:text-red">{idea.name}</span>
                 <span className="max-w-[48ch] font-serif text-h3 leading-snug text-bone/85 italic">{idea.question}</span>
               </Link>
+              </Spotlight>
             </Reveal>
           ))}
         </ol>

@@ -89,6 +89,13 @@ function glowTexture() {
   _glowTex = new THREE.DataTexture(d, n, n, THREE.RGBAFormat); _glowTex.needsUpdate = true;
   return _glowTex;
 }
+// Soft cloud puff: the glow texture with normal blending, for volumes.
+export function puff(color, size, opacity, [x, y, z]) {
+  glowTexture();
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(size, size), new THREE.MeshBasicMaterial({ map: _glowTex, color, transparent: true, opacity, depthWrite: false, fog: false }));
+  m.position.set(x, y, z);
+  return m;
+}
 export function glowDisc(color, size, opacity, [x, y, z]) {
   const m = new THREE.Mesh(
     new THREE.PlaneGeometry(size, size),
@@ -150,10 +157,44 @@ export function atmosphere(radius, color, strength = 1.0, lightDir = [-1, 0.3, 0
   return g;
 }
 
-// No env reflections in this container (PMREM needs half-float textures that
-// the source-built headless-gl lacks), so metals are satin: partly diffuse,
-// lit directly. Fully metallic materials would render black.
-export const metal = (color, rough = 0.3) => new THREE.MeshStandardMaterial({ color, metalness: 0.55, roughness: Math.max(rough, 0.22) });
+// Reflective metal without PMREM. This container's source-built headless-gl
+// lacks OES_texture_half_float, so three's environment maps render black.
+// Instead, an analytic "studio" (sky gradient + two softboxes + a red
+// kicker) is evaluated in the shader along the reflection vector and added
+// to the lit result. Real mirror-like metal, no textures, no extensions.
+const STUDIO_GLSL = `
+uniform vec3 uTint; uniform float uEnvI; uniform float uRough;
+float rraBox(vec3 d, vec3 c, float w) { return smoothstep(1.0 - w, 1.0, dot(d, normalize(c))); }
+vec3 rraStudio(vec3 d, float r) {
+  float w = mix(0.04, 0.4, r);
+  vec3 sky = mix(vec3(0.05, 0.04, 0.04), vec3(0.55, 0.52, 0.5), smoothstep(-0.2, 0.8, d.y));
+  sky += vec3(0.5, 0.47, 0.44) * smoothstep(0.35, 0.0, abs(d.y - 0.05));
+  sky += vec3(1.0, 0.93, 0.85) * 5.0 * rraBox(d, vec3(-0.6, 0.75, 0.55), w);
+  sky += vec3(0.85, 0.9, 1.0) * 2.6 * rraBox(d, vec3(0.8, 0.35, -0.6), w * 1.4);
+  sky += vec3(0.77, 0.12, 0.16) * 1.8 * rraBox(d, vec3(-0.9, 0.1, -0.5), w * 1.6);
+  sky += vec3(0.9) * 0.9 * smoothstep(0.985 - w, 1.0, abs(d.x)) * smoothstep(-0.1, 0.3, d.y);
+  return sky;
+}`;
+export function metal(color, rough = 0.28, envI = 1.5) {
+  const m = new THREE.MeshStandardMaterial({ color, metalness: 1.0, roughness: Math.max(rough, 0.12) });
+  const tint = new THREE.Color(color);
+  m.onBeforeCompile = (sh) => {
+    sh.uniforms.uTint = { value: tint };
+    sh.uniforms.uEnvI = { value: envI };
+    sh.uniforms.uRough = { value: m.roughness };
+    sh.fragmentShader = sh.fragmentShader
+      .replace('#include <common>', '#include <common>\n' + STUDIO_GLSL)
+      .replace('#include <output_fragment>', `
+        vec3 rraV = normalize(vViewPosition);
+        vec3 rraR = inverseTransformDirection(reflect(-rraV, normal), viewMatrix);
+        float rraNV = clamp(dot(normal, rraV), 0.0, 1.0);
+        vec3 rraF = uTint + (1.0 - uTint) * pow(1.0 - rraNV, 5.0);
+        outgoingLight += rraStudio(rraR, uRough) * rraF * uEnvI;
+        #include <output_fragment>`);
+  };
+  m.customProgramCacheKey = () => 'rra-metal';
+  return m;
+}
 export const matte = (color, rough = 0.8, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: 0, ...extra });
 export const glow = (color, i = 2.5) => new THREE.MeshStandardMaterial({ color: 0x000000, emissive: color, emissiveIntensity: i });
 
@@ -173,3 +214,4 @@ export function cam(aspectW, aspectH, pos, look = [0, 0, 0], fov = 32) {
   c.position.set(...pos); c.lookAt(...look);
   return c;
 }
+

@@ -5,6 +5,7 @@ import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import Stamp from "@/components/archive/Stamp";
 import { BOOKS } from "@/lib/data/books";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The Story",
@@ -25,6 +26,7 @@ export default function StoryPage() {
         <ol className="mx-auto max-w-[1400px] border-t border-line" role="list">
           {BOOKS.map((b, i) => (
             <Reveal as="li" key={b.slug} delay={i * 0.03} className="border-b border-line">
+              <Spotlight tone="red" className="h-full">
               <Link
                 href={`/story/books/${b.slug}/`}
                 className="group grid grid-cols-[5rem_1fr] items-center gap-5 py-8 md:grid-cols-[7rem_9rem_1fr_auto] md:gap-10 md:py-10"
@@ -42,6 +44,7 @@ export default function StoryPage() {
                   <span>{b.narrators.length === 1 ? "Darrow narrates" : `${b.narrators.length} narrators`}</span>
                 </span>
               </Link>
+              </Spotlight>
             </Reveal>
           ))}
           <li className="border-b border-line">

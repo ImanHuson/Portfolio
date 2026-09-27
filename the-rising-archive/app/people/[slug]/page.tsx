@@ -8,6 +8,7 @@ import Stamp from "@/components/archive/Stamp";
 import { PEOPLE, getPerson, type Person } from "@/lib/data/people";
 import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
 import { cn } from "@/lib/utils";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const dynamicParams = false;
 
@@ -208,12 +209,12 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             <h2 className="font-display text-h3 font-bold uppercase">Core relationships</h2>
             <ul className="mt-8 grid gap-px bg-line md:grid-cols-4" role="list">
               {person.bonds.map((b) => (
-                <li key={b.name} className="bg-void p-6">
+                <Spotlight as="li" tone="red" key={b.name} className="bg-void p-6">
                   <p className="font-display text-2xl font-bold uppercase">{b.name}</p>
                   <SpoilerGate book={b.book} compact className="mt-2">
                     <p className="mt-2 text-ash">{b.note}</p>
                   </SpoilerGate>
-                </li>
+                </Spotlight>
               ))}
             </ul>
             <Link href="/people/relationships/" className="mt-8 inline-block border-b border-red pb-1 font-mono text-meta tracking-[0.2em] uppercase hover:text-red">

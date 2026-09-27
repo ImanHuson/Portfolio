@@ -5,6 +5,7 @@ import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Stamp from "@/components/archive/Stamp";
 import { ARGUMENTS, CHORUS, OPEN_QUESTIONS } from "@/lib/data/fandom";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The Fandom",
@@ -34,7 +35,8 @@ export default function FandomPage() {
           </div>
           <ol role="list" className="mt-10 grid gap-px bg-line md:grid-cols-2">
             {ARGUMENTS.map((a, i) => (
-              <Reveal as="li" key={a.q} delay={(i % 2) * 0.05} className="bg-void p-7 md:p-10">
+              <Reveal as="li" key={a.q} delay={(i % 2) * 0.05} className="bg-void">
+                <Spotlight tone="red" className="h-full p-7 md:p-10">
                 <SpoilerGate book={a.book} compact>
                   <p className="font-serif text-h3 leading-snug text-bone">{a.q}</p>
                   <dl className="mt-6 grid gap-5 sm:grid-cols-2">
@@ -48,6 +50,7 @@ export default function FandomPage() {
                     </div>
                   </dl>
                 </SpoilerGate>
+                </Spotlight>
               </Reveal>
             ))}
           </ol>
@@ -81,12 +84,12 @@ export default function FandomPage() {
           </p>
           <ul role="list" className="mt-12 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
             {CHORUS.map((c) => (
-              <li key={c.name} className="bg-void p-7">
+              <Spotlight as="li" tone="red" key={c.name} className="bg-void p-7">
                 <SpoilerGate book={c.book} compact>
                   <p className="font-display text-4xl leading-none font-extrabold uppercase">{c.name}</p>
                   <p className="mt-3 text-sm text-ash">{c.note}</p>
                 </SpoilerGate>
-              </li>
+              </Spotlight>
             ))}
           </ul>
           <p className="mt-8 text-sm text-ash-2">

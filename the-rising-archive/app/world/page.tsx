@@ -4,6 +4,7 @@ import PageHeader from "@/components/typography/PageHeader";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import { cn } from "@/lib/utils";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The World",
@@ -31,6 +32,7 @@ export default function WorldPage() {
         <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-6">
           {PARTS.map((p, i) => (
             <Reveal as="li" key={p.href} delay={i * 0.04} className={cn("bg-void", p.span)}>
+              <Spotlight tone="gold" className="h-full">
               <Link href={p.href} className="group relative flex h-full min-h-[22rem] flex-col justify-end overflow-hidden">
                 <Plate src={p.plate} alt={p.alt} className="absolute inset-0 h-full object-cover opacity-70 transition-[opacity,transform] duration-700 group-hover:scale-[1.03] group-hover:opacity-90" sizes="(min-width: 768px) 60vw, 100vw" />
                 <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void via-void/60 to-transparent" />
@@ -39,6 +41,7 @@ export default function WorldPage() {
                   <span className="mt-2 block max-w-[40ch] text-ash">{p.body}</span>
                 </div>
               </Link>
+              </Spotlight>
             </Reveal>
           ))}
         </ul>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/typography/PageHeader";
 import { SOURCES } from "@/lib/data/author";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "Official sources",
@@ -19,12 +20,12 @@ export default function SourcesPage() {
       <section aria-label="Sources" className="px-5 pb-28 md:px-8">
         <ul role="list" className="mx-auto max-w-[1100px] divide-y divide-line border-y border-line">
           {SOURCES.map((s) => (
-            <li key={s.href}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="group grid gap-2 py-7 md:grid-cols-[20rem_1fr] md:gap-10">
+            <Spotlight as="li" tone="gold" lift={false} key={s.href}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="group grid gap-2 px-2 py-7 md:grid-cols-[20rem_1fr] md:gap-10">
                 <span className="font-display text-2xl font-bold uppercase group-hover:text-red">{s.label}</span>
                 <span className="text-ash">{s.note}</span>
               </a>
-            </li>
+            </Spotlight>
           ))}
         </ul>
       </section>

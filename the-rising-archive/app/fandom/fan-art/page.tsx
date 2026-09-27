@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/typography/PageHeader";
 import Plate from "@/components/archive/Plate";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The archive’s plates",
@@ -58,9 +59,9 @@ export default function FanArtPage() {
             <p className="mt-2 text-ash">{g.note}</p>
             <ul role="list" className={g.title === "Six books" ? "mt-8 grid grid-cols-2 gap-3 md:grid-cols-6" : g.title === "The Rising" ? "mt-8 grid gap-3 md:grid-cols-2" : "mt-8 grid grid-cols-2 gap-3 md:grid-cols-5"}>
               {g.items.map((it) => (
-                <li key={it.src}>
+                <Spotlight as="li" tone="gold" key={it.src}>
                   <Plate src={it.src} alt={it.alt} width={it.w ?? 900} height={it.h ?? 900} sizes="(min-width: 768px) 20vw, 50vw" />
-                </li>
+                </Spotlight>
               ))}
             </ul>
           </div>

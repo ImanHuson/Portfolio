@@ -5,6 +5,7 @@ import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import { HOUSES } from "@/lib/data/houses";
 import { cn } from "@/lib/utils";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The Houses",
@@ -25,6 +26,7 @@ export default function HousesPage() {
         <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-6">
           {HOUSES.map((h, i) => (
             <Reveal as="li" key={h.slug} delay={i * 0.04} className={cn("bg-void", i < 2 ? "md:col-span-3" : "md:col-span-2")}>
+              <Spotlight tone="gold" className="h-full">
               <Link href={`/world/houses/${h.slug}/`} className="group flex h-full flex-col">
                 <div className="overflow-hidden">
                   <Plate
@@ -46,6 +48,7 @@ export default function HousesPage() {
                   <span className="mt-auto pt-6 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">{h.seat}</span>
                 </div>
               </Link>
+              </Spotlight>
             </Reveal>
           ))}
         </ul>

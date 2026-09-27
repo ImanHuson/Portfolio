@@ -2,6 +2,7 @@ import Link from "next/link";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import { cn } from "@/lib/utils";
+import Spotlight from "@/components/archive/Spotlight";
 
 const BRANCHES = [
   { href: "/story/", title: "The Story", body: "Six books as six chapters in the history of a civilization, and the timeline they sit on.", cta: "Open the story", plate: "/images/books/red-rising.webp", w: 900, h: 1350, span: "md:col-span-4 md:row-span-2 md:min-h-[34rem]" },
@@ -32,6 +33,7 @@ export default function ArchiveIndex() {
         <ul role="list" className="mt-16 grid gap-px bg-line md:grid-cols-6">
           {BRANCHES.map((b, i) => (
             <Reveal as="li" key={b.href} delay={(i % 3) * 0.05} className={cn("bg-void", b.span)}>
+              <Spotlight tone={b.href === "/sealed/" || i < 2 ? "red" : "gold"} className="h-full">
               <Link href={b.href} className="group relative flex h-full min-h-[20rem] flex-col justify-end overflow-hidden">
                 {b.plate ? (
                   <>
@@ -56,6 +58,7 @@ export default function ArchiveIndex() {
                   <span className="mt-6 block font-mono text-meta tracking-[0.2em] text-bone uppercase group-hover:text-red">{b.cta}</span>
                 </div>
               </Link>
+              </Spotlight>
             </Reveal>
           ))}
         </ul>

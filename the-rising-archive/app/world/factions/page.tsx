@@ -7,6 +7,7 @@ import Stamp from "@/components/archive/Stamp";
 import HowlerRollCall from "@/components/world/HowlerRollCall";
 import { ASCOMANNI, FACTIONS, KNIGHTS } from "@/lib/data/factions";
 import { cn } from "@/lib/utils";
+import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
   title: "The Factions",
@@ -59,7 +60,7 @@ export default function FactionsPage() {
             <HowlerRollCall />
           </div>
           <p className="mt-6 max-w-[64ch] text-sm text-ash-2">
-            The pack grows over the saga; this roll call lists the Institute Howlers whose histories the archive could verify. Weapons and some defining moments aren’t recorded here rather than guessed.
+            From the Institute pack to the Solar War. Weapons and details appear only where the archive could verify them; names listed without detail are on the roll and nothing more is claimed.
           </p>
         </div>
       </section>
@@ -68,11 +69,11 @@ export default function FactionsPage() {
         <div className="mx-auto max-w-[1400px]">
           <h2 id="knights-t" className="font-serif text-h1 leading-[0.9] text-gold">The Olympic Knights</h2>
           <p className="mt-5 max-w-[56ch] text-lede text-ash">
-            Twelve seats. The Society’s champions, each with an armour, a title and a reputation. Where the archive couldn’t confirm a detail, it says so.
+            Twelve seats. The Society’s champions, each with an armour, a title and a reputation. Ten of the twelve titles are named here, plus a disputed thirteenth. Where the archive couldn’t confirm a detail, it says so.
           </p>
           <ul role="list" className="mt-12 grid gap-px bg-line md:grid-cols-2 lg:grid-cols-3">
             {KNIGHTS.map((k) => (
-              <li key={k.title} className="flex flex-col gap-4 bg-void p-7">
+              <Spotlight as="li" tone="gold" key={k.title} className="flex flex-col gap-4 bg-void p-7">
                 <div className="flex items-start justify-between gap-4">
                   <p className="font-serif text-3xl text-bone">{k.title}</p>
                   {k.disputed && <Stamp kind="disputed" />}
@@ -81,20 +82,22 @@ export default function FactionsPage() {
                   <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Armour</p>
                   <p className="mt-1 text-ash">{k.armour ?? <Stamp kind="unknown" />}</p>
                 </div>
-                {k.holder && (
-                  <div>
-                    <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Held by</p>
+                <div>
+                  <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Held by</p>
+                  {k.holder ? (
                     <SpoilerGate book={k.holder.book} compact className="mt-1">
                       <p className="mt-1 text-bone/85">{k.holder.text}</p>
                     </SpoilerGate>
-                  </div>
-                )}
+                  ) : (
+                    <Stamp kind="unknown" className="mt-1" />
+                  )}
+                </div>
                 {k.note && (
                   <SpoilerGate book={k.note.book} compact>
                     <p className="text-sm text-ash">{k.note.text}</p>
                   </SpoilerGate>
                 )}
-              </li>
+              </Spotlight>
             ))}
           </ul>
         </div>

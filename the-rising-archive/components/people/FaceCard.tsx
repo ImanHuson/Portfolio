@@ -10,6 +10,14 @@ import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
 import { cssEase, duration } from "@/lib/animation/tokens";
 import { cn } from "@/lib/utils";
 
+const SPOT: Record<string, string> = {
+  apollonius: "radial-gradient(circle 260px at var(--mx, 50%) var(--my, 40%), rgba(200,169,106,0.24), transparent 70%), linear-gradient(160deg, rgba(122,15,23,0.4), transparent 60%)",
+  gold: "radial-gradient(circle 240px at var(--mx, 50%) var(--my, 40%), rgba(200,169,106,0.16), transparent 70%), linear-gradient(160deg, rgba(140,116,70,0.16), transparent 60%)",
+  red: "radial-gradient(circle 240px at var(--mx, 50%) var(--my, 40%), rgba(196,30,42,0.2), transparent 70%), linear-gradient(160deg, rgba(122,15,23,0.26), transparent 60%)",
+  rim: "radial-gradient(circle 240px at var(--mx, 50%) var(--my, 40%), rgba(223,232,255,0.13), transparent 70%), linear-gradient(160deg, rgba(170,178,186,0.1), transparent 60%)",
+  none: "radial-gradient(circle 240px at var(--mx, 50%) var(--my, 40%), rgba(233,228,218,0.1), transparent 70%)",
+};
+
 /** One face of power. Five of the ten carry an authored micro-interaction
  * from the brief (Darrow, Cassius, Lysander, Atlas, Apollonius); the rest
  * stay still on purpose. Everything that fires on hover also fires on
@@ -20,7 +28,6 @@ export default function FaceCard({ person, lens, className }: { person: Person; 
   const [active, setActive] = useState(false);
   const [cycle, setCycle] = useState(0);
   const [noticed, setNoticed] = useState(false);
-  const [spot, setSpot] = useState({ x: 50, y: 50 });
   const cardRef = useRef<HTMLAnchorElement>(null);
 
   const unlocked = clearance >= person.lensBook;
@@ -60,26 +67,25 @@ export default function FaceCard({ person, lens, className }: { person: Person; 
       onMouseLeave={leave}
       onFocus={enter}
       onBlur={leave}
-      onMouseMove={(e) => {
-        if (!isApollonius || !cardRef.current) return;
-        const r = cardRef.current.getBoundingClientRect();
-        setSpot({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+      onPointerMove={(e) => {
+        // The Apollonius spotlight, now on every face: position goes straight
+        // into CSS variables, so tracking the cursor never re-renders React.
+        const el = cardRef.current;
+        if (!el || e.pointerType === "touch") return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
       }}
       className={cn(
-        "group relative flex min-h-[19rem] flex-col justify-between overflow-hidden bg-void p-7 transition-colors duration-300 hover:bg-void-2 focus-visible:bg-void-2 md:p-9",
-        isApollonius && "transition-transform duration-500 hover:scale-[1.015] focus-visible:scale-[1.015]",
+        "group relative flex min-h-[19rem] flex-col justify-between overflow-hidden bg-void p-7 transition-[background-color,transform] duration-500 hover:z-10 hover:bg-void-2 focus-visible:z-10 focus-visible:bg-void-2 motion-safe:hover:scale-[1.012] motion-safe:focus-visible:scale-[1.012] md:p-9",
         className,
       )}
     >
-      {isApollonius && (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
-          style={{
-            background: `radial-gradient(circle 220px at ${spot.x}% ${spot.y}%, rgba(200,169,106,0.18), transparent 70%), linear-gradient(160deg, rgba(122,15,23,0.35), transparent 60%)`,
-          }}
-        />
-      )}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
+        style={{ background: SPOT[isApollonius ? "apollonius" : person.register] }}
+      />
       {person.slug === "lysander" && (
         <svg aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100">
           <motion.path

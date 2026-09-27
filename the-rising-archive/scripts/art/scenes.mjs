@@ -1,9 +1,7 @@
-// Scene registry. Usage (from the level-2 skill's workdir, after its
-// scripts/setup.sh, with kit.mjs and this file copied in):
-//   xvfb-run -a node scenes.mjs <name> [outDir]
+// Scene registry. Usage: xvfb-run -a node scenes.mjs <name> [outDir]
 import { THREE, createRenderer, captureFrame, addStudioEnvironment, seededRandom } from './pipeline.mjs';
 import {
-  C, fbm, planetTexture, mix, ss, darkStage, backdrop, glowDisc, archiveLights, plinth, stars,
+  C, fbm, planetTexture, mix, ss, darkStage, backdrop, glowDisc, puff, archiveLights, plinth, stars,
   atmosphere, metal, matte, glow, lathe, shapeFrom, cam,
 } from './kit.mjs';
 
@@ -143,7 +141,7 @@ S['relic-darrow'] = relic((g) => {
   // worn bands near the base
   for (let i = 0; i < 3; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.58 - i * 0.04, 0.025, 12, 96), metal(0x5a4a3a, 0.6)); r.rotation.x = Math.PI / 2; r.position.y = 0.12 + i * 0.12; tooth.add(r); }
   // red Martian dust on the plinth
-  const dust = new THREE.Mesh(new THREE.CircleGeometry(2.2, 96), new THREE.MeshStandardMaterial({ map: planetTexture((n) => { const t = ss(0.45, 0.62, n); return mix([16, 8, 7], [74, 30, 18], t); }, { w: 512, h: 512, scale: 14, seed: 5 }), roughness: 1 }));
+  const dust = new THREE.Mesh(new THREE.CircleGeometry(2.2, 96), new THREE.MeshStandardMaterial({ map: planetTexture((n) => { const t = ss(0.45, 0.62, n); return mix([14, 7, 6], [66, 28, 17], t); }, { w: 1024, h: 1024, scale: 34, seed: 5 }), roughness: 1 }));
   dust.rotation.x = -Math.PI / 2; dust.position.y = 0.005; g.add(dust);
 });
 
@@ -191,11 +189,8 @@ S['relic-cassius'] = relic((g) => {
 
 // Sevro: a crown he doesn't want, knocked into the dirt beside a wolf pelt.
 S['relic-sevro'] = relic((g) => {
-  const pelt = new THREE.Mesh(new THREE.SphereGeometry(1.5, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2), matte(0x1d1a17, 1));
-  pelt.scale.set(1, 0.18, 0.8); pelt.position.set(-0.3, 0, -0.2); g.add(pelt);
-  const pos = pelt.geometry.attributes.position;
-  for (let i = 0; i < pos.count; i++) { const n = fbm(pos.getX(i) * 3, pos.getY(i) * 3, pos.getZ(i) * 3, 3, 5); pos.setY(i, pos.getY(i) * (0.6 + n)); }
-  pelt.geometry.computeVertexNormals();
+  const dirt = new THREE.Mesh(new THREE.CircleGeometry(2.3, 96), new THREE.MeshStandardMaterial({ map: planetTexture((n) => { const t = ss(0.4, 0.66, n); return mix([12, 11, 10], [58, 52, 46], t); }, { w: 512, h: 512, scale: 26, seed: 8 }), roughness: 1 }));
+  dirt.rotation.x = -Math.PI / 2; dirt.position.y = 0.005; g.add(dirt);
   const crown = new THREE.Group();
   const band = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.28, 96, 1, true), metal(C.gold, 0.28)); band.material.side = THREE.DoubleSide; crown.add(band);
   for (let i = 0; i < 9; i++) { const a = (i / 9) * Math.PI * 2; const sp = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.36, 12), metal(C.gold, 0.28)); sp.position.set(Math.cos(a) * 0.55, 0.3, Math.sin(a) * 0.55); crown.add(sp); }
@@ -223,20 +218,25 @@ S['relic-pax'] = relic((g) => {
 
 // Diomedes: a storm cloak, alive with cloud and lightning.
 S['relic-diomedes'] = relic((g, scene) => {
-  const cloud = matte(0x30343c, 1);
-  for (let i = 0; i < 220; i++) {
-    const a = seededRandom(i * 1.7) * Math.PI * 2, r = Math.pow(seededRandom(i * 3.1), 0.6) * 1.5, h = 1.5 + (seededRandom(i * 5.3) - 0.5) * 0.9 * (1.4 - r / 1.5);
-    const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.16 + seededRandom(i * 7.1) * 0.26, 2), cloud);
-    m.position.set(Math.cos(a) * r, h, Math.sin(a) * r * 0.55); g.add(m);
+  // A storm as soft volume: layered puffs, dark outside, lit from within.
+  for (let i = 0; i < 260; i++) {
+    const a = seededRandom(i * 1.7) * Math.PI * 2, r = Math.pow(seededRandom(i * 3.1), 0.7) * 1.7;
+    const y = 1.55 + (seededRandom(i * 5.3) - 0.5) * 0.8 * (1.3 - r / 1.7);
+    const shade = 0.012 + seededRandom(i * 9.1) * 0.02 + Math.max(0, y - 1.5) * 0.02;
+    g.add(puff(new THREE.Color(shade, shade * 1.08, shade * 1.3), 0.9 + seededRandom(i * 7.1) * 0.9, 0.7, [Math.cos(a) * r, y, Math.sin(a) * r * 0.5 + 0.2]));
   }
+  for (let i = 0; i < 26; i++) g.add(glowDisc(0x7f9fd8, 0.7 + seededRandom(i * 4.2) * 0.8, 0.16, [(seededRandom(i * 2.2) - 0.5) * 1.6, 1.3 + seededRandom(i * 6.6) * 0.4, 0.6]));
   const bolt = (pts, w) => new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(...p)), false, 'catmullrom', 0.0), 80, w, 6), glow(0xeaf2ff, 8));
-  g.add(bolt([[0.15, 1.2, 0.7], [0.32, 0.95, 0.72], [0.1, 0.72, 0.75], [0.36, 0.45, 0.74], [0.18, 0.2, 0.72], [0.3, 0.0, 0.7]], 0.022));
-  g.add(bolt([[0.32, 0.95, 0.72], [0.62, 0.8, 0.7], [0.7, 0.6, 0.68]], 0.012));
-  g.add(bolt([[-0.7, 1.3, 0.6], [-0.85, 1.05, 0.62], [-0.62, 0.86, 0.64]], 0.012));
-  const inner = new THREE.PointLight(0xcfe0ff, 30, 4, 2); inner.position.set(0.1, 1.45, 0.3); scene.add(inner);
-  const strike = new THREE.PointLight(0xeaf2ff, 18, 3, 2); strike.position.set(0.3, 0.2, 1.0); scene.add(strike);
-  g.add(glowDisc(0xdfe8ff, 2.2, 0.45, [0.25, 0.05, 0.8]));
-}, { halo: 0x9fb4d8, haloOpacity: 0.16, lights: { red: 0x9fb4d8, redI: 1.2, key: 0xcfd8ff, keyI: 0.9 }, camPos: [0, 1.5, 6.6], look: [0, 1.0, 0], exposure: 1.1 });
+  const main = [[0.15, 1.35, 0.9], [0.24, 1.18, 0.92], [0.12, 1.02, 0.93], [0.3, 0.86, 0.93], [0.2, 0.7, 0.94], [0.38, 0.52, 0.94], [0.26, 0.36, 0.93], [0.34, 0.18, 0.92], [0.28, 0.0, 0.9]];
+  g.add(bolt(main, 0.011));
+  g.add(bolt([[0.3, 0.86, 0.93], [0.46, 0.78, 0.92], [0.5, 0.66, 0.91], [0.64, 0.6, 0.9]], 0.006));
+  g.add(bolt([[0.2, 0.7, 0.94], [0.06, 0.6, 0.93], [0.0, 0.46, 0.92]], 0.005));
+  main.forEach(([x, y, z], i) => g.add(glowDisc(0xcfe0ff, 0.5 + (i % 3) * 0.15, 0.45, [x, y, z + 0.02])));
+  g.add(glowDisc(0x9fb8e8, 3.2, 0.3, [0.25, 1.25, 0.8]));
+  g.add(glowDisc(0xdfe8ff, 2.4, 0.5, [0.25, 0.05, 1.0]));
+  g.add(glowDisc(0xdfe8ff, 1.6, 0.35, [0.25, 0.9, 1.0]));
+  const strike = new THREE.PointLight(0xeaf2ff, 18, 3, 2); strike.position.set(0.3, 0.2, 1.1); scene.add(strike);
+}, { halo: 0x9fb4d8, haloOpacity: 0.14, lights: { red: 0x9fb4d8, redI: 1.0, key: 0xcfd8ff, keyI: 0.7 }, camPos: [0, 1.4, 6.4], look: [0, 1.05, 0], exposure: 1.1 });
 
 // Atlas: a shelf of carved totems, each one a person who fooled him.
 S['relic-atlas'] = relic((g) => {
@@ -366,27 +366,70 @@ function facetedHelm(scale, shellMat, trimMat, visorMat) {
   helm.scale.setScalar(scale);
   return helm;
 }
-S['tech-starshell'] = relic((g) => {
-  const helm = facetedHelm(0.95, new THREE.MeshStandardMaterial({ color: 0x3a3c42, metalness: 0.5, roughness: 0.32 }), metal(C.gold, 0.3), glow(C.red, 2.2));
-  helm.position.y = 1.35; helm.rotation.y = -0.5; g.add(helm);
-}, { camPos: [0.3, 1.45, 5.0], look: [0, 1.25, 0], lights: { keyI: 0.35, redI: 2.8, rimI: 2.2 }, haloOpacity: 0.2 });
+S['tech-starshell'] = (R) => {
+  // A twelve-foot armoured suit beside a person, as a rim-lit silhouette in
+  // fog: scale is the point of a StarShell, and silhouette reads cleanly.
+  const scene = new THREE.Scene(); darkStage(scene, { bg: 0x0a0506, fog: 0.07 });
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), matte(0x040404, 1)); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+  const arm = matte(0x15161a, 0.45, { metalness: 0.4 }), dark = matte(0x0d0e10, 0.55, { metalness: 0.3 });
+  const cap = (r, l, m) => new THREE.Mesh(new THREE.CapsuleGeometry(r, l, 8, 24), m);
+  const box = (w, h, d, m) => new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
+  const makeSuit = () => {
+  const suit = new THREE.Group();
+  const torso = box(1.5, 1.4, 0.95, arm); torso.position.y = 3.05; suit.add(torso);
+  const chest = box(1.3, 0.5, 0.2, dark); chest.position.set(0, 3.25, 0.52); suit.add(chest);
+  const core = new THREE.Mesh(new THREE.CircleGeometry(0.12, 32), glow(C.red, 3)); core.position.set(0, 3.25, 0.63); suit.add(core);
+  const pelvis = box(1.1, 0.5, 0.8, dark); pelvis.position.y = 2.15; suit.add(pelvis);
+  [-1, 1].forEach((sg) => {
+    const pad = new THREE.Mesh(new THREE.SphereGeometry(0.46, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), arm); pad.position.set(sg * 1.02, 3.55, 0); pad.scale.set(1.1, 0.8, 1.1); suit.add(pad);
+    const up = cap(0.22, 0.7, dark); up.position.set(sg * 1.08, 2.95, 0); up.rotation.z = sg * 0.12; suit.add(up);
+    const fore = cap(0.26, 0.7, arm); fore.position.set(sg * 1.2, 2.05, 0.12); fore.rotation.x = -0.25; suit.add(fore);
+    const fist = box(0.38, 0.38, 0.4, dark); fist.position.set(sg * 1.25, 1.55, 0.3); suit.add(fist);
+    const thigh = cap(0.3, 0.75, arm); thigh.position.set(sg * 0.42, 1.45, 0); suit.add(thigh);
+    const shin = cap(0.27, 0.8, dark); shin.position.set(sg * 0.45, 0.62, 0.05); suit.add(shin);
+    const foot = box(0.5, 0.2, 0.8, arm); foot.position.set(sg * 0.45, 0.1, 0.18); suit.add(foot);
+  });
+  const helm = new THREE.Mesh(lathe([[0, 0.55], [0.26, 0.5], [0.36, 0.3], [0.38, 0.0], [0.33, -0.2], [0.28, -0.26]], 48), arm); helm.position.set(0, 4.05, 0.05); suit.add(helm);
+  const visor = box(0.46, 0.05, 0.1, glow(C.red, 2.4)); visor.position.set(0, 4.12, 0.38); suit.add(visor);
+  return suit;
+  };
+  for (let i = 0; i < 5; i++) { const su = makeSuit(); su.position.set(-3.2 + i * 2.1, 0, -i * 2.4); su.rotation.y = -0.15; su.traverse((o) => { if (o.isMesh) o.castShadow = true; }); scene.add(su); }
+  // a person, for scale
+  const person = new THREE.Group(); const skin = matte(0x050506, 1);
+  const body = cap(0.15, 0.45, skin); body.position.y = 1.3; person.add(body);
+  [-0.09, 0.09].forEach((x) => { const leg = cap(0.065, 0.62, skin); leg.position.set(x, 0.42, 0); person.add(leg); });
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.12, 24, 16), skin); head.position.y = 1.78; person.add(head);
+  person.position.set(-0.3, 0, 2.4); scene.add(person);
+  scene.add(glowDisc(C.red, 30, 0.5, [0.5, 3.2, -14]));
+  const back = new THREE.DirectionalLight(0xff5a40, 4.0); back.position.set(-2, 3, -8); scene.add(back);
+  for (let i = 0; i < 5; i++) { const lamp = new THREE.PointLight(0xff5a40, 6, 5, 2); lamp.position.set(-3.2 + i * 2.1, 5.2, -i * 2.4 - 1.2); scene.add(lamp); }
+  const rim2 = new THREE.DirectionalLight(0x9fb4d8, 1.6); rim2.position.set(5, 3, -4); scene.add(rim2);
+  
+  scene.add(new THREE.AmbientLight(0xffffff, 0.02));
+  return { scene, camera: cam(R.W, R.H, [-1.2, 1.2, 10.5], [0.6, 2.2, -2], 38), exposure: 1.25 };
+};
 S['tech-dreadnought'] = (R) => {
   const scene = new THREE.Scene(); darkStage(scene, { fog: 0 }); stars(scene, { seed: 61, size: 0.07, opacity: 0.8 });
-  const mars = new THREE.Mesh(new THREE.SphereGeometry(10, 160, 120), new THREE.MeshStandardMaterial({ map: planetTexture((n) => mix([96, 38, 20], [168, 84, 46], ss(0.35, 0.7, n)), { scale: 3, seed: 2 }), roughness: 1 }));
-  mars.position.set(0, -11.2, -4); scene.add(mars); scene.add(atmosphere(10, 0xd0704a, 0.5, [-3, 2, 1]));
-  const ship = new THREE.Group(); const hull = metal(0x3a3d43, 0.45);
-  const wedge = new THREE.Mesh(new THREE.ExtrudeGeometry(shapeFrom([[3.2, 0], [-2.2, 0.95], [-2.4, 0.6], [-2.4, -0.6], [-2.2, -0.95]]), { depth: 0.35, bevelEnabled: true, bevelSize: 0.04, bevelThickness: 0.04, bevelSegments: 2 }), hull);
-  wedge.rotation.x = -Math.PI / 2; ship.add(wedge);
-  const tower = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.45, 0.5), hull); tower.position.set(-1.6, 0.55, 0); ship.add(tower);
-  const bridge = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.9), hull); bridge.position.set(-1.6, 0.84, 0); ship.add(bridge);
-  for (let i = 0; i < 70; i++) { const w = 0.08 + seededRandom(i) * 0.25; const b = new THREE.Mesh(new THREE.BoxGeometry(w, 0.05 + seededRandom(i * 2) * 0.12, w), metal(0x3c3f45, 0.5)); const x = -2.2 + seededRandom(i * 3) * 4.6; const half = 0.95 * (1 - (x + 2.2) / 5.4); b.position.set(x, 0.4, (seededRandom(i * 5) - 0.5) * 1.6 * half); ship.add(b); }
-  for (let i = 0; i < 3; i++) { const e = new THREE.Mesh(new THREE.CircleGeometry(0.16, 24), glow(0x9fd0ff, 6)); e.rotation.y = -Math.PI / 2; e.position.set(-2.46, 0.17, -0.45 + i * 0.45); ship.add(e); ship.add(glowDisc(0x9fd0ff, 1.0, 0.5, [-2.6, 0.17, -0.45 + i * 0.45])); }
-  for (let i = 0; i < 50; i++) { const w = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.015, 0.01), glow(0xffd9a0, 3)); const x = -2.1 + seededRandom(i * 7) * 4.5; w.position.set(x, 0.2, 0.96 * (1 - (x + 2.2) / 5.4) + 0.02); ship.add(w); }
-  ship.position.set(0.2, 0.6, 0); ship.rotation.set(0.25, -0.6, 0.12); ship.scale.setScalar(0.95); scene.add(ship);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.05));
-  const sun = new THREE.DirectionalLight(0xfff1e0, 3); sun.position.set(-3, 2, 1); scene.add(sun);
-  const bounce = new THREE.DirectionalLight(0xd0704a, 0.8); bounce.position.set(0, -3, 1); scene.add(bounce);
-  return { scene, camera: cam(R.W, R.H, [0, 1, 8], [0, 0.2, 0], 34), exposure: 1.1 };
+  const mars = new THREE.Mesh(new THREE.SphereGeometry(14, 200, 140), new THREE.MeshStandardMaterial({ map: planetTexture((n, lat) => { const base = mix([96, 38, 20], [168, 84, 46], ss(0.35, 0.7, n)); return mix(base, [230, 222, 214], ss(1.2, 1.4, Math.abs(lat))); }, { scale: 4, seed: 2, oct: 7 }), roughness: 1 }));
+  mars.position.set(-3, -15.8, -10); scene.add(mars); scene.add(atmosphere(14, 0xd0704a, 0.55, [-3, 2, 1]));
+  const ship = new THREE.Group(); const hull = metal(0x4a4f57, 0.26), dark = metal(0x2a2d33, 0.35);
+  const wedge = new THREE.Mesh(new THREE.ExtrudeGeometry(shapeFrom([[3.6, 0], [-2.4, 1.05], [-2.7, 0.7], [-2.7, -0.7], [-2.4, -1.05]]), { depth: 0.42, bevelEnabled: true, bevelSize: 0.05, bevelThickness: 0.05, bevelSegments: 2 }), hull);
+  wedge.rotation.x = -Math.PI / 2; wedge.position.y = -0.2; ship.add(wedge);
+  const keel = new THREE.Mesh(new THREE.ExtrudeGeometry(shapeFrom([[3.2, 0], [-2.2, 0.55], [-2.5, 0.3], [-2.5, -0.3], [-2.2, -0.55]]), { depth: 0.3, bevelEnabled: false }), dark);
+  keel.rotation.x = -Math.PI / 2; keel.position.y = -0.52; ship.add(keel);
+  const spine = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.22, 0.34), hull); spine.position.set(-0.3, 0.33, 0); ship.add(spine);
+  const tower = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.55, 0.5), hull); tower.position.set(-1.8, 0.7, 0); ship.add(tower);
+  const bridge = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.12, 1.2), dark); bridge.position.set(-1.8, 1.02, 0); ship.add(bridge);
+  for (let i = 0; i < 140; i++) { const w = 0.05 + seededRandom(i) * 0.22; const x = -2.5 + seededRandom(i * 3) * 5.6; const half = 1.0 * (1 - (x + 2.4) / 6.0); if (half <= 0.05) continue; const b = new THREE.Mesh(new THREE.BoxGeometry(w, 0.04 + seededRandom(i * 2) * 0.14, w * (0.5 + seededRandom(i * 7))), seededRandom(i * 11) > 0.5 ? hull : dark); b.position.set(x, 0.24 + seededRandom(i * 13) * 0.05, (seededRandom(i * 5) - 0.5) * 1.8 * half); ship.add(b); }
+  for (let i = 0; i < 4; i++) { const z = -0.66 + i * 0.44; const e = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.2, 0.3, 24), dark); e.rotation.z = Math.PI / 2; e.position.set(-2.82, -0.02, z); ship.add(e); const f = new THREE.Mesh(new THREE.CircleGeometry(0.15, 24), glow(0x9fd0ff, 6)); f.rotation.y = -Math.PI / 2; f.position.set(-2.98, -0.02, z); ship.add(f); ship.add(glowDisc(0x9fd0ff, 1.3, 0.55, [-3.1, -0.02, z])); }
+  for (let i = 0; i < 90; i++) { const w = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.02, 0.01), glow(0xffd9a0, 3)); const x = -2.3 + seededRandom(i * 7) * 5.2; const edge = 1.05 * (1 - (x + 2.4) / 6.0); if (edge < 0.08) continue; w.position.set(x, -0.05 - seededRandom(i * 9) * 0.1, edge + 0.03); ship.add(w); }
+  ship.position.set(0.2, 0.7, 0); ship.rotation.set(0.28, -0.55, 0.08); ship.scale.setScalar(0.85); scene.add(ship);
+  const escort = ship.clone(); escort.scale.setScalar(0.14); escort.position.set(-2.4, 1.9, -6); scene.add(escort);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.04));
+  const sun = new THREE.DirectionalLight(0xfff1e0, 3.2); sun.position.set(-3, 2.5, 2); scene.add(sun);
+  const bounce = new THREE.DirectionalLight(0xd0704a, 1.1); bounce.position.set(0, -3, 1); scene.add(bounce);
+  const rimL = new THREE.DirectionalLight(0x9fb4d8, 1.2); rimL.position.set(4, 1, -3); scene.add(rimL);
+  return { scene, camera: cam(R.W, R.H, [0.8, 0.6, 9.2], [0, 0.45, 0], 38), exposure: 1.1 };
 };
 
 S['tech-starship'] = (R) => {

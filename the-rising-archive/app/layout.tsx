@@ -4,6 +4,7 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import ArchiveProvider from "@/components/providers/ArchiveProvider";
 import SiteNav from "@/components/navigation/SiteNav";
 import SiteFooter from "@/components/navigation/SiteFooter";
+import SealedNotice from "@/components/archive/SealedNotice";
 import "./globals.css";
 
 // Type system: Big Shoulders (industrial, condensed: the Red / mining /
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <SiteNav />
             <main id="main">{children}</main>
             <SiteFooter />
+            <SealedNotice />
           </ArchiveProvider>
         </SmoothScroll>
         <div className="grain" aria-hidden />
