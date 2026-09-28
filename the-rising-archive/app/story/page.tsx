@@ -5,7 +5,7 @@ import PageHeader from "@/components/typography/PageHeader";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import Stamp from "@/components/archive/Stamp";
-import { BOOKS } from "@/lib/data/books";
+import { BOOKS, COVER_CREDIT, coverSrc } from "@/lib/data/books";
 import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function StoryPage() {
                 href={`/story/books/${b.slug}/`}
                 className="group grid grid-cols-[5rem_1fr] items-center gap-5 py-8 md:grid-cols-[7rem_9rem_1fr_auto] md:gap-10 md:py-10"
               >
-                <Plate src={`/images/books/${b.slug}.webp`} alt="" width={900} height={1350} className="w-20 transition-transform duration-500 group-hover:-translate-y-1 md:w-28" sizes="112px" />
+                <Plate src={coverSrc(b.slug)} alt="" width={900} height={1350} className="w-20 transition-transform duration-500 group-hover:-translate-y-1 md:w-28" sizes="112px" />
                 <span className="hidden font-display text-7xl leading-none font-extrabold text-line-strong transition-colors duration-300 group-hover:text-red md:block md:text-8xl">
                   {b.numeral}
                 </span>
@@ -60,6 +60,7 @@ export default function StoryPage() {
             </Link>
           </li>
         </ol>
+        <p className="mx-auto mt-6 max-w-[1400px] text-sm text-ash-2">{COVER_CREDIT}. US editions.</p>
       </section>
 
       <section aria-label="More of the story" className="px-5 py-24 md:px-8">

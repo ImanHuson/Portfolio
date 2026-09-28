@@ -6,7 +6,15 @@
 // from this archive's build environment, so treat these as quoted-by-readers,
 // not checked against the page.
 
-export type SagaQuote = { text: string; who: string; where: string; book: number; note?: string };
+export type SagaQuote = {
+  text: string;
+  who: string;
+  where: string;
+  book: number;
+  note?: string;
+  /** A spoiler-safe speaker name, shown even while the line is sealed. */
+  speaker?: string;
+};
 
 /** One line per member of the Ten Faces, keyed by person slug. */
 export const TEN_QUOTES: Record<string, SagaQuote> = {
@@ -30,14 +38,14 @@ export const TEN_QUOTES: Record<string, SagaQuote> = {
 
 /** The saga's lines that stayed with readers. Chosen by the archive. */
 export const BEST_LINES: SagaQuote[] = [
-  { text: "I would have lived in peace. But my enemies brought me war.", who: "Darrow", where: "Red Rising, the opening line", book: 0 },
-  { text: "Then you must live for more.", who: "Eo, to Darrow", where: "Red Rising", book: 1 },
-  { text: "A fool pulls the leaves. A brute chips the trunk. A sage digs the roots.", who: "Lorn au Arcos", where: "Golden Son", book: 2 },
-  { text: "My wife called me Fitchner. But the Golds made me Ares.", who: "Fitchner au Barca", where: "Golden Son", book: 2 },
-  { text: "Honor is not what you say. It is not what you read. Honor is what you do.", who: "Romulus au Raa", where: "Morning Star", book: 3 },
-  { text: "What does it say about me that my greatest enemy knows me better than any friend?", who: "Adrius au Augustus", where: "Morning Star", book: 3 },
-  { text: "Yield I do not, for a man cannot yield to a dog.", who: "Ragnar Volarus", where: "The first trilogy", book: 3 },
-  { text: "You are a world entire. You are grand and lovely.", who: "Ephraim ti Horn, to Lyria", where: "Iron Gold", book: 4 },
-  { text: "I fear a man who believes in good. For he can excuse any evil.", who: "Atlas au Raa", where: "Dark Age, chapter 17", book: 5 },
-  { text: "My honor remains.", who: "Cassius au Bellona", where: "Light Bringer", book: 6 },
+  { text: "I would have lived in peace. But my enemies brought me war.", who: "Darrow", where: "Red Rising, the opening line", book: 0, speaker: "Darrow" },
+  { text: "Then you must live for more.", who: "Eo, to Darrow", where: "Red Rising", book: 1, speaker: "Eo" },
+  { text: "A fool pulls the leaves. A brute chips the trunk. A sage digs the roots.", who: "Lorn au Arcos", where: "Golden Son", book: 2, speaker: "Lorn au Arcos" },
+  { text: "My wife called me Fitchner. But the Golds made me Ares.", who: "Fitchner au Barca", where: "Golden Son", book: 2, speaker: "Fitchner au Barca" },
+  { text: "Honor is not what you say. It is not what you read. Honor is what you do.", who: "Romulus au Raa", where: "Morning Star", book: 3, speaker: "Romulus au Raa" },
+  { text: "What does it say about me that my greatest enemy knows me better than any friend?", who: "Adrius au Augustus", where: "Morning Star", book: 3, speaker: "The Jackal" },
+  { text: "Yield I do not, for a man cannot yield to a dog.", who: "Ragnar Volarus", where: "The first trilogy", book: 3, speaker: "Ragnar Volarus" },
+  { text: "You are a world entire. You are grand and lovely.", who: "Ephraim ti Horn, to Lyria", where: "Iron Gold", book: 4, speaker: "Ephraim ti Horn" },
+  { text: "I fear a man who believes in good. For he can excuse any evil.", who: "Atlas au Raa", where: "Dark Age, chapter 17", book: 5, speaker: "Atlas au Raa" },
+  { text: "My honor remains.", who: "Cassius au Bellona", where: "Light Bringer", book: 6, speaker: "Cassius au Bellona" },
 ];

@@ -8,7 +8,7 @@ export default function SiteFooter() {
         <div>
           <p className="font-display text-3xl font-bold tracking-tight uppercase">The Red Rising Archive</p>
           <p className="mt-4 max-w-[52ch] text-sm text-ash">
-            An unofficial fan archive. Red Rising, its characters and its world belong to Pierce Brown and his publishers. Plot facts here were checked against published sources; interpretation is marked as the archivist&rsquo;s own. Every image is an archive plate rendered for this site, not published artwork.
+            An unofficial fan archive. Red Rising, its characters and its world belong to Pierce Brown and his publishers. Plot facts here were checked against published sources; interpretation is marked as the archivist&rsquo;s own. The book covers are the publisher&rsquo;s (Del Rey, Penguin Random House), shown to identify the books. Every other image is an archive plate made for this site.
           </p>
         </div>
         <nav aria-label="Footer">

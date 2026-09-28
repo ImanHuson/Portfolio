@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
-import { BOOKS, getBook } from "@/lib/data/books";
+import { BOOKS, COVER_CREDIT, coverSrc, getBook } from "@/lib/data/books";
 
 export const dynamicParams = false;
 
@@ -73,8 +73,8 @@ export default async function BookPage({ params }: PageProps<"/story/books/[slug
           </dl>
           </div>
           <figure className="mx-auto w-full max-w-[360px] md:mx-0 md:justify-self-end">
-            <Plate src={`/images/books/${book.slug}.webp`} alt={`Archive plate for ${book.title}: an original symbol, not the published cover.`} width={900} height={1350} priority className="border border-line" sizes="(min-width: 768px) 30vw, 80vw" />
-            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive plate, not the published cover</figcaption>
+            <Plate src={coverSrc(book.slug)} alt={`Cover of ${book.title} by Pierce Brown.`} width={900} height={1350} priority className="border border-line" sizes="(min-width: 768px) 30vw, 80vw" />
+            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">{COVER_CREDIT}</figcaption>
           </figure>
         </div>
       </header>

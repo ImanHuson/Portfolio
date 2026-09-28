@@ -4,7 +4,7 @@ import CardWash from "@/components/archive/CardWash";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import { AUTHOR } from "@/lib/data/author";
-import { BOOKS } from "@/lib/data/books";
+import { BOOKS, COVER_CREDIT, coverSrc } from "@/lib/data/books";
 import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
@@ -51,12 +51,13 @@ export default function AuthorPage() {
             {BOOKS.map((b) => (
               <li key={b.slug}>
                 <Link href={`/story/books/${b.slug}/`} className="group block">
-                  <Plate src={`/images/books/${b.slug}.webp`} alt={`Archive plate for ${b.title}.`} width={900} height={1350} className="transition-transform duration-500 group-hover:-translate-y-1" sizes="(min-width: 1024px) 16vw, 45vw" />
+                  <Plate src={coverSrc(b.slug)} alt={`Cover of ${b.title}.`} width={900} height={1350} className="transition-transform duration-500 group-hover:-translate-y-1" sizes="(min-width: 1024px) 16vw, 45vw" />
                   <span className="mt-3 block font-mono text-meta tracking-[0.16em] text-ash uppercase group-hover:text-bone">{b.published}</span>
                 </Link>
               </li>
             ))}
           </ol>
+          <p className="mt-6 text-sm text-ash-2">{COVER_CREDIT}. US editions.</p>
         </div>
       </section>
 
