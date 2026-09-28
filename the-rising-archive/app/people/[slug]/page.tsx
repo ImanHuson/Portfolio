@@ -11,15 +11,27 @@ import { PEOPLE, getPerson, safeAs, type Person } from "@/lib/data/people";
 import { ACCENT_CLASS, NAME_CLASS, RULE_CLASS } from "@/lib/registers";
 import { cn } from "@/lib/utils";
 import Spotlight from "@/components/archive/Spotlight";
+import QuoteFigure from "@/components/archive/QuoteFigure";
+import ExtendedDossier from "@/components/people/ExtendedDossier";
+import { WolfIcon } from "@/components/people/icons";
+import { EXTENDED, getExtended } from "@/lib/data/extended";
+import { TEN_QUOTES } from "@/lib/data/quotes";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return PEOPLE.map((p) => ({ slug: p.slug }));
+  return [...PEOPLE, ...EXTENDED].map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/people/[slug]">): Promise<Metadata> {
   const { slug } = await params;
+  const ext = getExtended(slug);
+  if (ext)
+    return {
+      title: `${ext.name}, ${ext.epithet}`,
+      description: `Archive dossier: ${ext.name} in the Red Rising Saga. ${ext.color}, ${ext.origin}. ${ext.categories.join(", ")}.`,
+      alternates: { canonical: "./" },
+    };
   const p = getPerson(slug);
   if (!p) return {};
   return {
@@ -92,6 +104,8 @@ function Special({ person }: { person: Person }) {
 
 export default async function DossierPage({ params }: PageProps<"/people/[slug]">) {
   const { slug } = await params;
+  const ext = getExtended(slug);
+  if (ext) return <ExtendedDossier person={ext} />;
   const person = getPerson(slug);
   if (!person) notFound();
   const idx = PEOPLE.findIndex((p) => p.slug === slug);
@@ -151,8 +165,11 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             </div>
           </dl>
           </div>
-          <figure className="max-w-[560px] lg:justify-self-end">
+          {/* Fan easter eggs: Sevro's goblin peeks in on hover; Atlas's plate
+              starts veiled and clears on its own. */}
+          <figure className={cn("group relative max-w-[560px] lg:justify-self-end", person.slug === "atlas" && "atlas-veil")}>
             <Plate src={`/images/people/${person.slug}.webp`} alt={`Archive relic for ${safeAs(person).name}: ${person.motif}`} priority className="border border-line" sizes="(min-width: 1024px) 40vw, 100vw" />
+            {person.slug === "sevro" && <WolfIcon className="goblin-peek pointer-events-none absolute right-4 bottom-12 w-10 text-bone/80" />}
             <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive relic. {person.motif}</figcaption>
           </figure>
         </div>
@@ -189,6 +206,15 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
           </aside>
         </div>
       </section>
+
+      {TEN_QUOTES[person.slug] && (
+        <section aria-labelledby="words-title" className="border-t border-line px-5 py-20 md:px-8">
+          <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[4fr_8fr]">
+            <h2 id="words-title" className="font-mono text-meta tracking-[0.2em] text-ash-2 uppercase">In their words</h2>
+            <QuoteFigure q={TEN_QUOTES[person.slug]} />
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="dossier-title" className="border-t border-line px-5 py-20 md:px-8">
         <div className="mx-auto max-w-[1400px]">

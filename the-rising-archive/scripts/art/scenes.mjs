@@ -283,6 +283,167 @@ S['relic-the-jackal'] = relic((g) => {
   [[1, 2, gold], [5, 5, ink], [3, 6, ink]].forEach(([i, j, m]) => { const p = chessPiece('pawn', m); p.position.set((i - 3.5) * 0.4, 0.08, (j - 3.5) * 0.4); p.position.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.2); g.add(p); });
 }, { camPos: [3.4, 2.6, 4.6], look: [0.6, 0.2, 0.4], halo: 0xeef0f2, haloOpacity: 0.1, lights: { keyI: 1.8, key: 0xdfe8ff } });
 
+// ============================== RELICS (the extended ten) ==============================
+const redDust = (seed, dark = [14, 7, 6], light = [66, 28, 17], r = 2.2) => {
+  const d = new THREE.Mesh(new THREE.CircleGeometry(r, 96), new THREE.MeshStandardMaterial({ map: planetTexture((n) => mix(dark, light, ss(0.45, 0.62, n)), { w: 1024, h: 1024, scale: 34, seed }), roughness: 1 }));
+  d.rotation.x = -Math.PI / 2; d.position.y = 0.005; return d;
+};
+const snowFloor = (seed) => {
+  const d = new THREE.Mesh(new THREE.CircleGeometry(2.6, 96), new THREE.MeshStandardMaterial({ map: planetTexture((n) => mix([70, 76, 86], [128, 136, 148], ss(0.35, 0.7, n)), { w: 1024, h: 1024, scale: 20, seed }), roughness: 0.95 }));
+  d.rotation.x = -Math.PI / 2; d.position.y = 0.006; return d;
+};
+const flakes = (g, n, seed, color = 0xeef3ff) => {
+  const m = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.85 });
+  for (let i = 0; i < n; i++) { const f = new THREE.Mesh(new THREE.SphereGeometry(0.012 + seededRandom(i * seed) * 0.018, 6, 6), m); f.position.set((seededRandom(i * 1.3 + seed) - 0.5) * 5, 0.2 + seededRandom(i * 2.9 + seed) * 3.2, (seededRandom(i * 4.1 + seed) - 0.5) * 3); g.add(f); }
+};
+
+// Victra: gold shards, split and sharpened, on dark stone.
+S['relic-victra'] = relic((g) => {
+  const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.9, 1), matte(0x1b1716, 0.9)); rock.scale.set(1.7, 0.5, 1.15); rock.position.y = 0.28; g.add(rock);
+  const gold = metal(C.gold, 0.18), scar = metal(0x6b5a3a, 0.55);
+  for (let i = 0; i < 11; i++) {
+    const h = 0.55 + seededRandom(i * 3.3) * 1.35, a = (i / 11) * Math.PI * 2 + seededRandom(i) * 0.5, r = 0.1 + seededRandom(i * 5.1) * 0.6;
+    const sh = new THREE.Mesh(new THREE.ConeGeometry(0.08 + seededRandom(i * 1.7) * 0.09, h, 4), i % 4 === 3 ? scar : gold);
+    sh.position.set(Math.cos(a) * r, 0.5 + h * 0.4, Math.sin(a) * r * 0.6);
+    sh.rotation.set((seededRandom(i * 7) - 0.5) * 0.8, a, (seededRandom(i * 9) - 0.5) * 0.8); g.add(sh);
+  }
+}, { halo: C.red, haloOpacity: 0.36, lights: { redI: 3.6, keyI: 1.7 }, camPos: [0, 1.7, 6.0], look: [0, 0.95, 0] });
+
+// Lyria: a miner's lamp, still lit, on red dust.
+S['relic-lyria'] = relic((g, scene) => {
+  g.add(redDust(12, [18, 8, 6], [92, 38, 20]));
+  const iron = metal(0x4a4038, 0.6);
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.38, 0.22, 48), iron); base.position.y = 0.11; g.add(base);
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.55, 48), glow(0xffa860, 2.4)); glass.position.y = 0.5; g.add(glass);
+  for (let i = 0; i < 4; i++) { const a = (i / 4) * Math.PI * 2 + 0.4; const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.6, 10), iron); bar.position.set(Math.cos(a) * 0.28, 0.5, Math.sin(a) * 0.28); g.add(bar); }
+  const cap = new THREE.Mesh(new THREE.ConeGeometry(0.37, 0.24, 48), iron); cap.position.y = 0.9; g.add(cap);
+  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.022, 10, 48, Math.PI), iron); handle.position.y = 1.02; handle.rotation.y = 0.5; g.add(handle);
+  const cloth = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.03, 0.55), matte(0x6a2c20, 0.95)); cloth.position.set(-0.9, 0.03, 0.55); cloth.rotation.y = 0.5; g.add(cloth);
+  const lamp = new THREE.PointLight(0xffa860, 14, 5, 2); lamp.position.set(0, 0.55, 0.1); scene.add(lamp);
+  g.add(glowDisc(0xffa860, 1.6, 0.5, [0, 0.5, 0.3]));
+  const pool = glowDisc(0xff8a4a, 3.4, 0.28, [0, 0.02, 0]); pool.rotation.x = -Math.PI / 2; g.add(pool);
+}, { halo: C.mars, haloOpacity: 0.32, lights: { keyI: 0.8, redI: 1.8, red: C.mars }, camPos: [0, 1.5, 5.4], look: [0, 0.55, 0] });
+
+// Ephraim: an empty frame in a dim room, the smoke still hanging.
+S['relic-ephraim'] = relic((g) => {
+  const wall = new THREE.Mesh(new THREE.BoxGeometry(5, 3.4, 0.1), matte(0x202024, 0.95)); wall.position.set(0, 1.7, -1.0); g.add(wall);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1.46, 1.06), matte(0x2c2c31, 0.95)); shadow.position.set(0.05, 1.78, -0.94); g.add(shadow);
+  const fm = metal(C.goldDim, 0.5);
+  [[0, 2.36, 1.72, 0.12], [0, 1.2, 1.72, 0.12], [0.8, 1.78, 0.12, 1.28], [-0.8, 1.78, 0.12, 1.28]].forEach(([x, y, w, h]) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.1), fm); b.position.set(x - 0.35, y - 0.05, -0.9); b.rotation.z = 0.06; g.add(b); });
+  const glassM = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.05, transparent: true, opacity: 0.3, clearcoat: 1 });
+  const tumbler = new THREE.Mesh(lathe([[0, 0], [0.2, 0], [0.22, 0.02], [0.24, 0.42], [0.22, 0.42], [0.2, 0.03], [0, 0.03]], 64), glassM); tumbler.position.set(0.9, 0.0, 0.6); tumbler.material.depthWrite = false; g.add(tumbler);
+  const drink = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.19, 0.12, 48), new THREE.MeshStandardMaterial({ color: 0x7a4a1a, roughness: 0.2, emissive: 0x2a1405 })); drink.position.set(0.9, 0.09, 0.6); g.add(drink);
+  for (let i = 0; i < 70; i++) { const sh = 0.05 + seededRandom(i * 2.3) * 0.05; g.add(puff(new THREE.Color(sh, sh, sh * 1.05), 0.9 + seededRandom(i * 3.1) * 1.1, 0.16, [(seededRandom(i * 1.9) - 0.5) * 4.5, 0.6 + seededRandom(i * 4.7) * 2.4, -0.4 + seededRandom(i * 6.1) * 1.4])); }
+}, { halo: 0x9aa0a8, haloOpacity: 0.1, lights: { red: 0x8a8f98, redI: 0.9, keyI: 1.4, key: 0xffe0b8 }, camPos: [0.3, 1.5, 5.8], look: [-0.1, 1.2, -0.4], exposure: 1.1 });
+
+// Volga: a small fire in the snow, and a place set beside it.
+S['relic-volga'] = relic((g, scene) => {
+  g.add(snowFloor(21));
+  const wood = matte(0x24170e, 0.95);
+  for (let i = 0; i < 5; i++) { const l = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 1.0, 12), wood); const a = (i / 5) * Math.PI * 2; l.position.set(Math.cos(a) * 0.18, 0.28, Math.sin(a) * 0.18); l.rotation.set(Math.sin(a) * 0.9, 0, -Math.cos(a) * 0.9); g.add(l); }
+  [[0, 0.35, 0, 0.3, 0.8, 0xffb050, 5], [0.05, 0.55, 0, 0.18, 0.55, 0xffd080, 7], [-0.06, 0.45, 0.03, 0.22, 0.6, 0xff7a30, 4]].forEach(([x, y, z, r, h, c, i]) => { const f = new THREE.Mesh(new THREE.ConeGeometry(r, h, 24), glow(c, i)); f.position.set(x, y + h / 2 - 0.2, z); g.add(f); });
+  g.add(glowDisc(0xff9a4a, 2.4, 0.55, [0, 0.55, 0.2]));
+  const fire = new THREE.PointLight(0xff9a4a, 22, 6, 2); fire.position.set(0, 0.6, 0.2); scene.add(fire);
+  const bowl = new THREE.Mesh(lathe([[0, 0], [0.22, 0], [0.3, 0.1], [0.32, 0.16], [0.3, 0.16], [0.2, 0.03], [0, 0.03]], 48), matte(0x6b4a30, 0.7)); bowl.position.set(1.1, 0.01, 0.5); g.add(bowl);
+  const mug = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.11, 0.26, 32), matte(0x5a4030, 0.7)); mug.position.set(1.5, 0.13, 0.15); g.add(mug);
+  flakes(g, 140, 7);
+}, { halo: 0xff9a4a, haloOpacity: 0.2, lights: { key: 0xbfd0ff, keyI: 0.6, red: 0x9fb4d8, redI: 0.9 }, camPos: [0.3, 1.4, 5.4], look: [0.3, 0.5, 0] });
+
+// Ragnar: a dark blade planted in snow, under a cold sky.
+S['relic-ragnar'] = relic((g) => {
+  g.add(snowFloor(33));
+  const steel = metal(0x2a2e35, 0.35);
+  const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.7, 0.04), steel); blade.position.set(0, 0.75, 0); g.add(blade);
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.3, 4), steel); tip.rotation.set(Math.PI, Math.PI / 4, 0); tip.scale.set(1, 1, 0.28); tip.position.set(0, -0.2, 0); tip.visible = false; g.add(tip);
+  const guard = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.08, 0.1), metal(0x1a1c20, 0.4)); guard.position.y = 1.62; g.add(guard);
+  const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.55, 16), matte(0x2a1d14, 0.8)); grip.position.y = 1.92; g.add(grip);
+  const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.08, 24, 16), metal(0x1a1c20, 0.4)); pommel.position.y = 2.22; g.add(pommel);
+  const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.015, 8, 32), matte(0x7a1a18, 0.8)); wrap.rotation.x = Math.PI / 2; wrap.position.y = 1.75; g.add(wrap);
+  flakes(g, 220, 13);
+}, { halo: 0x9fb4d8, haloOpacity: 0.2, lights: { key: 0xdfe8ff, keyI: 1.4, red: 0x9fb4d8, redI: 1.2 }, camPos: [0, 1.5, 6.6], look: [0, 1.1, 0], exposure: 0.95 });
+
+// Kavax: a fox asleep by a great chair.
+S['relic-kavax'] = relic((g) => {
+  const wood = matte(0x3a2618, 0.7), trim = metal(C.gold, 0.3);
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.18, 1.3), wood); seat.position.set(-0.3, 0.9, -0.6); g.add(seat);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(1.8, 2.2, 0.18), wood); back.position.set(-0.3, 2.0, -1.2); g.add(back);
+  [[-1.1, -0.05], [0.5, -0.05], [-1.1, -1.15], [0.5, -1.15]].forEach(([x, z]) => { const l = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.9, 0.16), wood); l.position.set(x, 0.45, z); g.add(l); });
+  const crest = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.08, 0.22), trim); crest.position.set(-0.3, 3.12, -1.2); g.add(crest);
+  const fur = matte(0xb8561e, 0.85), white = matte(0xe9e0d0, 0.9), dark = matte(0x1a1210, 0.8);
+  const fox = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.4, 40, 30), fur); body.scale.set(1.25, 0.62, 0.9); body.position.y = 0.25; fox.add(body);
+  const tail = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([[-0.45, 0.2, 0], [-0.55, 0.16, 0.35], [-0.2, 0.14, 0.55], [0.25, 0.14, 0.48]].map((p) => new THREE.Vector3(...p))), 40, 0.14, 16), fur); fox.add(tail);
+  const tipM = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 14), white); tipM.position.set(0.28, 0.14, 0.47); tipM.scale.set(1.4, 0.9, 1); fox.add(tipM);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 32, 24), fur); head.position.set(0.42, 0.28, 0.25); fox.add(head);
+  const snout = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.26, 20), fur); snout.rotation.z = -Math.PI / 2; snout.position.set(0.62, 0.24, 0.3); fox.add(snout);
+  const nose = new THREE.Mesh(new THREE.SphereGeometry(0.03, 12, 10), dark); nose.position.set(0.75, 0.24, 0.3); fox.add(nose);
+  [0.12, -0.02].forEach((dz) => { const ear = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.18, 16), fur); ear.position.set(0.38, 0.47, 0.25 + dz); ear.rotation.z = 0.3; fox.add(ear); });
+  fox.position.set(0.7, 0.0, 0.6); fox.rotation.y = -0.5; g.add(fox);
+}, { halo: C.gold, haloOpacity: 0.24, lights: { red: 0xffb070, redI: 1.8, keyI: 2.0 }, camPos: [0.8, 1.9, 6.0], look: [0.1, 1.0, -0.2] });
+
+// Fitchner: a receiver in a buried room, dials lit, still listening.
+S['relic-fitchner'] = relic((g, scene) => {
+  const case_ = metal(0x3a3a2e, 0.55), knob = metal(0x1a1a18, 0.4);
+  const box = new THREE.Mesh(new THREE.BoxGeometry(2.0, 1.0, 0.8), case_); box.position.y = 0.5; g.add(box);
+  const panel = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 0.8), matte(0x15150f, 0.6)); panel.position.set(0, 0.52, 0.405); g.add(panel);
+  const win = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.22), glow(0xff8a3a, 1.6)); win.position.set(-0.3, 0.72, 0.41); g.add(win);
+  const needle = new THREE.Mesh(new THREE.PlaneGeometry(0.015, 0.2), matte(0x100805, 0.8)); needle.position.set(-0.18, 0.72, 0.415); g.add(needle);
+  [[-0.55, 0.32], [-0.1, 0.32], [0.55, 0.55], [0.55, 0.25]].forEach(([x, y]) => { const k = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.1, 0.1, 32), knob); k.rotation.x = Math.PI / 2; k.position.set(x, y, 0.45); g.add(k); });
+  const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.6, 8), metal(0x8a8a80, 0.3)); ant.position.set(0.8, 1.7, -0.2); ant.rotation.z = -0.35; g.add(ant);
+  const paper = matte(0xd8d0bc, 0.9), ink = matte(0x0a0a0a, 0.9);
+  [[-1.3, 0.9, 0.2], [1.3, 0.8, -0.4]].forEach(([x, z, r]) => {
+    const sh = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.01, 1.05), paper); sh.position.set(x, 0.01, z); sh.rotation.y = r; g.add(sh);
+    for (let i = 0; i < 5; i++) { const bar = new THREE.Mesh(new THREE.BoxGeometry(0.2 + seededRandom(i * 3 + x) * 0.4, 0.012, 0.06), ink); bar.position.set(x - 0.15 + seededRandom(i * 7 + x) * 0.1, 0.018, z - 0.35 + i * 0.16); bar.rotation.y = r; g.add(bar); }
+  });
+  const glowL = new THREE.PointLight(0xff8a3a, 6, 3, 2); glowL.position.set(-0.3, 0.72, 0.9); scene.add(glowL);
+}, { halo: C.red, haloOpacity: 0.26, lights: { keyI: 1.2, redI: 2.6 }, camPos: [0.4, 1.8, 5.2], look: [0, 0.5, 0] });
+
+// Lorn: a razor at rest on an old wooden stand, winter light through stone.
+S['relic-lorn'] = relic((g) => {
+  const stone = new THREE.Mesh(new THREE.BoxGeometry(4.2, 3.4, 0.4), matte(0x3a3833, 0.95)); stone.position.set(0, 1.7, -1.2); g.add(stone);
+  const wood = matte(0x4a3522, 0.75);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.14, 0.5), wood); base.position.set(0, 0.07, 0); g.add(base);
+  [-0.8, 0.8].forEach((x) => { const u = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.8, 0.3), wood); u.position.set(x, 0.5, 0); g.add(u); const cr = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.08, 0.3), wood); cr.position.set(x, 0.92, 0); g.add(cr); });
+  const blade = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.05, 0.03), new THREE.MeshStandardMaterial({ color: 0xa8aeb6, metalness: 0.7, roughness: 0.18 })); blade.position.set(0.2, 1.0, 0); g.add(blade);
+  const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.055, 0.55, 24), metal(C.goldDim, 0.4)); hilt.rotation.z = Math.PI / 2; hilt.position.set(-1.2, 1.0, 0); g.add(hilt);
+  const cap = new THREE.Mesh(new THREE.SphereGeometry(0.065, 20, 14), metal(C.goldDim, 0.4)); cap.position.set(-1.49, 1.0, 0); g.add(cap);
+}, { halo: 0xdfe8ff, haloOpacity: 0.12, lights: { key: 0xdfe8ff, keyI: 1.8, red: 0xb89a6a, redI: 1.0 }, camPos: [0.6, 1.6, 5.6], look: [0, 1.0, -0.3] });
+
+// Orion: a brass orrery, its rings tilted toward a blue star.
+S['relic-orion'] = relic((g, scene) => {
+  const brass = metal(C.gold, 0.25);
+  const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 1.1, 20), brass); stand.position.y = 0.55; g.add(stand);
+  const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.65, 0.08, 48), brass); foot.position.y = 0.04; g.add(foot);
+  const core = new THREE.Mesh(new THREE.SphereGeometry(0.2, 40, 30), glow(0x7fb8ff, 3.2)); core.position.y = 1.6; g.add(core);
+  g.add(glowDisc(0x7fb8ff, 1.8, 0.55, [0, 1.6, 0.2]));
+  const light = new THREE.PointLight(0x7fb8ff, 10, 5, 2); light.position.set(0, 1.6, 0.3); scene.add(light);
+  [[0.7, 0.4, 0.2], [1.05, -0.35, 0.9], [1.4, 0.15, 2.1]].forEach(([r, tilt, a], i) => {
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.018, 12, 128), brass); ring.rotation.set(Math.PI / 2 + tilt, 0, 0); ring.position.y = 1.6; g.add(ring);
+    const planet = new THREE.Mesh(new THREE.SphereGeometry(0.07 + i * 0.03, 24, 18), i === 1 ? matte(0xb5452a, 0.8) : metal(0x9aa6b8, 0.4));
+    const p = new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r).applyAxisAngle(new THREE.Vector3(1, 0, 0), tilt); planet.position.set(p.x, 1.6 + p.y, p.z); g.add(planet);
+  });
+  const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.5, 8), brass); arm.position.y = 1.35; g.add(arm);
+}, { halo: 0x7fb8ff, haloOpacity: 0.22, lights: { red: 0x4a78c8, redI: 1.8, keyI: 1.4 }, camPos: [0, 1.9, 5.4], look: [0, 1.4, 0] });
+
+// Romulus: old books under a single candle, in cold light.
+S['relic-romulus'] = relic((g, scene) => {
+  const covers = [0x3a1a18, 0x2a2a20, 0x1e2630, 0x3a2e1e, 0x2a1a24];
+  let y = 0;
+  covers.forEach((c, i) => {
+    const w = 1.3 + seededRandom(i * 2.1) * 0.4, d = 0.95 + seededRandom(i * 3.7) * 0.2, h = 0.14 + seededRandom(i * 5.3) * 0.08;
+    const book = new THREE.Group();
+    const cov = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matte(c, 0.7)); book.add(cov);
+    const pages = new THREE.Mesh(new THREE.BoxGeometry(w - 0.06, h * 0.78, d - 0.02), matte(0xd9cfb8, 0.95)); pages.position.x = 0.04; book.add(pages);
+    const band = new THREE.Mesh(new THREE.BoxGeometry(0.03, h + 0.005, d + 0.005), metal(C.goldDim, 0.4)); band.position.x = -w / 2 + 0.12; book.add(band);
+    book.position.set(-0.05 + (seededRandom(i * 9) - 0.5) * 0.2, y + h / 2, 0); book.rotation.y = (seededRandom(i * 11) - 0.5) * 0.5; g.add(book); y += h;
+  });
+  const holder = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.24, 0.06, 32), metal(C.goldDim, 0.35)); holder.position.set(1.25, 0.03, 0.3); g.add(holder);
+  const candle = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.7, 24), matte(0xe9e4da, 0.8)); candle.position.set(1.25, 0.41, 0.3); g.add(candle);
+  const flame = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.16, 16), glow(0xffc070, 6)); flame.position.set(1.25, 0.84, 0.3); g.add(flame);
+  g.add(glowDisc(0xffc070, 0.8, 0.6, [1.25, 0.84, 0.35]));
+  const cl = new THREE.PointLight(0xffc070, 7, 4, 2); cl.position.set(1.25, 0.9, 0.4); scene.add(cl);
+}, { halo: 0xdfe8ff, haloOpacity: 0.14, lights: { key: 0xcfd8ff, keyI: 1.3, red: 0xdfe8ff, redI: 1.2 }, camPos: [0.5, 1.7, 5.4], look: [0.5, 0.6, 0] });
+
 // ============================== HOUSE SEALS ==============================
 function starPoly(n, ro, ri, rot = 0) { const pts = []; for (let i = 0; i < n * 2; i++) { const r = i % 2 ? ri : ro; const a = rot + (i / (n * 2)) * Math.PI * 2; pts.push([Math.cos(a) * r, Math.sin(a) * r]); } return pts; }
 function sealScene(emblem, { disc = 0x6e1016, rimCol = C.gold, emblemCol = C.gold, halo = C.red, haloOpacity = 0.22 } = {}) {

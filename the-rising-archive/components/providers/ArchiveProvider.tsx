@@ -14,7 +14,7 @@ type ArchiveState = {
   openClearance: () => void;
   soundOn: boolean;
   toggleSound: () => void;
-  cue: (c: "heartbeat" | "strike" | "seal") => void;
+  cue: (c: "heartbeat" | "strike" | "seal" | "howl") => void;
 };
 
 const Ctx = createContext<ArchiveState | null>(null);
@@ -52,7 +52,7 @@ export default function ArchiveProvider({ children }: { children: React.ReactNod
     }
   }, []);
 
-  const cue = useCallback((c: "heartbeat" | "strike" | "seal") => sound.play(c), []);
+  const cue = useCallback((c: "heartbeat" | "strike" | "seal" | "howl") => sound.play(c), []);
 
   return (
     <Ctx.Provider

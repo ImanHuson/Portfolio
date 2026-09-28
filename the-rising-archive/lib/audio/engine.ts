@@ -2,7 +2,7 @@
 // synthesized with the Web Audio API after the reader switches sound on
 // (a user gesture, which browsers require before audio can start).
 
-type Cue = "heartbeat" | "strike" | "seal";
+type Cue = "heartbeat" | "strike" | "seal" | "howl";
 
 class SoundEngine {
   private ctx: AudioContext | null = null;
@@ -74,7 +74,45 @@ class SoundEngine {
       this.metal();
     } else if (cue === "seal") {
       this.thump(0, 0.5, 38);
+    } else if (cue === "howl") {
+      this.howl();
     }
+  }
+
+  /** Lorn's old wolf: one distant howl, a sine rising and falling through a
+   * bandpass with a slow vibrato, far back in the mix. */
+  private howl() {
+    if (!this.ctx || !this.master) return;
+    const ctx = this.ctx;
+    const t = ctx.currentTime;
+    const o = ctx.createOscillator();
+    o.type = "sine";
+    o.frequency.setValueAtTime(330, t);
+    o.frequency.linearRampToValueAtTime(560, t + 0.9);
+    o.frequency.linearRampToValueAtTime(520, t + 2.1);
+    o.frequency.linearRampToValueAtTime(380, t + 2.9);
+    const lfo = ctx.createOscillator();
+    lfo.frequency.value = 5.5;
+    const lfoGain = ctx.createGain();
+    lfoGain.gain.value = 7;
+    lfo.connect(lfoGain);
+    lfoGain.connect(o.frequency);
+    const band = ctx.createBiquadFilter();
+    band.type = "bandpass";
+    band.frequency.value = 520;
+    band.Q.value = 1.4;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.09, t + 0.5);
+    g.gain.setValueAtTime(0.09, t + 2.2);
+    g.gain.linearRampToValueAtTime(0, t + 3.1);
+    o.connect(band);
+    band.connect(g);
+    g.connect(this.master);
+    o.start(t);
+    lfo.start(t);
+    o.stop(t + 3.2);
+    lfo.stop(t + 3.2);
   }
 
   private thump(delay: number, level = 1, freq = 58) {
