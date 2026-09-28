@@ -5,15 +5,20 @@
 
 export type Titan = {
   slug: string;
-  form: number; // index in the turntable sprite set (scripts/titans)
+  form: number; // form index in scripts/titans/render.html (x-ray plates, scale silhouettes)
   name: string;
   height: number; // metres
-  localHeight: number; // the model's height in render units, for the to-scale strip
+  localHeight: number; // the render model's height in units, to size its silhouette in the scale strip
   trait: string; // one line, shown on hover
   abilities: string[];
   holders: { name: string; slug?: string }[];
   events: { year: string; text: string }[];
+  /** the specimen plate (scripts/titans/plates.py); sealed when the image itself spoils */
+  plate: { source: "anime" | "fan-art"; credit: string; sealed?: boolean };
 };
+
+const ANIME = "Attack on Titan (anime). © Hajime Isayama, Kodansha / Attack on Titan Production Committee";
+const anime = { source: "anime" as const, credit: ANIME };
 
 export const ORIGIN =
   "When Ymir Fritz died, thirteen years after she gained the power of the Titans, that power was split into nine. Each of the Nine Titans is one part of it.";
@@ -41,6 +46,8 @@ export const TITANS: Titan[] = [
       { year: "845", text: "Grisha Yeager takes it from the Reiss family and passes it, with the Attack Titan, to Eren." },
       { year: "854", text: "Eren uses it to begin the Rumbling." },
     ],
+    // the only plate that shows the ending, so it opens only on request
+    plate: { source: "fan-art", credit: "Fan art by Metaleks.", sealed: true },
   },
   {
     slug: "attack",
@@ -59,6 +66,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "Eren transforms for the first time, in the Battle of Trost." },
       { year: "854", text: "Eren attacks Liberio." },
     ],
+    plate: anime,
   },
   {
     slug: "colossal",
@@ -74,6 +82,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "Appears again at Trost. Later that year, at Shiganshina, Armin inherits it." },
       { year: "854", text: "Armin transforms in Liberio's harbour and destroys Marley's fleet." },
     ],
+    plate: anime,
   },
   {
     slug: "armored",
@@ -89,6 +98,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "Fights Eren at the Battle of Shiganshina." },
       { year: "854", text: "Fights Eren again, in Liberio." },
     ],
+    plate: anime,
   },
   {
     slug: "female",
@@ -108,6 +118,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "Exposed and cornered in Stohess; its holder seals herself in crystal." },
       { year: "854", text: "Annie comes out of the crystal." },
     ],
+    plate: anime,
   },
   {
     slug: "beast",
@@ -127,6 +138,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "Bombards the Survey Corps at Shiganshina." },
       { year: "854", text: "Zeke helps stop Eren, and Levi kills him." },
     ],
+    plate: anime,
   },
   {
     slug: "jaw",
@@ -142,6 +154,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "Ymir fights for the 104th at Utgard Castle." },
       { year: "854", text: "Falco Grice inherits it." },
     ],
+    plate: anime,
   },
   {
     slug: "cart",
@@ -156,6 +169,7 @@ export const TITANS: Titan[] = [
       { year: "850", text: "At the Battle of Shiganshina." },
       { year: "854", text: "Fights in Liberio with a mounted gun." },
     ],
+    plate: anime,
   },
   {
     slug: "war-hammer",
@@ -170,6 +184,7 @@ export const TITANS: Titan[] = [
     ],
     holders: [{ name: "The Tybur family" }, { name: "Lara Tybur" }, { name: "Eren Yeager", slug: "eren" }],
     events: [{ year: "854", text: "Lara Tybur fights Eren in Liberio; he takes its power." }],
+    plate: anime,
   },
 ];
 

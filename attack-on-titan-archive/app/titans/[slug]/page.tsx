@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Sealed from "@/components/archive/Sealed";
-import Turntable from "@/components/titans/Turntable";
 import XrayIntro from "@/components/titans/XrayIntro";
+import { asset } from "@/lib/utils";
 import { INHERITANCE, ORIGIN, STATUS, TITANS, getTitan } from "@/lib/data/titans";
 
 export const dynamicParams = false;
@@ -55,11 +55,19 @@ export default async function TitanFile({ params }: PageProps<"/titans/[slug]">)
         </nav>
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <div className="turn-always relative lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start">
-            <div aria-hidden className="absolute inset-x-[10%] bottom-0 h-1/2 bg-[radial-gradient(ellipse_at_50%_100%,rgba(138,116,100,0.25),transparent_70%)]" />
-            <Turntable slug={t.slug} live className="relative mx-auto w-full max-w-[340px]" />
-            <p className="mt-2 text-center font-mono text-meta tracking-[0.14em] text-ash uppercase">Recorded height {t.height} m</p>
-          </div>
+          <figure className="relative lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start">
+            {t.plate.sealed ? (
+              <>
+                <img src={asset(`/images/titans/${t.slug}-xray.webp`)} alt={`X-ray plate of the ${t.name}`} width={480} height={960} loading="lazy" className="mx-auto aspect-[1/2] w-full max-w-[300px]" />
+                <Sealed label="Sealed: the plate spoils the ending" className="mx-auto mt-4 max-w-[520px]">
+                  <img src={asset(`/images/titans/${t.slug}-plate.webp`)} alt={`Specimen plate: the ${t.name}`} width={820} height={1100} loading="lazy" className="w-full" />
+                </Sealed>
+              </>
+            ) : (
+              <img src={asset(`/images/titans/${t.slug}-plate.webp`)} alt={`Specimen plate: the ${t.name}`} width={820} height={1100} loading="lazy" className="mx-auto w-full max-w-[520px] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]" />
+            )}
+            <figcaption className="mx-auto mt-3 max-w-[520px] text-[0.8rem] text-ash-2">{t.plate.credit}</figcaption>
+          </figure>
 
           <div>
             <h1 className="font-display text-h1 leading-[0.95] font-bold text-paper">{t.name.replace(" Titan", "")}</h1>

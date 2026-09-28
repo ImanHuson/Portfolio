@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ChapterHeader from "@/components/typography/ChapterHeader";
 import NextChapter from "@/components/typography/NextChapter";
-import Turntable from "@/components/titans/Turntable";
+import { asset } from "@/lib/utils";
 import TitanGrid from "@/components/titans/TitanGrid";
 import { INHERITANCE, ORIGIN, TITANS } from "@/lib/data/titans";
 
@@ -21,7 +21,7 @@ export default function Titans() {
         id="AOT-04"
         title="The Titans"
         trail={[{ href: "/soldiers/", label: "AOT-03" }]}
-        lede="Nine inheritances, handed down by being eaten. Hover a Titan to turn it; open one to read its file."
+        lede="Nine inheritances, handed down by being eaten. Nine specimen plates; open one to read its file."
       />
 
       {/* the monumental archive: nine columns, one per Titan */}
@@ -43,11 +43,19 @@ export default function Titans() {
               </div>
               <div className="absolute inset-0 flex items-end justify-around gap-1">
                 {TITANS.map((t) => {
-                  // the sprite frame is 7.3 render units tall with the feet 2.6% up from its bottom
+                  // silhouettes from the render frames: 7.3 render units tall, feet 2.6% up from the bottom
                   const h = ((t.height / MAX) * 7.3) / t.localHeight;
                   return (
                     <div key={t.slug} className="relative flex h-full flex-1 items-end justify-center">
-                      <Turntable slug={t.slug} className="w-auto" style={{ height: `${h * 100}%`, marginBottom: `-${h * 2.6}%` }} />
+                      <img
+                        src={asset(`/images/titans/${t.slug}-sil.webp`)}
+                        alt=""
+                        width={300}
+                        height={600}
+                        loading="lazy"
+                        className="w-auto max-w-none"
+                        style={{ height: `${h * 100}%`, marginBottom: `-${h * 2.6}%` }}
+                      />
                     </div>
                   );
                 })}

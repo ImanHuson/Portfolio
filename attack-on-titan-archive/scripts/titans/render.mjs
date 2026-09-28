@@ -1,16 +1,16 @@
-// Renders each Titan's 24-frame turntable (and one x-ray plate) from
-// render.html in headless Chromium, as PNGs in a work dir; sprite.py then
-// grades and assembles them.
-//   node render.mjs <url-of-render.html> <outdir> [forms...] [--preview]
+// Renders each Titan's front view and x-ray plate from render.html in
+// headless Chromium, as PNGs in a work dir; sprite.py then turns them into
+// the scale-strip silhouette and the x-ray. (The 3D models themselves are no
+// longer shown: the Titans are specimen plates, scripts/titans/plates.py.)
+//   node render.mjs <url-of-render.html> <outdir> [forms...]
 // Run it from a directory where `playwright` is installed, with the project
 // served over HTTP so render.html loads.
 import { chromium } from "playwright";
 import fs from "node:fs";
 const [url, out, ...rest] = process.argv.slice(2);
-const preview = rest.includes("--preview");
 const forms = rest.filter((r) => !r.startsWith("--")).map(Number);
 const list = forms.length ? forms : [0, 1, 2, 3, 4, 5, 6, 7, 8];
-const FRAMES = preview ? 4 : 24;
+const FRAMES = 1; // front view only
 fs.mkdirSync(out, { recursive: true });
 const b = await chromium.launch({ executablePath: process.env.CHROME || "/opt/pw-browsers/chromium", args: ["--no-sandbox", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
 const page = await b.newPage();
