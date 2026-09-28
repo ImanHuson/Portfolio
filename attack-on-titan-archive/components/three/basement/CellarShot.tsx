@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { Mesh, Program, Renderer, Triangle } from "ogl";
 import { fragment, vertex } from "./cellarShader";
 import { cellarAt } from "./cellarPath";
+import { isSoftwareGL } from "@/components/three/governor";
 
 /**
  * The descent into the Yeager cellar: one raymarched full-screen pass (see
@@ -33,9 +34,17 @@ export default function CellarShot({
     try {
       renderer = new Renderer({ dpr: scale, alpha: false, antialias: false, powerPreference: "high-performance" });
     } catch {
-      return; // no WebGL: the section's dark ground and the text beats remain
+      // no WebGL at all: the section shows its stills
+      onTooSlow?.();
+      return;
     }
     const gl = renderer.gl;
+    if (isSoftwareGL(gl)) {
+      // a software rasteriser cannot run this scene: stills, before the reader has scrolled
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      onTooSlow?.();
+      return;
+    }
     gl.clearColor(0.02, 0.02, 0.02, 1);
     gl.canvas.setAttribute("aria-hidden", "true");
     Object.assign(gl.canvas.style, { display: "block", width: "100%", height: "100%" });

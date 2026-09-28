@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { reducedMotionStore } from "@/lib/animation/tokens";
+import { readerInside, reducedMotionStore } from "@/lib/animation/tokens";
 import { DESCENT } from "@/lib/data/basement";
 import { asset, cn } from "@/lib/utils";
 
@@ -40,7 +40,7 @@ function ContactSheet() {
         {FRAMES.map((f, k) => (
           <li key={f.src} className={cn(k === 0 && "md:col-span-2")}>
             <img src={asset(f.src)} alt="" width={1280} height={800} loading="lazy" className="w-full" />
-            <p className="mt-3 font-mono text-meta tracking-[0.2em] text-ash-2">FRAME {String(k + 1).padStart(2, "0")}</p>
+            <p className="mt-3 font-mono text-meta tracking-[0.2em] text-ash">FRAME {String(k + 1).padStart(2, "0")}</p>
             {f.beats.map((i) => (
               <Beat key={i} i={i} className="mt-3 max-w-[46ch]" />
             ))}
@@ -61,10 +61,15 @@ export default function Descent() {
   const progress = useRef(0);
   // a device too slow for the live scene gets the contact sheet instead
   const [tooSlow, setTooSlow] = useState(false);
-  const onTooSlow = useCallback(() => setTooSlow(true), []);
-  // the stills are far shorter than the pinned scene: keep the reader at the descent
+  const wasInside = useRef(false);
+  const onTooSlow = useCallback(() => {
+    wasInside.current = readerInside(hostRef.current);
+    setTooSlow(true);
+  }, []);
+  // the stills are far shorter than the pinned scene: if the reader was inside it,
+  // keep them at the descent; if they had not reached it yet, leave the page alone
   useEffect(() => {
-    if (tooSlow) document.getElementById("descent")?.scrollIntoView({ block: "start" });
+    if (tooSlow && wasInside.current) document.getElementById("descent")?.scrollIntoView({ block: "start" });
   }, [tooSlow]);
 
   useGSAP(

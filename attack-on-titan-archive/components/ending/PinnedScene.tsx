@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { reducedMotionStore } from "@/lib/animation/tokens";
+import { readerInside, reducedMotionStore } from "@/lib/animation/tokens";
 import { asset, cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -43,11 +43,15 @@ export default function PinnedScene({
   const progress = useRef(0);
   // a device too slow for the live scene gets the stills instead, kept in place
   const [tooSlow, setTooSlow] = useState(false);
-  const onTooSlow = useCallback(() => setTooSlow(true), []);
+  const wasInside = useRef(false);
+  const onTooSlow = useCallback(() => {
+    wasInside.current = readerInside(hostRef.current);
+    setTooSlow(true);
+  }, []);
   useEffect(() => {
     if (!tooSlow) return;
     document.documentElement.classList.remove("nav-hidden");
-    document.getElementById(anchor)?.scrollIntoView({ block: "start" });
+    if (wasInside.current) document.getElementById(anchor)?.scrollIntoView({ block: "start" });
   }, [tooSlow, anchor]);
 
   useGSAP(
@@ -120,7 +124,7 @@ export default function PinnedScene({
           <div
             ref={hudRef}
             aria-hidden
-            className="pointer-events-none absolute top-[calc(var(--nav-h)+1rem)] left-4 grid gap-1 font-mono text-[0.72rem] tracking-[0.16em] text-paper/75 uppercase transition-opacity duration-500 md:left-8"
+            className="pointer-events-none absolute top-[calc(var(--nav-h)+1rem)] left-4 grid gap-1 font-mono text-meta tracking-[0.16em] text-paper/75 uppercase transition-opacity duration-500 md:left-8"
           />
         )}
         {beats.map((b, i) => (

@@ -17,14 +17,15 @@ export default function TheWar() {
     <>
       <ChapterHeader
         id="AOT-07"
+        image="/images/heads/war.webp"
+        imagePosition="50% 50%"
         title="The War"
-        trail={[{ href: "/the-world/", label: "AOT-06" }]}
         lede="Five battles inside the Walls in a single year, two more across the sea, the gear that let people fight at all, and what it cost."
       />
       <BattleSection />
       <OdmSection />
       <Memorial />
-      <NextChapter href="/the-rumbling/" id="AOT-08" title="The Rumbling" line="The ending begins here. The file opens only when you ask." />
+      <NextChapter current="AOT-07" />
     </>
   );
 }

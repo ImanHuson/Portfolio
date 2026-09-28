@@ -28,7 +28,7 @@ export default function TheRumbling() {
           </ol>
         </div>
       </section>
-      <NextChapter href="/paths/" id="AOT-09" title="Paths" line="Where every Eldian is connected." />
+      <NextChapter current="AOT-08" />
     </EndingGate>
   );
 }

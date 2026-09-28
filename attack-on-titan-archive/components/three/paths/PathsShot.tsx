@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Camera, Geometry, Mesh, Program, Renderer, Transform, Triangle, Vec3 } from "ogl";
-import { makeGovernor } from "@/components/three/governor";
+import { isSoftwareGL, makeGovernor } from "@/components/three/governor";
 
 // Paths: an endless desert under stars, and at its centre a pillar of light
 // that branches into countless lines, one for every Subject of Ymir. A small
@@ -201,9 +201,17 @@ export default function PathsShot({ progress, className, onTooSlow }: { progress
     try {
       renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio || 1, small ? 1.25 : 1.5), antialias: true });
     } catch {
+      // no WebGL at all: the section shows its stills
+      onTooSlow?.();
       return;
     }
     const gl = renderer.gl;
+    if (isSoftwareGL(gl)) {
+      // a software rasteriser cannot run this scene: stills, before the reader has scrolled
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      onTooSlow?.();
+      return;
+    }
     gl.canvas.setAttribute("aria-hidden", "true");
     Object.assign(gl.canvas.style, { display: "block", width: "100%", height: "100%" });
     host.appendChild(gl.canvas);

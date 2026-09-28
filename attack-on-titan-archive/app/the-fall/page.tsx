@@ -121,7 +121,7 @@ export default function TheFall() {
         </p>
       </section>
 
-      <NextChapter href="/soldiers/" id="AOT-03" title="The Soldiers" line="Personnel files of the 104th Cadet Corps and the Survey Corps: who they were before the war changed them." />
+      <NextChapter current="AOT-02" />
     </>
   );
 }

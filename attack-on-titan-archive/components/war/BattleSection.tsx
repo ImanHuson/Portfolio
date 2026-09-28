@@ -4,14 +4,13 @@ import { useRef, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import { reducedMotionStore } from "@/lib/animation/tokens";
 import Sealed from "@/components/archive/Sealed";
-import { BATTLES, MAINLAND, WALL_KM, type Battle } from "@/lib/data/war";
+import { BATTLES, MAINLAND, SIDE_CSS, WALL_KM, type Battle } from "@/lib/data/war";
 import { cn } from "@/lib/utils";
 import type { MapApi } from "@/components/three/battlemap/BattleMap";
 
 const BattleMap = dynamic(() => import("@/components/three/battlemap/BattleMap"), { ssr: false });
 
 const noSub = () => () => {};
-const SIDE_CSS = { titan: "#d94d3d", scout: "#6bb880", garrison: "#9ea8c7", marley: "#b3b3a8" } as const;
 
 /** The flat version (JS off, and the key under the 3D map): Walls, districts, battles. */
 function FlatMap({ className }: { className?: string }) {
@@ -30,7 +29,7 @@ function FlatMap({ className }: { className?: string }) {
         const [x, y] = pt(b.at.deg, b.at.km);
         return (
           <g key={b.id}>
-            <circle cx={x} cy={y} r="1.6" fill="#d94d3d" />
+            <circle cx={x} cy={y} r="1.6" fill="#e0685c" />
             <text x={x + 2.4} y={y + 1} fontSize="3" fill="#d8d0b8" fontFamily="monospace">
               {b.name}
             </text>
@@ -46,7 +45,7 @@ function BattleFile({ b, onBack }: { b: Battle; onBack?: () => void }) {
     <article>
       <p className="font-mono text-meta tracking-[0.2em] text-ash uppercase">
         {b.year}
-        {b.approx && <span className="ml-3 text-ash-2">Position approximate</span>}
+        {b.approx && <span className="ml-3 text-ash">Position approximate</span>}
       </p>
       <h3 className="mt-2 font-display text-h3 leading-tight font-bold text-paper">{b.name}</h3>
       <p className="mt-4 text-[1.02rem] leading-relaxed text-paper/85">{b.summary}</p>
@@ -67,7 +66,7 @@ function BattleFile({ b, onBack }: { b: Battle; onBack?: () => void }) {
       )}
       <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2" aria-label="Forces">
         {b.forces.map((f) => (
-          <li key={f.label} className="flex items-center gap-2 font-mono text-[0.72rem] tracking-[0.1em] text-paper/70 uppercase">
+          <li key={f.label} className="flex items-center gap-2 font-mono text-meta tracking-[0.1em] text-paper/70 uppercase">
             <span aria-hidden className="size-2.5 rounded-full" style={{ background: SIDE_CSS[f.side] }} />
             {f.label}
           </li>
@@ -101,8 +100,7 @@ export default function BattleSection() {
   return (
     <section aria-labelledby="map-title" className="px-4 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <p className="font-mono text-meta tracking-[0.2em] text-ash uppercase">Strategic map</p>
-        <h2 id="map-title" className="mt-3 font-display text-h2 leading-tight font-bold text-paper">
+        <h2 id="map-title" className="font-display text-h2 leading-tight font-bold text-paper">
           850: five battles in one year
         </h2>
         <p className="mt-4 max-w-[62ch] text-lede leading-relaxed text-paper/80">
@@ -133,7 +131,7 @@ export default function BattleSection() {
                         className="flex w-full items-baseline justify-between border-b border-line py-3 text-left font-military text-[1.05rem] tracking-[0.08em] text-paper/75 uppercase transition-colors hover:text-paper"
                       >
                         {b.name}
-                        <span className="font-mono text-meta text-ash-2">{b.year}</span>
+                        <span className="font-mono text-meta text-ash">{b.year}</span>
                       </button>
                     </li>
                   ))}

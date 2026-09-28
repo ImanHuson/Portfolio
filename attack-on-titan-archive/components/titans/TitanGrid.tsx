@@ -52,7 +52,7 @@ export default function TitanGrid() {
               onClick={(e) => enter(e, t.slug)}
               className="group flex h-full flex-col items-center px-2 pt-6 pb-5 text-center transition-colors hover:bg-base-2 focus-visible:bg-base-2"
             >
-              <span className="font-mono text-[0.72rem] tracking-[0.12em] text-ash">{t.height} M</span>
+              <span className="font-mono text-meta tracking-[0.12em] text-ash">{t.height} M</span>
               <img
                 src={asset(`/images/titans/${t.slug}-col.webp`)}
                 alt=""

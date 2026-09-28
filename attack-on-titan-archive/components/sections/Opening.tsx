@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { reducedMotionStore } from "@/lib/animation/tokens";
+import { readerInside, reducedMotionStore } from "@/lib/animation/tokens";
 import { getLenis } from "@/components/providers/SmoothScroll";
 import { altitudeAt } from "@/components/three/choreography";
 import { sound } from "@/lib/audio/engine";
@@ -68,9 +68,9 @@ function StaticOpening() {
         </div>
         <a
           href="#index"
-          className="mt-10 inline-block border-b border-paper/60 pb-1 font-military text-[0.95rem] tracking-[0.3em] text-paper uppercase transition-colors hover:border-paper"
+          className="mt-10 inline-flex items-center gap-3 border border-paper/50 bg-base/40 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase backdrop-blur-sm transition-colors hover:border-paper hover:bg-paper hover:text-ink"
         >
-          Open the archive
+          Open the chapters <span aria-hidden>&darr;</span>
         </a>
       </div>
     </section>
@@ -87,21 +87,28 @@ export default function Opening() {
   );
   const hostRef = useRef<HTMLElement>(null);
   const altRef = useRef<HTMLSpanElement>(null);
+  const railRef = useRef<HTMLSpanElement>(null);
   const progress = useRef(0);
   const last = useRef(0);
   // a device too slow for the live scene gets the static opening (a real frame
   // of the scene) instead, and the reader is taken back to its top
   const [tooSlow, setTooSlow] = useState(false);
-  const onTooSlow = useCallback(() => setTooSlow(true), []);
+  const wasInside = useRef(false);
+  const onTooSlow = useCallback(() => {
+    wasInside.current = readerInside(hostRef.current);
+    setTooSlow(true);
+  }, []);
+  // the static opening is one screen tall: only a reader already inside the
+  // pinned shot is taken back to its start; anyone else stays where they are
   useEffect(() => {
-    if (tooSlow) window.scrollTo({ top: 0 });
+    if (tooSlow && wasInside.current) window.scrollTo({ top: 0 });
   }, [tooSlow]);
 
   useGSAP(
     () => {
       if (mode !== "cinematic" || tooSlow || !hostRef.current) return;
       const q = gsap.utils.selector(hostRef);
-      gsap.set(q("[data-beat]"), { autoAlpha: 0, y: 12 });
+      gsap.set(q("[data-beat]:not([data-place])"), { autoAlpha: 0, y: 12 });
       gsap.set(q("[data-title] > *"), { autoAlpha: 0, y: 30 });
 
       const tl = gsap.timeline({
@@ -119,15 +126,14 @@ export default function Opening() {
             last.current = p;
             progress.current = p;
             if (altRef.current) altRef.current.textContent = String(altitudeAt(p)).padStart(3, "0");
+            if (railRef.current) railRef.current.style.transform = `scaleY(${p})`;
           },
         },
       });
 
-      // 845 / Shiganshina District / Wall Maria, one at a time, on black
-      q("[data-place]").forEach((el, i) => {
-        tl.to(el, { autoAlpha: 1, y: 0, duration: 0.02 }, 0.004 + i * 0.022);
-      });
-      tl.to(q("[data-place]"), { autoAlpha: 0, duration: 0.03 }, 0.2);
+      // 845 / Shiganshina District / Wall Maria: on screen from the first frame,
+      // over the Wall, so the page never opens on an empty black screen
+      tl.to(q("[data-place]"), { autoAlpha: 0, y: -12, duration: 0.03 }, 0.13);
       tl.to(q("[data-hud]"), { autoAlpha: 1, y: 0, duration: 0.03 }, 0.1).to(q("[data-hud]"), { autoAlpha: 0, duration: 0.02 }, 0.74);
 
       // the field report
@@ -153,22 +159,22 @@ export default function Opening() {
   if (mode === "still")
     return (
       <section aria-labelledby="opening-title" className="relative flex min-h-[100dvh] items-end overflow-hidden px-4 pt-[var(--nav-h)] pb-16 md:px-8 md:pb-20">
-        <WallShot still stillAt={0.705} className="absolute inset-0" />
+        <WallShot still stillAt={0.705} onTooSlow={onTooSlow} className="absolute inset-0" />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-base via-base/10 to-base/30" />
         <div className="relative mx-auto w-full max-w-[1400px]">
           <p className="font-mono text-meta tracking-[0.3em] text-paper/70 uppercase">{PLACE.join("   /   ")}</p>
           <div className="mt-6">
             <Title id="opening-title" />
           </div>
-          <a href="#index" className="mt-10 inline-block border-b border-paper/60 pb-1 font-military text-[0.95rem] tracking-[0.3em] text-paper uppercase">
-            Open the archive
+          <a href="#index" className="mt-10 inline-flex items-center gap-3 border border-paper/50 bg-base/40 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase backdrop-blur-sm transition-colors hover:border-paper hover:bg-paper hover:text-ink">
+            Open the chapters <span aria-hidden>&darr;</span>
           </a>
         </div>
       </section>
     );
 
   return (
-    <section ref={hostRef} aria-labelledby="opening-title" className="relative h-[1000vh]">
+    <section ref={hostRef} aria-labelledby="opening-title" className="relative h-[650vh]">
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
         <WallShot progress={progress} onTooSlow={onTooSlow} className="absolute inset-0" />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(11,12,10,0.7)_100%)]" />
@@ -197,10 +203,10 @@ export default function Opening() {
         </p>
 
         {/* field report */}
-        <ol aria-label="Field report" className="absolute bottom-24 left-4 flex max-w-[36ch] flex-col gap-2 font-mono text-[0.8rem] leading-snug md:bottom-12 md:left-8">
+        <ol aria-label="Field report" className="absolute bottom-24 left-4 flex max-w-[36ch] flex-col gap-2 font-mono text-[0.875rem] leading-snug [text-shadow:0_1px_12px_rgba(0,0,0,0.9)] md:bottom-12 md:left-8">
           {LOG.map((l, i) => (
-            <li key={l.text} data-beat data-log={i} className={l.alert ? "text-[#e4a49b]" : "text-paper/85"}>
-              <span className="mr-2 text-paper/50">OBS {String(i + 1).padStart(2, "0")}</span>
+            <li key={l.text} data-beat data-log={i} className={l.alert ? "text-alert" : "text-paper/85"}>
+              <span className="mr-2 text-paper/60">OBS {String(i + 1).padStart(2, "0")}</span>
               {l.text}
             </li>
           ))}
@@ -215,7 +221,7 @@ export default function Opening() {
         <p
           data-beat
           data-inside
-          className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center font-display text-h2 leading-tight font-semibold text-paths uppercase"
+          className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center font-display text-h2 leading-tight font-semibold text-balance text-paper uppercase"
         >
           The Walls were never what they seemed.
         </p>
@@ -228,10 +234,15 @@ export default function Opening() {
             e.preventDefault();
             lenis.scrollTo("#index", { immediate: true });
           }}
-          className="absolute right-4 bottom-5 py-1.5 font-mono text-meta tracking-[0.2em] text-paper/60 uppercase transition-colors hover:text-paper focus-visible:text-paper md:right-8 md:bottom-8"
+          className="absolute right-4 bottom-5 border border-paper/30 bg-base/50 px-4 py-2.5 font-military text-[0.9rem] tracking-[0.18em] text-paper/90 uppercase backdrop-blur-sm transition-colors hover:border-paper/70 hover:text-paper md:right-8 md:bottom-8"
         >
-          Skip the opening
+          Skip to the chapters
         </a>
+
+        {/* where the reader is in the shot: a hairline that fills as it plays */}
+        <span aria-hidden className="absolute top-[calc(var(--nav-h)+1.25rem)] right-4 bottom-24 w-px bg-paper/15 md:right-8">
+          <span ref={railRef} className="block h-full w-full origin-top scale-y-0 bg-paper/70" />
+        </span>
       </div>
     </section>
   );

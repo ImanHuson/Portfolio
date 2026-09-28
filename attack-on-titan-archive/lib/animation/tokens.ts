@@ -54,3 +54,11 @@ export const reducedMotionStore = {
   },
   getSnapshot: () => window.matchMedia(RM).matches,
 };
+
+/** True when the reader has scrolled into this (pinned) section, so a swap to
+ * shorter stills should keep them at its start; false before they reach it. */
+export function readerInside(el: HTMLElement | null) {
+  if (!el) return false;
+  const r = el.getBoundingClientRect();
+  return r.top < 0 && r.bottom > 0;
+}

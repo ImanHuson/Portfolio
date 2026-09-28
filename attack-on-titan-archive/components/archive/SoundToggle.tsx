@@ -12,6 +12,7 @@ export default function SoundToggle() {
       type="button"
       data-js-only
       aria-pressed={on}
+      aria-label="Sound"
       onClick={() => void sound.toggle()}
       className="group flex items-center gap-2 py-2 font-military text-[0.85rem] tracking-[0.14em] whitespace-nowrap text-paper/80 sm:tracking-[0.24em] uppercase transition-colors hover:text-paper"
     >
@@ -24,7 +25,7 @@ export default function SoundToggle() {
           />
         ))}
       </span>
-      Sound {on ? "on" : "off"}
+      <span className="sr-only sm:not-sr-only">Sound {on ? "on" : "off"}</span>
     </button>
   );
 }

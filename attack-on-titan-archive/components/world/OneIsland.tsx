@@ -65,7 +65,7 @@ function StaticWorld() {
             <span
               key={l.id}
               className={cn(
-                "absolute -translate-y-1/2 font-military text-[0.8rem] tracking-[0.3em] text-paper/85 uppercase md:text-[0.95rem]",
+                "absolute -translate-y-1/2 font-military text-meta tracking-[0.3em] text-paper/85 uppercase md:text-[0.95rem]",
                 l.anchor === "start" ? "pl-2" : "-translate-x-1/2",
               )}
               style={{ left: `${(l.at[0] / MAP.w) * 100}%`, top: `${(l.at[1] / MAP.h) * 100}%` }}
@@ -79,7 +79,7 @@ function StaticWorld() {
             <p key={b.text}>{b.text}</p>
           ))}
         </div>
-        <p className="mt-8 max-w-[70ch] text-[0.85rem] leading-relaxed text-ash-2">{MAP_NOTE}</p>
+        <p className="mt-8 max-w-[70ch] text-[0.85rem] leading-relaxed text-ash">{MAP_NOTE}</p>
       </div>
     </section>
   );
@@ -211,7 +211,7 @@ export default function OneIsland() {
             </div>
           </div>
         ))}
-        <p className="absolute top-[calc(var(--nav-h)+1rem)] right-4 max-w-[34ch] text-right text-[0.7rem] leading-snug text-ash-2 md:right-8">
+        <p className="absolute top-[calc(var(--nav-h)+1rem)] right-4 max-w-[34ch] text-right text-meta leading-snug text-ash md:right-8">
           Coastlines of our world, flipped north to south. The Walls are a mark, not to scale.
         </p>
       </div>

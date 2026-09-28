@@ -416,7 +416,7 @@ export default function OdmViewer({
             labelRefs.current[l.id] = el;
           }}
           aria-hidden
-          className="pointer-events-none absolute top-0 left-0 font-mono text-[0.68rem] tracking-[0.12em] whitespace-nowrap text-paper uppercase opacity-0 transition-opacity duration-200 [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]"
+          className="pointer-events-none absolute top-0 left-0 font-mono text-meta tracking-[0.12em] whitespace-nowrap text-paper uppercase opacity-0 transition-opacity duration-200 [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]"
         >
           <span className="mr-1.5 inline-block size-1.5 -translate-y-px rounded-full bg-flare align-middle" />
           {l.name}

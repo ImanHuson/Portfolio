@@ -19,8 +19,9 @@ export default function Titans() {
     <>
       <ChapterHeader
         id="AOT-04"
+        image="/images/heads/titans.webp"
+        imagePosition="55% 35%"
         title="The Titans"
-        trail={[{ href: "/soldiers/", label: "AOT-03" }]}
         lede="Nine inheritances, handed down by being eaten. Nine specimen plates; open one to read its file."
       />
 
@@ -39,7 +40,7 @@ export default function Titans() {
           <figure className="mt-14">
             <div className="relative h-[min(64vh,560px)] overflow-hidden border-b border-paper/40">
               <div aria-hidden className="absolute inset-x-0 border-t border-dashed border-flare/70" style={{ bottom: `${(WALL / MAX) * 100}%` }}>
-                <span className="absolute -top-6 left-0 font-mono text-[0.72rem] tracking-[0.12em] text-[#d98b82]">WALL, 50 M</span>
+                <span className="absolute -top-6 left-0 font-mono text-meta tracking-[0.12em] text-alert">WALL, 50 M</span>
               </div>
               <div className="absolute inset-0 flex items-end justify-around gap-1">
                 {TITANS.map((t) => {
@@ -61,7 +62,7 @@ export default function Titans() {
                 })}
               </div>
             </div>
-            <figcaption className="mt-3 grid grid-cols-9 gap-1 text-center font-mono text-[0.62rem] tracking-[0.08em] text-ash md:text-[0.72rem]">
+            <figcaption className="mt-3 grid grid-cols-9 gap-1 text-center font-mono text-meta tracking-[0.08em] text-ash md:text-meta">
               {TITANS.map((t) => (
                 <span key={t.slug}>
                   <span className="hidden md:inline">{t.name.replace(" Titan", "")} </span>
@@ -85,7 +86,7 @@ export default function Titans() {
         </div>
       </section>
 
-      <NextChapter href="/the-basement/" id="AOT-05" title="The Basement" line="Shiganshina, 850. A key, a cellar door, and what Grisha kept under his desk." />
+      <NextChapter current="AOT-04" />
     </>
   );
 }

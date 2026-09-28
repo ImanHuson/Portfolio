@@ -17,7 +17,7 @@ import { createPost } from "./Post";
 import { terrainH } from "./terrain";
 import { shotAt } from "./choreography";
 import { lerp } from "@/lib/animation/tokens";
-import { makeGovernor } from "./governor";
+import { isSoftwareGL, makeGovernor } from "./governor";
 
 /**
  * Year 845, the opening shot. Pure ogl (this repo's proven WebGL path),
@@ -56,9 +56,17 @@ export default function WallShot({
     try {
       renderer = new Renderer({ dpr, alpha: false, antialias: !small, powerPreference: "high-performance", preserveDrawingBuffer: still });
     } catch {
-      return; // no WebGL: the composed CSS frame behind stays visible
+      // no WebGL at all: the section shows its stills
+      onTooSlow?.();
+      return;
     }
     const gl = renderer.gl;
+    if (!still && isSoftwareGL(gl)) {
+      // a software rasteriser cannot run this scene: stills, before the reader has scrolled
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      onTooSlow?.();
+      return;
+    }
     gl.clearColor(0.043, 0.047, 0.039, 1);
     gl.canvas.setAttribute("aria-hidden", "true");
     gl.canvas.style.display = "block";

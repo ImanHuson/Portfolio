@@ -28,8 +28,8 @@ export default function Memorial() {
               <span className="font-display text-[1.25rem] font-bold text-paper">{m.name}</span>
               <span
                 className={cn(
-                  "font-mono text-[0.75rem] tracking-[0.2em]",
-                  m.fate === "SURVIVED" ? "text-[#6bb880]" : m.fate === "KIA" ? "text-ash" : "text-paper/60",
+                  "font-mono text-meta tracking-[0.2em]",
+                  m.fate === "SURVIVED" ? "font-bold text-paper" : m.fate === "KIA" ? "text-ash" : "text-paper/60",
                 )}
               >
                 {m.fate}
@@ -52,7 +52,7 @@ export default function Memorial() {
           {MEMORIAL_104.map((m) => (
             <li key={m.name} className="memorial-fade grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 border-b border-paper/10 py-5 md:grid-cols-[16rem_6rem_1fr]">
               <span className="font-display text-[1.25rem] font-bold text-paper">{m.name}</span>
-              <span className="font-mono text-[0.75rem] tracking-[0.2em] text-ash">KIA</span>
+              <span className="font-mono text-meta tracking-[0.2em] text-ash">KIA</span>
               <span className="col-span-2 text-[0.92rem] leading-relaxed text-paper/60 md:col-span-1">
                 {m.note}
                 {m.later && (
@@ -67,12 +67,12 @@ export default function Memorial() {
 
         <div aria-label="Soldiers the story does not name" className="mt-20 grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 md:grid-cols-4">
           {Array.from({ length: UNNAMED }, (_, i) => (
-            <span key={i} aria-hidden={i > 0} className="memorial-fade font-mono text-[0.68rem] tracking-[0.16em] text-paper/35 uppercase">
+            <span key={i} aria-hidden={i > 0} className="memorial-fade font-mono text-meta tracking-[0.16em] text-paper/35 uppercase">
               Name not recorded
             </span>
           ))}
         </div>
-        <p className="mt-16 max-w-[60ch] text-[0.85rem] leading-relaxed text-ash-2">{MEMORIAL_NOTE}</p>
+        <p className="mt-16 max-w-[60ch] text-[0.85rem] leading-relaxed text-ash">{MEMORIAL_NOTE}</p>
       </div>
     </section>
   );

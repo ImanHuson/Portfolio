@@ -28,7 +28,7 @@ export default function Paths() {
           </ol>
         </div>
       </section>
-      <NextChapter href="/the-end/" id="AOT-10" title="The End" line="A single tree." />
+      <NextChapter current="AOT-09" />
     </EndingGate>
   );
 }

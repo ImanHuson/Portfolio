@@ -10,10 +10,9 @@ export default function SiteFooter() {
             renders made for it; any images of characters are used for identification and commentary.
           </p>
         </div>
-        <div className="font-mono text-[0.75rem] leading-relaxed text-ash-2 md:text-right">
-          <p>ARCHIVE STATUS: ASSEMBLING</p>
+        <div className="text-[0.95rem] leading-relaxed text-ash md:text-right">
           <p>
-            <a href="/Portfolio/" className="inline-block py-1 underline decoration-ash-2/50 underline-offset-4 hover:text-paper">
+            <a href="/Portfolio/" className="inline-block py-1 underline decoration-ash/50 underline-offset-4 transition-colors hover:text-paper">
               Back to the portfolio
             </a>
           </p>

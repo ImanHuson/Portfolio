@@ -102,16 +102,10 @@ varying vec3 vC;
 void main(){ vec2 d = gl_PointCoord - 0.5; float a = 1.0 - smoothstep(0.35, 0.5, length(d)); if (a < 0.01) discard; gl_FragColor = vec4(vC, a); }`;
 
 const SIDE_COLOR: Record<Side, [number, number, number]> = {
-  titan: [0.85, 0.3, 0.24],
-  scout: [0.42, 0.72, 0.5],
-  garrison: [0.62, 0.66, 0.78],
-  marley: [0.7, 0.7, 0.66],
-};
-export const SIDE_CSS: Record<Side, string> = {
-  titan: "#d94d3d",
-  scout: "#6bb880",
-  garrison: "#9ea8c7",
-  marley: "#b3b3a8",
+  titan: [0.88, 0.41, 0.36],
+  scout: [0.85, 0.82, 0.72],
+  garrison: [0.64, 0.61, 0.53],
+  marley: [0.5, 0.48, 0.42],
 };
 
 export type MapApi = { focus: (id: string | null) => void };
@@ -354,10 +348,10 @@ export default function BattleMap({
           aria-label={`${b.year} ${b.name}`}
           className="group absolute top-0 left-0 -mt-3 -ml-2 flex items-center gap-2 py-1 pr-2 text-left data-[side=left]:-translate-x-[calc(100%-1.25rem)] data-[side=left]:flex-row-reverse data-[side=left]:pr-0 data-[side=left]:pl-2"
         >
-          <span className="relative block size-4 rounded-full border-2 border-[#d94d3d] bg-[#d94d3d]/30 transition-transform group-hover:scale-125 group-focus-visible:scale-125">
-            <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-[#d94d3d]/40 motion-reduce:hidden" />
+          <span className="relative block size-4 rounded-full border-2 border-alert bg-alert/30 transition-transform group-hover:scale-125 group-focus-visible:scale-125">
+            <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-alert/40 motion-reduce:hidden" />
           </span>
-          <span className="font-mono text-[0.66rem] tracking-[0.12em] whitespace-nowrap text-paper uppercase [text-shadow:0_1px_6px_rgba(0,0,0,0.95)] md:text-[0.72rem]">
+          <span className="font-mono text-meta tracking-[0.12em] whitespace-nowrap text-paper uppercase [text-shadow:0_1px_6px_rgba(0,0,0,0.95)] md:text-meta">
             {/* small screens have no room for the full name on either side of a marker */}
             <span className="sm:hidden">{SHORT[b.id] ?? b.name}</span>
             <span className="hidden sm:inline">

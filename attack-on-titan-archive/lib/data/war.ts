@@ -7,6 +7,8 @@
 // and Utgard Castle and the Forest of Giant Trees are placed approximately.
 
 export type Side = "titan" | "scout" | "garrison" | "marley";
+/** The site has one accent: Titans carry it; the human sides are told apart by value on the paper scale, and are named in every key. */
+export const SIDE_CSS: Record<Side, string> = { titan: "#e0685c", scout: "#d8d0b8", garrison: "#a39c87", marley: "#7f7a6b" };
 
 export type Battle = {
   id: string;

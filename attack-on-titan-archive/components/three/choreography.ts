@@ -3,7 +3,7 @@ import { lerp, range, smoothstep } from "@/lib/animation/tokens";
 // The opening, as a shot list keyed to scroll progress p (0..1). Every
 // move has a job; nothing moves just to prove the page has 3D in it.
 //
-//   0.00-0.10  black, then the Wall, close. It fills the frame.
+//   0.00-0.10  the Wall, close and dim, under the place card. It fills the frame.
 //   0.10-0.30  RISE: the Wall shrinks, the district and the fields appear.
 //   0.30-0.44  HOLD, high. Birds over the roofs, cloud shadows. Then
 //              lightning beyond the Wall (a Titan shifter transforms), a
@@ -59,7 +59,7 @@ export function shotAt(p: number, t = 0) {
   return {
     cam: [cam[0] + shake, cam[1] + shake * 0.6, cam[2]] as V3,
     tgt,
-    exposure: smoothstep(range(p, 0.035, 0.12)) + bolt * 0.9 + range(p, 0.614, 0.618) * (1 - range(p, 0.618, 0.63)) * 0.35,
+    exposure: 0.5 + 0.5 * smoothstep(range(p, 0.02, 0.12)) + bolt * 0.9 + range(p, 0.614, 0.618) * (1 - range(p, 0.618, 0.63)) * 0.35,
     bolt,
     // the shadow is thrown the moment it stands; it sweeps over the district
     shadowTop: smoothstep(range(p, 0.408, 0.44)) * 6.2 * (1 - smoothstep(range(p, 0.72, 0.76))),

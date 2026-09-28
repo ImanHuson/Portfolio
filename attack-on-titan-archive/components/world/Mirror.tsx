@@ -47,9 +47,9 @@ function PairTable({ pair }: { pair: MirrorPair }) {
   return (
     <div className="border-t border-line pt-14 first:border-t-0 first:pt-0">
       <h3 className="text-center font-display text-h2 leading-tight font-bold text-paper">
-        {pair.left} <span className="text-ash-2">/</span> {pair.right}
+        {pair.left} <span className="text-ash">/</span> {pair.right}
       </h3>
-      {pair.warning && <p className="mt-2 text-center font-mono text-meta tracking-[0.2em] text-[#d98b82] uppercase">{pair.warning}</p>}
+      {pair.warning && <p className="mt-2 text-center font-mono text-meta tracking-[0.2em] text-alert uppercase">{pair.warning}</p>}
       <div className="mt-8 grid grid-cols-2 gap-6">
         <Portrait slug={pair.leftSlug} className="ml-auto h-36 w-auto object-contain md:h-48" />
         <Portrait slug={pair.rightSlug} className="h-36 w-auto object-contain md:h-48" />
@@ -170,12 +170,12 @@ export default function Mirror() {
               aria-selected={i === idx}
               onClick={() => choose(i)}
               className={cn(
-                "shrink-0 border-b-2 px-3 py-2 font-mono text-[0.72rem] tracking-[0.14em] whitespace-nowrap uppercase transition-colors",
+                "shrink-0 border-b-2 px-3 py-2 font-mono text-meta tracking-[0.14em] whitespace-nowrap uppercase transition-colors",
                 i === idx ? "border-paper text-paper" : "border-transparent text-ash hover:text-paper",
               )}
             >
               {pairName(p)}
-              {p.warning && <span className="ml-2 text-[#d98b82]">· {p.warning}</span>}
+              {p.warning && <span className="ml-2 text-alert">· {p.warning}</span>}
             </button>
           ))}
         </div>

@@ -45,3 +45,17 @@ export function makeGovernor({
     },
   };
 }
+
+/**
+ * True when the context runs on a software rasteriser (SwiftShader, llvmpipe,
+ * Microsoft Basic Render). Those cannot hold the heavy scenes at a readable
+ * frame rate, so the section goes straight to its stills at load time, before
+ * the reader has scrolled, instead of failing ten seconds in. `?gl=force` in
+ * the URL skips the check (for rendering stills and QA on such machines).
+ */
+export function isSoftwareGL(gl: WebGLRenderingContext | WebGL2RenderingContext) {
+  if (typeof location !== "undefined" && new URLSearchParams(location.search).get("gl") === "force") return false;
+  const info = gl.getExtension("WEBGL_debug_renderer_info");
+  const name = String(info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
+  return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(name);
+}

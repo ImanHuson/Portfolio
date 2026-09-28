@@ -4,15 +4,16 @@
  * ATTACK ON TITAN: THE ARCHIVE. Design tokens.
  * Defined once here; components never improvise their own values.
  *
- * The palette is built around the story, not the logo:
+ * The palette is built around the story, and it is locked: one ground, one
+ * paper scale, one accent, on every page (no per-chapter tints).
  *   base / void      the dark ground everything is recovered onto
- *   wall / paper     limestone and archive paper: the Survey Corps register
+ *   wall / paper     limestone and archive paper, and the text on the dark
  *   ink              military black, the colour of text ON paper
- *   blood            the ONE accent. Stamps, KIA marks, the breach. Never a glow.
- *   scout            Wings of Freedom green. Act I tint only.
- *   marley           concrete. Act II tint only.
- *   titan            flesh / bone. Titan research register only.
- *   paths            near-white of the Paths. Act III only.
+ *   blood / flare    the ONE accent. Stamps, KIA marks, the breach. Never a glow.
+ *   alert            the same accent lifted to text weight (small type on dark)
+ * Documents from inside the story (field sheets, the photograph's back, the
+ * Marleyan file) keep their own paper, as objects on the ground, never as
+ * the page's background.
  * Shape: radius 0 everywhere. Documents have corners.
  */
 
@@ -33,11 +34,8 @@
   --ash-2: #6a665a;
 
   --blood: #6e1717;
-  --flare: #a8261c; /* blood, lifted for text/marks on dark grounds (AA at large sizes) */
-  --scout: #263b2e;
-  --marley: #3b3832;
-  --titan: #8a7464;
-  --paths: #e6e0ce;
+  --flare: #a8261c; /* blood, lifted for marks and large text on dark grounds */
+  --alert: #e0685c; /* the same accent at text weight: 5.9:1 on base, for small type */
   --void: #020202;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,10 +61,7 @@
   --color-ash-2: var(--ash-2);
   --color-blood: var(--blood);
   --color-flare: var(--flare);
-  --color-scout: var(--scout);
-  --color-marley: var(--marley);
-  --color-titan: var(--titan);
-  --color-paths: var(--paths);
+  --color-alert: var(--alert);
   --color-void: var(--void);
 
   --radius-sm: 0rem;
@@ -81,7 +76,7 @@
   --font-mono: var(--font-mono-face);         /* coordinates, IDs, reports */
   --font-sans: var(--font-sans-face);         /* reading text */
 
-  --text-meta: 0.75rem;
+  --text-meta: 0.8125rem; /* 13px floor: nothing on the site is set smaller */
   --text-body: 1.0625rem;
   --text-lede: clamp(1.15rem, 1.05rem + 0.55vw, 1.45rem);
   --text-h3: clamp(1.35rem, 1.15rem + 0.8vw, 1.85rem);
@@ -117,6 +112,10 @@
   p {
     text-wrap: pretty;
   }
+  /* figures in records line up */
+  .font-mono, table, time {
+    font-variant-numeric: tabular-nums;
+  }
   ::selection {
     background: var(--blood);
     color: var(--paper);
@@ -149,6 +148,13 @@ html.lenis, html.lenis body { height: auto; }
   opacity: 0.06;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* The Marleyan file: a concrete-grey document on the dark desk (the one
+   register change in The World lives inside this sheet, not across the page). */
+.file-sheet {
+  background-color: #d9d7d0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 30px 80px -30px rgba(0, 0, 0, 0.85);
 }
 
 /* Archive paper: a document surface on the dark ground. Fibre + foxing,
@@ -244,3 +250,43 @@ html.nav-hidden .site-header:not(:focus-within) {
 .site-header {
   transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
 }
+
+/* The one card interaction, used by every linked file on the site (index
+   cards, the chapter footer): the border lifts, a line in the accent draws
+   across the top edge, the ground warms a step. No bounce, no glow. */
+.file-link {
+  transition: border-color var(--dur-ui) var(--ease-out), background-color var(--dur-ui) var(--ease-out);
+}
+.file-link::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 2px;
+  background: var(--alert);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-out);
+  z-index: 1;
+}
+.file-link:hover,
+.file-link:focus-visible {
+  border-color: var(--line-strong);
+  background-color: var(--base-3);
+}
+.file-link:active {
+  transform: translateY(1px);
+}
+.file-link:hover::before,
+.file-link:focus-visible::before {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .file-link::before { transition: none; }
+}
+
+/* An ending file on the index: sealed, no picture. */
+.sealed-plate {
+  background-color: var(--base);
+  background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(216, 208, 184, 0.035) 11px 12px);
+}
+.sealed-plate .stamp { color: var(--alert); mix-blend-mode: normal; }

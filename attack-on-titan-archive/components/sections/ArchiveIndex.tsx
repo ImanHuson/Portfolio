@@ -1,74 +1,91 @@
 import Link from "next/link";
-import { ACTS } from "@/lib/data/chapters";
+import { ACTS, type Chapter } from "@/lib/data/chapters";
+import { asset, cn } from "@/lib/utils";
 
-/** The file index, as a document on the desk: not a card grid. One sheet
- * per act, typed entries, a stamp where a chapter is still sealed. */
+function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
+  return (
+    <Link href={c.href ?? "/"} className={cn("file-link group relative flex w-full flex-col border border-line bg-base-2", feature && "md:grid md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]")}>
+      {c.image ? (
+        <span className={cn("relative block overflow-hidden", feature ? "aspect-[16/10]" : "aspect-[4/3]")}>
+          <img
+            src={asset(c.image)}
+            alt=""
+            width={1680}
+            height={1050}
+            loading="lazy"
+            className="size-full object-cover grayscale-[0.4] transition-[filter,transform] duration-700 ease-[var(--ease-out)] group-hover:grayscale-0 motion-safe:group-hover:scale-[1.03]"
+          />
+          <span aria-hidden className={cn("absolute inset-0 bg-gradient-to-t from-base-2/80 to-transparent to-40%", feature && "md:bg-gradient-to-l md:from-base-2/60 md:to-30%")} />
+        </span>
+      ) : (
+        // the ending files: no picture on the index, it would give them away
+        <span aria-hidden className="sealed-plate relative flex aspect-[4/3] items-center justify-center overflow-hidden">
+          <span className="font-display text-[clamp(3rem,2rem+4vw,5.5rem)] font-bold text-paper/[0.07]">{c.id.slice(-2)}</span>
+          <span className="stamp absolute right-4 bottom-4 text-meta">Sealed</span>
+        </span>
+      )}
+      <span className={cn("flex flex-1 flex-col p-5 md:p-6", feature && "md:justify-end md:p-8")}>
+        <span className="font-mono text-meta text-ash">{c.id}</span>
+        <span className={cn("mt-2 flex items-baseline justify-between gap-4 font-display leading-none font-bold text-paper", feature ? "text-[clamp(1.8rem,1rem+1.6vw,2.5rem)]" : "text-h3")}>
+          {c.title}
+          <span aria-hidden className="text-[1.1rem] text-paper/40 transition-[color,transform] duration-300 group-hover:translate-x-1 group-hover:text-paper">
+            &rarr;
+          </span>
+        </span>
+        <span className="mt-3 block max-w-[46ch] text-[0.975rem] leading-snug text-ash transition-colors group-hover:text-paper/85">{c.line}</span>
+      </span>
+    </Link>
+  );
+}
+
+/** The table of contents: ten files in three acts, each one a picture of
+ * where it takes you, so choosing is by sight as well as by title. */
 export default function ArchiveIndex() {
   return (
-    <section id="index" aria-labelledby="index-title" className="relative overflow-hidden px-4 py-28 md:px-8 md:py-40">
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_10%,rgba(38,59,46,0.35),transparent_55%),radial-gradient(ellipse_at_85%_90%,rgba(59,56,50,0.4),transparent_50%)]" />
-      <div className="relative mx-auto grid max-w-[1400px] gap-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-24">
-        <div className="lg:sticky lg:top-[calc(var(--nav-h)+3rem)] lg:self-start">
-          <h2 id="index-title" className="font-display text-h2 leading-[1.02] font-semibold text-paper">
-            Recovered after the war.
+    <section id="index" aria-labelledby="index-title" className="relative px-4 py-24 md:px-8 md:py-36">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end md:gap-16">
+          <h2 id="index-title" className="font-display text-h1 leading-[0.95] font-bold text-paper">
+            Ten files, in the order it happened.
           </h2>
-          <p className="mt-6 max-w-[46ch] text-lede leading-relaxed text-paper/80">
-            This archive was assembled from what survived: military records, research notes, intelligence files, and
-            the testimony of the people who were there. It reads in order, the way the story does.
-          </p>
-          <p className="mt-6 max-w-[46ch] text-[0.95rem] text-ash">
-            Everything past the first chapter spoils the story. If you have not finished it, stop at the Wall.
-          </p>
+          <div className="grid max-w-[46ch] gap-4">
+            <p className="text-lede leading-relaxed text-paper/80">
+              Military records, research notes, intelligence files and the people who were there, recovered after the war.
+            </p>
+            <p className="text-[0.95rem] text-ash">Everything past The Wall spoils the story. If you have not finished it, start there and stop there.</p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-14">
+        <div className="mt-20 grid gap-20 md:mt-28 md:gap-24">
           {ACTS.map((act, ai) => (
-            <article
-              key={act.name}
-              aria-labelledby={`act-${ai}`}
-              className="paper relative px-6 py-8 md:px-10 md:py-10"
-              style={{ transform: `rotate(${[-0.6, 0.45, -0.3][ai]}deg)` }}
-            >
-              <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-ink/25 pb-4">
-                <h3 id={`act-${ai}`} className="font-display text-h3 font-extrabold tracking-[0.04em] text-ink uppercase">
+            <section key={act.name} aria-labelledby={`act-${ai}`} className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] lg:gap-12">
+              <header className="lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start">
+                <h3 id={`act-${ai}`} className="font-display text-h2 leading-none font-bold text-paper">
                   {act.name}
                 </h3>
-                <p className="font-mono text-[0.72rem] tracking-[0.08em] text-ink/60 uppercase">Survey Corps Archive</p>
+                <p className="mt-4 max-w-[34ch] font-serif text-[1.1rem] leading-snug text-paper/70 italic">{act.register}</p>
               </header>
-              <p className="mt-4 max-w-[52ch] font-serif text-[1.02rem] text-ink/75 italic">{act.register}</p>
-              <ol className="mt-6 flex flex-col">
-                {act.chapters.map((c) => {
-                  const body = (
-                    <>
-                      <span className="font-mono text-[0.72rem] tracking-[0.1em] text-ink/55">{c.id}</span>
-                      <span>
-                        <span className="block font-military text-[1.35rem] leading-tight font-semibold tracking-[0.12em] text-ink uppercase">
-                          {c.title}
-                        </span>
-                        <span className="mt-1 block text-[0.95rem] leading-snug text-ink/70">{c.line}</span>
-                      </span>
-                      {c.open ? (
-                        <span className="font-mono text-[0.72rem] tracking-[0.14em] text-scout uppercase">Open</span>
-                      ) : (
-                        <span className="stamp text-[0.68rem]">Sealed</span>
-                      )}
-                    </>
-                  );
-                  const cls = "grid grid-cols-[4.5rem_1fr_auto] items-center gap-4 py-4";
+              <ol className="grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-6">
+                {act.chapters.map((c, i) => {
+                  // the act's first file leads, full width; the rest share the row below it evenly
+                  const feature = i === 0 && !!c.image;
+                  const rest = act.chapters.length - (act.chapters[0].image ? 1 : 0);
+                  const k = feature ? -1 : i - (act.chapters[0].image ? 1 : 0);
                   return (
-                    <li key={c.id} className="border-t border-ink/10 first:border-t-0">
-                      {c.open && c.href ? (
-                        <Link href={c.href} className={`${cls} transition-colors hover:bg-ink/5`}>
-                          {body}
-                        </Link>
-                      ) : (
-                        <div className={cls}>{body}</div>
+                    <li
+                      key={c.id}
+                      className={cn(
+                        "flex",
+                        feature ? "sm:col-span-2 lg:col-span-6" : rest === 3 ? "lg:col-span-2" : "lg:col-span-3",
+                        !feature && rest % 2 === 1 && k === rest - 1 && "sm:col-span-2 lg:col-span-2",
                       )}
+                    >
+                      <ChapterCard c={c} feature={feature} />
                     </li>
                   );
                 })}
               </ol>
-            </article>
+            </section>
           ))}
         </div>
       </div>

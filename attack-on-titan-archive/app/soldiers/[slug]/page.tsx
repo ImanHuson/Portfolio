@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps<"/soldiers/[slug]">
 function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-ink/15 py-3 break-words first:border-t-0">
-      <dt className="font-mono text-[0.72rem] tracking-[0.14em] text-ink/55 uppercase">{label}</dt>
+      <dt className="font-mono text-meta tracking-[0.14em] text-ink/55 uppercase">{label}</dt>
       <dd className="font-military text-[1.1rem] leading-snug font-semibold tracking-[0.06em] text-ink uppercase">{value}</dd>
     </div>
   );
@@ -70,7 +70,7 @@ export default async function Dossier({ params }: PageProps<"/soldiers/[slug]">)
         <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <figure className="lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start">
             <img src={asset(`/images/personnel/${p.slug}.webp`)} alt={`${p.name}, recovered portrait`} width={800} height={900} fetchPriority="high" className="mx-auto w-full max-w-[520px]" />
-            {credit && <figcaption className="mx-auto mt-3 max-w-[520px] px-6 text-[0.8rem] text-ash-2">{credit.credit}</figcaption>}
+            {credit && <figcaption className="mx-auto mt-3 max-w-[520px] px-6 text-meta text-ash">{credit.credit}</figcaption>}
           </figure>
 
           <div>
@@ -78,7 +78,7 @@ export default async function Dossier({ params }: PageProps<"/soldiers/[slug]">)
             <p className="mt-4 font-serif text-h3 text-paper/70 italic">{p.word}</p>
 
             <div className="paper relative mt-10 px-6 py-7 md:px-9">
-              <p className="font-mono text-[0.72rem] tracking-[0.14em] text-ink/60 uppercase">Personnel file {p.file}</p>
+              <p className="font-mono text-meta tracking-[0.14em] text-ink/60 uppercase">Personnel file {p.file}</p>
               <dl className="mt-4">
                 <Field label="Name" value={p.name} />
                 <Field label="Origin" value={p.origin} />

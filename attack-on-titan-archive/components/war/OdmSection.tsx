@@ -29,8 +29,7 @@ export default function OdmSection() {
   return (
     <section aria-labelledby="odm-title" className="border-t border-line px-4 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <p className="font-mono text-meta tracking-[0.2em] text-ash uppercase">Equipment</p>
-        <h2 id="odm-title" className="mt-3 font-display text-h2 leading-tight font-bold text-paper">
+        <h2 id="odm-title" className="font-display text-h2 leading-tight font-bold text-paper">
           Omni-directional mobility gear
         </h2>
         <p className="mt-4 max-w-[60ch] text-lede leading-relaxed text-paper/80">
@@ -51,7 +50,7 @@ export default function OdmSection() {
                   className="absolute inset-0 size-full object-contain"
                 />
               </noscript>
-              <p className="pointer-events-none absolute bottom-3 left-3 font-mono text-[0.68rem] tracking-[0.14em] text-ash-2 uppercase" data-js-only>
+              <p className="pointer-events-none absolute bottom-3 left-3 font-mono text-meta tracking-[0.14em] text-ash uppercase" data-js-only>
                 Drag to turn
               </p>
             </div>
@@ -82,7 +81,7 @@ export default function OdmSection() {
               >
                 How it moves
               </button>
-              <p className="w-full max-w-[52ch] text-[0.8rem] leading-snug text-ash-2">
+              <p className="w-full max-w-[52ch] text-meta leading-snug text-ash">
                 Simulated, simply: gravity, two wires that can only pull, reeled in at a fixed rate, a little gas, then release. Shown at half speed.
               </p>
             </div>
