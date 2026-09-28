@@ -187,20 +187,45 @@ html.lenis, html.lenis body { height: auto; }
   }
 }
 
-/* Titan turntables: 24 frames in one horizontal sprite. Hover or focus plays
-   the turn; reduced motion never does (the first frame is a composed view). */
+/* Titan turntables: 24 frames in one horizontal sprite, and a still of
+   frame 0. At rest only the still is requested. Both are transparent, so they
+   are swapped, never layered (the still would show through as a second
+   Titan): the sprite replaces the still only once it has downloaded
+   (data-ready from the grid's prefetch, data-live on a Titan's own page).
+   No JS keeps the still. Reduced motion never plays the turn. */
 .turntable {
+  background-image: var(--still);
   background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.turntable[data-live],
+.turn-on-hover:is(:hover, :focus-visible) .turntable[data-ready] {
+  background-image: var(--sprite);
   background-size: 2400% 100%;
   background-position: 0 0;
 }
 @keyframes turn {
+  from { background-position: 0 0; }
   to { background-position: calc(100% * 24 / 23) 0; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .turn-on-hover:is(:hover, :focus-visible) .turntable,
-  .turn-always .turntable {
+  .turn-on-hover:is(:hover, :focus-visible) .turntable[data-ready],
+  .turn-always .turntable[data-live] {
     animation: turn 2.4s steps(24) infinite;
   }
-  .turn-always .turntable { animation-duration: 7s; }
+  .turn-always .turntable[data-live] { animation-duration: 7s; }
+}
+
+/* entering a Titan: the column pushes in toward the chest, then the x-ray */
+.titan-enter .turntable {
+  transform: scale(7);
+  transform-origin: 50% 36%;
+  transition: transform 900ms cubic-bezier(0.7, 0, 0.84, 0);
+}
+.xray-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: #020202 center / contain no-repeat;
+  pointer-events: none;
 }

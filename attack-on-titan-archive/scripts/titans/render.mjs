@@ -1,6 +1,9 @@
-// Renders each Titan's 24-frame turntable from render.html in headless
-// Chromium and writes PNG frames to a work dir; sprite.py assembles them.
-//   node scripts/titans/render.mjs <url-of-render.html> <outdir> [forms...] [--preview]
+// Renders each Titan's 24-frame turntable (and one x-ray plate) from
+// render.html in headless Chromium, as PNGs in a work dir; sprite.py then
+// grades and assembles them.
+//   node render.mjs <url-of-render.html> <outdir> [forms...] [--preview]
+// Run it from a directory where `playwright` is installed, with the project
+// served over HTTP so render.html loads.
 import { chromium } from "playwright";
 import fs from "node:fs";
 const [url, out, ...rest] = process.argv.slice(2);
@@ -13,13 +16,14 @@ const b = await chromium.launch({ executablePath: process.env.CHROME || "/opt/pw
 const page = await b.newPage();
 page.on("pageerror", (e) => console.error("PAGEERROR", e.message));
 await page.goto(url);
-await page.waitForFunction(() => window.ready === true);
+await page.waitForFunction(() => window.ready === true, null, { timeout: 120000 });
+const save = (name, data) => fs.writeFileSync(`${out}/${name}.png`, Buffer.from(data.split(",")[1], "base64"));
 for (const f of list) {
   for (let i = 0; i < FRAMES; i++) {
     const a = (i / FRAMES) * Math.PI * 2;
-    const data = await page.evaluate(([f, a]) => window.frame(f, a, 600, 1200), [f, a]);
-    fs.writeFileSync(`${out}/t${f}_${String(i).padStart(2, "0")}.png`, Buffer.from(data.split(",")[1], "base64"));
+    save(`t${f}_${String(i).padStart(2, "0")}`, await page.evaluate(([f, a]) => window.frame(f, a, 425, 850, 0), [f, a]));
   }
+  save(`x${f}`, await page.evaluate((f) => window.frame(f, 0, 600, 1200, 1), f));
   console.log("form", f, "done");
 }
 await b.close();

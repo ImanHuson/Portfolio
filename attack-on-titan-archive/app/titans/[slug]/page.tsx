@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Sealed from "@/components/archive/Sealed";
 import Turntable from "@/components/titans/Turntable";
+import XrayIntro from "@/components/titans/XrayIntro";
 import { INHERITANCE, ORIGIN, STATUS, TITANS, getTitan } from "@/lib/data/titans";
 
 export const dynamicParams = false;
@@ -37,6 +38,7 @@ export default async function TitanFile({ params }: PageProps<"/titans/[slug]">)
 
   return (
     <article className="px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
+      <XrayIntro slug={t.slug} />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.16em] text-paper/60 uppercase">
@@ -55,7 +57,7 @@ export default async function TitanFile({ params }: PageProps<"/titans/[slug]">)
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div className="turn-always relative lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start">
             <div aria-hidden className="absolute inset-x-[10%] bottom-0 h-1/2 bg-[radial-gradient(ellipse_at_50%_100%,rgba(138,116,100,0.25),transparent_70%)]" />
-            <Turntable slug={t.slug} className="relative mx-auto w-full max-w-[340px]" />
+            <Turntable slug={t.slug} live className="relative mx-auto w-full max-w-[340px]" />
             <p className="mt-2 text-center font-mono text-meta tracking-[0.14em] text-ash uppercase">Recorded height {t.height} m</p>
           </div>
 

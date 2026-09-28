@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import ChapterHeader from "@/components/typography/ChapterHeader";
 import NextChapter from "@/components/typography/NextChapter";
 import Turntable from "@/components/titans/Turntable";
+import TitanGrid from "@/components/titans/TitanGrid";
 import { INHERITANCE, ORIGIN, TITANS } from "@/lib/data/titans";
 
 export const metadata: Metadata = {
@@ -26,20 +26,7 @@ export default function Titans() {
 
       {/* the monumental archive: nine columns, one per Titan */}
       <section aria-label="The Nine Titans" className="px-4 pb-24 md:px-8">
-        <ol className="mx-auto grid max-w-[1500px] grid-cols-3 gap-px bg-line md:grid-cols-9">
-          {TITANS.map((t) => (
-            <li key={t.slug} className="bg-base">
-              <Link href={`/titans/${t.slug}/`} className="turn-on-hover group flex h-full flex-col items-center px-2 pt-6 pb-5 text-center transition-colors hover:bg-base-2 focus-visible:bg-base-2">
-                <span className="font-mono text-[0.72rem] tracking-[0.12em] text-ash">{t.height} M</span>
-                <Turntable slug={t.slug} small className="mt-3 w-full max-w-[150px]" />
-                <span className="mt-4 font-display text-[0.95rem] leading-tight font-bold text-paper md:text-[1rem]">{t.name.replace(" Titan", "")}</span>
-                <span className="mt-2 hidden min-h-[4.5em] max-w-[18ch] text-[0.82rem] leading-snug text-ash opacity-70 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 md:block">
-                  {t.trait}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <TitanGrid />
       </section>
 
       {/* to scale, against the Wall */}
@@ -60,7 +47,7 @@ export default function Titans() {
                   const h = ((t.height / MAX) * 7.3) / t.localHeight;
                   return (
                     <div key={t.slug} className="relative flex h-full flex-1 items-end justify-center">
-                      <Turntable slug={t.slug} small className="w-auto" style={{ height: `${h * 100}%`, marginBottom: `-${h * 2.6}%` }} />
+                      <Turntable slug={t.slug} className="w-auto" style={{ height: `${h * 100}%`, marginBottom: `-${h * 2.6}%` }} />
                     </div>
                   );
                 })}
