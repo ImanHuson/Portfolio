@@ -26,27 +26,6 @@ export const OPEN_QUESTIONS: string[] = [
   "What is left of the Society when there is nothing left to defend?",
 ];
 
-export type Quote = { text: string; who: string; where: string };
-export const WORDS: { group: string; quotes: Quote[]; fragments?: { note: string; where: string }[] }[] = [
-  { group: "Words of Eo", quotes: [{ text: "Then you must live for more.", who: "Eo, to Darrow", where: "Red Rising" }] },
-  {
-    group: "Words of Darrow",
-    quotes: [{ text: "I would have lived in peace. But my enemies brought me war.", who: "Darrow", where: "Red Rising, the opening line" }],
-    fragments: [{ note: "“Break the chains.” The saga’s arc words, returning book after book.", where: "Across the saga" }],
-  },
-  { group: "Words of Cassius", quotes: [{ text: "My honor remains.", who: "Cassius au Bellona", where: "Light Bringer" }] },
-  {
-    group: "Words of Lorn",
-    quotes: [{ text: "A fool pulls the leaves. A brute chips the trunk. A sage digs the roots.", who: "Lorn au Arcos", where: "Golden Son" }],
-    fragments: [{ note: "Lorn, on why he would not have raised Darrow to be a great man.", where: "Golden Son" }],
-  },
-  { group: "Words of Sevro", quotes: [{ text: "Don’t worry, I wouldn’t fit in your skin.", who: "Sevro, to Darrow, wearing a wolf pelt", where: "Red Rising" }] },
-  { group: "Words of Virginia", quotes: [] },
-  { group: "Words of the Enemies", quotes: [] },
-];
-
-// Names readers keep returning to, from reader discussion threads. No formal
-// poll was found, so this is presented as a chorus, not a ranking.
 export const CHORUS: { name: string; note: string; book: number }[] = [
   { name: "Sevro", note: "The most common answer to “favourite character.”", book: 1 },
   { name: "Darrow", note: "Admired more than loved, some readers say. They’re here for his friends.", book: 1 },

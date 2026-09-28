@@ -259,6 +259,14 @@ nav[aria-label="Breadcrumb"] a {
   --w-spot: rgba(223, 232, 255, 0.1);
   --w-edge: rgba(200, 220, 245, 0.85);
 }
+/* Orion's deep-space blue, for the one Blue in the archive. */
+.wash-card[data-wash="blue"] {
+  --w-rest: rgba(40, 80, 160, 0.3);
+  --w-rest-low: rgba(40, 80, 160, 0.13);
+  --w-hot: rgba(70, 120, 210, 0.2);
+  --w-spot: rgba(127, 184, 255, 0.14);
+  --w-edge: rgba(127, 184, 255, 0.9);
+}
 .wash-layer {
   position: absolute;
   inset: 0;
@@ -338,3 +346,150 @@ nav[aria-label="Breadcrumb"] a {
 .wash-card:focus-within .text-ash {
   color: color-mix(in srgb, var(--ash), var(--bone) 45%);
 }
+
+/* ── Extended dossiers ────────────────────────────────────────────────────
+   One header mood per person, from the brief's visual direction. Pure CSS
+   backgrounds, so they render with JS off and never move. */
+@layer components {
+  .mood {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .mood-crimson {
+    background:
+      radial-gradient(ellipse 70% 70% at 12% 0%, rgba(160, 18, 30, 0.42), transparent 70%),
+      repeating-linear-gradient(135deg, rgba(233, 228, 218, 0.025) 0 2px, transparent 2px 14px);
+  }
+  .mood-dust {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 110%, rgba(181, 69, 42, 0.4), transparent 70%),
+      radial-gradient(ellipse 60% 60% at 10% 0%, rgba(122, 15, 23, 0.25), transparent 70%);
+  }
+  .mood-smoke {
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 30%, rgba(150, 150, 160, 0.14), transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(120, 120, 130, 0.1), transparent 70%);
+  }
+  .mood-hearth,
+  .mood-snow {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(238, 243, 255, 0.5) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 70% 60%, rgba(238, 243, 255, 0.35) 0 1px, transparent 1.5px),
+      var(--mood-glow);
+    background-size: 90px 110px, 140px 90px, 100% 100%;
+  }
+  .mood-hearth {
+    --mood-glow: radial-gradient(ellipse 60% 55% at 50% 105%, rgba(255, 140, 60, 0.3), transparent 70%);
+  }
+  .mood-snow {
+    --mood-glow: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(159, 180, 216, 0.22), transparent 70%);
+  }
+  .mood-bear {
+    background: radial-gradient(ellipse 70% 70% at 15% 0%, rgba(200, 169, 106, 0.26), transparent 70%);
+  }
+  .mood-classified {
+    background:
+      repeating-linear-gradient(0deg, rgba(233, 228, 218, 0.03) 0 1px, transparent 1px 4px),
+      radial-gradient(ellipse 50% 60% at 90% 10%, rgba(196, 30, 42, 0.22), transparent 70%);
+  }
+  .mood-stone {
+    background:
+      linear-gradient(180deg, rgba(200, 186, 160, 0.08), transparent 60%),
+      repeating-linear-gradient(90deg, rgba(233, 228, 218, 0.02) 0 1px, transparent 1px 120px);
+  }
+  .mood-nav {
+    background:
+      linear-gradient(rgba(127, 184, 255, 0.06) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(90deg, rgba(127, 184, 255, 0.06) 1px, transparent 1px) 0 0 / 48px 48px,
+      radial-gradient(ellipse 70% 70% at 70% 20%, rgba(40, 80, 160, 0.35), transparent 70%);
+  }
+  .mood-rim {
+    background: radial-gradient(ellipse 70% 70% at 15% 0%, rgba(110, 140, 175, 0.26), transparent 70%);
+  }
+
+  /* Traits as typographic chips that settle in one after another. */
+  .trait-chip {
+    animation: chip-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes chip-in {
+    from { opacity: 0; transform: translateY(8px); }
+  }
+
+  /* Orion: orbital particles, once, on arrival. */
+  .orbits { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .orbit {
+    position: absolute;
+    left: 72%;
+    top: 34%;
+    border: 1px solid rgba(127, 184, 255, 0.14);
+    border-radius: 9999px;
+    animation: orbit-spin var(--dur) linear, orbit-fade 4.5s ease-out forwards;
+  }
+  .orbit::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #9fc8ff;
+    box-shadow: 0 0 12px 3px rgba(127, 184, 255, 0.7);
+  }
+  @keyframes orbit-spin { to { rotate: 360deg; } }
+  @keyframes orbit-fade { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
+
+  /* Sophocles: a fox crossing the bottom of the screen, once. */
+  .fox-trot {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 0;
+    z-index: 60;
+    pointer-events: none;
+    animation: fox-trot 6s linear forwards;
+  }
+  @keyframes fox-trot {
+    from { transform: translateX(-10vw); }
+    to { transform: translateX(110vw); }
+  }
+
+  /* Atlas: the plate starts veiled, and clears when you look closer. */
+  .atlas-veil img {
+    animation: unveil 1.4s ease-out 1.6s both;
+  }
+  @keyframes unveil {
+    from { filter: blur(10px) grayscale(0.6); }
+    to { filter: none; }
+  }
+
+  /* Sevro: something small and toothy peeks in. */
+  .goblin-peek {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 300ms ease-out, transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .group:hover .goblin-peek,
+  .group:focus-within .goblin-peek {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* They Are the Story: names surface one at a time. */
+  .story-name {
+    animation: story-name 20s ease-in-out infinite both;
+  }
+  @keyframes story-name {
+    0%, 100% { opacity: 0.12; }
+    8%, 14% { opacity: 1; }
+    24% { opacity: 0.12; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trait-chip, .orbit, .fox-trot, .story-name, .atlas-veil img { animation: none; }
+    .orbit { display: none; }
+    .fox-trot { display: none; }
+    .story-name { opacity: 0.8; }
+  }
+}
+
