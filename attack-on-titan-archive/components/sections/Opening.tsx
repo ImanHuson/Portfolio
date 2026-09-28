@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -89,10 +89,17 @@ export default function Opening() {
   const altRef = useRef<HTMLSpanElement>(null);
   const progress = useRef(0);
   const last = useRef(0);
+  // a device too slow for the live scene gets the static opening (a real frame
+  // of the scene) instead, and the reader is taken back to its top
+  const [tooSlow, setTooSlow] = useState(false);
+  const onTooSlow = useCallback(() => setTooSlow(true), []);
+  useEffect(() => {
+    if (tooSlow) window.scrollTo({ top: 0 });
+  }, [tooSlow]);
 
   useGSAP(
     () => {
-      if (mode !== "cinematic" || !hostRef.current) return;
+      if (mode !== "cinematic" || tooSlow || !hostRef.current) return;
       const q = gsap.utils.selector(hostRef);
       gsap.set(q("[data-beat]"), { autoAlpha: 0, y: 12 });
       gsap.set(q("[data-title] > *"), { autoAlpha: 0, y: 30 });
@@ -138,10 +145,10 @@ export default function Opening() {
 
       tl.to({}, { duration: 0.01 }, 0.99); // pin the timeline length to 1
     },
-    { dependencies: [mode], scope: hostRef },
+    { dependencies: [mode, tooSlow], scope: hostRef },
   );
 
-  if (mode === "static") return <StaticOpening />;
+  if (mode === "static" || tooSlow) return <StaticOpening />;
 
   if (mode === "still")
     return (
@@ -163,7 +170,7 @@ export default function Opening() {
   return (
     <section ref={hostRef} aria-labelledby="opening-title" className="relative h-[1000vh]">
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
-        <WallShot progress={progress} className="absolute inset-0" />
+        <WallShot progress={progress} onTooSlow={onTooSlow} className="absolute inset-0" />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(11,12,10,0.7)_100%)]" />
 
         {/* 845 / place / wall */}

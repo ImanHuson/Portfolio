@@ -17,6 +17,7 @@ import { createPost } from "./Post";
 import { terrainH } from "./terrain";
 import { shotAt } from "./choreography";
 import { lerp } from "@/lib/animation/tokens";
+import { makeGovernor } from "./governor";
 
 /**
  * Year 845, the opening shot. Pure ogl (this repo's proven WebGL path),
@@ -32,12 +33,15 @@ export default function WallShot({
   stillAt = 0.705,
   className,
   onReady,
+  onTooSlow,
 }: {
   progress?: React.RefObject<number>;
   still?: boolean;
   stillAt?: number;
   className?: string;
   onReady?: () => void;
+  /** called once if frames stay slow even at the lowest resolution */
+  onTooSlow?: () => void;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
 
@@ -144,7 +148,7 @@ export default function WallShot({
       camera.perspective({ aspect, fov });
       xrayCam.perspective({ aspect, fov: aspect < 0.8 ? 62 : 42 });
       backdrop.program.uniforms.uRes.value = [w, h];
-      const px = (h * dpr) / (2 * Math.tan((fov * Math.PI) / 360));
+      const px = (h * renderer.dpr) / (2 * Math.tan((fov * Math.PI) / 360));
       steam.program.uniforms.uPxScale.value = px * 0.06;
       birds.program.uniforms.uPx.value = px * 0.9;
       post.resize();
@@ -244,13 +248,30 @@ export default function WallShot({
     }
 
     let raf: number | null = null;
+    // the heaviest scene on the site: lower the resolution on slow devices,
+    // and hand over to the rendered stills if even that is not enough
+    const gov = makeGovernor({
+      start,
+      scale: renderer.dpr,
+      floor: 0.5,
+      apply: (sc) => {
+        renderer.dpr = sc;
+        resize();
+      },
+      onTooSlow,
+    });
     const loop = () => {
-      frame(progress?.current ?? 0, (performance.now() - start) / 1000);
+      const now = performance.now();
+      gov.tick(now);
+      frame(progress?.current ?? 0, (now - start) / 1000);
       raf = requestAnimationFrame(loop);
     };
     // only render while on screen: the opening is a long sticky section
     const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && raf === null) loop();
+      if (entry.isIntersecting && raf === null) {
+        gov.rest(performance.now());
+        loop();
+      }
       else if (!entry.isIntersecting && raf !== null) {
         cancelAnimationFrame(raf);
         raf = null;
@@ -267,7 +288,7 @@ export default function WallShot({
       gl.canvas.remove();
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [progress, still, stillAt, onReady]);
+  }, [progress, still, stillAt, onReady, onTooSlow]);
 
   return <div ref={hostRef} className={className} />;
 }
