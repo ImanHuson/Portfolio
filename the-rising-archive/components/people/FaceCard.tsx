@@ -127,7 +127,7 @@ export default function FaceCard({
           </span>
         </div>
         <h3 className={cn("mt-5 text-4xl leading-[0.95] md:text-5xl", NAME_CLASS[person.register])}>{shown.name}</h3>
-        <div className="mt-2 h-7 overflow-hidden">
+        <div className="mt-2 min-h-7 overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
             <motion.p
               key={title}
