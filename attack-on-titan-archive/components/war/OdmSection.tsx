@@ -77,7 +77,7 @@ export default function OdmSection() {
                   setExplode(0);
                   api.current?.demo();
                 }}
-                className="border border-paper/40 px-4 py-2 font-mono text-meta tracking-[0.16em] text-paper uppercase transition-colors hover:border-paper hover:bg-paper/5"
+                className="press border border-paper/40 px-4 py-2 font-mono text-meta tracking-[0.16em] text-paper uppercase hover:border-paper hover:bg-paper/5"
               >
                 How it moves
               </button>

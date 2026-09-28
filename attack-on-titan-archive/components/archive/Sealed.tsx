@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 
 /** A sealed passage: a native <details>, so it opens with JS off and needs no
- * state. Closed, it reads as a redaction bar with a stamp; open, as the file. */
+ * state. Closed, it is a marked strip that says what is behind it and invites
+ * the reader to open it; open, the passage reads as part of the file. */
 export default function Sealed({
   label = "Sealed: spoils later chapters",
   children,
@@ -11,17 +12,22 @@ export default function Sealed({
   label?: string;
   children: React.ReactNode;
   className?: string;
-  /** on a paper document the label is inked in blood, not lit pink */
+  /** on a paper document the strip is inked, not lit */
   onPaper?: boolean;
 }) {
+  const what = label.replace(/^sealed:\s*/i, "");
   return (
     <details className={cn("sealed group", className)}>
-      <summary className="flex cursor-pointer list-none items-center gap-4 py-2 [&::-webkit-details-marker]:hidden">
-        <span aria-hidden className="block h-4 min-w-12 flex-1 bg-ink/90 shadow-[inset_0_0_0_1px_rgba(216,208,184,0.12)] group-open:hidden" />
-        <span className={cn("font-mono text-meta tracking-[0.14em] uppercase underline underline-offset-4 group-open:hidden", onPaper ? "font-medium text-blood decoration-blood/50" : "text-[#d98b82] decoration-[#d98b82]/40")}>
-          {label}
-        </span>
-        <span className={cn("hidden font-mono text-meta tracking-[0.14em] uppercase group-open:inline", onPaper ? "text-ink/60" : "text-ash")}>Reseal</span>
+      <summary
+        className={cn(
+          "flex cursor-pointer list-none items-center gap-3 border border-dashed px-4 py-3 transition-colors group-open:border-transparent group-open:hover:border-transparent group-open:hover:bg-transparent group-open:px-0 group-open:py-1 [&::-webkit-details-marker]:hidden",
+          onPaper ? "border-ink/35 hover:border-ink/70 hover:bg-ink/[0.04]" : "border-paper/25 hover:border-paper/60 hover:bg-paper/[0.03]",
+        )}
+      >
+        <span className={cn("font-military text-[0.95rem] font-semibold tracking-[0.14em] uppercase group-open:hidden", onPaper ? "text-blood" : "text-alert")}>Sealed</span>
+        <span className={cn("min-w-0 flex-1 text-[0.95rem] leading-snug group-open:hidden", onPaper ? "text-ink/80" : "text-paper/80")}>{what}</span>
+        <span className={cn("shrink-0 font-mono text-meta group-open:hidden", onPaper ? "text-ink/60" : "text-ash")}>Open</span>
+        <span className={cn("hidden font-mono text-meta group-open:inline", onPaper ? "text-ink/60" : "text-ash")}>Reseal</span>
       </summary>
       <div className="pt-2">{children}</div>
     </details>

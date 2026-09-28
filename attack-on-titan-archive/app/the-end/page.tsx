@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import NextChapter from "@/components/typography/NextChapter";
 import EndingGate from "@/components/ending/EndingGate";
 import Tree from "@/components/ending/Tree";
@@ -19,6 +18,7 @@ export default function TheEnd() {
     <>
       <EndingGate id="AOT-10" title="The End">
         {/* no interface: black, a tree, and the lines */}
+        <h1 className="sr-only">The End</h1>
         <section
           aria-label="The end"
           className="relative flex min-h-[100dvh] flex-col items-center justify-end overflow-hidden bg-void px-4 pb-10"
@@ -103,12 +103,6 @@ export default function TheEnd() {
                 ))}
               </dl>
             </div>
-            <Link
-              href="/#index"
-              className="justify-self-start border border-paper/40 px-5 py-3 font-mono text-meta tracking-[0.2em] text-paper uppercase transition-colors hover:border-paper hover:bg-paper/5"
-            >
-              Return to the archive
-            </Link>
           </div>
         </section>
       </EndingGate>

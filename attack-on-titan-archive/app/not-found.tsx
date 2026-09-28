@@ -9,7 +9,7 @@ export default function NotFound() {
         <p className="mt-6 max-w-[48ch] font-serif text-lede text-paper/85 italic">This page was lost, or never filed. The ten chapters are all still here.</p>
         <Link
           href="/#index"
-          className="mt-10 inline-flex items-center gap-3 border border-paper/50 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase transition-colors hover:border-paper hover:bg-paper hover:text-ink"
+          className="press mt-10 inline-flex items-center gap-3 border border-paper/50 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase hover:border-paper hover:bg-paper hover:text-ink"
         >
           Open the chapters
         </Link>

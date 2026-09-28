@@ -24,7 +24,7 @@ export default function EndingGate({ id, title, children }: { id: string; title:
         <p className="font-mono text-meta tracking-[0.3em] text-ash uppercase">{id}</p>
         <h1 className="font-display text-h1 leading-none font-bold text-paper uppercase">{title}</h1>
         <p className="max-w-[40ch] font-serif text-lede text-paper/70 italic">This file holds the ending of the story. Nothing past this point is sealed.</p>
-        <span className="border border-paper/50 px-6 py-3 font-mono text-meta tracking-[0.24em] text-paper uppercase transition-colors hover:border-paper hover:bg-paper/5">
+        <span className="press border border-paper/50 px-6 py-3 font-mono text-meta tracking-[0.24em] text-paper uppercase hover:border-paper hover:bg-paper/5">
           Open the file
         </span>
       </summary>

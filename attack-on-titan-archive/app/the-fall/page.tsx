@@ -91,7 +91,7 @@ export default function TheFall() {
         </ol>
       </section>
 
-      <section aria-labelledby="land-title" className="border-t border-line bg-[radial-gradient(ellipse_at_30%_40%,rgba(38,59,46,0.35),transparent_60%)] px-4 py-24 md:px-8 md:py-32">
+      <section aria-labelledby="land-title" className="border-t border-line px-4 py-24 md:px-8 md:py-32">
         <div className="mx-auto grid max-w-[1400px] items-center gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <WallsMap className="mx-auto w-full max-w-[640px]" />
           <div>

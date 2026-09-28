@@ -50,7 +50,7 @@ export default function PersonnelDesk() {
 
       <ul className="mt-14 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
         {PEOPLE.map((p, i) => (
-          <li key={p.slug} hidden={!shown(p.tags)} className={cn("col-span-1", SPAN[i % SPAN.length])}>
+          <li key={p.slug} hidden={!shown(p.tags)} className={cn("desk-file col-span-1", SPAN[i % SPAN.length])}>
             <Link href={`/soldiers/${p.slug}/`} className="group block">
               <img
                 src={asset(`/images/personnel/${p.slug}.webp`)}

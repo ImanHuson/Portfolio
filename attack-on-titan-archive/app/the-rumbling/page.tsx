@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import NextChapter from "@/components/typography/NextChapter";
 import EndingGate from "@/components/ending/EndingGate";
 import RumblingSection from "@/components/ending/RumblingSection";
+import EndingHeader from "@/components/ending/EndingHeader";
 import { RUMBLING_FACTS } from "@/lib/data/ending";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function TheRumbling() {
   return (
     <EndingGate id="AOT-08" title="The Rumbling">
+      <EndingHeader id="AOT-08" lede="The Walls were never only walls. This is the file where they wake. Scroll slowly: it starts quiet." />
       <RumblingSection />
       <section aria-labelledby="rumbling-record" className="bg-void px-4 py-24 md:px-8 md:py-32">
         <div className="mx-auto max-w-[900px]">

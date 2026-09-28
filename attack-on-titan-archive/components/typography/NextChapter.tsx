@@ -6,7 +6,9 @@ import { CHAPTERS } from "@/lib/data/chapters";
 export default function NextChapter({ current }: { current: string }) {
   const i = CHAPTERS.findIndex((c) => c.id === current);
   const prev = CHAPTERS[i - 1];
-  const next = CHAPTERS[i + 1];
+  // the last file hands the reader back to the first
+  const next = CHAPTERS[i + 1] ?? CHAPTERS[0];
+  const again = !CHAPTERS[i + 1];
   return (
     <nav aria-label="Chapters" className="border-t border-line px-4 py-16 md:px-8 md:py-24">
       <div className="mx-auto grid max-w-[1400px] gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-end md:gap-16">
@@ -26,7 +28,7 @@ export default function NextChapter({ current }: { current: string }) {
         </div>
         {next && (
           <Link href={next.href ?? "/"} className="file-link group relative order-1 block border border-line bg-base-2 p-6 md:order-2 md:p-10">
-            <span className="font-mono text-meta text-ash">Next &middot; {next.id}</span>
+            <span className="font-mono text-meta text-ash">{again ? "Back to the beginning" : "Next"} &middot; {next.id}</span>
             <span className="mt-3 flex items-end justify-between gap-6">
               <span className="font-display text-h2 leading-none font-bold text-paper">{next.title}</span>
               <span aria-hidden className="pb-1 text-h3 text-paper/60 transition-[color,transform] duration-200 ease-[var(--ease-out)] group-hover:text-paper motion-safe:[@media(hover:hover)]:group-hover:translate-x-1.5">

@@ -303,3 +303,45 @@ html.nav-hidden .site-header:not(:focus-within) {
 @starting-style {
   .ending-gate[open] > :not(summary) { opacity: 0; }
 }
+
+/* A sealed passage settles in when opened, instead of appearing at once. */
+details.sealed[open] > div {
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+@starting-style {
+  details.sealed[open] > div { opacity: 0; transform: translateY(-4px); }
+}
+
+/* Personnel desk: files brought back by a filter settle in. */
+.desk-file:not([hidden]) {
+  transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
+}
+@starting-style {
+  .desk-file:not([hidden]) { opacity: 0; transform: translateY(8px); }
+}
+
+/* Press feedback for the site's buttons. */
+.press {
+  transition-property: color, background-color, border-color, transform;
+  transition-duration: 160ms;
+  transition-timing-function: var(--ease-out);
+}
+.press:active,
+summary:active > .press {
+  transform: scale(0.97);
+}
+
+/* The static opening (slow devices, no JS, first paint): its lines rise in
+   once, in order. CSS only, so it plays with JS off; reduced motion shows
+   them at once. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise > * {
+    animation: rise 600ms var(--ease-out) both;
+  }
+  .rise > :nth-child(2) { animation-delay: 70ms; }
+  .rise > :nth-child(3) { animation-delay: 140ms; }
+  .rise > :nth-child(4) { animation-delay: 210ms; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+}

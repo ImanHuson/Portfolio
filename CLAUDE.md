@@ -127,6 +127,23 @@ A fourth fan build, an Attack on Titan archive, built from a large "ATTACK ON TI
   - **Hover movement** is gated to `(hover: hover)`, so touch taps don't leave arrows shifted.
   - **Cards** get a 160 ms press.
   - **Opened ending files** fade in via `@starting-style` (opacity only, because ScrollTrigger measures the pinned scenes inside).
+- **Third round ("improve it further").** A full-page review of every chapter found:
+  - **The seal looked broken.** Closed, it was a dark empty bar next to tiny pink text, which reads as a failed loading skeleton. It is now a dashed strip reading "Sealed · what's behind it · Open", in the accent. It is still a native `<details>`.
+  - **The opened ending files had no title.** They now open on `EndingHeader` (id · act, title, lede on black; The End keeps an sr-only h1 so its tree and lines stay uninterrupted).
+  - **Leftovers:** the green tint on The Fall's "What was lost" and a stray pink hex are gone.
+  - **The End no longer dead-ends.** Its foot links back to The Wall ("Back to the beginning").
+  - **One non-finding:** full-page screenshots make the sticky dossier portraits look like dead columns. They are sticky; check in a viewport screenshot before "fixing" it.
+
+  `emil-find-animation-opportunities` then passed four additions through its gate:
+  - Opened seals settle in over 200 ms.
+  - Files brought back by the desk filter settle in over 250 ms (`.desk-file`, `@starting-style`).
+  - A 160 ms `scale(0.97)` press on standalone buttons (`.press`).
+  - A one-time CSS rise of the static opening's lines (`.rise`, 70 ms stagger), which also plays with JS off.
+
+  It rejected:
+  - Animating the chapter menu (core navigation, keyboard-openable).
+  - Scroll-gated card reveals (the known opacity-gating bug).
+  - Motion on read data (memorial rows, the to-scale strip, field sheets).
 - **No-JS / reduced motion:** the static hero uses real frames rendered from the scene (`public/images/opening-845*.webp`, landscape + portrait, made by screenshotting the canvas at p=0.705 with the DOM hidden; regenerate the same way if the scene changes). Reduced motion renders a single still WebGL frame at the same point.
 - **Sound** (`lib/audio/engine.ts`) is synthesized wind + distant birds + an arrival crack, off until the visitor clicks the toggle.
 - **Character images:** the user will supply screenshots for the personnel files. The plan agreed with them: raw files go in the gitignored `portraits-src/`, a build-time Pillow script applies a per-character archival treatment (different artifact per character, shared palette/grain), and only the treated WebP is committed. Official art is never used as hero/decoration. The fair-use/DMCA trade-off was explained to the user and they chose it.

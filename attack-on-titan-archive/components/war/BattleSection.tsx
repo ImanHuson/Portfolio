@@ -76,7 +76,7 @@ function BattleFile({ b, onBack }: { b: Battle; onBack?: () => void }) {
         <button
           type="button"
           onClick={onBack}
-          className="mt-8 border border-paper/40 px-4 py-2 font-mono text-meta tracking-[0.16em] text-paper uppercase transition-colors hover:border-paper hover:bg-paper/5"
+          className="press mt-8 border border-paper/40 px-4 py-2 font-mono text-meta tracking-[0.16em] text-paper uppercase hover:border-paper hover:bg-paper/5"
         >
           Back to the map
         </button>

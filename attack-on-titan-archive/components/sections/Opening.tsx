@@ -61,14 +61,14 @@ function StaticOpening() {
         />
       </picture>
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-base via-base/25 to-base/40" />
-      <div className="relative mx-auto w-full max-w-[1400px]">
+      <div className="rise relative mx-auto w-full max-w-[1400px]">
         <p className="font-mono text-meta tracking-[0.3em] text-paper/70 uppercase">{PLACE.join("   /   ")}</p>
         <div className="mt-6">
           <Title id="opening-title" />
         </div>
         <a
           href="#index"
-          className="mt-10 inline-flex items-center gap-3 border border-paper/50 bg-base/40 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase backdrop-blur-sm transition-colors hover:border-paper hover:bg-paper hover:text-ink"
+          className="press mt-10 inline-flex items-center gap-3 border border-paper/50 bg-base/40 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase backdrop-blur-sm hover:border-paper hover:bg-paper hover:text-ink"
         >
           Open the chapters <span aria-hidden>&darr;</span>
         </a>
@@ -166,7 +166,7 @@ export default function Opening() {
           <div className="mt-6">
             <Title id="opening-title" />
           </div>
-          <a href="#index" className="mt-10 inline-flex items-center gap-3 border border-paper/50 bg-base/40 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase backdrop-blur-sm transition-colors hover:border-paper hover:bg-paper hover:text-ink">
+          <a href="#index" className="press mt-10 inline-flex items-center gap-3 border border-paper/50 bg-base/40 px-5 py-3 font-military text-[1rem] tracking-[0.18em] text-paper uppercase backdrop-blur-sm hover:border-paper hover:bg-paper hover:text-ink">
             Open the chapters <span aria-hidden>&darr;</span>
           </a>
         </div>
@@ -234,7 +234,7 @@ export default function Opening() {
             e.preventDefault();
             lenis.scrollTo("#index", { immediate: true });
           }}
-          className="absolute right-4 bottom-5 border border-paper/30 bg-base/50 px-4 py-2.5 font-military text-[0.9rem] tracking-[0.18em] text-paper/90 uppercase backdrop-blur-sm transition-colors hover:border-paper/70 hover:text-paper md:right-8 md:bottom-8"
+          className="press absolute right-4 bottom-5 border border-paper/30 bg-base/50 px-4 py-2.5 font-military text-[0.9rem] tracking-[0.18em] text-paper/90 uppercase backdrop-blur-sm hover:border-paper/70 hover:text-paper md:right-8 md:bottom-8"
         >
           Skip to the chapters
         </a>
