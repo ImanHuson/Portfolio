@@ -13,7 +13,7 @@ export default function NextChapter({ current }: { current: string }) {
         <div className="order-2 grid gap-4 md:order-1">
           {prev && (
             <Link href={prev.href ?? "/"} className="group flex items-baseline gap-3 text-ash transition-colors hover:text-paper">
-              <span aria-hidden className="transition-transform group-hover:-translate-x-1">&larr;</span>
+              <span aria-hidden className="transition-transform duration-200 ease-[var(--ease-out)] motion-safe:[@media(hover:hover)]:group-hover:-translate-x-1">&larr;</span>
               <span>
                 <span className="font-mono text-meta">{prev.id}</span> <span className="font-military tracking-[0.1em] uppercase">{prev.title}</span>
               </span>
@@ -29,7 +29,7 @@ export default function NextChapter({ current }: { current: string }) {
             <span className="font-mono text-meta text-ash">Next &middot; {next.id}</span>
             <span className="mt-3 flex items-end justify-between gap-6">
               <span className="font-display text-h2 leading-none font-bold text-paper">{next.title}</span>
-              <span aria-hidden className="pb-1 text-h3 text-paper/60 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-paper">
+              <span aria-hidden className="pb-1 text-h3 text-paper/60 transition-[color,transform] duration-200 ease-[var(--ease-out)] group-hover:text-paper motion-safe:[@media(hover:hover)]:group-hover:translate-x-1.5">
                 &rarr;
               </span>
             </span>

@@ -148,9 +148,19 @@ export default function Mirror() {
     const host = hostRef.current;
     if (!host) return;
     const top = host.getBoundingClientRect().top + window.scrollY;
+    // a cut, not a rewind: jump straight to the pair's first stage (a smooth scroll
+    // back up a 900vh scene replays the whole timeline backwards at speed), with the
+    // stage dipping out and back so the swap does not teleport; the tabs stay put
+    const stage = [...host.querySelectorAll<HTMLElement>(".sticky > :not([role='tablist'])")];
+    stage.forEach((el) => Object.assign(el.style, { transition: "none", opacity: "0" }));
     const lenis = getLenis();
-    if (lenis) lenis.scrollTo(top, { duration: 0.8 });
-    else window.scrollTo({ top, behavior: "smooth" });
+    if (lenis) lenis.scrollTo(top, { immediate: true, force: true });
+    else window.scrollTo({ top });
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() =>
+        stage.forEach((el) => Object.assign(el.style, { transition: "opacity 200ms var(--ease-out)", opacity: "" })),
+      ),
+    );
   }
 
   if (mode !== "cinematic") return <StaticMirror />;

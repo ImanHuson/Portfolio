@@ -58,7 +58,7 @@ export default function PersonnelDesk() {
                 width={800}
                 height={900}
                 loading={i < 4 ? "eager" : "lazy"}
-                className="w-full transition-transform duration-300 ease-[var(--ease-out)] motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:rotate-[0.6deg]"
+                className="w-full transition-transform duration-300 ease-[var(--ease-out)] motion-safe:[@media(hover:hover)]:group-hover:-translate-y-1.5 motion-safe:[@media(hover:hover)]:group-hover:rotate-[0.6deg]"
               />
               <span className="mt-2 flex flex-wrap items-baseline justify-between gap-x-3 px-2">
                 <span className="font-military text-[1.1rem] font-semibold tracking-[0.12em] text-paper uppercase group-hover:underline group-hover:decoration-paper/40 group-hover:underline-offset-4">

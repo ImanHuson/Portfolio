@@ -8,6 +8,16 @@ import { prefersReducedMotion } from "@/lib/animation/tokens";
 import { asset, cn } from "@/lib/utils";
 
 export const ENTER_KEY = "aot-titan-enter";
+/** set after the first entry: the push-in is a first-time moment, later clicks are plain links */
+const ENTERED_KEY = "aot-titan-entered";
+
+function enteredBefore() {
+  try {
+    return sessionStorage.getItem(ENTERED_KEY) === "1";
+  } catch {
+    return true;
+  }
+}
 
 /** The nine columns, each a specimen plate cropped tall. Opening one "enters the Titan": the column pushes in
  * toward its chest, the page goes dark, and its x-ray fills the screen; the
@@ -25,20 +35,23 @@ export default function TitanGrid() {
   }, []);
 
   function enter(e: React.MouseEvent<HTMLAnchorElement>, slug: string) {
-    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || prefersReducedMotion()) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || prefersReducedMotion() || enteredBefore()) return;
     e.preventDefault();
+    try {
+      sessionStorage.setItem(ENTERED_KEY, "1");
+    } catch {}
     const href = `/titans/${slug}/`;
     router.prefetch(href);
     setEntering(slug);
     setPhase(1);
     timers.current.push(
-      window.setTimeout(() => setPhase(2), 520),
+      window.setTimeout(() => setPhase(2), 260),
       window.setTimeout(() => {
         try {
           sessionStorage.setItem(ENTER_KEY, slug);
         } catch {}
         router.push(href);
-      }, 1050),
+      }, 500),
     );
   }
 
@@ -59,7 +72,7 @@ export default function TitanGrid() {
                 width={300}
                 height={600}
                 loading="lazy"
-                className="titan-col mt-3 aspect-[1/2] w-full max-w-[150px] object-cover opacity-85 transition-[opacity,filter] duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:group-hover:brightness-110"
+                className="titan-col mt-3 aspect-[1/2] w-full max-w-[150px] object-cover opacity-85 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
               />
               <span className="mt-4 font-display text-[0.95rem] leading-tight font-bold text-paper md:text-[1rem]">{t.name.replace(" Titan", "")}</span>
               <span className="mt-2 hidden min-h-[4.5em] max-w-[18ch] text-[0.82rem] leading-snug text-ash opacity-70 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 md:block">
@@ -72,7 +85,7 @@ export default function TitanGrid() {
       {entering && (
         <div
           aria-hidden
-          className="xray-veil transition-opacity duration-500 ease-out"
+          className="xray-veil transition-opacity duration-[220ms] ease-[var(--ease-out)]"
           style={{
             opacity: phase === 2 ? 1 : 0,
             backgroundImage: `url(${asset(`/images/titans/${entering}-xray.webp`)})`,

@@ -31,7 +31,7 @@ export default function XrayIntro({ slug }: { slug: string }) {
       sessionStorage.removeItem(ENTER_KEY);
     } catch {}
     const a = requestAnimationFrame(() => requestAnimationFrame(() => setFading(true)));
-    const b = window.setTimeout(() => setGone(true), 1100);
+    const b = window.setTimeout(() => setGone(true), 500);
     return () => {
       cancelAnimationFrame(a);
       clearTimeout(b);
@@ -42,11 +42,11 @@ export default function XrayIntro({ slug }: { slug: string }) {
   return (
     <div
       aria-hidden
-      className="xray-veil transition-[opacity,transform] duration-[1000ms] ease-out"
+      className="xray-veil transition-[opacity,transform] duration-[450ms] ease-[var(--ease-out)]"
       style={{
         backgroundImage: `url(${asset(`/images/titans/${slug}-xray.webp`)})`,
         opacity: fading ? 0 : 1,
-        transform: fading ? "scale(1.25)" : "scale(1)",
+        transform: fading ? "scale(1.08)" : "scale(1)",
       }}
     />
   );

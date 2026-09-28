@@ -38,7 +38,8 @@
   --alert: #e0685c; /* the same accent at text weight: 5.9:1 on base, for small type */
   --void: #020202;
 
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);      /* entering, leaving, UI response */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* movement on screen */
   --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-micro: 180ms;
   --dur-ui: 320ms;
@@ -184,11 +185,14 @@ html.lenis, html.lenis body { height: auto; }
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
 }
 
+/* Reduced motion: fewer and gentler, not none. Keyframe motion stops;
+   transitions keep only colour and opacity, so feedback survives and
+   nothing moves. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-property: opacity, color, background-color, border-color !important;
     scroll-behavior: auto !important;
   }
 }
@@ -197,7 +201,7 @@ html.lenis, html.lenis body { height: auto; }
 .titan-enter .titan-col {
   transform: scale(7);
   transform-origin: 50% 36%;
-  transition: transform 900ms cubic-bezier(0.7, 0, 0.84, 0);
+  transition: transform 480ms var(--ease-in-out);
 }
 .xray-veil {
   position: fixed;
@@ -248,14 +252,14 @@ html.nav-hidden .site-header:not(:focus-within) {
   transform: translateY(-100%);
 }
 .site-header {
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
 }
 
 /* The one card interaction, used by every linked file on the site (index
    cards, the chapter footer): the border lifts, a line in the accent draws
    across the top edge, the ground warms a step. No bounce, no glow. */
 .file-link {
-  transition: border-color var(--dur-ui) var(--ease-out), background-color var(--dur-ui) var(--ease-out);
+  transition: border-color 200ms var(--ease-out), background-color 200ms var(--ease-out), transform 160ms var(--ease-out);
 }
 .file-link::before {
   content: "";
@@ -265,7 +269,7 @@ html.nav-hidden .site-header:not(:focus-within) {
   background: var(--alert);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 600ms var(--ease-out);
+  transition: transform 250ms var(--ease-out);
   z-index: 1;
 }
 .file-link:hover,
@@ -290,3 +294,12 @@ html.nav-hidden .site-header:not(:focus-within) {
   background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(216, 208, 184, 0.035) 11px 12px);
 }
 .sealed-plate .stamp { color: var(--alert); mix-blend-mode: normal; }
+
+/* An ending file, once opened, fades in rather than appearing at once.
+   Opacity only: the pinned scenes inside are measured by ScrollTrigger. */
+.ending-gate[open] > :not(summary) {
+  transition: opacity 300ms var(--ease-out);
+}
+@starting-style {
+  .ending-gate[open] > :not(summary) { opacity: 0; }
+}

@@ -13,7 +13,7 @@ function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
             width={1680}
             height={1050}
             loading="lazy"
-            className="size-full object-cover grayscale-[0.4] transition-[filter,transform] duration-700 ease-[var(--ease-out)] group-hover:grayscale-0 motion-safe:group-hover:scale-[1.03]"
+            className="size-full object-cover opacity-90 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 motion-safe:[@media(hover:hover)]:group-hover:scale-[1.03]"
           />
           <span aria-hidden className={cn("absolute inset-0 bg-gradient-to-t from-base-2/80 to-transparent to-40%", feature && "md:bg-gradient-to-l md:from-base-2/60 md:to-30%")} />
         </span>
@@ -28,7 +28,7 @@ function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
         <span className="font-mono text-meta text-ash">{c.id}</span>
         <span className={cn("mt-2 flex items-baseline justify-between gap-4 font-display leading-none font-bold text-paper", feature ? "text-[clamp(1.8rem,1rem+1.6vw,2.5rem)]" : "text-h3")}>
           {c.title}
-          <span aria-hidden className="text-[1.1rem] text-paper/40 transition-[color,transform] duration-300 group-hover:translate-x-1 group-hover:text-paper">
+          <span aria-hidden className="text-[1.1rem] text-paper/40 transition-[color,transform] duration-200 ease-[var(--ease-out)] group-hover:text-paper motion-safe:[@media(hover:hover)]:group-hover:translate-x-1">
             &rarr;
           </span>
         </span>
