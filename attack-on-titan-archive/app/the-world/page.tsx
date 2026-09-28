@@ -165,7 +165,7 @@ export default function TheWorld() {
 
       <Mirror />
 
-      <NextChapter href="/#index" id="AOT-07" title="The War" line="Sealed for now. Liberio, the battle maps, and the gear that made it possible." />
+      <NextChapter href="/the-war/" id="AOT-07" title="The War" line="Five battles inside the Walls, two across the sea, and the gear that made it possible." />
     </>
   );
 }

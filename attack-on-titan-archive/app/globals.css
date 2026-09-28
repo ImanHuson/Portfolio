@@ -200,3 +200,20 @@ html.lenis, html.lenis body { height: auto; }
   background: #020202 center / contain no-repeat;
   pointer-events: none;
 }
+
+/* the memorial: the dead fade as they scroll past; the living stay. A CSS
+   view timeline, so no JS; browsers without it, and reduced motion, keep
+   every name at full strength. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .memorial-fade {
+      animation: memorial-fade linear both;
+      animation-timeline: view();
+      animation-range: cover 45% cover 85%;
+    }
+  }
+}
+@keyframes memorial-fade {
+  from { opacity: 1; }
+  to { opacity: 0.22; }
+}
