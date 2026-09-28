@@ -454,6 +454,11 @@ nav[aria-label="Breadcrumb"] a {
     to { transform: translateX(110vw); }
   }
 
+  /* A sealed quote names its speaker; once open, the caption does. */
+  .quote-wrap:has(> details[open]) > .quote-label {
+    display: none;
+  }
+
   /* Atlas: the plate starts veiled, and clears when you look closer. */
   .atlas-veil img {
     animation: unveil 1.4s ease-out 1.6s both;

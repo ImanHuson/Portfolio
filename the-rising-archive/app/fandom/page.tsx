@@ -5,6 +5,7 @@ import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Stamp from "@/components/archive/Stamp";
 import { ARGUMENTS, CHORUS, OPEN_QUESTIONS } from "@/lib/data/fandom";
+import { BEST_LINES } from "@/lib/data/quotes";
 import Spotlight from "@/components/archive/Spotlight";
 
 export const metadata: Metadata = {
@@ -26,6 +27,33 @@ export default function FandomPage() {
           <Link href="/fandom/fan-art/" className="border-b border-line-strong pb-1 text-ash hover:text-bone">The archive’s plates</Link>
         </div>
       </PageHeader>
+
+      <section aria-labelledby="words" className="px-5 pb-24 md:px-8">
+        <div className="mx-auto grid max-w-[1400px] gap-12 border-t border-line pt-10 lg:grid-cols-[5fr_7fr]">
+          <div>
+            <h2 id="words" className="font-display text-h2 leading-none font-bold uppercase">Words that survived</h2>
+            <p className="mt-5 max-w-[44ch] text-ash">
+              The saga’s best lines, and one line for each of the archive’s twenty characters. Each is sealed at the book it comes from, so a first-time reader can open only what they have read.
+            </p>
+            <Link
+              href="/fandom/quotes/"
+              className="mt-8 inline-flex min-h-11 items-center gap-3 border border-red px-5 py-3 font-mono text-meta tracking-[0.2em] text-bone uppercase transition-colors hover:bg-red/15"
+            >
+              Read all the quotes <span aria-hidden>→</span>
+            </Link>
+          </div>
+          <div>
+            <figure>
+              <blockquote className="max-w-[26ch] font-serif text-h2 leading-tight text-bone italic">“{BEST_LINES[0].text}”</blockquote>
+              <figcaption className="mt-4 font-mono text-meta tracking-[0.18em] text-ash uppercase">
+                {BEST_LINES[0].who}, <span className="text-ash-2">{BEST_LINES[0].where}</span>
+              </figcaption>
+            </figure>
+            <p className="mt-10 font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Also in the lines that stayed</p>
+            <p className="mt-3 max-w-[60ch] text-lede text-bone/85">{BEST_LINES.slice(1).map((q) => q.speaker).join(" · ")}</p>
+          </div>
+        </div>
+      </section>
 
       <section aria-labelledby="args" className="px-5 pb-24 md:px-8">
         <div className="mx-auto max-w-[1400px]">
@@ -90,6 +118,11 @@ export default function FandomPage() {
                   <p className="mt-3 text-sm text-ash">{c.note}</p>
                 </SpoilerGate>
               </Spotlight>
+            ))}
+            {/* Fill the grid's last row, so no bare seam shows through. */}
+            {CHORUS.length % 2 === 1 && <li aria-hidden className="hidden bg-void sm:block lg:hidden" />}
+            {Array.from({ length: (4 - (CHORUS.length % 4)) % 4 }, (_, i) => (
+              <li key={i} aria-hidden className="hidden bg-void lg:block" />
             ))}
           </ul>
           <p className="mt-8 text-sm text-ash-2">

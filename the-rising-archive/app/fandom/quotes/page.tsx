@@ -42,7 +42,7 @@ export default function QuotesPage() {
           <ol className="mt-14 space-y-16 border-l border-line pl-6 md:pl-10">
             {BEST_LINES.map((q) => (
               <Reveal as="li" key={q.text}>
-                <QuoteFigure q={q} />
+                <QuoteFigure q={q} showSpeaker />
               </Reveal>
             ))}
           </ol>
