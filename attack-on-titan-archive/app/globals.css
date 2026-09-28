@@ -94,7 +94,8 @@
     background: var(--base);
   }
   body {
-    background: var(--base);
+    /* no background of its own: the html ground shows through, with the
+       fixed .ambient layer painted over it and under every page */
     color: var(--paper);
     font-family: var(--font-sans), system-ui, sans-serif;
     font-size: var(--text-body);
@@ -344,4 +345,41 @@ summary:active > .press {
 }
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
+}
+
+/* Depth behind every page: a faint warm haze from above (lamp-light on a
+   desk) and a low glow of the accent from below. Fixed, behind content
+   (z-index -1 over the html ground), so sections with their own ground
+   still cover it. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 22% -8%, rgba(216, 208, 184, 0.075), transparent 70%),
+    radial-gradient(ellipse 60% 45% at 92% 108%, rgba(168, 38, 28, 0.12), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(110, 23, 23, 0.08), transparent 70%);
+}
+
+/* Reading progress: a hairline in the accent along the header's foot. */
+.read-progress {
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 2px;
+  background: var(--flare);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+@supports (animation-timeline: scroll()) {
+  .read-progress {
+    animation: read-grow linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes read-grow { to { transform: scaleX(1); } }
+/* it is a position indicator driven by the reader's own scroll, not motion:
+   the reduced-motion reset must not freeze it */
+@media (prefers-reduced-motion: reduce) {
+  .read-progress { animation-duration: auto !important; }
 }

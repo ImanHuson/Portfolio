@@ -1,28 +1,27 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Camera, Renderer, Transform, Vec3, type Mesh } from "ogl";
+import { Camera, Renderer, Transform, Vec3 } from "ogl";
 import { ATMOS_UNIFORMS, SHADOW_UNIFORMS } from "./glsl";
 import { createSky } from "./Sky";
 import { createGround } from "./Ground";
 import { createWall } from "./Wall";
 import { createTown } from "./Town";
-import { createTitan, createXrayTitan } from "./Titan";
 import { createSteam } from "./Steam";
-import { createXrayBackdrop } from "./Xray";
 import { createTrees } from "./Trees";
 import { createBirds } from "./Birds";
 import { createLightning } from "./Lightning";
 import { createPost } from "./Post";
-import { terrainH } from "./terrain";
 import { shotAt } from "./choreography";
 import { lerp } from "@/lib/animation/tokens";
 import { isSoftwareGL, makeGovernor } from "./governor";
 
 /**
  * Year 845, the opening shot. Pure ogl (this repo's proven WebGL path),
- * split into modules: Sky / Ground / Wall / Town / Titan / Steam / Xray /
- * choreography. Scroll progress arrives through a ref, never React state,
+ * split into modules: Sky / Ground / Wall / Town / Steam / Lightning /
+ * choreography. The Titan is never shown: the lightning, the steam column
+ * climbing past the Wall, the shadow over the district and the gate are
+ * how it arrives. Scroll progress arrives through a ref, never React state,
  * so scrubbing never re-renders React.
  *
  * `still` renders one composed frame and stops (reduced motion, poster).
@@ -30,7 +29,7 @@ import { isSoftwareGL, makeGovernor } from "./governor";
 export default function WallShot({
   progress,
   still = false,
-  stillAt = 0.705,
+  stillAt = 0.68,
   className,
   onReady,
   onTooSlow,
@@ -99,51 +98,19 @@ export default function WallShot({
     lightning.setParent(scene);
     const post = createPost(gl);
 
-    const titan = createTitan(gl, shared, { steps: small ? 64 : 96 });
-    titan.program.uniforms.uCut.value = 100;
-    titan.position.set(0, 0, -62.8);
-    titan.rotation.x = 0.07; // leaning in, over the parapet
-    titan.setParent(scene);
-
-    // the ones that walk outside: skinned, far smaller, never "cut"
-    const wanderers: Mesh[] = [];
-    // the ones walking outside: 3-15 m, scattered over the hills, a few by the river
-    const spots: [number, number, number, number][] = [
-      [-24, -96, 0.22, 0.4], [34, -128, 0.3, -0.6], [-46, -140, 0.18, 1.2], [40, -150, 0.26, -1.4],
-      [6, -175, 0.34, 0.2], [-14, -205, 0.24, 2.4], [58, -118, 0.16, -0.9], [-70, -110, 0.2, 0.7],
-      [-102, -168, 0.45, 0.3], [22, -240, 0.5, -0.2], [-40, -262, 0.3, 1.8], [75, -210, 0.38, -2.2],
-      // two close to where the camera ends up, so the last frame has a subject
-      [-30, -128, 0.26, 2.6], [-58, -150, 0.2, 2.2],
-    ];
-    for (const [x, z, s, ry] of spots.slice(0, small ? 9 : 14)) {
-      const m = createTitan(gl, shared, { skin: 1, steps: 48 });
-      m.position.set(x, terrainH(x, z) - 0.05, z);
-      m.scale.set(s);
-      m.rotation.y = ry;
-      m.setParent(scene);
-      wanderers.push(m);
-    }
-
-    const steam = createSteam(gl, shared, small ? 700 : 1500, {
-      origin: [0, 0, -62.8], spread: [1.25, 1.6, 0.9], size: 8, speed: 0.05, tint: [1.0, 0.97, 0.92],
+    // the column: rises out of the fields beyond the south Wall to well over its
+    // top, backlit by the low sun (the only sign of what is standing in it)
+    const steam = createSteam(gl, shared, small ? 1200 : 2600, {
+      origin: [0, 0, -63.2], spread: [2.3, 3.2, 1.7], size: 7.5, speed: 0.045, tint: [1.0, 0.99, 0.97],
     });
-    steam.renderOrder = 10; // always over the body: the steam hides the forming edge
+    steam.renderOrder = 10;
     steam.setParent(scene);
-    const dust = createSteam(gl, shared, small ? 260 : 520, {
-      origin: [gateXZ[0], 0, gateXZ[1]], spread: [3.5, 4.0, 3.5], size: 6, speed: 0.1, tint: [0.92, 0.86, 0.76],
+    const dust = createSteam(gl, shared, small ? 600 : 1300, {
+      origin: [gateXZ[0], 0, gateXZ[1]], spread: [4.5, 5.0, 4.5], size: 6.5, speed: 0.1, tint: [0.92, 0.86, 0.76],
     });
     dust.program.uniforms.uCeil.value = 0.4;
     dust.renderOrder = 10;
     dust.setParent(scene);
-
-    // the pass through the Wall: its own scene and camera
-    const xrayScene = new Transform();
-    const xrayCam = new Camera(gl, { fov: 42, near: 0.05, far: 50 });
-    const backdrop = createXrayBackdrop(gl);
-    backdrop.renderOrder = -1;
-    backdrop.setParent(xrayScene);
-    const xrayTitan = createXrayTitan(gl);
-    xrayTitan.mesh.setParent(xrayScene);
 
     let aspect = 1;
     function resize() {
@@ -151,11 +118,9 @@ export default function WallShot({
       const h = host!.clientHeight;
       renderer.setSize(w, h);
       aspect = w / h;
-      // portrait screens get a wider lens so the Titan still fits
+      // portrait screens get a wider lens so the column still fits
       const fov = aspect < 0.8 ? 58 : aspect < 1.2 ? 48 : 38;
       camera.perspective({ aspect, fov });
-      xrayCam.perspective({ aspect, fov: aspect < 0.8 ? 62 : 42 });
-      backdrop.program.uniforms.uRes.value = [w, h];
       const px = (h * renderer.dpr) / (2 * Math.tan((fov * Math.PI) / 360));
       steam.program.uniforms.uPxScale.value = px * 0.06;
       birds.program.uniforms.uPx.value = px * 0.9;
@@ -166,8 +131,10 @@ export default function WallShot({
     const ro = new ResizeObserver(resize);
     ro.observe(host);
 
-    const warm = { fog: [0.74, 0.69, 0.6], sun: [1.08, 0.9, 0.68], sky: [0.42, 0.46, 0.5], zen: [0.36, 0.42, 0.48] };
-    const cold = { fog: [0.56, 0.58, 0.58], sun: [0.92, 0.84, 0.74], sky: [0.38, 0.42, 0.46], zen: [0.3, 0.36, 0.42] };
+    // a clear morning (canon: the attack came out of a blue sky): warm sun, blue
+    // zenith, golden haze low down; the valley at the end turns cooler
+    const warm = { fog: [0.8, 0.72, 0.6], sun: [1.32, 1.0, 0.66], sky: [0.36, 0.46, 0.62], zen: [0.2, 0.36, 0.64] };
+    const cold = { fog: [0.6, 0.67, 0.74], sun: [1.08, 0.94, 0.78], sky: [0.36, 0.45, 0.6], zen: [0.22, 0.36, 0.6] };
     const mix3 = (a: number[], b: number[], t: number) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
 
     const start = performance.now();
@@ -188,30 +155,20 @@ export default function WallShot({
       sky.program.uniforms.uZenith.value = mix3(warm.zen, cold.zen, s.out);
       sky.program.uniforms.uTime.value = t;
 
-      shared.uTitanTop.value = Math.max(s.shadowTop, s.cut) * s.titanFade;
-      titan.program.uniforms.uEyes.value = s.eyes;
-      titan.program.uniforms.uFade.value = s.titanFade * s.present;
-      titan.visible = s.present > 0.001 && s.titanFade > 0.001;
+      // the shadow of something taller than the Wall, thrown across the district
+      shared.uTitanTop.value = s.shadowTop;
 
-      // the body stands whole inside its steam; the column clears bottom-up
+      // the column climbs as it thickens, then bursts and thins out
       steam.program.uniforms.uIntensity.value = s.steam * (1 + s.vanish * 1.5);
-      steam.program.uniforms.uCeil.value = 6.7;
-      steam.program.uniforms.uClear.value = s.vanish > 0.01 ? -1 : s.cut;
+      steam.program.uniforms.uCeil.value = 2.5 + 7.5 * s.rise;
+      steam.program.uniforms.uClear.value = -1;
       steam.program.uniforms.uTime.value = t;
       steam.visible = s.steam > 0.001;
-      dust.program.uniforms.uIntensity.value = s.dust * 1.4;
+      dust.program.uniforms.uIntensity.value = s.dust * 2.0;
       dust.program.uniforms.uTime.value = t;
       dust.visible = s.dust > 0.001;
       ground.program.uniforms.uBreach.value = s.breach;
       wall.program.uniforms.uBreach.value = s.breach;
-
-      // a heavy, swaying walk: bob on the step, sway between steps
-      for (let i = 0; i < wanderers.length; i++) {
-        const w = wanderers[i];
-        const ph = t * (0.9 + (i % 3) * 0.15) + i * 1.7;
-        w.rotation.z = Math.sin(ph) * 0.05;
-        w.rotation.x = 0.04 + Math.abs(Math.sin(ph)) * 0.03;
-      }
 
       birds.visible = s.birds > 0.01;
       birds.program.uniforms.uTime.value = t;
@@ -224,16 +181,6 @@ export default function WallShot({
       const target = post.target();
       renderer.render({ scene, camera, target });
 
-      if (s.xray > 0.001) {
-        xrayTitan.uniforms.uXray.value = s.xray;
-        backdrop.program.uniforms.uXray.value = Math.min(1, s.xray * 1.4);
-        backdrop.program.uniforms.uTravel.value = s.xrayTravel * 0.6;
-        const y = lerp(3.3, 5.35, s.xrayTravel);
-        xrayCam.position.set(0.35 * Math.sin(s.xrayTravel * 2.4), y, aspect < 0.8 ? 3.4 : 2.5);
-        xrayCam.lookAt([0, y + 0.1, 0]);
-        renderer.render({ scene: xrayScene, camera: xrayCam, target, clear: false });
-      }
-
       // where the sun is on screen, for the light shafts
       const sd = atmos.uSun.value as number[];
       sunWorld.set(camera.position.x + sd[0] * 1000, camera.position.y + sd[1] * 1000, camera.position.z + sd[2] * 1000);
@@ -242,7 +189,7 @@ export default function WallShot({
       sunClip.copy(sunWorld).applyMatrix4(camera.projectionViewMatrix);
       const su: [number, number] = [sunClip.x * 0.5 + 0.5, sunClip.y * 0.5 + 0.5];
       const onScreen = Math.max(0, 1 - Math.max(Math.abs(su[0] - 0.5), Math.abs(su[1] - 0.5)) * 1.1);
-      post.render(renderer as never, su, s.rays * facing * Math.min(1, onScreen * 1.6 + 0.15) * (1 - s.xray), t);
+      post.render(renderer as never, su, s.rays * facing * Math.min(1, onScreen * 1.6 + 0.15), t);
     }
 
     if (still) {
