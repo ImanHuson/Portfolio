@@ -11,7 +11,7 @@ const BRANCHES = [
   { href: "/world/", title: "The World", body: "Fourteen Colors, five houses, the factions, the planets, the machines.", cta: "Enter the world", plate: "/images/places/mars.webp", w: 900, h: 900, span: "md:col-span-2" },
   { href: "/ideas/", title: "The Ideas", body: "Six questions the saga won’t stop asking.", cta: "Ask them", plate: "/images/rising/movement.webp", w: 1600, h: 900, span: "md:col-span-2" },
   { href: "/fandom/", title: "The Fandom", body: "The arguments, the quotes, the chorus.", cta: "Join the argument", plate: "/images/people/virginia.webp", w: 900, h: 900, span: "md:col-span-2" },
-  { href: "/author/", title: "The Author", body: "Pierce Brown, the man who built Mars.", cta: "Meet him", plate: "/images/books/light-bringer.webp", w: 900, h: 1350, span: "md:col-span-3" },
+  { href: "/author/", title: "The Author", body: "Pierce Brown, the man who built Mars.", cta: "Meet him", plate: "/images/covers/light-bringer.webp", w: 900, h: 1350, span: "md:col-span-3" },
   { href: "/sealed/", title: "The Sealed File", body: "VII. Red God. Status: incomplete.", cta: "Access denied", plate: null, w: 0, h: 0, span: "md:col-span-3" },
 ];
 

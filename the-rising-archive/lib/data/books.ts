@@ -23,6 +23,11 @@ export type Book = {
   memories: string[];
 };
 
+/** The published covers (US editions), shown to identify the books.
+ * Fetched and converted by scripts/art/covers.py. */
+export const COVER_CREDIT = "Cover © Del Rey, an imprint of Penguin Random House";
+export const coverSrc = (slug: string) => `/images/covers/${slug}.webp`;
+
 export const BOOKS: Book[] = [
   {
     n: 1,
