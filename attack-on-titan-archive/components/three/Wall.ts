@@ -78,8 +78,7 @@ void main() {
 
   vec3 L = normalize(uSun);
   float diff = max(dot(N, L), 0.0);
-  float shade = titanShadow(vWorld);
-  if (vFace > 1.5) shade *= 1.0;
+  float shade = titanShadow(vWorld) * cloudShadow(vWorld.xz);
   vec3 light = uSunColor * diff * 2.0 * shade + uSkyColor * (0.5 + 0.35 * N.y);
   col *= light;
 

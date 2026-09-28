@@ -52,7 +52,7 @@ void main() {
   roofCol *= 0.85 + 0.25 * noise2(vWorld.xz * 11.0 + vSeed * 40.0);
   vec3 col = mix(wallCol, roofCol, step(0.0, vRoof));
   col *= mix(0.6, 1.0, smoothstep(0.0, 0.35, vWorld.y));   // contact darkening
-  float shade = min(wallShadow(vWorld), titanShadow(vWorld));
+  float shade = min(wallShadow(vWorld), titanShadow(vWorld)) * cloudShadow(vWorld.xz);
   float diff = max(dot(N, normalize(uSun)), 0.0);
   col *= uSunColor * diff * 1.9 * shade + uSkyColor * (0.45 + 0.35 * N.y);
   float dist = length(cameraPosition - vWorld);

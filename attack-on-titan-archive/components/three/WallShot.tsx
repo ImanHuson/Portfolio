@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Camera, Renderer, Transform, type Mesh } from "ogl";
+import { Camera, Renderer, Transform, Vec3, type Mesh } from "ogl";
 import { ATMOS_UNIFORMS, SHADOW_UNIFORMS } from "./glsl";
 import { createSky } from "./Sky";
 import { createGround } from "./Ground";
@@ -10,6 +10,11 @@ import { createTown } from "./Town";
 import { createTitan, createXrayTitan } from "./Titan";
 import { createSteam } from "./Steam";
 import { createXrayBackdrop } from "./Xray";
+import { createTrees } from "./Trees";
+import { createBirds } from "./Birds";
+import { createLightning } from "./Lightning";
+import { createPost } from "./Post";
+import { terrainH } from "./terrain";
 import { shotAt } from "./choreography";
 import { lerp } from "@/lib/animation/tokens";
 
@@ -60,7 +65,7 @@ export default function WallShot({
     const atmos = ATMOS_UNIFORMS();
     const shared = { ...atmos, ...SHADOW_UNIFORMS() };
 
-    const camera = new Camera(gl, { fov: 38, near: 0.05, far: 3000 });
+    const camera = new Camera(gl, { fov: 38, near: 0.25, far: 2600 });
     const scene = new Transform();
 
     const sky = createSky(gl, atmos);
@@ -73,21 +78,34 @@ export default function WallShot({
     wall.setParent(scene);
     const town = createTown(gl, shared, small ? 0.6 : 1);
     town.setParent(scene);
+    const trees = createTrees(gl, shared, small ? 4000 : 11000);
+    trees.setParent(scene);
+    const birds = createBirds(gl, small ? 36 : 70);
+    birds.setParent(scene);
+    const lightning = createLightning(gl);
+    lightning.position.set(0, 30, -63.5);
+    lightning.setParent(scene);
+    const post = createPost(gl);
 
     const titan = createTitan(gl, shared, { steps: small ? 64 : 96 });
     titan.program.uniforms.uCut.value = 100;
-    titan.position.set(0, 0, -65);
+    titan.position.set(0, 0, -62.8);
+    titan.rotation.x = 0.07; // leaning in, over the parapet
     titan.setParent(scene);
 
     // the ones that walk outside: skinned, far smaller, never "cut"
     const wanderers: Mesh[] = [];
+    // the ones walking outside: 3-15 m, scattered over the hills, a few by the river
     const spots: [number, number, number, number][] = [
       [-24, -96, 0.22, 0.4], [34, -128, 0.3, -0.6], [-46, -140, 0.18, 1.2], [40, -150, 0.26, -1.4],
       [6, -175, 0.34, 0.2], [-14, -205, 0.24, 2.4], [58, -118, 0.16, -0.9], [-70, -110, 0.2, 0.7],
+      [-102, -168, 0.45, 0.3], [22, -240, 0.5, -0.2], [-40, -262, 0.3, 1.8], [75, -210, 0.38, -2.2],
+      // two close to where the camera ends up, so the last frame has a subject
+      [-30, -128, 0.26, 2.6], [-58, -150, 0.2, 2.2],
     ];
-    for (const [x, z, s, ry] of spots.slice(0, small ? 5 : 8)) {
+    for (const [x, z, s, ry] of spots.slice(0, small ? 9 : 14)) {
       const m = createTitan(gl, shared, { skin: 1, steps: 48 });
-      m.position.set(x, 0, z);
+      m.position.set(x, terrainH(x, z) - 0.05, z);
       m.scale.set(s);
       m.rotation.y = ry;
       m.setParent(scene);
@@ -95,7 +113,7 @@ export default function WallShot({
     }
 
     const steam = createSteam(gl, shared, small ? 700 : 1500, {
-      origin: [0, 0, -65], spread: [1.25, 1.6, 0.9], size: 8, speed: 0.05, tint: [1.0, 0.97, 0.92],
+      origin: [0, 0, -62.8], spread: [1.25, 1.6, 0.9], size: 8, speed: 0.05, tint: [1.0, 0.97, 0.92],
     });
     steam.renderOrder = 10; // always over the body: the steam hides the forming edge
     steam.setParent(scene);
@@ -128,6 +146,8 @@ export default function WallShot({
       backdrop.program.uniforms.uRes.value = [w, h];
       const px = (h * dpr) / (2 * Math.tan((fov * Math.PI) / 360));
       steam.program.uniforms.uPxScale.value = px * 0.06;
+      birds.program.uniforms.uPx.value = px * 0.9;
+      post.resize();
       dust.program.uniforms.uPxScale.value = px * 0.06;
     }
     resize();
@@ -139,8 +159,11 @@ export default function WallShot({
     const mix3 = (a: number[], b: number[], t: number) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
 
     const start = performance.now();
+    const sunWorld = new Vec3();
+    const sunClip = new Vec3();
     function frame(p: number, t: number) {
-      const s = shotAt(p);
+      const s = shotAt(p, t);
+      shared.uTime.value = t;
       camera.position.set(...s.cam);
       // portrait screens can't hold an off-centre composition: aim closer to centre
       camera.lookAt(aspect < 0.8 ? [s.tgt[0] * 0.3, s.tgt[1], s.tgt[2]] : s.tgt);
@@ -170,12 +193,24 @@ export default function WallShot({
       ground.program.uniforms.uBreach.value = s.breach;
       wall.program.uniforms.uBreach.value = s.breach;
 
+      // a heavy, swaying walk: bob on the step, sway between steps
       for (let i = 0; i < wanderers.length; i++) {
         const w = wanderers[i];
-        w.rotation.z = Math.sin(t * 0.6 + i * 1.7) * 0.04;
+        const ph = t * (0.9 + (i % 3) * 0.15) + i * 1.7;
+        w.rotation.z = Math.sin(ph) * 0.05;
+        w.rotation.x = 0.04 + Math.abs(Math.sin(ph)) * 0.03;
       }
 
-      renderer.render({ scene, camera });
+      birds.visible = s.birds > 0.01;
+      birds.program.uniforms.uTime.value = t;
+      birds.program.uniforms.uScatter.value = s.scatter;
+      lightning.visible = s.bolt > 0.001;
+      lightning.program.uniforms.uStrike.value = s.bolt * 3;
+      // the bolt faces the camera around its vertical axis
+      lightning.rotation.y = Math.atan2(camera.position.x - lightning.position.x, camera.position.z - lightning.position.z);
+
+      const target = post.target();
+      renderer.render({ scene, camera, target });
 
       if (s.xray > 0.001) {
         xrayTitan.uniforms.uXray.value = s.xray;
@@ -184,8 +219,18 @@ export default function WallShot({
         const y = lerp(3.3, 5.35, s.xrayTravel);
         xrayCam.position.set(0.35 * Math.sin(s.xrayTravel * 2.4), y, aspect < 0.8 ? 3.4 : 2.5);
         xrayCam.lookAt([0, y + 0.1, 0]);
-        renderer.render({ scene: xrayScene, camera: xrayCam, clear: false });
+        renderer.render({ scene: xrayScene, camera: xrayCam, target, clear: false });
       }
+
+      // where the sun is on screen, for the light shafts
+      const sd = atmos.uSun.value as number[];
+      sunWorld.set(camera.position.x + sd[0] * 1000, camera.position.y + sd[1] * 1000, camera.position.z + sd[2] * 1000);
+      sunClip.copy(sunWorld).applyMatrix4(camera.viewMatrix);
+      const facing = sunClip.z < 0 ? 1 : 0;
+      sunClip.copy(sunWorld).applyMatrix4(camera.projectionViewMatrix);
+      const su: [number, number] = [sunClip.x * 0.5 + 0.5, sunClip.y * 0.5 + 0.5];
+      const onScreen = Math.max(0, 1 - Math.max(Math.abs(su[0] - 0.5), Math.abs(su[1] - 0.5)) * 1.1);
+      post.render(renderer as never, su, s.rays * facing * Math.min(1, onScreen * 1.6 + 0.15) * (1 - s.xray), t);
     }
 
     if (still) {

@@ -19,12 +19,13 @@ const WallShot = dynamic(() => import("@/components/three/WallShot"), { ssr: fal
 const PLACE = ["845", "Shiganshina District", "Wall Maria"];
 
 // Field report lines, typed in as the shot unfolds. Only verifiable facts:
-// the Walls are 50 m, the Colossal Titan 60 m, the outer gate was breached.
+// the Walls are 50 m, the Colossal Titan 60 m, a shifter transforms in a
+// lightning strike, the outer gate was breached.
 const LOG = [
-  { at: 0.325, text: "Shadow crossing the southern fields." },
-  { at: 0.44, text: "Steam beyond the Wall. Source unknown." },
-  { at: 0.55, text: "Height estimated at 60 m. The Wall stands 50 m." },
-  { at: 0.62, text: "Outer gate destroyed.", alert: true },
+  { at: 0.405, text: "Lightning strike south of the Wall." },
+  { at: 0.43, text: "A shadow across the district. Steam beyond the Wall." },
+  { at: 0.56, text: "Height estimated at 60 m. The Wall stands 50 m." },
+  { at: 0.617, text: "Outer gate destroyed.", alert: true },
 ];
 
 function Title({ id }: { id?: string }) {
@@ -104,7 +105,8 @@ export default function Opening() {
           onUpdate: (self) => {
             const p = self.progress;
             const prev = last.current;
-            if (prev < 0.614 && p >= 0.614) sound.cue("arrival");
+            if (prev < 0.403 && p >= 0.403) sound.cue("arrival");
+            if (prev < 0.616 && p >= 0.616) sound.cue("breach");
             last.current = p;
             progress.current = p;
             if (altRef.current) altRef.current.textContent = String(altitudeAt(p)).padStart(3, "0");

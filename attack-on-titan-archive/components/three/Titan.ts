@@ -194,6 +194,13 @@ void main() {
   vec3 lit = col * (uSunColor * diff * 1.6 * shade + uSkyColor * (0.2 + 0.2 * N.y) * mix(1.0, 2.0, uSkin)) * ao
     + uSunColor * (rim * 1.4 + spec * 0.5) * shade;
 
+  // backlit flesh: light passing THROUGH thin parts (edges, fingers, jaw)
+  // glows red. Fast translucency, after Barre-Brisebois & Bouchard (GDC 2011).
+  vec3 Lt = normalize(L + N * 0.35);
+  float trans = pow(clamp(dot(V, -Lt), 0.0, 1.0), 4.0) * (1.0 - ao * 0.55) * (1.0 - uSkin * 0.6);
+  float thin = pow(1.0 - max(dot(N, V), 0.0), 1.5);
+  lit += vec3(0.95, 0.22, 0.1) * uSunColor * trans * (0.35 + 1.4 * thin) * shade;
+
   // the forming edge smoulders under the steam
   float ember = 0.6 + 0.4 * noise3(p * 14.0);
   lit = mix(lit, vec3(0.9, 0.36, 0.16) * ember, capEdge * 0.85);

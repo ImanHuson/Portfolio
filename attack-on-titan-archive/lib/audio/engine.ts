@@ -3,7 +3,7 @@
 // (a user gesture, which browsers require before audio can start).
 // Brief section 05: "No music. Wind. Distant birds. Very subtle ambience."
 
-export type Cue = "arrival" | "rumble";
+export type Cue = "arrival" | "breach" | "rumble";
 
 type Listener = () => void;
 
@@ -143,14 +143,14 @@ class SoundEngine {
     const ctx = this.ctx;
     const t = ctx.currentTime;
     const src = ctx.createBufferSource();
-    src.buffer = this.noiseBuffer(c === "arrival" ? 3 : 5);
+    src.buffer = this.noiseBuffer(c === "rumble" ? 5 : 3);
     const lp = ctx.createBiquadFilter();
     lp.type = "lowpass";
-    lp.frequency.value = c === "arrival" ? 900 : 120;
+    lp.frequency.value = c === "arrival" ? 900 : c === "breach" ? 260 : 120;
     const g = ctx.createGain();
-    const peak = c === "arrival" ? 0.9 : 0.7;
+    const peak = c === "arrival" ? 0.9 : c === "breach" ? 1 : 0.7;
     g.gain.setValueAtTime(0, t);
-    if (c === "arrival") {
+    if (c === "arrival" || c === "breach") {
       // the lightning-crack of a transformation: sharp attack, long tail
       g.gain.linearRampToValueAtTime(peak, t + 0.02);
       g.gain.exponentialRampToValueAtTime(0.001, t + 2.8);

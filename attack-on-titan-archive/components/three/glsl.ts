@@ -80,6 +80,12 @@ uniform float uWallH;
 uniform vec3 uTitanPos;
 uniform float uTitanTop;
 uniform float uTitanW;
+uniform float uTime;
+// drifting cloud shadows: the one thing that makes a still landscape feel like weather
+float cloudShadow(vec2 p) {
+  float c = fbm2(p * 0.006 + vec2(uTime * 0.012, uTime * 0.004));
+  return 1.0 - 0.42 * smoothstep(0.5, 0.72, c);
+}
 float wallShadow(vec3 p) {
   vec2 s = normalize(uSun.xz);
   float tanE = uSun.y / length(uSun.xz);
@@ -113,7 +119,8 @@ float titanShadow(vec3 p) {
 export const SHADOW_UNIFORMS = () => ({
   uWallR: { value: 60 },
   uWallH: { value: 5 },
-  uTitanPos: { value: [0, 0, -65] },
+  uTitanPos: { value: [0, 0, -62.8] },
   uTitanTop: { value: 0 },
-  uTitanW: { value: 1.35 },
+  uTitanW: { value: 1.9 }, // body plus its steam: the shadow must read from 300 m up
+  uTime: { value: 0 },
 });
