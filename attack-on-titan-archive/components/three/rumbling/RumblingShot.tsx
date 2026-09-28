@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { Camera, Geometry, Mesh, Program, Renderer, Transform, Triangle, Vec3 } from "ogl";
+import { makeGovernor } from "@/components/three/governor";
 import { layout, rumblingAt, seaFragment, seaVertex, titanFragment, titanVertex } from "./rumbling";
 
-export default function RumblingShot({ progress, className }: { progress: React.RefObject<number>; className?: string }) {
+export default function RumblingShot({ progress, className, onTooSlow }: { progress: React.RefObject<number>; className?: string; onTooSlow?: () => void }) {
   const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -81,9 +82,23 @@ export default function RumblingShot({ progress, className }: { progress: React.
 
     let raf = 0;
     const t0 = performance.now();
+    const gov = makeGovernor({
+      start: t0,
+      scale: renderer.dpr,
+      floor: 0.5,
+      apply: (sc) => {
+        renderer.dpr = sc;
+        resize();
+      },
+      onTooSlow,
+    });
     function frame(now: number) {
       raf = requestAnimationFrame(frame);
-      if (!visible || document.hidden) return;
+      if (!visible || document.hidden) {
+        gov.rest(now);
+        return;
+      }
+      gov.tick(now);
       const s = rumblingAt(progress.current ?? 0);
       shared.uTime.value = (now - t0) / 1000;
       shared.uDark.value = s.dark;
@@ -103,7 +118,7 @@ export default function RumblingShot({ progress, className }: { progress: React.
       gl.getExtension("WEBGL_lose_context")?.loseContext();
       gl.canvas.remove();
     };
-  }, [progress]);
+  }, [progress, onTooSlow]);
 
   return <div ref={hostRef} className={className} />;
 }

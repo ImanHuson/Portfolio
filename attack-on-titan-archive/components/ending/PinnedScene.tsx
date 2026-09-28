@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -26,12 +26,13 @@ export default function PinnedScene({
 }: {
   label: string;
   beats: Beat[];
-  Scene: React.ComponentType<{ progress: React.RefObject<number>; className?: string }>;
+  Scene: React.ComponentType<{ progress: React.RefObject<number>; className?: string; onTooSlow?: () => void }>;
   stills: { src: string; beats: number[] }[];
   height?: string;
   /** lines for a HUD, recomputed from progress on every scroll update (no React state) */
   hud?: (p: number) => string[];
 }) {
+  const anchor = `scene-${label.toLowerCase().replace(/[^a-z]+/g, "-")}`;
   const mode = useSyncExternalStore(
     reducedMotionStore.subscribe,
     () => (reducedMotionStore.getSnapshot() ? "still" : "cinematic"),
@@ -40,10 +41,26 @@ export default function PinnedScene({
   const hostRef = useRef<HTMLElement>(null);
   const hudRef = useRef<HTMLDivElement>(null);
   const progress = useRef(0);
+  // a device too slow for the live scene gets the stills instead, kept in place
+  const [tooSlow, setTooSlow] = useState(false);
+  const onTooSlow = useCallback(() => setTooSlow(true), []);
+  useEffect(() => {
+    if (!tooSlow) return;
+    document.documentElement.classList.remove("nav-hidden");
+    document.getElementById(anchor)?.scrollIntoView({ block: "start" });
+  }, [tooSlow, anchor]);
 
   useGSAP(
     () => {
-      if (mode !== "cinematic" || !hostRef.current) return;
+      if (mode !== "cinematic" || tooSlow || !hostRef.current) return;
+      // the surreal scenes have no interface: the site's navigation fades while one is pinned
+      // (it comes back on keyboard focus, and as soon as the scene is scrolled past)
+      ScrollTrigger.create({
+        trigger: hostRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        onToggle: (self) => document.documentElement.classList.toggle("nav-hidden", self.isActive),
+      });
       const q = gsap.utils.selector(hostRef);
       gsap.set(q("[data-beat]"), { autoAlpha: 0, y: 10 });
       const drawHud = (p: number) => {
@@ -72,12 +89,14 @@ export default function PinnedScene({
       });
       tl.to({}, { duration: 0.01 }, 0.99);
     },
-    { dependencies: [mode], scope: hostRef },
+    { dependencies: [mode, tooSlow], scope: hostRef },
   );
+  // never leave the navigation hidden when the scene unmounts
+  useEffect(() => () => document.documentElement.classList.remove("nav-hidden"), []);
 
-  if (mode !== "cinematic")
+  if (mode !== "cinematic" || tooSlow)
     return (
-      <section aria-label={label} className="bg-void px-4 py-20 md:px-8 md:py-28">
+      <section id={anchor} aria-label={label} className="scroll-mt-[var(--nav-h)] bg-void px-4 py-20 md:px-8 md:py-28">
         <ol className="mx-auto grid max-w-[1400px] gap-x-6 gap-y-14 md:grid-cols-2">
           {stills.map((f, k) => (
             <li key={f.src} className={cn(k === 0 && "md:col-span-2")}>
@@ -94,9 +113,9 @@ export default function PinnedScene({
     );
 
   return (
-    <section ref={hostRef} aria-label={label} className={cn("relative bg-void", height)}>
+    <section ref={hostRef} id={anchor} aria-label={label} className={cn("relative bg-void", height)}>
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
-        <Scene progress={progress} className="absolute inset-0" />
+        <Scene progress={progress} onTooSlow={onTooSlow} className="absolute inset-0" />
         {hud && (
           <div
             ref={hudRef}

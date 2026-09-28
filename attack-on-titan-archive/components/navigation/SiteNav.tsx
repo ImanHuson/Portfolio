@@ -5,7 +5,7 @@ import SoundToggle from "@/components/archive/SoundToggle";
  * theatre. The page is the navigation; this is the file's header strip. */
 export default function SiteNav() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-[var(--nav-h)] border-b border-paper/10 bg-base/70 backdrop-blur-[2px]">
+    <header className="site-header fixed inset-x-0 top-0 z-50 h-[var(--nav-h)] border-b border-paper/10 bg-base/70 backdrop-blur-[2px]">
       <nav aria-label="Primary" className="mx-auto flex h-full max-w-[1400px] items-center justify-between gap-3 px-4 sm:gap-6 md:px-8">
         <Link href="/" className="flex items-baseline gap-3 font-military text-[0.95rem] font-semibold tracking-[0.18em] whitespace-nowrap text-paper uppercase sm:tracking-[0.28em]">
           <span>AoT Archive</span>

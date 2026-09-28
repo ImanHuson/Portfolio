@@ -112,20 +112,35 @@ uniform float uTime;
 ${SKY_GLSL}
 float cap(vec2 p, vec2 a, vec2 b, float r){ vec2 pa = p - a, ba = b - a; float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0); return length(pa - ba * h) - r; }
 float smin(float a, float b, float k){ float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0); return mix(b, a, h) - k * h * (1.0 - h); }
+float body2(vec2 q, float w){
+  // a flayed giant, arms hanging, head a little forward
+  float d = cap(q, vec2(0.0, 0.5), vec2(0.0, 0.76), 0.085);                         // torso
+  d = smin(d, cap(q, vec2(-0.13, 0.78), vec2(0.13, 0.78), 0.05), 0.04);            // shoulders
+  d = smin(d, length(q - vec2(0.012, 0.885)) - 0.058, 0.02);                        // head
+  d = smin(d, cap(q, vec2(-0.03, 0.845), vec2(0.03, 0.845), 0.03), 0.015);        // neck
+  d = min(d, cap(q, vec2(-0.06, 0.48), vec2(-0.07 + w, 0.02), 0.045));              // legs
+  d = min(d, cap(q, vec2(0.06, 0.48), vec2(0.07 - w, 0.02), 0.045));
+  d = smin(d, cap(q, vec2(-0.16, 0.77), vec2(-0.2 - w * 0.5, 0.42), 0.034), 0.02); // arms
+  d = smin(d, cap(q, vec2(0.16, 0.77), vec2(0.2 + w * 0.5, 0.42), 0.034), 0.02);
+  return d;
+}
+float hsh(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+float vnoise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hsh(i), hsh(i + vec2(1, 0)), f.x), mix(hsh(i + vec2(0, 1)), hsh(i + vec2(1, 1)), f.x), f.y); }
 void main(){
   if (vY < 0.0) discard; // below the waterline
   float vis = clamp(uCount - vOrder, 0.0, 1.0);
   if (vis <= 0.0) discard;
   vec2 q = vQ;
   float w = sin(uTime * 0.6 + vPhase * 6.283) * 0.035; // a slow stride
-  // a flayed giant, arms hanging, head a little forward
-  float d = cap(q, vec2(0.0, 0.5), vec2(0.0, 0.76), 0.085);                         // torso
-  d = smin(d, cap(q, vec2(-0.13, 0.78), vec2(0.13, 0.78), 0.05), 0.04);            // shoulders
-  d = smin(d, length(q - vec2(0.012, 0.885)) - 0.058, 0.02);                        // head
-  d = min(d, cap(q, vec2(-0.06, 0.48), vec2(-0.07 + w, 0.02), 0.045));              // legs
-  d = min(d, cap(q, vec2(0.06, 0.48), vec2(0.07 - w, 0.02), 0.045));
-  d = min(d, cap(q, vec2(-0.16, 0.77), vec2(-0.2 - w * 0.5, 0.42), 0.034));        // arms
-  d = min(d, cap(q, vec2(0.16, 0.77), vec2(0.2 + w * 0.5, 0.42), 0.034));
+  float d = body2(q, w);
+  // volume from the silhouette: the distance field's gradient is the surface
+  // tilt and its depth inside gives a rounded bulge, so the body reads as a
+  // form lit from behind, not a paper cut-out
+  float e = 0.004;
+  vec2 g = vec2(body2(q + vec2(e, 0.0), w) - body2(q - vec2(e, 0.0), w), body2(q + vec2(0.0, e), w) - body2(q - vec2(0.0, e), w)) / (2.0 * e);
+  float inside = clamp(-d / 0.06, 0.0, 1.0);
+  vec3 nrm = normalize(vec3(g * (1.0 - inside * 0.85), 0.35 + inside));
   float px = 0.004 + vDist * 0.00002;
   float body = smoothstep(px, -px, d);
   float haze = exp(-max(d, 0.0) * 26.0) * 0.14 * smoothstep(0.45, 0.95, q.y);     // heat rising off them
@@ -133,9 +148,16 @@ void main(){
   vec3 fogC = skyCol(normalize(vec3(0.0, 0.004, -1.0))) * 0.45;
   float fog = 1.0 - exp(-vDist * 0.0016);
   vec3 dark = vec3(0.002, 0.0018, 0.0018);
-  // backlit: a warm rim just inside the edge
-  float rim = smoothstep(-0.018, 0.0, d) * body;
-  vec3 c = mix(dark, vec3(0.3, 0.13, 0.05) * (1.0 - 0.6 * uDark), rim * 0.6);
+  // back light where the surface turns away from the viewer, a faint cool
+  // fill from the sky above, and exposed muscle as vertical fibre; the detail
+  // fades out with distance, where only the rimmed silhouette can be seen
+  float back = pow(1.0 - nrm.z, 2.6); // tight: light only at the turning edges, the body stays dark
+  float top = max(nrm.y, 0.0) * 0.35;
+  float fibre = vnoise(vec2(q.x * 90.0, q.y * 9.0)) * 0.6 + vnoise(q * 30.0) * 0.4;
+  vec3 lightC = vec3(0.34, 0.15, 0.06) * (1.0 - 0.6 * uDark);
+  vec3 near = dark * (0.7 + 0.6 * fibre) + lightC * back * (0.5 + 0.5 * fibre) + vec3(0.02, 0.022, 0.03) * top;
+  vec3 far = dark + lightC * smoothstep(-0.018, 0.0, d) * 0.6;
+  vec3 c = mix(far, near, 1.0 - smoothstep(60.0, 180.0, vDist));
   c = mix(c, fogC, fog);
   vec3 hazeC = fogC;
   float a = max(body, haze * (1.0 - fog * 0.7));

@@ -13,18 +13,8 @@ export default function EndingGate({ id, title, children }: { id: string; title:
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // a reader who opened one ending file has seen the gate: open the next ones
-    try {
-      if (sessionStorage.getItem("aot-ending-open") === "1") el.open = true;
-    } catch {}
-    const onToggle = () => {
-      if (el.open) {
-        try {
-          sessionStorage.setItem("aot-ending-open", "1");
-        } catch {}
-      }
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
+    // every ending file asks on its own: no gate is skipped for having opened another
+    const onToggle = () => requestAnimationFrame(() => ScrollTrigger.refresh());
     el.addEventListener("toggle", onToggle);
     return () => el.removeEventListener("toggle", onToggle);
   }, []);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Camera, Geometry, Mesh, Program, Renderer, Transform, Triangle, Vec3 } from "ogl";
+import { makeGovernor } from "@/components/three/governor";
 
 // Paths: an endless desert under stars, and at its centre a pillar of light
 // that branches into countless lines, one for every Subject of Ymir. A small
@@ -73,15 +74,26 @@ attribute float depth;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform float uReveal;
+uniform vec2 uOffset; // in pixels: the same lines drawn a few times, nudged, to make them glow
+uniform vec2 uRes;
 varying float vA;
 void main(){
   vA = clamp((uReveal * 9.0 - depth), 0.0, 1.0) * (1.0 - depth * 0.075);
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  gl_Position.xy += uOffset / uRes * 2.0 * gl_Position.w;
 }`;
 const lineFragment = /* glsl */ `
 precision highp float;
+uniform float uGain;
 varying float vA;
-void main(){ gl_FragColor = vec4(vec3(0.62, 0.8, 1.0) * vA * 0.95, 1.0); }`;
+void main(){ gl_FragColor = vec4(vec3(0.62, 0.8, 1.0) * vA * uGain, 1.0); }`;
+
+// core, a 1px ring, then a faint 3px halo: webgl draws lines 1px wide at most
+const GLOW: [number, number, number][] = [
+  [0, 0, 0.95],
+  [1, 0, 0.32], [-1, 0, 0.32], [0, 1, 0.32], [0, -1, 0.32],
+  [2.5, 0, 0.09], [-2.5, 0, 0.09], [0, 2.5, 0.09], [0, -2.5, 0.09], [1.8, 1.8, 0.07], [-1.8, -1.8, 0.07], [1.8, -1.8, 0.07], [-1.8, 1.8, 0.07],
+];
 
 const pointVertex = /* glsl */ `
 attribute vec3 position;
@@ -179,7 +191,7 @@ function pathsAt(p: number) {
   return { pos, tgt, glow: 0.35 + 0.65 * c((p - 0.12) / 0.3), reveal: c((p - 0.3) / 0.35) };
 }
 
-export default function PathsShot({ progress, className }: { progress: React.RefObject<number>; className?: string }) {
+export default function PathsShot({ progress, className, onTooSlow }: { progress: React.RefObject<number>; className?: string; onTooSlow?: () => void }) {
   const hostRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const host = hostRef.current;
@@ -216,15 +228,27 @@ export default function PathsShot({ progress, className }: { progress: React.Ref
     bg.setParent(scene);
 
     const tree = buildTree();
-    const lines = new Mesh(gl, {
-      mode: gl.LINES,
-      geometry: new Geometry(gl, { position: { size: 3, data: tree.pos }, depth: { size: 1, data: tree.dep } }),
-      program: new Program(gl, { vertex: lineVertex, fragment: lineFragment, ...additive(), uniforms: { uReveal: { value: 0 } } }),
+    const treeGeo = new Geometry(gl, { position: { size: 3, data: tree.pos }, depth: { size: 1, data: tree.dep } });
+    const reveal = { value: 0 };
+    const lineRes = { value: [1, 1] };
+    const lineMeshes = GLOW.map(([ox, oy, gain]) => {
+      const m = new Mesh(gl, {
+        mode: gl.LINES,
+        geometry: treeGeo,
+        program: new Program(gl, {
+          vertex: lineVertex,
+          fragment: lineFragment,
+          ...additive(),
+          uniforms: { uReveal: reveal, uRes: lineRes, uOffset: { value: [ox, oy] }, uGain: { value: gain } },
+        }),
+      });
+      m.program.setBlendFunc(gl.ONE, gl.ONE);
+      m.frustumCulled = false;
+      m.renderOrder = 1;
+      m.setParent(scene);
+      return m;
     });
-    lines.program.setBlendFunc(gl.ONE, gl.ONE);
-    lines.frustumCulled = false;
-    lines.renderOrder = 1;
-    lines.setParent(scene);
+    void lineMeshes;
 
     const N = small ? 500 : 1200;
     const pp = new Float32Array(N * 3);
@@ -259,6 +283,8 @@ export default function PathsShot({ progress, className }: { progress: React.Ref
       renderer.setSize(host!.clientWidth, host!.clientHeight);
       camera.perspective({ aspect: host!.clientWidth / Math.max(1, host!.clientHeight) });
       bg.program.uniforms.uRes.value = [gl.canvas.width, gl.canvas.height];
+      // glow offsets are in CSS pixels, so the halo is the same width at any resolution
+      lineRes.value = [host!.clientWidth, host!.clientHeight];
     }
     resize();
     const ro = new ResizeObserver(resize);
@@ -268,9 +294,23 @@ export default function PathsShot({ progress, className }: { progress: React.Ref
     io.observe(host);
     let raf = 0;
     const t0 = performance.now();
+    const gov = makeGovernor({
+      start: t0,
+      scale: renderer.dpr,
+      floor: 0.5,
+      apply: (sc) => {
+        renderer.dpr = sc;
+        resize();
+      },
+      onTooSlow,
+    });
     function frame(now: number) {
       raf = requestAnimationFrame(frame);
-      if (!visible || document.hidden) return;
+      if (!visible || document.hidden) {
+        gov.rest(now);
+        return;
+      }
+      gov.tick(now);
       const t = (now - t0) / 1000;
       const s = pathsAt(progress.current ?? 0);
       camera.position.copy(s.pos);
@@ -280,7 +320,7 @@ export default function PathsShot({ progress, className }: { progress: React.Ref
       u.uCamLook.value.copy(s.tgt);
       u.uTime.value = t;
       u.uGlow.value = s.glow;
-      lines.program.uniforms.uReveal.value = s.reveal;
+      reveal.value = s.reveal;
       motes.program.uniforms.uTime.value = t;
       fig.program.uniforms.uCamPos.value.copy(s.pos);
       renderer.render({ scene, camera });
@@ -293,6 +333,6 @@ export default function PathsShot({ progress, className }: { progress: React.Ref
       gl.getExtension("WEBGL_lose_context")?.loseContext();
       gl.canvas.remove();
     };
-  }, [progress]);
+  }, [progress, onTooSlow]);
   return <div ref={hostRef} className={className} />;
 }
