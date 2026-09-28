@@ -75,7 +75,8 @@
   --radius-xl: 0rem;
 
   /* three typographic personalities (brief section 03), set in layout.tsx */
-  --font-display: var(--font-display-face);   /* editorial serif: THE WALLS */
+  --font-display: var(--font-display-face);   /* inscription capitals: THE WALLS */
+  --font-serif: var(--font-serif-face);       /* worn historical italic: ledes, quotes */
   --font-military: var(--font-military-face); /* condensed grotesk: YEAR 845 */
   --font-mono: var(--font-mono-face);         /* coordinates, IDs, reports */
   --font-sans: var(--font-sans-face);         /* reading text */
@@ -107,6 +108,11 @@
   }
   h1, h2, h3, h4 {
     text-wrap: balance;
+  }
+  /* the display face is inscription caps: print it, don't render it */
+  .font-display {
+    filter: url(#ink);
+    letter-spacing: 0.01em;
   }
   p {
     text-wrap: pretty;
@@ -179,4 +185,22 @@ html.lenis, html.lenis body { height: auto; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Titan turntables: 24 frames in one horizontal sprite. Hover or focus plays
+   the turn; reduced motion never does (the first frame is a composed view). */
+.turntable {
+  background-repeat: no-repeat;
+  background-size: 2400% 100%;
+  background-position: 0 0;
+}
+@keyframes turn {
+  to { background-position: calc(100% * 24 / 23) 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .turn-on-hover:is(:hover, :focus-visible) .turntable,
+  .turn-always .turntable {
+    animation: turn 2.4s steps(24) infinite;
+  }
+  .turn-always .turntable { animation-duration: 7s; }
 }

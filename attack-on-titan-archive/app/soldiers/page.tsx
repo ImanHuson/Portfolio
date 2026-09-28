@@ -27,7 +27,7 @@ export default function Soldiers() {
           </p>
         </div>
       </section>
-      <NextChapter href="/#index" id="AOT-04" title="The Titans" line="Sealed for now. The next files are still being recovered." />
+      <NextChapter href="/titans/" id="AOT-04" title="The Titans" line="Nine inheritances, handed down by being eaten, from the Founding to the War Hammer." />
     </>
   );
 }

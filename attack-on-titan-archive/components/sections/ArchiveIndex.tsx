@@ -35,7 +35,7 @@ export default function ArchiveIndex() {
                 </h3>
                 <p className="font-mono text-[0.72rem] tracking-[0.08em] text-ink/60 uppercase">Survey Corps Archive</p>
               </header>
-              <p className="mt-4 max-w-[52ch] font-display text-[1.02rem] text-ink/75 italic">{act.register}</p>
+              <p className="mt-4 max-w-[52ch] font-serif text-[1.02rem] text-ink/75 italic">{act.register}</p>
               <ol className="mt-6 flex flex-col">
                 {act.chapters.map((c) => {
                   const body = (

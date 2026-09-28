@@ -35,7 +35,7 @@ function Title({ id }: { id?: string }) {
         Attack on Titan
       </h1>
       <p className="mt-3 font-military text-h3 font-semibold tracking-[0.5em] text-paper/85 uppercase">The Archive</p>
-      <div className="mt-8 max-w-[34ch] font-display text-lede leading-snug text-paper/90 italic">
+      <div className="mt-8 max-w-[34ch] font-serif text-lede leading-snug text-paper/90 italic">
         <p>Humanity lived behind the Walls for one hundred years.</p>
         <p className="mt-1">It took one day to destroy the illusion.</p>
       </div>

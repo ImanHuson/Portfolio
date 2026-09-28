@@ -48,7 +48,7 @@ export default function ChapterHeader({
           </ol>
         </nav>
         <h1 className="mt-6 font-display text-h1 leading-[0.92] font-extrabold text-paper uppercase">{title}</h1>
-        <div className="mt-6 max-w-[52ch] font-display text-lede leading-snug text-paper/85 italic">{lede}</div>
+        <div className="mt-6 max-w-[52ch] font-serif text-lede leading-snug text-paper/85 italic">{lede}</div>
       </div>
     </header>
   );

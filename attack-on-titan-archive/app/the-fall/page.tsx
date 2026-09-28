@@ -116,7 +116,7 @@ export default function TheFall() {
       </section>
 
       <section aria-label="A note in the margin" className="px-4 py-24 md:px-8 md:py-32">
-        <p className="mx-auto max-w-[30ch] text-center font-display text-h3 leading-snug text-paper/90 italic">
+        <p className="mx-auto max-w-[30ch] text-center font-serif text-h3 leading-snug text-paper/90 italic">
           Inside the Walls, 845 was remembered as a catastrophe. The archive would later find that it had been a mission.
         </p>
       </section>

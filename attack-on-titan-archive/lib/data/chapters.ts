@@ -12,7 +12,7 @@ export const ACTS: Act[] = [
       { id: "AOT-01", title: "The Wall", line: "Shiganshina, 845. The morning it ended.", open: true, href: "/" },
       { id: "AOT-02", title: "The Fall", line: "Wall Maria, the evacuation, and what it cost.", open: true, href: "/the-fall/" },
       { id: "AOT-03", title: "The Soldiers", line: "Personnel files of the 104th and the Survey Corps.", open: true, href: "/soldiers/" },
-      { id: "AOT-04", title: "The Titans", line: "Nine inheritances, and the research that tried to name them.", open: false },
+      { id: "AOT-04", title: "The Titans", line: "Nine inheritances, and the research that tried to name them.", open: true, href: "/titans/" },
     ],
   },
   {

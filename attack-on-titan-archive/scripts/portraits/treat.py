@@ -35,10 +35,10 @@ def font(name, size):
     return ImageFont.truetype(str(FONTS / name), size)
 
 
-MONO = lambda s: font("IBM_Plex_Mono_Medium_500.ttf", s)
+MONO = lambda s: font("Courier_Prime_Bold.ttf", s)
 COND = lambda s: font("Barlow_Condensed_Bold_700.ttf", s)
-ITAL = lambda s: font("Playfair_Display_Italic_400.ttf", s)
-SERIF = lambda s: font("Playfair_Display_Regular_400.ttf", s)
+ITAL = lambda s: font("IM_FELL_English_Italic.ttf", s)
+SERIF = lambda s: font("Cinzel_Bold.ttf", s)
 
 
 # ---------------------------------------------------------------- base look

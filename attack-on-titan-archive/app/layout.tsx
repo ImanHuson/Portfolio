@@ -1,31 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow, Barlow_Condensed, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
+import { Barlow, Barlow_Condensed, Cinzel, Courier_Prime, IM_Fell_English } from "next/font/google";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import SiteNav from "@/components/navigation/SiteNav";
 import SiteFooter from "@/components/navigation/SiteFooter";
 import "./globals.css";
 
-// Three typographic personalities (brief section 03):
-//   Playfair Display: high-contrast editorial serif, historical not futuristic.
-//     THE WALLS / THE RUMBLING / PATHS. The brief names a serif for display,
-//     and the register is a recovered historical document: the one case the
-//     taste skill allows it. (Cormorant was used by the-rising-archive; not reused.)
+// Typography, matched to the show's own lettering (brief section 03):
+//   Cinzel: Roman inscription capitals, chiselled and monumental, the nearest
+//     open font to the series' title lettering. THE WALLS / THE RUMBLING.
+//     A faint ink-bleed filter (.ink in globals.css) roughens its edges.
+//   IM Fell English: a digitised 17th-century type with real print wear, for
+//     italic ledes and quotations: the voice of the historical record.
 //   Barlow Condensed: the military voice. YEAR 845 / WALL MARIA / RESTRICTED.
-//   IBM Plex Mono: typewritten reports, coordinates, archive IDs.
+//   Courier Prime: the typewriter, for reports, coordinates, archive IDs.
 //   Barlow (regular width) for reading text.
-const display = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "600", "800"],
-  style: ["normal", "italic"],
-  variable: "--font-display-face",
-});
+const display = Cinzel({ subsets: ["latin"], weight: ["600", "700", "900"], variable: "--font-display-face" });
+const serif = IM_Fell_English({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serif-face" });
 const military = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-military-face",
 });
 const sans = Barlow({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans-face" });
-const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono-face" });
+const mono = Courier_Prime({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-mono-face" });
 
 const SITE = "https://imanhuson.github.io/Portfolio/attack-on-titan-archive";
 
@@ -68,7 +65,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${military.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${serif.variable} ${military.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         <a
           href="#main"
@@ -79,6 +76,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{`[data-js-only]{display:none!important}`}</style>
         </noscript>
+        {/* ink bleed for display type: a whisper of displacement so the
+            chiselled capitals read as printed, not rendered */}
+        <svg aria-hidden width="0" height="0" className="absolute">
+          <filter id="ink" x="-2%" y="-10%" width="104%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <SmoothScroll>
           <SiteNav />

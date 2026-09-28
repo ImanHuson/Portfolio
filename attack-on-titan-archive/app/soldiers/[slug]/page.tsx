@@ -75,7 +75,7 @@ export default async function Dossier({ params }: PageProps<"/soldiers/[slug]">)
 
           <div>
             <h1 className="font-display text-h1 leading-[0.92] font-extrabold text-paper">{p.name}</h1>
-            <p className="mt-4 font-display text-h3 text-paper/70 italic">{p.word}</p>
+            <p className="mt-4 font-serif text-h3 text-paper/70 italic">{p.word}</p>
 
             <div className="paper relative mt-10 px-6 py-7 md:px-9">
               <p className="font-mono text-[0.72rem] tracking-[0.14em] text-ink/60 uppercase">Personnel file {p.file}</p>

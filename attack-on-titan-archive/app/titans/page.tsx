@@ -1,0 +1,96 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import ChapterHeader from "@/components/typography/ChapterHeader";
+import NextChapter from "@/components/typography/NextChapter";
+import Turntable from "@/components/titans/Turntable";
+import { INHERITANCE, ORIGIN, TITANS } from "@/lib/data/titans";
+
+export const metadata: Metadata = {
+  title: "The Titans",
+  description: "The Nine Titans: the Founding, Attack, Colossal, Armored, Female, Beast, Jaw, Cart and War Hammer, their powers, holders and heights, to scale.",
+  alternates: { canonical: "./" },
+};
+
+const WALL = 50; // metres
+const MAX = 60;
+
+export default function Titans() {
+  return (
+    <>
+      <ChapterHeader
+        id="AOT-04"
+        title="The Titans"
+        trail={[{ href: "/soldiers/", label: "AOT-03" }]}
+        lede="Nine inheritances, handed down by being eaten. Hover a Titan to turn it; open one to read its file."
+      />
+
+      {/* the monumental archive: nine columns, one per Titan */}
+      <section aria-label="The Nine Titans" className="px-4 pb-24 md:px-8">
+        <ol className="mx-auto grid max-w-[1500px] grid-cols-3 gap-px bg-line md:grid-cols-9">
+          {TITANS.map((t) => (
+            <li key={t.slug} className="bg-base">
+              <Link href={`/titans/${t.slug}/`} className="turn-on-hover group flex h-full flex-col items-center px-2 pt-6 pb-5 text-center transition-colors hover:bg-base-2 focus-visible:bg-base-2">
+                <span className="font-mono text-[0.72rem] tracking-[0.12em] text-ash">{t.height} M</span>
+                <Turntable slug={t.slug} small className="mt-3 w-full max-w-[150px]" />
+                <span className="mt-4 font-display text-[0.95rem] leading-tight font-bold text-paper md:text-[1rem]">{t.name.replace(" Titan", "")}</span>
+                <span className="mt-2 hidden min-h-[4.5em] max-w-[18ch] text-[0.82rem] leading-snug text-ash opacity-70 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 md:block">
+                  {t.trait}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* to scale, against the Wall */}
+      <section aria-labelledby="scale-title" className="border-t border-line bg-[radial-gradient(ellipse_at_50%_100%,rgba(138,116,100,0.16),transparent_60%)] px-4 py-24 md:px-8 md:py-32">
+        <div className="mx-auto max-w-[1500px]">
+          <h2 id="scale-title" className="font-display text-h2 leading-tight font-bold text-paper">
+            To scale
+          </h2>
+          <p className="mt-4 max-w-[56ch] text-ash">Every Titan at its recorded height, against the fifty metres of a Wall. Only one of them could look over it.</p>
+          <figure className="mt-14">
+            <div className="relative h-[min(64vh,560px)] overflow-hidden border-b border-paper/40">
+              <div aria-hidden className="absolute inset-x-0 border-t border-dashed border-flare/70" style={{ bottom: `${(WALL / MAX) * 100}%` }}>
+                <span className="absolute -top-6 left-0 font-mono text-[0.72rem] tracking-[0.12em] text-[#d98b82]">WALL, 50 M</span>
+              </div>
+              <div className="absolute inset-0 flex items-end justify-around gap-1">
+                {TITANS.map((t) => {
+                  // the sprite frame is 7.3 render units tall with the feet 2.6% up from its bottom
+                  const h = ((t.height / MAX) * 7.3) / t.localHeight;
+                  return (
+                    <div key={t.slug} className="relative flex h-full flex-1 items-end justify-center">
+                      <Turntable slug={t.slug} small className="w-auto" style={{ height: `${h * 100}%`, marginBottom: `-${h * 2.6}%` }} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <figcaption className="mt-3 grid grid-cols-9 gap-1 text-center font-mono text-[0.62rem] tracking-[0.08em] text-ash md:text-[0.72rem]">
+              {TITANS.map((t) => (
+                <span key={t.slug}>
+                  <span className="hidden md:inline">{t.name.replace(" Titan", "")} </span>
+                  {t.height} m
+                </span>
+              ))}
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section aria-labelledby="rules-title" className="border-t border-line px-4 py-24 md:px-8 md:py-32">
+        <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-2">
+          <h2 id="rules-title" className="font-display text-h2 leading-tight font-bold text-paper">
+            How a Titan is inherited
+          </h2>
+          <div className="grid gap-6 text-lede leading-relaxed text-paper/80">
+            <p>{ORIGIN}</p>
+            <p>{INHERITANCE}</p>
+          </div>
+        </div>
+      </section>
+
+      <NextChapter href="/#index" id="AOT-05" title="The Basement" line="Sealed for now. A key, a locked door, three photographs." />
+    </>
+  );
+}
