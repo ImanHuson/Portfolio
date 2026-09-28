@@ -129,7 +129,7 @@ export default function TheBasement() {
         </div>
       </section>
 
-      <NextChapter href="/#index" id="AOT-06" title="The World" line="Sealed for now. Marley, the Eldian question, and the other side of the sea." />
+      <NextChapter href="/the-world/" id="AOT-06" title="The World" line="One island, and across the sea, Marley." />
     </>
   );
 }
