@@ -4,6 +4,7 @@ import NextChapter from "@/components/typography/NextChapter";
 import Sealed from "@/components/archive/Sealed";
 import Descent from "@/components/sections/Descent";
 import { BOOKS, KEY_845, KEY_845_SEALED, PHOTOGRAPH } from "@/lib/data/basement";
+import { asset } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "The Basement",
@@ -32,21 +33,7 @@ export default function TheBasement() {
       <div className="bg-[#e8e6e0] text-[#151513]">
         <section aria-labelledby="photo-title" className="px-4 pt-24 pb-20 md:px-8 md:pt-32 md:pb-28">
           <div className="mx-auto grid max-w-[1400px] items-start gap-14 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
-            <figure className="lg:order-2">
-              {/* the back of the photograph: where the message is */}
-              <div className="relative mx-auto max-w-[520px] -rotate-[1.2deg] bg-[#f3efe4] px-8 py-10 shadow-[0_2px_0_rgba(0,0,0,0.05),0_30px_60px_-28px_rgba(0,0,0,0.45)] md:px-12 md:py-14">
-                <div aria-hidden className="absolute inset-3 border border-[#151513]/10" />
-                <p className="font-mono text-meta tracking-[0.2em] text-[#151513]/55 uppercase">Reverse</p>
-                <div className="mt-6 grid gap-3 font-serif text-[1.35rem] leading-snug text-[#2a241c] italic md:text-[1.55rem]">
-                  {PHOTOGRAPH.back.map((l) => (
-                    <p key={l}>{l}</p>
-                  ))}
-                </div>
-              </div>
-              <figcaption className="mx-auto mt-5 max-w-[520px] text-[0.85rem] text-[#151513]/60">{PHOTOGRAPH.backNote}</figcaption>
-            </figure>
-
-            <div className="lg:order-1">
+            <div className="lg:sticky lg:top-[calc(var(--nav-h)+3rem)]">
               <p className="font-mono text-meta tracking-[0.2em] text-[#151513]/60 uppercase">Found in the first book</p>
               <h2 id="photo-title" className="mt-4 font-sans text-h2 leading-[0.98] font-semibold tracking-[-0.02em]">
                 Light, burned onto paper.
@@ -59,6 +46,34 @@ export default function TheBasement() {
                 </Sealed>
               </div>
             </div>
+
+            <figure>
+              <div className="relative mx-auto max-w-[480px]">
+                {/* the front: the print Eren holds */}
+                <img
+                  src={asset("/images/basement/photograph.webp")}
+                  alt="A sepia studio photograph: a man in a dark suit stands beside a woman seated in a winged armchair, with a small boy on her lap, in front of a drawn curtain."
+                  width={822}
+                  height={1052}
+                  loading="lazy"
+                  className="relative z-10 w-[88%] rotate-[1.6deg] shadow-[0_2px_0_rgba(0,0,0,0.05),0_30px_60px_-26px_rgba(0,0,0,0.55)]"
+                />
+                {/* the back, tucked under it: where the message is */}
+                <div className="relative -mt-14 ml-auto w-[92%] -rotate-[1.2deg] bg-[#f3efe4] px-8 pt-20 pb-10 shadow-[0_2px_0_rgba(0,0,0,0.05),0_30px_60px_-28px_rgba(0,0,0,0.45)] md:px-10 md:pb-12">
+                  <div aria-hidden className="absolute inset-3 border border-[#151513]/10" />
+                  <p className="font-mono text-meta tracking-[0.2em] text-[#151513]/55 uppercase">Reverse</p>
+                  <div className="mt-5 grid gap-3 font-serif text-[1.3rem] leading-snug text-[#2a241c] italic md:text-[1.45rem]">
+                    {PHOTOGRAPH.back.map((l) => (
+                      <p key={l}>{l}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <figcaption className="mx-auto mt-5 grid max-w-[480px] gap-1 text-[0.85rem] text-[#151513]/60">
+                <span>{PHOTOGRAPH.backNote}</span>
+                <span>{PHOTOGRAPH.credit}</span>
+              </figcaption>
+            </figure>
           </div>
         </section>
 

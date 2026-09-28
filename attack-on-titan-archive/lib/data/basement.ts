@@ -37,4 +37,6 @@ export const PHOTOGRAPH = {
     "Humanity there is not extinct. It lives in comfort.",
   ],
   backNote: "Paraphrased. The wording differs between translations.",
+  // front: the anime's colour frame of the sitting, toned to match the print shown in the episode (scripts/basement/photo.py)
+  credit: "Front: the anime's frame of the sitting, printed in the sepia of the photograph Eren holds. Attack on Titan (anime). © Hajime Isayama, Kodansha / Attack on Titan Production Committee. Reverse: the archive's transcription.",
 };
