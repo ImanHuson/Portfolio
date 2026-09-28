@@ -15,8 +15,10 @@ const [PX, PY] = MAP.paradisAt;
 // the three Walls, as a mark: radii in the story's own ratio (250 / 380 / 480)
 const WALLS = [480, 380, 250].map((r) => (r / 480) * 13);
 
-const LABELS = [
-  { id: "paradis", text: "Paradis", at: [PX + 26, PY - 6] as [number, number], from: 0.26 },
+type Label = { id: string; text: string; at: [number, number]; from: number; anchor?: "start" };
+const LABELS: Label[] = [
+  // starts just past the east coast (the island's widest point), so it never sits on the land
+  { id: "paradis", text: "Paradis", at: [MAP.paradisEnds[0][0] + 2, PY - 4] as [number, number], from: 0.26, anchor: "start" as const },
   { id: "sea", text: "The sea", at: MAP.seaAt as [number, number], from: 0.5 },
   { id: "marley", text: "Marley", at: MAP.mainlandAt as [number, number], from: 0.56 },
 ];
@@ -62,7 +64,10 @@ function StaticWorld() {
           {LABELS.map((l) => (
             <span
               key={l.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2 font-military text-[0.8rem] tracking-[0.3em] text-paper/85 uppercase md:text-[0.95rem]"
+              className={cn(
+                "absolute -translate-y-1/2 font-military text-[0.8rem] tracking-[0.3em] text-paper/85 uppercase md:text-[0.95rem]",
+                l.anchor === "start" ? "pl-2" : "-translate-x-1/2",
+              )}
               style={{ left: `${(l.at[0] / MAP.w) * 100}%`, top: `${(l.at[1] / MAP.h) * 100}%` }}
             >
               {l.text}
@@ -176,7 +181,12 @@ export default function OneIsland() {
             ref={(el) => {
               labelRefs.current[l.id] = el;
             }}
-            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 font-military text-[0.85rem] tracking-[0.35em] text-paper/90 uppercase opacity-0 md:text-[1rem]"
+            className={cn(
+              "pointer-events-none absolute -translate-y-1/2 font-military text-[0.85rem] tracking-[0.35em] text-paper/90 uppercase opacity-0 md:text-[1rem]",
+              l.anchor === "start" ? "pl-2.5" : "-translate-x-1/2",
+              // on the narrowest screens the channel is too thin for two labels
+              l.id === "sea" && "max-[420px]:hidden",
+            )}
           >
             {l.text}
           </span>

@@ -54,7 +54,7 @@ export const MAP = {
   /** a point well inside the Marleyan mainland, for its label */
   mainlandAt: ${JSON.stringify(pt(22, -14))},
   /** the open sea between them */
-  seaAt: ${JSON.stringify(pt(42, -12))},
+  seaAt: ${JSON.stringify(pt(38.5, -21))},
 };
 `;
 const dest = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../lib/data/worldMap.ts");

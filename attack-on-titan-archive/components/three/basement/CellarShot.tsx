@@ -11,7 +11,16 @@ import { cellarAt } from "./cellarPath";
  * Draws only while on screen, and lowers its own resolution when frames run
  * long, because the cost is per pixel.
  */
-export default function CellarShot({ progress, className }: { progress: React.RefObject<number>; className?: string }) {
+export default function CellarShot({
+  progress,
+  className,
+  onTooSlow,
+}: {
+  progress: React.RefObject<number>;
+  className?: string;
+  /** called once if frames stay slow even at the lowest resolution: show the stills instead */
+  onTooSlow?: () => void;
+}) {
   const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -72,19 +81,32 @@ export default function CellarShot({ progress, className }: { progress: React.Re
 
     let raf = 0;
     let lastT = performance.now();
-    let slow = 0;
     const start = lastT;
+    // adaptive resolution, judged on time, not frame counts: a device at one
+    // frame a second would need minutes to trip a counter
+    let ema = 20; // smoothed frame time, ms
+    let lastAdjust = start + 1000; // ignore the first second (shader compile)
+    let gaveUp = false;
     function frame(now: number) {
       raf = requestAnimationFrame(frame);
-      if (!visible || document.hidden) return;
+      if (!visible || document.hidden) {
+        lastT = now;
+        return;
+      }
       const dt = now - lastT;
       lastT = now;
-      // adaptive resolution: a run of long frames drops the scale a step
-      slow = dt > 34 ? slow + 1 : Math.max(0, slow - 1);
-      if (slow > 20 && scale > 0.45) {
-        scale = Math.max(0.45, scale * 0.8);
-        slow = 0;
-        resize();
+      ema = ema * 0.85 + dt * 0.15;
+      if (now - lastAdjust > 1500 && ema > 34) {
+        if (scale > 0.45) {
+          scale = Math.max(0.45, scale * 0.75);
+          resize();
+          lastAdjust = now;
+          ema = 24;
+        } else if (!gaveUp && onTooSlow && now - lastAdjust > 3000) {
+          // too slow even at the floor: hand over to the stills
+          gaveUp = true;
+          onTooSlow();
+        }
       }
       const t = (now - start) / 1000;
       const s = cellarAt(progress.current ?? 0, t);
@@ -110,7 +132,7 @@ export default function CellarShot({ progress, className }: { progress: React.Re
       gl.getExtension("WEBGL_lose_context")?.loseContext();
       gl.canvas.remove();
     };
-  }, [progress]);
+  }, [progress, onTooSlow]);
 
   return <div ref={hostRef} className={className} />;
 }

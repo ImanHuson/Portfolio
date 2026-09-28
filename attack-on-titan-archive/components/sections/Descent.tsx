@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -35,7 +35,7 @@ function Beat({ i, className }: { i: number; className?: string }) {
 
 function ContactSheet() {
   return (
-    <section aria-label="The descent" className="bg-void px-4 py-20 md:px-8 md:py-28">
+    <section id="descent" aria-label="The descent" className="scroll-mt-[var(--nav-h)] bg-void px-4 py-20 md:px-8 md:py-28">
       <ol className="mx-auto grid max-w-[1400px] gap-x-6 gap-y-14 md:grid-cols-2">
         {FRAMES.map((f, k) => (
           <li key={f.src} className={cn(k === 0 && "md:col-span-2")}>
@@ -59,10 +59,17 @@ export default function Descent() {
   );
   const hostRef = useRef<HTMLElement>(null);
   const progress = useRef(0);
+  // a device too slow for the live scene gets the contact sheet instead
+  const [tooSlow, setTooSlow] = useState(false);
+  const onTooSlow = useCallback(() => setTooSlow(true), []);
+  // the stills are far shorter than the pinned scene: keep the reader at the descent
+  useEffect(() => {
+    if (tooSlow) document.getElementById("descent")?.scrollIntoView({ block: "start" });
+  }, [tooSlow]);
 
   useGSAP(
     () => {
-      if (mode !== "cinematic" || !hostRef.current) return;
+      if (mode !== "cinematic" || tooSlow || !hostRef.current) return;
       const q = gsap.utils.selector(hostRef);
       gsap.set(q("[data-beat]"), { autoAlpha: 0, y: 10 });
 
@@ -85,15 +92,15 @@ export default function Descent() {
 
       tl.to({}, { duration: 0.01 }, 0.99);
     },
-    { dependencies: [mode], scope: hostRef },
+    { dependencies: [mode, tooSlow], scope: hostRef },
   );
 
-  if (mode !== "cinematic") return <ContactSheet />;
+  if (mode !== "cinematic" || tooSlow) return <ContactSheet />;
 
   return (
-    <section ref={hostRef} aria-label="The descent" className="relative h-[900vh] bg-void">
+    <section ref={hostRef} id="descent" aria-label="The descent" className="relative h-[900vh] bg-void">
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
-        <CellarShot progress={progress} className="absolute inset-0" />
+        <CellarShot progress={progress} onTooSlow={onTooSlow} className="absolute inset-0" />
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(2,2,2,0.55)_100%)]" />
 
         {DESCENT.map((_, i) => (

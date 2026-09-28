@@ -74,56 +74,256 @@ export const WARRIOR_FILES = [
 ];
 
 export type MirrorStage = { stage: string; left: string; right: string; leftSealed?: string; rightSealed?: string };
-
-/** Eren / Reiner. Both sides of each stage are verified; the ending is sealed. */
-export const MIRROR: { left: string; right: string; leftSlug: string; rightSlug: string; stages: MirrorStage[] } = {
-  left: "Eren",
-  right: "Reiner",
-  leftSlug: "eren",
-  rightSlug: "reiner",
-  stages: [
-    {
-      stage: "Child",
-      left: "Shiganshina, inside Wall Maria. He wants to see the world beyond the Walls.",
-      right: "Liberio, inside the internment zone. His father is Marleyan and may not see him.",
-    },
-    {
-      stage: "Training",
-      left: "The 104th Cadet Corps. He graduates fifth.",
-      right: "The weakest of the Warrior candidates. Later, in the 104th, he graduates second.",
-    },
-    {
-      stage: "Inheritance",
-      left: "His father makes him a Titan the night Shiganshina falls.",
-      right: "Chosen for the Armored Titan, and told it was not for his ability.",
-    },
-    {
-      stage: "First kill",
-      left: "At nine, he kills the traffickers who took Mikasa.",
-      right: "At the Walls, in 845, the Armored Titan breaks the inner gate. Wall Maria falls.",
-    },
-    {
-      stage: "War",
-      left: "Trost, the forest, Stohess, Shiganshina.",
-      right: "Shiganshina again, then four years on Marley's front, to Fort Slava.",
-    },
-    {
-      stage: "Home destroyed",
-      left: "Shiganshina, 845, by the Colossal and Armored Titans.",
-      right: "Liberio, 854.",
-      rightSealed: "By Eren.",
-    },
-    {
-      stage: "Isolation",
-      left: "He goes to Marley alone, as a wounded Eldian soldier called Kruger.",
-      right: "A soldier to the 104th he betrayed, a devil to Marley, a Warrior to his own people.",
-    },
-    {
-      stage: "Choice",
-      left: "Sealed.",
-      right: "Sealed.",
-      leftSealed: "He sets off the Rumbling.",
-      rightSealed: "He joins his old enemies to stop it.",
-    },
-  ],
+export type MirrorPair = {
+  left: string;
+  right: string;
+  leftSlug: string;
+  rightSlug: string;
+  /** shown on the pair's tab when the pairing itself gives something away */
+  warning?: string;
+  stages: MirrorStage[];
 };
+
+/** The brief's six pairs. Every line checked; late reveals sealed. */
+export const MIRRORS: MirrorPair[] = [
+  {
+    left: "Eren",
+    right: "Reiner",
+    leftSlug: "eren",
+    rightSlug: "reiner",
+    stages: [
+      {
+        stage: "Child",
+        left: "Shiganshina, inside Wall Maria. He wants to see the world beyond the Walls.",
+        right: "Liberio, inside the internment zone. His father is Marleyan and may not see him.",
+      },
+      {
+        stage: "Training",
+        left: "The 104th Cadet Corps. He graduates fifth.",
+        right: "The weakest of the Warrior candidates. Later, in the 104th, he graduates second.",
+      },
+      {
+        stage: "Inheritance",
+        left: "His father makes him a Titan the night Shiganshina falls.",
+        right: "Chosen for the Armored Titan, and told it was not for his ability.",
+      },
+      {
+        stage: "First kill",
+        left: "At nine, he kills the traffickers who took Mikasa.",
+        right: "At the Walls, in 845, the Armored Titan breaks the inner gate. Wall Maria falls.",
+      },
+      {
+        stage: "War",
+        left: "Trost, the forest, Stohess, Shiganshina.",
+        right: "Shiganshina again, then four years on Marley's front, to Fort Slava.",
+      },
+      {
+        stage: "Home destroyed",
+        left: "Shiganshina, 845, by the Colossal and Armored Titans.",
+        right: "Liberio, 854.",
+        rightSealed: "By Eren.",
+      },
+      {
+        stage: "Isolation",
+        left: "He goes to Marley alone, as a wounded Eldian soldier called Kruger.",
+        right: "A soldier to the 104th he betrayed, a devil to Marley, a Warrior to his own people.",
+      },
+      {
+        stage: "Choice",
+        left: "Sealed.",
+        right: "Sealed.",
+        leftSealed: "He sets off the Rumbling.",
+        rightSealed: "He joins his old enemies to stop it.",
+      },
+    ],
+  },
+  {
+    left: "Eren",
+    right: "Gabi",
+    leftSlug: "eren",
+    rightSlug: "gabi",
+    stages: [
+      {
+        stage: "Child",
+        left: "Shiganshina, inside Wall Maria. He wants to see the world beyond the Walls.",
+        right: "Liberio, inside the internment zone. She is raised to believe the Eldians on the island are devils.",
+      },
+      {
+        stage: "Training",
+        left: "The 104th Cadet Corps. He graduates fifth.",
+        right: "A Warrior candidate, in line to inherit the Armored Titan from her cousin Reiner.",
+      },
+      {
+        stage: "Hatred",
+        left: "He swears to wipe every Titan off the face of the earth.",
+        right: "She means to kill everyone on Paradis, to free the Eldians of Liberio.",
+      },
+      {
+        stage: "First battle",
+        left: "Trost, 850. He is eaten, and comes out of the Titan that ate him as a Titan himself.",
+        right: "Fort Slava, 854. She volunteers to take out the anti-Titan artillery alone, with a bomb she made.",
+      },
+      {
+        stage: "Home destroyed",
+        left: "Shiganshina, 845.",
+        right: "Liberio, 854.",
+        rightSealed: "By Eren.",
+      },
+      {
+        stage: "First kill",
+        left: "At nine, he kills the traffickers who took Mikasa.",
+        right: "Sealed.",
+        rightSealed: "On the airship out of Liberio, she shoots Sasha Braus.",
+      },
+    ],
+  },
+  {
+    left: "Eren",
+    right: "Zeke",
+    leftSlug: "eren",
+    rightSlug: "zeke",
+    warning: "Spoils the Basement",
+    stages: [
+      {
+        stage: "Father",
+        left: "Grisha Yeager. Eren is his son by Carla.",
+        right: "Grisha Yeager. Zeke is his son by Dina, his first wife.",
+      },
+      {
+        stage: "Childhood",
+        left: "Grisha keeps him out of the basement.",
+        right: "Grisha puts him into the Warrior program at five, to spy for the Restorationists.",
+      },
+      {
+        stage: "Mother",
+        left: "Carla is eaten by a Titan when Shiganshina falls.",
+        right: "He reports his parents to the authorities. His mother is turned into a Titan on Paradis.",
+        leftSealed: "The Titan that ate her was Dina.",
+      },
+      {
+        stage: "Titan",
+        left: "His father's: the Attack Titan.",
+        right: "The Beast Titan, from Tom Ksaver, who played catch with him.",
+      },
+      {
+        stage: "Shiganshina",
+        left: "850: the Survey Corps comes back to take the district.",
+        right: "850: the Beast Titan bombards the Survey Corps with thrown rock.",
+      },
+      {
+        stage: "Plan",
+        left: "Sealed.",
+        right: "Sealed.",
+        leftSealed: "He lets Zeke believe they want the same thing, then sets off the Rumbling.",
+        rightSealed: "To end the Eldians by making them unable to have children.",
+      },
+    ],
+  },
+  {
+    left: "Mikasa",
+    right: "Annie",
+    leftSlug: "mikasa",
+    rightSlug: "annie",
+    stages: [
+      {
+        stage: "Child",
+        left: "Traffickers murder her parents. Eren saves her, and the Yeagers take her in.",
+        right: "Adopted by an Eldian man in Liberio, who trains her to fight so she can become a Warrior.",
+      },
+      {
+        stage: "Training",
+        left: "First in the 104th.",
+        right: "Fourth in the 104th.",
+      },
+      {
+        stage: "Corps",
+        left: "The Survey Corps, to stay beside Eren.",
+        right: "The Military Police, closer to the capital.",
+      },
+      {
+        stage: "Stohess",
+        left: "850: she hunts the Female Titan through the district.",
+        right: "850: exposed, the Female Titan fights through the district.",
+      },
+      {
+        stage: "After",
+        left: "She stays at Eren's side.",
+        right: "She seals herself in crystal, and stays there four years.",
+      },
+      {
+        stage: "Choice",
+        left: "Sealed.",
+        right: "Sealed.",
+        leftSealed: "She is the one who ends it.",
+        rightSealed: "She comes back to fight the Rumbling.",
+      },
+    ],
+  },
+  {
+    left: "Armin",
+    right: "Erwin",
+    leftSlug: "armin",
+    rightSlug: "erwin",
+    stages: [
+      {
+        stage: "The question",
+        left: "His grandfather's forbidden book about the world outside. He wants to see the ocean.",
+        right: "His father, a teacher, suspects the king altered people's memories. Erwin repeats it, and his father dies for it.",
+      },
+      {
+        stage: "Command",
+        left: "At Trost he talks the Garrison out of killing Eren.",
+        right: "The thirteenth commander of the Survey Corps.",
+      },
+      {
+        stage: "Shiganshina",
+        left: "850: he draws the Colossal Titan's heat onto himself so Eren can strike.",
+        right: "850: he leads the last charge at the Beast Titan, knowing it is suicide.",
+      },
+      {
+        stage: "One serum",
+        left: "Burned and dying, he is given the serum, and the Colossal Titan.",
+        right: "Dying beside him, he is not.",
+      },
+      {
+        stage: "The dream",
+        left: "He sees the ocean.",
+        right: "He died wanting to see the basement.",
+      },
+    ],
+  },
+  {
+    left: "Historia",
+    right: "Ymir",
+    leftSlug: "historia",
+    rightSlug: "ymir",
+    stages: [
+      {
+        stage: "Name",
+        left: "Born Historia Reiss, the illegitimate daughter of Rod Reiss.",
+        right: "An orphan given the name Ymir by a cult, and made to play the founder of the Eldians.",
+      },
+      {
+        stage: "Punished",
+        left: "Given the name Krista Lenz and sent away, until she was old enough to enlist.",
+        right: "When the cult is caught, she is turned into a Pure Titan on Paradis.",
+      },
+      {
+        stage: "The 104th",
+        left: "She enlists as Krista.",
+        right: "After sixty years as a Titan, she eats Marcel Galliard, becomes human again, and enlists.",
+      },
+      {
+        stage: "Utgard",
+        left: "Ymir shows her Titan to save her.",
+        right: "She transforms to save Historia and the others.",
+      },
+      {
+        stage: "Her own life",
+        left: "She smashes the serum her father wants her to take, and is crowned queen.",
+        right: "She leaves with Reiner and Bertholdt.",
+        rightSealed: "In Marley she lets Porco Galliard eat her, and leaves Historia a letter.",
+      },
+    ],
+  },
+];

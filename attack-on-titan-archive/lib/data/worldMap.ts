@@ -11,5 +11,5 @@ export const MAP = {
   /** a point well inside the Marleyan mainland, for its label */
   mainlandAt: [460.1,268.9],
   /** the open sea between them */
-  seaAt: [593,282.2],
+  seaAt: [569.7,222.4],
 };
