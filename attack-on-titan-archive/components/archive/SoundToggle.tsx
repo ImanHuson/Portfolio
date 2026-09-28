@@ -13,7 +13,7 @@ export default function SoundToggle() {
       data-js-only
       aria-pressed={on}
       onClick={() => void sound.toggle()}
-      className="group flex items-center gap-2 py-2 font-military text-[0.85rem] tracking-[0.24em] text-paper/80 uppercase transition-colors hover:text-paper"
+      className="group flex items-center gap-2 py-2 font-military text-[0.85rem] tracking-[0.14em] whitespace-nowrap text-paper/80 sm:tracking-[0.24em] uppercase transition-colors hover:text-paper"
     >
       <span aria-hidden className="flex h-3 items-end gap-[2px]">
         {[0.5, 1, 0.7].map((h, i) => (
