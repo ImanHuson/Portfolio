@@ -6,6 +6,12 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   // Override default ignores of eslint-config-next.
+  {
+    // Static export with images.unoptimized: next/image would add nothing but
+    // a wrapper, and it does not prefix basePath on src. Plain <img> with
+    // explicit width/height (no layout shift) is the deliberate choice here.
+    rules: { "@next/next/no-img-element": "off" },
+  },
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",

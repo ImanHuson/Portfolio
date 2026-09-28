@@ -10,8 +10,8 @@ export const ACTS: Act[] = [
     register: "Green. Stone. Military. We are trapped inside the Walls.",
     chapters: [
       { id: "AOT-01", title: "The Wall", line: "Shiganshina, 845. The morning it ended.", open: true, href: "/" },
-      { id: "AOT-02", title: "The Fall", line: "Wall Maria, the evacuation, and what it cost.", open: false },
-      { id: "AOT-03", title: "The Soldiers", line: "Personnel files of the 104th and the Survey Corps.", open: false },
+      { id: "AOT-02", title: "The Fall", line: "Wall Maria, the evacuation, and what it cost.", open: true, href: "/the-fall/" },
+      { id: "AOT-03", title: "The Soldiers", line: "Personnel files of the 104th and the Survey Corps.", open: true, href: "/soldiers/" },
       { id: "AOT-04", title: "The Titans", line: "Nine inheritances, and the research that tried to name them.", open: false },
     ],
   },

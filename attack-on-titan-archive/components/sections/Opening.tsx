@@ -54,6 +54,8 @@ function StaticOpening() {
         <img
           src={asset("/images/opening-845.webp")}
           alt=""
+          width={1680}
+          height={1050}
           fetchPriority="high"
           className="absolute inset-0 size-full object-cover object-[70%_50%]"
         />
