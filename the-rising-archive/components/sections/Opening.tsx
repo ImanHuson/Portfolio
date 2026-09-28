@@ -157,11 +157,16 @@ export default function Opening() {
             </footer>
           </blockquote>
 
+          {/* The visual title stays hidden until the scroll reveals it, and
+              hidden text is also hidden from screen readers. So the page's
+              heading is this always-present one, and the animated title is
+              decoration. */}
+          <h1 id="opening-title" className="sr-only">Red Rising: The Archive</h1>
           <div data-title className="absolute flex flex-col items-center">
-            <h1 id="opening-title" className="font-display text-colossal leading-[0.8] font-extrabold tracking-tight uppercase">
+            <p aria-hidden className="font-display text-colossal leading-[0.8] font-extrabold tracking-tight uppercase">
               Red Rising
-            </h1>
-            <p className="mt-3 font-display text-h3 font-semibold tracking-[0.4em] text-red uppercase">The Archive</p>
+            </p>
+            <p aria-hidden className="mt-3 font-display text-h3 font-semibold tracking-[0.4em] text-red uppercase">The Archive</p>
             <a
               href="#live-for-more"
               onClick={(e) => {
