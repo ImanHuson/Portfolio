@@ -162,7 +162,7 @@ export function atmosphere(radius, color, strength = 1.0, lightDir = [-1, 0.3, 0
 // Instead, an analytic "studio" (sky gradient + two softboxes + a red
 // kicker) is evaluated in the shader along the reflection vector and added
 // to the lit result. Real mirror-like metal, no textures, no extensions.
-const STUDIO_GLSL = `
+export const STUDIO_GLSL = `
 uniform vec3 uTint; uniform float uEnvI; uniform float uRough;
 float rraBox(vec3 d, vec3 c, float w) { return smoothstep(1.0 - w, 1.0, dot(d, normalize(c))); }
 vec3 rraStudio(vec3 d, float r) {
