@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import PageHeader from "@/components/typography/PageHeader";
 import TenFaces from "@/components/people/TenFaces";
 import { PEOPLE, safeAs } from "@/lib/data/people";
@@ -34,13 +35,15 @@ export default function PeoplePage() {
       </section>
       <section aria-label="More of the people" className="px-5 pb-28 md:px-8">
         <div className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
-          <Link href="/people/relationships/" className="group bg-void p-10 transition-colors hover:bg-void-2">
+          <Link href="/people/relationships/" className="group bg-void p-10 wash-card">
             <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Constellation</span>
             <span className="mt-3 block max-w-[40ch] text-ash">Darrow at the center. Every line opens into the story of one relationship.</span>
+            <CardWash />
           </Link>
-          <Link href="/people/the-vale/" className="group bg-void p-10 transition-colors hover:bg-void-2">
+          <Link data-wash="rim" href="/people/the-vale/" className="group bg-void p-10 wash-card">
             <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Vale</span>
             <span className="mt-3 block max-w-[40ch] text-ash">The dead, as memory rather than a body count.</span>
+            <CardWash />
           </Link>
         </div>
       </section>

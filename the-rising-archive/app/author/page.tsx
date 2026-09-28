@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import { AUTHOR } from "@/lib/data/author";
@@ -62,21 +63,24 @@ export default function AuthorPage() {
       <section aria-label="More" className="border-t border-line px-5 py-20 md:px-8">
         <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-3">
           <Spotlight as="li" tone="gold" className="bg-void">
-            <Link href="/author/sons-of-ares/" className="group block h-full p-8 transition-colors hover:bg-void-2 md:p-10">
+            <Link href="/author/sons-of-ares/" className="group block h-full p-8 wash-card md:p-10">
               <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The comics</span>
               <span className="mt-2 block text-ash">Sons of Ares: the revolution’s origin, with Fitchner at its centre.</span>
+              <CardWash />
             </Link>
           </Spotlight>
           <Spotlight as="li" tone="gold" className="bg-void">
-            <Link href="/author/sources/" className="group block h-full p-8 transition-colors hover:bg-void-2 md:p-10">
+            <Link href="/author/sources/" className="group block h-full p-8 wash-card md:p-10">
               <span className="font-display text-h3 font-bold uppercase group-hover:text-red">Official sources</span>
               <span className="mt-2 block text-ash">Where the author’s notes, interviews and news actually live.</span>
+              <CardWash />
             </Link>
           </Spotlight>
           <Spotlight as="li" tone="gold" className="bg-void">
-            <Link href="/fandom/" className="group block h-full p-8 transition-colors hover:bg-void-2 md:p-10">
+            <Link href="/fandom/" className="group block h-full p-8 wash-card md:p-10">
               <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The fandom</span>
               <span className="mt-2 block text-ash">The arguments his books started.</span>
+              <CardWash />
             </Link>
           </Spotlight>
         </ul>

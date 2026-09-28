@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import PersonName from "@/components/people/PersonName";
 import Plate from "@/components/archive/Plate";
 import { notFound } from "next/navigation";
@@ -38,18 +39,18 @@ function Special({ person }: { person: Person }) {
           <p className="mt-3 max-w-[56ch] text-ash">The archive does not tell you which column is true. Let the contradiction breathe.</p>
           <SpoilerGate book={4} className="mt-10">
             <div className="mt-10 grid gap-px bg-line md:grid-cols-2">
-              <div className="bg-void p-8">
+              <Spotlight tone="gold" lift={false} className="bg-void p-8">
                 <p className="font-mono text-meta tracking-[0.18em] text-gold uppercase">What Lysander believes</p>
                 <ul className="mt-6 space-y-3 font-serif text-3xl" role="list">
                   {["Order", "Continuity", "Hierarchy", "Responsibility", "Civilization"].map((w) => <li key={w}>{w}</li>)}
                 </ul>
-              </div>
-              <div className="bg-void p-8">
+              </Spotlight>
+              <Spotlight tone="red" lift={false} className="bg-void p-8">
                 <p className="font-mono text-meta tracking-[0.18em] text-red uppercase">What the reader sees</p>
                 <ul className="mt-6 space-y-3 font-display text-3xl font-bold uppercase" role="list">
                   {["Privilege", "Paternalism", "Self-justification", "Ambition", "Violence"].map((w) => <li key={w}>{w}</li>)}
                 </ul>
-              </div>
+              </Spotlight>
             </div>
           </SpoilerGate>
         </div>
@@ -234,13 +235,15 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
       <Special person={person} />
 
       <nav aria-label="Other dossiers" className="grid border-t border-line md:grid-cols-2">
-        <Link href={`/people/${prev.slug}/`} className="group border-line p-8 transition-colors hover:bg-void-2 md:border-r md:p-12">
+        <Link href={`/people/${prev.slug}/`} className="group border-line p-8 wash-card md:border-r md:p-12">
           <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Previous dossier</span>
           <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[prev.register])}><PersonName person={prev} /></span>
+          <CardWash />
         </Link>
-        <Link href={`/people/${next.slug}/`} className="group p-8 text-right transition-colors hover:bg-void-2 md:p-12">
+        <Link href={`/people/${next.slug}/`} className="group p-8 text-right wash-card md:p-12">
           <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Next dossier</span>
           <span className={cn("mt-2 block text-3xl group-hover:opacity-80", NAME_CLASS[next.register])}><PersonName person={next} /></span>
+          <CardWash />
         </Link>
       </nav>
     </article>

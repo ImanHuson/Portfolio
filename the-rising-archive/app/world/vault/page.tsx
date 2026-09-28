@@ -27,7 +27,7 @@ export default function VaultPage() {
         <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
           {VAULT.map((a, i) => (
             <Reveal as="li" key={a.slug} delay={(i % 2) * 0.06} className="bg-void">
-              <Spotlight as="article" tone="rim" className={cn("grid h-full gap-0 sm:grid-cols-2", i % 4 >= 2 && "sm:[&>*:first-child]:order-2")}>
+              <Spotlight as="article" tone="red" className={cn("grid h-full gap-0 sm:grid-cols-2", i % 4 >= 2 && "sm:[&>*:first-child]:order-2")}>
                 <Plate src={a.plate} alt={`${a.name}, rendered for this archive.`} className="aspect-square object-cover" sizes="(min-width: 768px) 25vw, 50vw" />
                 <div className="flex flex-col p-6 md:p-8">
                   <h2 className="font-display text-3xl leading-none font-bold uppercase">{a.name}</h2>

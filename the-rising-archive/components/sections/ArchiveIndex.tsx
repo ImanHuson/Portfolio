@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import { cn } from "@/lib/utils";
@@ -66,9 +67,10 @@ export default function ArchiveIndex() {
         <ul role="list" className="mt-px grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
           {DEEP.map((d) => (
             <li key={d.href} className="bg-void">
-              <Link href={d.href} className="group block p-8 transition-colors hover:bg-void-2">
+              <Link href={d.href} className="group block p-8 wash-card">
                 <span className="font-display text-2xl font-semibold uppercase group-hover:text-red">{d.title}</span>
                 <span className="mt-2 block text-sm text-ash">{d.body}</span>
+                <CardWash />
               </Link>
             </li>
           ))}

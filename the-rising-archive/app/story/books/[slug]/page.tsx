@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import { notFound } from "next/navigation";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
@@ -150,20 +151,23 @@ export default async function BookPage({ params }: PageProps<"/story/books/[slug
 
       <nav aria-label="Other books" className="grid border-t border-line md:grid-cols-2">
         {prev ? (
-          <Link href={`/story/books/${prev.slug}/`} className="group border-line p-8 transition-colors hover:bg-void-2 md:border-r md:p-12">
+          <Link href={`/story/books/${prev.slug}/`} className="group border-line p-8 wash-card md:border-r md:p-12">
             <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Previous, book {prev.numeral}</span>
             <span className="mt-2 block font-display text-h3 font-bold uppercase group-hover:text-red">{prev.title}</span>
+            <CardWash />
           </Link>
         ) : (
-          <Link href="/story/timeline/" className="group border-line p-8 transition-colors hover:bg-void-2 md:border-r md:p-12">
+          <Link href="/story/timeline/" className="group border-line p-8 wash-card md:border-r md:p-12">
             <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Before the books</span>
             <span className="mt-2 block font-display text-h3 font-bold uppercase group-hover:text-red">The Timeline</span>
+            <CardWash />
           </Link>
         )}
         {next ? (
-          <Link href={`/story/books/${next.slug}/`} className="group p-8 text-right transition-colors hover:bg-void-2 md:p-12">
+          <Link href={`/story/books/${next.slug}/`} className="group p-8 text-right wash-card md:p-12">
             <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Next, book {next.numeral}</span>
             <span className="mt-2 block font-display text-h3 font-bold uppercase group-hover:text-red">{next.title}</span>
+            <CardWash />
           </Link>
         ) : (
           <div className="p-8 text-right md:p-12">

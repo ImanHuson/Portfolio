@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import { notFound } from "next/navigation";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
+import Spotlight from "@/components/archive/Spotlight";
 import Stamp from "@/components/archive/Stamp";
 import TelemanusTable from "@/components/world/TelemanusTable";
 import RaaTree from "@/components/world/RaaTree";
@@ -100,13 +102,13 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
             <h2 id="artifacts" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase md:pt-2">Archive artifacts</h2>
             <ol className="grid gap-px bg-line sm:grid-cols-2">
               {h.artifacts.map((a, i) => (
-                <li key={a.title} className="bg-void p-6 md:p-8">
+                <Spotlight as="li" tone="gold" key={a.title} className="bg-void p-6 md:p-8">
                   <p className="font-mono text-meta tracking-[0.2em] text-red uppercase">Item {String(i + 1).padStart(2, "0")}</p>
                   <p className="mt-2 font-display text-2xl font-bold uppercase">{a.title}</p>
                   <SpoilerGate book={a.book} compact className="mt-4">
                     <p className="mt-4 text-ash">{a.body}</p>
                   </SpoilerGate>
-                </li>
+                </Spotlight>
               ))}
             </ol>
           </div>
@@ -147,9 +149,10 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
       )}
 
       <nav aria-label="Next house" className="border-t border-line">
-        <Link href={`/world/houses/${next.slug}/`} className="group block p-8 text-right transition-colors hover:bg-void-2 md:p-12">
+        <Link href={`/world/houses/${next.slug}/`} className="group block p-8 text-right wash-card md:p-12">
           <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">Next dossier</span>
           <span className="mt-2 block font-serif text-h3 text-bone group-hover:text-red">{next.name}</span>
+          <CardWash />
         </Link>
       </nav>
     </article>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import { notFound } from "next/navigation";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
@@ -82,9 +83,10 @@ export default async function IdeaPage({ params }: PageProps<"/ideas/[slug]">) {
       </section>
 
       <nav aria-label="Next idea" className="border-t border-line">
-        <Link href={next ? `/ideas/${next.slug}/` : "/what-survives/"} className="group block p-8 text-right transition-colors hover:bg-void-2 md:p-12">
+        <Link href={next ? `/ideas/${next.slug}/` : "/what-survives/"} className="group block p-8 text-right wash-card md:p-12">
           <span className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">{next ? "Next question" : "The end of the archive"}</span>
           <span className="mt-2 block font-display text-h3 font-bold uppercase group-hover:text-red">{next ? next.name : "What the war couldn’t kill"}</span>
+          <CardWash />
         </Link>
       </nav>
     </article>

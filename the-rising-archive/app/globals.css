@@ -218,3 +218,119 @@ nav[aria-label="Breadcrumb"] a {
   padding-block: 0.3rem;
   margin-block: -0.3rem;
 }
+
+/* ── Card wash ──────────────────────────────────────────────────────────
+   Every card rests in a burgundy wash (the share card's colour) over the
+   near-black page, and brightens and saturates on hover: a hotter wash, a
+   cursor-following light (--mx/--my, written by Spotlight/FaceCard), a
+   red light line drawing across the top edge, and warmer plates.
+   All layers are `screen`-blended overlays, so they tint the card's own
+   background and content without z-index games. Tones: red (default),
+   gold (gold light, same burgundy), rim (cool silver, kept for the Rim and
+   the Vale), apollonius (stronger). */
+@layer components {
+.wash-card {
+  --w-rest: rgba(122, 15, 23, 0.42);
+  --w-rest-low: rgba(122, 15, 23, 0.2);
+  --w-hot: rgba(168, 22, 36, 0.34);
+  --w-spot: rgba(214, 40, 52, 0.18);
+  --w-edge: rgba(236, 90, 98, 0.95);
+  position: relative;
+  overflow: hidden;
+}
+.wash-card[data-wash="gold"] {
+  --w-spot: rgba(200, 169, 106, 0.24);
+  --w-edge: rgba(200, 169, 106, 0.9);
+}
+.wash-card[data-wash="apollonius"] {
+  --w-rest: rgba(122, 15, 23, 0.52);
+  --w-hot: rgba(168, 22, 36, 0.4);
+  --w-spot: rgba(200, 169, 106, 0.24);
+  --w-edge: rgba(200, 169, 106, 0.95);
+}
+.wash-card[data-wash="rim"] {
+  --w-rest: rgba(170, 178, 186, 0.07);
+  --w-rest-low: rgba(170, 178, 186, 0.03);
+  --w-hot: rgba(170, 178, 186, 0.14);
+  --w-spot: rgba(223, 232, 255, 0.16);
+  --w-edge: rgba(223, 232, 255, 0.7);
+}
+.wash-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.wash-rest {
+  background:
+    radial-gradient(170% 140% at 0% 0%, var(--w-rest), transparent 72%),
+    radial-gradient(120% 100% at 100% 100%, var(--w-rest-low), transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.045 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.wash-hot {
+  opacity: 0;
+  background:
+    radial-gradient(circle var(--spot-r, 260px) at var(--mx, 50%) var(--my, 40%), var(--w-spot), transparent 70%),
+    radial-gradient(150% 120% at 0% 0%, var(--w-hot), transparent 75%);
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wash-edge {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--w-edge), transparent);
+  opacity: 0;
+  transform: scaleX(0.2);
+  transition:
+    opacity 400ms ease-out,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wash-card:hover > .wash-hot,
+.wash-card:focus-within > .wash-hot,
+.wash-card:focus-visible > .wash-hot {
+  opacity: 1;
+}
+.wash-card:hover > .wash-edge,
+.wash-card:focus-within > .wash-edge,
+.wash-card:focus-visible > .wash-edge {
+  opacity: 1;
+  transform: scaleX(1);
+}
+/* Plates warm up with the card. */
+.wash-card img {
+  transition: filter 500ms ease-out;
+}
+.wash-card:hover img,
+.wash-card:focus-within img {
+  filter: saturate(1.25) brightness(1.08);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wash-edge {
+    transform: none;
+    transition: opacity 200ms linear;
+  }
+  .wash-hot,
+  .wash-card img {
+    transition-duration: 150ms;
+  }
+}
+}
+
+/* Pure red is 3.2:1 on the burgundy wash; this lighter red is 5.2:1 on
+   the resting wash, so small red labels stay readable. */
+.wash-card .text-red {
+  color: #ec5a62;
+}
+
+/* Muted text lifts a step as the card lights up, so it keeps its contrast
+   against the brighter wash. */
+.wash-card:hover .text-ash-2,
+.wash-card:focus-within .text-ash-2 {
+  color: var(--ash);
+}
+.wash-card:hover .text-ash,
+.wash-card:focus-within .text-ash {
+  color: color-mix(in srgb, var(--ash), var(--bone) 45%);
+}

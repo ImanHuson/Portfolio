@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardWash from "@/components/archive/CardWash";
 import PageHeader from "@/components/typography/PageHeader";
 import Plate from "@/components/archive/Plate";
 import Reveal from "@/components/archive/Reveal";
@@ -63,17 +64,19 @@ export default function StoryPage() {
 
       <section aria-label="More of the story" className="px-5 py-24 md:px-8">
         <div className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
-          <Link href="/story/timeline/" className="group bg-void p-10 transition-colors hover:bg-void-2">
+          <Link href="/story/timeline/" className="group bg-void p-10 wash-card">
             <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Timeline</span>
             <span className="mt-3 block max-w-[40ch] text-ash">
               Seven centuries, from the Conquering to the sealed file. Every node opens.
             </span>
+            <CardWash />
           </Link>
-          <Link href="/story/the-rising/" className="group bg-void p-10 transition-colors hover:bg-void-2">
+          <Link href="/story/the-rising/" className="group bg-void p-10 wash-card">
             <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Rising</span>
             <span className="mt-3 block max-w-[40ch] text-ash">
               Not an organization. A movement, a war, a myth, and eventually a government.
             </span>
+            <CardWash />
           </Link>
         </div>
       </section>
