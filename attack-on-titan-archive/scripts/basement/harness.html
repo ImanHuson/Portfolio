@@ -1,0 +1,22 @@
+<!doctype html><html><body style="margin:0;background:#000">
+<canvas id="c"></canvas>
+<script type="module">
+import { vertex, fragment } from "./gen/cellarShader.js";
+import { cellarAt } from "./gen/cellarPath.js";
+const c=document.getElementById('c');
+const gl=c.getContext('webgl',{preserveDrawingBuffer:true});
+function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o;}
+const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vertex));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(pr);
+if(!gl.getProgramParameter(pr,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(pr));
+gl.useProgram(pr);
+const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const loc=gl.getAttribLocation(pr,'position');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+const U=n=>gl.getUniformLocation(pr,n);
+window.frame=(p,w,h,time=1.3)=>{c.width=w;c.height=h;gl.viewport(0,0,w,h);
+ const s=cellarAt(p,time);
+ gl.uniform2f(U('uRes'),w,h);gl.uniform3f(U('uCamPos'),...s.pos);gl.uniform3f(U('uCamLook'),...s.look);
+ gl.uniform1f(U('uFov'),1.05);gl.uniform1f(U('uTime'),time);gl.uniform1f(U('uDoor'),s.door);gl.uniform1f(U('uDrawer'),s.drawer);
+ gl.uniform1f(U('uBooks'),s.books);gl.uniform1f(U('uWhite'),s.white);gl.uniform1f(U('uLantern'),s.lantern);gl.uniform1f(U('uSteps'),110);gl.uniform1f(U('uKeyIn'),s.keyIn);gl.uniform1f(U('uKeyTurn'),s.keyTurn);
+ gl.drawArrays(gl.TRIANGLES,0,3);return c.toDataURL('image/png');};
+window.ready=true;
+</script></body></html>

@@ -85,7 +85,7 @@ export default function Titans() {
         </div>
       </section>
 
-      <NextChapter href="/#index" id="AOT-05" title="The Basement" line="Sealed for now. A key, a locked door, three photographs." />
+      <NextChapter href="/the-basement/" id="AOT-05" title="The Basement" line="Shiganshina, 850. A key, a cellar door, and what Grisha kept under his desk." />
     </>
   );
 }

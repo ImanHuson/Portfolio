@@ -19,7 +19,7 @@ export const ACTS: Act[] = [
     name: "Truth",
     register: "Black. White. Concrete. Photography. The world is larger than we thought.",
     chapters: [
-      { id: "AOT-05", title: "The Basement", line: "A key, a locked door, three photographs.", open: false },
+      { id: "AOT-05", title: "The Basement", line: "A key that did not fit, three books, one photograph.", open: true, href: "/the-basement/" },
       { id: "AOT-06", title: "The World", line: "Marley, the Eldian question, and the other side of the sea.", open: false },
       { id: "AOT-07", title: "The War", line: "Liberio, the battle maps, and the gear that made it possible.", open: false },
     ],

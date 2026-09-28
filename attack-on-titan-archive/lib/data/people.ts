@@ -335,7 +335,7 @@ export const PEOPLE: Person[] = [
     relationships: "Dina and Zeke. Carla and Eren. Eren Kruger, the Owl.",
     belief: "That Eldia deserved to be restored.",
     transformation: "In 845 he took the Founding Titan from the Reiss family and gave both Titans to Eren.",
-    legacy: "What he left in the basement: his notes, and three photographs.",
+    legacy: "What he left in the basement: three books of his own writing, and one photograph.",
   },
 ];
 
