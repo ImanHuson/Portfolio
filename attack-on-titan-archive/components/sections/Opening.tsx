@@ -48,7 +48,7 @@ function Title({ id }: { id?: string }) {
 function StaticOpening() {
   return (
     <section aria-labelledby="opening-title" className="relative flex min-h-[100dvh] items-end overflow-hidden px-4 pt-[var(--nav-h)] pb-16 md:px-8 md:pb-20">
-      {/* a real frame of the scene, rendered from it: the Titan's head over the Wall */}
+      {/* a real frame of the scene, rendered from it: the Wall, the steam past its top, the dust at the gate */}
       <picture>
         <source media="(max-aspect-ratio: 4/5)" srcSet={asset("/images/opening-845-portrait.webp")} />
         <img
@@ -62,7 +62,7 @@ function StaticOpening() {
       </picture>
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-base via-base/25 to-base/40" />
       <div className="rise relative mx-auto w-full max-w-[1400px]">
-        <p className="font-mono text-meta tracking-[0.3em] text-paper/70 uppercase">{PLACE.join("   /   ")}</p>
+        <p className="font-mono text-meta tracking-[0.16em] text-paper/75 uppercase sm:tracking-[0.3em]">{PLACE.join(" / ")}</p>
         <div className="mt-6">
           <Title id="opening-title" />
         </div>
@@ -146,7 +146,7 @@ export default function Opening() {
       tl.to(q("[data-title] > *"), { autoAlpha: 1, y: 0, duration: 0.03, stagger: 0.012 }, 0.655);
       tl.to(q("[data-title] > *"), { autoAlpha: 0, y: -16, duration: 0.025 }, 0.725);
 
-      // inside the Wall
+      // over the Wall, on the way out
       tl.to(q("[data-inside]"), { autoAlpha: 1, y: 0, duration: 0.02 }, 0.8).to(q("[data-inside]"), { autoAlpha: 0, duration: 0.02 }, 0.852);
 
       tl.to({}, { duration: 0.01 }, 0.99); // pin the timeline length to 1
@@ -159,10 +159,10 @@ export default function Opening() {
   if (mode === "still")
     return (
       <section aria-labelledby="opening-title" className="relative flex min-h-[100dvh] items-end overflow-hidden px-4 pt-[var(--nav-h)] pb-16 md:px-8 md:pb-20">
-        <WallShot still stillAt={0.705} onTooSlow={onTooSlow} className="absolute inset-0" />
+        <WallShot still stillAt={0.68} onTooSlow={onTooSlow} className="absolute inset-0" />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-base via-base/10 to-base/30" />
         <div className="relative mx-auto w-full max-w-[1400px]">
-          <p className="font-mono text-meta tracking-[0.3em] text-paper/70 uppercase">{PLACE.join("   /   ")}</p>
+          <p className="font-mono text-meta tracking-[0.16em] text-paper/75 uppercase sm:tracking-[0.3em]">{PLACE.join(" / ")}</p>
           <div className="mt-6">
             <Title id="opening-title" />
           </div>

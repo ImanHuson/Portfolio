@@ -52,7 +52,7 @@ export function createSky(gl: OGLRenderingContext, atmos: Record<string, { value
   const program = new Program(gl, {
     vertex,
     fragment,
-    uniforms: { ...atmos, uZenith: { value: [0.36, 0.42, 0.48] }, uCloud: { value: 1 }, uTime: { value: 0 } },
+    uniforms: { ...atmos, uZenith: { value: [0.2, 0.36, 0.64] }, uCloud: { value: 1 }, uTime: { value: 0 } },
     cullFace: gl.FRONT,
     depthWrite: false,
   });

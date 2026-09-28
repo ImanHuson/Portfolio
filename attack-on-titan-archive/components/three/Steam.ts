@@ -56,16 +56,23 @@ varying float vAlpha;
 varying vec3 vWorld;
 varying float vLife;
 void main() {
+  // a billow, not a disc: noise eats into the edge, so each puff has a torn outline
   vec2 c = gl_PointCoord - 0.5;
   float d = length(c);
-  float soft = smoothstep(0.5, 0.0, d);
-  soft *= soft;
-  soft *= 0.45 + 0.9 * noise2(gl_PointCoord * 3.5 + vSeed * 31.0);   // wisps, not discs
-  if (soft * vAlpha < 0.003) discard;
-  vec3 col = uTint * (uSkyColor * 0.9 + uSunColor * 0.8);
-  col += uSunColor * 0.5 * (1.0 - vLife);        // backlit when fresh and dense
+  float n = fbm2(gl_PointCoord * 2.6 + vSeed * 17.0);
+  float dens = smoothstep(0.0, 0.32, (0.46 - d) + (n - 0.5) * 0.6);
+  if (dens * vAlpha < 0.004) discard;
+  // backlit: thin edges catch the sun (a silver lining when looking toward it),
+  // the dense core stays in its own shadow
+  vec3 V = normalize(vWorld - cameraPosition);
+  float back = pow(max(dot(V, normalize(uSun)), 0.0), 3.0);
+  float thin = 1.0 - smoothstep(0.0, 0.6, dens);
+  // steam is white: a cool grey core in its own shadow, sunlit edges
+  vec3 core = uTint * (vec3(0.74, 0.77, 0.82) * 0.9 + uSkyColor * 0.35 + uSunColor * 0.18) * mix(0.7, 1.0, vLife);
+  vec3 lit = uTint * (uSunColor * (0.8 + 1.8 * back) + vec3(0.2));
+  vec3 col = mix(core, lit, clamp(thin * 0.85 + 0.2 + (1.0 - vLife) * 0.25, 0.0, 1.0));
   float dist = length(cameraPosition - vWorld);
-  gl_FragColor = vec4(grade(applyFog(col, dist, vWorld.y)), min(soft * vAlpha * 0.3, 0.9));
+  gl_FragColor = vec4(grade(applyFog(col, dist, vWorld.y)), min(dens * vAlpha * 0.42, 0.92));
 }
 `;
 

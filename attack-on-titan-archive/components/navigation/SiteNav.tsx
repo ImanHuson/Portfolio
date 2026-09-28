@@ -17,6 +17,8 @@ export default function SiteNav() {
           <SoundToggle />
         </div>
       </div>
+      {/* how far through this file: CSS scroll-driven, so it costs no JS and simply isn't there where unsupported */}
+      <span className="read-progress" aria-hidden />
     </header>
   );
 }

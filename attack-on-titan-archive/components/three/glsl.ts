@@ -58,16 +58,20 @@ vec3 grade(vec3 c) {
   c *= uExposure;
   c = c / (1.0 + c * 0.35);           // soft shoulder, keeps highlights paper, not white
   float l = dot(c, vec3(0.299, 0.587, 0.114));
-  c = mix(vec3(l), c, 0.86);          // archive desaturation
+  c = mix(vec3(l), c, 1.1);           // colour, not archive grey: the site's grade lives in its type and paper
+  // split tone: cool, slightly teal shadows; warm highlights
+  c += vec3(-0.018, 0.004, 0.026) * (1.0 - smoothstep(0.0, 0.45, l)) + vec3(0.03, 0.012, -0.024) * smoothstep(0.45, 1.0, l);
+  c = clamp(c, 0.0, 1.0);
+  c = mix(c, c * c * (3.0 - 2.0 * c), 0.22); // a gentle S-curve for depth
   return c;
 }
 `;
 
 export const ATMOS_UNIFORMS = () => ({
   uSun: { value: [0.24, 0.3, -0.92] },
-  uSunColor: { value: [1.08, 0.9, 0.68] },
-  uSkyColor: { value: [0.42, 0.46, 0.5] },
-  uFogColor: { value: [0.7, 0.66, 0.58] },
+  uSunColor: { value: [1.32, 1.0, 0.66] },
+  uSkyColor: { value: [0.36, 0.46, 0.62] },
+  uFogColor: { value: [0.8, 0.72, 0.6] },
   uFogDensity: { value: 0.0036 },
   uExposure: { value: 1.0 },
 });

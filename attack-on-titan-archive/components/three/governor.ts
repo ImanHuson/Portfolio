@@ -20,7 +20,8 @@ export function makeGovernor({
   let ema = 20;
   let last = start;
   let lastAdjust = start + 1000; // ignore the first second (shader compile)
-  let gaveUp = false;
+  // ?gl=force (QA, rendering stills): never hand over to the stills
+  let gaveUp = typeof location !== "undefined" && new URLSearchParams(location.search).get("gl") === "force";
   return {
     /** call once per drawn frame */
     tick(now: number) {

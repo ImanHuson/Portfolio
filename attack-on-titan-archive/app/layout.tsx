@@ -67,6 +67,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${serif.variable} ${military.variable} ${sans.variable} ${mono.variable}`}>
       <body>
+        {/* depth behind every page: faint lamp-light from above, the accent low down */}
+        <div className="ambient" aria-hidden />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-paper focus:px-4 focus:py-2 focus:font-military focus:tracking-[0.2em] focus:text-ink focus:uppercase"
