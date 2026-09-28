@@ -1,0 +1,34 @@
+import type { Metadata } from "next";
+import NextChapter from "@/components/typography/NextChapter";
+import EndingGate from "@/components/ending/EndingGate";
+import PathsSection from "@/components/ending/PathsSection";
+import { PATHS_FACTS } from "@/lib/data/ending";
+
+export const metadata: Metadata = {
+  title: "Paths",
+  description: "AOT-09. Part of the ending. This file opens only on request.",
+  alternates: { canonical: "./" },
+};
+
+export default function Paths() {
+  return (
+    <EndingGate id="AOT-09" title="Paths">
+      <PathsSection />
+      <section aria-labelledby="paths-record" className="bg-void px-4 py-24 md:px-8 md:py-32">
+        <div className="mx-auto max-w-[900px]">
+          <h2 id="paths-record" className="font-mono text-meta tracking-[0.24em] text-ash uppercase">
+            The record
+          </h2>
+          <ol className="mt-10 grid gap-8">
+            {PATHS_FACTS.map((f) => (
+              <li key={f} className="border-l border-paper/20 pl-6 text-lede leading-relaxed text-paper/80">
+                {f}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+      <NextChapter href="/the-end/" id="AOT-10" title="The End" line="A single tree." />
+    </EndingGate>
+  );
+}

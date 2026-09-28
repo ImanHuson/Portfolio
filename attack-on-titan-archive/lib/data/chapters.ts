@@ -28,9 +28,9 @@ export const ACTS: Act[] = [
     name: "Freedom",
     register: "Void. Sand. Paths. Fire. The Walls were never the real prison.",
     chapters: [
-      { id: "AOT-08", title: "The Rumbling", line: "The largest thing that ever walked.", open: false },
-      { id: "AOT-09", title: "Paths", line: "Where every Eldian is connected.", open: false },
-      { id: "AOT-10", title: "The End", line: "A single tree.", open: false },
+      { id: "AOT-08", title: "The Rumbling", line: "The largest thing that ever walked.", open: true, href: "/the-rumbling/" },
+      { id: "AOT-09", title: "Paths", line: "Where every Eldian is connected.", open: true, href: "/paths/" },
+      { id: "AOT-10", title: "The End", line: "A single tree.", open: true, href: "/the-end/" },
     ],
   },
 ];

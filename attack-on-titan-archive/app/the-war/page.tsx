@@ -24,7 +24,7 @@ export default function TheWar() {
       <BattleSection />
       <OdmSection />
       <Memorial />
-      <NextChapter href="/#index" id="AOT-08" title="The Rumbling" line="Sealed for now. The largest thing that ever walked." />
+      <NextChapter href="/the-rumbling/" id="AOT-08" title="The Rumbling" line="The ending begins here. The file opens only when you ask." />
     </>
   );
 }
