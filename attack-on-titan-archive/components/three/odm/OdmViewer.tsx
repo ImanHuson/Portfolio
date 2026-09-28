@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Camera, Cylinder, Mat4, Mesh, Quat, Renderer, Transform, Vec3 } from "ogl";
+import { Camera, Cylinder, Mat4, Mesh, Plane, Program, Quat, Renderer, Transform, Vec3 } from "ogl";
 import { buildGear, makeProgram } from "./gear";
 
 export type OdmApi = {
@@ -52,17 +52,40 @@ export default function OdmViewer({
     const scene = new Transform();
     const gear = buildGear(gl);
     gear.root.setParent(scene);
+    // wires are placed in world space (belt to anchor), so they must not ride on the moving body
+    for (const w of gear.wires) w.setParent(scene);
 
     // two trees for the anchors to bite into, only during the demo
     const trees: Mesh[] = [];
     for (const s of [-1, 1]) {
-      const t = new Mesh(gl, { geometry: new Cylinder(gl, { radiusTop: 0.12, radiusBottom: 0.16, height: 6, radialSegments: 20 }), program: makeProgram(gl, { color: [0.2, 0.14, 0.09], metal: 0, rough: 0.8 }) });
-      t.position.set(s * 1.9, 1.4, 3.4);
+      const t = new Mesh(gl, { geometry: new Cylinder(gl, { radiusTop: 0.28, radiusBottom: 0.4, height: 12, radialSegments: 24 }), program: makeProgram(gl, { color: [0.2, 0.14, 0.09], metal: 0, rough: 0.8 }) });
+      t.position.set(s * 3.2, 5, 8);
       t.program.uniforms.uOpacity.value = 0;
       t.setParent(scene);
       trees.push(t);
     }
-    const targets = [new Vec3(-1.78, 1.9, 3.32), new Vec3(1.78, 2.05, 3.32)];
+    // the ground, only during the demo: a faint surveyor's grid at the wearer's feet
+    const ground = new Mesh(gl, {
+      geometry: new Plane(gl, { width: 40, height: 40 }),
+      program: new Program(gl, {
+        transparent: true,
+        depthWrite: false,
+        cullFace: null,
+        vertex: `attribute vec3 position; uniform mat4 modelMatrix; uniform mat4 viewMatrix; uniform mat4 projectionMatrix; varying vec3 vW;
+          void main(){ vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
+        fragment: `precision highp float; uniform float uOpacity; uniform vec3 uShadow; varying vec3 vW;
+          void main(){ vec2 g = abs(fract(vW.xz) - 0.5); float line = smoothstep(0.47, 0.5, max(g.x, g.y));
+            float fade = 1.0 - smoothstep(4.0, 16.0, length(vW.xz - vec2(0.0, 4.0)));
+            float shadow = (1.0 - smoothstep(0.0, 0.45, length(vW.xz - uShadow.xz))) * uShadow.y;
+            gl_FragColor = vec4(vec3(0.8, 0.76, 0.66) * line, (line * 0.35 * fade + shadow * 0.55) * uOpacity); }`,
+        uniforms: { uOpacity: { value: 0 }, uShadow: { value: new Vec3() } },
+      }),
+    });
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.95;
+    ground.setParent(scene);
+    // where the anchors bite: the near face of each trunk, 4.5 m up
+    const targets = [new Vec3(-2.93, 4.5, 7.72), new Vec3(2.93, 4.7, 7.72)];
 
     // ---- camera orbit
     let yaw = -0.75;
@@ -117,7 +140,87 @@ export default function OdmViewer({
     let explode = 0;
     let active: string | null = null;
     let demoStart = -1;
-    const DEMO = 5.2; // seconds
+    const DEMO = 7.5; // seconds, at half speed
+    // ---- the simulation: the wearer as a point mass at the belt, two
+    // inextensible wires that can only pull, reeled in at a fixed rate, a
+    // little gas thrust while reeling, then release and free flight.
+    const G = 9.81;
+    const SLOW = 0.5; // shown at half speed
+    const ANCHOR_SPEED = 45; // m/s
+    const REEL = 7; // m/s
+    const THRUST = 3; // m/s^2
+    const sim = {
+      P: new Vec3(),
+      V: new Vec3(),
+      simT: 0,
+      hook: [0, 0], // 0..1 of the anchor's flight
+      L: [0, 0], // wire lengths once attached
+      attached: false,
+      released: false,
+      landedAt: -1,
+    };
+    const hookFrom = [new Vec3(-0.18, 0, -0.1), new Vec3(0.18, 0, -0.1)]; // barrels, relative to the belt
+    function simReset() {
+      sim.P.set(0, 0, 0);
+      sim.V.set(0, 0, 0);
+      sim.simT = 0;
+      sim.hook = [0, 0];
+      sim.L = [0, 0];
+      sim.attached = false;
+      sim.released = false;
+      sim.landedAt = -1;
+    }
+    function simStep(dt: number) {
+      sim.simT += dt;
+      const t = sim.simT;
+      // fire: the anchors fly out along straight lines
+      for (let i = 0; i < 2; i++) {
+        const from = new Vec3().copy(hookFrom[i]).add(sim.P);
+        const dist = from.distance(targets[i]);
+        sim.hook[i] = Math.min(1, sim.hook[i] + (ANCHOR_SPEED * dt) / Math.max(dist, 0.1));
+      }
+      if (!sim.attached && sim.hook[0] >= 1 && sim.hook[1] >= 1) {
+        sim.attached = true;
+        for (let i = 0; i < 2; i++) sim.L[i] = new Vec3().copy(hookFrom[i]).add(sim.P).distance(targets[i]);
+      }
+      // forces
+      sim.V.y -= G * dt;
+      if (sim.attached && !sim.released) {
+        const mid = new Vec3().copy(targets[0]).add(targets[1]).scale(0.5);
+        const dir = new Vec3().sub(mid, sim.P).normalize();
+        sim.V.add(dir.scale(THRUST * dt));
+        for (let i = 0; i < 2; i++) sim.L[i] = Math.max(0.6, sim.L[i] - REEL * dt);
+      }
+      sim.P.add(new Vec3().copy(sim.V).scale(dt));
+      // wire constraints: pull only
+      if (sim.attached && !sim.released) {
+        for (let i = 0; i < 2; i++) {
+          const a = targets[i];
+          const d = new Vec3().sub(new Vec3().copy(hookFrom[i]).add(sim.P), a);
+          const len = d.len();
+          if (len > sim.L[i]) {
+            d.scale(1 / len);
+            sim.P.sub(new Vec3().copy(d).scale(len - sim.L[i]));
+            const out = sim.V.dot(d);
+            if (out > 0) sim.V.sub(new Vec3().copy(d).scale(out));
+          }
+        }
+        // let go before hitting the trunks: close enough, or after 2.2 s
+        const mid = new Vec3().copy(targets[0]).add(targets[1]).scale(0.5);
+        if (sim.P.distance(mid) < 2.6 || t > 2.2) {
+          sim.released = true;
+          sim.V.y += 2.5; // a last kick of gas, up and over
+        }
+      }
+      // the ground
+      if (sim.P.y < 0) {
+        sim.P.y = 0;
+        if (sim.V.y < 0) sim.V.y = 0;
+        sim.V.x *= 0.8;
+        sim.V.z *= 0.8;
+        if (sim.released && sim.landedAt < 0) sim.landedAt = t;
+      }
+    }
 
     apiRef.current = {
       setExplode: (t) => {
@@ -168,29 +271,40 @@ export default function OdmViewer({
       // slow turn when nobody is touching it
       if (!reduced && !dragging && nowMs - idleSince > 4000 && demoStart < 0) yaw += 0.0025;
 
-      // ---- the movement demo: fire, reel, release
+      // ---- the movement demo, simulated
       let fly = 0;
       let wiresOn = false;
-      let reach = 0; // 0 in the barrel .. 1 at the tree
       if (demoStart >= 0) {
         const t = now - demoStart;
-        if (t > DEMO) demoStart = -1;
-        const fireIn = ease(clamp01(t / 0.6));
-        const reel = ease(clamp01((t - 0.9) / 1.8));
-        const out = ease(clamp01((t - 3.0) / 0.5));
-        const back = ease(clamp01((t - 3.6) / 1.4));
-        reach = fireIn * (1 - out);
-        wiresOn = t < 3.5;
-        fly = reel * (1 - back);
-        for (const tr of trees) tr.program.uniforms.uOpacity.value = Math.min(fireIn, 1 - back) * 0.9;
-        gear.turbine.rotation.z += 0.1 + 0.9 * (reel > 0 && reel < 1 ? 1 : 0);
+        // run the simulation up to t (at half speed), in small fixed steps
+        const target = t * SLOW;
+        let n = 0;
+        while (sim.simT < target && n++ < 200) simStep(1 / 240);
+        const landedFor = sim.landedAt >= 0 ? sim.simT - sim.landedAt : 0;
+        const fadeOut = clamp01((landedFor - 0.6) / 0.5);
+        if (t > DEMO || fadeOut >= 1) {
+          demoStart = -1;
+          simReset();
+        }
+        wiresOn = !sim.released;
+        fly = clamp01(sim.P.len() / 6);
+        const treeA = Math.min(clamp01(t / 0.3), 1 - fadeOut) * 0.95;
+        for (const tr of trees) tr.program.uniforms.uOpacity.value = treeA;
+        ground.program.uniforms.uOpacity.value = treeA;
+        ground.program.uniforms.uShadow.value.set(sim.P.x, 1 - clamp01(sim.P.y / 6), sim.P.z);
+        gear.turbine.rotation.z += sim.attached && !sim.released ? 1.1 : 0.15;
+        // lean into the pull, then level out in the air
+        const pitch = sim.released ? Math.max(-0.2, -Math.atan2(sim.V.y, 6)) : -Math.min(0.5, sim.V.len() * 0.05);
+        gear.root.rotation.x += (pitch - gear.root.rotation.x) * 0.1;
+        gear.root.position.copy(sim.P);
+        if (fadeOut > 0) gear.root.position.lerp(new Vec3(0, 0, 0), fadeOut);
       } else {
         for (const tr of trees) tr.program.uniforms.uOpacity.value = 0;
+        ground.program.uniforms.uOpacity.value = 0;
         gear.turbine.rotation.z += reduced ? 0 : 0.02;
+        gear.root.position.set(0, 0, 0);
+        gear.root.rotation.x += (0 - gear.root.rotation.x) * 0.1;
       }
-      // the body is pulled toward the anchors, rising in an arc
-      gear.root.position.set(0, fly * 0.95 + Math.sin(fly * Math.PI) * 0.25, fly * 1.85);
-      gear.root.rotation.x = -fly * 0.35;
 
       // parts: explode offsets, highlight, dim the others when one is chosen
       for (const p of gear.parts) {
@@ -204,12 +318,13 @@ export default function OdmViewer({
           m.program.uniforms.uOpacity.value = active && !on ? 0.4 : 1;
         }
       }
-      for (const m of gear.ghostMeshes) m.program.uniforms.uOpacity.value = 0.95 * (1 - clamp01(explode * 1.6)) * (1 - fly * 0.6);
+      for (const m of gear.ghostMeshes) m.program.uniforms.uOpacity.value = 0.8 * (1 - clamp01(explode * 1.6)) * (1 - fly * 0.6);
 
       // anchors: aim at the trees and fly out along their wires. ogl's lookAt
       // works in the parent's space and turns +z (the barrel) to the target.
       gear.anchorHeads.forEach((head, i) => {
         const mount = head.parent!;
+        const reach = demoStart >= 0 && !sim.released ? sim.hook[i] : 0;
         if (reach > 0) {
           mount.parent!.updateMatrixWorld();
           const inv = new Mat4().inverse(mount.parent!.worldMatrix);
@@ -222,7 +337,7 @@ export default function OdmViewer({
         }
       });
       gear.wires.forEach((w, i) => {
-        w.visible = wiresOn && reach > 0.02;
+        w.visible = wiresOn && sim.hook[i] > 0.02;
         if (!w.visible) return;
         const mount = gear.anchorHeads[i].parent!;
         mount.updateMatrixWorld();
@@ -244,9 +359,9 @@ export default function OdmViewer({
       const cy = Math.sin(pitch);
       const cz = Math.cos(pitch) * Math.cos(yaw);
       const follow = gear.root.position;
-      const d = dist + fly * 2.6 + ease(clamp01(explode)) * 0.9;
-      camera.position.set(center.x + follow.x * 0.6 + cx * d, center.y + follow.y * 0.6 + cy * d, center.z + follow.z * 0.6 + cz * d);
-      tmp.set(center.x + follow.x * 0.6, center.y + follow.y * 0.6, center.z + follow.z * 0.6);
+      const d = dist + fly * 2.2 + ease(clamp01(explode)) * 0.9;
+      camera.position.set(center.x + follow.x * 0.85 + cx * d, center.y + follow.y * 0.85 + cy * d, center.z + follow.z * 0.85 + cz * d);
+      tmp.set(center.x + follow.x * 0.85, center.y + follow.y * 0.85, center.z + follow.z * 0.85);
       camera.lookAt(tmp);
       scene.traverse((o) => {
         const m = o as Mesh;

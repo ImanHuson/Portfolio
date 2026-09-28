@@ -1,5 +1,5 @@
 import Sealed from "@/components/archive/Sealed";
-import { MEMORIAL, MEMORIAL_NOTE } from "@/lib/data/war";
+import { MEMORIAL, MEMORIAL_104, MEMORIAL_NOTE, TROST_LOSS } from "@/lib/data/war";
 import { cn } from "@/lib/utils";
 
 const UNNAMED = 144;
@@ -38,6 +38,25 @@ export default function Memorial() {
                 {m.note}
                 {m.later && (
                   <Sealed label="Sealed: after 850" className="mt-1">
+                    <p className="pt-1 text-paper/75">{m.later}</p>
+                  </Sealed>
+                )}
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <h3 className="mt-24 text-center font-mono text-meta tracking-[0.24em] text-ash uppercase">104th Cadet Corps. Trost, 850</h3>
+        <p className="mt-3 text-center text-[0.9rem] text-paper/50">{TROST_LOSS}</p>
+        <ol className="mt-10 grid gap-0">
+          {MEMORIAL_104.map((m) => (
+            <li key={m.name} className="memorial-fade grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 border-b border-paper/10 py-5 md:grid-cols-[16rem_6rem_1fr]">
+              <span className="font-display text-[1.25rem] font-bold text-paper">{m.name}</span>
+              <span className="font-mono text-[0.75rem] tracking-[0.2em] text-ash">KIA</span>
+              <span className="col-span-2 text-[0.92rem] leading-relaxed text-paper/60 md:col-span-1">
+                {m.note}
+                {m.later && (
+                  <Sealed label="Sealed: how he died" className="mt-1">
                     <p className="pt-1 text-paper/75">{m.later}</p>
                   </Sealed>
                 )}

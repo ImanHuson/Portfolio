@@ -82,6 +82,9 @@ export default function OdmSection() {
               >
                 How it moves
               </button>
+              <p className="w-full max-w-[52ch] text-[0.8rem] leading-snug text-ash-2">
+                Simulated, simply: gravity, two wires that can only pull, reeled in at a fixed rate, a little gas, then release. Shown at half speed.
+              </p>
             </div>
           </div>
 

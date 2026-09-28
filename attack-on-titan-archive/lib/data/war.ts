@@ -171,5 +171,15 @@ export const MEMORIAL: { name: string; fate: Fate; note: string; later?: string 
   { name: "Floch Forster", fate: "SURVIVED", note: "Shiganshina, 850. The only one of Erwin's charge to live.", later: "Killed in 854, at the port of Odiha." },
 ];
 
+/** The 104th Cadet Corps at Trost, 850: cadets, not yet Survey Corps. The Garrison and the cadets lost 207 dead or missing there. */
+export const MEMORIAL_104: { name: string; note: string; later?: string }[] = [
+  { name: "Thomas Wagner", note: "Squad 34. Swallowed by an Abnormal as his squad watched." },
+  { name: "Nack Tierce", note: "Squad 34." },
+  { name: "Mylius Zeramuski", note: "Squad 34." },
+  { name: "Mina Carolina", note: "Squad 34. A Titan caught her wire and threw her into a wall." },
+  { name: "Marco Bott", note: "Found dead after the battle. Jean identified him.", later: "He overheard Reiner and Bertholdt. Reiner pinned him, Annie took his gear on Reiner's order, and they left him to a Titan." },
+];
+export const TROST_LOSS = "207 dead or missing, 897 wounded: the Garrison and the cadets together, at Trost.";
+
 export const MEMORIAL_NOTE =
-  "Named members only, as the story names them; their fate as of the end of 850, with later deaths sealed. The rows without names stand for the soldiers the story never names. Their number here is not a count.";
+  "Named soldiers only, as the story names them; their fate as of the end of 850, with later deaths sealed. The rows without names stand for the soldiers the story never names. Their number here is not a count.";
