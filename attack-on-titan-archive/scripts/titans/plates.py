@@ -9,6 +9,7 @@ Run from attack-on-titan-archive/:
 Input:  titans-src/<slug>.jpg  (gitignored: raw screenshots never ship)
 Output: public/images/titans/<slug>-plate.webp  specimen plate on card, 4:5 (Titan page)
         public/images/titans/<slug>-col.webp    tall crop, 1:2, edges fade out (index column)
+Entries with col=None (founding-rumbling, a sealed second plate) make only a plate.
 """
 
 import sys
@@ -29,7 +30,9 @@ OUT = ROOT / "public" / "images" / "titans"
 # slack). col: the point of the source the column is centred on, and coltop
 # trims empty sky above a low subject before the column crop.
 TITANS = {
-    "founding":   dict(n="01", name="FOUNDING TITAN",   h="13 M", trim=(0, 0, 1, 0.925), plate=(0.5, 0.3),  col=(0.5, 0.25)),
+    "founding":   dict(n="01", name="FOUNDING TITAN",   h="13 M", trim=(0, 0, 1, 0.93),  plate=(0.92, 0.5), col=(0.74, 0.5)),
+    # the form it took in 854: spoils the ending, sealed on the page, no column
+    "founding-rumbling": dict(n="01-B", name="FOUNDING TITAN, 854", h="", trim=(0, 0, 1, 0.93), plate=(0.5, 0.3), col=None),
     "attack":     dict(n="02", name="ATTACK TITAN",     h="15 M", trim=(0, 0, 1, 0.8),   plate=(0.4, 0.3),  col=(0.38, 0.3)),
     "colossal":   dict(n="03", name="COLOSSAL TITAN",   h="60 M", trim=(0, 0, 1, 0.925), plate=(0.25, 0.4), col=(0.27, 0.4)),
     "armored":    dict(n="04", name="ARMORED TITAN",    h="15 M", trim=(0, 0, 1, 0.925), plate=(0.72, 0.3), col=(0.74, 0.3)),
@@ -75,7 +78,8 @@ def plate(slug, spec, i):
     d.rectangle((49, 49, 50 + 720, 50 + 900), outline=tuple(int(c) for c in INK), width=2)
     ink = tuple(int(c) for c in INK)
     d.text((50, 975), f"SPECIMEN PLATE {spec['n']} / 09", font=MONO(24), fill=ink)
-    d.text((W - 50, 975), f"RECORDED HEIGHT {spec['h']}", font=MONO(24), fill=ink, anchor="ra")
+    if spec["h"]:
+        d.text((W - 50, 975), f"RECORDED HEIGHT {spec['h']}", font=MONO(24), fill=ink, anchor="ra")
     d.text((50, 1012), spec["name"], font=COND(46), fill=ink)
     card = card.convert("RGBA")
     card.save(OUT / f"{slug}-plate.webp", quality=78, method=6)
@@ -113,6 +117,7 @@ if __name__ == "__main__":
         if slug not in want:
             continue
         plate(slug, TITANS[slug], i)
-        column(slug, TITANS[slug], i)
+        if TITANS[slug]["col"]:
+            column(slug, TITANS[slug], i)
         sizes = [f"{p.name} {p.stat().st_size // 1024} KB" for p in sorted(OUT.glob(f"{slug}-[pc][lo]*.webp"))]
         print(slug, ", ".join(sizes))

@@ -53,9 +53,8 @@ export default function TitanGrid() {
               className="group flex h-full flex-col items-center px-2 pt-6 pb-5 text-center transition-colors hover:bg-base-2 focus-visible:bg-base-2"
             >
               <span className="font-mono text-[0.72rem] tracking-[0.12em] text-ash">{t.height} M</span>
-              {/* the Founding's own plate spoils the ending, so its column shows the x-ray */}
               <img
-                src={asset(`/images/titans/${t.slug}-${t.plate.sealed ? "xray" : "col"}.webp`)}
+                src={asset(`/images/titans/${t.slug}-col.webp`)}
                 alt=""
                 width={300}
                 height={600}

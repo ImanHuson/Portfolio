@@ -13,12 +13,13 @@ export type Titan = {
   abilities: string[];
   holders: { name: string; slug?: string }[];
   events: { year: string; text: string }[];
-  /** the specimen plate (scripts/titans/plates.py); sealed when the image itself spoils */
-  plate: { source: "anime" | "fan-art"; credit: string; sealed?: boolean };
+  /** the specimen plate (scripts/titans/plates.py). `later` is a second plate,
+   * <slug>-<later.id>-plate.webp, sealed on the page because it spoils. */
+  plate: { credit: string; later?: { id: string; label: string; alt: string; credit: string } };
 };
 
 const ANIME = "Attack on Titan (anime). © Hajime Isayama, Kodansha / Attack on Titan Production Committee";
-const anime = { source: "anime" as const, credit: ANIME };
+const anime = { credit: ANIME };
 
 export const ORIGIN =
   "When Ymir Fritz died, thirteen years after she gained the power of the Titans, that power was split into nine. Each of the Nine Titans is one part of it.";
@@ -46,8 +47,11 @@ export const TITANS: Titan[] = [
       { year: "845", text: "Grisha Yeager takes it from the Reiss family and passes it, with the Attack Titan, to Eren." },
       { year: "854", text: "Eren uses it to begin the Rumbling." },
     ],
-    // the only plate that shows the ending, so it opens only on request
-    plate: { source: "fan-art", credit: "Fan art by Metaleks.", sealed: true },
+    // the Rumbling form spoils the ending, so that plate opens only on request
+    plate: {
+      credit: "Attack on Titan. © Hajime Isayama, Kodansha. Image as posted to r/ShingekiNoKyojin by u/Apro_7.",
+      later: { id: "rumbling", label: "Sealed: the form it took in 854", alt: "Specimen plate: the Founding Titan in 854", credit: ANIME },
+    },
   },
   {
     slug: "attack",

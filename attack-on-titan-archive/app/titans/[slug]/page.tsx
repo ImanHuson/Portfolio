@@ -55,18 +55,16 @@ export default async function TitanFile({ params }: PageProps<"/titans/[slug]">)
         </nav>
 
         <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <figure className="relative lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start">
-            {t.plate.sealed ? (
-              <>
-                <img src={asset(`/images/titans/${t.slug}-xray.webp`)} alt={`X-ray plate of the ${t.name}`} width={480} height={960} loading="lazy" className="mx-auto aspect-[1/2] w-full max-w-[300px]" />
-                <Sealed label="Sealed: the plate spoils the ending" className="mx-auto mt-4 max-w-[520px]">
-                  <img src={asset(`/images/titans/${t.slug}-plate.webp`)} alt={`Specimen plate: the ${t.name}`} width={820} height={1100} loading="lazy" className="w-full" />
-                </Sealed>
-              </>
-            ) : (
-              <img src={asset(`/images/titans/${t.slug}-plate.webp`)} alt={`Specimen plate: the ${t.name}`} width={820} height={1100} loading="lazy" className="mx-auto w-full max-w-[520px] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]" />
-            )}
+          {/* not sticky when a sealed second plate can open under it: a sticky block taller than the screen hides its foot */}
+          <figure className={t.plate.later ? "relative lg:self-start" : "relative lg:sticky lg:top-[calc(var(--nav-h)+2rem)] lg:self-start"}>
+            <img src={asset(`/images/titans/${t.slug}-plate.webp`)} alt={`Specimen plate: the ${t.name}`} width={820} height={1100} loading="lazy" className="mx-auto w-full max-w-[520px] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]" />
             <figcaption className="mx-auto mt-3 max-w-[520px] text-[0.8rem] text-ash-2">{t.plate.credit}</figcaption>
+            {t.plate.later && (
+              <Sealed label={t.plate.later.label} className="mx-auto mt-6 max-w-[520px]">
+                <img src={asset(`/images/titans/${t.slug}-${t.plate.later.id}-plate.webp`)} alt={t.plate.later.alt} width={820} height={1100} loading="lazy" className="w-full" />
+                <p className="mt-3 text-[0.8rem] text-ash-2">{t.plate.later.credit}</p>
+              </Sealed>
+            )}
           </figure>
 
           <div>
