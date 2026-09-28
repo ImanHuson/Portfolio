@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/*
+ * ATTACK ON TITAN: THE ARCHIVE. Design tokens.
+ * Defined once here; components never improvise their own values.
+ *
+ * The palette is built around the story, not the logo:
+ *   base / void      the dark ground everything is recovered onto
+ *   wall / paper     limestone and archive paper: the Survey Corps register
+ *   ink              military black, the colour of text ON paper
+ *   blood            the ONE accent. Stamps, KIA marks, the breach. Never a glow.
+ *   scout            Wings of Freedom green. Act I tint only.
+ *   marley           concrete. Act II tint only.
+ *   titan            flesh / bone. Titan research register only.
+ *   paths            near-white of the Paths. Act III only.
+ * Shape: radius 0 everywhere. Documents have corners.
+ */
+
+:root {
+  color-scheme: dark;
+
+  --base: #0b0c0a;
+  --base-2: #121310;
+  --base-3: #1a1b17;
+  --line: #2a2b25;
+  --line-strong: #3d3e36;
+
+  --wall: #c7c0a9;
+  --paper: #d8d0b8;
+  --paper-dim: #a39c87;
+  --ink: #161714;
+  --ash: #8f8a7a;
+  --ash-2: #6a665a;
+
+  --blood: #6e1717;
+  --flare: #a8261c; /* blood, lifted for text/marks on dark grounds (AA at large sizes) */
+  --scout: #263b2e;
+  --marley: #3b3832;
+  --titan: #8a7464;
+  --paths: #e6e0ce;
+  --void: #020202;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 180ms;
+  --dur-ui: 320ms;
+  --dur-reveal: 900ms;
+
+  --nav-h: 60px;
+}
+
+@theme inline {
+  --color-base: var(--base);
+  --color-base-2: var(--base-2);
+  --color-base-3: var(--base-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-wall: var(--wall);
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-ink: var(--ink);
+  --color-ash: var(--ash);
+  --color-ash-2: var(--ash-2);
+  --color-blood: var(--blood);
+  --color-flare: var(--flare);
+  --color-scout: var(--scout);
+  --color-marley: var(--marley);
+  --color-titan: var(--titan);
+  --color-paths: var(--paths);
+  --color-void: var(--void);
+
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+  --radius-lg: 0rem;
+  --radius-xl: 0rem;
+
+  /* three typographic personalities (brief section 03), set in layout.tsx */
+  --font-display: var(--font-display-face);   /* editorial serif: THE WALLS */
+  --font-military: var(--font-military-face); /* condensed grotesk: YEAR 845 */
+  --font-mono: var(--font-mono-face);         /* coordinates, IDs, reports */
+  --font-sans: var(--font-sans-face);         /* reading text */
+
+  --text-meta: 0.75rem;
+  --text-body: 1.0625rem;
+  --text-lede: clamp(1.15rem, 1.05rem + 0.55vw, 1.45rem);
+  --text-h3: clamp(1.35rem, 1.15rem + 0.8vw, 1.85rem);
+  --text-h2: clamp(2.1rem, 1.5rem + 2.6vw, 3.9rem);
+  --text-h1: clamp(3rem, 1.8rem + 6vw, 8rem);
+  --text-colossal: clamp(3.6rem, 1.2rem + 11vw, 13rem);
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+  html {
+    background: var(--base);
+  }
+  body {
+    background: var(--base);
+    color: var(--paper);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--blood);
+    color: var(--paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--paper);
+    outline-offset: 3px;
+  }
+  button, a, summary, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  [id] {
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+  }
+}
+
+/* Lenis base styles */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Film grain: fixed, pointer-events-none, never on a scrolling container. */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Archive paper: a document surface on the dark ground. Fibre + foxing,
+   all CSS so it costs nothing to download. */
+.paper {
+  background-color: var(--paper);
+  color: var(--ink);
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(110, 90, 50, 0.16), transparent 42%),
+    radial-gradient(ellipse at 88% 92%, rgba(90, 70, 40, 0.2), transparent 46%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 22px 60px -20px rgba(0, 0, 0, 0.7);
+}
+
+/* Rubber stamp: uneven ink, slight rotation, blood only. */
+.stamp {
+  display: inline-block;
+  border: 2px solid currentColor;
+  color: var(--blood);
+  padding: 0.2em 0.6em;
+  font-family: var(--font-military), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+  mix-blend-mode: multiply;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
