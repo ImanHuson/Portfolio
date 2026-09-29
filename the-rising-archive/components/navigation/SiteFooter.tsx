@@ -2,13 +2,13 @@ import Link from "next/link";
 
 export default function SiteFooter() {
   return (
-    <footer className="relative z-10 border-t border-line bg-void">
+    <footer className="relative z-10 border-t border-line bg-void/40">
       {/* pb leaves room for the fixed sealed-passages notice */}
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pt-16 pb-28 md:grid-cols-[2fr_1fr_1fr] md:px-8">
         <div>
           <p className="font-display text-3xl font-bold tracking-tight uppercase">The Red Rising Archive</p>
           <p className="mt-4 max-w-[52ch] text-sm text-ash">
-            An unofficial fan archive. Red Rising, its characters and its world belong to Pierce Brown and his publishers. Plot facts here were checked against published sources; interpretation is marked as the archivist&rsquo;s own. The book covers are the publisher&rsquo;s (Del Rey, Penguin Random House), shown to identify the books. The character portraits are fan art, credited to their artists on the Fan Art page. The planets are NASA photographs, and the museum pieces and paintings come from The Met’s public-domain collection. Everything else was made for this site.
+            An unofficial fan archive. Red Rising, its characters and its world belong to Pierce Brown and his publishers. Plot facts here were checked against published sources; interpretation is marked as the archivist&rsquo;s own. The book covers are the publisher&rsquo;s (Del Rey, Penguin Random House), shown to identify the books. The character portraits are fan art, credited to their artists on the Fan Art page. The planets are NASA photographs, the museum pieces and paintings come from The Met’s public-domain collection, and the two warship plates are art from the video game Dreadnought, as stand-ins. Every source is listed on the Fan Art page.
           </p>
         </div>
         <nav aria-label="Footer">

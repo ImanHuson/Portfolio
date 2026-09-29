@@ -52,8 +52,8 @@ export const IDEAS: Idea[] = [
     slug: "honor",
     name: "Honor",
     question: "Four people. Four completely different relationships with the same word.",
-    plate: "/images/people/cassius.webp",
-    plateAlt: "A broken razor beside an untouched glass of wine.",
+    plate: "/images/portraits/cassius.webp",
+    plateAlt: "Cassius au Bellona, in fan art.",
     portrait: { slug: "cassius", name: "Cassius au Bellona" },
     lines: [],
     pairs: [
@@ -84,8 +84,8 @@ export const IDEAS: Idea[] = [
     slug: "fatherhood",
     name: "Fatherhood",
     question: "The saga is quietly obsessed with what parents leave behind.",
-    plate: "/images/people/pax.webp",
-    plateAlt: "A hoverbike built from salvage, glowing blue underneath.",
+    plate: "/images/portraits/pax.webp",
+    plateAlt: "Pax, in fan art.",
     portrait: { slug: "pax", name: "Pax" },
     lines: [],
     pairs: [

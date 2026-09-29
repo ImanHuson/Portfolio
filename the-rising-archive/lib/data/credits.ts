@@ -1,9 +1,9 @@
-// Public-domain images that replaced the archive's generated plates where a
-// real thing came close to the description (scripts/art/sourced.py). Every
-// one is public domain: The Metropolitan Museum of Art's Open Access
+// Real images that replaced the archive's generated plates where a
+// real thing came close to the description (scripts/art/sourced.py). All
+// but two are public domain: The Metropolitan Museum of Art's Open Access
 // (CC0) and NASA imagery (not copyrighted). The generated originals are
-// kept in /images/renders/ for the Fan Art page. Dreadnoughts, starships
-// and PsychoSpikes keep their renders: nothing real comes close.
+// retired. The dreadnought and starship plates are ship art from the video
+// game Dreadnought (the owner's image), credited as a stand-in.
 
 export type Credit = { title: string; by: string; source: string; url: string; alt: string };
 
@@ -11,6 +11,9 @@ const met = (id: number) => `https://www.metmuseum.org/art/collection/search/${i
 const nasa = (id: string) => `https://images.nasa.gov/details/${id}`;
 const MET = "The Metropolitan Museum of Art, Open Access (public domain)";
 const NASA = "NASA (public domain)";
+// Not public domain: game art the owner supplied, used as a stand-in the
+// way the rapier stands in for a razor, and credited to the game.
+const GAME = "Video game art, a stand-in (not public domain)";
 
 export const CREDITS: Record<string, Credit> = {
   "/images/vault/razor.webp": { title: "Rapier", by: "Italian, ca. 1610–20", source: MET, url: met(22369), alt: "A rapier’s ornate steel hilt, standing in for a razor." },
@@ -18,6 +21,9 @@ export const CREDITS: Record<string, Credit> = {
   "/images/vault/minds-eye.webp": { title: "Wedjat Eye Amulet", by: "Egyptian, 332–30 BCE", source: MET, url: met(550940), alt: "A gold Eye of Horus amulet." },
   "/images/vault/carving.webp": { title: "Bronze scalpel", by: "Roman, 1st–2nd century CE", source: MET, url: met(244206), alt: "A Roman bronze scalpel." },
   "/images/vault/holotech.webp": { title: "Terracotta roundels in the form of theatrical masks", by: "Greek, 1st century BCE", source: MET, url: met(257595), alt: "Two theatre masks, one grave, one grinning." },
+  "/images/vault/dreadnought.webp": { title: "Invictus, Lorica and Gravis", by: "Dreadnought (YAGER), over NASA’s Mars", source: GAME, url: "https://en.wikipedia.org/wiki/Dreadnought_(video_game)", alt: "Three dreadnoughts in formation above the limb of Mars, standing in for the Pax." },
+  "/images/vault/starship.webp": { title: "Zaratan leading a formation", by: "Dreadnought (YAGER), over NASA’s Mars", source: GAME, url: "https://en.wikipedia.org/wiki/Dreadnought_(video_game)", alt: "A gold-trimmed warship leading a formation of cruisers above Mars." },
+  "/images/vault/psychospike.webp": { title: "Hairpin", by: "Sri Lankan, 19th century", source: MET, url: met(90207), alt: "An ornate 19th-century hairpin beside its cap, standing in for a PsychoSpike." },
   "/images/houses/augustus.webp": { title: "Marble statue of a lion", by: "Greek, ca. 400–390 BCE", source: MET, url: met(248140), alt: "A marble lion, crouched to spring." },
   "/images/houses/bellona.webp": { title: "Eagle", by: "American, 1809–11", source: MET, url: met(17139), alt: "A gilded eagle, wings spread." },
   "/images/houses/telemanus.webp": { title: "Netsuke of Fox", by: "Japanese, 19th century", source: MET, url: met(60375), alt: "A carved ivory fox." },

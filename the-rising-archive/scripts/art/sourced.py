@@ -12,6 +12,11 @@ Three treatments, each for a reason:
             are lifted to the page's void so the frame edge disappears.
 - painting: cropped to 16:9 and given the covers' light grade (whites
             held to aged bone, a faint grain). Colours are left alone.
+- fleet:    ships cut from a supplied ship chart (the video game
+            Dreadnought's roster, the user's image, kept in gitignored
+            sourced-src/ship-chart.jpg and credited as a stand-in), set in a
+            formation above the NASA Mars limb: distant ships smaller and
+            hazed toward the void.
 
     python3 scripts/art/sourced.py          # from the-rising-archive/
     python3 scripts/art/sourced.py razor    # some
@@ -43,6 +48,7 @@ JOBS = {
     "vault/minds-eye": ("object", MET + "eg/original/DP112570.jpg", {"fit": 0.7}),
     "vault/carving": ("object", MET + "gr/original/DP9053.jpg", {"fit": 0.8, "rotate": -28}),
     "vault/holotech": ("object", MET + "gr/original/DP367987.jpg", {"fit": 0.82}),
+    "vault/psychospike": ("object", MET + "as/original/CI49.23ab.jpg", {"fit": 0.84, "rotate": -40}),
     "houses/augustus": ("object", MET + "gr/original/DP-43517-001.jpg", {"fit": 0.84}),
     "houses/bellona": ("object", MET + "ad/original/2002.21.jpg", {"fit": 0.8}),
     "houses/telemanus": ("object", MET + "as/original/LC-10_211_1409-001.jpg", {"fit": 0.78, "tol": 34, "neutral": True}),
@@ -54,6 +60,20 @@ JOBS = {
     "places/venus": ("planet", NASA + "PIA23791/PIA23791~orig.jpg", {"half": "right"}),
     "places/io": ("planet", NASA + "PIA02308/PIA02308~large.jpg", {}),
     "places/earth": ("planet", NASA + "GSFC_20171208_Archive_e002131/GSFC_20171208_Archive_e002131~large.jpg", {}),
+    "vault/dreadnought": ("fleet", "local:ship-chart.jpg", {"ships": [
+        # (crop box in the chart, centre x, centre y, width, depth: 0 near .. 1 far)
+        ((565, 38, 940, 132), 0.70, 0.2, 0.46, 0.85),
+        ((315, 168, 690, 245), 0.27, 0.29, 0.4, 0.7),
+        ((40, 38, 440, 132), 0.5, 0.48, 0.96, 0.0),
+    ]}),
+    "vault/starship": ("fleet", "local:ship-chart.jpg", {"ships": [
+        ((690, 505, 920, 580), 0.78, 0.16, 0.2, 0.9),
+        ((390, 505, 625, 580), 0.22, 0.19, 0.22, 0.85),
+        ((75, 505, 345, 580), 0.52, 0.1, 0.2, 0.9),
+        ((350, 370, 670, 445), 0.28, 0.34, 0.44, 0.55),
+        ((600, 280, 925, 352), 0.73, 0.37, 0.44, 0.5),
+        ((60, 278, 400, 352), 0.48, 0.56, 0.84, 0.0),
+    ]}),
     "rising/movement": ("painting", MET + "ad/original/DP215410.jpg", {"cy": 0.5}),
     "rising/war": ("painting", MET + "ep/original/DT2944.jpg", {"cy": 0.55}),
     "rising/myth": ("painting", MET + "ep/original/DP119115.jpg", {"cy": 0.62}),
@@ -63,6 +83,8 @@ JOBS = {
 
 def fetch(name, url):
     SRC.mkdir(exist_ok=True)
+    if url.startswith("local:"):
+        return Image.open(SRC / url[6:]).convert("RGB")
     f = SRC / (name.replace("/", "_") + ".jpg")
     if not f.exists():
         # Met originals are huge; its web-large rendition is plenty here.
@@ -201,8 +223,79 @@ def do_painting(name, im, cy=0.5):
     save(grain(a), name)
 
 
+def ship_mask(im):
+    """The chart's ships are light metal on a near-black ground, one ship per
+    crop. A luminance key finds the hull, a wide close joins its plates, and
+    filling from the edges keeps the dark gaps and engine blocks inside it.
+    The rim's alpha follows luminance, so edges fade into the void."""
+    import cv2
+
+    lum = np.asarray(im, float) @ np.array([0.299, 0.587, 0.114])
+    fg = (lum > 40).astype(np.uint8)
+    fg = cv2.morphologyEx(fg, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    h, w = fg.shape
+    flood = fg.copy()
+    cv2.floodFill(flood, np.zeros((h + 2, w + 2), np.uint8), (0, 0), 1)
+    fg = (fg | (flood == 0)).astype(np.uint8)
+    n, lab, stats, _ = cv2.connectedComponentsWithStats(fg, 8)
+    if n > 1:
+        big = stats[1:, cv2.CC_STAT_AREA].max()
+        fg = np.isin(lab, [k for k in range(1, n) if stats[k, cv2.CC_STAT_AREA] >= big * 0.01]).astype(np.uint8)
+    core = cv2.erode(fg, np.ones((5, 5), np.uint8)).astype(float)
+    soft = np.clip((lum - 22) / 40, 0, 1)
+    alpha = np.where(fg > 0, np.maximum(soft, core), 0)
+    return Image.fromarray((alpha * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))
+
+
+def do_fleet(name, chart, ships):
+    W = H = 900
+    y, x = np.mgrid[0:H, 0:W].astype(float)
+    a = np.zeros((H, W, 3)) + VOID
+    rng = np.random.default_rng(11)
+    for _ in range(260):  # a sparse, faint starfield
+        sx, sy, b = rng.uniform(0, W), rng.uniform(0, H * 0.8), rng.uniform(40, 170) * rng.uniform(0.2, 1) ** 2
+        a[int(sy), int(sx)] += b
+    # The Mars limb below: NASA's Viking mosaic. Its equatorial band is bent
+    # onto a large arc and darkened, so the ships lead.
+    mars = fetch("places/mars", JOBS["places/mars"][1])
+    g = np.asarray(mars.convert("L"), float)
+    ys, xs = np.where(g > 18)
+    d = mars.crop((xs.min(), ys.min(), xs.max(), ys.max()))
+    band = np.asarray(d.crop((int(d.width * 0.12), int(d.height * 0.4), int(d.width * 0.88), int(d.height * 0.62))), float)
+    top, R = int(H * 0.76), 1500
+    cy0 = top + R
+    r = np.hypot(x - W / 2, y - cy0)
+    u = np.clip(np.arctan2(x - W / 2, cy0 - y) / 0.8 + 0.5, 0, 1)
+    v = np.clip((R - r) / (H - top + 20), 0, 1)
+    bh, bw = band.shape[:2]
+    samp = band[np.clip((v * (bh - 1)).astype(int), 0, bh - 1), np.clip((u * (bw - 1)).astype(int), 0, bw - 1)]
+    inside = np.clip((R - r) * 0.8, 0, 1)[..., None]
+    shade = (0.3 + 0.4 * np.clip(1 - v * 1.4, 0, 1))[..., None]  # lit at the limb, falling into night
+    a = a * (1 - inside) + samp * shade * inside
+    atmo = np.exp(-((r - R) / 7) ** 2) + 0.35 * np.exp(-((r - R) / 26) ** 2) * (r > R)
+    a += atmo[..., None] * np.array([190, 80, 55]) * 0.55
+    glow = np.exp(-(((x - W / 2) / (W * 0.8)) ** 2 + ((y - H * 0.95) / (H * 0.3)) ** 2))
+    a += glow[..., None] * np.array([50, 8, 12])
+    for box, cx, cy, wf, depth in ships:
+        s = chart.crop(box)
+        m = ship_mask(s)
+        w = int(W * wf)
+        h = int(s.height * w / s.width)
+        s, m = s.resize((w, h), Image.LANCZOS), m.resize((w, h), Image.LANCZOS)
+        obj = np.asarray(s, float)
+        # Distance: darker and hazed toward the void.
+        obj = obj * (1 - 0.55 * depth) + VOID * 0.55 * depth
+        # A warm underside, lit from Mars below.
+        obj = obj + (np.linspace(0, 1, h)[:, None, None] ** 2) * np.array([38, 8, 6]) * (1 - depth)
+        mm = np.asarray(m, float)[..., None] / 255
+        ox, oy = int(cx * W - w / 2), int(cy * H - h / 2)
+        reg = a[oy : oy + h, ox : ox + w]
+        a[oy : oy + h, ox : ox + w] = reg * (1 - mm) + obj * mm
+    save(grain(a, 2.0), name)
+
+
 for key in sys.argv[1:] or JOBS:
     name = key if "/" in key else next(k for k in JOBS if k.endswith("/" + key))
     kind, url, opt = JOBS[name]
     im = fetch(name, url)
-    {"object": do_object, "planet": do_planet, "painting": do_painting}[kind](name, im, **opt)
+    {"object": do_object, "planet": do_planet, "painting": do_painting, "fleet": do_fleet}[kind](name, im, **opt)

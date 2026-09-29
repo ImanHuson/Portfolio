@@ -152,8 +152,9 @@
   html {
     background: var(--void);
   }
+  /* No body background: the html ground and the fixed .ambient layer
+     show through it. */
   body {
-    background: var(--void);
     color: var(--bone);
     font-family: var(--font-sans), system-ui, sans-serif;
     font-size: var(--text-body);
@@ -194,6 +195,21 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* The ambient: the dossier header's burgundy, made site-wide (the user's
+   call). A fixed layer behind every page, so each screen, wherever you
+   scroll, has burgundy fading in from the top-left corner and a fainter
+   echo from the bottom-right, and the middle stays near-black for text.
+   Sections without their own ground let it through; cards sit on it. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 70% at 4% 0%, rgba(122, 15, 23, 0.44), transparent 70%),
+    radial-gradient(ellipse 52% 48% at 100% 100%, rgba(122, 15, 23, 0.22), transparent 70%);
+}
 
 /* Film grain: fixed, pointer-events-none, never on a scrolling container. */
 .grain {

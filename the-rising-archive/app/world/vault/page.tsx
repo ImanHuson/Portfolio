@@ -22,12 +22,12 @@ export default function VaultPage() {
         tone="rim"
         trail={[{ href: "/", label: "Archive" }, { href: "/world/", label: "The World" }, { href: "/world/vault/", label: "Vault" }]}
         title="The Artifact Vault"
-        lede="The machinery of the war, catalogued like museum pieces. Where something real comes close, it stands in: a real sword for the razor, real armour for the StarShell. The rest are the archive’s own renders."
+        lede="The machinery of the war, catalogued like museum pieces. Where something real comes close, it stands in: a real sword for the razor, real armour for the StarShell, a video game’s warships for the fleet, a hairpin for the PsychoSpike."
       />
       <section aria-label="Artifacts" className="px-5 pb-20 md:px-8">
         <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
           {VAULT.map((a, i) => (
-            <Reveal as="li" key={a.slug} delay={(i % 2) * 0.06} className="bg-void">
+            <Reveal as="li" cell key={a.slug} delay={(i % 2) * 0.06} className="bg-void">
               <Spotlight as="article" tone="red" className={cn("grid h-full gap-0 sm:grid-cols-2", i % 4 >= 2 && "sm:[&>*:first-child]:order-2")}>
                 <Plate src={a.plate} alt={altFor(a.plate, `${a.name}, rendered for this archive.`)} className="aspect-square object-cover" sizes="(min-width: 768px) 25vw, 50vw" />
                 <div className="flex flex-col p-6 md:p-8">

@@ -22,7 +22,6 @@ export default function PageHeader({
         aria-hidden
         className={cn(
           "pointer-events-none absolute inset-x-0 top-0 h-[70vh]",
-          tone === "red" && "bg-[radial-gradient(ellipse_70%_60%_at_20%_0%,rgba(122,15,23,0.28),transparent_70%)]",
           tone === "gold" && "bg-[radial-gradient(ellipse_70%_60%_at_20%_0%,rgba(146,111,52,0.2),transparent_70%)]",
           tone === "rim" && "bg-[radial-gradient(ellipse_70%_60%_at_20%_0%,rgba(170,178,186,0.14),transparent_70%)]",
         )}

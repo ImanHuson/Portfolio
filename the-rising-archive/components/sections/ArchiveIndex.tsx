@@ -33,7 +33,7 @@ export default function ArchiveIndex() {
 
         <ul role="list" className="mt-16 grid gap-px bg-line md:grid-cols-6">
           {BRANCHES.map((b, i) => (
-            <Reveal as="li" key={b.href} delay={(i % 3) * 0.05} className={cn("bg-void", b.span)}>
+            <Reveal as="li" cell key={b.href} delay={(i % 3) * 0.05} className={cn("bg-void", b.span)}>
               <Spotlight tone={b.href === "/sealed/" || i < 2 ? "red" : "gold"} className="h-full">
               <Link href={b.href} className="group relative flex h-full min-h-[20rem] flex-col justify-end overflow-hidden">
                 {b.plate ? (

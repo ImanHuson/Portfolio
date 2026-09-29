@@ -31,7 +31,7 @@ export default function WorldPage() {
       <section aria-label="Parts of the world" className="px-5 pb-28 md:px-8">
         <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-6">
           {PARTS.map((p, i) => (
-            <Reveal as="li" key={p.href} delay={i * 0.04} className={cn("bg-void", p.span)}>
+            <Reveal as="li" cell key={p.href} delay={i * 0.04} className={cn("bg-void", p.span)}>
               <Spotlight tone="gold" className="h-full">
               <Link href={p.href} className="group relative flex h-full min-h-[22rem] flex-col justify-end overflow-hidden">
                 <Plate src={p.plate} alt={p.alt} className="absolute inset-0 h-full object-cover opacity-70 transition-[opacity,transform] duration-700 group-hover:scale-[1.03] group-hover:opacity-90" sizes="(min-width: 768px) 60vw, 100vw" />

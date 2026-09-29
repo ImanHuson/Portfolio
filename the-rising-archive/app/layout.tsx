@@ -71,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${serif.variable} ${sans.variable} ${mono.variable}`}
     >
       <body>
+        <div className="ambient" aria-hidden />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-bone focus:px-4 focus:py-2 focus:font-mono focus:text-meta focus:text-void focus:uppercase"

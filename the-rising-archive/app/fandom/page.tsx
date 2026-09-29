@@ -24,7 +24,7 @@ export default function FandomPage() {
       >
         <div className="mt-10 flex flex-wrap gap-8 font-mono text-meta tracking-[0.2em] uppercase">
           <Link href="/fandom/quotes/" className="border-b border-red pb-1 hover:text-red">Words that survived</Link>
-          <Link href="/fandom/fan-art/" className="border-b border-line-strong pb-1 text-ash hover:text-bone">The archive’s plates</Link>
+          <Link href="/fandom/fan-art/" className="border-b border-line-strong pb-1 text-ash hover:text-bone">Fan art and sources</Link>
         </div>
       </PageHeader>
 
@@ -63,7 +63,7 @@ export default function FandomPage() {
           </div>
           <ol role="list" className="mt-10 grid gap-px bg-line md:grid-cols-2">
             {ARGUMENTS.map((a, i) => (
-              <Reveal as="li" key={a.q} delay={(i % 2) * 0.05} className="bg-void">
+              <Reveal as="li" cell key={a.q} delay={(i % 2) * 0.05} className="bg-void">
                 <Spotlight tone="red" className="h-full p-7 md:p-10">
                 <SpoilerGate book={a.book} compact>
                   <p className="font-serif text-h3 leading-snug text-bone">{a.q}</p>

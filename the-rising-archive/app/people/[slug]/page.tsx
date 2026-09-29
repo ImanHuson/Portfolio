@@ -79,7 +79,7 @@ function Special({ person }: { person: Person }) {
       ["Status", "Banished from the Core to the Kuiper Belt in 739 PCE. Later returned."],
     ];
     return (
-      <section aria-label="The Atlas files" className="border-t border-line bg-void-2 px-5 py-20 md:px-8">
+      <section aria-label="The Atlas files" className="border-t border-line bg-void-2/60 px-5 py-20 md:px-8">
         <div className="mx-auto max-w-[1100px]">
           <div className="flex flex-wrap items-center gap-4">
             <h2 className="font-mono text-lg tracking-[0.3em] text-rim uppercase">The Atlas files</h2>
@@ -123,7 +123,6 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
           aria-hidden
           className={cn(
             "pointer-events-none absolute inset-0",
-            person.register === "red" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(122,15,23,0.32),transparent_70%)]",
             person.register === "gold" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(146,111,52,0.2),transparent_70%)]",
             person.register === "rim" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(170,178,186,0.16),transparent_70%)]",
             person.register === "none" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(147,143,136,0.12),transparent_70%)]",

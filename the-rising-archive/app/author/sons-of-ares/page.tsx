@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/typography/PageHeader";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import { COMICS } from "@/lib/data/author";
 
 export const metadata: Metadata = {
@@ -28,8 +28,8 @@ export default function SonsOfAresPage() {
             </p>
           </div>
           <figure>
-            <Plate src="/images/renders/rising/movement.webp" alt="A cavern full of small red lamps: a movement, before it had a name." width={1600} height={900} className="border border-line" />
-            <figcaption className="mt-3 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">Archive plate. Not the comic’s art.</figcaption>
+            <FramedPortrait slug="fitchner" name="Fitchner au Barca" size="hero" sizes="(min-width: 768px) 30vw, 80vw" />
+            <figcaption className="mt-3 font-mono text-meta tracking-[0.16em] text-ash uppercase">Fitchner, the comic’s centre. Fan art, not the comic’s.</figcaption>
           </figure>
         </div>
       </section>

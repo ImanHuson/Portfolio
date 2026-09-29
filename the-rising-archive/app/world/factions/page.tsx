@@ -103,7 +103,7 @@ export default function FactionsPage() {
         </div>
       </section>
 
-      <section id="ascomanni" aria-labelledby="asco-t" className="border-t border-line bg-void-2 px-5 py-24 md:px-8">
+      <section id="ascomanni" aria-labelledby="asco-t" className="border-t border-line bg-void-2/60 px-5 py-24 md:px-8">
         <div className="mx-auto max-w-[900px] border border-line-strong bg-void p-8 font-mono md:p-12">
           <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-line pb-4 text-meta tracking-[0.2em] text-ash-2 uppercase">
             <span>Intelligence file</span>
