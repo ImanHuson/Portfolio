@@ -17,7 +17,7 @@ const positions = BONDS.map((_, i) => {
 
 const STROKE: Record<Bond["register"], string> = {
   red: "#c41e2a",
-  gold: "#8c7446",
+  gold: "#ae8625",
   rim: "#aab2ba",
   none: "#6b6862",
   obsidian: "#6b6862",

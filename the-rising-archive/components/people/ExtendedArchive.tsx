@@ -37,7 +37,7 @@ export default function ExtendedArchive() {
                   <p className="mt-4 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">Their line opens after {BOOK_TITLES[p.lineBook]}</p>
                 )}
                 {p.easter === "minotaur" && (
-                  <p className="mt-3 font-display text-lg font-bold tracking-[0.2em] text-gold uppercase opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <p className="mt-3 font-display text-lg font-bold tracking-[0.2em] gold-foil uppercase opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
                     The Minotaur approaches.
                   </p>
                 )}

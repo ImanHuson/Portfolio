@@ -80,7 +80,7 @@ export default function ExtendedDossier({ person }: { person: ExtendedPerson }) 
             </nav>
             {/* The Minotaur makes an entrance (brief section 59). */}
             {person.easter === "minotaur" && (
-              <p className="minotaur-enters mt-8 font-display text-2xl font-bold tracking-[0.3em] text-gold uppercase">Apollonius enters the room.</p>
+              <p className="minotaur-enters mt-8 font-display text-2xl font-bold tracking-[0.3em] gold-foil uppercase">Apollonius enters the room.</p>
             )}
             <h1 className={cn("mt-6 max-w-[14ch] text-h1 leading-[0.88]", NAME_CLASS[person.register])}>{person.name}</h1>
             <div className="mt-6 flex flex-wrap items-center gap-4">

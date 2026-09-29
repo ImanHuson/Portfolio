@@ -67,7 +67,7 @@ export default function FactionsPage() {
 
       <section id="knights" aria-labelledby="knights-t" className="border-t border-line px-5 py-24 md:px-8">
         <div className="mx-auto max-w-[1400px]">
-          <h2 id="knights-t" className="font-serif text-h1 leading-[0.9] text-gold">The Olympic Knights</h2>
+          <h2 id="knights-t" className="font-serif text-h1 leading-[0.9] gold-foil">The Olympic Knights</h2>
           <p className="mt-5 max-w-[56ch] text-lede text-ash">
             Twelve seats. The Society’s champions, each with an armour, a title and a reputation. Ten of the twelve titles are named here, plus a disputed thirteenth. Where the archive couldn’t confirm a detail, it says so.
           </p>

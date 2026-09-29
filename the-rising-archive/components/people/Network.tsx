@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 // reads without colour (brief section 55).
 type Look = { stroke: string; width: number; dash?: string; cap?: "round"; double?: boolean };
 export const LOOK: Record<LinkKind, Look> = {
-  family: { stroke: "#c8a96a", width: 3.4 },
+  family: { stroke: "#d2ac47", width: 3.4 },
   friendship: { stroke: "#e9e4da", width: 1.6 },
   mentorship: { stroke: "#e9e4da", width: 1.6, dash: "16 6 3 6" },
   rivalry: { stroke: "#ec5a62", width: 1.8, dash: "10 8" },

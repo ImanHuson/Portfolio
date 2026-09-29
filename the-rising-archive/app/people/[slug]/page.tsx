@@ -124,7 +124,7 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
           className={cn(
             "pointer-events-none absolute inset-0",
             person.register === "red" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(122,15,23,0.32),transparent_70%)]",
-            person.register === "gold" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(140,116,70,0.2),transparent_70%)]",
+            person.register === "gold" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(146,111,52,0.2),transparent_70%)]",
             person.register === "rim" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(170,178,186,0.16),transparent_70%)]",
             person.register === "none" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(147,143,136,0.12),transparent_70%)]",
           )}

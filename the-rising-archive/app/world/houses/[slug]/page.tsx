@@ -39,7 +39,7 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
   return (
     <article>
       <header className="relative overflow-hidden px-5 pt-[calc(var(--nav-h)+4rem)] pb-16 md:px-8 md:pt-[calc(var(--nav-h)+6rem)] md:pb-24">
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] bg-[radial-gradient(ellipse_60%_60%_at_20%_0%,rgba(140,116,70,0.2),transparent_70%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] bg-[radial-gradient(ellipse_60%_60%_at_20%_0%,rgba(146,111,52,0.2),transparent_70%)]" />
         <div className="relative mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[7fr_5fr] md:items-center">
           <div>
             <nav aria-label="Breadcrumb" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
@@ -50,8 +50,8 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
             <p className="mt-8 font-mono text-meta tracking-[0.3em] text-red uppercase">Political dossier</p>
             <h1 className="mt-3 font-serif text-h1 leading-[0.9] font-medium text-bone">{h.name}</h1>
             {h.motto && (
-              <p className="mt-4 font-serif text-h3 text-gold italic">
-                {h.motto} <span className="text-ash">“{h.mottoEn}.”</span>
+              <p className="mt-4 font-serif text-h3 italic">
+                <span className="gold-foil">{h.motto}</span> <span className="text-ash">“{h.mottoEn}.”</span>
               </p>
             )}
             <div className="mt-8 max-w-[52ch] space-y-3 text-lede text-bone/85">

@@ -26,5 +26,5 @@ export const COLORS: ColorTier[] = [
   { name: "Copper", hex: "#a8703f", ink: "#1a0f05", role: "Administration and bureaucracy", voice: "Forms, ledgers, permissions. The pyramid, written down.", face: "mono" },
   { name: "White", hex: "#e7e3da", ink: "#141414", role: "Clergy and judiciary", voice: "The law, and the faith that says the law is right.", face: "serif" },
   { name: "Silver", hex: "#b9bcc2", ink: "#121315", role: "Finance and commerce", voice: "Money, trade, and the quiet power of owning debt.", face: "serif" },
-  { name: "Gold", hex: "#c8a96a", ink: "#0e0b05", role: "Rulers", voice: "The people who designed the pyramid.", face: "serif" },
+  { name: "Gold", hex: "#d2ac47", ink: "#0e0b05", role: "Rulers", voice: "The people who designed the pyramid.", face: "serif" },
 ];

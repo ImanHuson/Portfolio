@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "..", "..", ".claude", "skills", "le
 from render import Design
 
 VOID = (7, 7, 10); BONE = (233, 228, 218); ASH = (147, 143, 136); RED = (196, 30, 42)
-DEEP = (122, 15, 23); MARS = (181, 69, 42); GOLD = (200, 169, 106); RIM = (238, 240, 242)
+DEEP = (122, 15, 23); MARS = (181, 69, 42); GOLD = (210, 172, 71); RIM = (238, 240, 242)
 OUT = os.environ.get("ART_OUT", os.path.join(HERE, "renders"))
 os.makedirs(OUT, exist_ok=True)
 

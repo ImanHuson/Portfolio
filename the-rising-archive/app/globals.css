@@ -33,8 +33,17 @@
   --red-glow: rgba(196, 30, 42, 0.22);
   --mars: #b5452a;
 
-  --gold: #c8a96a;
-  --gold-dim: #8c7446;
+  /* Gold, from the user's metallic swatches: #D2AC47 is the register's
+     text colour, #EDC967 its highlight, #AE8625 the deep tone (the smallest
+     gold that still passes AA as text), #926F34 for lines only (4.3:1, too
+     faint for text), #F7EF8A the specular, #824E00 the moulding's shadow. */
+  --gold: #d2ac47;
+  --gold-light: #edc967;
+  --gold-pale: #f7ef8a;
+  --gold-deep: #ae8625;
+  --gold-dim: #926f34;
+  --gold-shadow: #824e00;
+  --gold-sheen: linear-gradient(100deg, #ae8625, #f7ef8a 32%, #d2ac47 60%, #edc967 82%, #ae8625);
 
   --rim: #eef0f2;
   --rim-dim: #aab2ba;
@@ -104,6 +113,8 @@
   --color-mars: var(--mars);
   --color-gold: var(--gold);
   --color-gold-dim: var(--gold-dim);
+  --color-gold-light: var(--gold-light);
+  --color-gold-deep: var(--gold-deep);
   --color-rim: var(--rim);
   --color-rim-dim: var(--rim-dim);
 
@@ -230,6 +241,33 @@ nav[aria-label="Breadcrumb"] a {
    background and content without z-index games. Tones: red (default),
    gold (gold light, same burgundy), rim (cool silver, kept for the Rim and
    the Vale), apollonius (stronger). */
+/* Gold foil: the swatches' metallic sweep on the few large gold lines
+   (house mottos, the Olympic Knights, the Minotaur's entrance). Plain
+   --gold stays the fallback and the colour for small text, where a
+   gradient only muddies the letterforms. */
+@layer components {
+  .gold-foil {
+    color: var(--gold);
+  }
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .gold-foil {
+      background-image: var(--gold-sheen);
+      background-size: 100% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      /* Italic overhang would otherwise fall outside the painted box. */
+      padding-inline-end: 0.12em;
+      margin-inline-end: -0.12em;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+  }
+}
+@media (forced-colors: active) {
+  .gold-foil { background: none; color: CanvasText; }
+}
+
 @layer components {
 .wash-card {
   --w-rest: rgba(122, 15, 23, 0.42);
@@ -241,14 +279,14 @@ nav[aria-label="Breadcrumb"] a {
   overflow: hidden;
 }
 .wash-card[data-wash="gold"] {
-  --w-spot: rgba(200, 169, 106, 0.24);
-  --w-edge: rgba(200, 169, 106, 0.9);
+  --w-spot: rgba(210, 172, 71, 0.24);
+  --w-edge: rgba(210, 172, 71, 0.9);
 }
 .wash-card[data-wash="apollonius"] {
   --w-rest: rgba(122, 15, 23, 0.52);
   --w-hot: rgba(168, 22, 36, 0.4);
-  --w-spot: rgba(200, 169, 106, 0.24);
-  --w-edge: rgba(200, 169, 106, 0.95);
+  --w-spot: rgba(210, 172, 71, 0.24);
+  --w-edge: rgba(210, 172, 71, 0.95);
 }
 /* The Rim's cool steel. Blue-grey is lighter than burgundy at the same
    strength, so the hover layers are gentler to keep text readable. */
@@ -350,7 +388,7 @@ nav[aria-label="Breadcrumb"] a {
   }
   .mood-minotaur {
     background:
-      radial-gradient(circle at 75% 30%, rgba(200, 169, 106, 0.22), transparent 45%),
+      radial-gradient(circle at 75% 30%, rgba(210, 172, 71, 0.22), transparent 45%),
       linear-gradient(160deg, rgba(122, 15, 23, 0.45), transparent 60%);
   }
   /* The curtain rises on the Minotaur's line, once. */
@@ -385,7 +423,7 @@ nav[aria-label="Breadcrumb"] a {
     --mood-glow: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(159, 180, 216, 0.22), transparent 70%);
   }
   .mood-bear {
-    background: radial-gradient(ellipse 70% 70% at 15% 0%, rgba(200, 169, 106, 0.26), transparent 70%);
+    background: radial-gradient(ellipse 70% 70% at 15% 0%, rgba(210, 172, 71, 0.26), transparent 70%);
   }
   .mood-classified {
     background:
@@ -526,7 +564,7 @@ nav[aria-label="Breadcrumb"] a {
     padding: var(--pf-mat);
     background: radial-gradient(ellipse 90% 70% at 50% 20%, #4a0d14, #1c0407 80%);
     box-shadow:
-      inset 0 0 0 1px rgba(200, 169, 106, 0.2),
+      inset 0 0 0 1px rgba(210, 172, 71, 0.2),
       inset 0 10px 18px -6px rgba(0, 0, 0, 0.85);
   }
   .pframe-glass {
@@ -559,7 +597,7 @@ nav[aria-label="Breadcrumb"] a {
   }
 
   .pframe[data-frame="gold"] {
-    --pf-moulding: linear-gradient(135deg, #6b5427, #e3c98a 18%, #8c7446 35%, #f1dca4 52%, #7a5f2e 70%, #caa86a 86%, #5a4520);
+    --pf-moulding: linear-gradient(135deg, #824e00, #edc967 18%, #926f34 35%, #f7ef8a 52%, #ae8625 70%, #d2ac47 86%, #825900);
     --pf-lip: rgba(255, 236, 190, 0.45);
   }
   .pframe[data-frame="red"] {
@@ -604,7 +642,7 @@ nav[aria-label="Breadcrumb"] a {
     margin: 14px auto 0;
     padding: 9px 12px 8px;
     text-align: center;
-    background: var(--pf-plate, linear-gradient(180deg, #e2c889, #8c7446));
+    background: var(--pf-plate, linear-gradient(180deg, #edc967, #d2ac47 45%, #ae8625));
     color: var(--pf-ink, #231808);
     box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }

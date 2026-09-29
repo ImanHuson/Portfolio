@@ -47,7 +47,7 @@ export default function QuotesPage() {
             ))}
           </ol>
           <div className="mt-16 border-l-2 border-gold-dim pl-6">
-            <p className="font-mono text-meta tracking-[0.2em] text-gold-dim uppercase">Memory fragment</p>
+            <p className="font-mono text-meta tracking-[0.2em] text-gold-deep uppercase">Memory fragment</p>
             <p className="mt-2 text-lede text-ash">“Break the chains.” The saga’s arc words, returning book after book.</p>
             <p className="mt-2 font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">See: across the saga</p>
           </div>

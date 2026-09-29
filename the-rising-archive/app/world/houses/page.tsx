@@ -40,8 +40,8 @@ export default function HousesPage() {
                 <div className="flex flex-1 flex-col p-7 md:p-9">
                   <span className="font-display text-h3 leading-none font-bold uppercase group-hover:text-red">{h.name}</span>
                   {h.motto ? (
-                    <span className="mt-3 font-serif text-xl text-gold italic">
-                      {h.motto}. <span className="text-ash">{h.mottoEn}.</span>
+                    <span className="mt-3 font-serif text-xl italic">
+                      <span className="gold-foil">{h.motto}.</span> <span className="text-ash">{h.mottoEn}.</span>
                     </span>
                   ) : (
                     <span className="mt-3 font-serif text-xl text-ash-2 italic">No motto verified.</span>

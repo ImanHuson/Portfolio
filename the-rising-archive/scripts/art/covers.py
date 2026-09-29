@@ -136,7 +136,7 @@ def artifact(im, kind, seed):
         arr = arr * (1 - m) + np.array([150, 52, 36]) * m
     elif kind == "gilt":  # Golden Son: a gilt edge catching light down the spine side.
         m = (np.exp(-x / 14) * 0.5)[..., None]
-        arr = arr * (1 - m) + np.array([200, 169, 106]) * m
+        arr = arr * (1 - m) + np.array([210, 172, 71]) * m
     elif kind == "bleach":  # Morning Star: sun-faded from the top right.
         r = np.hypot(x - W * 1.05, y + H * 0.05) / (W * 1.3)
         m = (np.clip(1 - r, 0, 1) ** 1.4 * 0.30)[..., None]

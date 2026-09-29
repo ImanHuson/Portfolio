@@ -22,7 +22,7 @@ export default function TelemanusTable() {
   return (
     <figure className="mx-auto max-w-[640px]">
       <div className="relative aspect-square">
-        <div aria-hidden className="absolute inset-[22%] rounded-full border border-gold-dim/60 bg-[radial-gradient(circle,rgba(200,169,106,0.12),transparent_70%)]" />
+        <div aria-hidden className="absolute inset-[22%] rounded-full border border-gold-dim/60 bg-[radial-gradient(circle,rgba(210,172,71,0.12),transparent_70%)]" />
         <div aria-hidden className="absolute inset-[30%] rounded-full border border-line" />
         <ul role="list" className="absolute inset-0">
           {SEATS.map((s, i) => {
@@ -45,7 +45,7 @@ export default function TelemanusTable() {
             );
           })}
         </ul>
-        <p className="absolute inset-0 flex items-center justify-center text-center font-mono text-meta tracking-[0.2em] text-gold-dim uppercase">
+        <p className="absolute inset-0 flex items-center justify-center text-center font-mono text-meta tracking-[0.2em] text-gold-deep uppercase">
           The Telemanus Table
         </p>
       </div>
