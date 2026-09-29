@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CardWash from "@/components/archive/CardWash";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import QuoteFigure from "@/components/archive/QuoteFigure";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Stamp from "@/components/archive/Stamp";
@@ -46,15 +46,7 @@ export default function ExtendedDossier({ person }: { person: ExtendedPerson }) 
   const idx = EXTENDED.findIndex((p) => p.slug === person.slug);
   const prev = EXTENDED[(idx - 1 + EXTENDED.length) % EXTENDED.length];
   const next = EXTENDED[(idx + 1) % EXTENDED.length];
-  const plate = (
-    <Plate
-      src={`/images/people/${person.slug}.webp`}
-      alt={`Archive relic for ${person.name}: ${person.motif}`}
-      priority
-      className="border border-line"
-      sizes="(min-width: 1024px) 40vw, 100vw"
-    />
-  );
+  const plate = <FramedPortrait slug={person.slug} name={person.name} size="hero" priority sizes="(min-width: 1024px) 30vw, 80vw" />;
 
   return (
     <article>
@@ -86,6 +78,10 @@ export default function ExtendedDossier({ person }: { person: ExtendedPerson }) 
                 The ones who deserve a place
               </Link>
             </nav>
+            {/* The Minotaur makes an entrance (brief section 59). */}
+            {person.easter === "minotaur" && (
+              <p className="minotaur-enters mt-8 font-display text-2xl font-bold tracking-[0.3em] text-gold uppercase">Apollonius enters the room.</p>
+            )}
             <h1 className={cn("mt-6 max-w-[14ch] text-h1 leading-[0.88]", NAME_CLASS[person.register])}>{person.name}</h1>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <span aria-hidden className={cn("h-px w-12", RULE_CLASS[person.register])} />
@@ -110,10 +106,9 @@ export default function ExtendedDossier({ person }: { person: ExtendedPerson }) 
               ))}
             </dl>
           </div>
-          <figure className="max-w-[560px] lg:justify-self-end">
+          <div className="w-full max-w-[460px] justify-self-center lg:justify-self-end">
             {person.easter === "howl" ? <HowlPlate>{plate}</HowlPlate> : plate}
-            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive relic. {person.motif}</figcaption>
-          </figure>
+          </div>
         </div>
       </header>
 

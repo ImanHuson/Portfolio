@@ -26,13 +26,7 @@ export const TEN_QUOTES: Record<string, SagaQuote> = {
   diomedes: { text: "A man is nothing before the storm.", who: "Diomedes au Raa", where: "The second trilogy", book: 5 },
   atlas: { text: "I fear a man who believes in good. For he can excuse any evil.", who: "Atlas au Raa", where: "Dark Age, chapter 17", book: 5 },
   lysander: { text: "I was named for a contradiction: a Spartan general who had the mind of an Athenian.", who: "Lysander au Lune", where: "Iron Gold", book: 4 },
-  apollonius: {
-    text: "The mind is its own place, and in itself can make a heaven of hell or a hell out of heaven.",
-    who: "Apollonius au Valii-Rath",
-    where: "Iron Gold, chapter 34",
-    book: 4,
-    note: "He is quoting Milton’s Paradise Lost, loosely.",
-  },
+  victra: { text: "I’m a Julii. Cold runneth through my veins.", who: "Victra", where: "The first trilogy", book: 3 },
   "the-jackal": { text: "What does it say about me that my greatest enemy knows me better than any friend?", who: "Adrius au Augustus", where: "Morning Star", book: 3 },
 };
 

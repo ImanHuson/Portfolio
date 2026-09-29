@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useId, useSyncExternalStore } from "react";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import { useArchive } from "@/components/providers/ArchiveProvider";
 import { EXTENDED } from "@/lib/data/extended";
 import { FEATURED } from "@/lib/data/featured";
@@ -73,12 +73,11 @@ export default function IronRain() {
                   )}
                 >
                   <input type="radio" name={name} value={f.slug} checked={on} onChange={() => pickStore.set(f.slug)} className="sr-only" />
-                  <Plate
-                    src={`/images/people/${f.slug}.webp`}
-                    alt=""
-                    width={900}
-                    height={900}
-                    className={cn("aspect-square w-full border object-cover transition-opacity", on ? "border-red opacity-100" : "border-line opacity-70 group-hover:opacity-100")}
+                  <FramedPortrait
+                    slug={f.slug}
+                    name={f.as(clearance).name}
+                    size="card"
+                    className={cn("transition-opacity", on ? "opacity-100" : "opacity-75 group-hover:opacity-100")}
                     sizes="(min-width: 1024px) 18vw, (min-width: 640px) 24vw, 45vw"
                   />
                   <span className="font-display text-lg leading-tight font-bold uppercase md:text-xl">{f.as(clearance).name}</span>

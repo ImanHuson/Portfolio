@@ -356,10 +356,17 @@ nav[aria-label="Breadcrumb"] a {
     inset: 0;
     pointer-events: none;
   }
-  .mood-crimson {
+  .mood-minotaur {
     background:
-      radial-gradient(ellipse 70% 70% at 12% 0%, rgba(160, 18, 30, 0.42), transparent 70%),
-      repeating-linear-gradient(135deg, rgba(233, 228, 218, 0.025) 0 2px, transparent 2px 14px);
+      radial-gradient(circle at 75% 30%, rgba(200, 169, 106, 0.22), transparent 45%),
+      linear-gradient(160deg, rgba(122, 15, 23, 0.45), transparent 60%);
+  }
+  /* The curtain rises on the Minotaur's line, once. */
+  .minotaur-enters {
+    animation: minotaur-enters 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  }
+  @keyframes minotaur-enters {
+    from { opacity: 0; letter-spacing: 0.6em; }
   }
   .mood-dust {
     background:
@@ -491,10 +498,151 @@ nav[aria-label="Breadcrumb"] a {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .trait-chip, .orbit, .fox-trot, .story-name, .atlas-veil img { animation: none; }
+    .trait-chip, .orbit, .fox-trot, .story-name, .atlas-veil img, .minotaur-enters { animation: none; }
     .orbit { display: none; }
     .fox-trot { display: none; }
     .story-name { opacity: 0.8; }
   }
 }
 
+
+/* ------------------------------------------------------------------------
+   Portrait frames (FramedPortrait). One museum frame for everyone, as in
+   the brief's "museum of people": a moulding in the character's Color, the
+   same burgundy mat, glass lit from above, and an engraved plaque. The
+   moulding is the Color system made physical: gilt for Gold, rusted mine
+   iron for Red, black iron for Obsidian, gunmetal for Gray, steel for
+   Blue, pale silver for the Rim, plain wood for Pax, who has no Color.
+   ------------------------------------------------------------------------ */
+@layer components {
+  .pframe {
+    --pf-pad: 12px;
+    --pf-mat: 18px;
+    position: relative;
+    padding: var(--pf-pad);
+    background: var(--pf-moulding);
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.55),
+      inset 0 0 0 3px var(--pf-lip, rgba(255, 255, 255, 0.18)),
+      inset 0 0 0 4px rgba(0, 0, 0, 0.45),
+      0 28px 50px -24px rgba(0, 0, 0, 0.95),
+      0 2px 0 rgba(255, 255, 255, 0.04);
+  }
+  .pframe-wrap[data-size="card"] .pframe { --pf-pad: 7px; --pf-mat: 9px; }
+  .pframe-wrap[data-size="thumb"] .pframe { --pf-pad: 4px; --pf-mat: 0px; }
+  .pframe-mat {
+    padding: var(--pf-mat);
+    background: radial-gradient(ellipse 90% 70% at 50% 20%, #4a0d14, #1c0407 80%);
+    box-shadow:
+      inset 0 0 0 1px rgba(200, 169, 106, 0.2),
+      inset 0 10px 18px -6px rgba(0, 0, 0, 0.85);
+  }
+  .pframe-glass {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8), 0 3px 10px rgba(0, 0, 0, 0.7);
+  }
+  /* Light from above on the glass, and a slow sweep across it on hover. */
+  .pframe-glass::after,
+  .pframe-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .pframe-glass::after {
+    background:
+      radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255, 244, 222, 0.16), transparent 70%),
+      linear-gradient(172deg, rgba(255, 255, 255, 0.07), transparent 38%);
+  }
+  .pframe-glass::before {
+    z-index: 1;
+    background: linear-gradient(115deg, transparent 35%, rgba(255, 250, 235, 0.14) 48%, transparent 60%);
+    transform: translateX(-120%);
+    transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :is(a, .group):hover .pframe-glass::before,
+  :is(a, .group):focus-visible .pframe-glass::before {
+    transform: translateX(120%);
+  }
+
+  .pframe[data-frame="gold"] {
+    --pf-moulding: linear-gradient(135deg, #6b5427, #e3c98a 18%, #8c7446 35%, #f1dca4 52%, #7a5f2e 70%, #caa86a 86%, #5a4520);
+    --pf-lip: rgba(255, 236, 190, 0.45);
+  }
+  .pframe[data-frame="red"] {
+    --pf-moulding:
+      radial-gradient(circle at 14% 18%, rgba(160, 70, 34, 0.9) 0 8%, transparent 26%),
+      radial-gradient(circle at 82% 76%, rgba(122, 48, 24, 0.9) 0 7%, transparent 24%),
+      radial-gradient(circle at 70% 10%, rgba(150, 60, 30, 0.7) 0 5%, transparent 18%),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 5px),
+      linear-gradient(135deg, #3a1a12, #6a2a18 30%, #2a120c 55%, #5a2414 80%, #26100a);
+    --pf-lip: rgba(214, 120, 80, 0.3);
+  }
+  .pframe[data-frame="obsidian"] {
+    --pf-moulding: linear-gradient(160deg, #2a2a33, #050507 42%, #1d1d24 68%, #08080b);
+    --pf-lip: rgba(170, 178, 200, 0.35);
+  }
+  .pframe[data-frame="gray"] {
+    --pf-moulding: linear-gradient(135deg, #34373c, #7e838b 22%, #3f4248 45%, #8d939b 62%, #303338 82%, #5d6168);
+    --pf-lip: rgba(220, 225, 232, 0.3);
+  }
+  .pframe[data-frame="blue"] {
+    --pf-moulding:
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px),
+      linear-gradient(135deg, #243149, #8ea6cc 22%, #34466a 45%, #a9bcdf 62%, #223049 85%);
+    --pf-lip: rgba(200, 220, 255, 0.35);
+  }
+  .pframe[data-frame="rim"] {
+    --pf-moulding: linear-gradient(135deg, #5e636a, #e3e6ea 20%, #8b9199 42%, #f2f4f6 60%, #737980 82%, #b9bec5);
+    --pf-lip: rgba(255, 255, 255, 0.5);
+  }
+  .pframe[data-frame="none"] {
+    --pf-moulding:
+      repeating-linear-gradient(88deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 7px),
+      linear-gradient(135deg, #2e1b10, #5a3a24 30%, #3b2416 60%, #4e311e 85%, #26160c);
+    --pf-lip: rgba(230, 190, 150, 0.22);
+  }
+
+  /* The plaque: the frame's own metal, engraved. */
+  .pframe-plaque {
+    display: grid;
+    gap: 2px;
+    width: min(82%, 22rem);
+    margin: 14px auto 0;
+    padding: 9px 12px 8px;
+    text-align: center;
+    background: var(--pf-plate, linear-gradient(180deg, #e2c889, #8c7446));
+    color: var(--pf-ink, #231808);
+    box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+  .pframe-plaque-name {
+    font-family: var(--font-display), sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+  .pframe-plaque-credit {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .pframe-plaque[data-frame="red"] { --pf-plate: linear-gradient(180deg, #5a2c1c, #2a120c); --pf-ink: #f0d2bc; }
+  .pframe-plaque[data-frame="obsidian"] { --pf-plate: linear-gradient(180deg, #25252d, #0b0b0f); --pf-ink: #d5d9e2; }
+  .pframe-plaque[data-frame="gray"] { --pf-plate: linear-gradient(180deg, #8a8f97, #4a4e55); --pf-ink: #101114; }
+  .pframe-plaque[data-frame="blue"] { --pf-plate: linear-gradient(180deg, #b3c5e4, #5d739a); --pf-ink: #0c1424; }
+  .pframe-plaque[data-frame="rim"] { --pf-plate: linear-gradient(180deg, #f1f3f5, #9aa0a8); --pf-ink: #15181c; }
+  .pframe-plaque[data-frame="none"] { --pf-plate: linear-gradient(180deg, #4e311e, #26160c); --pf-ink: #eadcc6; }
+  .pframe-plaque:is([data-frame="red"], [data-frame="obsidian"], [data-frame="none"]) .pframe-plaque-name {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pframe-glass::before { transition: none; }
+}

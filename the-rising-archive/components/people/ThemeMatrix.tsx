@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import { useArchive } from "@/components/providers/ArchiveProvider";
 import { FEATURED } from "@/lib/data/featured";
 import { MATRIX, THEMES, memberBook, memberSlug, type Theme } from "@/lib/data/themes";
@@ -60,7 +60,7 @@ export default function ThemeMatrix() {
                 data-wash={f.register === "rim" ? "rim" : f.register === "gold" ? "gold" : "red"}
                 className={cn("wash-card group flex h-full items-center gap-3 p-4 transition-opacity duration-300", theme && !on && "opacity-25")}
               >
-                <Plate src={`/images/people/${f.slug}.webp`} alt="" width={900} height={900} className="size-12 shrink-0 border border-line object-cover" sizes="48px" />
+                <FramedPortrait slug={f.slug} name={f.as(clearance).name} size="thumb" className="w-11 shrink-0" sizes="48px" />
                 <span className="min-w-0">
                   <span className="block truncate font-display text-lg leading-tight font-bold uppercase">{f.as(clearance).name}</span>
                   <span className="block truncate font-mono text-[0.7rem] tracking-[0.14em] text-ash uppercase">{f.color}</span>

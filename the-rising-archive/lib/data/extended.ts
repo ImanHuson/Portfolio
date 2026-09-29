@@ -3,7 +3,8 @@
 // and corrected against the brief where it was wrong: Kavax is Primus of
 // House Telemanus, not a Sovereign; Fitchner was House Mars's Proctor and
 // Ares, not a Howler; Ephraim and Trigg were engaged, not married; Lyria
-// joins the Howlers only in Dark Age. Epithets marked `archive` are this
+// joins the Howlers only in Dark Age. Apollonius moved here from the Ten
+// Faces, and Victra moved up into them, at the user's call. Epithets marked `archive` are this
 // archive's own names, not the books'. Every moment carries the book it
 // spoils; anything the archive couldn't verify was left out.
 
@@ -18,7 +19,7 @@ export type Words = { text: string; who: string; where: string; book: number };
 
 /** Header treatments from the brief's visual direction, one per dossier. */
 export type Mood =
-  | "crimson" // Victra: sharp, scarred, industrial
+  | "minotaur" // Apollonius: gold light on red velvet, a stage
   | "dust" // Lyria: red dust, worn fabric
   | "smoke" // Ephraim: dim, grey, smoky
   | "hearth" // Volga: snow outside, firelight inside
@@ -40,7 +41,7 @@ export type ExtendedPerson = {
   role: string;
   categories: string[];
   register: Register; // typographic voice for the name
-  wash: "red" | "gold" | "rim" | "blue";
+  wash: "red" | "gold" | "rim" | "blue" | "apollonius";
   mood: Mood;
   firstBook: number;
   /** The personal archive line, safe at `lineBook`; `lineEarly` before it. */
@@ -56,51 +57,57 @@ export type ExtendedPerson = {
   words?: Words;
   reading: string; // MY READING: labelled interpretation, never canon
   motif: string;
-  easter?: "sophocles" | "howl" | "orbit";
+  easter?: "sophocles" | "howl" | "orbit" | "minotaur";
 };
 
 export const EXTENDED: ExtendedPerson[] = [
   {
-    slug: "victra",
+    slug: "apollonius",
     file: 11,
-    name: "Victra au Julii",
-    epithet: "The Iron Woman",
-    epithetSource: "archive",
+    name: "Apollonius au Valii-Rath",
+    epithet: "The Minotaur of Mars",
+    epithetSource: "books",
     color: "Gold",
-    origin: "House Julii, Mars",
-    role: "Warrior, revolutionary",
-    categories: ["Identity", "Loyalty", "Defiance"],
+    origin: "House Valii-Rath, Mars",
+    role: "Warlord, prisoner, performer",
+    categories: ["Power", "Performance", "Vengeance"],
     register: "gold",
-    wash: "red",
-    mood: "crimson",
-    firstBook: 2,
-    line: "The Gold who chose her own name.",
+    wash: "apollonius",
+    mood: "minotaur",
+    firstBook: 4,
+    line: "Terrifying or hilarious. The answer is yes.",
     lineBook: 3,
-    lineEarly: "Julii by birth, and never quite by temperament.",
     essence: [
-      "Victra is fiercely independent, brutally direct, intensely loyal and exceptionally dangerous.",
-      "She is shaped by what her family expects and by the reputation the Julii name carries, and she keeps showing that she means to define herself by her own choices. Physical ferocity and emotional vulnerability, in one person.",
+      "He mastered the violin at twelve. He is a master of the razor, ranked among the finest fighters of his generation.",
+      "He treats conversation like theater. He sees himself not merely as powerful but as a work of art still being perfected.",
     ],
-    traits: ["Fiercely loyal", "Blunt", "Independent", "Aggressive", "Protective", "Honest", "Fearless", "Emotionally intense", "Strong-willed", "Resilient"],
+    traits: ["Theatrical", "Vain", "Brilliant", "Musical", "Proud", "Charismatic", "Vengeful", "Cultured", "Unpredictable", "Dangerous"],
     roleText: [
-      "She enters Golden Son among the Golds around Darrow and becomes one of his closest friends. Through her the saga asks whether someone raised on Julii ruthlessness can choose loyalty instead, and keep choosing it.",
+      "Iron Gold brings him out of Deepgrave, the prison where he was meant to be forgotten: Darrow frees him to use him, with a bomb in his head to keep him cooperative. Every scene he enters becomes his stage.",
+      { text: "In Dark Age he makes a secret pact with Lysander: the Society restored, and the lives of his betrayers delivered to him.", book: 5 },
     ],
-    themes: ["Identity", "Loyalty", "Defiance", "Family"],
+    themes: ["Power", "Self-creation", "Performance", "Vengeance"],
     connections: [
-      { name: "Darrow", note: "Friend, then family by choice.", book: 2, slug: "darrow" },
-      { name: "Sevro", note: "Husband.", book: 3, slug: "sevro" },
-      { name: "Antonia au Severus-Julii", note: "Half-sister, and her enemy.", book: 2 },
-      { name: "Agrippina au Julii", note: "Mother. Primus of House Julii.", book: 2 },
+      { name: "Darrow", note: "Freed him from Deepgrave to use him.", book: 4, slug: "darrow" },
+      { name: "Tactus au Rath", note: "Younger brother.", book: 4 },
+      { name: "Lysander au Lune", note: "A secret pact.", book: 5, slug: "lysander" },
+      { name: "Kavax au Telemanus", note: "He breaks his spine at Phobos.", book: 6, slug: "kavax" },
     ],
     moments: [
-      { title: "The retinue", text: "Introduced in Golden Son as one of the Golds around Darrow, and soon one of his closest friends.", book: 2 },
-      { title: "The Triumph", text: "When the Triumph turns into a massacre, Antonia shoots Victra in the spine and kills their mother.", book: 2 },
-      { title: "Barca", text: "She asks Sevro to marry her. They wed in the Morning Star’s hangar, and she takes his name, Barca, to leave the baggage of her birth family behind.", book: 3 },
-      { title: "The Red Hand", text: "She loses her left ear fighting off the Red Hand.", book: 5 },
+      { title: "Deepgrave", text: "Imprisoned for crimes against the Republic, then broken out by Darrow’s crew with a bomb in his head to keep him honest.", book: 4 },
+      { title: "The pact", text: "He allies with Lysander in secret, for the Society’s return and the lives of the people who betrayed him.", book: 5 },
+      { title: "Phobos", text: "He breaks Kavax au Telemanus’s spine in the Battle of Phobos.", book: 6 },
+      { title: "The Dockyards", text: "He takes the Venus Dockyards in an eight-day battle in October 754.", book: 6 },
     ],
-    words: { text: "I’m a Julii. Cold runneth through my veins.", who: "Victra", where: "The first trilogy", book: 3 },
-    reading: "Victra is identity in defiance of inheritance. She is the proof that the Julii name was something she wore, never something she was, and the saga lets her be dangerous without ever making her cold where it counts.",
-    motif: "Gold shards, split and sharpened, on dark stone.",
+    words: {
+      text: "The mind is its own place, and in itself can make a heaven of hell or a hell out of heaven.",
+      who: "Apollonius au Valii-Rath",
+      where: "Iron Gold, chapter 34",
+      book: 4,
+    },
+    reading: "Apollonius is power as self-creation: a man who decided to be a masterpiece and made the war his audience. The saga never lets him be only a joke or only a monster, and that is exactly why he frightens.",
+    motif: "Gold marble. Red velvet. A violin string vibrating somewhere in the dark.",
+    easter: "minotaur",
   },
   {
     slug: "lyria",

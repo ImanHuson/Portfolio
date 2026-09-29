@@ -42,3 +42,6 @@ next-env.d.ts
 
 # raw publisher covers (scripts/art/covers.py); only the treated WebP ships
 /covers-src/
+
+# raw fan-art sources (scripts/art/portraits.py); only the treated WebP ships
+/portraits-src/

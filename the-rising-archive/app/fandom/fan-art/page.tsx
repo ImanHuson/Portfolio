@@ -2,10 +2,20 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/typography/PageHeader";
 import Plate from "@/components/archive/Plate";
 import Spotlight from "@/components/archive/Spotlight";
+import FramedPortrait from "@/components/archive/FramedPortrait";
+import { getExtended } from "@/lib/data/extended";
+import { getPerson, safeAs } from "@/lib/data/people";
+import { PORTRAITS, portraitCredit } from "@/lib/data/portraits";
+
+const portraitName = (slug: string) => {
+  const p = getPerson(slug);
+  if (p) return safeAs(p).name;
+  return getExtended(slug)?.name ?? (slug === "eo" ? "Eo of Lykos" : slug);
+};
 
 export const metadata: Metadata = {
   title: "The archive’s plates",
-  description: "The fan-made images of this archive: three.js renders and code-drawn plates, made for this site.",
+  description: "The character portraits, fan art credited to its artists, and the archive’s own images: three.js renders and code-drawn plates made for this site.",
   alternates: { canonical: "./" },
 };
 
@@ -16,9 +26,9 @@ const GROUPS: { title: string; note: string; items: { src: string; alt: string; 
     items: ["red-rising", "golden-son", "morning-star", "iron-gold", "dark-age", "light-bringer"].map((s) => ({ src: `/images/books/${s}.webp`, alt: `Book plate for ${s.replace(/-/g, " ")}.`, w: 900, h: 1350 })),
   },
   {
-    title: "Ten relics",
-    note: "One object for each of the Ten Faces, rendered as museum pieces.",
-    items: ["darrow", "virginia", "cassius", "sevro", "pax", "diomedes", "atlas", "lysander", "apollonius", "the-jackal"].map((s) => ({ src: `/images/people/${s}.webp`, alt: `The relic for ${s.replace(/-/g, " ")}.` })),
+    title: "Twenty relics",
+    note: "One object for each of the twenty, rendered as museum pieces. They stood in for the portraits before the portraits came.",
+    items: ["darrow", "virginia", "cassius", "sevro", "pax", "diomedes", "atlas", "lysander", "victra", "the-jackal", "apollonius", "lyria", "ephraim", "volga", "ragnar", "kavax", "fitchner", "lorn", "orion", "romulus"].map((s) => ({ src: `/images/people/${s}.webp`, alt: `The relic for ${s.replace(/-/g, " ")}.` })),
   },
   {
     title: "The Rising",
@@ -42,7 +52,7 @@ export default function FanArtPage() {
       <PageHeader
         trail={[{ href: "/", label: "Archive" }, { href: "/fandom/", label: "The Fandom" }, { href: "/fandom/fan-art/", label: "Fan art" }]}
         title="The archive’s plates"
-        lede="This archive’s own fan art. Every image was generated for this site: three.js scenes rendered headlessly, and posters drawn in code. None of it is published artwork, and none of it tries to be."
+        lede="The character portraits are the fandom’s work, credited to the artists below. Everything else here is the archive’s own: three.js scenes rendered headlessly, and posters drawn in code."
       >
         <p className="mt-6 max-w-[56ch] text-sm text-ash-2">
           For the fandom’s real artists, go where they post:{" "}
@@ -52,6 +62,27 @@ export default function FanArtPage() {
           .
         </p>
       </PageHeader>
+      <section aria-labelledby="portraits-title" className="border-t border-line px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 id="portraits-title" className="font-display text-h3 font-bold uppercase">The portraits</h2>
+          <p className="mt-2 max-w-[70ch] text-ash">
+            Fan art, shown in the archive’s frames and credited as each artist signed it. Where a signature isn’t legible or there isn’t one, the credit says so rather than guessing. If one of these is yours and you want it credited differently or taken down,{" "}
+            <a href="https://github.com/ImanHuson/Portfolio/issues" target="_blank" rel="noopener noreferrer" className="text-ash underline decoration-line-strong underline-offset-4 hover:text-bone">
+              open an issue
+            </a>{" "}
+            and it will be.
+          </p>
+          <ul role="list" className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+            {Object.keys(PORTRAITS).map((slug) => (
+              <li key={slug}>
+                <FramedPortrait slug={slug} name={portraitName(slug)} size="card" sizes="(min-width: 1024px) 18vw, 45vw" />
+                <p className="mt-3 font-display text-lg leading-tight font-bold uppercase">{portraitName(slug)}</p>
+                <p className="mt-1 font-mono text-meta tracking-[0.12em] text-ash uppercase">{portraitCredit(slug)}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
       {GROUPS.map((g) => (
         <section key={g.title} aria-labelledby={g.title} className="border-t border-line px-5 py-16 md:px-8">
           <div className="mx-auto max-w-[1400px]">

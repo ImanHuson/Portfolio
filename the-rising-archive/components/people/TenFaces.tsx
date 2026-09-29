@@ -9,11 +9,11 @@ import { BOOK_TITLES } from "@/lib/data/spoilers";
 import { cn } from "@/lib/utils";
 
 // Bento with exact cell count: 16 cells on a 4-column grid, no empty cells.
-// Darrow 2x2, Virginia 2x1, Apollonius 2x1, the Jackal 2x1, six singles.
+// Darrow 2x2, Virginia 2x1, Victra 2x1, the Jackal 2x1, six singles.
 const SPAN: Record<string, string> = {
   darrow: "md:col-span-2 md:row-span-2 md:min-h-[38rem]",
   virginia: "md:col-span-2",
-  apollonius: "md:col-span-2",
+  victra: "md:col-span-2",
   "the-jackal": "md:col-span-2",
 };
 

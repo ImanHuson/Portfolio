@@ -22,7 +22,7 @@ const TEN: Record<string, { house: G[]; role: G[]; traits: string[]; keywords: G
   diomedes: { house: ["House Raa"], role: ["Storm Knight"], traits: ["Honorable", "Austere", "Reserved"], keywords: ["Rim", "Olympic Knights", "Philosophy", "Honor"] },
   atlas: { house: ["House Raa"], role: ["Fear Knight"], traits: ["Patient", "Cold", "Clever"], keywords: ["Rim", "Olympic Knights", "Gorgons", "Fear"] },
   lysander: { house: ["House Lune"], role: ["Heir", "Exile"], traits: ["Brilliant", "Idealistic", "Ambitious"], keywords: ["Luna", "Philosophy", "Civilization"] },
-  apollonius: { house: ["House Valii-Rath"], role: ["Warlord", "Prisoner"], traits: ["Theatrical", "Vain", "Dangerous"], keywords: ["Minotaur", "Deepgrave", "Mars"] },
+  victra: { house: ["House Julii", { t: "House Barca", book: 3 }], role: ["Warrior", "Heiress"], traits: ["Loyal", "Blunt", "Fearless", "Independent"], keywords: ["Iron", "Julii", "Mars"] },
   "the-jackal": { house: ["House Pluto", { t: "House Augustus", book: 1 }], role: ["Primus", "Politician"], traits: ["Cunning", "Cruel", "Wounded"], keywords: ["Power", "Politics", "Institute"] },
 };
 
@@ -37,7 +37,7 @@ const EXTRA: Record<string, string[]> = {
   lyria: ["Mines", "Lagalos"],
   volga: ["Snowball", "Ice"],
   ephraim: ["Freelancer", "Thief"],
-  victra: ["House Julii", "Iron"],
+  apollonius: ["Minotaur", "Deepgrave", "Violin", "Valii-Rath"],
 };
 
 export type Hit = { key: string; href: string; name: string; meta: string; kind: "featured" | "cast"; match?: string; firstBook: number };

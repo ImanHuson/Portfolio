@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import CardWash from "@/components/archive/CardWash";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import { useArchive } from "@/components/providers/ArchiveProvider";
 import { EXTENDED } from "@/lib/data/extended";
 import { BOOK_TITLES } from "@/lib/data/spoilers";
@@ -24,7 +24,7 @@ export default function ExtendedArchive() {
               data-wash={p.wash}
               className="wash-card group grid h-full grid-cols-[5.5rem_1fr] gap-5 bg-void p-6 sm:grid-cols-[8rem_1fr] md:p-8"
             >
-              <Plate src={`/images/people/${p.slug}.webp`} alt="" className="aspect-square w-full border border-line object-cover" sizes="128px" />
+              <FramedPortrait slug={p.slug} name={p.name} size="card" sizes="128px" />
               <div className="min-w-0">
                 <p className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
                   {p.color} · {p.origin}
@@ -35,6 +35,11 @@ export default function ExtendedArchive() {
                   <p className="mt-4 max-w-[44ch] font-serif text-lg text-bone/90 italic">{line}</p>
                 ) : (
                   <p className="mt-4 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">Their line opens after {BOOK_TITLES[p.lineBook]}</p>
+                )}
+                {p.easter === "minotaur" && (
+                  <p className="mt-3 font-display text-lg font-bold tracking-[0.2em] text-gold uppercase opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    The Minotaur approaches.
+                  </p>
                 )}
                 <span className="mt-5 block font-mono text-meta tracking-[0.18em] text-ash uppercase transition-colors group-hover:text-red">
                   Open dossier <span aria-hidden>→</span>

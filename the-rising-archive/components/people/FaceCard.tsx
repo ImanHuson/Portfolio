@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import CardWash from "@/components/archive/CardWash";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -13,11 +13,11 @@ import { cssEase, duration } from "@/lib/animation/tokens";
 import { cn } from "@/lib/utils";
 
 // The card wash tone per register: burgundy for everyone except the Rim,
-// which keeps its cool silver; Apollonius gets the stronger, gold-lit wash.
+// which keeps its cool silver.
 const WASH: Record<string, string> = { red: "red", gold: "gold", rim: "rim", none: "red" };
 
 /** One face of power. Five of the ten carry an authored micro-interaction
- * from the brief (Darrow, Cassius, Lysander, Atlas, Apollonius); the rest
+ * from the brief (Darrow, Cassius, Lysander, Atlas); the rest
  * stay still on purpose. Everything that fires on hover also fires on
  * keyboard focus. */
 export default function FaceCard({
@@ -70,19 +70,18 @@ export default function FaceCard({
 
   const shown = shownAs(person, clearance);
   const title = hover && active ? hover[cycle] : shown.epithet;
-  const isApollonius = person.slug === "apollonius";
 
   return (
     <Link
       ref={cardRef}
       href={`/people/${person.slug}/`}
-      data-wash={isApollonius ? "apollonius" : WASH[person.register]}
+      data-wash={WASH[person.register]}
       onMouseEnter={enter}
       onMouseLeave={leave}
       onFocus={enter}
       onBlur={leave}
       onPointerMove={(e) => {
-        // The Apollonius spotlight, now on every face: position goes straight
+        // The cursor spotlight on every face: position goes straight
         // into CSS variables, so tracking the cursor never re-renders React.
         const el = cardRef.current;
         if (!el || e.pointerType === "touch") return;
@@ -111,15 +110,14 @@ export default function FaceCard({
         </svg>
       )}
 
-      <Plate
-        src={`/images/people/${person.slug}.webp`}
-        alt=""
-        width={900}
-        height={900}
-        className="pointer-events-none absolute top-6 right-6 w-16 opacity-60 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 md:w-20"
-        sizes="80px"
+      <FramedPortrait
+        slug={person.slug}
+        name={shown.name}
+        size="thumb"
+        className="pointer-events-none absolute top-6 right-6 w-16 md:w-20"
+        imgClassName="opacity-85 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
       />
-      <div className="relative pr-20">
+      <div className="relative pr-20 md:pr-24">
         <div className="flex items-center gap-3">
           <span aria-hidden className={cn("h-px w-8", RULE_CLASS[person.register])} />
           <span className={cn("font-mono text-meta tracking-[0.18em] uppercase", ACCENT_CLASS[person.register])}>
@@ -171,11 +169,6 @@ export default function FaceCard({
         ) : lensesLocked ? null : (
           <p className="font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">
             {LENSES.find((l) => l.key === lens)!.label} opens after {BOOK_TITLES[person.lensBook]}
-          </p>
-        )}
-        {isApollonius && (
-          <p className="mt-4 font-display text-lg font-bold tracking-[0.2em] text-gold uppercase opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
-            The Minotaur approaches.
           </p>
         )}
         {/* The whole card is a link; say so, for readers who don't hover. */}

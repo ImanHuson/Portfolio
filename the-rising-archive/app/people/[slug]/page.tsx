@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CardWash from "@/components/archive/CardWash";
 import PersonName from "@/components/people/PersonName";
-import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
@@ -111,7 +111,6 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
   const idx = PEOPLE.findIndex((p) => p.slug === slug);
   const prev = PEOPLE[(idx - 1 + PEOPLE.length) % PEOPLE.length];
   const next = PEOPLE[(idx + 1) % PEOPLE.length];
-  const minotaur = person.slug === "apollonius";
 
   return (
     <article>
@@ -128,7 +127,6 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             person.register === "gold" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(140,116,70,0.2),transparent_70%)]",
             person.register === "rim" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(170,178,186,0.16),transparent_70%)]",
             person.register === "none" && "bg-[radial-gradient(ellipse_70%_70%_at_10%_0%,rgba(147,143,136,0.12),transparent_70%)]",
-            minotaur && "bg-[radial-gradient(circle_at_75%_30%,rgba(200,169,106,0.22),transparent_45%),linear-gradient(160deg,rgba(122,15,23,0.45),transparent_60%)]",
           )}
         />
         <div className="relative mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[7fr_5fr] lg:items-center">
@@ -138,13 +136,13 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             <span aria-hidden> / </span>
             <span>Dossier</span>
           </nav>
-          {minotaur && (
-            <p className="mt-8 font-display text-2xl font-bold tracking-[0.3em] text-gold uppercase">{person.intro[0] as string}</p>
-          )}
           <h1 className={cn("mt-6 max-w-[14ch] text-h1 leading-[0.88]", NAME_CLASS[person.register])}><PersonName person={person} /></h1>
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center gap-4">
             <span aria-hidden className={cn("h-px w-12", RULE_CLASS[person.register])} />
             <p className={cn("font-serif text-h3 italic", ACCENT_CLASS[person.register])}><PersonName person={person} part="epithet" /></p>
+            {person.epithetSource === "archive" && (
+              <span className="border border-line-strong px-1.5 py-0.5 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">The archive’s name, not the books’</span>
+            )}
           </div>
           <dl className="mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
             <div>
@@ -167,11 +165,10 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
           </div>
           {/* Fan easter eggs: Sevro's goblin peeks in on hover; Atlas's plate
               starts veiled and clears on its own. */}
-          <figure className={cn("group relative max-w-[560px] lg:justify-self-end", person.slug === "atlas" && "atlas-veil")}>
-            <Plate src={`/images/people/${person.slug}.webp`} alt={`Archive relic for ${safeAs(person).name}: ${person.motif}`} priority className="border border-line" sizes="(min-width: 1024px) 40vw, 100vw" />
-            {person.slug === "sevro" && <WolfIcon className="goblin-peek pointer-events-none absolute right-4 bottom-12 w-10 text-bone/80" />}
-            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">Archive relic. {person.motif}</figcaption>
-          </figure>
+          <div className={cn("group relative w-full max-w-[460px] justify-self-center lg:justify-self-end", person.slug === "atlas" && "atlas-veil")}>
+            <FramedPortrait slug={person.slug} name={safeAs(person).name} size="hero" priority sizes="(min-width: 1024px) 30vw, 80vw" />
+            {person.slug === "sevro" && <WolfIcon className="goblin-peek pointer-events-none absolute right-8 bottom-28 w-10 text-bone/80" />}
+          </div>
         </div>
       </header>
 
@@ -179,7 +176,7 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
         <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[7fr_5fr]">
           <SpoilerGate book={person.firstBook - 1}>
             <div className="space-y-6">
-              {(minotaur ? person.intro.slice(1) : person.intro).map((p, i) =>
+              {person.intro.map((p, i) =>
                 typeof p === "string" ? (
                   <Reveal key={i}>
                     <p className="max-w-[58ch] text-lede text-bone/90">{p}</p>
