@@ -49,10 +49,10 @@ JOBS = {
     "vault/carving": ("object", MET + "gr/original/DP9053.jpg", {"fit": 0.8, "rotate": -28}),
     "vault/holotech": ("object", MET + "gr/original/DP367987.jpg", {"fit": 0.82}),
     "vault/psychospike": ("object", MET + "as/original/CI49.23ab.jpg", {"fit": 0.84, "rotate": -40}),
-    "houses/augustus": ("object", MET + "gr/original/DP-43517-001.jpg", {"fit": 0.84}),
+    "houses/augustus": ("object", MET + "gr/original/DP-43517-001.jpg", {"fit": 0.84, "neutral": (21, 40), "cut_below": 0.63, "hi": True}),
     "houses/bellona": ("object", MET + "ad/original/2002.21.jpg", {"fit": 0.8}),
-    "houses/telemanus": ("object", MET + "as/original/LC-10_211_1409-001.jpg", {"fit": 0.78, "tol": 34, "neutral": True}),
-    "houses/lune": ("object", MET + "gr/original/DP109367.jpg", {"fit": 0.74, "flame": True}),
+    "houses/telemanus": ("object", MET + "as/original/LC-10_211_1409-001.jpg", {"fit": 0.78, "tol": 34, "neutral": (16, 90), "hi": True}),
+    "houses/lune": ("object", MET + "gr/original/DP109367.jpg", {"fit": 0.74, "flame": True, "neutral": (10, 100), "hi": True}),
     "houses/raa": ("object", MET + "es/original/ES5844.jpg", {"fit": 0.8, "tol": 26}),
     "places/mars": ("planet", NASA + "PIA00407/PIA00407~large.jpg", {}),
     "places/luna": ("planet", NASA + "PIA00405/PIA00405~large.jpg", {}),
@@ -81,20 +81,26 @@ JOBS = {
 }
 
 
-def fetch(name, url):
+def fetch(name, url, hi=False):
+    """hi: the Met's full-resolution original (about 4000 px) instead of its
+    ~600 px web-large rendition, downscaled to 1600 px for processing. Worth
+    it where the plate is large or the object has fine detail."""
     SRC.mkdir(exist_ok=True)
     if url.startswith("local:"):
         return Image.open(SRC / url[6:]).convert("RGB")
-    f = SRC / (name.replace("/", "_") + ".jpg")
+    f = SRC / (name.replace("/", "_") + ("-hi" if hi else "") + ".jpg")
     if not f.exists():
-        # Met originals are huge; its web-large rendition is plenty here.
-        url = url.replace("/original/", "/web-large/")
+        if not hi:
+            url = url.replace("/original/", "/web-large/")
         req = urllib.request.Request(urllib.parse.quote(url, safe=":/~"), headers={"User-Agent": "rising-archive/1.0"})
         try:
             f.write_bytes(urllib.request.urlopen(req, timeout=120).read())
         except Exception as e:
             raise SystemExit(f"{name}: {url}: {e}")
-    return Image.open(f).convert("RGB")
+    im = Image.open(f).convert("RGB")
+    if hi:
+        im.thumbnail((1600, 1600), Image.LANCZOS)
+    return im
 
 
 def grain(a, amt=2.4, seed=1):
@@ -119,7 +125,7 @@ def stage(W, H):
     return a
 
 
-def cutout(im, tol=18, neutral=False):
+def cutout(im, tol=18, neutral=False, cut_below=None):
     """Mask of the object. A flood fill from the edges marks the studio paper
     as probable background; OpenCV's GrabCut then separates the object
     properly (the Met's backdrops are gradients a flood fill alone can't
@@ -143,10 +149,22 @@ def cutout(im, tol=18, neutral=False):
     bgd, fgd = np.zeros((1, 65), np.float64), np.zeros((1, 65), np.float64)
     cv2.grabCut(img, gc, None, bgd, fgd, 6, cv2.GC_INIT_WITH_MASK)
     fg = np.isin(gc, (cv2.GC_FGD, cv2.GC_PR_FGD)).astype(np.uint8)
-    if neutral:  # a warm object on neutral grey paper: drop the grey
+    if neutral:  # a warm object on neutral grey paper or plinth: drop the grey
+        # True, or (max chroma, min brightness) to tune it per image.
+        cmax, lmin = (14, 120) if neutral is True else neutral
         a = np.asarray(im, float)
         chroma = a.max(axis=2) - a.min(axis=2)
-        fg[(chroma < 14) & (a.mean(axis=2) > 120)] = 0
+        fg[(chroma < cmax) & (a.mean(axis=2) > lmin)] = 0
+        # Grey patches inside the object (marble, patina) went too; fill the
+        # small enclosed holes back in, but keep real openings like a handle.
+        h, w = fg.shape
+        flood = fg.copy()
+        cv2.floodFill(flood, np.zeros((h + 2, w + 2), np.uint8), (0, 0), 1)
+        n, lab, stats, _ = cv2.connectedComponentsWithStats((flood == 0).astype(np.uint8), 4)
+        small = [k for k in range(1, n) if stats[k, cv2.CC_STAT_AREA] < fg.sum() * 0.004]
+        fg[np.isin(lab, small)] = 1
+    if cut_below:  # drop a base the object stands on, below this height
+        fg[int(fg.shape[0] * cut_below) :, :] = 0
     fg = cv2.morphologyEx(fg, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
     n, lab, stats, _ = cv2.connectedComponentsWithStats(fg, 8)
     if n > 1:
@@ -158,9 +176,9 @@ def cutout(im, tol=18, neutral=False):
     return mask
 
 
-def do_object(name, im, fit=0.8, rotate=0, tol=18, flame=False, neutral=False):
+def do_object(name, im, fit=0.8, rotate=0, tol=18, flame=False, neutral=False, cut_below=None):
     W = H = 900
-    mask = cutout(im, tol, neutral)
+    mask = cutout(im, tol, neutral, cut_below)
     if rotate:
         im = im.rotate(rotate, expand=True, resample=Image.BICUBIC, fillcolor=(0, 0, 0))
         mask = mask.rotate(rotate, expand=True, resample=Image.BICUBIC, fillcolor=0)
@@ -297,5 +315,5 @@ def do_fleet(name, chart, ships):
 for key in sys.argv[1:] or JOBS:
     name = key if "/" in key else next(k for k in JOBS if k.endswith("/" + key))
     kind, url, opt = JOBS[name]
-    im = fetch(name, url)
+    im = fetch(name, url, opt.pop("hi", False))
     {"object": do_object, "planet": do_planet, "painting": do_painting, "fleet": do_fleet}[kind](name, im, **opt)

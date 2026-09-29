@@ -29,7 +29,7 @@ export default function WorldPage() {
         lede="The pyramid, the families at its top, the factions tearing at it, the worlds it spans, and the machines it built."
       />
       <section aria-label="Parts of the world" className="px-5 pb-28 md:px-8">
-        <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-6">
+        <ul role="list" className="mx-auto grid max-w-[1400px] hairline md:grid-cols-6">
           {PARTS.map((p, i) => (
             <Reveal as="li" cell key={p.href} delay={i * 0.04} className={cn("bg-void", p.span)}>
               <Spotlight tone="gold" className="h-full">

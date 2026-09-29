@@ -87,7 +87,7 @@ export default function ExtendedDossier({ person }: { person: ExtendedPerson }) 
               <span aria-hidden className={cn("h-px w-12", RULE_CLASS[person.register])} />
               <p className={cn("font-serif text-h3 italic", ACCENT_CLASS[person.register])}>{person.epithet}</p>
               {person.epithetSource === "archive" && (
-                <span className="border border-line-strong px-1.5 py-0.5 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">
+                <span className="border border-line-strong px-1.5 py-0.5 font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">
                   The archive’s name, not the books’
                 </span>
               )}
@@ -169,7 +169,7 @@ export default function ExtendedDossier({ person }: { person: ExtendedPerson }) 
       <section aria-labelledby="connections" className="border-t border-line px-5 py-20 md:px-8">
         <div className="mx-auto max-w-[1400px]">
           <Label id="connections">Connections</Label>
-          <ul role="list" className="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <ul role="list" className="mt-8 grid hairline sm:grid-cols-2 lg:grid-cols-4">
             {person.connections.map((c) => {
               const body = (
                 <SpoilerGate book={c.book} compact>

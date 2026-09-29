@@ -8,7 +8,9 @@ import { CLEARANCE_LEVELS } from "@/lib/data/spoilers";
 
 /** At low clearance a page can be mostly sealed bars, which reads as empty.
  * This says so plainly, counts what is sealed, and offers the two real
- * choices: unseal this page only, or change clearance. */
+ * choices: unseal this page only, or change clearance. It sits in the empty
+ * band under the header at the top of the page and scrolls away with it:
+ * as a fixed pill it covered text and sealed rows on nearly every page. */
 export default function SealedNotice() {
   const pathname = usePathname();
   const { clearance, known, openClearance } = useArchive();
@@ -32,22 +34,22 @@ export default function SealedNotice() {
   return (
     <aside
       aria-label="Sealed passages on this page"
-      className="fixed right-4 bottom-4 z-30 flex max-w-[calc(100vw-2rem)] flex-wrap items-center gap-x-4 gap-y-2 border border-line-strong bg-void-2/95 py-2.5 pr-2 pl-4 font-mono text-[0.68rem] tracking-[0.16em] text-ash uppercase shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-md"
+      className="absolute top-[calc(var(--nav-h)+0.75rem)] right-5 z-30 flex max-w-[calc(100vw-2.5rem)] items-center gap-x-2.5 border border-line-strong bg-void-2/90 py-0.5 pr-0.5 pl-3 font-mono text-meta tracking-[0.08em] whitespace-nowrap text-ash uppercase sm:tracking-[0.14em] md:right-8 md:gap-x-4"
     >
       <span>
-        <span className="text-bone">{count}</span> sealed here <span className="text-ash-2">({lvl?.short})</span>
+        <span className="text-bone">{count}</span> sealed<span className="hidden sm:inline"> here ({lvl?.short})</span>
       </span>
       <button
         type="button"
         onClick={() => document.querySelectorAll<HTMLDetailsElement>("main details.spoiler").forEach((d) => (d.open = true))}
-        className="text-bone underline decoration-red underline-offset-4 hover:text-red"
+        className="py-1.5 text-bone underline decoration-red underline-offset-4 hover:text-red"
       >
-        Unseal this page
+        Unseal<span className="hidden sm:inline"> this page</span>
       </button>
-      <button type="button" onClick={openClearance} className="hover:text-bone">
+      <button type="button" onClick={openClearance} className="py-1.5 hover:text-bone">
         Clearance
       </button>
-      <button type="button" aria-label="Dismiss" onClick={() => setDismissed(pathname)} className="flex size-7 items-center justify-center text-ash-2 hover:text-bone">
+      <button type="button" aria-label="Dismiss" onClick={() => setDismissed(pathname)} className="flex size-8 items-center justify-center text-ash hover:text-bone">
         <X className="size-3.5" strokeWidth={1.5} />
       </button>
     </aside>

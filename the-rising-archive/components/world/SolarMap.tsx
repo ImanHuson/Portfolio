@@ -76,7 +76,7 @@ export default function SolarMap() {
             transition={{ duration: 0.32, ease: cssEase.out }}
           >
             <Plate src={place.plate} alt={altFor(place.plate, place.name)} className="border border-line" />
-            <p className="mt-2 font-mono text-[0.7rem] tracking-[0.12em] text-ash-2 uppercase">As it looks today. {creditLine(place.plate)}</p>
+            <p className="mt-2 font-mono text-meta tracking-[0.12em] text-ash-2 uppercase">As it looks today. {creditLine(place.plate)}</p>
             <h2 className="mt-6 font-display text-h2 leading-none font-bold uppercase">{place.name}</h2>
             <div className="mt-5 space-y-4">
               {place.lines.map((l) => (

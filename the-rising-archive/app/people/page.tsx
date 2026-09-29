@@ -53,7 +53,7 @@ export default function PeoplePage() {
         <ExtendedArchive />
       </section>
       <section aria-label="More of the people" className="px-5 pb-28 md:px-8">
-        <div className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto grid max-w-[1400px] hairline md:grid-cols-2 xl:grid-cols-4">
           {[
             { href: "/people/relationships/", title: "Relationships", body: "Darrow at the center, then the whole web of twenty. Every line is a sequence of events.", wash: "red" },
             { href: "/people/themes/", title: "Themes", body: "Twelve ideas and five circles: how the archive reads the people it keeps.", wash: "gold" },

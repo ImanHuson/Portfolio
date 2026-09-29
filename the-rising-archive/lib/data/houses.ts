@@ -42,7 +42,7 @@ export const HOUSES: House[] = [
       { name: "Pax au Augustus", note: "Son of Darrow and Virginia, named for Pax au Telemanus.", book: 4 },
     ],
     artifacts: [
-      { title: "The Augustus seal", body: "The lion on red. Rendered for this archive; not the published heraldry.", book: 0 },
+      { title: "The Augustus seal", body: "A golden lion on red. The picture here is a Greek marble lion standing in for it, not the published heraldry.", book: 0 },
       { title: "Nero’s political history", body: "The ArchGovernor who ordered Eo hanged, and who ran Mars as a board he intended to win.", book: 1 },
       { title: "Adrius’s psychological profile", body: "He paid Karnus au Bellona to kill Claudius, his father’s favourite child. When Nero disowned him, he shot him.", book: 2 },
       { title: "Darrow’s transformation", body: "A Red carved into a Gold, taken into the house of the man who hanged his wife.", book: 2 },

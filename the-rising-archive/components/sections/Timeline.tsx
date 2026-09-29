@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Stamp from "@/components/archive/Stamp";
+import { useArchive } from "@/components/providers/ArchiveProvider";
+import { BOOK_TITLES } from "@/lib/data/spoilers";
 import { TIMELINE, type TimelineNode } from "@/lib/data/timeline";
 import { cssEase, duration, prefersReducedMotion } from "@/lib/animation/tokens";
 import { cn } from "@/lib/utils";
@@ -22,10 +24,11 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function NodeBody({ node }: { node: TimelineNode }) {
+function NodeBody({ node, named }: { node: TimelineNode; named: boolean }) {
   return (
     <dl className="grid gap-6 pt-6 pb-2 md:grid-cols-2">
       <div className="md:col-span-2">
+        {!named && <p className="mb-2 font-display text-h3 leading-none font-bold text-bone uppercase">{node.title}</p>}
         <p className="max-w-[62ch] text-lede text-bone">{node.summary}</p>
       </div>
       {node.where && <Field label="Where">{node.where}</Field>}
@@ -42,6 +45,9 @@ export default function Timeline() {
   const [open, setOpen] = useState<string | null>("eo");
   const reduce = useReducedMotion();
   const ref = useRef<HTMLOListElement>(null);
+  // Titles spoil too ("The Fall of Luna"): below the node's book the list
+  // says only which book it happens in, and the title waits inside the seal.
+  const { clearance } = useArchive();
 
   useGSAP(
     () => {
@@ -70,6 +76,7 @@ export default function Timeline() {
       {TIMELINE.map((node) => {
         const isOpen = open === node.slug;
         const sealed = node.status === "sealed";
+        const named = clearance >= node.book;
         return (
           <li key={node.slug} className="relative grid gap-2 pb-10 pl-10 md:grid-cols-[120px_1fr] md:gap-10 md:pl-0">
             <span className="font-mono text-meta leading-7 tracking-[0.14em] text-ash uppercase md:text-right">{node.when}</span>
@@ -100,9 +107,10 @@ export default function Timeline() {
                       className={cn(
                         "-my-1 py-1 text-left font-display text-h3 leading-none font-bold uppercase transition-colors",
                         isOpen ? "text-bone" : "text-bone/70 hover:text-bone",
+                        !named && "text-ash",
                       )}
                     >
-                      {node.title}
+                      {named ? node.title : `An event in ${BOOK_TITLES[node.book]}`}
                     </button>
                   </h3>
                   <AnimatePresence initial={false}>
@@ -118,7 +126,7 @@ export default function Timeline() {
                       >
                         <div className="pt-2">
                           <SpoilerGate book={node.book} compact>
-                            <NodeBody node={node} />
+                            <NodeBody node={node} named={named} />
                           </SpoilerGate>
                         </div>
                       </motion.div>

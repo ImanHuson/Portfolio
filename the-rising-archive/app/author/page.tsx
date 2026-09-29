@@ -62,7 +62,7 @@ export default function AuthorPage() {
       </section>
 
       <section aria-label="More" className="border-t border-line px-5 py-20 md:px-8">
-        <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-3">
+        <ul role="list" className="mx-auto grid max-w-[1400px] hairline md:grid-cols-3">
           <Spotlight as="li" tone="gold" className="bg-void">
             <Link href="/author/sons-of-ares/" className="group block h-full p-8 wash-card md:p-10">
               <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The comics</span>

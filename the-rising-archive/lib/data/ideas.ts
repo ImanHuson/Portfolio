@@ -22,6 +22,7 @@ export const IDEAS: Idea[] = [
     plate: "/images/rising/movement.webp",
     plateAlt: "Washington Crossing the Delaware: a boat of rebels crossing a frozen river.",
     lines: [
+      { text: "The Society is built so that every Color knows its place and never leaves it. Freedom here isn’t one thing: it means something different to each Color, because each was made for a different cage.", book: 0 },
       { text: "It starts with Eo, who asks Darrow to live for more than survival, and pays for the asking.", book: 1 },
       { text: "The first trilogy is about getting free. The second is about what freedom is worth to a Red girl in a refugee camp ten years later. Lyria’s chapters in Iron Gold ask the question the Rising didn’t have time to.", book: 4 },
     ],
@@ -44,6 +45,7 @@ export const IDEAS: Idea[] = [
     plate: "/images/rising/government.webp",
     plateAlt: "The Death of Socrates: a state executes its own philosopher.",
     lines: [
+      { text: "Tearing a hierarchy down and deciding what to build in its place are two different problems, and the saga treats both of them as the story.", book: 0 },
       { text: "The Rising wins. That is where the hard part starts.", book: 3 },
       { text: "The Republic keeps the Senate, the fleets and the broadcasts. It has to decide how much else of the old world to keep, and every choice is someone else’s betrayal.", book: 4 },
     ],
@@ -55,7 +57,9 @@ export const IDEAS: Idea[] = [
     plate: "/images/portraits/cassius.webp",
     plateAlt: "Cassius au Bellona, in fan art.",
     portrait: { slug: "cassius", name: "Cassius au Bellona" },
-    lines: [],
+    lines: [
+      { text: "Honor sounds like one word. In the Society it means something different to everyone who uses it: a family inheritance, a code of combat, a debt to a people, an argument for keeping everyone in their place. Four people below, four definitions.", book: 0 },
+    ],
     pairs: [
       { a: "Cassius", b: "Honour as inheritance", note: "The thing he was raised on, and has to relearn after it is used against him.", book: 1 },
       { a: "Lorn", b: "Honour as refusal", note: "A legend of the razor who tried to step away from the Society’s violence.", book: 2 },
@@ -71,7 +75,9 @@ export const IDEAS: Idea[] = [
     plateAlt: "The cover of Light Bringer.",
     plateW: 900,
     plateH: 1350,
-    lines: [],
+    lines: [
+      { text: "Legacy is what gets handed down whether anyone wants it or not: a name, a Color, a grudge, a dream. The saga keeps checking what each person was given, and what they chose to keep.", book: 0 },
+    ],
     pairs: [
       { a: "Eo", b: "A dream", note: "That a life could be more than labour.", book: 1 },
       { a: "Darrow", b: "A war", note: "Fought to make the dream possible.", book: 3 },
@@ -87,7 +93,9 @@ export const IDEAS: Idea[] = [
     plate: "/images/portraits/pax.webp",
     plateAlt: "Pax, in fan art.",
     portrait: { slug: "pax", name: "Pax" },
-    lines: [],
+    lines: [
+      { text: "The saga keeps returning to what parents hand their children: a name, a cause, a debt, a way of seeing the world. Each pairing below is a parent, a child, and what passed between them.", book: 0 },
+    ],
     pairs: [
       { a: "Fitchner", b: "Sevro", note: "A father his son thought didn’t care.", book: 1 },
       { a: "Nero", b: "Virginia and Adrius", note: "Two children, raised to win. One refused.", book: 2 },

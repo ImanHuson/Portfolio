@@ -37,7 +37,7 @@ export default function ArchiveSearch() {
         type="search"
         value={q}
         onChange={(e) => update(e.target.value)}
-        placeholder="A name, a Color, a House, a trait, a theme, a book"
+        placeholder="A name, a Color, a House, a trait, a theme, a book…"
         autoComplete="off"
         spellCheck={false}
         className="mt-6 block w-full border-b-2 border-line-strong bg-transparent py-3 font-serif text-2xl text-bone italic placeholder:text-ash-2 focus:border-red focus:outline-none md:text-3xl"

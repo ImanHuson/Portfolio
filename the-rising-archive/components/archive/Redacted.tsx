@@ -18,7 +18,7 @@ export default function Redacted({ book, children, className }: { book: number; 
     <details ref={ref} className={cn("spoiler", className)}>
       <summary className="group flex min-h-7 cursor-pointer items-center gap-3">
         <span aria-hidden className="block h-4 flex-1 bg-bone/90 transition-colors group-hover:bg-red" />
-        <span className="font-mono text-[0.65rem] tracking-[0.2em] text-ash-2 uppercase">
+        <span className="font-mono text-meta tracking-[0.2em] text-ash-2 uppercase">
           Redacted to {BOOK_TITLES[book]}
         </span>
       </summary>

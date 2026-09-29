@@ -24,7 +24,7 @@ export default function HousesPage() {
         lede="Opened like sealed political dossiers, not encyclopedia cards. Each file unseals further as your clearance allows."
       />
       <section aria-label="The houses" className="px-5 pb-28 md:px-8">
-        <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-6">
+        <ul role="list" className="mx-auto grid max-w-[1400px] hairline md:grid-cols-6">
           {HOUSES.map((h, i) => (
             <Reveal as="li" cell key={h.slug} delay={i * 0.04} className={cn("bg-void", i < 2 ? "md:col-span-3" : "md:col-span-2")}>
               <Spotlight tone="gold" className="h-full">

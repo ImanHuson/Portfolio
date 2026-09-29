@@ -62,7 +62,7 @@ export default function IronRain() {
           <p className="mt-6 max-w-[60ch] text-lede text-ash">
             The Iron Rain: soldiers dropped from orbit in armor onto a defended world. Pick one person to fall beside. This isn’t a vote and nothing is counted: your answer stays in this browser.
           </p>
-          <div className="mt-12 grid grid-cols-2 gap-px bg-line sm:grid-cols-4 lg:grid-cols-5">
+          <div className="mt-12 grid grid-cols-2 hairline sm:grid-cols-4 lg:grid-cols-5">
             {FEATURED.map((f) => {
               const on = pick === f.slug;
               return (

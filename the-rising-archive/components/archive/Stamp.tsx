@@ -17,7 +17,7 @@ export default function Stamp({ kind, className }: { kind: StampKind; className?
   return (
     <span
       className={cn(
-        "inline-flex items-center border px-2 py-0.5 font-mono text-[0.65rem] tracking-[0.2em] uppercase",
+        "inline-flex items-center border px-2 py-0.5 font-mono text-meta tracking-[0.2em] uppercase",
         kind === "sealed" || kind === "disputed" ? "border-red/70 text-red" : "border-line-strong text-ash",
         className,
       )}

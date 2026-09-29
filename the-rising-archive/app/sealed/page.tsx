@@ -46,8 +46,8 @@ export default function SealedPage() {
 
         <div className="mt-16 flex flex-wrap gap-3">
           <Stamp kind="sealed" />
-          <span className="inline-flex items-center border border-red/70 px-2 py-0.5 text-[0.65rem] tracking-[0.2em] text-red uppercase">Access denied</span>
-          <span className="inline-flex items-center border border-line-strong px-2 py-0.5 text-[0.65rem] tracking-[0.2em] text-ash uppercase">Waiting for author</span>
+          <span className="inline-flex items-center border border-red/70 px-2 py-0.5 text-meta tracking-[0.2em] text-red uppercase">Access denied</span>
+          <span className="inline-flex items-center border border-line-strong px-2 py-0.5 text-meta tracking-[0.2em] text-ash uppercase">Waiting for author</span>
         </div>
 
         <section aria-labelledby="status" className="mt-20 border-t border-line pt-8 text-sm leading-relaxed text-ash">

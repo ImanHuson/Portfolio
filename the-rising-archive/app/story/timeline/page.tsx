@@ -25,14 +25,21 @@ export default function TimelinePage() {
           <ul className="mx-auto mt-16 grid max-w-[1100px] gap-6">
             {TIMELINE.map((n) => (
               <li key={n.slug}>
-                <strong>{n.title}</strong> ({n.when})
                 {n.book > 0 ? (
-                  <details className="spoiler mt-2">
-                    <summary className="text-ash">Sealed. Contains {BOOK_TITLES[n.book]}. Open</summary>
-                    <p>{n.summary}</p>
-                  </details>
+                  <>
+                    <strong>An event in {BOOK_TITLES[n.book]}</strong> ({n.when})
+                    <details className="spoiler mt-2">
+                      <summary className="text-ash">Sealed. Contains {BOOK_TITLES[n.book]}. Open</summary>
+                      <p>
+                        <strong>{n.title}.</strong> {n.summary}
+                      </p>
+                    </details>
+                  </>
                 ) : (
-                  <p>{n.summary}</p>
+                  <>
+                    <strong>{n.title}</strong> ({n.when})
+                    <p>{n.summary}</p>
+                  </>
                 )}
               </li>
             ))}

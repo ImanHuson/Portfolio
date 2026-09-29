@@ -16,7 +16,7 @@ export default function HowlerRollCall() {
 
   return (
     <>
-      <ol className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3" aria-label="Howler roll call">
+      <ol className="grid hairline sm:grid-cols-2 lg:grid-cols-3" aria-label="Howler roll call">
         {shown.map((h) => {
           const state = h.fate && h.fate.book <= clearance ? h.fate.state : "lit";
           return (
@@ -52,7 +52,7 @@ export default function HowlerRollCall() {
                   {h.fate.text}
                 </p>
               )}
-              {state === "memorial" && <span className="absolute top-6 right-6 font-mono text-[0.65rem] tracking-[0.2em] text-ash-2 uppercase">In the Vale</span>}
+              {state === "memorial" && <span className="absolute top-6 right-6 font-mono text-meta tracking-[0.2em] text-ash-2 uppercase">In the Vale</span>}
             </Spotlight>
           );
         })}

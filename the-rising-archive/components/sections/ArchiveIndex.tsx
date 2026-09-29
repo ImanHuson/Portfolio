@@ -31,7 +31,7 @@ export default function ArchiveIndex() {
           Where do you want to begin?
         </h2>
 
-        <ul role="list" className="mt-16 grid gap-px bg-line md:grid-cols-6">
+        <ul role="list" className="mt-16 grid hairline md:grid-cols-6">
           {BRANCHES.map((b, i) => (
             <Reveal as="li" cell key={b.href} delay={(i % 3) * 0.05} className={cn("bg-void", b.span)}>
               <Spotlight tone={b.href === "/sealed/" || i < 2 ? "red" : "gold"} className="h-full">
@@ -64,7 +64,7 @@ export default function ArchiveIndex() {
           ))}
         </ul>
 
-        <ul role="list" className="mt-px grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <ul role="list" className="mt-px grid hairline sm:grid-cols-2 lg:grid-cols-4">
           {DEEP.map((d) => (
             <li key={d.href} className="bg-void">
               <Link href={d.href} className="group block p-8 wash-card">

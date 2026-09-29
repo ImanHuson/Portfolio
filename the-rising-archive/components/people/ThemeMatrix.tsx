@@ -50,7 +50,7 @@ export default function ThemeMatrix() {
         )}
       </p>
 
-      <ul role="list" className="mt-8 grid grid-cols-2 gap-px bg-line sm:grid-cols-4 lg:grid-cols-5">
+      <ul role="list" className="mt-8 grid grid-cols-2 hairline sm:grid-cols-4 lg:grid-cols-5">
         {FEATURED.map((f) => {
           const on = theme ? isIn(theme, f.slug) : true;
           return (

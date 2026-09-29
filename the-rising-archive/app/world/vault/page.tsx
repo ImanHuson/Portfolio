@@ -25,11 +25,11 @@ export default function VaultPage() {
         lede="The machinery of the war, catalogued like museum pieces. Where something real comes close, it stands in: a real sword for the razor, real armour for the StarShell, a video game’s warships for the fleet, a hairpin for the PsychoSpike."
       />
       <section aria-label="Artifacts" className="px-5 pb-20 md:px-8">
-        <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
+        <ul role="list" className="mx-auto grid max-w-[1400px] hairline md:grid-cols-2">
           {VAULT.map((a, i) => (
             <Reveal as="li" cell key={a.slug} delay={(i % 2) * 0.06} className="bg-void">
               <Spotlight as="article" tone="red" className={cn("grid h-full gap-0 sm:grid-cols-2", i % 4 >= 2 && "sm:[&>*:first-child]:order-2")}>
-                <Plate src={a.plate} alt={altFor(a.plate, `${a.name}, rendered for this archive.`)} className="aspect-square object-cover" sizes="(min-width: 768px) 25vw, 50vw" />
+                <Plate src={a.plate} alt={altFor(a.plate, `${a.name}.`)} className="aspect-square object-cover" sizes="(min-width: 768px) 25vw, 50vw" />
                 <div className="flex flex-col p-6 md:p-8">
                   <h2 className="font-display text-3xl leading-none font-bold uppercase">{a.name}</h2>
                   <p className="mt-3 font-serif text-lg text-bone/90 italic">{a.line}</p>
@@ -40,8 +40,8 @@ export default function VaultPage() {
                       </SpoilerGate>
                     ))}
                   </div>
-                  {a.reading && <Stamp kind="reading" className="mt-auto self-start pt-0" />}
-                  <p className="mt-6 font-mono text-[0.7rem] tracking-[0.12em] text-ash-2 uppercase">{creditLine(a.plate) || "Archive render"}</p>
+                  {a.reading && <Stamp kind="reading" className="mt-5 self-start" />}
+                  <p className="mt-6 font-mono text-meta tracking-[0.12em] text-ash-2 uppercase">{creditLine(a.plate) || "Archive render"}</p>
                 </div>
               </Spotlight>
             </Reveal>

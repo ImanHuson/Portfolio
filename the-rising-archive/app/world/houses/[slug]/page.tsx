@@ -72,7 +72,7 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
           </div>
           <figure>
             <Plate src={h.plate} alt={altFor(h.plate, `The ${h.name} seal.`)} priority className="border border-line" />
-            <figcaption className="mt-3 font-mono text-[0.7rem] tracking-[0.12em] text-ash-2 uppercase">A stand-in for the house’s sign. {creditLine(h.plate)}</figcaption>
+            <figcaption className="mt-3 font-mono text-meta tracking-[0.12em] text-ash-2 uppercase">A stand-in for the house’s sign. {creditLine(h.plate)}</figcaption>
           </figure>
         </div>
       </header>
@@ -80,7 +80,7 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
       <section aria-labelledby="members" className="border-t border-line px-5 py-20 md:px-8">
         <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[3fr_9fr]">
           <h2 id="members" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase md:pt-2">The family file</h2>
-          <ul role="list" className="grid gap-px bg-line">
+          <ul role="list" className="grid hairline">
             {h.members.map((m) => (
               <li key={m.name} className="bg-void py-6 md:px-6">
                 <SpoilerGate book={m.book} compact>
@@ -104,7 +104,7 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
         <section aria-labelledby="artifacts" className="border-t border-line px-5 py-20 md:px-8">
           <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[3fr_9fr]">
             <h2 id="artifacts" className="font-mono text-meta tracking-[0.18em] text-ash-2 uppercase md:pt-2">Archive artifacts</h2>
-            <ol className="grid gap-px bg-line sm:grid-cols-2">
+            <ol className="grid hairline sm:grid-cols-2">
               {h.artifacts.map((a, i) => (
                 <Spotlight as="li" tone="gold" key={a.title} className="bg-void p-6 md:p-8">
                   <p className="font-mono text-meta tracking-[0.2em] text-red uppercase">Item {String(i + 1).padStart(2, "0")}</p>

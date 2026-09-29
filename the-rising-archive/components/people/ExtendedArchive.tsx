@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export default function ExtendedArchive() {
   const { clearance } = useArchive();
   return (
-    <ul role="list" className="mx-auto grid max-w-[1400px] gap-px bg-line lg:grid-cols-2">
+    <ul role="list" className="mx-auto grid max-w-[1400px] hairline lg:grid-cols-2">
       {EXTENDED.map((p) => {
         const line = clearance >= p.lineBook ? p.line : p.lineEarly;
         return (

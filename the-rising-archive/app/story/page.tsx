@@ -64,7 +64,7 @@ export default function StoryPage() {
       </section>
 
       <section aria-label="More of the story" className="px-5 py-24 md:px-8">
-        <div className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
+        <div className="mx-auto grid max-w-[1400px] hairline md:grid-cols-2">
           <Link href="/story/timeline/" className="group bg-void p-10 wash-card">
             <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Timeline</span>
             <span className="mt-3 block max-w-[40ch] text-ash">

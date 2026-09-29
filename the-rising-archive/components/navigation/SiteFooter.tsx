@@ -3,8 +3,7 @@ import Link from "next/link";
 export default function SiteFooter() {
   return (
     <footer className="relative z-10 border-t border-line bg-void/40">
-      {/* pb leaves room for the fixed sealed-passages notice */}
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pt-16 pb-28 md:grid-cols-[2fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pt-16 pb-16 md:grid-cols-[2fr_1fr_1fr] md:px-8">
         <div>
           <p className="font-display text-3xl font-bold tracking-tight uppercase">The Red Rising Archive</p>
           <p className="mt-4 max-w-[52ch] text-sm text-ash">

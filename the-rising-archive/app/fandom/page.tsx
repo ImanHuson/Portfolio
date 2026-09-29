@@ -61,7 +61,7 @@ export default function FandomPage() {
             <h2 id="args" className="font-display text-h2 leading-none font-bold uppercase">The great arguments</h2>
             <Stamp kind="argued" />
           </div>
-          <ol role="list" className="mt-10 grid gap-px bg-line md:grid-cols-2">
+          <ol role="list" className="mt-10 grid hairline md:grid-cols-2">
             {ARGUMENTS.map((a, i) => (
               <Reveal as="li" cell key={a.q} delay={(i % 2) * 0.05} className="bg-void">
                 <Spotlight tone="red" className="h-full p-7 md:p-10">
@@ -110,7 +110,7 @@ export default function FandomPage() {
           <p className="mt-5 max-w-[60ch] text-ash">
             The names readers keep returning to in discussion threads. Not a ranking: no formal poll was found, so this is a chorus, and the loudest voices are argued about as much as they are loved.
           </p>
-          <ul role="list" className="mt-12 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <ul role="list" className="mt-12 grid hairline sm:grid-cols-2 lg:grid-cols-4">
             {CHORUS.map((c) => (
               <Spotlight as="li" tone="red" key={c.name} className="bg-void p-7">
                 <SpoilerGate book={c.book} compact>

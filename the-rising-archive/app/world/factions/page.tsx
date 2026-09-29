@@ -71,7 +71,7 @@ export default function FactionsPage() {
           <p className="mt-5 max-w-[56ch] text-lede text-ash">
             Twelve seats. The Society’s champions, each with an armour, a title and a reputation. Ten of the twelve titles are named here, plus a disputed thirteenth. Where the archive couldn’t confirm a detail, it says so.
           </p>
-          <ul role="list" className="mt-12 grid gap-px bg-line md:grid-cols-2 lg:grid-cols-3">
+          <ul role="list" className="mt-12 grid hairline md:grid-cols-2 lg:grid-cols-3">
             {KNIGHTS.map((k) => (
               <Spotlight as="li" tone="gold" key={k.title} className="flex flex-col gap-4 bg-void p-7">
                 <div className="flex items-start justify-between gap-4">

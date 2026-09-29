@@ -65,7 +65,7 @@ export default async function IdeaPage({ params }: PageProps<"/ideas/[slug]">) {
             </div>
           )}
           {idea.pairs && (
-            <ul role="list" className="mt-8 grid gap-px bg-line">
+            <ul role="list" className="mt-8 grid hairline">
               {idea.pairs.map((p) => (
                 <li key={p.a + p.b} className="bg-void py-6">
                   <SpoilerGate book={p.book} compact>

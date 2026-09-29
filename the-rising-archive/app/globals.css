@@ -25,8 +25,8 @@
   --line-strong: #3a3a45;
 
   --bone: #e9e4da;
-  --ash: #938f88;
-  --ash-2: #6b6862;
+  --ash: #a39f97;
+  --ash-2: #8a867f;
 
   --red: #c41e2a;
   --red-deep: #7a0f17;
@@ -131,7 +131,7 @@
 
   /* type scale: editorial, dramatic at the top, calm in the body */
   --text-eyebrow: 0.6875rem;
-  --text-meta: 0.75rem;
+  --text-meta: 0.8125rem;
   --text-body: 1.0625rem;
   --text-lede: clamp(1.2rem, 1.1rem + 0.6vw, 1.5rem);
   --text-h3: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
@@ -284,6 +284,20 @@ nav[aria-label="Breadcrumb"] a {
   .gold-foil { background: none; color: CanvasText; }
 }
 
+/* Hairline grids: cells separated by 1px lines. Each cell draws its own
+   ring into the gap, instead of the grid painting its whole background in
+   the line colour, which showed as a solid slate block wherever a row
+   wasn't full (and through the gap while a cell moved). Empty cells now
+   show the page. */
+@layer components {
+  .hairline {
+    gap: 1px;
+  }
+  .hairline > * {
+    box-shadow: 0 0 0 1px var(--line);
+  }
+}
+
 @layer components {
 .wash-card {
   --w-rest: rgba(122, 15, 23, 0.42);
@@ -374,6 +388,13 @@ nav[aria-label="Breadcrumb"] a {
     transition-duration: 150ms;
   }
 }
+}
+
+/* Pure red is 3.4:1 on the page, fine for display type but not for small
+   labels. Small red text takes a lighter red (5:1 on the page, 4.5:1 in
+   the burgundy corners); large red type keeps the true accent. */
+:is(.text-meta, .text-sm, .text-xs).text-red {
+  color: #e0474f;
 }
 
 /* Pure red is 3.2:1 on the burgundy wash; this lighter red is 5.2:1 on

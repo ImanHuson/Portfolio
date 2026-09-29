@@ -74,7 +74,7 @@ export default async function BookPage({ params }: PageProps<"/story/books/[slug
           </div>
           <figure className="mx-auto w-full max-w-[360px] md:mx-0 md:justify-self-end">
             <Plate src={coverSrc(book.slug)} alt={`Cover of ${book.title} by Pierce Brown.`} width={900} height={1350} priority className="border border-line" sizes="(min-width: 768px) 30vw, 80vw" />
-            <figcaption className="mt-3 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">{COVER_CREDIT}</figcaption>
+            <figcaption className="mt-3 font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">{COVER_CREDIT}</figcaption>
           </figure>
         </div>
       </header>
@@ -137,7 +137,7 @@ export default async function BookPage({ params }: PageProps<"/story/books/[slug
           <div>
             <h2 className="font-display text-2xl font-bold uppercase">Key memories</h2>
             <SpoilerGate book={book.n} compact className="mt-6">
-              <ul className="mt-6 grid grid-cols-2 gap-px bg-line" role="list">
+              <ul className="mt-6 grid grid-cols-2 hairline" role="list">
                 {book.memories.map((m) => (
                   <li key={m} className="bg-void px-4 py-3 text-sm text-ash">
                     {m}

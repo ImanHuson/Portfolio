@@ -115,7 +115,7 @@ export default function TenFaces() {
           )}
         </div>
       </div>
-      <div className="mx-auto mt-10 grid max-w-[1400px] gap-px bg-line md:grid-cols-4">
+      <div className="mx-auto mt-10 grid max-w-[1400px] hairline md:grid-cols-4">
         {PEOPLE.map((p) => (
           <FaceCard key={p.slug} person={p} lens={lens} lensesLocked={locked} className={SPAN[p.slug]} />
         ))}

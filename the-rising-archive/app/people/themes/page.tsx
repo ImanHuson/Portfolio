@@ -47,7 +47,7 @@ export default function ThemesPage() {
           <p className="mt-6 max-w-[58ch] text-lede text-ash">
             Five groupings drawn by this archive. A person can stand in more than one. Lorn is both a Reaper’s teacher and a Knight.
           </p>
-          <ul role="list" className="mt-12 grid gap-px bg-line md:grid-cols-2 xl:grid-cols-3">
+          <ul role="list" className="mt-12 grid hairline md:grid-cols-2 xl:grid-cols-3">
             {CIRCLES.map((c) => (
               <li key={c.name} className="bg-void">
                 <div data-wash={c.name === "The Sovereigns" ? "gold" : "red"} className="wash-card h-full p-8">

@@ -50,7 +50,7 @@ function Special({ person }: { person: Person }) {
           <h2 className="font-display text-h3 font-bold uppercase">The same man, two columns</h2>
           <p className="mt-3 max-w-[56ch] text-ash">The archive does not tell you which column is true. Let the contradiction breathe.</p>
           <SpoilerGate book={4} className="mt-10">
-            <div className="mt-10 grid gap-px bg-line md:grid-cols-2">
+            <div className="mt-10 grid hairline md:grid-cols-2">
               <Spotlight tone="gold" lift={false} className="bg-void p-8">
                 <p className="font-mono text-meta tracking-[0.18em] text-gold uppercase">What Lysander believes</p>
                 <ul className="mt-6 space-y-3 font-serif text-3xl" role="list">
@@ -140,7 +140,7 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
             <span aria-hidden className={cn("h-px w-12", RULE_CLASS[person.register])} />
             <p className={cn("font-serif text-h3 italic", ACCENT_CLASS[person.register])}><PersonName person={person} part="epithet" /></p>
             {person.epithetSource === "archive" && (
-              <span className="border border-line-strong px-1.5 py-0.5 font-mono text-[0.65rem] tracking-[0.18em] text-ash-2 uppercase">The archive’s name, not the books’</span>
+              <span className="border border-line-strong px-1.5 py-0.5 font-mono text-meta tracking-[0.18em] text-ash-2 uppercase">The archive’s name, not the books’</span>
             )}
           </div>
           <dl className="mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
@@ -237,7 +237,7 @@ export default async function DossierPage({ params }: PageProps<"/people/[slug]"
         <section aria-label="Core relationships" className="border-t border-line px-5 py-20 md:px-8">
           <div className="mx-auto max-w-[1400px]">
             <h2 className="font-display text-h3 font-bold uppercase">Core relationships</h2>
-            <ul className="mt-8 grid gap-px bg-line md:grid-cols-4" role="list">
+            <ul className="mt-8 grid hairline md:grid-cols-4" role="list">
               {person.bonds.map((b) => (
                 <Spotlight as="li" tone="red" key={b.name} className="bg-void p-6">
                   <p className="font-display text-2xl font-bold uppercase">{b.name}</p>
