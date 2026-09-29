@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Plate from "@/components/archive/Plate";
+import { altFor, creditLine } from "@/lib/data/credits";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import { PLACES } from "@/lib/data/places";
 import { cssEase } from "@/lib/animation/tokens";
@@ -74,7 +75,8 @@ export default function SolarMap() {
             exit={reduce ? undefined : { opacity: 0, y: -8 }}
             transition={{ duration: 0.32, ease: cssEase.out }}
           >
-            <Plate src={place.plate} alt={`${place.name}, rendered for this archive.`} className="border border-line" />
+            <Plate src={place.plate} alt={altFor(place.plate, place.name)} className="border border-line" />
+            <p className="mt-2 font-mono text-[0.7rem] tracking-[0.12em] text-ash-2 uppercase">As it looks today. {creditLine(place.plate)}</p>
             <h2 className="mt-6 font-display text-h2 leading-none font-bold uppercase">{place.name}</h2>
             <div className="mt-5 space-y-4">
               {place.lines.map((l) => (

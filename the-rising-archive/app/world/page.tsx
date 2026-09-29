@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 };
 
 const PARTS = [
-  { href: "/world/colors/", title: "Fourteen Colors", body: "A caste tower. Start at the bottom and climb.", plate: "/images/places/mars.webp", alt: "Mars, half in shadow.", span: "md:col-span-4 md:row-span-2" },
-  { href: "/world/houses/", title: "Houses", body: "Five Gold dynasties, opened as sealed dossiers.", plate: "/images/houses/augustus.webp", alt: "The Augustus seal.", span: "md:col-span-2" },
-  { href: "/world/factions/", title: "Factions", body: "The Society, the Sons of Ares, the Howlers, the Knights.", plate: "/images/rising/myth.webp", alt: "A masked idol over a crowd.", span: "md:col-span-2" },
-  { href: "/world/places/", title: "Places", body: "A map of the Solar System’s grievances.", plate: "/images/places/io.webp", alt: "Io in front of Jupiter.", span: "md:col-span-3" },
+  { href: "/world/colors/", title: "Fourteen Colors", body: "A caste tower. Start at the bottom and climb.", plate: "/images/places/mars.webp", alt: "Mars.", span: "md:col-span-4 md:row-span-2" },
+  { href: "/world/houses/", title: "Houses", body: "Five Gold dynasties, opened as sealed dossiers.", plate: "/images/houses/augustus.webp", alt: "A marble lion, the Augustus sign.", span: "md:col-span-2" },
+  { href: "/world/factions/", title: "Factions", body: "The Society, the Sons of Ares, the Howlers, the Knights.", plate: "/images/rising/war.webp", alt: "The Battle of Vercellae: cavalry in the crush of a battle.", span: "md:col-span-2" },
+  { href: "/world/places/", title: "Places", body: "A map of the Solar System’s grievances.", plate: "/images/places/io.webp", alt: "Io.", span: "md:col-span-3" },
   { href: "/world/vault/", title: "The Vault", body: "Razors, StarShells, dreadnoughts and worse.", plate: "/images/vault/dreadnought.webp", alt: "A dreadnought above Mars.", span: "md:col-span-3" },
 ];
 

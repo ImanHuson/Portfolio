@@ -28,7 +28,7 @@ export default function SonsOfAresPage() {
             </p>
           </div>
           <figure>
-            <Plate src="/images/rising/movement.webp" alt="A cavern full of small red lamps: a movement, before it had a name." width={1600} height={900} className="border border-line" />
+            <Plate src="/images/renders/rising/movement.webp" alt="A cavern full of small red lamps: a movement, before it had a name." width={1600} height={900} className="border border-line" />
             <figcaption className="mt-3 font-mono text-meta tracking-[0.16em] text-ash-2 uppercase">Archive plate. Not the comic’s art.</figcaption>
           </figure>
         </div>

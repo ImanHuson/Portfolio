@@ -14,7 +14,7 @@ const STAGES = [
   {
     word: "A movement",
     plate: "/images/rising/movement.webp",
-    alt: "A cavern full of small red lamps.",
+    alt: "Washington Crossing the Delaware: a boat of rebels crossing a frozen river.",
     book: 1,
     lines: [
       "It starts before Darrow. A Gold named Fitchner au Barca loves a Red woman, Bryn of Cryssos. The Society executes her for it. He answers by building the Sons of Ares.",
@@ -24,7 +24,7 @@ const STAGES = [
   {
     word: "A war",
     plate: "/images/rising/war.webp",
-    alt: "Streaks of light falling onto Mars: the Iron Rain.",
+    alt: "The Battle of Vercellae: cavalry in the crush of a battle.",
     book: 2,
     lines: [
       "A duel at a gala on Luna is built to split the Golds against each other, and it does. Then soldiers fall on Mars from orbit in the Iron Rain.",
@@ -34,7 +34,7 @@ const STAGES = [
   {
     word: "A myth",
     plate: "/images/rising/myth.webp",
-    alt: "A masked idol looming over a crowd in red light.",
+    alt: "The Harvesters: reapers with scythes in a golden field.",
     book: 3,
     lines: [
       "The Reaper. The Morning Star. A name bigger than the man, carried by Obsidians who were bred to be weapons and chose freedom instead.",
@@ -44,7 +44,7 @@ const STAGES = [
   {
     word: "A government",
     plate: "/images/rising/government.webp",
-    alt: "An empty senate hemicycle under a single light.",
+    alt: "The Death of Socrates: a state executes its own philosopher.",
     book: 3,
     lines: [
       "November 743 PCE: Luna falls. The Solar Republic is founded, with Virginia au Augustus as Sovereign.",

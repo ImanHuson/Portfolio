@@ -41,7 +41,7 @@ export type ExtendedPerson = {
   role: string;
   categories: string[];
   register: Register; // typographic voice for the name
-  wash: "red" | "gold" | "rim" | "blue" | "apollonius";
+  wash: "red" | "gold" | "rim" | "apollonius";
   mood: Mood;
   firstBook: number;
   /** The personal archive line, safe at `lineBook`; `lineEarly` before it. */
@@ -161,7 +161,7 @@ export const EXTENDED: ExtendedPerson[] = [
     role: "Ex-legionnaire, freelancer",
     categories: ["Trauma", "Redemption", "Found family"],
     register: "none",
-    wash: "rim",
+    wash: "red",
     mood: "smoke",
     firstBook: 4,
     line: "A man who stopped believing in anything, and then found people worth believing in.",
@@ -410,7 +410,7 @@ export const EXTENDED: ExtendedPerson[] = [
     role: "Captain, admiral, Imperator",
     categories: ["Merit", "Leadership", "Freedom"],
     register: "rim",
-    wash: "blue",
+    wash: "red",
     mood: "nav",
     firstBook: 2,
     line: "She did not inherit command. She earned it.",

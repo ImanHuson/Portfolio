@@ -3,6 +3,7 @@ import Link from "next/link";
 import CardWash from "@/components/archive/CardWash";
 import { notFound } from "next/navigation";
 import Plate from "@/components/archive/Plate";
+import FramedPortrait from "@/components/archive/FramedPortrait";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Stamp from "@/components/archive/Stamp";
@@ -41,7 +42,11 @@ export default async function IdeaPage({ params }: PageProps<"/ideas/[slug]">) {
             <h1 className="mt-6 font-display text-colossal leading-[0.8] font-extrabold tracking-tight uppercase">{idea.name}</h1>
             <p className="mt-8 max-w-[30ch] font-serif text-h2 leading-tight text-bone italic">{idea.question}</p>
           </div>
-          <Plate src={idea.plate} alt={idea.plateAlt} priority className="border border-line" sizes="(min-width: 768px) 33vw, 100vw" />
+          {idea.portrait ? (
+            <FramedPortrait slug={idea.portrait.slug} name={idea.portrait.name} size="hero" priority sizes="(min-width: 768px) 30vw, 80vw" />
+          ) : (
+            <Plate src={idea.plate} alt={idea.plateAlt} width={idea.plateW ?? 900} height={idea.plateH ?? 900} priority className="border border-line" sizes="(min-width: 768px) 33vw, 100vw" />
+          )}
         </div>
       </header>
 

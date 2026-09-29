@@ -6,8 +6,9 @@ const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /** An archive plate: one of the rendered images in /public/images. Every
  * plate was generated for this site (three.js renders and code-drawn
- * posters), except the book covers in /images/covers, which are the
- * publisher's and are shown credited. */
+ * posters), except the book covers in /images/covers (the publisher's),
+ * the portraits (credited fan art) and the public-domain images listed in
+ * lib/data/credits.ts. */
 export default function Plate({
   src,
   alt,

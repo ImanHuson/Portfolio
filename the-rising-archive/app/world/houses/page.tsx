@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/typography/PageHeader";
 import Plate from "@/components/archive/Plate";
+import { altFor } from "@/lib/data/credits";
 import Reveal from "@/components/archive/Reveal";
 import { HOUSES } from "@/lib/data/houses";
 import { cn } from "@/lib/utils";
@@ -31,7 +32,7 @@ export default function HousesPage() {
                 <div className="overflow-hidden">
                   <Plate
                     src={h.plate}
-                    alt={`The ${h.name} seal, rendered for this archive.`}
+                    alt={altFor(h.plate, `The ${h.name} seal.`)}
                     className="aspect-square object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     sizes={i < 2 ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 33vw, 100vw"}
                   />

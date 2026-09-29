@@ -6,6 +6,10 @@ export type Idea = {
   question: string;
   plate: string;
   plateAlt: string;
+  plateW?: number;
+  plateH?: number;
+  /** Show this character's framed portrait instead of the plate. */
+  portrait?: { slug: string; name: string };
   lines: { text: string; book: number }[];
   pairs?: { a: string; b: string; note: string; book: number }[];
 };
@@ -16,7 +20,7 @@ export const IDEAS: Idea[] = [
     name: "Freedom",
     question: "What happens when people who have been oppressed finally receive power?",
     plate: "/images/rising/movement.webp",
-    plateAlt: "A cavern full of small red lamps, stretching into the dark.",
+    plateAlt: "Washington Crossing the Delaware: a boat of rebels crossing a frozen river.",
     lines: [
       { text: "It starts with Eo, who asks Darrow to live for more than survival, and pays for the asking.", book: 1 },
       { text: "The first trilogy is about getting free. The second is about what freedom is worth to a Red girl in a refugee camp ten years later. Lyria’s chapters in Iron Gold ask the question the Rising didn’t have time to.", book: 4 },
@@ -27,7 +31,7 @@ export const IDEAS: Idea[] = [
     name: "Power",
     question: "Is power inherently corrupting? Or does it simply reveal what people were already willing to do?",
     plate: "/images/houses/augustus.webp",
-    plateAlt: "The Augustus seal: a gold sunburst lion on red.",
+    plateAlt: "A marble lion, crouched to spring: the Augustus sign.",
     lines: [
       { text: "The archive’s answer is the Ten Faces: ten people, and ten different things power became in their hands.", book: 0 },
       { text: "Darrow wins a war by becoming the Reaper. The books that follow ask what the Reaper costs the man.", book: 3 },
@@ -38,7 +42,7 @@ export const IDEAS: Idea[] = [
     name: "Revolution",
     question: "When does liberation become government? And when does government become another hierarchy?",
     plate: "/images/rising/government.webp",
-    plateAlt: "An empty senate hemicycle under a single light.",
+    plateAlt: "The Death of Socrates: a state executes its own philosopher.",
     lines: [
       { text: "The Rising wins. That is where the hard part starts.", book: 3 },
       { text: "The Republic keeps the Senate, the fleets and the broadcasts. It has to decide how much else of the old world to keep, and every choice is someone else’s betrayal.", book: 4 },
@@ -50,6 +54,7 @@ export const IDEAS: Idea[] = [
     question: "Four people. Four completely different relationships with the same word.",
     plate: "/images/people/cassius.webp",
     plateAlt: "A broken razor beside an untouched glass of wine.",
+    portrait: { slug: "cassius", name: "Cassius au Bellona" },
     lines: [],
     pairs: [
       { a: "Cassius", b: "Honour as inheritance", note: "The thing he was raised on, and has to relearn after it is used against him.", book: 1 },
@@ -62,8 +67,10 @@ export const IDEAS: Idea[] = [
     slug: "legacy",
     name: "Legacy",
     question: "Every generation inherits a different version of the same conflict.",
-    plate: "/images/books/light-bringer.webp",
-    plateAlt: "Book plate: light radiating from a single point.",
+    plate: "/images/covers/light-bringer.webp",
+    plateAlt: "The cover of Light Bringer.",
+    plateW: 900,
+    plateH: 1350,
     lines: [],
     pairs: [
       { a: "Eo", b: "A dream", note: "That a life could be more than labour.", book: 1 },
@@ -79,6 +86,7 @@ export const IDEAS: Idea[] = [
     question: "The saga is quietly obsessed with what parents leave behind.",
     plate: "/images/people/pax.webp",
     plateAlt: "A hoverbike built from salvage, glowing blue underneath.",
+    portrait: { slug: "pax", name: "Pax" },
     lines: [],
     pairs: [
       { a: "Fitchner", b: "Sevro", note: "A father his son thought didn’t care.", book: 1 },

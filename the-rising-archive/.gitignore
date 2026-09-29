@@ -45,3 +45,6 @@ next-env.d.ts
 
 # raw fan-art sources (scripts/art/portraits.py); only the treated WebP ships
 /portraits-src/
+
+# raw public-domain downloads (scripts/art/sourced.py)
+/sourced-src/

@@ -6,6 +6,7 @@ import FramedPortrait from "@/components/archive/FramedPortrait";
 import { getExtended } from "@/lib/data/extended";
 import { getPerson, safeAs } from "@/lib/data/people";
 import { PORTRAITS, portraitCredit } from "@/lib/data/portraits";
+import { CREDITS } from "@/lib/data/credits";
 
 const portraitName = (slug: string) => {
   const p = getPerson(slug);
@@ -33,15 +34,15 @@ const GROUPS: { title: string; note: string; items: { src: string; alt: string; 
   {
     title: "The Rising",
     note: "A movement, a war, a myth, a government.",
-    items: ["movement", "war", "myth", "government"].map((s) => ({ src: `/images/rising/${s}.webp`, alt: `The Rising: ${s}.`, w: 1600, h: 900 })),
+    items: ["movement", "war", "myth", "government"].map((s) => ({ src: `/images/renders/rising/${s}.webp`, alt: `The Rising: ${s}.`, w: 1600, h: 900 })),
   },
   {
     title: "Worlds, seals and machines",
     note: "Planets, house seals, and the Artifact Vault.",
     items: [
-      ...["mars", "luna", "earth", "mercury", "venus", "io"].map((s) => ({ src: `/images/places/${s}.webp`, alt: `${s}, rendered.` })),
-      ...["augustus", "bellona", "lune", "telemanus", "raa"].map((s) => ({ src: `/images/houses/${s}.webp`, alt: `The ${s} seal.` })),
-      ...["razor", "starshell", "dreadnought", "starship", "minds-eye", "carving", "psychospike", "holotech"].map((s) => ({ src: `/images/vault/${s}.webp`, alt: `${s.replace(/-/g, " ")}, from the Vault.` })),
+      ...["mars", "luna", "earth", "mercury", "venus", "io"].map((s) => ({ src: `/images/renders/places/${s}.webp`, alt: `${s}, rendered.` })),
+      ...["augustus", "bellona", "lune", "telemanus", "raa"].map((s) => ({ src: `/images/renders/houses/${s}.webp`, alt: `The ${s} seal.` })),
+      ...["razor", "starshell", "dreadnought", "starship", "minds-eye", "carving", "psychospike", "holotech"].map((s) => ({ src: `/images/renders/vault/${s}.webp`, alt: `${s.replace(/-/g, " ")}, from the Vault.` })),
     ],
   },
 ];
@@ -52,7 +53,7 @@ export default function FanArtPage() {
       <PageHeader
         trail={[{ href: "/", label: "Archive" }, { href: "/fandom/", label: "The Fandom" }, { href: "/fandom/fan-art/", label: "Fan art" }]}
         title="The archive’s plates"
-        lede="The character portraits are the fandom’s work, credited to the artists below. Everything else here is the archive’s own: three.js scenes rendered headlessly, and posters drawn in code."
+        lede="The character portraits are the fandom’s work, credited to the artists below. The renders further down are the archive’s own: three.js scenes and posters drawn in code. Where a real, public-domain image came closer, the site uses it instead; those are listed at the end."
       >
         <p className="mt-6 max-w-[56ch] text-sm text-ash-2">
           For the fandom’s real artists, go where they post:{" "}
@@ -98,6 +99,24 @@ export default function FanArtPage() {
           </div>
         </section>
       ))}
+      <section aria-labelledby="sources-title" className="border-t border-line px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 id="sources-title" className="font-display text-h3 font-bold uppercase">Real images used on the site</h2>
+          <p className="mt-2 max-w-[70ch] text-ash">
+            Where a real object, painting or photograph came close to what the books describe, it replaced the archive’s render. All are public domain: The Met’s Open Access collection and NASA.
+          </p>
+          <ul role="list" className="mt-8 grid gap-x-10 gap-y-3 md:grid-cols-2">
+            {Object.entries(CREDITS).map(([src, c]) => (
+              <li key={src} className="border-b border-line pb-3 text-sm">
+                <a href={c.url} target="_blank" rel="noopener noreferrer" className="inline-block py-1 text-bone underline decoration-line-strong underline-offset-4 hover:text-red">
+                  {c.title}
+                </a>
+                <span className="text-ash">. {c.by}. {c.source}.</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </>
   );
 }

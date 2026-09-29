@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils";
 import Spotlight from "@/components/archive/Spotlight";
 
 const BRANCHES = [
-  { href: "/story/", title: "The Story", body: "Six books as six chapters in the history of a civilization, and the timeline they sit on.", cta: "Open the story", plate: "/images/books/shelf.webp", w: 1600, h: 900, span: "md:col-span-4 md:row-span-2 md:min-h-[34rem]" },
-  { href: "/people/", title: "The People", body: "Ten faces of power, their dossiers, and what the war took from each of them.", cta: "Open the dossiers", plate: "/images/people/darrow.webp", w: 900, h: 900, span: "md:col-span-2 md:row-span-2" },
+  { href: "/story/", title: "The Story", body: "Six books as six chapters in the history of a civilization, and the timeline they sit on.", cta: "Open the story", plate: "/images/covers/shelf.webp", w: 1600, h: 900, span: "md:col-span-4 md:row-span-2 md:min-h-[34rem]" },
+  { href: "/people/", title: "The People", body: "Ten faces of power, their dossiers, and what the war took from each of them.", cta: "Open the dossiers", plate: "/images/portraits/darrow.webp", w: 960, h: 1200, span: "md:col-span-2 md:row-span-2" },
   { href: "/world/", title: "The World", body: "Fourteen Colors, five houses, the factions, the planets, the machines.", cta: "Enter the world", plate: "/images/places/mars.webp", w: 900, h: 900, span: "md:col-span-2" },
   { href: "/ideas/", title: "The Ideas", body: "Six questions the saga won’t stop asking.", cta: "Ask them", plate: "/images/rising/movement.webp", w: 1600, h: 900, span: "md:col-span-2" },
-  { href: "/fandom/", title: "The Fandom", body: "The arguments, the quotes, the chorus.", cta: "Join the argument", plate: "/images/people/virginia.webp", w: 900, h: 900, span: "md:col-span-2" },
+  { href: "/fandom/", title: "The Fandom", body: "The arguments, the quotes, the chorus.", cta: "Join the argument", plate: "/images/portraits/sevro.webp", w: 960, h: 1200, span: "md:col-span-2" },
   { href: "/author/", title: "The Author", body: "Pierce Brown, the man who built Mars.", cta: "Meet him", plate: "/images/covers/light-bringer.webp", w: 900, h: 1350, span: "md:col-span-3" },
   { href: "/sealed/", title: "The Sealed File", body: "VII. Red God. Status: incomplete.", cta: "Access denied", plate: null, w: 0, h: 0, span: "md:col-span-3" },
 ];

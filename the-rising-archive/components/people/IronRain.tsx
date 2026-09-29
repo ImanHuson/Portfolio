@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useId, useSyncExternalStore } from "react";
+import CardWash from "@/components/archive/CardWash";
 import FramedPortrait from "@/components/archive/FramedPortrait";
 import { useArchive } from "@/components/providers/ArchiveProvider";
 import { EXTENDED } from "@/lib/data/extended";
@@ -67,11 +68,13 @@ export default function IronRain() {
               return (
                 <label
                   key={f.slug}
+                  data-wash="red"
                   className={cn(
-                    "group relative flex cursor-pointer flex-col gap-3 bg-void p-4 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-red md:p-5",
-                    on ? "bg-red/15" : "hover:bg-void-3",
+                    "wash-card group relative flex cursor-pointer flex-col gap-3 bg-void p-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-red md:p-5",
+                    on && "outline-2 -outline-offset-2 outline-red",
                   )}
                 >
+                  <CardWash />
                   <input type="radio" name={name} value={f.slug} checked={on} onChange={() => pickStore.set(f.slug)} className="sr-only" />
                   <FramedPortrait
                     slug={f.slug}

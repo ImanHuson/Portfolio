@@ -3,6 +3,7 @@ import Link from "next/link";
 import CardWash from "@/components/archive/CardWash";
 import { notFound } from "next/navigation";
 import Plate from "@/components/archive/Plate";
+import { altFor, creditLine } from "@/lib/data/credits";
 import Reveal from "@/components/archive/Reveal";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import Spotlight from "@/components/archive/Spotlight";
@@ -69,7 +70,10 @@ export default async function HousePage({ params }: PageProps<"/world/houses/[sl
               </div>
             </dl>
           </div>
-          <Plate src={h.plate} alt={`The ${h.name} seal, rendered for this archive.`} priority className="border border-line" />
+          <figure>
+            <Plate src={h.plate} alt={altFor(h.plate, `The ${h.name} seal.`)} priority className="border border-line" />
+            <figcaption className="mt-3 font-mono text-[0.7rem] tracking-[0.12em] text-ash-2 uppercase">A stand-in for the house’s sign. {creditLine(h.plate)}</figcaption>
+          </figure>
         </div>
       </header>
 

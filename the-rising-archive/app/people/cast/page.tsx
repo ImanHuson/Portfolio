@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import CardWash from "@/components/archive/CardWash";
 import FramedPortrait from "@/components/archive/FramedPortrait";
 import SpoilerGate from "@/components/archive/SpoilerGate";
 import { PORTRAITS } from "@/lib/data/portraits";
@@ -61,7 +62,7 @@ export default function CastPage() {
               <h3 className="font-mono text-meta tracking-[0.2em] text-ash-2 uppercase">First met in {BOOK_TITLES[b]}</h3>
               <ul role="list" className="mt-6 grid gap-px bg-line md:grid-cols-2 xl:grid-cols-3">
                 {CAST.filter((c) => c.book === b).map((c) => (
-                  <li key={c.slug} id={c.slug} className="scroll-mt-28 bg-void p-6 md:p-7">
+                  <li key={c.slug} id={c.slug} data-wash="red" className="wash-card scroll-mt-28 bg-void p-6 md:p-7">
                     {PORTRAITS[c.slug] && <FramedPortrait slug={c.slug} name={c.name} size="card" className="mb-5 w-32" sizes="128px" />}
                     <p className="font-display text-2xl leading-tight font-bold uppercase">{c.name}</p>
                     <p className="mt-1 font-mono text-meta tracking-[0.16em] text-ash uppercase">{c.color}</p>
@@ -85,6 +86,7 @@ export default function CastPage() {
                         </p>
                       )}
                     </SpoilerGate>
+                    <CardWash />
                   </li>
                 ))}
               </ul>

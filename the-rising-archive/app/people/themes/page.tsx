@@ -50,7 +50,7 @@ export default function ThemesPage() {
           <ul role="list" className="mt-12 grid gap-px bg-line md:grid-cols-2 xl:grid-cols-3">
             {CIRCLES.map((c) => (
               <li key={c.name} className="bg-void">
-                <div data-wash={c.name === "The Survivors" ? "rim" : c.name === "The Sovereigns" ? "gold" : "red"} className="wash-card h-full p-8">
+                <div data-wash={c.name === "The Sovereigns" ? "gold" : "red"} className="wash-card h-full p-8">
                   <h3 className="font-display text-h3 leading-none font-bold uppercase">{c.name}</h3>
                   <p className="mt-2 font-mono text-meta tracking-[0.16em] text-ash uppercase">{c.theme}</p>
                   <p className="mt-5 max-w-[40ch] text-ash">{c.note}</p>
