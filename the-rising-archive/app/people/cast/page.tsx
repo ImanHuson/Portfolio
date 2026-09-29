@@ -74,7 +74,7 @@ export default function CastPage() {
                             .map((r, i) => (
                               <span key={r.href}>
                                 {i > 0 && ", "}
-                                <Link href={r.href} className="text-ash underline decoration-line-strong underline-offset-4 hover:text-bone">
+                                <Link href={r.href} className="inline-block py-1 text-ash underline decoration-line-strong underline-offset-4 hover:text-bone">
                                   {r.name}
                                 </Link>
                               </span>
