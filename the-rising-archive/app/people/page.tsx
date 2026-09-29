@@ -6,6 +6,8 @@ import TenFaces from "@/components/people/TenFaces";
 import ExtendedArchive from "@/components/people/ExtendedArchive";
 import PeopleNav from "@/components/people/PeopleNav";
 import TheyAreTheStory from "@/components/people/TheyAreTheStory";
+import IronRain from "@/components/people/IronRain";
+import SearchForm from "@/components/people/SearchForm";
 import { PEOPLE, safeAs } from "@/lib/data/people";
 
 export const metadata: Metadata = {
@@ -23,6 +25,7 @@ export default function PeoplePage() {
         lede="Not a ranking. Ten people, ten ideas of what power is for. Switch the lens to read all ten the same way, then open any dossier."
       />
       <PeopleNav />
+      <SearchForm />
       <section id="ten" aria-label="The ten" className="scroll-mt-24 px-5 pb-24 md:px-8">
         <TenFaces />
         <noscript>
@@ -50,19 +53,22 @@ export default function PeoplePage() {
         <ExtendedArchive />
       </section>
       <section aria-label="More of the people" className="px-5 pb-28 md:px-8">
-        <div className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2">
-          <Link href="/people/relationships/" className="group bg-void p-10 wash-card">
-            <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Constellation</span>
-            <span className="mt-3 block max-w-[40ch] text-ash">Darrow at the center. Every line opens into the story of one relationship.</span>
-            <CardWash />
-          </Link>
-          <Link data-wash="rim" href="/people/the-vale/" className="group bg-void p-10 wash-card">
-            <span className="font-display text-h3 font-bold uppercase group-hover:text-red">The Vale</span>
-            <span className="mt-3 block max-w-[40ch] text-ash">The dead, as memory rather than a body count.</span>
-            <CardWash />
-          </Link>
+        <div className="mx-auto grid max-w-[1400px] gap-px bg-line md:grid-cols-2 xl:grid-cols-4">
+          {[
+            { href: "/people/relationships/", title: "Relationships", body: "Darrow at the center, then the whole web of twenty. Every line is a sequence of events.", wash: "red" },
+            { href: "/people/themes/", title: "Themes", body: "Twelve ideas and five circles: how the archive reads the people it keeps.", wash: "gold" },
+            { href: "/people/cast/", title: "Complete cast", body: "Everyone around the twenty, in short sealed entries, and a search across all of it.", wash: "red" },
+            { href: "/people/the-vale/", title: "The Vale", body: "The dead, as memory rather than a body count.", wash: "rim" },
+          ].map((c) => (
+            <Link key={c.href} data-wash={c.wash} href={c.href} className="group wash-card bg-void p-10">
+              <span className="font-display text-h3 font-bold uppercase group-hover:text-red">{c.title}</span>
+              <span className="mt-3 block max-w-[40ch] text-ash">{c.body}</span>
+              <CardWash />
+            </Link>
+          ))}
         </div>
       </section>
+      <IronRain />
       <TheyAreTheStory />
     </>
   );
