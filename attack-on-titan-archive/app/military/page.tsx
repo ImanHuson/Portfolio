@@ -18,7 +18,8 @@ export default function Military() {
       <ChapterHeader
         id="The archive"
         title="The Military"
-        image="/images/heads/war.webp"
+        image={BG.rampart.src}
+        credit={BG.rampart.credit}
         imagePosition="50% 40%"
         lede="Three branches inside the Walls, the school that feeds them, and the army across the sea that trained children to break them."
       />

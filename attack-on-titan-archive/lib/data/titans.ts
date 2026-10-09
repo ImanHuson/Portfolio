@@ -8,7 +8,6 @@ export type Titan = {
   form: number; // form index in scripts/titans/render.html (x-ray plates, scale silhouettes)
   name: string;
   height: number; // metres
-  localHeight: number; // the render model's height in units, to size its silhouette in the scale strip
   trait: string; // one line, shown on hover
   abilities: string[];
   holders: { name: string; slug?: string }[];
@@ -35,7 +34,6 @@ export const TITANS: Titan[] = [
     form: 0,
     name: "Founding Titan",
     height: 13,
-    localHeight: 5.9,
     trait: "Command over every Titan, and over the minds of every Eldian.",
     abilities: [
       "Commands Pure Titans and the other Titan shifters.",
@@ -58,7 +56,6 @@ export const TITANS: Titan[] = [
     form: 1,
     name: "Attack Titan",
     height: 15,
-    localHeight: 6.1,
     trait: "It has always fought for freedom.",
     abilities: [
       "Its holders have always fought for freedom.",
@@ -77,7 +74,6 @@ export const TITANS: Titan[] = [
     form: 2,
     name: "Colossal Titan",
     height: 60,
-    localHeight: 6.2,
     trait: "Sixty metres tall, and a blast of heat when it forms.",
     abilities: ["Immense size: taller than the Walls.", "An explosive transformation and scalding steam."],
     holders: [{ name: "Bertholdt Hoover" }, { name: "Armin Arlert", slug: "armin" }],
@@ -93,7 +89,6 @@ export const TITANS: Titan[] = [
     form: 3,
     name: "Armored Titan",
     height: 15,
-    localHeight: 6.1,
     trait: "Hardened plates over the whole body.",
     abilities: ["Hardened armour plates that blades cannot cut."],
     holders: [{ name: "Reiner Braun", slug: "reiner" }],
@@ -109,7 +104,6 @@ export const TITANS: Titan[] = [
     form: 4,
     name: "Female Titan",
     height: 14,
-    localHeight: 6.05,
     trait: "A scream that calls the Pure Titans.",
     abilities: [
       "Can harden parts of its body at will.",
@@ -129,7 +123,6 @@ export const TITANS: Titan[] = [
     form: 5,
     name: "Beast Titan",
     height: 17,
-    localHeight: 5.4,
     trait: "Its shape follows its holder.",
     abilities: [
       "Takes an animal form that differs from holder to holder.",
@@ -149,7 +142,6 @@ export const TITANS: Titan[] = [
     form: 6,
     name: "Jaw Titan",
     height: 5,
-    localHeight: 4.6,
     trait: "Jaws and claws that bite through hardening.",
     abilities: ["The strongest jaws of the Nine, able to bite through hardened Titan flesh.", "Small, fast and agile."],
     holders: [{ name: "Marcel Galliard" }, { name: "Ymir", slug: "ymir" }, { name: "Porco Galliard" }, { name: "Falco Grice" }],
@@ -165,7 +157,6 @@ export const TITANS: Titan[] = [
     form: 7,
     name: "Cart Titan",
     height: 4,
-    localHeight: 3.4,
     trait: "It can stay transformed for months.",
     abilities: ["Extraordinary endurance: its holder has stayed transformed for about two months.", "Four-legged, and can carry equipment and armament."],
     holders: [{ name: "Pieck Finger" }],
@@ -180,7 +171,6 @@ export const TITANS: Titan[] = [
     form: 8,
     name: "War Hammer Titan",
     height: 15,
-    localHeight: 6.3,
     trait: "Weapons forged from its own hardened flesh.",
     abilities: [
       "Forms weapons and structures from hardened Titan flesh: a hammer, pikes, spikes.",

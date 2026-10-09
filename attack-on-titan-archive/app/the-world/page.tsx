@@ -82,7 +82,8 @@ export default function TheWorld() {
     <>
       <ChapterHeader
         id="AOT-06"
-        image="/images/heads/world.webp"
+        image={BG.sea.src}
+        credit={BG.sea.credit}
         imagePosition="50% 50%"
         title="The World"
         lede="Grisha's books said it plainly: the Walls were never the edge of the world. This is what lies past them, and what it calls the people inside."

@@ -65,7 +65,7 @@ export default function Timeline() {
         ref={track}
         tabIndex={0}
         aria-label="Timeline, from Ymir Fritz to the end"
-        data-lenis-prevent
+       
         onPointerDown={(e) => {
           if (e.pointerType !== "mouse" || !track.current) return;
           drag.current = { x: e.clientX, left: track.current.scrollLeft, moved: false };

@@ -5,6 +5,8 @@ import Sealed from "@/components/archive/Sealed";
 import XrayIntro from "@/components/titans/XrayIntro";
 import { asset } from "@/lib/utils";
 import { INHERITANCE, ORIGIN, STATUS, TITANS, getTitan } from "@/lib/data/titans";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 export const dynamicParams = false;
 
@@ -37,7 +39,8 @@ export default async function TitanFile({ params }: PageProps<"/titans/[slug]">)
   const next = TITANS[(i + 1) % TITANS.length];
 
   return (
-    <article className="px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
+    <article className="relative isolate px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
+      <SectionBackdrop src={BG.colossi.src} credit={BG.colossi.credit} position="50% 60%" strength={0.16} />
       <XrayIntro slug={t.slug} />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Breadcrumb">
