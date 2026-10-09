@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ACTS, type Chapter } from "@/lib/data/chapters";
+import { WAYS } from "@/lib/data/ways";
 import { asset, cn } from "@/lib/utils";
 
 function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
@@ -88,6 +89,28 @@ export default function ArchiveIndex() {
             </section>
           ))}
         </div>
+
+        <nav aria-labelledby="ways-title" className="mt-24 border-t border-line pt-10 md:mt-32">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] lg:gap-12">
+            <div>
+              <h3 id="ways-title" className="font-display text-h2 leading-none font-bold text-paper">Ways in</h3>
+              <p className="mt-4 max-w-[34ch] font-serif text-[1.1rem] leading-snug text-paper/70 italic">Or follow one thread across the whole story.</p>
+            </div>
+            <ul className="grid grid-cols-[minmax(0,1fr)] divide-y divide-line border-y border-line sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-3">
+              {WAYS.map((w) => (
+                <li key={w.href} className="sm:border-b sm:border-line">
+                  <Link href={w.href} className="group flex items-baseline justify-between gap-4 py-5 pr-2 transition-colors hover:bg-paper/[0.03] sm:px-4">
+                    <span>
+                      <span className="block font-military text-[1.3rem] font-semibold tracking-[0.1em] text-paper uppercase">{w.name}</span>
+                      <span className="mt-1 block text-ash transition-colors group-hover:text-paper/85">{w.line}</span>
+                    </span>
+                    <span aria-hidden className="text-paper/50 transition-[color,transform] duration-200 ease-[var(--ease-out)] group-hover:text-paper motion-safe:[@media(hover:hover)]:group-hover:translate-x-1">&rarr;</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
       </div>
     </section>
   );

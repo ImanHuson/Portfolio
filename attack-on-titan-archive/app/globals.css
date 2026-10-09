@@ -383,3 +383,15 @@ summary:active > .press {
 @media (prefers-reduced-motion: reduce) {
   .read-progress { animation-duration: auto !important; }
 }
+
+/* The timeline's sideways progress (a named scroll timeline on the track). */
+.timeline-progress { transform: scaleX(0); }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 768px) {
+    .timeline-track { scroll-timeline: --tl x; }
+    .timeline-progress { animation: read-grow linear both; animation-timeline: --tl; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline-progress { animation-duration: auto !important; }
+}

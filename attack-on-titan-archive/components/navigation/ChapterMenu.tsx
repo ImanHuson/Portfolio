@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ACTS, chapterFor } from "@/lib/data/chapters";
+import { WAYS } from "@/lib/data/ways";
 import { cn } from "@/lib/utils";
 
 /**
@@ -82,6 +83,23 @@ export default function ChapterMenu() {
               </ol>
             </div>
           ))}
+        </nav>
+        <nav aria-label="Ways in" className="mx-auto mt-10 max-w-[1400px] border-t border-line pt-6">
+          <p className="font-military text-[0.95rem] font-semibold tracking-[0.14em] text-ash uppercase">Or go in by theme</p>
+          <ul className="mt-3 grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:grid-cols-6">
+            {WAYS.map((w) => (
+              <li key={w.href}>
+                <Link
+                  href={w.href}
+                  aria-current={pathname === w.href || pathname === w.href.slice(0, -1) ? "page" : undefined}
+                  className="group/way block border-l-2 border-transparent py-2 pl-3 transition-colors hover:border-paper/40 aria-[current=page]:border-alert"
+                >
+                  <span className="block font-military text-[1.05rem] font-semibold tracking-[0.1em] text-paper/85 uppercase group-hover/way:text-paper">{w.name}</span>
+                  <span className="block text-[0.85rem] leading-snug text-ash">{w.line}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
         <p className="mx-auto mt-8 max-w-[1400px] text-[0.9rem] text-ash">Everything past The Wall spoils the story. The last three files ask before they open.</p>
       </div>
