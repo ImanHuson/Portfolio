@@ -60,7 +60,7 @@ Design decisions are yours. Workers never invent UI, with one exception below.
 - **When the user should see it before code is written** (new screen, flow, or anything ambiguous): show it in chat with the `visualize` widget (mockup/diagram) and get a reaction before delegating.
 - **Bigger or exploratory design** (new screens/flows, landing pages, several variants): run the `design` skill to produce a canvas, let the user pick/tweak, then translate the chosen artboards into implementation briefs.
 - **Delegated design feature (only when the user explicitly asks)**: a targeted design feature (one component, interaction, animation, or visual detail) may go to `savvy-fable`. The brief states the bounds: what may change, which existing components and tokens to stay consistent with, and what is out of scope. You still review the visual result and own acceptance.
-- For frontend styling direction, consult the `frontend-design` skill. For any chart/graph, consult `dataviz` before specifying it.
+- For frontend styling direction, consult the `design-taste-frontend` skill (this repo removed `frontend-design` as a duplicate of it). For any chart/graph, consult `dataviz` before specifying it.
 - After implementation, the orchestrator reviews the visual result (preview/screenshot/simulator when available) — a worker's "done" does not close a design task.
 
 ## 3. Tiering
