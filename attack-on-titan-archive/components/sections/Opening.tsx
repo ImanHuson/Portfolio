@@ -5,27 +5,20 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { reducedMotionStore } from "@/lib/animation/tokens";
-import { FRAMES, GEN_CREDIT, HERO, heroReady, type Scene } from "@/lib/data/backgrounds";
-import DepthImage from "@/components/archive/DepthImage";
+import { BG, FRAMES, FRAME_CREDIT } from "@/lib/data/backgrounds";
 import { sound } from "@/lib/audio/engine";
 import { asset } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /*
- * The opening, as a short film cut from the archive's paintings: the Wall
- * from above, the plain from the top of the Wall, a lightning flash, then the
- * Colossal Titan over the Wall. The first two are drawn in depth (DepthImage):
- * the scroll moves a camera through them, not just across them. Everything
- * else is a transform or an opacity, scrubbed by scroll. Facts in the lines
- * are the verified ones: Walls 50 m, the Colossal Titan 60 m, the outer gate
- * kicked in.
+ * The opening, as a short film cut from real images rather than a rendered
+ * scene, all anime frames: Shiganshina from above, the district seen from the
+ * top of Wall Maria, a lightning flash, then the Colossal Titan over the Wall. Every move is a transform or an
+ * opacity on a few images, scrubbed by scroll, so it runs on the compositor
+ * and never drops a frame to the main thread. Facts in the lines are the
+ * verified ones: Walls 50 m, the Colossal Titan 60 m, the outer gate kicked in.
  */
-
-const COLOSSAL: Scene = heroReady("colossal")
-  ? HERO.colossal
-  : { src: FRAMES.colossal, credit: "The user's frame: Attack on Titan (anime), © Hajime Isayama, Kodansha / Attack on Titan Production Committee" };
-const COLOSSAL_ALT = "The Colossal Titan's face over the top of the Wall, steam pouring off it.";
 
 const PLACE = ["845", "Shiganshina District", "Wall Maria"];
 
@@ -67,8 +60,8 @@ function StaticOpening() {
   return (
     <section aria-labelledby="opening-title" className="relative flex min-h-[100dvh] items-end overflow-hidden px-4 pt-[var(--nav-h)] pb-16 md:px-8 md:pb-20">
       <img
-        src={asset(COLOSSAL.src)}
-        alt={COLOSSAL_ALT}
+        src={asset(FRAMES.colossal)}
+        alt="The Colossal Titan's face over the top of the Wall, steam pouring off it, a soldier in flight beside it."
         width={1920}
         height={1079}
         fetchPriority="high"
@@ -83,18 +76,8 @@ function StaticOpening() {
         </div>
         <ChaptersLink className="mt-10" />
       </div>
-      <p className="absolute right-4 bottom-3 max-w-[60ch] text-right font-mono text-meta text-ash/80 md:right-8">{COLOSSAL.credit}.</p>
+      <p className="absolute right-4 bottom-3 max-w-[60ch] text-right font-mono text-meta text-ash/80 md:right-8">Frame: {FRAME_CREDIT}.</p>
     </section>
-  );
-}
-
-/** one shot of the film: drawn in depth when its painting has a depth map */
-function Shot({ name, scene, eager }: { name: string; scene: Scene; eager?: boolean }) {
-  const cls = "absolute inset-0 size-full will-change-transform";
-  return scene.depth ? (
-    <DepthImage data-shot={name} src={scene.src} depth={scene.depth} eager={eager} className={cls} amount={0.045} />
-  ) : (
-    <img data-shot={name} src={asset(scene.src)} alt="" fetchPriority={eager ? "high" : undefined} className={`${cls} object-cover`} />
   );
 }
 
@@ -119,8 +102,8 @@ export default function Opening() {
       gsap.set(q("[data-beat]"), { autoAlpha: 0, y: 14 });
       gsap.set(q("[data-title] > *"), { autoAlpha: 0, y: 30 });
       gsap.set(q("[data-shot='rampart'], [data-shot='colossal']"), { autoAlpha: 0 });
-      gsap.set(q("[data-shot='city']"), { scale: 1.3, xPercent: portrait ? 8 : 4, yPercent: 4, "--dx": -0.6, "--dy": 0.2, "--dz": 0 });
-      gsap.set(q("[data-shot='rampart']"), { scale: 1.05, "--dx": 0.6, "--dy": 0, "--dz": 0 });
+      gsap.set(q("[data-shot='city']"), { scale: 1.45, xPercent: portrait ? 8 : 4, yPercent: 4 });
+      gsap.set(q("[data-shot='rampart']"), { scale: 1.05 });
       // the Colossal frame opens tight on the steam over the Wall's top, above the face
       gsap.set(q("[data-shot='colossal']"), portrait ? { scale: 1.3, xPercent: -22, yPercent: 6 } : { scale: 1.75, xPercent: -38, yPercent: 14 });
 
@@ -143,12 +126,12 @@ export default function Opening() {
       });
 
       // shot 1: the city from above, gliding down and in
-      tl.to(q("[data-shot='city']"), { scale: 1.06, xPercent: 0, yPercent: -2, "--dx": 0.4, "--dy": -0.3, "--dz": 1, duration: 0.3 }, 0);
+      tl.to(q("[data-shot='city']"), { scale: 1.12, xPercent: 0, yPercent: -2, duration: 0.3 }, 0);
       tl.to(q("[data-place]"), { autoAlpha: 0, y: -14, duration: 0.04 }, 0.07);
       // shot 2: from the top of the Wall, a slow push over the district
       tl.to(q("[data-shot='rampart']"), { autoAlpha: 1, duration: 0.05 }, 0.2);
       tl.to(q("[data-shot='city']"), { autoAlpha: 0, duration: 0.03 }, 0.25);
-      tl.to(q("[data-shot='rampart']"), { scale: 1.18, xPercent: -4, yPercent: 2, "--dx": -0.5, "--dz": 1, duration: 0.24 }, 0.2);
+      tl.to(q("[data-shot='rampart']"), { scale: 1.32, xPercent: -6, yPercent: 3, duration: 0.24 }, 0.2);
       // lightning: a white flash, the rampart gone, black
       tl.to(q("[data-flash]"), { autoAlpha: 0.95, duration: 0.008 }, 0.43)
         .to(q("[data-flash]"), { autoAlpha: 0, duration: 0.03 }, 0.438)
@@ -185,12 +168,12 @@ export default function Opening() {
     <section ref={hostRef} aria-labelledby="opening-title" className="relative h-[520vh] bg-void">
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
         <div data-shake className="absolute inset-[-3%]">
-          <Shot name="city" scene={HERO.city} eager />
-          <Shot name="rampart" scene={HERO.rampart} />
+          <img data-shot="city" src={asset(BG.shiganshina.src)} alt="" fetchPriority="high" className={shot} />
+          <img data-shot="rampart" src={asset(BG.wallTop.src)} alt="" className={`${shot} object-[50%_50%]`} />
           <img
             data-shot="colossal"
-            src={asset(COLOSSAL.src)}
-            alt={COLOSSAL_ALT}
+            src={asset(FRAMES.colossal)}
+            alt="The Colossal Titan's face over the top of the Wall, steam pouring off it, a soldier in flight beside it."
             className={`${shot} origin-[30%_35%] object-[28%_30%]`}
           />
         </div>
@@ -249,7 +232,7 @@ export default function Opening() {
           <span ref={railRef} className="block h-full w-full origin-top scale-y-0 bg-paper/70" />
         </span>
         <p className="absolute bottom-[1.5vh] left-4 max-w-[90vw] truncate font-mono text-meta text-ash/70 md:left-8">
-          Paintings: {GEN_CREDIT}s. Last frame: {COLOSSAL.credit}.
+          Frames: {FRAME_CREDIT}.
         </p>
       </div>
     </section>

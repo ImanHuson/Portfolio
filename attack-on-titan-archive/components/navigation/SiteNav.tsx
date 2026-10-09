@@ -6,7 +6,7 @@ import ChapterMenu from "@/components/navigation/ChapterMenu";
  * where the reader is. One line, 60px. */
 export default function SiteNav() {
   return (
-    <header style={{ viewTransitionName: "site-header" }} className="site-header fixed inset-x-0 top-0 z-50 h-[var(--nav-h)] border-b border-paper/10 bg-base/80 backdrop-blur-md">
+    <header className="site-header fixed inset-x-0 top-0 z-50 h-[var(--nav-h)] border-b border-paper/10 bg-base/80 backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-[1400px] items-center justify-between gap-3 px-4 sm:gap-6 md:px-8">
         <Link href="/" className="font-display text-[1.05rem] font-bold tracking-[0.08em] whitespace-nowrap text-paper">
           <span className="sm:hidden">AoT Archive</span>

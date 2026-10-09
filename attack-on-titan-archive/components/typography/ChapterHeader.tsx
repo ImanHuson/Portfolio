@@ -1,4 +1,3 @@
-import { ViewTransition } from "react";
 import { CHAPTERS } from "@/lib/data/chapters";
 import { asset } from "@/lib/utils";
 
@@ -23,18 +22,15 @@ export default function ChapterHeader({
   const chapter = CHAPTERS.find((c) => c.id === id);
   return (
     <header className="hd relative min-h-[82dvh] overflow-hidden px-4 pt-[calc(var(--nav-h)+2rem)] md:px-8">
-      {/* the same picture as this chapter's card on the index: it morphs from the card into place */}
-      <ViewTransition name={chapter ? `card-${chapter.id}` : undefined} share="morph" default="none">
-        <img
-          src={asset(image)}
-          alt=""
-          width={1680}
-          height={1050}
-          fetchPriority="high"
-          className="hd-move absolute inset-0 size-full object-cover"
-          style={{ objectPosition: imagePosition }}
-        />
-      </ViewTransition>
+      <img
+        src={asset(image)}
+        alt=""
+        width={1680}
+        height={1050}
+        fetchPriority="high"
+        className="hd-move absolute inset-0 size-full object-cover"
+        style={{ objectPosition: imagePosition }}
+      />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-base from-15% via-base/70 to-base/20 md:from-5% md:via-base/50" />
       <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_95%,rgba(11,12,10,0.9),transparent_60%)]" />
       <div className="relative mx-auto flex min-h-[calc(82dvh-var(--nav-h)-2rem)] max-w-[1400px] flex-col justify-end pb-14 md:pb-16">

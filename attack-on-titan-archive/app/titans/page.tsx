@@ -21,8 +21,7 @@ export default function Titans() {
     <>
       <ChapterHeader
         id="AOT-04"
-        image={BG.titansField.src}
-        credit={BG.titansField.credit}
+        image="/images/heads/titans.webp"
         imagePosition="55% 35%"
         title="The Titans"
         lede="Nine inheritances, handed down by being eaten. Nine specimen plates; open one to read its file."
@@ -30,7 +29,7 @@ export default function Titans() {
 
       {/* the monumental archive: nine columns, one per Titan */}
       <section aria-label="The Nine Titans" className="relative isolate px-4 pb-24 md:px-8">
-        <SectionBackdrop src={BG.trostFormation.src} credit={BG.trostFormation.credit} position="50% 60%" strength={0.24} />
+        <SectionBackdrop src={BG.titansField.src} credit={BG.titansField.credit} position="50% 60%" strength={0.24} />
         <TitanGrid />
       </section>
 

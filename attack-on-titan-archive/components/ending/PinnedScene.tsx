@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { reducedMotionStore } from "@/lib/animation/tokens";
 import { asset, cn } from "@/lib/utils";
-import DepthImage from "@/components/archive/DepthImage";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -26,13 +25,7 @@ export type Shot = {
   framed?: boolean;
   /** portrait art: its full height, sides feathered into the dark on wide screens */
   contain?: boolean;
-  /** a depth map: the shot is drawn in depth, its camera travels through it */
-  depth?: string;
-  /** the depth camera at `at` and at `until`: [sideways, vertical, push-in] */
-  cam?: { from: [number, number, number]; to: [number, number, number] };
 };
-
-const CAM: NonNullable<Shot["cam"]> = { from: [-0.7, 0, 0], to: [0.7, -0.2, 1] };
 
 /**
  * A pinned, scroll-scrubbed scene cut from real images, with text beats.
@@ -100,10 +93,8 @@ export default function PinnedScene({
       drawHud(0);
       shots.forEach((s, i) => {
         const el = q(`[data-shot='${i}']`);
-        const c = s.cam ?? CAM;
-        const cam = (v: [number, number, number]) => (s.depth ? { "--dx": v[0], "--dy": v[1], "--dz": v[2] } : {});
-        gsap.set(el, { autoAlpha: i === 0 ? 1 : 0, scale: s.from.s, xPercent: s.from.x ?? 0, yPercent: s.from.y ?? 0, ...cam(c.from) });
-        tl.to(el, { scale: s.to.s, xPercent: s.to.x ?? 0, yPercent: s.to.y ?? 0, ...cam(c.to), duration: s.until - s.at, ease: "sine.inOut" }, s.at);
+        gsap.set(el, { autoAlpha: i === 0 ? 1 : 0, scale: s.from.s, xPercent: s.from.x ?? 0, yPercent: s.from.y ?? 0 });
+        tl.to(el, { scale: s.to.s, xPercent: s.to.x ?? 0, yPercent: s.to.y ?? 0, duration: s.until - s.at, ease: "sine.inOut" }, s.at);
         if (i > 0) tl.to(el, { autoAlpha: 1, duration: 0.035 }, s.at);
         if (s.until < 1) tl.to(el, { autoAlpha: 0, duration: 0.035 }, s.until - 0.02);
       });
@@ -154,17 +145,6 @@ export default function PinnedScene({
             <div key={i} data-shot={i} className="absolute inset-0 flex items-center justify-center will-change-transform">
               <img src={asset(s.src)} alt={s.alt ?? ""} className="max-h-[62dvh] w-auto max-w-[min(78vw,560px)] border border-paper/20 shadow-[0_40px_120px_-20px_rgba(0,0,0,0.9)]" />
             </div>
-          ) : s.depth ? (
-            <DepthImage
-              key={i}
-              data-shot={i}
-              src={s.src}
-              depth={s.depth}
-              alt={s.alt}
-              position={s.position}
-              eager={i === 0}
-              className="absolute inset-0 size-full will-change-transform"
-            />
           ) : (
             <img
               key={i}

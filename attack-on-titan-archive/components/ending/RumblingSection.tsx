@@ -2,7 +2,7 @@
 
 import PinnedScene, { type Shot } from "@/components/ending/PinnedScene";
 import { RUMBLING_BEATS } from "@/lib/data/ending";
-import { BG, GEN_CREDIT, HERO } from "@/lib/data/backgrounds";
+import { BG, FRAME_CREDIT } from "@/lib/data/backgrounds";
 
 const GLYPHS = "░▒▓█/\\|_#?";
 /** the observation post's report, falling apart as the count climbs */
@@ -35,13 +35,13 @@ function hud(p: number): string[] {
   ].map((l, i) => corrupt(l, bad, salt + i));
 }
 
-// the quiet sea with steam on the horizon; the Walls' Titans waking; the line
-// on the march; the Rumbling arriving over the clouds
+// the quiet sea; the Walls' Titans waking and setting out; the line on the
+// march; the Rumbling arriving over the clouds (all anime frames)
 const SHOTS: Shot[] = [
-  { ...HERO.sea, at: 0, until: 0.34, from: { s: 1.05 }, to: { s: 1.22, y: -2 }, position: "50% 50%" },
+  { src: BG.wallSea.src, at: 0, until: 0.34, from: { s: 1.05 }, to: { s: 1.22, y: -2 }, position: "50% 50%" },
   { src: BG.titansBegin.src, at: 0.32, until: 0.5, from: { s: 1.4, y: 6 }, to: { s: 1.08 }, position: "50% 55%" },
-  { ...HERO.march, at: 0.49, until: 0.7, from: { s: 1.05 }, to: { s: 1.3, y: -4 }, position: "50% 50%" },
-  { ...HERO.clouds, at: 0.68, until: 1, from: { s: 1.15, x: -2 }, to: { s: 1 }, position: "50% 50%" },
+  { src: BG.titansMarch.src, at: 0.49, until: 0.7, from: { s: 1.05 }, to: { s: 1.3, y: -4 }, position: "50% 50%" },
+  { src: BG.rumblingMarley.src, at: 0.68, until: 1, from: { s: 1.15, x: -2 }, to: { s: 1 }, position: "50% 50%" },
 ];
 
 export default function RumblingSection() {
@@ -52,7 +52,7 @@ export default function RumblingSection() {
       shots={SHOTS}
       hud={hud}
       height="h-[800vh]"
-      credit={`Paintings: ${GEN_CREDIT}s.`}
+      credit={`Frames: ${FRAME_CREDIT}.`}
     />
   );
 }

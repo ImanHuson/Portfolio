@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ViewTransition } from "react";
 import { ACTS, type Chapter } from "@/lib/data/chapters";
 import { WAYS } from "@/lib/data/ways";
 import { asset, cn } from "@/lib/utils";
@@ -11,16 +10,14 @@ function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
     <Link href={c.href ?? "/"} className={cn("file-link group relative flex w-full flex-col border border-line bg-base-2", feature && "md:grid md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]")}>
       {c.image ? (
         <span className={cn("relative block overflow-hidden", feature ? "aspect-[16/10]" : "aspect-[4/3]")}>
-          <ViewTransition name={c.href && c.href !== "/" ? `card-${c.id}` : undefined} share="morph" default="none">
-            <img
-              src={asset(c.image)}
-              alt=""
-              width={1680}
-              height={1050}
-              loading="lazy"
-              className="size-full object-cover opacity-90 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 motion-safe:[@media(hover:hover)]:group-hover:scale-[1.03]"
-            />
-          </ViewTransition>
+          <img
+            src={asset(c.image)}
+            alt=""
+            width={1680}
+            height={1050}
+            loading="lazy"
+            className="size-full object-cover opacity-90 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 motion-safe:[@media(hover:hover)]:group-hover:scale-[1.03]"
+          />
           <span aria-hidden className={cn("absolute inset-0 bg-gradient-to-t from-base-2/80 to-transparent to-40%", feature && "md:bg-gradient-to-l md:from-base-2/60 md:to-30%")} />
         </span>
       ) : (

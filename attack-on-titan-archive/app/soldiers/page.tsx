@@ -16,8 +16,7 @@ export default function Soldiers() {
     <>
       <ChapterHeader
         id="AOT-03"
-        image={BG.surveyCorps.src}
-        credit={BG.surveyCorps.credit}
+        image="/images/heads/soldiers.webp"
         imagePosition="60% 30%"
         title="The Soldiers"
         lede="Sixteen files, recovered in whatever state they survived: a burned print, a clipped photograph, a page from a notebook, a poster. Open one."
