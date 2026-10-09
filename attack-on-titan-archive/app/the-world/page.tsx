@@ -82,8 +82,8 @@ export default function TheWorld() {
     <>
       <ChapterHeader
         id="AOT-06"
-        image={BG.sea.src}
-        credit={BG.sea.credit}
+        image={BG.ocean.src}
+        credit={BG.ocean.credit}
         imagePosition="50% 50%"
         title="The World"
         lede="Grisha's books said it plainly: the Walls were never the edge of the world. This is what lies past them, and what it calls the people inside."
@@ -94,7 +94,7 @@ export default function TheWorld() {
       {/* A Marleyan file, laid on the same dark desk as everything else: the register
           changes inside the document, never the page around it. */}
       <div className="relative isolate px-3 pt-24 pb-28 md:px-16 md:pt-40 md:pb-44 xl:px-24">
-        <SectionBackdrop src={BG.liberio.src} credit={BG.liberio.credit} position="60% 50%" strength={0.38} />
+        <SectionBackdrop src={BG.liberioCity.src} credit={BG.liberioCity.credit} position="60% 50%" strength={0.38} />
         <div className={`file-sheet mx-auto max-w-[1400px] ${INK}`}>
           <div className="sticky top-[var(--nav-h)] z-20 border-b border-[#141412]/25 bg-[#cfccc4]/95 px-4 backdrop-blur-[2px] md:px-8">
             <ul className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-1 py-2 font-mono text-meta tracking-[0.18em] uppercase md:text-meta">

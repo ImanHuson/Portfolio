@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { ODM_PARTS } from "@/lib/data/war";
-import { cn } from "@/lib/utils";
+import { asset, cn } from "@/lib/utils";
 import OdmPlate from "@/components/war/OdmPlate";
 import OdmMotion from "@/components/war/OdmMotion";
 import SectionBackdrop from "@/components/archive/SectionBackdrop";
-import { BG } from "@/lib/data/backgrounds";
+import { BG, FRAME_CREDIT } from "@/lib/data/backgrounds";
 /** The gear as an engineering plate: pick out a part, take it apart, and see how a swing works. */
 export default function OdmSection() {
   const [play, setPlay] = useState(0);
@@ -21,7 +21,7 @@ export default function OdmSection() {
 
   return (
     <section aria-labelledby="odm-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
-      <SectionBackdrop src={BG.forest.src} credit={BG.forest.credit} position="50% 40%" strength={0.26} />
+      <SectionBackdrop src={BG.odmFlight.src} credit={BG.odmFlight.credit} position="50% 40%" strength={0.26} />
       <div className="mx-auto max-w-[1400px]">
         <h2 id="odm-title" className="font-display text-h2 leading-tight font-bold text-paper">
           Omni-directional mobility gear
@@ -32,6 +32,17 @@ export default function OdmSection() {
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-14">
           <div>
+            <figure className="mb-8">
+              <img
+                src={asset(BG.odmCase.src)}
+                alt="A full set of the gear laid out in its wooden case: the main unit with its two spools, the grips, the gas canisters and the blade boxes."
+                width={1920}
+                height={1080}
+                loading="lazy"
+                className="w-full border border-line"
+              />
+              <figcaption className="mt-2 font-mono text-meta text-ash">The gear in its case, as the anime draws it. {FRAME_CREDIT}.</figcaption>
+            </figure>
             <div className="relative border border-line bg-[radial-gradient(ellipse_at_50%_40%,#1d1e19,#0b0c0a_75%)] p-2 sm:p-4">
               <OdmPlate active={active} explode={explode} />
             </div>

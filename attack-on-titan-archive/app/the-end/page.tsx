@@ -46,7 +46,7 @@ export default function TheEnd() {
           aria-labelledby="status-title"
           className="relative isolate bg-void px-4 py-24 md:px-8 md:py-32"
         >
-          <SectionBackdrop src={BG.sea.src} credit={BG.sea.credit} position="50% 45%" strength={0.3} />
+          <SectionBackdrop src={BG.grave.src} credit={BG.grave.credit} position="50% 45%" strength={0.3} />
           <div className="mx-auto max-w-[640px]">
             <h2 id="status-title" className="sr-only">
               Archive status
@@ -69,7 +69,7 @@ export default function TheEnd() {
           aria-labelledby="end-record"
           className="relative isolate bg-void px-4 pt-16 pb-24 md:px-8 md:pb-32"
         >
-          <SectionBackdrop src={BG.colossiPair.src} credit={BG.colossiPair.credit} position="50% 60%" strength={0.22} />
+          <SectionBackdrop src={BG.threeSea.src} credit={BG.threeSea.credit} position="50% 60%" strength={0.22} />
           <div className="mx-auto grid max-w-[900px] gap-16">
             <div>
               <h2

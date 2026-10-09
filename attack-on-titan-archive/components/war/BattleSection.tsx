@@ -63,7 +63,7 @@ export default function BattleSection() {
 
   return (
     <section aria-labelledby="map-title" className="relative isolate px-4 py-24 md:px-8 md:py-32">
-      <SectionBackdrop src={BG.siegeRight.src} credit={BG.siegeRight.credit} position="50% 40%" strength={0.16} />
+      <SectionBackdrop src={BG.stohess.src} credit={BG.scoutsShiganshina.credit} position="50% 40%" strength={0.16} />
       <div className="mx-auto max-w-[1400px]">
         <h2 id="map-title" className="font-display text-h2 leading-tight font-bold text-paper">
           850: five battles in one year

@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { reducedMotionStore } from "@/lib/animation/tokens";
-import { BG, BG_SOURCE, FRAMES, FRAME_CREDIT } from "@/lib/data/backgrounds";
+import { BG, FRAMES, FRAME_CREDIT } from "@/lib/data/backgrounds";
 import { sound } from "@/lib/audio/engine";
 import { asset } from "@/lib/utils";
 
@@ -13,9 +13,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /*
  * The opening, as a short film cut from real images rather than a rendered
- * scene: a walled city from above (de' Barbari, 1500), the face of a great
- * rampart (Bourne's Kashmir Gate, 1860s), a lightning flash, then the frame
- * of the Colossal Titan over the Wall. Every move is a transform or an
+ * scene, all anime frames: Shiganshina from above, the district seen from the
+ * top of Wall Maria, a lightning flash, then the Colossal Titan over the Wall. Every move is a transform or an
  * opacity on a few images, scrubbed by scroll, so it runs on the compositor
  * and never drops a frame to the main thread. Facts in the lines are the
  * verified ones: Walls 50 m, the Colossal Titan 60 m, the outer gate kicked in.
@@ -129,7 +128,7 @@ export default function Opening() {
       // shot 1: the city from above, gliding down and in
       tl.to(q("[data-shot='city']"), { scale: 1.12, xPercent: 0, yPercent: -2, duration: 0.3 }, 0);
       tl.to(q("[data-place]"), { autoAlpha: 0, y: -14, duration: 0.04 }, 0.07);
-      // shot 2: the rampart, a slow push toward the gate
+      // shot 2: from the top of the Wall, a slow push over the district
       tl.to(q("[data-shot='rampart']"), { autoAlpha: 1, duration: 0.05 }, 0.2);
       tl.to(q("[data-shot='city']"), { autoAlpha: 0, duration: 0.03 }, 0.25);
       tl.to(q("[data-shot='rampart']"), { scale: 1.32, xPercent: -6, yPercent: 3, duration: 0.24 }, 0.2);
@@ -169,8 +168,8 @@ export default function Opening() {
     <section ref={hostRef} aria-labelledby="opening-title" className="relative h-[520vh] bg-void">
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
         <div data-shake className="absolute inset-[-3%]">
-          <img data-shot="city" src={asset(BG.city.src)} alt="" fetchPriority="high" className={shot} />
-          <img data-shot="rampart" src={asset(BG.rampart.src)} alt="" className={`${shot} object-[60%_50%]`} />
+          <img data-shot="city" src={asset(BG.shiganshina.src)} alt="" fetchPriority="high" className={shot} />
+          <img data-shot="rampart" src={asset(BG.wallTop.src)} alt="" className={`${shot} object-[50%_50%]`} />
           <img
             data-shot="colossal"
             src={asset(FRAMES.colossal)}
@@ -233,7 +232,7 @@ export default function Opening() {
           <span ref={railRef} className="block h-full w-full origin-top scale-y-0 bg-paper/70" />
         </span>
         <p className="absolute bottom-[1.5vh] left-4 max-w-[90vw] truncate font-mono text-meta text-ash/70 md:left-8">
-          {BG.city.credit}; {BG.rampart.credit} ({BG_SOURCE}). Frame: {FRAME_CREDIT}.
+          Frames: {FRAME_CREDIT}.
         </p>
       </div>
     </section>

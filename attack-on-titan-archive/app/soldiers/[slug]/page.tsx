@@ -54,7 +54,7 @@ export default async function Dossier({ params }: PageProps<"/soldiers/[slug]">)
 
   return (
     <article className="relative isolate px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
-      <SectionBackdrop src={BG.soldiers.src} credit={BG.soldiers.credit} position="50% 40%" strength={0.14} />
+      <SectionBackdrop src={BG.surveyCorps.src} credit={BG.surveyCorps.credit} position="50% 40%" strength={0.14} />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.16em] text-paper/60 uppercase">

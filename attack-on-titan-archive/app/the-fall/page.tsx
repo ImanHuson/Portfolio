@@ -58,14 +58,14 @@ export default function TheFall() {
       <ChapterHeader
         id="AOT-02"
         title="The Fall"
-        image={BG.burning.src}
-        credit={BG.burning.credit}
+        image={BG.shiganshina845.src}
+        credit={BG.shiganshina845.credit}
         imagePosition="50% 40%"
         lede="In one day in 845 the outer Wall failed, and with it more than a third of the land humanity had left."
       />
 
       <section aria-label="The record, 845 to 847" className="relative isolate px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src={BG.rampart.src} credit={BG.rampart.credit} position="50% 40%" strength={0.3} />
+        <SectionBackdrop src={BG.shiganshina.src} credit={BG.shiganshina.credit} position="50% 40%" strength={0.3} />
         <ol className="mx-auto max-w-[1400px]">
           {LEDGER.map((e, i) => {
             const first = i === 0 || LEDGER[i - 1].year !== e.year;
@@ -96,7 +96,7 @@ export default function TheFall() {
       </section>
 
       <section aria-labelledby="land-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src={BG.townGate.src} credit={BG.townGate.credit} position="50% 50%" strength={0.22} />
+        <SectionBackdrop src={BG.trostAerial.src} credit={BG.trostAerial.credit} position="50% 50%" strength={0.22} />
         <div className="mx-auto grid max-w-[1400px] items-center gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <WallsMap className="mx-auto w-full max-w-[640px]" />
           <div>
@@ -121,7 +121,7 @@ export default function TheFall() {
       </section>
 
       <section aria-label="A note in the margin" className="relative isolate px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src={BG.city.src} credit={BG.city.credit} position="50% 50%" strength={0.18} />
+        <SectionBackdrop src={BG.refugees.src} credit={BG.refugees.credit} position="50% 50%" strength={0.18} />
         <p className="mx-auto max-w-[30ch] text-center font-serif text-h3 leading-snug text-paper/90 italic">
           Inside the Walls, 845 was remembered as a catastrophe. The archive would later find that it had been a mission.
         </p>

@@ -1,7 +1,7 @@
-"""Every image behind the archive's sections and scroll scenes, from two
-sources: public-domain (CC0) museum images from the Cleveland Museum of Art's
-Open Access collection, and the anime frames the user supplied (titans-src/,
-gitignored). Nothing here is rendered or generated.
+"""Every image behind the archive's sections and scroll scenes: anime frames
+from the Attack on Titan Wiki (bg-src/wiki/, see WIKI below) and the user's
+own frame. The CMA (CC0) path is kept for museum images. Nothing here is
+rendered or generated.
 
     python3 -I scripts/bg/sourced.py [name ...]      (from attack-on-titan-archive/)
 
@@ -30,35 +30,11 @@ CDN = "https://openaccess-cdn.clevelandart.org/{a}/{a}_print.jpg"
 # name: (source, crop box as fractions, mode, long side in px)
 #   source: a CMA accession number, or "local:<path>" for a supplied frame
 JOBS = {
-    # sections (CC0, Cleveland Museum of Art)
-    "soldiers": ("1942.1248", (0.10, 0.36, 0.92, 0.93), "photo", 1920),  # Homer, A Bivouac Fire on the Potomac, 1861
-    "titans": ("1993.8", (0.035, 0.07, 0.97, 0.93), "photo", 1920),  # Veneziano, Skeletons, 1518
-    "liberio": ("1992.329", (0.0, 0.0, 0.975, 1.0), "photo", 1920),  # Sutcliffe, Harbor Scene, c. 1880
-    "forest": ("1988.167", (0.0, 0.0, 1.0, 1.0), "photo", 1920),  # Famin, Forest of Fontainebleau, c. 1874
-    "memorial": ("1988.159", (0.0, 0.0, 1.0, 1.0), "photo", 1920),  # Barnard, New Hope Church, 1865-66
-    "archive": ("2020.276.10", (0.075, 0.07, 0.97, 0.93), "ink", 1920),  # Nolli, Pianta Grande di Roma, 1748
-    "city": ("1949.565", (0.02, 0.05, 0.98, 0.95), "photo", 2400),  # de' Barbari, View of Venice, 1500
-    "rampart": ("2024.5.30", (0.0, 0.12, 1.0, 0.97), "photo", 2400),  # Bourne, Delhi, the Kashmir Gate, 1863-70
-    "town-gate": ("2003.278", (0.01, 0.05, 0.99, 0.92), "ink", 1920),  # Hollar, Moated Town Gate, 1676
-    "city-ink": ("1949.565", (0.02, 0.05, 0.98, 0.95), "ink", 1920),  # de' Barbari again, in negative
-    "burning": ("1942.647", (0.0, 0.0, 1.0, 1.0), "paint", 2400),  # Turner, Burning of the Houses of Parliament, 1835
-    "fort": ("2018.215", (0.0, 0.1, 1.0, 0.9), "photo", 1920),  # Photoglob, Agra. The Fort, 1890
-    "colossi": ("1992.306", (0.0, 0.0, 1.0, 0.92), "photo", 2400),  # Beato, The Colossi of Memnon, c. 1860s
-    "colossi-pair": ("2006.119", (0.0, 0.08, 1.0, 0.88), "photo", 1920),  # Bechard, The Colossi of Memnon, 1870s
-    "sea": ("1924.195", (0.0, 0.0, 1.0, 1.0), "paint", 2400),  # Homer, Early Morning After a Storm at Sea, 1900-03
-    "prison-stair": ("1941.26.12", (0.02, 0.03, 0.98, 0.97), "photo", 2000),  # Piranesi, Carceri XII
-    "prison-platform": ("1941.26.8", (0.03, 0.05, 0.97, 0.95), "photo", 2000),  # Piranesi, Carceri X
-    "siege-right": ("1923.69.a", (0.0, 0.03, 1.0, 0.97), "ink", 2400),  # Durer, Siege of a Fortress, 1527
-    "siege-left": ("1923.69.b", (0.0, 0.03, 1.0, 0.97), "ink", 1920),
-    "dunes": ("2002.45", (0.0, 0.15, 1.0, 0.92), "photo", 2400),
-    "dunes-night": ("2002.45", (0.02, 0.12, 0.58, 0.8), "night", 2000),  # the same, as moonlight for Paths  # O'Sullivan, Sand Dunes, Carson Desert, 1867
-    "simoom": ("2012.263", (0.0, 0.0, 0.6, 0.95), "paint", 2000),  # Haghe after Roberts, Approach of the Simoon, 1849
-    "still-life": ("1965.235", (0.0, 0.0, 1.0, 1.0), "paint", 1920),  # Harnett, Memento Mori, 1879
-    "candle": ("2023.1", (0.0, 0.3, 1.0, 0.84), "paint", 1920),  # Therbusch, A Scientist by Candlelight, 1755
-    # the user's frames (anime screenshots; same fair-use call as the portraits)
+    # the user's own frame (the opening's Colossal Titan over the Wall)
     "colossal-wall": ("local:titans-src/colossal.jpg", (0.0, 0.0, 1.0, 0.925), "frame", 1920),
-    "rumbling-founding": ("local:titans-src/founding-rumbling.jpg", (0.0, 0.0, 1.0, 0.905), "frame", 900),
-    "rumbling-founding-haze": ("local:titans-src/founding-rumbling.jpg", (0.0, 0.0, 1.0, 0.905), "haze", 640),
+    # CC0 museum images (Cleveland Museum of Art) were the site's backgrounds
+    # before the anime frames below replaced them; add one back as
+    # "name": ("<accession number>", (crop box), "photo" | "ink" | "paint", px).
 }
 
 
@@ -82,6 +58,18 @@ def light(im, sat):
     im = im.point(lut)
     noise = Image.effect_noise(im.size, 20).convert("L")
     return Image.blend(im, Image.merge("RGB", (noise,) * 3), 0.03)
+
+
+# Anime frames from the Attack on Titan Wiki (attackontitan.fandom.com, its
+# image CDN is reachable here), fetched into bg-src/wiki/ (gitignored) by the
+# picker in the session scratchpad; meta.json records each frame's wiki title.
+# Same fair-use call as the portraits and Titan plates; credited on the page.
+WIKI = pathlib.Path("bg-src/wiki")
+if (WIKI / "meta.json").exists():
+    import json
+
+    for _name in json.loads((WIKI / "meta.json").read_text()):
+        JOBS.setdefault(f"aot-{_name}", (f"local:{WIKI}/{_name}.png", (0.0, 0.0, 1.0, 1.0), "frame", 2560 if _name == "rumbling-marley" else 1920))
 
 
 if __name__ == "__main__":

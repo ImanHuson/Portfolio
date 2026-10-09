@@ -18,13 +18,13 @@ export default function Military() {
       <ChapterHeader
         id="The archive"
         title="The Military"
-        image={BG.rampart.src}
-        credit={BG.rampart.credit}
+        image={BG.wings.src}
+        credit={BG.wings.credit}
         imagePosition="50% 40%"
         lede="Three branches inside the Walls, the school that feeds them, and the army across the sea that trained children to break them."
       />
       <section aria-label="Regiment files" className="relative isolate px-4 py-20 md:px-8 md:py-28">
-        <SectionBackdrop src={BG.soldiers.src} credit={BG.soldiers.credit} position="50% 40%" strength={0.3} />
+        <SectionBackdrop src={BG.scoutsRide.src} credit={BG.scoutsRide.credit} position="50% 40%" strength={0.3} />
         <ReadingProgress className="mx-auto mb-16 max-w-[1400px]" />
         <Regiments />
         <p className="mx-auto mt-24 max-w-[1400px] text-[0.85rem] text-ash">

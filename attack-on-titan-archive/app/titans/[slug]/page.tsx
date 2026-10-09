@@ -40,7 +40,7 @@ export default async function TitanFile({ params }: PageProps<"/titans/[slug]">)
 
   return (
     <article className="relative isolate px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
-      <SectionBackdrop src={BG.colossi.src} credit={BG.colossi.credit} position="50% 60%" strength={0.16} />
+      <SectionBackdrop src={BG.titansField.src} credit={BG.titansField.credit} position="50% 60%" strength={0.16} />
       <XrayIntro slug={t.slug} />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Breadcrumb">

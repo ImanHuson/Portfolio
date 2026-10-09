@@ -77,7 +77,7 @@ function PairTable({ pair }: { pair: MirrorPair }) {
 function StaticMirror() {
   return (
     <section aria-labelledby="mirror-title" className="relative isolate px-4 py-20 md:px-8 md:py-28">
-      <SectionBackdrop src={BG.colossiPair.src} credit={BG.colossiPair.credit} position="50% 60%" strength={0.2} />
+      <SectionBackdrop src={BG.marleyMap.src} credit={BG.marleyMap.credit} position="50% 60%" strength={0.2} />
       <div className="mx-auto grid max-w-[1200px] gap-16">
         <h2 id="mirror-title" className="text-center font-mono text-meta tracking-[0.3em] text-ash uppercase">
           The mirror: six pairs
@@ -167,7 +167,7 @@ export default function Mirror() {
 
   return (
     <section ref={hostRef} aria-labelledby="mirror-title" className="relative isolate h-[900vh]">
-      <SectionBackdrop src={BG.colossiPair.src} position="50% 60%" strength={0.2} />
+      <SectionBackdrop src={BG.marleyMap.src} position="50% 60%" strength={0.2} />
       <div className="sticky top-0 flex h-[100dvh] flex-col overflow-hidden pt-[var(--nav-h)]">
         <h2 id="mirror-title" className="sr-only">
           The mirror

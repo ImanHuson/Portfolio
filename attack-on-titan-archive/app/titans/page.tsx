@@ -29,13 +29,13 @@ export default function Titans() {
 
       {/* the monumental archive: nine columns, one per Titan */}
       <section aria-label="The Nine Titans" className="relative isolate px-4 pb-24 md:px-8">
-        <SectionBackdrop src={BG.colossi.src} credit={BG.colossi.credit} position="50% 60%" strength={0.24} />
+        <SectionBackdrop src={BG.titansField.src} credit={BG.titansField.credit} position="50% 60%" strength={0.24} />
         <TitanGrid />
       </section>
 
       {/* to scale, against the Wall */}
       <section aria-labelledby="scale-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src={BG.fort.src} credit={BG.fort.credit} position="50% 30%" strength={0.28} />
+        <SectionBackdrop src={BG.colossalBreach.src} credit={BG.colossalBreach.credit} position="50% 30%" strength={0.28} />
         <div className="mx-auto max-w-[1500px]">
           <h2 id="scale-title" className="font-display text-h2 leading-tight font-bold text-paper">
             To scale
@@ -76,7 +76,7 @@ export default function Titans() {
       </section>
 
       <section aria-labelledby="rules-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src={BG.titans.src} credit={BG.titans.credit} position="55% 40%" strength={0.3} />
+        <SectionBackdrop src={BG.ymirDevil.src} credit={BG.ymirDevil.credit} position="55% 40%" strength={0.3} />
         <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-2">
           <h2 id="rules-title" className="font-display text-h2 leading-tight font-bold text-paper">
             How a Titan is inherited

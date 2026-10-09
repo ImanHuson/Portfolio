@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 export default function TheRumbling() {
   return (
     <EndingGate id="AOT-08" title="The Rumbling">
-      <EndingHeader id="AOT-08" image={BG.sea.src} lede="The Walls were never only walls. This is the file where they wake. Scroll slowly: it starts quiet." />
+      <EndingHeader id="AOT-08" image={BG.wallTitan.src} lede="The Walls were never only walls. This is the file where they wake. Scroll slowly: it starts quiet." />
       <RumblingSection />
       <section aria-labelledby="rumbling-record" className="relative isolate bg-void px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src={BG.simoom.src} credit={BG.simoom.credit} position="50% 45%" strength={0.34} />
+        <SectionBackdrop src={BG.titansMarching.src} credit={BG.titansMarching.credit} position="50% 45%" strength={0.34} />
         <div className="mx-auto max-w-[900px]">
           <h2 id="rumbling-record" className="font-mono text-meta tracking-[0.24em] text-ash uppercase">
             The record

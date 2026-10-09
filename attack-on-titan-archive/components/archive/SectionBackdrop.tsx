@@ -1,5 +1,4 @@
 import { asset, cn } from "@/lib/utils";
-import { BG_SOURCE } from "@/lib/data/backgrounds";
 
 /**
  * A section's own ground: an image that stays in view while the reader
@@ -55,7 +54,7 @@ export default function SectionBackdrop({
       </div>
       {credit && (
         <p className="absolute right-4 bottom-3 z-10 max-w-[calc(100%-2rem)] text-right font-mono text-meta text-ash/80 md:right-8">
-          Behind this section: {credit}. {BG_SOURCE}.
+          Behind this section: {credit}.
         </p>
       )}
     </>

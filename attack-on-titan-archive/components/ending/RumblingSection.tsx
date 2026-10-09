@@ -2,7 +2,7 @@
 
 import PinnedScene, { type Shot } from "@/components/ending/PinnedScene";
 import { RUMBLING_BEATS } from "@/lib/data/ending";
-import { BG, BG_SOURCE, FRAMES, FRAME_CREDIT } from "@/lib/data/backgrounds";
+import { BG, FRAME_CREDIT } from "@/lib/data/backgrounds";
 
 const GLYPHS = "░▒▓█/\\|_#?";
 /** the observation post's report, falling apart as the count climbs */
@@ -35,14 +35,13 @@ function hud(p: number): string[] {
   ].map((l, i) => corrupt(l, bad, salt + i));
 }
 
-// the quiet sea; the first shapes on the horizon (the Colossi of Memnon); the
-// form at the head of them, from the anime; the storm of sand that follows
+// the quiet sea; the Walls' Titans waking and setting out; the line on the
+// march; the Rumbling arriving over the clouds (all anime frames)
 const SHOTS: Shot[] = [
-  { src: BG.sea.src, at: 0, until: 0.34, from: { s: 1.05 }, to: { s: 1.25, x: -3, y: -2 }, position: "50% 40%" },
-  { src: BG.colossi.src, at: 0.32, until: 0.5, from: { s: 1.5, y: 8 }, to: { s: 1.1, y: 0 }, position: "35% 60%" },
-  { src: FRAMES.foundingHaze, at: 0.49, until: 0.7, from: { s: 1.1 }, to: { s: 1.25 } },
-  { src: FRAMES.founding, alt: "Eren's Titan form at the start of the Rumbling, its ribs bare, in a haze of steam.", at: 0.49, until: 0.7, from: { s: 0.9 }, to: { s: 1.08 }, framed: true },
-  { src: BG.simoom.src, at: 0.68, until: 1, from: { s: 1.3, y: 4 }, to: { s: 1.05 }, position: "60% 55%" },
+  { src: BG.wallSea.src, at: 0, until: 0.34, from: { s: 1.05 }, to: { s: 1.22, y: -2 }, position: "50% 50%" },
+  { src: BG.titansBegin.src, at: 0.32, until: 0.5, from: { s: 1.4, y: 6 }, to: { s: 1.08 }, position: "50% 55%" },
+  { src: BG.titansMarch.src, at: 0.49, until: 0.7, from: { s: 1.05 }, to: { s: 1.3, y: -4 }, position: "50% 50%" },
+  { src: BG.rumblingMarley.src, at: 0.68, until: 1, from: { s: 1.15, x: -2 }, to: { s: 1 }, position: "50% 50%" },
 ];
 
 export default function RumblingSection() {
@@ -53,7 +52,7 @@ export default function RumblingSection() {
       shots={SHOTS}
       hud={hud}
       height="h-[800vh]"
-      credit={`${BG.sea.credit}; ${BG.colossi.credit}; ${BG.simoom.credit} (${BG_SOURCE}). Frame: ${FRAME_CREDIT}.`}
+      credit={`Frames: ${FRAME_CREDIT}.`}
     />
   );
 }

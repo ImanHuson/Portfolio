@@ -17,13 +17,13 @@ export default function TimelinePage() {
       <ChapterHeader
         id="The archive"
         title="Timeline"
-        image={BG.townGate.src}
-        credit={BG.townGate.credit}
+        image={BG.oldMap.src}
+        credit={BG.oldMap.credit}
         imagePosition="50% 45%"
         lede="Two thousand years, from a girl in a forest to a single tree. Each entry says where to read it in full; the ending stays sealed until you open it."
       />
       <section aria-label="Timeline" className="relative isolate py-16 md:py-24">
-        <SectionBackdrop src={BG.cityInk.src} credit={BG.cityInk.credit} position="50% 50%" strength={0.2} />
+        <SectionBackdrop src={BG.stohess.src} credit={BG.stohess.credit} position="50% 50%" strength={0.2} />
         <Timeline />
       </section>
       <NextChapter current="" />
