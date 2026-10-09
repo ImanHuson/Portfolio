@@ -6,6 +6,17 @@
 
 The user wants every installed skill applied wherever it fits, **without having to name it**. So before starting any task, check the skill listing and the routing rules in point 6 below, and invoke the matching skill yourself: `ponytail` on ordinary code edits, `unlazy` on long multi-part work, `design-taste-frontend` before design work, `impeccable` + `web-design-guidelines` + `playwright-cli` to verify UI, the `gsap-*` skills for GSAP code, the `emil-*` skills for motion, `no-ai-slop` for site copy, `vibe-security` when code touches keys, auth, forms or user data, `diagnosing-bugs` for hard bugs, `hyperframes` for anything video. Say in one line which skill you're using and why. If you skipped one that plainly applied, that's a miss, not a style choice. `emil-review-animations`, `emil-prototype`, `emil-pick-ui-library` and `improve-codebase-architecture` had their user-only flag removed at the user's request so this applies to them too (local change to the vendored files; keep it if they are re-synced from upstream). The exceptions are the skills still marked user-only (`disable-model-invocation`), kept that way on purpose: `savvy-flow` (expensive), the issue-tracker skills (they publish to GitHub), and the ones that need the user's answers: Claude can't start those, so when one of them would clearly help, say so in one line and name the command for the user to type.
 
+## Don't ask the user for things you can do yourself (standing instruction from the user)
+
+"DO NOT ASK ME for things you are capable of doing yourself." If a question can be answered by reading the code, the git history, this file, the docs, a web search, a build, a test or a screenshot, answer it yourself and get on with the work. Don't ask the user to run a command, check a page, look up a fact, pick a file, confirm what a function does or make a choice that has a sensible default. Make the call, say in one line what you chose and why, and keep going; the user will redirect if they disagree. Don't end a turn with "want me to...?" for a next step that's plainly part of the task. Do it.
+
+Ask only when it really can't be avoided:
+- **A permission gate**, either one this file sets (the once-per-session "push to main?" before a deploy) or a tool prompt that refuses.
+- **Something only the user can supply**: an image from Gemini or ChatGPT (see the next section), credentials, a paid account, or a file that's only on their machine.
+- **A decision that is genuinely theirs**: whether to replace a project or add a new one alongside it (point 5 below), taste calls with no default and big consequences, deleting their work, anything public or costly.
+
+When you do ask, ask everything in one message with a recommended answer for each question, and keep working on whatever doesn't depend on the answer.
+
 ## Generated images and 3D objects: say when they're not good enough, and hand over a prompt (standing instruction from the user)
 
 The tools available here (code-drawn `level-1`, headless three.js `level-2`, raymarched or procedural ogl models) are good at abstract graphics, typography, seals and simple objects. They are weak at anything that needs illustration or realism: people, faces, creatures, painted scenes, detailed props, photographic texture. This repo has already shipped generations that didn't hold up (the AoT Titan read as a mannequin twice, the procedural Titans as clay, the "illustrated" post-processes were rejected). So:
