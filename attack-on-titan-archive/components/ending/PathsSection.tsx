@@ -2,12 +2,12 @@
 
 import PinnedScene, { type Shot } from "@/components/ending/PinnedScene";
 import { PATHS_BEATS } from "@/lib/data/ending";
-import { BG, FRAMES, FRAME_CREDIT } from "@/lib/data/backgrounds";
+import { BG, FRAMES, GEN_CREDIT, HERO } from "@/lib/data/backgrounds";
 
-// the anime's Paths: the stars and the branching light, then the reader's own
-// painting of the tree, then Ymir in the sand, shaping the Wall Titans
+// Paths: the desert under the stars and the far light, then the reader's own
+// painting of the tree, then the figure in the sand, shaping the Wall Titans
 const SHOTS: Shot[] = [
-  { src: BG.pathsStars.src, at: 0, until: 0.4, from: { s: 1.3, y: 6 }, to: { s: 1.05 }, position: "50% 50%" },
+  { ...HERO.desert, at: 0, until: 0.4, from: { s: 1.3, y: 6 }, to: { s: 1.05 }, position: "50% 50%" },
   { src: FRAMES.paths, alt: "A tree of glowing gold and teal threads rising out of the dark.", at: 0.36, until: 0.74, from: { s: 1.3, y: 14 }, to: { s: 1, y: 0 }, position: "50% 40%", contain: true },
   { src: BG.ymirMolding.src, at: 0.72, until: 1, from: { s: 1.3, y: 4 }, to: { s: 1.06 }, position: "45% 55%" },
 ];
@@ -44,7 +44,7 @@ export default function PathsSection() {
       shots={SHOTS}
       overlay={<Motes />}
       height="h-[700vh]"
-      credit={`Frames: ${FRAME_CREDIT}. The tree: the reader's own artwork.`}
+      credit={`Paintings: ${GEN_CREDIT}s. The tree: the reader's own artwork.`}
     />
   );
 }
