@@ -20,6 +20,18 @@ The tools available here (code-drawn `level-1`, headless three.js `level-2`, ray
    For a 3D object needed as a model rather than a picture, also say so plainly. These tools make images, not usable meshes. Offer the realistic option: a reference image to model from, a CC0 model source if the network allows one, or a flat image used as a plate instead.
 3. **When the user supplies the image**, run it through the project's existing treatment pipeline (crop, grade, grain, frame), credit it as an AI-generated image made by the user with the named tool, and keep any earlier labelling rule the project has (e.g. the-rising-archive labels generated character images as the archive's AI-generated interpretation).
 
+## Deploy after every big change so the user can review it live (standing instruction from the user)
+
+The user reviews on the live site, not in the container. After every **big change** (a new page or section, a phase of a build, a design or audit round, new or replaced images, anything visible the user would want to look at), deploy it without being asked. Small fixes in the same session can be batched into one deploy at the end of a round.
+
+1. **Prove it first:** the changed project builds locally (`npm run build` in that project, which for the Next builds also runs lint and typecheck), and a `playwright-cli` pass at 375 and 1440 px shows the change working, with no console errors. Never deploy a build that fails or that you haven't looked at.
+2. **Ask once, then push to `main`:** commit on the session branch and push it. The first time in a session that a change is ready to deploy, ask the user in one line ("Ready to deploy X to the live site — push to main?"); once they say yes, later deploys in the same session don't need asking again. Then fast-forward `main` (`git push origin HEAD:main`). If `main` has moved and a fast-forward isn't possible, merge `origin/main` into the branch first (never force-push `main`).
+3. **Watch the deploy:** the push to `main` triggers `.github/workflows/pages.yml` (about 1.5 to 2 minutes). Check the "Deploy Pages" run for that commit with the GitHub tools until it finishes. If it fails, read the job log, fix it and push again before reporting; a red deploy is unfinished work, not something to mention and leave.
+4. **Confirm it's live:** fetch the changed page from `https://imanhuson.github.io/Portfolio/...` and check the new content is actually being served (Pages can serve the old version for a minute after a green run).
+5. **Report with links:** end with direct links to each changed page (not just the landing page), one line on what to look at, and an explicit request for feedback. Live roots: `/Portfolio/` (landing), `/Portfolio/Iman_Kasim_Portfolio.html`, `/Portfolio/book-site-react/`, `/Portfolio/red-rising-archive/`, `/Portfolio/the-rising-archive/`, `/Portfolio/attack-on-titan-archive/`.
+
+Pushes that only touch `.claude/`, `CLAUDE.md` or `AGENTS.md` files don't deploy (`paths-ignore` in `pages.yml`), because they change nothing on the site. If a manual redeploy is ever needed, the workflow also has `workflow_dispatch`.
+
 ## Default approach when asked to build a new site here (read this first)
 
 Every tool listed in this file — skills and libraries both — is available. The point of this section is to make sure they're all *considered*, not that they're all *used*. Stacking every library onto one site is not what makes it look premium; the `web_cheatcodes.pdf` someone sent for this repo ends with the line that actually matters: *"Good design + typography + spacing + 2–3 intentional animations > 50 random effects."* Take that literally.

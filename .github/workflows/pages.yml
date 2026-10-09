@@ -9,6 +9,13 @@ name: Deploy Pages
 on:
   push:
     branches: [main]
+    # Skill, agent and instruction-file changes don't touch the site, so
+    # they don't need a rebuild. Any push that also changes a site file
+    # still deploys.
+    paths-ignore:
+      - ".claude/**"
+      - "CLAUDE.md"
+      - "**/AGENTS.md"
   workflow_dispatch:
 
 permissions:
