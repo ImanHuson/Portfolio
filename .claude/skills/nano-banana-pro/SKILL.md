@@ -47,6 +47,8 @@ python3 .claude/skills/nano-banana-pro/generate_image.py \
 
 ## Choosing parameters
 
+- **Model** — the default is Nano Banana 2 (Gemini 3.1 Flash Image, about $0.045 per image). Add `--pro` for Nano Banana Pro (Gemini 3 Pro Image, about $0.134 per 1K/2K image) only for hero images, close-ups where detail decides quality, or text inside the image. Neither has a free API tier: billing must be on in AI Studio.
+- **Multiple references** — `--input` is repeatable (Google accepts up to 14 images): edit one image, transfer a style from one to another, or keep a character consistent across a set by passing earlier results back in.
 - **Aspect ratio** — pick what fits the slot:
   - `16:9` — hero banners, OG images, video thumbnails (default)
   - `1:1` — avatars, square cards, Instagram
@@ -58,6 +60,8 @@ python3 .claude/skills/nano-banana-pro/generate_image.py \
 - **Output path** — save into the project's static asset folder (`public/`, `static/`, `assets/`, `src/assets/`, etc.). Pick the existing convention by inspecting the repo.
 
 ## Prompting tips for great web visuals
+
+Prompt patterns by use (hero, texture, product, illustration, editing, style transfer) are in `references/prompting-guide.md`.
 
 Nano Banana Pro is strong at photorealism, typography, and following compositional instructions. For the best output:
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate images with Google's Nano Banana Pro (Gemini 3 Pro Image).
+"""Generate images with Google's Nano Banana models (Gemini 3.1 Flash Image by default, 3 Pro Image with --pro).
 
 Defaults to the Gemini Developer API (auth via GEMINI_API_KEY).
 To use Vertex AI instead, set GOOGLE_GENAI_USE_VERTEXAI=true plus
@@ -12,20 +12,26 @@ import os
 import sys
 from pathlib import Path
 
-DEFAULT_MODEL = "gemini-3-pro-image-preview"
+# Flash (Nano Banana 2) is the cheap default (~$0.045/image); Pro (~$0.134 at 1K/2K)
+# is for hero images and text in the image. Model ids are tried with and without
+# "-preview", since Google lists both forms.
+PRO_MODEL = "gemini-3-pro-image-preview"
+FLASH_MODEL = "gemini-3.1-flash-image-preview"
+DEFAULT_MODEL = FLASH_MODEL
 ASPECT_RATIOS = ["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"]
 SIZES = ["1K", "2K", "4K"]
 
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        description="Generate an image with Nano Banana Pro (Gemini 3 Pro Image).",
+        description="Generate an image with Nano Banana (Gemini 3.1 Flash Image; --pro for Gemini 3 Pro Image).",
     )
     p.add_argument("prompt", help="Text prompt describing the image.")
     p.add_argument("-o", "--output", required=True, help="Output image file path (e.g. public/hero.png).")
     p.add_argument("--aspect-ratio", default="16:9", choices=ASPECT_RATIOS, help="Image aspect ratio (default: 16:9).")
     p.add_argument("--size", default="2K", choices=SIZES, help="Image resolution tier (default: 2K).")
-    p.add_argument("--model", default=DEFAULT_MODEL, help=f"Model ID (default: {DEFAULT_MODEL}).")
+    p.add_argument("--model", default=None, help=f"Model ID (default: {DEFAULT_MODEL}).")
+    p.add_argument("--pro", action="store_true", help=f"Use Nano Banana Pro ({PRO_MODEL}): hero images, text in the image.")
     p.add_argument(
         "--input",
         action="append",
@@ -89,15 +95,25 @@ def main() -> int:
     for ref in args.input:
         contents.append(load_input_image(ref))
 
-    print(f"generating with {args.model} ({args.aspect_ratio}, {args.size})...", file=sys.stderr)
-    response = client.models.generate_content(
-        model=args.model,
-        contents=contents,
-        config=types.GenerateContentConfig(
-            response_modalities=["TEXT", "IMAGE"],
-            image_config=types.ImageConfig(aspect_ratio=args.aspect_ratio, image_size=args.size),
-        ),
-    )
+    model = args.model or (PRO_MODEL if args.pro else DEFAULT_MODEL)
+    candidates = [model] + ([model.removesuffix("-preview")] if model.endswith("-preview") else [])
+    response = None
+    for i, m in enumerate(candidates):
+        print(f"generating with {m} ({args.aspect_ratio}, {args.size})...", file=sys.stderr)
+        try:
+            response = client.models.generate_content(
+                model=m,
+                contents=contents,
+                config=types.GenerateContentConfig(
+                    response_modalities=["TEXT", "IMAGE"],
+                    image_config=types.ImageConfig(aspect_ratio=args.aspect_ratio, image_size=args.size),
+                ),
+            )
+            break
+        except Exception as e:  # unknown model id -> try the next spelling; anything else is real
+            if i + 1 < len(candidates) and ("404" in str(e) or "NOT_FOUND" in str(e)):
+                continue
+            raise
 
     saved = False
     for part in response.parts:
