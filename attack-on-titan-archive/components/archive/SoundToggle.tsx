@@ -3,8 +3,8 @@
 import { useSyncExternalStore } from "react";
 import { sound } from "@/lib/audio/engine";
 
-/** Off by default. Sound starts only on this click (browsers block
- * autoplay, and nobody should be ambushed by audio). */
+/** Off by default. The score and the ambience start only on this click
+ * (browsers block autoplay, and nobody should be ambushed by audio). */
 export default function SoundToggle() {
   const on = useSyncExternalStore(sound.subscribe, sound.getSnapshot, () => false);
   return (
@@ -12,7 +12,7 @@ export default function SoundToggle() {
       type="button"
       data-js-only
       aria-pressed={on}
-      aria-label="Sound"
+      aria-label="Sound and score"
       onClick={() => void sound.toggle()}
       className="group flex items-center gap-2 py-2 font-military text-[0.85rem] tracking-[0.14em] whitespace-nowrap text-paper/80 sm:tracking-[0.24em] uppercase transition-colors hover:text-paper"
     >
@@ -25,7 +25,7 @@ export default function SoundToggle() {
           />
         ))}
       </span>
-      <span className="sr-only sm:not-sr-only">Sound {on ? "on" : "off"}</span>
+      <span className="sr-only sm:not-sr-only">Score {on ? "on" : "off"}</span>
     </button>
   );
 }

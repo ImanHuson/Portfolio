@@ -4,6 +4,7 @@ import NextChapter from "@/components/typography/NextChapter";
 import { asset } from "@/lib/utils";
 import TitanGrid from "@/components/titans/TitanGrid";
 import { INHERITANCE, ORIGIN, TITANS } from "@/lib/data/titans";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
 
 export const metadata: Metadata = {
   title: "The Titans",
@@ -31,7 +32,8 @@ export default function Titans() {
       </section>
 
       {/* to scale, against the Wall */}
-      <section aria-labelledby="scale-title" className="border-t border-line bg-[radial-gradient(ellipse_at_50%_100%,rgba(138,116,100,0.16),transparent_60%)] px-4 py-24 md:px-8 md:py-32">
+      <section aria-labelledby="scale-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
+        <SectionBackdrop src="/images/opening-845.webp" position="40% 40%" strength={0.26} />
         <div className="mx-auto max-w-[1500px]">
           <h2 id="scale-title" className="font-display text-h2 leading-tight font-bold text-paper">
             To scale
@@ -62,11 +64,11 @@ export default function Titans() {
                 })}
               </div>
             </div>
-            <figcaption className="mt-3 grid grid-cols-9 gap-1 text-center font-mono text-meta tracking-[0.08em] text-ash md:text-meta">
+            <figcaption className="mt-3 grid grid-cols-9 gap-1 text-center font-mono text-meta whitespace-nowrap text-ash md:tracking-[0.08em]">
               {TITANS.map((t) => (
-                <span key={t.slug}>
+                <span key={t.slug} className="min-w-0">
                   <span className="hidden md:inline">{t.name.replace(" Titan", "")} </span>
-                  {t.height} m
+                  {t.height}<span className="hidden sm:inline">&nbsp;m</span>
                 </span>
               ))}
             </figcaption>

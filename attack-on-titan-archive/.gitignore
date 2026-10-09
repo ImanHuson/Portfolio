@@ -40,6 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 portraits-src/
+bg-src/
 titans-src/
 scripts/basement/gen/
 basement-src/

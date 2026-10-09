@@ -3,6 +3,7 @@ import { Barlow, Barlow_Condensed, Cinzel, Courier_Prime, IM_Fell_English } from
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import SiteNav from "@/components/navigation/SiteNav";
 import SiteFooter from "@/components/navigation/SiteFooter";
+import ScoreDirector from "@/components/archive/ScoreDirector";
 import "./globals.css";
 
 // Typography, matched to the show's own lettering (brief section 03):
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <SmoothScroll>
           <SiteNav />
+          <ScoreDirector />
           <main id="main">{children}</main>
           <SiteFooter />
         </SmoothScroll>

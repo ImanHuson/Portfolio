@@ -1,7 +1,10 @@
 // Procedural sound: no audio files, nothing autoplays. Everything is
 // synthesized with the Web Audio API after the visitor switches sound on
 // (a user gesture, which browsers require before audio can start).
-// Brief section 05: "No music. Wind. Distant birds. Very subtle ambience."
+// Wind, distant birds, the crack of the opening's cues, and an original
+// score (score.ts) whose mood follows the act being read.
+
+import { Score, type Mood } from "./score";
 
 export type Cue = "arrival" | "breach" | "rumble";
 
@@ -12,6 +15,8 @@ class SoundEngine {
   private master: GainNode | null = null;
   private wind: { gain: GainNode; stop: () => void } | null = null;
   private birdTimer: number | null = null;
+  private score: Score | null = null;
+  private mood: Mood = "humanity";
   private listeners = new Set<Listener>();
   enabled = false;
 
@@ -31,6 +36,8 @@ class SoundEngine {
     this.master = this.ctx.createGain();
     this.master.gain.value = 0.6;
     this.master.connect(this.ctx.destination);
+    this.score = new Score(this.ctx, this.master);
+    this.score.setMood(this.mood);
     return this.ctx;
   }
 
@@ -58,6 +65,7 @@ class SoundEngine {
     this.enabled = true;
     this.startWind();
     this.scheduleBird();
+    this.score?.start();
     this.emit();
   }
 
@@ -65,6 +73,7 @@ class SoundEngine {
     this.enabled = false;
     this.wind?.stop();
     this.wind = null;
+    this.score?.stop();
     if (this.birdTimer !== null) window.clearTimeout(this.birdTimer);
     this.birdTimer = null;
     void this.ctx?.suspend();
@@ -90,7 +99,7 @@ class SoundEngine {
     lfo.connect(lfoGain).connect(band.frequency);
     const gain = ctx.createGain();
     gain.gain.value = 0;
-    gain.gain.linearRampToValueAtTime(0.22, ctx.currentTime + 4);
+    gain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 4); // under the score
     src.connect(band).connect(gain).connect(this.master);
     src.start();
     lfo.start();
@@ -136,6 +145,12 @@ class SoundEngine {
       o.start(t);
       o.stop(t + 0.12);
     }
+  }
+
+  /** The act being read sets the score's mood (kept even while sound is off). */
+  setMood(m: Mood) {
+    this.mood = m;
+    this.score?.setMood(m);
   }
 
   cue(c: Cue) {

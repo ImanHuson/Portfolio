@@ -3,6 +3,7 @@ import ChapterHeader from "@/components/typography/ChapterHeader";
 import NextChapter from "@/components/typography/NextChapter";
 import WallsMap from "@/components/archive/WallsMap";
 import Sealed from "@/components/archive/Sealed";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
 
 export const metadata: Metadata = {
   title: "The Fall",
@@ -61,7 +62,8 @@ export default function TheFall() {
         lede="In one day in 845 the outer Wall failed, and with it more than a third of the land humanity had left."
       />
 
-      <section aria-label="The record, 845 to 847" className="px-4 py-24 md:px-8 md:py-32">
+      <section aria-label="The record, 845 to 847" className="relative isolate px-4 py-24 md:px-8 md:py-32">
+        <SectionBackdrop src="/images/fall-845.webp" position="50% 35%" strength={0.3} />
         <ol className="mx-auto max-w-[1400px]">
           {LEDGER.map((e, i) => {
             const first = i === 0 || LEDGER[i - 1].year !== e.year;

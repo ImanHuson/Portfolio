@@ -5,6 +5,7 @@ import Sealed from "@/components/archive/Sealed";
 import Descent from "@/components/sections/Descent";
 import { BOOKS, KEY_845, KEY_845_SEALED, PHOTOGRAPH } from "@/lib/data/basement";
 import { asset } from "@/lib/utils";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
 
 export const metadata: Metadata = {
   title: "The Basement",
@@ -30,7 +31,8 @@ export default function TheBasement() {
 
       {/* The print and the books: paper objects on the same dark ground as the rest of the archive. */}
       <div>
-        <section aria-labelledby="photo-title" className="px-4 pt-24 pb-20 md:px-8 md:pt-32 md:pb-28">
+        <section aria-labelledby="photo-title" className="relative isolate px-4 pt-24 pb-20 md:px-8 md:pt-32 md:pb-28">
+          <SectionBackdrop src="/images/basement/descent-4.webp" position="50% 60%" strength={0.28} />
           <div className="mx-auto grid max-w-[1400px] items-start gap-14 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
             <div className="lg:sticky lg:top-[calc(var(--nav-h)+3rem)]">
               <h2 id="photo-title" className="font-display text-h2 leading-[1.02] font-bold text-paper">
@@ -75,7 +77,8 @@ export default function TheBasement() {
           </div>
         </section>
 
-        <section aria-labelledby="books-title" className="border-t border-line px-4 py-20 md:px-8 md:py-28">
+        <section aria-labelledby="books-title" className="relative isolate border-t border-line px-4 py-20 md:px-8 md:py-28">
+          <SectionBackdrop src="/images/basement/descent-5.webp" position="50% 55%" strength={0.3} />
           <div className="mx-auto grid max-w-[1400px] gap-14 md:grid-cols-2">
             <div>
               <h2 id="books-title" className="font-display text-h2 leading-[1.02] font-bold text-paper">
@@ -110,7 +113,8 @@ export default function TheBasement() {
         </section>
       </div>
 
-      <section aria-labelledby="key-title" className="px-4 py-24 md:px-8 md:py-32">
+      <section aria-labelledby="key-title" className="relative isolate px-4 py-24 md:px-8 md:py-32">
+        <SectionBackdrop src="/images/basement/descent-3.webp" position="50% 45%" strength={0.22} />
         <div className="mx-auto grid max-w-[1400px] gap-10 md:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] md:gap-20">
           <div>
             <h2 id="key-title" className="font-display text-h2 leading-tight font-bold text-paper">
