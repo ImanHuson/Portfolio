@@ -5,6 +5,8 @@ import NextChapter from "@/components/typography/NextChapter";
 import Sealed from "@/components/archive/Sealed";
 import OneIsland from "@/components/world/OneIsland";
 import Mirror from "@/components/world/Mirror";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 import {
   FILE_HEAD,
   HISTORY,
@@ -90,7 +92,8 @@ export default function TheWorld() {
 
       {/* A Marleyan file, laid on the same dark desk as everything else: the register
           changes inside the document, never the page around it. */}
-      <div className="px-3 py-10 md:px-8 md:py-16">
+      <div className="relative isolate px-3 pt-24 pb-28 md:px-16 md:pt-40 md:pb-44 xl:px-24">
+        <SectionBackdrop src={BG.liberio.src} credit={BG.liberio.credit} position="60% 50%" strength={0.38} />
         <div className={`file-sheet mx-auto max-w-[1400px] ${INK}`}>
           <div className="sticky top-[var(--nav-h)] z-20 border-b border-[#141412]/25 bg-[#cfccc4]/95 px-4 backdrop-blur-[2px] md:px-8">
             <ul className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-1 py-2 font-mono text-meta tracking-[0.18em] uppercase md:text-meta">

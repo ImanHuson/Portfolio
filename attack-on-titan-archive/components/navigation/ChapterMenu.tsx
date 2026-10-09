@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ACTS, chapterFor } from "@/lib/data/chapters";
 import { WAYS } from "@/lib/data/ways";
+import ReadingProgress from "@/components/archive/ReadingProgress";
 import { cn } from "@/lib/utils";
 
 /**
@@ -101,7 +102,10 @@ export default function ChapterMenu() {
             ))}
           </ul>
         </nav>
-        <p className="mx-auto mt-8 max-w-[1400px] text-[0.9rem] text-ash">Everything past The Wall spoils the story. The last three files ask before they open.</p>
+        <div className="mx-auto mt-8 flex max-w-[1400px] flex-wrap items-center justify-between gap-x-8 gap-y-4">
+          <p className="text-[0.9rem] text-ash">Everything past The Wall spoils the story. The last three files ask before they open.</p>
+          <ReadingProgress />
+        </div>
       </div>
     </details>
   );

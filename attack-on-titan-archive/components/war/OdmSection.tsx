@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import { reducedMotionStore } from "@/lib/animation/tokens";
 import { ODM_PARTS } from "@/lib/data/war";
 import { asset, cn } from "@/lib/utils";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 import type { OdmApi } from "@/components/three/odm/OdmViewer";
 
 const OdmViewer = dynamic(() => import("@/components/three/odm/OdmViewer"), { ssr: false });
@@ -27,7 +29,8 @@ export default function OdmSection() {
   }
 
   return (
-    <section aria-labelledby="odm-title" className="border-t border-line px-4 py-24 md:px-8 md:py-32">
+    <section aria-labelledby="odm-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
+      <SectionBackdrop src={BG.forest.src} credit={BG.forest.credit} position="50% 40%" strength={0.26} />
       <div className="mx-auto max-w-[1400px]">
         <h2 id="odm-title" className="font-display text-h2 leading-tight font-bold text-paper">
           Omni-directional mobility gear

@@ -1,4 +1,5 @@
 import { asset, cn } from "@/lib/utils";
+import { BG_SOURCE } from "@/lib/data/backgrounds";
 
 /**
  * A section's own ground: an image that stays in view while the reader
@@ -12,6 +13,7 @@ export default function SectionBackdrop({
   position = "50% 50%",
   strength = 0.32,
   contain = false,
+  credit,
   className,
 }: {
   src: string;
@@ -20,9 +22,12 @@ export default function SectionBackdrop({
   strength?: number;
   /** a portrait image on wide screens: full height, centred, edges into black */
   contain?: boolean;
+  /** what the image is, shown small at the section's foot */
+  credit?: string;
   className?: string;
 }) {
   return (
+    <>
     <div aria-hidden className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}>
       <div className="sticky top-0 h-[100dvh] w-full">
         <img
@@ -43,5 +48,11 @@ export default function SectionBackdrop({
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-base to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-base to-transparent" />
     </div>
+    {credit && (
+      <p className="absolute right-4 bottom-3 z-10 max-w-[calc(100%-2rem)] text-right font-mono text-meta text-ash/80 md:right-8">
+        Behind this section: {credit}. {BG_SOURCE}.
+      </p>
+    )}
+    </>
   );
 }

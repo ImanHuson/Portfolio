@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import ChapterHeader from "@/components/typography/ChapterHeader";
 import NextChapter from "@/components/typography/NextChapter";
 import PersonnelDesk from "@/components/soldiers/PersonnelDesk";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 export const metadata: Metadata = {
   title: "The Soldiers",
@@ -19,7 +21,8 @@ export default function Soldiers() {
         title="The Soldiers"
         lede="Sixteen files, recovered in whatever state they survived: a burned print, a clipped photograph, a page from a notebook, a poster. Open one."
       />
-      <section aria-label="Personnel files" className="px-4 pb-28 md:px-8 md:pb-40">
+      <section aria-label="Personnel files" className="relative isolate px-4 pb-28 md:px-8 md:pb-40">
+        <SectionBackdrop src={BG.soldiers.src} credit={BG.soldiers.credit} position="50% 40%" strength={0.22} />
         <div className="mx-auto max-w-[1400px]">
           <PersonnelDesk />
           <p className="mt-20 max-w-[70ch] text-[0.85rem] text-ash">

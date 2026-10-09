@@ -13,6 +13,7 @@ export type Event = {
   chapter: string; // AOT-0X, where to read it in full
   href: string;
   sealed?: string; // a spoiling line, behind a seal
+  seal?: string; // what the seal hides, said without spoiling it
 };
 
 export const ERAS: Era[] = [
@@ -56,6 +57,7 @@ export const EVENTS: Event[] = [
     chapter: "AOT-06",
     href: "/the-world/",
     sealed: "The Walls are made of Colossal Titans, standing shoulder to shoulder, asleep.",
+    seal: "what the Walls are made of",
   },
   {
     era: "walls",
@@ -113,6 +115,7 @@ export const EVENTS: Event[] = [
     chapter: "AOT-05",
     href: "/the-basement/",
     sealed: "Only nine of them come back. In the cellar: three books, one photograph, and the truth about the world outside.",
+    seal: "who comes back, and what is in the cellar",
   },
   {
     era: "end",
@@ -130,6 +133,7 @@ export const EVENTS: Event[] = [
     chapter: "AOT-07",
     href: "/the-war/",
     sealed: "Eren, hidden in the internment zone, transforms beneath the stage.",
+    seal: "who is beneath the stage",
   },
   {
     era: "end",
@@ -139,6 +143,7 @@ export const EVENTS: Event[] = [
     chapter: "AOT-08",
     href: "/the-rumbling/",
     sealed: "The Walls wake, and walk. About eight in ten people alive are killed before it is stopped.",
+    seal: "what the Rumbling is, and what it costs",
   },
   {
     era: "end",
@@ -148,5 +153,6 @@ export const EVENTS: Event[] = [
     chapter: "AOT-10",
     href: "/the-end/",
     sealed: "Mikasa ends it. The power of the Titans leaves the world.",
+    seal: "how it ends",
   },
 ];

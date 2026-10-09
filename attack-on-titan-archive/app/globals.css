@@ -395,3 +395,6 @@ summary:active > .press {
 @media (prefers-reduced-motion: reduce) {
   .timeline-progress { animation-duration: auto !important; }
 }
+
+/* A seal past the reader's "open seals up to" line says so (set by ReadingSync). */
+details[data-ahead="1"]:not([open]) .ahead-note { display: inline; }

@@ -1,13 +1,16 @@
 import Sealed from "@/components/archive/Sealed";
 import { MEMORIAL, MEMORIAL_104, MEMORIAL_NOTE, TROST_LOSS } from "@/lib/data/war";
 import { cn } from "@/lib/utils";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 const UNNAMED = 144;
 
 /** A quiet list. The dead fade as they pass; the living stay. No effects beyond that. */
 export default function Memorial() {
   return (
-    <section aria-labelledby="memorial-title" className="border-t border-line bg-void px-4 py-28 md:px-8 md:py-40">
+    <section aria-labelledby="memorial-title" className="relative isolate border-t border-line bg-void px-4 py-28 md:px-8 md:py-40">
+      <SectionBackdrop src={BG.memorial.src} credit={BG.memorial.credit} position="50% 45%" strength={0.24} />
       <div className="mx-auto max-w-[900px]">
         <header className="text-center">
           <h2 id="memorial-title" className="font-display text-h1 leading-none font-bold tracking-[0.06em] text-paper uppercase">

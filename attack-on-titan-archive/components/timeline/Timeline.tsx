@@ -5,6 +5,7 @@ import Link from "next/link";
 import Sealed from "@/components/archive/Sealed";
 import { ERAS, EVENTS } from "@/lib/data/timeline";
 import { cn } from "@/lib/utils";
+import ReadingProgress from "@/components/archive/ReadingProgress";
 
 /**
  * The whole story on one line. Wide screens: a horizontal track you can drag
@@ -40,7 +41,13 @@ export default function Timeline() {
 
   return (
     <div className="[timeline-scope:--tl]">
-      <nav aria-label="Eras" data-js-only className="mx-auto flex max-w-[1400px] flex-wrap gap-2 px-4 md:px-8">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8">
+        <p className="max-w-[60ch] text-paper/80">
+          The whole story is on this line. Anything a later chapter reveals is sealed under that chapter: set how far you have read and the seals up to there open; the rest stay shut.
+        </p>
+        <ReadingProgress className="mt-5" />
+      </div>
+      <nav aria-label="Eras" data-js-only className="mx-auto mt-10 flex max-w-[1400px] flex-wrap gap-2 px-4 md:px-8">
         {ERAS.map((e) => (
           <button
             key={e.id}
@@ -100,7 +107,7 @@ export default function Timeline() {
               <h3 className="mt-3 font-military text-[1.25rem] font-semibold tracking-[0.1em] text-paper uppercase">{ev.title}</h3>
               <p className="mt-2 max-w-[44ch] leading-relaxed text-paper/80">{ev.text}</p>
               {ev.sealed && (
-                <Sealed label={`Sealed: until ${ev.chapter}`} className="mt-4 max-w-[44ch]">
+                <Sealed label={`Sealed: ${ev.seal ?? "a later chapter"}`} chapter={ev.chapter} className="mt-4 max-w-[44ch]">
                   <p className="pt-1 leading-relaxed text-paper/85">{ev.sealed}</p>
                 </Sealed>
               )}

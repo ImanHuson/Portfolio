@@ -31,7 +31,7 @@ export default function Regiments() {
                   {b.command.map((c) => (
                     <li key={c.name + c.note}>
                       {c.sealed ? (
-                        <Sealed label={`Sealed: ${c.note.toLowerCase()}`}>
+                        <Sealed label={`Sealed: who became ${c.note.toLowerCase()}`} chapter={c.sealed}>
                           <Commander {...c} />
                         </Sealed>
                       ) : (
@@ -46,7 +46,7 @@ export default function Regiments() {
             </dl>
 
             {b.sealed && (
-              <Sealed label={`Sealed: ${b.sealed.label}`}>
+              <Sealed label={`Sealed: ${b.sealed.label}`} chapter={b.sealed.chapter}>
                 <p className="max-w-[60ch] leading-relaxed text-paper/85">{b.sealed.text}</p>
                 <ul className="mt-4 grid max-w-sm grid-cols-3 gap-3">
                   {["reiner", "annie"].map((s) => (
@@ -56,6 +56,26 @@ export default function Regiments() {
                   ))}
                 </ul>
               </Sealed>
+            )}
+
+            {b.named && (
+              <div>
+                <p className={label}>Also on record</p>
+                <ul className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-x-8 gap-y-5 sm:grid-cols-2">
+                  {b.named.map((n) => (
+                    <li key={n.name} className="border-l border-line pl-4">
+                      <p className="font-military text-[1.1rem] font-semibold tracking-[0.08em] text-paper uppercase">{n.name}</p>
+                      <p className="mt-1 max-w-[46ch] leading-relaxed text-paper/80">{n.note}</p>
+                      {n.sealed && (
+                        <Sealed label="Sealed: what became of him" chapter={n.sealed.chapter} className="mt-3">
+                          <p className="leading-relaxed text-paper/85">{n.sealed.text}</p>
+                        </Sealed>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-[0.9rem] text-ash">No personnel file yet: these files need a photograph.</p>
+              </div>
             )}
 
             {b.members.length > 0 && (

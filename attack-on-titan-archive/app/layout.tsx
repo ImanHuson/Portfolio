@@ -4,6 +4,7 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import SiteNav from "@/components/navigation/SiteNav";
 import SiteFooter from "@/components/navigation/SiteFooter";
 import ScoreDirector from "@/components/archive/ScoreDirector";
+import ReadingSync from "@/components/archive/ReadingSync";
 import "./globals.css";
 
 // Typography, matched to the show's own lettering (brief section 03):
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SmoothScroll>
           <SiteNav />
           <ScoreDirector />
+          <ReadingSync />
           <main id="main">{children}</main>
           <SiteFooter />
         </SmoothScroll>

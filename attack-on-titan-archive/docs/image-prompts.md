@@ -1,5 +1,16 @@
 # Section backgrounds to generate (Gemini Nano Banana or ChatGPT)
 
+**Status (stand-ins live):** prompts 2-7 now have public-domain stand-ins on
+the site, chosen from the Cleveland Museum of Art's Open Access collection
+(CC0) and graded by `scripts/bg/sourced.py`: Homer's *A Bivouac Fire on the
+Potomac* (soldiers), Veneziano's *Skeletons* (titans), Sutcliffe's *Harbor
+Scene* (liberio), Famin's *Forest of Fontainebleau* (forest), Barnard's
+*Battlefield of New Hope Church* (memorial) and Nolli's map of Rome in
+negative (archive). A generated image only needs making if it would beat the
+stand-in; drop it in `bg-src/` under the same name, run `treat.py`, and remove
+that line from `sourced.py`'s JOBS so it isn't overwritten. Prompt 1
+(`paths-wide.png`) has no stand-in.
+
 These are the sections whose background needs a real illustration or
 photographic environment, which the tools in this repo can't make well (they
 read as game assets). Paste one prompt per image. Save each result in

@@ -5,6 +5,7 @@ import { asset } from "@/lib/utils";
 import TitanGrid from "@/components/titans/TitanGrid";
 import { INHERITANCE, ORIGIN, TITANS } from "@/lib/data/titans";
 import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 export const metadata: Metadata = {
   title: "The Titans",
@@ -76,7 +77,8 @@ export default function Titans() {
         </div>
       </section>
 
-      <section aria-labelledby="rules-title" className="border-t border-line px-4 py-24 md:px-8 md:py-32">
+      <section aria-labelledby="rules-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
+        <SectionBackdrop src={BG.titans.src} credit={BG.titans.credit} position="55% 40%" strength={0.3} />
         <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-2">
           <h2 id="rules-title" className="font-display text-h2 leading-tight font-bold text-paper">
             How a Titan is inherited

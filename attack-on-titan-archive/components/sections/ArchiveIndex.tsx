@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ACTS, type Chapter } from "@/lib/data/chapters";
 import { WAYS } from "@/lib/data/ways";
 import { asset, cn } from "@/lib/utils";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
   return (
@@ -43,7 +45,8 @@ function ChapterCard({ c, feature }: { c: Chapter; feature?: boolean }) {
  * where it takes you, so choosing is by sight as well as by title. */
 export default function ArchiveIndex() {
   return (
-    <section id="index" aria-labelledby="index-title" className="relative px-4 py-24 md:px-8 md:py-36">
+    <section id="index" aria-labelledby="index-title" className="relative isolate px-4 py-24 md:px-8 md:py-36">
+      <SectionBackdrop src={BG.archive.src} credit={BG.archive.credit} position="50% 50%" strength={0.2} />
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end md:gap-16">
           <h2 id="index-title" className="font-display text-h1 leading-[0.95] font-bold text-paper">
