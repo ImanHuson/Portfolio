@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 /**
  * The last three files are the ending. The whole chapter sits inside a
@@ -20,7 +22,8 @@ export default function EndingGate({ id, title, children }: { id: string; title:
   }, []);
   return (
     <details ref={ref} className="ending-gate group">
-      <summary className="flex min-h-[100dvh] cursor-pointer list-none flex-col items-center justify-center gap-8 bg-void px-6 pt-[var(--nav-h)] text-center group-open:hidden [&::-webkit-details-marker]:hidden">
+      <summary className="relative isolate flex min-h-[100dvh] cursor-pointer list-none flex-col items-center justify-center gap-8 bg-void px-6 pt-[var(--nav-h)] text-center group-open:hidden [&::-webkit-details-marker]:hidden">
+        <SectionBackdrop src={BG.cityInk.src} position="50% 50%" strength={0.14} />
         <p className="font-mono text-meta tracking-[0.3em] text-ash uppercase">{id}</p>
         <h1 className="font-display text-h1 leading-none font-bold text-paper uppercase">{title}</h1>
         <p className="max-w-[40ch] font-serif text-lede text-paper/70 italic">This file holds the ending of the story. Nothing past this point is sealed.</p>

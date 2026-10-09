@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ChapterHeader from "@/components/typography/ChapterHeader";
+import { BG } from "@/lib/data/backgrounds";
 import NextChapter from "@/components/typography/NextChapter";
 import BattleSection from "@/components/war/BattleSection";
 import OdmSection from "@/components/war/OdmSection";
@@ -17,7 +18,8 @@ export default function TheWar() {
     <>
       <ChapterHeader
         id="AOT-07"
-        image="/images/heads/war.webp"
+        image={BG.siegeLeft.src}
+        credit={BG.siegeLeft.credit}
         imagePosition="50% 50%"
         title="The War"
         lede="Five battles inside the Walls in a single year, two more across the sea, the gear that let people fight at all, and what it cost."

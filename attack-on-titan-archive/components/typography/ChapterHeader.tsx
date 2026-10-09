@@ -9,23 +9,26 @@ export default function ChapterHeader({
   lede,
   image,
   imagePosition = "50% 50%",
+  credit,
 }: {
   id: string;
   title: string;
   lede: React.ReactNode;
   image: string;
   imagePosition?: string;
+  /** what the frame is, small in the corner */
+  credit?: string;
 }) {
   const chapter = CHAPTERS.find((c) => c.id === id);
   return (
-    <header className="relative min-h-[82dvh] overflow-hidden px-4 pt-[calc(var(--nav-h)+2rem)] md:px-8">
+    <header className="hd relative min-h-[82dvh] overflow-hidden px-4 pt-[calc(var(--nav-h)+2rem)] md:px-8">
       <img
         src={asset(image)}
         alt=""
         width={1680}
         height={1050}
         fetchPriority="high"
-        className="absolute inset-0 size-full object-cover"
+        className="hd-move absolute inset-0 size-full object-cover"
         style={{ objectPosition: imagePosition }}
       />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-base from-15% via-base/70 to-base/20 md:from-5% md:via-base/50" />
@@ -38,6 +41,7 @@ export default function ChapterHeader({
         <h1 className="mt-4 font-display text-h1 leading-[0.92] font-extrabold text-paper uppercase">{title}</h1>
         <div className="mt-6 max-w-[52ch] font-serif text-lede leading-snug text-paper/90 italic">{lede}</div>
       </div>
+      {credit && <p className="absolute right-4 bottom-3 max-w-[calc(100%-2rem)] text-right font-mono text-meta text-ash/80 md:right-8">{credit}</p>}
     </header>
   );
 }

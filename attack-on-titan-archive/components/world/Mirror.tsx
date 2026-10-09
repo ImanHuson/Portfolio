@@ -5,10 +5,11 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { reducedMotionStore } from "@/lib/animation/tokens";
-import { getLenis } from "@/components/providers/SmoothScroll";
 import Sealed from "@/components/archive/Sealed";
 import { MIRRORS, type MirrorPair, type MirrorStage } from "@/lib/data/world";
 import { asset, cn } from "@/lib/utils";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -75,7 +76,8 @@ function PairTable({ pair }: { pair: MirrorPair }) {
 
 function StaticMirror() {
   return (
-    <section aria-labelledby="mirror-title" className="px-4 py-20 md:px-8 md:py-28">
+    <section aria-labelledby="mirror-title" className="relative isolate px-4 py-20 md:px-8 md:py-28">
+      <SectionBackdrop src={BG.colossiPair.src} credit={BG.colossiPair.credit} position="50% 60%" strength={0.2} />
       <div className="mx-auto grid max-w-[1200px] gap-16">
         <h2 id="mirror-title" className="text-center font-mono text-meta tracking-[0.3em] text-ash uppercase">
           The mirror: six pairs
@@ -153,9 +155,7 @@ export default function Mirror() {
     // stage dipping out and back so the swap does not teleport; the tabs stay put
     const stage = [...host.querySelectorAll<HTMLElement>(".sticky > :not([role='tablist'])")];
     stage.forEach((el) => Object.assign(el.style, { transition: "none", opacity: "0" }));
-    const lenis = getLenis();
-    if (lenis) lenis.scrollTo(top, { immediate: true, force: true });
-    else window.scrollTo({ top });
+    window.scrollTo({ top, behavior: "instant" });
     requestAnimationFrame(() =>
       requestAnimationFrame(() =>
         stage.forEach((el) => Object.assign(el.style, { transition: "opacity 200ms var(--ease-out)", opacity: "" })),
@@ -166,7 +166,8 @@ export default function Mirror() {
   if (mode !== "cinematic") return <StaticMirror />;
 
   return (
-    <section ref={hostRef} aria-labelledby="mirror-title" className="relative h-[900vh]">
+    <section ref={hostRef} aria-labelledby="mirror-title" className="relative isolate h-[900vh]">
+      <SectionBackdrop src={BG.colossiPair.src} position="50% 60%" strength={0.2} />
       <div className="sticky top-0 flex h-[100dvh] flex-col overflow-hidden pt-[var(--nav-h)]">
         <h2 id="mirror-title" className="sr-only">
           The mirror

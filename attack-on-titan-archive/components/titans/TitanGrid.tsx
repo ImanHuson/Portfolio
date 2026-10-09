@@ -88,7 +88,7 @@ export default function TitanGrid() {
           className="xray-veil transition-opacity duration-[220ms] ease-[var(--ease-out)]"
           style={{
             opacity: phase === 2 ? 1 : 0,
-            backgroundImage: `url(${asset(`/images/titans/${entering}-xray.webp`)})`,
+            backgroundImage: `url(${asset(`/images/titans/${entering}-plate.webp`)})`,
           }}
         />
       )}

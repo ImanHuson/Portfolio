@@ -1,44 +1,12 @@
 "use client";
 
-import { useRef, useState, useSyncExternalStore } from "react";
-import dynamic from "next/dynamic";
-import { reducedMotionStore } from "@/lib/animation/tokens";
+import { useState } from "react";
 import Sealed from "@/components/archive/Sealed";
-import { BATTLES, MAINLAND, SIDE_CSS, WALL_KM, type Battle } from "@/lib/data/war";
+import { BATTLES, MAINLAND, SIDE_CSS, type Battle } from "@/lib/data/war";
 import { cn } from "@/lib/utils";
-import type { MapApi } from "@/components/three/battlemap/BattleMap";
-
-const BattleMap = dynamic(() => import("@/components/three/battlemap/BattleMap"), { ssr: false });
-
-const noSub = () => () => {};
-
-/** The flat version (JS off, and the key under the 3D map): Walls, districts, battles. */
-function FlatMap({ className }: { className?: string }) {
-  const S = 0.1; // px per km in the 110-unit box
-  const pt = (deg: number, km: number) => {
-    const a = (deg * Math.PI) / 180;
-    return [55 + Math.sin(a) * km * S, 55 - Math.cos(a) * km * S];
-  };
-  return (
-    <svg viewBox="0 0 110 110" className={className} role="img" aria-label="The Walls, with the battles of 850 marked">
-      <rect width="110" height="110" fill="#121310" />
-      <circle cx="55" cy="55" r={WALL_KM.maria * S} fill="#1a1b17" stroke="#c7c0a9" strokeWidth="0.6" />
-      <circle cx="55" cy="55" r={WALL_KM.rose * S} fill="#1f201b" stroke="#c7c0a9" strokeWidth="0.5" />
-      <circle cx="55" cy="55" r={WALL_KM.sina * S} fill="#24251f" stroke="#c7c0a9" strokeWidth="0.45" />
-      {BATTLES.map((b) => {
-        const [x, y] = pt(b.at.deg, b.at.km);
-        return (
-          <g key={b.id}>
-            <circle cx={x} cy={y} r="1.6" fill="#e0685c" />
-            <text x={x + 2.4} y={y + 1} fontSize="3" fill="#d8d0b8" fontFamily="monospace">
-              {b.name}
-            </text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
+import WarMap from "@/components/war/WarMap";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 function BattleFile({ b, onBack }: { b: Battle; onBack?: () => void }) {
   return (
@@ -86,41 +54,32 @@ function BattleFile({ b, onBack }: { b: Battle; onBack?: () => void }) {
 }
 
 export default function BattleSection() {
-  const hydrated = useSyncExternalStore(noSub, () => true, () => false);
-  const reduced = useSyncExternalStore(reducedMotionStore.subscribe, reducedMotionStore.getSnapshot, () => false);
-  const api = useRef<MapApi | null>(null);
   const [picked, setPicked] = useState<string | null>(null);
   const battle = BATTLES.find((b) => b.id === picked);
 
   function pick(id: string | null) {
     setPicked(id);
-    api.current?.focus(id);
   }
 
   return (
-    <section aria-labelledby="map-title" className="px-4 py-24 md:px-8 md:py-32">
+    <section aria-labelledby="map-title" className="relative isolate px-4 py-24 md:px-8 md:py-32">
+      <SectionBackdrop src={BG.siegeRight.src} credit={BG.siegeRight.credit} position="50% 40%" strength={0.16} />
       <div className="mx-auto max-w-[1400px]">
         <h2 id="map-title" className="font-display text-h2 leading-tight font-bold text-paper">
           850: five battles in one year
         </h2>
         <p className="mt-4 max-w-[62ch] text-lede leading-relaxed text-paper/80">
-          Choose a battle to go down to it. The Walls and districts sit where the story puts them; the land itself is illustrative, and the forces are schematic.
+          Choose a battle to go in close. The Walls and districts sit where the story puts them; the relief and rivers are illustrative, and the forces are schematic.
         </p>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-12">
-          <div className="relative aspect-[4/5] overflow-hidden bg-[#0b0c0a] sm:aspect-[16/10]">
-            {hydrated ? (
-              <BattleMap apiRef={api} reduced={reduced} onPick={(id) => pick(id)} className="absolute inset-0" />
-            ) : (
-              <FlatMap className="absolute inset-0 size-full" />
-            )}
-          </div>
+          <WarMap picked={picked} onPick={pick} className="aspect-square border border-line sm:aspect-[16/11]" />
 
           <div aria-live="polite">
-            {hydrated && battle ? (
+            {battle ? (
               <BattleFile b={battle} onBack={() => pick(null)} />
-            ) : hydrated ? (
-              <div>
+            ) : (
+              <div data-js-only>
                 <p className="text-paper/70">Or choose from the list:</p>
                 <ul className="mt-4 grid gap-1">
                   {BATTLES.map((b) => (
@@ -137,7 +96,7 @@ export default function BattleSection() {
                   ))}
                 </ul>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
 

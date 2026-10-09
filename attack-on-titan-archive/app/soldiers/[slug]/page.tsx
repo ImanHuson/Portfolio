@@ -5,6 +5,8 @@ import Sealed from "@/components/archive/Sealed";
 import { PEOPLE, getPerson } from "@/lib/data/people";
 import { PORTRAITS } from "@/lib/data/portraits";
 import { asset } from "@/lib/utils";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 export const dynamicParams = false;
 
@@ -51,7 +53,8 @@ export default async function Dossier({ params }: PageProps<"/soldiers/[slug]">)
   const credit = PORTRAITS.find((x) => x.id === p.slug);
 
   return (
-    <article className="px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
+    <article className="relative isolate px-4 pt-[calc(var(--nav-h)+3rem)] md:px-8">
+      <SectionBackdrop src={BG.soldiers.src} credit={BG.soldiers.credit} position="50% 40%" strength={0.14} />
       <div className="mx-auto max-w-[1400px]">
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.16em] text-paper/60 uppercase">

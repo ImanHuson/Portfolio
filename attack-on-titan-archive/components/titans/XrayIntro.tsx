@@ -44,7 +44,7 @@ export default function XrayIntro({ slug }: { slug: string }) {
       aria-hidden
       className="xray-veil transition-[opacity,transform] duration-[450ms] ease-[var(--ease-out)]"
       style={{
-        backgroundImage: `url(${asset(`/images/titans/${slug}-xray.webp`)})`,
+        backgroundImage: `url(${asset(`/images/titans/${slug}-plate.webp`)})`,
         opacity: fading ? 0 : 1,
         transform: fading ? "scale(1.08)" : "scale(1)",
       }}

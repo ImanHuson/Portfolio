@@ -5,6 +5,7 @@ import RumblingSection from "@/components/ending/RumblingSection";
 import EndingHeader from "@/components/ending/EndingHeader";
 import { RUMBLING_FACTS } from "@/lib/data/ending";
 import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 export const metadata: Metadata = {
   title: "The Rumbling",
@@ -15,10 +16,10 @@ export const metadata: Metadata = {
 export default function TheRumbling() {
   return (
     <EndingGate id="AOT-08" title="The Rumbling">
-      <EndingHeader id="AOT-08" lede="The Walls were never only walls. This is the file where they wake. Scroll slowly: it starts quiet." />
+      <EndingHeader id="AOT-08" image={BG.sea.src} lede="The Walls were never only walls. This is the file where they wake. Scroll slowly: it starts quiet." />
       <RumblingSection />
       <section aria-labelledby="rumbling-record" className="relative isolate bg-void px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src="/images/ending/rumbling-3.webp" position="50% 45%" strength={0.34} />
+        <SectionBackdrop src={BG.simoom.src} credit={BG.simoom.credit} position="50% 45%" strength={0.34} />
         <div className="mx-auto max-w-[900px]">
           <h2 id="rumbling-record" className="font-mono text-meta tracking-[0.24em] text-ash uppercase">
             The record

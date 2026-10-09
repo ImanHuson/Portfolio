@@ -135,11 +135,6 @@
   }
 }
 
-/* Lenis base styles */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
 
 /* Film grain: fixed, pointer-events-none, never on a scrolling container. */
 .grain {
@@ -147,8 +142,9 @@ html.lenis, html.lenis body { height: auto; }
   inset: 0;
   pointer-events: none;
   z-index: 60;
-  opacity: 0.06;
-  mix-blend-mode: overlay;
+  /* plain alpha, never a blend mode: a fixed full-screen blend layer made every
+     scrolled frame re-blend the whole screen (measured: p95 33 ms -> 16.7 ms) */
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -398,3 +394,61 @@ summary:active > .press {
 
 /* A seal past the reader's "open seals up to" line says so (set by ReadingSync). */
 details[data-ahead="1"]:not([open]) .ahead-note { display: inline; }
+
+/* Scroll-reactive backdrops (SectionBackdrop) and chapter header frames:
+   the image drifts and settles as its section passes. Transform only, on a
+   scroll-driven CSS timeline, so it runs off the main thread; BackdropMotion
+   covers browsers without it. Reduced motion: still. */
+.bd-move { transform: scale(1.06); will-change: transform; }
+.hd-move { will-change: transform; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bd { view-timeline: --bd block; }
+    .bd-move { animation: bd-drift linear both; animation-timeline: --bd; animation-range: cover; }
+    .hd { view-timeline: --hd block; }
+    .hd-move { animation: hd-drift linear both; animation-timeline: --hd; animation-range: exit; }
+  }
+}
+@keyframes bd-drift {
+  from { transform: translate3d(0, -4%, 0) scale(1.18); }
+  to { transform: translate3d(0, 4%, 0) scale(1.04); }
+}
+@keyframes hd-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(0, 16%, 0) scale(1.08); }
+}
+
+/* Paths: motes of light rising off the sand. Transform and opacity only. */
+.paths-motes span {
+  position: absolute;
+  border-radius: 9999px;
+  background: #f2d58a;
+  box-shadow: 0 0 6px 1px rgba(63, 209, 181, 0.6);
+  opacity: 0;
+  animation: mote-rise linear infinite;
+}
+@keyframes mote-rise {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: translate3d(12px, -70vh, 0); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paths-motes span { animation: none; opacity: 0.6; }
+}
+
+/* The war map: the plate zooms toward a chosen battle; markers keep their size. */
+@property --z { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --tx { syntax: "<percentage>"; inherits: true; initial-value: 0%; }
+@property --ty { syntax: "<percentage>"; inherits: true; initial-value: 0%; }
+.war-plate {
+  transform: translate(var(--tx), var(--ty)) scale(var(--z));
+  transition: --z 900ms var(--ease-in-out), --tx 900ms var(--ease-in-out), --ty 900ms var(--ease-in-out);
+}
+.war-marker { transform: translate(-0.4rem, -50%) scale(calc(1 / var(--z))); transform-origin: 0.4rem 50%; }
+.war-force { stroke-dasharray: 1; stroke-dashoffset: 1; animation: war-draw 1.1s 0.5s var(--ease-out) forwards; }
+@keyframes war-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .war-plate { transition: none; }
+  .war-force { animation: none; stroke-dashoffset: 0; }
+}
+.war-marker-left { transform: translate(calc(-100% + 0.4rem), -50%) scale(calc(1 / var(--z))); transform-origin: calc(100% - 0.4rem) 50%; }

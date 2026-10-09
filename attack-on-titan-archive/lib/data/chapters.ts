@@ -17,8 +17,8 @@ export const ACTS: Act[] = [
     name: "Humanity",
     register: "Stone, the military, and the Walls we were trapped inside.",
     chapters: [
-      { id: "AOT-01", title: "The Wall", line: "Shiganshina, 845. The morning it ended.", open: true, href: "/", image: "/images/opening-845.webp" },
-      { id: "AOT-02", title: "The Fall", line: "Wall Maria, the evacuation, and what it cost.", open: true, href: "/the-fall/", image: "/images/fall-845.webp" },
+      { id: "AOT-01", title: "The Wall", line: "Shiganshina, 845. The morning it ended.", open: true, href: "/", image: "/images/bg/colossal-wall.webp" },
+      { id: "AOT-02", title: "The Fall", line: "Wall Maria, the evacuation, and what it cost.", open: true, href: "/the-fall/", image: "/images/bg/burning.webp" },
       { id: "AOT-03", title: "The Soldiers", line: "Personnel files of the 104th and the Survey Corps.", open: true, href: "/soldiers/", image: "/images/heads/soldiers.webp" },
       { id: "AOT-04", title: "The Titans", line: "Nine inheritances, and the research that tried to name them.", open: true, href: "/titans/", image: "/images/heads/titans.webp" },
     ],
@@ -27,9 +27,9 @@ export const ACTS: Act[] = [
     name: "Truth",
     register: "A photograph, a file from across the sea, and a world larger than we were told.",
     chapters: [
-      { id: "AOT-05", title: "The Basement", line: "A key that did not fit, three books, one photograph.", open: true, href: "/the-basement/", image: "/images/basement/descent-3.webp" },
-      { id: "AOT-06", title: "The World", line: "Marley, the Eldian question, and the other side of the sea.", open: true, href: "/the-world/", image: "/images/heads/world.webp" },
-      { id: "AOT-07", title: "The War", line: "Liberio, the battle maps, and the gear that made it possible.", open: true, href: "/the-war/", image: "/images/heads/war.webp" },
+      { id: "AOT-05", title: "The Basement", line: "A key that did not fit, three books, one photograph.", open: true, href: "/the-basement/", image: "/images/bg/prison-stair.webp" },
+      { id: "AOT-06", title: "The World", line: "Marley, the Eldian question, and the other side of the sea.", open: true, href: "/the-world/", image: "/images/bg/sea.webp" },
+      { id: "AOT-07", title: "The War", line: "Liberio, the battle maps, and the gear that made it possible.", open: true, href: "/the-war/", image: "/images/bg/siege-left.webp" },
     ],
   },
   {

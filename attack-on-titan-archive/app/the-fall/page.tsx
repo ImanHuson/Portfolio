@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ChapterHeader from "@/components/typography/ChapterHeader";
+import { BG } from "@/lib/data/backgrounds";
 import NextChapter from "@/components/typography/NextChapter";
 import WallsMap from "@/components/archive/WallsMap";
 import Sealed from "@/components/archive/Sealed";
@@ -57,13 +58,14 @@ export default function TheFall() {
       <ChapterHeader
         id="AOT-02"
         title="The Fall"
-        image="/images/fall-845.webp"
+        image={BG.burning.src}
+        credit={BG.burning.credit}
         imagePosition="50% 40%"
         lede="In one day in 845 the outer Wall failed, and with it more than a third of the land humanity had left."
       />
 
       <section aria-label="The record, 845 to 847" className="relative isolate px-4 py-24 md:px-8 md:py-32">
-        <SectionBackdrop src="/images/fall-845.webp" position="50% 35%" strength={0.3} />
+        <SectionBackdrop src={BG.rampart.src} credit={BG.rampart.credit} position="50% 40%" strength={0.3} />
         <ol className="mx-auto max-w-[1400px]">
           {LEDGER.map((e, i) => {
             const first = i === 0 || LEDGER[i - 1].year !== e.year;
@@ -93,7 +95,8 @@ export default function TheFall() {
         </ol>
       </section>
 
-      <section aria-labelledby="land-title" className="border-t border-line px-4 py-24 md:px-8 md:py-32">
+      <section aria-labelledby="land-title" className="relative isolate border-t border-line px-4 py-24 md:px-8 md:py-32">
+        <SectionBackdrop src={BG.townGate.src} credit={BG.townGate.credit} position="50% 50%" strength={0.22} />
         <div className="mx-auto grid max-w-[1400px] items-center gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <WallsMap className="mx-auto w-full max-w-[640px]" />
           <div>
@@ -117,7 +120,8 @@ export default function TheFall() {
         </div>
       </section>
 
-      <section aria-label="A note in the margin" className="px-4 py-24 md:px-8 md:py-32">
+      <section aria-label="A note in the margin" className="relative isolate px-4 py-24 md:px-8 md:py-32">
+        <SectionBackdrop src={BG.city.src} credit={BG.city.credit} position="50% 50%" strength={0.18} />
         <p className="mx-auto max-w-[30ch] text-center font-serif text-h3 leading-snug text-paper/90 italic">
           Inside the Walls, 845 was remembered as a catastrophe. The archive would later find that it had been a mission.
         </p>

@@ -3,6 +3,8 @@ import NextChapter from "@/components/typography/NextChapter";
 import EndingGate from "@/components/ending/EndingGate";
 import Tree from "@/components/ending/Tree";
 import { END_FACTS, PUBLICATION, STATUS_LINES } from "@/lib/data/ending";
+import SectionBackdrop from "@/components/archive/SectionBackdrop";
+import { BG } from "@/lib/data/backgrounds";
 
 export const metadata: Metadata = {
   title: "The End",
@@ -42,8 +44,9 @@ export default function TheEnd() {
 
         <section
           aria-labelledby="status-title"
-          className="bg-void px-4 py-24 md:px-8 md:py-32"
+          className="relative isolate bg-void px-4 py-24 md:px-8 md:py-32"
         >
+          <SectionBackdrop src={BG.sea.src} credit={BG.sea.credit} position="50% 45%" strength={0.3} />
           <div className="mx-auto max-w-[640px]">
             <h2 id="status-title" className="sr-only">
               Archive status
@@ -64,8 +67,9 @@ export default function TheEnd() {
 
         <section
           aria-labelledby="end-record"
-          className="bg-void px-4 pb-24 md:px-8 md:pb-32"
+          className="relative isolate bg-void px-4 pt-16 pb-24 md:px-8 md:pb-32"
         >
+          <SectionBackdrop src={BG.colossiPair.src} credit={BG.colossiPair.credit} position="50% 60%" strength={0.22} />
           <div className="mx-auto grid max-w-[900px] gap-16">
             <div>
               <h2
