@@ -6,7 +6,10 @@ paid route, spread the set over days), upscaled and depth-mapped locally.
     python3 -I scripts/gen/generate.py --dry      (what today's budget would make)
     python3 -I scripts/gen/generate.py name ...   (only these, still within budget)
 
-Needs CF_ACCOUNT_ID and CF_API_TOKEN in the environment. The token cannot
+Needs CF_ACCOUNT_ID and CF_API_TOKEN in the environment. The account is on
+Cloudflare's FREE plan (its 429 says "upgrade to Workers Paid"), so going
+over the allowance fails rather than bills; the allowance did not reset at
+00:00 UTC sharp, so a 429 just means try later (exit code 3). The token cannot
 read the account's usage or plan, so this script keeps its own ledger
 (ledger.json, committed so a new container sees today's spend) and prices
 every call conservatively: whole 512x512 tiles rounded up, Cloudflare's
@@ -150,9 +153,9 @@ def model(name):
 
 def call(tier, prompt, seed):
     t = TIERS[tier]
-    body = {"prompt": f"{prompt}, {STYLE}", "seed": seed}
-    if tier == "hero":
-        body |= {"width": t["w"], "height": t["h"], "num_steps": t["steps"], "negative_prompt": NEG}
+    body = {"prompt": f"{prompt}, {STYLE}"}
+    if tier == "hero":  # schnell rejects a seed; Phoenix takes one, so heroes are reproducible
+        body |= {"seed": seed, "width": t["w"], "height": t["h"], "num_steps": t["steps"], "negative_prompt": NEG}
     else:
         body |= {"steps": t["steps"]}
     url = f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CF_ACCOUNT_ID']}/ai/run/{t['model']}"
@@ -161,7 +164,8 @@ def call(tier, prompt, seed):
     try:
         r = urllib.request.urlopen(req, timeout=300)
     except urllib.error.HTTPError as e:
-        raise SystemExit(f"stopped: {e.code} {e.read()[:300]!r}")  # quota or error: never retry
+        print(f"stopped: {e.code} {e.read()[:300]!r}")  # quota or error: never retry here
+        raise SystemExit(3 if e.code == 429 else 1)
     data = r.read()
     if "image" in r.headers.get("content-type", ""):
         return data
@@ -256,8 +260,9 @@ if __name__ == "__main__":
         if dry:
             left -= c
             continue
-        spend(ledger, c)  # booked before the call: a failure still counts
+        data = call(tier, prompt, seed=zlib.crc32(n.encode()) % 2**31)
+        spend(ledger, c)  # a refused call costs nothing on the free plan
         left -= c
-        (RAW / f"{n}.img").write_bytes(call(tier, prompt, seed=zlib.crc32(n.encode()) % 2**31))
+        (RAW / f"{n}.img").write_bytes(data)
         treat(n, tier)
     print("spent today:", today(ledger), "of", BUDGET)
