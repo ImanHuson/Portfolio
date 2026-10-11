@@ -1,54 +1,95 @@
-// Every image behind the archive's sections and scroll scenes: frames from
-// the Attack on Titan anime, taken from the Attack on Titan Wiki's file pages
-// and graded by scripts/bg/sourced.py (same fair-use call as the portraits and
-// Titan plates). Each section names its frame; the rights line is FRAME_CREDIT.
+// Every image behind the archive's sections and scroll scenes is the
+// archive's own AI-generated painting, made by scripts/gen/generate.py on
+// Cloudflare Workers AI inside its free daily allowance (FLUX.1 schnell for
+// section grounds, Leonardo Phoenix for the scenes), upscaled and graded
+// locally. One art direction for all of them; none copies a frame, a
+// character's likeness or the series' emblems. They replaced anime frames.
 
-export const FRAME_CREDIT = "Attack on Titan (anime), © Hajime Isayama, Kodansha / Attack on Titan Production Committee";
+export const GEN_CREDIT = "The archive's AI-generated painting";
+const SCHNELL = "FLUX.1 schnell";
+const PHOENIX = "Leonardo Phoenix";
 
-const f = (name: string, scene: string) => ({ src: `/images/bg/aot-${name}.webp`, credit: `${scene}. ${FRAME_CREDIT}` });
+const g = (name: string, what: string) => ({
+  src: `/images/gen/${name}.webp`,
+  credit: `${what}. ${GEN_CREDIT} (${SCHNELL})`,
+});
 
 export const BG = {
-  shiganshina845: f("shiganshina-845", "Colossal Titan looming over Shiganshina"),
-  shiganshina: f("shiganshina", "Shiganshina in anime"),
-  wallTop: f("wall-top", "Return to Shiganshina District"),
-  trostAerial: f("trost-aerial", "Trost anime"),
-  refugees: f("refugees", "Refugees evacuating to Wall Sina"),
-  titansField: f("titans-field", "Titans appear inside Wall Rose"),
-  colossalBreach: f("colossal-breach", "The Colossal Titan appears to breach the Wall"),
-  ymirDevil: f("ymir-devil", "Ymir Fritz and the Devil of All Earth"),
-  scoutsRide: f("scouts-ride", "Scout Regiment rides to rescue Eren"),
-  surveyCorps: f("survey-corps", "New Survey Corps members"),
-  wings: f("wings", "Reclaiming Wall Maria"),
-  basementRoom: f("basement-room", "Anime basement"),
-  basementSearch: f("basement-search", "Eren searching the basement"),
-  threeBooks: f("three-books", "The three books in the basement"),
-  grishaKey: f("grisha-key", "Grisha key"),
-  keyDoor: f("key-door", "Eren uses the basement's key"),
-  leviDoor: f("levi-door", "Levi kicks the door open"),
-  ocean: f("ocean", "Season 3 fourth key visual (landscape)"),
-  liberioCity: f("liberio-city", "Liberio City"),
-  marleyMap: f("marley-map", "Marley territory flipped vertically"),
-  oldMap: f("old-map", "Marley territory (Anime)"),
-  trostFormation: f("trost-formation", "The Garrison's formation during the battle of Trost"),
-  scoutsShiganshina: f("scouts-shiganshina", "The Scouts reach Shiganshina"),
-  odmFlight: f("odm-flight", "Eren masters using ODM gear"),
-  aftermath: f("aftermath", "The devastating results of the operation to retake Wall Maria"),
-  odmCase: f("odm-case", "Omni-directional mobility gear"),
-  stohess: f("stohess", "Stohess anime"),
-  wallTown: f("wall-town", "Eren and Armin talk to each other through the Paths"),
-  wallSea: f("wall-sea", "The Wall Titans' path"),
-  titansBegin: f("titans-begin", "The Wall Titans begin to march"),
-  titansMarch: f("titans-march", "The Wall Titans march"),
-  rumblingMarley: f("rumbling-marley", "The Rumbling arrives in Marley"),
-  titansMarching: f("titans-marching", "The Wall Titans marching"),
-  wallTitan: f("wall-titan", "A Wall Titan is uncovered"),
-  pathsStars: f("paths-stars", "Paths (Anime)"),
-  ymirMolding: f("ymir-molding", "Ymir molding the Wall Titans"),
-  grave: f("grave", "Mikasa sits by Eren's grave"),
-  threeSea: f("three-sea", "Eren, Armin, and Mikasa at the sea"),
+  shiganshina845: g("shiganshina845", "Steam over the Wall above the district"),
+  shiganshina: g("shiganshina", "A district inside the Wall, from above"),
+  wallTop: g("wallTop", "On top of the Wall"),
+  trostAerial: g("trostAerial", "A city of the Walls, from above"),
+  refugees: g("refugees", "Refugees at the inner gate"),
+  titansField: g("titansField", "Titans in the fog"),
+  colossalBreach: g("colossalBreach", "The gate broken in"),
+  ymirDevil: g("ymirDevil", "The tree in the forest"),
+  scoutsRide: g("scoutsRide", "The Survey Corps riding out"),
+  surveyCorps: g("surveyCorps", "Soldiers on the Wall at dawn"),
+  wings: g("wings", "Flight among the giant trees"),
+  basementRoom: g("basementRoom", "The cellar by lamplight"),
+  basementSearch: g("basementSearch", "The cellar searched"),
+  threeBooks: g("threeBooks", "Three books"),
+  grishaKey: g("grishaKey", "The key"),
+  keyDoor: g("keyDoor", "The cellar door"),
+  leviDoor: g("leviDoor", "The door broken in"),
+  ocean: g("ocean", "The sea"),
+  liberioCity: g("liberioCity", "A Marleyan city at night"),
+  marleyMap: g("marleyMap", "A sea chart"),
+  oldMap: g("oldMap", "A cartographer's desk"),
+  trostFormation: g("trostFormation", "Cannon on the Wall above a burning city"),
+  scoutsShiganshina: g("scoutsShiganshina", "Riders above the ruined district"),
+  odmFlight: g("odmFlight", "Flight over the rooftops"),
+  aftermath: g("aftermath", "After the battle"),
+  odmCase: g("odmCase", "The armoury bench"),
+  stohess: g("stohess", "A city of the interior, broken"),
+  wallTown: g("wallTown", "The hill and the tree"),
+  wallSea: g("wallSea", "The Wall coming apart"),
+  titansBegin: g("titansBegin", "The Walls' Titans waking"),
+  titansMarch: g("titansMarch", "The march"),
+  rumblingMarley: g("rumblingMarley", "The march through a city"),
+  titansMarching: g("titansMarching", "The march by night"),
+  wallTitan: g("wallTitan", "A face in the Wall"),
+  pathsStars: g("pathsStars", "The tree of light"),
+  ymirMolding: g("ymirMolding", "Shaping them out of sand"),
+  grave: g("grave", "A grave under the tree"),
+  threeSea: g("threeSea", "Three at the sea"),
 } as const;
 
-/** The user's own frames and painting. */
+/** The scenes' paintings, with depth maps for parallax. Each arrives on the
+ * day the free allowance makes it; until it is in READY its scene uses the
+ * section painting named in `fallback` (flat). */
+const h = (name: string, what: string, fallback: keyof typeof BG) => ({
+  src: `/images/gen/hero-${name}.webp`,
+  depth: `/images/gen/hero-${name}-depth.webp`,
+  credit: `${what}. ${GEN_CREDIT} (${PHOENIX})`,
+  fallback,
+});
+
+const READY = new Set<string>([]);
+
+const HERO_LIST = {
+  city: h("city", "The Wall from above", "shiganshina"),
+  rampart: h("rampart", "On the Wall, lightning on the plain", "wallTop"),
+  colossal: h("colossal", "Over the Wall, in the steam", "shiganshina845"),
+  stair: h("stair", "The cellar stair", "keyDoor"),
+  study: h("study", "The study under the house", "basementRoom"),
+  sea: h("sea", "Steam on the horizon", "ocean"),
+  march: h("march", "The line on the march", "titansMarch"),
+  clouds: h("clouds", "Over the clouds", "rumblingMarley"),
+  desert: h("desert", "The desert under the stars", "pathsStars"),
+};
+
+/** whether a scene's own painting has been made yet */
+export const heroReady = (k: keyof typeof HERO_LIST) => READY.has(k);
+
+export type Scene = { src: string; depth?: string; credit: string };
+
+/** a scene's painting: the depth-mapped hero once it exists, else its flat fallback */
+export const HERO = Object.fromEntries(
+  Object.entries(HERO_LIST).map(([k, v]) => [k, READY.has(k) ? { src: v.src, depth: v.depth, credit: v.credit } : BG[v.fallback]]),
+) as Record<keyof typeof HERO_LIST, Scene>;
+
+/** The user's own frame and painting. */
 export const FRAMES = {
   colossal: "/images/bg/colossal-wall.webp",
   paths: "/images/bg/paths.webp",

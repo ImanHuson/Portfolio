@@ -418,6 +418,9 @@ details[data-ahead="1"]:not([open]) .ahead-note { display: inline; }
   to { transform: translate3d(0, 16%, 0) scale(1.08); }
 }
 
+/* DepthImage: the WebGL canvas covers its <img> once it has drawn. */
+.depth-image[data-depth="on"] > canvas { opacity: 1; }
+
 /* Paths: motes of light rising off the sand. Transform and opacity only. */
 .paths-motes span {
   position: absolute;
@@ -452,3 +455,40 @@ details[data-ahead="1"]:not([open]) .ahead-note { display: inline; }
   .war-force { animation: none; stroke-dashoffset: 0; }
 }
 .war-marker-left { transform: translate(calc(-100% + 0.4rem), -50%) scale(calc(1 / var(--z))); transform-origin: calc(100% - 0.4rem) 50%; }
+
+/* Route changes (app/template.tsx): the old page dims and sinks a little, the
+   new one rises into place; the header is anchored; a chapter card's picture
+   morphs into its chapter's header. Reduced motion keeps the fade only. */
+::view-transition-group(site-header) { animation: none; z-index: 10; }
+::view-transition-old(.page-out) { animation: 260ms var(--ease-in-out) both page-out; }
+::view-transition-new(.page-in) { animation: 520ms var(--ease-out) 140ms both page-in; }
+::view-transition-group(.morph) { animation-duration: 560ms; animation-timing-function: var(--ease-in-out); }
+::view-transition-image-pair(.morph) { animation-name: via-blur; }
+@keyframes page-out { to { opacity: 0; transform: translateY(-16px) scale(0.985); filter: brightness(0.4); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(28px); } }
+@keyframes via-blur { 40% { filter: blur(3px) brightness(1.15); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page-out) { animation: 160ms ease both fade-out; }
+  ::view-transition-new(.page-in) { animation: 200ms ease both fade-in; }
+  ::view-transition-group(.morph), ::view-transition-image-pair(.morph) { animation: none; }
+}
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+
+/* Section headings arrive: a wipe up out of their own line as they enter the
+   screen. A CSS view timeline only; where it is unsupported (or printing, or
+   a full-page capture) the animation never applies and the heading is simply
+   there. Reduced motion: nothing. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main h2.font-display {
+      animation: h-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 85%;
+    }
+  }
+}
+@keyframes h-arrive {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(0.35em); }
+  to { clip-path: inset(0 0 -0.3em 0); transform: none; }
+}
