@@ -58,8 +58,8 @@ export default function TheFall() {
       <ChapterHeader
         id="AOT-02"
         title="The Fall"
-        image={BG.shiganshina845.src}
-        credit={BG.shiganshina845.credit}
+        image={BG.colossalBreach.src}
+        credit={BG.colossalBreach.credit}
         imagePosition="50% 40%"
         lede="In one day in 845 the outer Wall failed, and with it more than a third of the land humanity had left."
       />

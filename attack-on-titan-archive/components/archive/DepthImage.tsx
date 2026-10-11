@@ -37,10 +37,18 @@ void main() {
   gl_FragColor = texture2D(img, clamp(p, 0.001, 0.999));
 }`;
 
+/** a real GPU only: software rasterisers (SwiftShader, llvmpipe) draw this
+ * full-screen pass on the CPU and stall scrolling, so they keep the <img>.
+ * `?gl=force` skips the check for QA. */
 const supportsGL = () => {
   try {
-    const c = document.createElement("canvas");
-    return !!c.getContext("webgl");
+    if (location.search.includes("gl=force")) return true;
+    const gl = document.createElement("canvas").getContext("webgl");
+    if (!gl) return false;
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const name = String(info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return !/swiftshader|llvmpipe|softpipe|software/i.test(name);
   } catch {
     return false;
   }
@@ -161,7 +169,10 @@ export default function DepthImage({
     if (fine) addEventListener("pointermove", onPtr, { passive: true });
 
     let raf = 0, visible = false;
-    const frame = () => {
+    // a slow GPU gives up and keeps the <img>: 8 slow frames (> 50 ms apart
+    // while drawing back to back) among the first 90 drawn
+    let prevDraw = 0, drawn = 0, slow = 0;
+    const frame = (t: number) => {
       raf = 0;
       if (!alive || !visible || ready < 2) return;
       const st = root.style;
@@ -175,6 +186,13 @@ export default function DepthImage({
       if (dirty || cx !== last.x || cy !== last.y || z !== last.z) {
         gl.uniform3f(uCam, cx, cy, z);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        if (prevDraw && t - prevDraw < 200 && t - prevDraw > 50 && drawn < 90 && ++slow >= 8) {
+          alive = false;
+          delete root.dataset.depth;
+          return;
+        }
+        prevDraw = t;
+        drawn++;
         last.x = cx;
         last.y = cy;
         last.z = z;

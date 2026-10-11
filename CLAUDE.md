@@ -254,6 +254,15 @@ A fourth fan build, an Attack on Titan archive, built from a large "ATTACK ON TI
     - A chapter card's image morphs into its chapter header (`card-AOT-0X`, `share="morph"`). The card image and the header image must be the same picture.
     - Reduced motion keeps the fade only.
   - **Section `h2.font-display` headings wipe up** on a CSS `view()` timeline. Where scroll timelines are missing, the animation never applies, so it can't hide content.
+  - **What the first run taught:**
+    - **Plan and reset.** The Cloudflare account is on the **free plan**: over the allowance, calls get a 429 and are never billed. On Oct 10 the account-wide allowance stayed exhausted all day; it was free again at 00:05 UTC Oct 11. Nothing here could see why, because the token can't read usage.
+    - **Real cost runs ~8% above the ledger's estimate.** `BUDGET` is 8,700.
+    - **schnell rejects a `seed`.** Its NSFW filter refused "giants shaking free of a wall"; filtered prompts are now skipped, not fatal.
+    - **schnell ignores "no battlements".** "A vast perfectly smooth featureless grey stone wall like a dam" got closer. `shiganshina845` is still a castle block and is now used only as a fallback; The Fall's header is `colossalBreach`.
+    - **Backgrounds are 1920 wide.** 2560 px ones didn't fix the scroll measurements either: this container's p95 is 33 ms on the deployed version too, so judge jank against `main` built the same way.
+    - **`DepthImage` never draws on a software rasteriser** (SwiftShader, llvmpipe: the home page's p95 went to 150 ms). It also gives up after 8 slow frames. `?gl=force` overrides this for QA.
+  - **Still weak, to redo in later batches:** `titansMarching` (glowing red eyes, a game-asset look), `titansBegin` (climbers on a cliff, not giants in a wall) and `shiganshina845`.
+  - **Not done yet:** the 7 remaining heroes, 2 a night. The personnel portraits and Titan plates are still anime screenshots.
 - **No-JS / reduced motion (superseded by the rebuild above; kept for history):** the static hero used real frames rendered from the scene (`public/images/opening-845*.webp`, landscape 1680x1050 + portrait 900x1600, and `fall-845.webp` at p=0.425), made by screenshotting at p=0.68 (the title shot) with the DOM hidden and `?gl=force` in the URL (it skips the software-GL check and keeps the frame governor from falling back, so this container's SwiftShader can render them); regenerate the same way if the scene changes. Reduced motion renders a single still WebGL frame at the same point.
 - **Sound** (`lib/audio/engine.ts`) is synthesized wind + distant birds + an arrival crack, off until the visitor clicks the toggle.
 - **Character images:** the user will supply screenshots for the personnel files. The plan agreed with them: raw files go in the gitignored `portraits-src/`, a build-time Pillow script applies a per-character archival treatment (different artifact per character, shared palette/grain), and only the treated WebP is committed. Official art is never used as hero/decoration. The fair-use/DMCA trade-off was explained to the user and they chose it.

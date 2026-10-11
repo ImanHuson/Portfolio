@@ -6,7 +6,10 @@ paid route, spread the set over days), upscaled and depth-mapped locally.
     python3 -I scripts/gen/generate.py --dry      (what today's budget would make)
     python3 -I scripts/gen/generate.py name ...   (only these, still within budget)
 
-Needs CF_ACCOUNT_ID and CF_API_TOKEN in the environment. The token cannot
+Needs CF_ACCOUNT_ID and CF_API_TOKEN in the environment. The account is on
+Cloudflare's FREE plan (its 429 says "upgrade to Workers Paid"), so going
+over the allowance fails rather than bills; the allowance did not reset at
+00:00 UTC sharp, so a 429 just means try later (exit code 3). The token cannot
 read the account's usage or plan, so this script keeps its own ledger
 (ledger.json, committed so a new container sees today's spend) and prices
 every call conservatively: whole 512x512 tiles rounded up, Cloudflare's
@@ -41,7 +44,7 @@ RAW = pathlib.Path("bg-src/gen")
 OUT = pathlib.Path("public/images/gen")
 MODELS = HERE / "models"
 LEDGER = HERE / "ledger.json"
-BUDGET = 9_500  # of the 10,000 free neurons, a margin for rounding
+BUDGET = 8_700  # of the 10,000 free neurons: real usage ran ~8% above this ledger's estimates
 
 MODELS_URL = {
     "x4v3.onnx": "https://huggingface.co/tamnvcc/Real-ESRGAN-General-x4v3_float/resolve/main/onnx/model.onnx",
@@ -85,13 +88,13 @@ QUEUE = {
     "hero-clouds": ("hero", 4, "high above the clouds at dawn, the heads and shoulders of countless colossal giants rising through a sea of cloud and steam, marching toward the viewer, awe and dread"),
     "hero-desert": ("hero", 5, "a vast desert of pale sand dunes at night under an impossibly dense starfield and milky way, in the far distance a single enormous glowing tree of light branching up into the sky, a tiny kneeling figure on a dune"),
     # section backgrounds (cheap tier; heroes may replace the most visible later)
-    "shiganshina845": ("bg", 0, f"a medieval walled town district at dawn, {WALL} behind it, a column of white steam rising over the top of the wall, smoke over the roofs"),
+    "shiganshina845": ("bg", 0, "a vast perfectly smooth featureless grey stone wall like a dam, no towers, no crenellations, rising fifty metres above a small medieval town of red tile roofs, a huge column of white steam rising from behind the top of the wall, dawn, seen from a town street"),
     "shiganshina": ("bg", 0, f"aerial view of a medieval town with red tile roofs packed inside {WALL}, curving away, morning mist, wide panoramic composition"),
     "wallTop": ("bg", 0, f"on top of {WALL}, a wide stone walkway with old cannons, a medieval town far below, golden hour, wide panoramic composition"),
     "trostAerial": ("bg", 0, "aerial view of a large medieval city with a river, canals and bell towers, bounded by an enormous smooth stone wall, overcast, wide panoramic composition"),
     "refugees": ("bg", 0, "a crowd of refugees with carts and bundles crossing a stone bridge toward a massive gate in a colossal wall, dust, dusk, seen from behind"),
     "titansField": ("bg", 0, "a misty green plain at dawn, enormous humanoid giants seen only as dark silhouettes in the fog, a small farmhouse in the foreground, eerie"),
-    "colossalBreach": ("bg", 0, f"a gate in {WALL} smashed open from outside, boulders flying into a medieval town, steam and dust everywhere"),
+    "colossalBreach": ("bg", 0, "a huge hole smashed through the base of a vast perfectly smooth featureless grey stone wall like a dam, no towers, no crenellations, boulders and dust exploding into a medieval town, seen from inside the town"),
     "ymirDevil": ("bg", 0, "a dark ancient forest at night, a glowing hollow at the roots of an enormous gnarled tree, mystical light, a small girl seen from behind"),
     "scoutsRide": ("bg", 0, "a column of cavalry soldiers in dark green hooded cloaks galloping across an open plain toward a forest of gigantic trees, dust, low sun, seen from behind"),
     "surveyCorps": ("bg", 0, f"a line of soldiers in dark green hooded cloaks standing on top of {WALL} at dawn, seen from behind, cloaks blowing in the wind"),
@@ -104,7 +107,7 @@ QUEUE = {
     "leviDoor": ("bg", 0, "a splintered wooden cellar door broken off its hinges, dust hanging in a lantern beam, stone stairs"),
     "ocean": ("bg", 0, "an endless calm ocean at sunrise seen from a pale sand beach, vast and quiet, wide panoramic composition"),
     "liberioCity": ("bg", 0, "an early twentieth century European industrial city at night, brick tenements, searchlights, an airship, factory smoke"),
-    "marleyMap": ("bg", 0, "an antique engraved sea chart of a coastline and an island on aged dark paper, compass rose, no labels, no writing"),
+    "marleyMap": ("bg", 0, "an antique engraved nautical chart on dark aged paper, one large island in an empty sea, fine coastline engraving, rhumb lines and a compass rose, no labels, no writing"),
     "oldMap": ("bg", 0, "a cartographer's desk at night with brass instruments and folded sea charts, candlelight, no writing"),
     "trostFormation": ("bg", 0, f"soldiers with cannons lined along the top of {WALL} above a burning medieval city, smoke"),
     "scoutsShiganshina": ("bg", 0, f"cavalry silhouetted on a hill at night overlooking a ruined medieval town inside {WALL}, moonlight"),
@@ -114,15 +117,15 @@ QUEUE = {
     "stohess": ("bg", 0, "a refined stone city with spires and a cathedral, a street collapsed into ruins, dust, afternoon light"),
     "wallTown": ("bg", 0, "a hill of tall grass under a lone tree at golden hour, a walled medieval town far away, wind"),
     "wallSea": ("bg", 0, "a colossal stone wall crumbling apart to reveal enormous stone-skinned giants inside it, steam rising, seen from far away at dusk"),
-    "titansBegin": ("bg", 0, "colossal giants shaking free of a crumbling wall, enormous clouds of steam, dusk, seen from far away"),
+    "titansBegin": ("bg", 0, "a vast perfectly smooth featureless grey stone wall like a dam, no towers, no crenellations cracking apart along its whole length, giant grey figures half emerging from inside it, huge plumes of steam, dusk, seen from far away across a plain"),
     "titansMarch": ("bg", 0, "an endless line of colossal giants marching across a plain, dust, blood red sky, seen from far away"),
     "rumblingMarley": ("bg", 0, "colossal giants walking through an industrial city, buildings collapsing, smoke and fire, seen from far away"),
-    "titansMarching": ("bg", 0, "an endless line of colossal giants marching at night, steam glowing, seen from far away"),
+    "titansMarching": ("bg", 0, "an endless line of colossal grey humanoid giants walking at night through steam, seen from very far away, small silhouettes against a glowing horizon, no glowing eyes"),
     "wallTitan": ("bg", 0, "a gigantic stone-skinned face exposed in a broken section of a wall, one eye open, rubble"),
     "pathsStars": ("bg", 0, "a glowing branching tree of light rising into a starry void above a pale sand desert"),
     "ymirMolding": ("bg", 0, "a lone small figure shaping giant figures out of sand in a starlit desert, endless"),
     "grave": ("bg", 0, "a single grave marker under a large lone tree on a grassy hill at dusk, a red scarf on it"),
-    "threeSea": ("bg", 0, "three small figures standing on a beach seen from behind facing a sunset ocean"),
+    "threeSea": ("bg", 0, "exactly three small figures standing side by side on a pale beach seen from behind, facing a calm sunset ocean, wide empty composition"),
 }
 
 
@@ -150,9 +153,9 @@ def model(name):
 
 def call(tier, prompt, seed):
     t = TIERS[tier]
-    body = {"prompt": f"{prompt}, {STYLE}", "seed": seed}
-    if tier == "hero":
-        body |= {"width": t["w"], "height": t["h"], "num_steps": t["steps"], "negative_prompt": NEG}
+    body = {"prompt": f"{prompt}, {STYLE}"}
+    if tier == "hero":  # schnell rejects a seed; Phoenix takes one, so heroes are reproducible
+        body |= {"seed": seed, "width": t["w"], "height": t["h"], "num_steps": t["steps"], "negative_prompt": NEG}
     else:
         body |= {"steps": t["steps"]}
     url = f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CF_ACCOUNT_ID']}/ai/run/{t['model']}"
@@ -161,7 +164,11 @@ def call(tier, prompt, seed):
     try:
         r = urllib.request.urlopen(req, timeout=300)
     except urllib.error.HTTPError as e:
-        raise SystemExit(f"stopped: {e.code} {e.read()[:300]!r}")  # quota or error: never retry
+        body = e.read()[:300]
+        if e.code == 400 and b"NSFW" in body:  # the model's filter refused this prompt: skip it, reword later
+            raise ValueError(f"filtered: {body!r}")
+        print(f"stopped: {e.code} {body!r}")  # quota or error: never retry here
+        raise SystemExit(3 if e.code == 429 else 1)
     data = r.read()
     if "image" in r.headers.get("content-type", ""):
         return data
@@ -221,11 +228,11 @@ def grade(im):
 
 def treat(name, tier):
     im = Image.open(RAW / f"{name}.img").convert("RGB")
-    if tier == "bg":  # square to a 16:10 band, then x2.5 (2560 wide)
+    if tier == "bg":  # square to a 16:10 band, then x1.875 (1920 wide: 2560 px backdrops decoded mid-scroll dropped frames)
         W, H = im.size
         band = round(W * 10 / 16)
         top = (H - band) // 2
-        im = upscale(im.crop((0, top, W, top + band)), 2.5)
+        im = upscale(im.crop((0, top, W, top + band)), 1.875)
     else:  # 1536x1024 to 2560x1707
         im = upscale(im, 2560 / 1536)
         depth(im).save(OUT / f"{name}-depth.webp", quality=82)
@@ -256,8 +263,13 @@ if __name__ == "__main__":
         if dry:
             left -= c
             continue
-        spend(ledger, c)  # booked before the call: a failure still counts
+        try:
+            data = call(tier, prompt, seed=zlib.crc32(n.encode()) % 2**31)
+        except ValueError as err:
+            print("skipped", n, err)
+            continue
+        spend(ledger, c)  # a refused call costs nothing on the free plan
         left -= c
-        (RAW / f"{n}.img").write_bytes(call(tier, prompt, seed=zlib.crc32(n.encode()) % 2**31))
+        (RAW / f"{n}.img").write_bytes(data)
         treat(n, tier)
     print("spent today:", today(ledger), "of", BUDGET)
