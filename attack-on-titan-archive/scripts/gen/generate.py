@@ -80,7 +80,7 @@ QUEUE = {
     # heroes: the opening and the pinned scenes, with depth maps
     "hero-city": ("hero", 1, f"aerial view from very high above at dawn, {WALL}, curving in a giant ring to the horizon, a small medieval town of red tile roofs packed against its inner foot, open farmland and morning mist outside the wall"),
     "hero-rampart": ("hero", 1, f"standing on top of {WALL}, a row of old iron cannons on rails along the wide stone walkway, looking out over an endless empty plain at dusk, storm clouds and a fork of lightning on the horizon, a dizzying drop below"),
-    "hero-colossal": ("hero", 2, f"the dark silhouette of an enormous giant's head and shoulders rising above the top of {WALL}, half hidden in billowing backlit steam, the low sun behind it, only its outline and the glow of steam visible, seen from the rooftops of the town far below, birds scattering, overwhelming scale"),
+    # hero-colossal: removed after two rejected attempts (a comic red head, then a stone golem behind a castle); the opening keeps the user's frame
     "hero-stair": ("hero", 2, "a narrow worn stone staircase descending into a pitch dark cellar beneath a burned-out house, a single lantern glow on the steps, dust in a shaft of cold daylight from a hatch above, an iron-strapped wooden door at the bottom"),
     "hero-study": ("hero", 3, "a small stone cellar study lit by one oil lamp, an old wooden desk with an open drawer, three worn leather-bound books on it, glass medicine vials and instruments, shelves of jars in deep shadow"),
     "hero-sea": ("hero", 3, "a calm grey sea at dusk under a heavy sky, on the far horizon a vast wall of white steam rising, ominous stillness, a dark rocky shore in the foreground"),
