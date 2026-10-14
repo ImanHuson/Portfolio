@@ -65,7 +65,7 @@ const h = (name: string, what: string, fallback: keyof typeof BG) => ({
   fallback,
 });
 
-const READY = new Set<string>(["city", "rampart", "stair", "sea"]);
+const READY = new Set<string>(["city", "rampart", "stair", "sea", "study"]);
 
 const HERO_LIST = {
   city: h("city", "The Wall from above", "shiganshina"),

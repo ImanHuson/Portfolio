@@ -85,7 +85,7 @@ QUEUE = {
     "hero-study": ("hero", 3, "a small stone cellar study lit by one oil lamp, an old wooden desk with an open drawer, three worn leather-bound books on it, glass medicine vials and instruments, shelves of jars in deep shadow"),
     "hero-sea": ("hero", 3, "a calm grey sea at dusk under a heavy sky, on the far horizon a vast wall of white steam rising, ominous stillness, a dark rocky shore in the foreground"),
     "hero-march": ("hero", 4, "from far away across a burning plain, an endless line of colossal featureless giants walking side by side, each taller than the clouds, silhouetted in steam and dust against a blood red sunset, a town crushed beneath them"),
-    "hero-clouds": ("hero", 4, "high above the clouds at dawn, the heads and shoulders of countless colossal giants rising through a sea of cloud and steam, marching toward the viewer, awe and dread"),
+    "hero-clouds": ("hero", 4, "high above a sea of cloud at dawn, the vast dark shoulders and backs of colossal giants pushing through the cloud layer far below, seen from behind and above, faceless silhouettes only, no faces, no eyes, no glowing eyes, steam rising, awe and dread, enormous scale"),
     "hero-desert": ("hero", 5, "a vast desert of pale sand dunes at night under an impossibly dense starfield and milky way, in the far distance a single enormous glowing tree of light branching up into the sky, a tiny kneeling figure on a dune"),
     # section backgrounds (cheap tier; heroes may replace the most visible later)
     "shiganshina845": ("bg", 0, "a quiet medieval street of timber houses at dawn, at the end of the street a gigantic perfectly smooth grey stone wall like a dam, no towers, no crenellations filling the sky, a tall column of white steam rising behind it"),
