@@ -40,7 +40,7 @@ function hud(p: number): string[] {
 const SHOTS: Shot[] = [
   { ...HERO.sea, at: 0, until: 0.34, from: { s: 1.05 }, to: { s: 1.22, y: -2 }, position: "50% 50%" },
   { src: BG.titansBegin.src, at: 0.32, until: 0.5, from: { s: 1.4, y: 6 }, to: { s: 1.08 }, position: "50% 55%" },
-  { ...HERO.march, at: 0.49, until: 0.7, from: { s: 1.05 }, to: { s: 1.3, y: -4 }, position: "50% 50%" },
+  { ...HERO.march, at: 0.49, until: 0.7, from: { s: 1.02 }, to: { s: 1.15, y: 2 }, position: "50% 40%" },
   { ...HERO.clouds, at: 0.68, until: 1, from: { s: 1.15, x: -2 }, to: { s: 1 }, position: "50% 50%" },
 ];
 
