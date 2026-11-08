@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/*
+ * Tokens. The platform (atlas) is a dark, night-side palette. A country page
+ * wraps its content in [data-theme] with both colour schemes written as
+ * --l-* and --d-* variables (lib/themes.ts); the rules below pick one by the
+ * reader's colour scheme. Components only ever use the semantic names.
+ */
+:root {
+  --bg: #0d1014;
+  --surface: #151a20;
+  --ink: #e8e4dc;
+  --muted: #9aa1a8;
+  --line: #2a313a;
+  --accent: #e2b45a;
+  --accent-text: #e2b45a;
+  --on-accent: #14110b;
+  --band: #11161c;
+  --on-band: #e8e4dc;
+  --photo-filter: none;
+  --enter-ms: 520ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --display: var(--font-atlas), ui-sans-serif, system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+[data-theme] {
+  --bg: var(--l-bg);
+  --surface: var(--l-surface);
+  --ink: var(--l-ink);
+  --muted: var(--l-muted);
+  --line: var(--l-line);
+  --accent: var(--l-accent);
+  --accent-text: var(--l-accentText);
+  --on-accent: var(--l-onAccent);
+  --band: var(--l-band);
+  --on-band: var(--l-onBand);
+  color-scheme: light;
+  background: var(--bg);
+  color: var(--ink);
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme] {
+    --bg: var(--d-bg);
+    --surface: var(--d-surface);
+    --ink: var(--d-ink);
+    --muted: var(--d-muted);
+    --line: var(--d-line);
+    --accent: var(--d-accent);
+    --accent-text: var(--d-accentText);
+    --on-accent: var(--d-onAccent);
+    --band: var(--d-band);
+    --on-band: var(--d-onBand);
+    color-scheme: dark;
+  }
+}
+[data-display="mincho"] {
+  --display: var(--font-mincho), "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-band: var(--band);
+  --color-on-band: var(--on-band);
+  --font-sans: var(--font-atlas), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--display);
+}
+
+html {
+  scroll-padding-top: 4.5rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+}
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: var(--accent); color: var(--on-accent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 60;
+  background: var(--accent); color: var(--on-accent);
+  padding: 0.5rem 0.9rem; font-weight: 600;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Photographs take the country's treatment; artworks and maps never do. */
+.photo { filter: var(--photo-filter); }
+
+/* Japan: a washi grain on a fixed layer, never on scrolling content. */
+[data-motif="washi"]::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-motif] > * { position: relative; z-index: 1; }
+
+/* Vertical place names, set as they are on Japanese signs and in print. */
+.tategaki {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+/* Arrival: country pages enter with their theme's motion (ink spreads in). */
+@media (prefers-reduced-motion: no-preference) {
+  .enter { animation: enter var(--enter-ms) var(--ease-out) both; }
+  .enter-2 { animation: enter var(--enter-ms) var(--ease-out) 90ms both; }
+  .enter-3 { animation: enter var(--enter-ms) var(--ease-out) 180ms both; }
+  [data-theme="japan"] .enter, [data-theme="japan"] .enter-2, [data-theme="japan"] .enter-3 { animation-name: ink; }
+}
+@keyframes enter { from { opacity: 0; transform: translateY(14px); } }
+@keyframes ink { from { opacity: 0; filter: blur(6px); transform: translateY(6px); } }
+
+/* Route changes: the old page dims out, the new one arrives. */
+::view-transition-old(.page-out) { animation: 220ms var(--ease-in-out) both page-out; }
+::view-transition-new(.page-in) { animation: 420ms var(--ease-out) 100ms both page-in; }
+::view-transition-group(site-header) { animation: none; z-index: 10; }
+@keyframes page-out { to { opacity: 0; } }
+@keyframes page-in { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page-out) { animation: 120ms ease both page-out; }
+  ::view-transition-new(.page-in) { animation: 160ms ease both fade; }
+}
+@keyframes fade { from { opacity: 0; } }
+
+/* Interactive cards: one press, one lift, hover only where hover exists. */
+.press { transition: transform 160ms var(--ease-out); }
+.press:active { transform: scale(0.98); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .lift { transition: transform 260ms var(--ease-out); }
+  .lift:hover { transform: translateY(-3px); }
+  .zoom img { transition: transform 600ms var(--ease-out); }
+  .zoom:hover img { transform: scale(1.03); }
+}
+
+@layer components {
+/* Reference markers. */
+.ref {
+  font-size: 0.7em; vertical-align: super; line-height: 0;
+  margin-left: 0.1em; color: var(--accent-text); text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+.ref:hover { text-decoration: underline; }
+}
+
+/* MapLibre: keep its UI legible on both palettes. */
+.maplibregl-ctrl-attrib { font-size: 11px; }
+.maplibregl-ctrl-group { border-radius: 2px !important; }
+.maplibregl-canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* Pannellum: hide its own branding box, keep its controls. */
+.pnlm-about-msg { display: none !important; }
+
+/* Globe markers: real buttons placed by MapLibre. */
+.globe-marker {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 8px 6px 2px; margin-left: -8px;
+  background: none; border: 0; cursor: pointer;
+  color: #e8e4dc; font: 500 13px/1 var(--font-atlas), system-ui, sans-serif;
+}
+.globe-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--m); box-shadow: 0 0 0 3px rgb(13 16 20 / 0.7);
+}
+.globe-marker[data-open="false"] .globe-dot { background: transparent; border: 2px solid var(--m); }
+.globe-label {
+  padding: 3px 6px; background: rgb(13 16 20 / 0.72); border-radius: 2px;
+  opacity: 0.85; transition: opacity 160ms var(--ease-out);
+}
+.globe-marker[data-open="false"] .globe-label { opacity: 0; }
+.globe-marker[data-open="true"] .globe-label { opacity: 1; font-weight: 650; font-size: 14px; }
+.globe-marker:hover .globe-label, .globe-marker:focus-visible .globe-label { opacity: 1; background: rgb(13 16 20 / 0.95); }
+.globe-marker:focus-visible { outline: 2px solid #e2b45a; outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .globe-marker[data-open="true"] .globe-dot { animation: beacon 2.4s var(--ease-out) infinite; }
+}
+@keyframes beacon {
+  0% { box-shadow: 0 0 0 3px rgb(13 16 20 / 0.7), 0 0 0 0 color-mix(in srgb, var(--m) 70%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 3px rgb(13 16 20 / 0.7), 0 0 0 12px transparent; }
+}
+
+/* Map labels and pins (HTML, so they are text, links and focusable). */
+.area-label {
+  font: 600 12px/1 var(--font-atlas), system-ui, sans-serif; letter-spacing: 0.02em;
+  color: var(--muted); pointer-events: none; white-space: nowrap;
+  text-shadow: 0 0 3px var(--bg), 0 0 3px var(--bg);
+}
+.area-label[data-open="true"] { color: var(--ink); font-size: 14px; }
+.map-pin {
+  display: flex; align-items: center; gap: 6px; margin-left: -7px;
+  color: var(--ink); text-decoration: none;
+  font: 600 13px/1.1 var(--font-atlas), system-ui, sans-serif;
+}
+.map-pin-dot {
+  width: 14px; height: 14px; border-radius: 50%; flex: none;
+  background: var(--accent); box-shadow: 0 0 0 3px var(--bg);
+}
+.map-pin[data-current="true"] .map-pin-dot { width: 18px; height: 18px; box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent); }
+.map-pin-label { padding: 4px 6px; background: color-mix(in srgb, var(--bg) 88%, transparent); border-radius: 2px; white-space: nowrap; }
+a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-decoration: underline; }
+
+/* The globe's attribution chip, in the atlas palette. */
+[data-state] .maplibregl-ctrl.maplibregl-ctrl-attrib, [data-state] .maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button { background-color: rgb(21 26 32 / 0.9); color: #9aa1a8; }
+[data-state] .maplibregl-ctrl-attrib a { color: #c9c4bb; }
+[data-state] .maplibregl-ctrl-attrib-button { filter: invert(1); }

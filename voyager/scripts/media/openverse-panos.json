@@ -1,0 +1,43 @@
+{
+ "3667254503": {
+  "id": "91413a2c-b8ee-42db-a5b2-0a0aea208b67",
+  "title": "Kyoto Station",
+  "creator": "vitroid",
+  "creator_url": "https://www.flickr.com/photos/77581941@N00",
+  "license": "by",
+  "license_version": "2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "foreign_landing_url": "https://www.flickr.com/photos/77581941@N00/3667254503",
+  "url": "https://live.staticflickr.com/2484/3667254503_b980357189_b.jpg",
+  "width": 1024,
+  "height": 512,
+  "tags": [
+   "equirectangular",
+   "kyoto",
+   "panorama",
+   "station"
+  ]
+ },
+ "4259644860": {
+  "id": "c7149875-1681-43a3-ad1e-0d9b3536d949",
+  "title": "Nishiki Shrine",
+  "creator": "vitroid",
+  "creator_url": "https://www.flickr.com/photos/77581941@N00",
+  "license": "by",
+  "license_version": "2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0/",
+  "foreign_landing_url": "https://www.flickr.com/photos/77581941@N00/4259644860",
+  "url": "https://live.staticflickr.com/2699/4259644860_c8126bf1bb_b.jpg",
+  "width": 1024,
+  "height": 512,
+  "tags": [
+   "equirectangular",
+   "handheld",
+   "hdr",
+   "kyoto",
+   "nishiki",
+   "panorama",
+   "swingrod"
+  ]
+ }
+}
