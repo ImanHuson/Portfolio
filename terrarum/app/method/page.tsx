@@ -3,7 +3,7 @@ import { RANKING, RANKING_CAVEATS, RANKING_SOURCES } from "@/lib/content/expansi
 
 export const metadata: Metadata = {
   title: "How this is made",
-  description: "How Voyager researches countries, checks facts and licences, and decides which country opens next.",
+  description: "How Terrarum researches countries, checks facts and licences, and decides which country opens next.",
 };
 
 const STEPS = [
@@ -18,7 +18,13 @@ export default function MethodPage() {
     <main id="main" className="mx-auto max-w-[1400px] px-4 py-14 md:px-8">
       <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">How this is made</h1>
       <p className="mt-4 max-w-[62ch] text-lg text-muted">
-        Voyager is for people who would like to see the world and cannot easily go. That only works if what it shows is real.
+        Terrarum is for people who would like to see the world and cannot easily go. That only works if what it shows is real.
+      </p>
+
+      <p className="mt-4 max-w-[62ch] text-muted">
+        The name comes from <cite>Theatrum Orbis Terrarum</cite>, the &ldquo;Theatre of the World&rdquo; Abraham Ortelius published in Antwerp in
+        1570: the first modern atlas, maps of one size arranged by continent and region, with a description on the back of each (
+        <a href="https://blogs.loc.gov/maps/2020/04/ortelius-a-legendary-mapmaker/" className="underline underline-offset-2">Library of Congress</a>).
       </p>
 
       <section aria-labelledby="research-h" className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
@@ -42,8 +48,9 @@ export default function MethodPage() {
             Museum of Art&rsquo;s public-domain collection.
           </p>
           <p>
-            A 360° view appears only where a real, openly licensed panorama of that spot exists. For Fushimi Inari and Kiyomizu-dera none does, so
-            those pages say so instead of showing something else. No image on this site is generated and passed off as a photograph.
+            Every image is searched for first, in open collections. A 360° view appears where a real, openly licensed panorama exists, as at
+            Nishiki Tenmangū, Kyoto Station and the Malé fish market. Where none exists, an AI-generated impression may be added later, and it is
+            always labelled as one: nothing generated is passed off as a photograph.
           </p>
         </div>
       </section>
@@ -51,19 +58,19 @@ export default function MethodPage() {
       <section id="expansion" aria-labelledby="expansion-h" className="mt-20 scroll-mt-20">
         <h2 id="expansion-h" className="text-2xl font-semibold">Which country opens next</h2>
         <p className="mt-3 max-w-[65ch] text-muted">
-          The first eleven countries were chosen by hand. After them, countries open in order of international tourist arrivals, the measure UN
-          Tourism uses. The table below is provisional: the figures come from compilations of UN Tourism&rsquo;s 2024 data, not yet from its own
-          country table.
+          The first eleven countries were chosen by hand and open in that order. After them, countries are added in batches of five to ten.
+          A batch is chosen for what there is to explore, the places, history and culture, with international tourist arrivals as a guide
+          rather than a strict ranking. The figures below come from compilations of UN Tourism&rsquo;s 2024 data.
         </p>
         <div className="mt-8 overflow-x-auto">
           <table className="w-full min-w-[560px] text-left text-[15px]">
-            <caption className="sr-only">International tourist arrivals, 2024, and whether each country is in Voyager</caption>
+            <caption className="sr-only">International tourist arrivals, 2024, and whether each country is in Terrarum</caption>
             <thead className="text-sm text-muted">
               <tr className="border-b border-line">
                 <th scope="col" className="py-3 pr-4 font-normal">Rank</th>
                 <th scope="col" className="py-3 pr-4 font-normal">Country</th>
                 <th scope="col" className="py-3 pr-4 font-normal">Arrivals, 2024</th>
-                <th scope="col" className="py-3 pr-4 font-normal">In Voyager</th>
+                <th scope="col" className="py-3 pr-4 font-normal">In Terrarum</th>
                 <th scope="col" className="py-3 font-normal">Note</th>
               </tr>
             </thead>
@@ -73,7 +80,7 @@ export default function MethodPage() {
                   <td className="py-3 pr-4">{r.rank}</td>
                   <td className="py-3 pr-4 font-medium">{r.country}</td>
                   <td className="py-3 pr-4">{r.arrivals}</td>
-                  <td className="py-3 pr-4">{r.inVoyager === "founding" ? "Founding collection" : r.inVoyager === "next" ? "Next to open" : "Later"}</td>
+                  <td className="py-3 pr-4">{r.inTerrarum === "founding" ? "Founding collection" : r.inTerrarum === "next" ? "Next to open" : "Later"}</td>
                   <td className="py-3 text-muted">{r.note}</td>
                 </tr>
               ))}

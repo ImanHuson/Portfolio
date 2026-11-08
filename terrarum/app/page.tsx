@@ -4,7 +4,7 @@ import { HomeGlobe } from "@/components/globe/HomeGlobe";
 import { Figure } from "@/components/ui/Figure";
 import { RandomPlace } from "@/components/ui/RandomPlace";
 import { COUNTRIES } from "@/lib/content/countries";
-import { getCountry, placePath, getPlace, openCountrySlugs } from "@/lib/content";
+import { allPlaceSlugs, getCountry, placePath, getPlace, openCountrySlugs } from "@/lib/content";
 import { MEDIA } from "@/lib/content/media";
 import { SOURCES } from "@/lib/content/sources";
 import { globeAccent } from "@/lib/themes";
@@ -21,10 +21,9 @@ export default function Home() {
     note: c.researchNote,
   }));
   const japan = getCountry("japan")!;
+  const openCountries = openCountrySlugs().map((slug) => getCountry(slug)!);
   const journey = japan.journeys[0];
-  const placeHrefs = openCountrySlugs().flatMap((c) =>
-    ["nishiki-market", "kiyomizu-dera", "fushimi-inari-taisha"].filter((p) => getPlace(c, p)).map((p) => placePath(c, p).href),
-  );
+  const placeHrefs = openCountrySlugs().flatMap((c) => allPlaceSlugs(c).map((p) => placePath(c, p).href));
   const inResearch = COUNTRIES.filter((c) => c.status !== "open");
   const photos = MEDIA.filter((m) => m.kind !== "artwork").length;
 
@@ -56,27 +55,36 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
           <h2 id="countries-h" className="text-3xl font-semibold tracking-tight md:text-4xl">Eleven countries to begin with</h2>
           <p className="mt-3 max-w-[60ch] text-muted">
-            One is open. The rest open one at a time, each only once its own research is done; after these eleven, the order follows
-            international tourist arrivals.
+            {openCountries.length} are open. The rest open in this order, each once its own research is done. After the eleven, new countries arrive in batches of
+            five to ten, chosen for their places, history and culture.
           </p>
           <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-            <Link href="/japan/" className="lift press zoom group block">
-              <div className="overflow-hidden">
-                <Figure id="kyoto-yasaka" credit="none" sizes="(min-width:1024px) 58vw, 100vw" imgClassName="aspect-[16/10] w-full object-cover" />
-              </div>
-              <div className="mt-5 flex items-baseline justify-between gap-4">
-                <h3 className="text-2xl font-semibold">
-                  Japan <span className="ml-1 font-normal text-muted" lang="ja">日本</span>
-                </h3>
-                <span className="text-sm text-accent">Open</span>
-              </div>
-              <p className="mt-2 max-w-[56ch] text-muted">{japan.summary}</p>
-              <p className="mt-3 inline-flex items-center gap-2 font-medium group-hover:underline">
-                Enter Japan <ArrowRight size={16} aria-hidden />
-              </p>
-            </Link>
+            <div className="grid gap-10">
+              {openCountries.map((c, i) => (
+                <Link key={c.entry.slug} href={`/${c.entry.slug}/`} className={`lift press zoom group grid gap-5 ${i === 0 ? "" : "md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:items-end"}`}>
+                  <div className="overflow-hidden">
+                    <Figure
+                      id={c.card}
+                      credit="none"
+                      sizes={i === 0 ? "(min-width:1024px) 58vw, 100vw" : "(min-width:1024px) 25vw, 100vw"}
+                      imgClassName={`w-full object-cover ${i === 0 ? "aspect-[16/10]" : "aspect-[4/3]"}`}
+                    />
+                  </div>
+                  <div>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h3 className={`font-semibold ${i === 0 ? "text-2xl" : "text-xl"}`}>{c.entry.name}</h3>
+                      <span className="text-sm text-accent">Open</span>
+                    </div>
+                    <p className="mt-2 max-w-[56ch] text-muted">{c.summary}</p>
+                    <p className="mt-3 inline-flex items-center gap-2 font-medium group-hover:underline">
+                      Enter {c.entry.name} <ArrowRight size={16} aria-hidden />
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
             <div>
-              <h3 className="text-sm font-medium text-muted">In research</h3>
+              <h3 className="text-sm font-medium text-muted">Next, in this order</h3>
               <ul className="mt-3 grid grid-cols-2 gap-x-6">
                 {inResearch.map((c) => (
                   <li key={c.slug} id={`country-${c.slug}`} className="flex items-center gap-3 border-t border-line py-3 scroll-mt-24">

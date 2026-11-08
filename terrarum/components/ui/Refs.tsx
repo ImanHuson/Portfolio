@@ -15,7 +15,7 @@ export function Cite({ ids, refs }: { ids: string[]; refs: Refs }) {
 
 export function SourceList({ refs, title = "Sources" }: { refs: Refs; title?: string }) {
   return (
-    <section aria-labelledby="sources-h" className="border-t border-line pt-10">
+    <section aria-labelledby="sources-h" className="border-t border-line pt-10" data-pagefind-ignore>
       <h2 id="sources-h" className="font-display text-2xl">{title}</h2>
       <ol className="mt-6 grid gap-x-10 gap-y-4 text-sm md:grid-cols-2">
         {refs.list.map((s, i) => (

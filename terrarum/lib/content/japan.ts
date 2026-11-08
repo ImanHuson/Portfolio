@@ -21,7 +21,11 @@ export const japan: Country = {
     { label: "Foreign visitors", value: "42.68 million in 2025 (provisional), up from 36.87 million in 2024", asOf: "2025", cite: ["stat-handbook-2026"] },
   ],
   hero: "cma-shono",
+  card: "kyoto-yasaka",
   regionsGeo: "/data/jp-regions.json",
+  regionsBounds: [[127, 25.5], [146, 45.6]],
+  regionsHeading: "Eight regions, one open",
+  regionsNote: "Japan’s regions are a convention, not a level of government. Kansai is researched; the others are on the map and waiting.",
   regions: ["kansai"],
   pendingRegions: [
     { geoKey: "hokkaido", name: "Hokkaido", native: "北海道" },
@@ -71,6 +75,7 @@ export const japan: Country = {
       ],
       cite: ["stat-handbook-2026", "nishiki-history"],
       status: "fact-checked",
+      seeAlso: { place: "nishiki-market", label: "Go to Nishiki Market" },
     },
     {
       id: "language",
@@ -84,6 +89,7 @@ export const japan: Country = {
     },
   ],
   timeline: {
+    title: "From the Jōmon to Reiwa",
     cite: ["columbia-afe-timeline", "nippon-kyoto-millennium"],
     caveat:
       "Period names and dates are conventions historians use, and they disagree, most of all before about 600 CE. Columbia’s timeline, used here, ends the Nara period in 814; most references end it in 794, when the court moved to Heian-kyō (Kyoto), and so does this page.",
@@ -148,6 +154,8 @@ export const regions: Region[] = [
     ],
     cities: ["kyoto"],
     pendingCities: [{ name: "Osaka", native: "大阪" }, { name: "Nara", native: "奈良" }, { name: "Kobe", native: "神戸" }, { name: "Ōtsu", native: "大津" }, { name: "Uji", native: "宇治" }],
+    areasGeo: { url: "/data/jp-prefectures.json", key: "region", only: ["kansai"], labelProp: "name" },
+    bounds: [[134.2, 33.4], [137.0, 35.8]],
     gaps: [
       { topic: "Official definitions compared", why: "How the Union of Kansai Governments and national ministries define the region is not yet researched." },
       { topic: "Osaka, Nara, Kobe and the countryside", why: "Listed, not yet researched." },

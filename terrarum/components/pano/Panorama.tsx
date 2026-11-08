@@ -11,6 +11,9 @@ export interface PanoProps {
   yaw: number;
   pitch?: number;
   hfov?: number;
+  /** Partial panoramas (cylindrical strips): horizontal and vertical extent in degrees. */
+  haov?: number;
+  vaov?: number;
   alt: string;
 }
 
@@ -26,7 +29,7 @@ declare global {
  * zoom, fullscreen. Loaded only when the reader asks for it, so the page does
  * not pay for WebGL and a 1 MB panorama up front.
  */
-export function Panorama({ src, title, yaw, pitch = 0, hfov = 100, alt }: PanoProps) {
+export function Panorama({ src, title, yaw, pitch = 0, hfov = 100, haov, vaov, alt }: PanoProps) {
   const host = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -48,7 +51,9 @@ export function Panorama({ src, title, yaw, pitch = 0, hfov = 100, alt }: PanoPr
           pitch,
           hfov,
           minHfov: 60,
-          maxHfov: 110,
+          maxHfov: vaov ? Math.min(110, vaov * 1.6) : 110,
+          ...(haov ? { haov } : {}),
+          ...(vaov ? { vaov, minPitch: -vaov / 2, maxPitch: vaov / 2, avoidShowingBackground: true } : {}),
           showZoomCtrl: true,
           showFullscreenCtrl: true,
           keyboardZoom: true,
@@ -66,7 +71,7 @@ export function Panorama({ src, title, yaw, pitch = 0, hfov = 100, alt }: PanoPr
       disposed = true;
       viewer?.destroy();
     };
-  }, [on, src, yaw, pitch, hfov]);
+  }, [on, src, yaw, pitch, hfov, haov, vaov]);
 
   return (
     <div className="relative aspect-[16/9] w-full overflow-hidden bg-band text-on-band">

@@ -42,7 +42,7 @@ jobs:
             red-rising-archive/package-lock.json
             the-rising-archive/package-lock.json
             attack-on-titan-archive/package-lock.json
-            voyager/package-lock.json
+            terrarum/package-lock.json
 
       - name: Build book-site-react
         working-directory: book-site-react
@@ -68,8 +68,8 @@ jobs:
           npm ci
           npm run build
 
-      - name: Build voyager
-        working-directory: voyager
+      - name: Build terrarum
+        working-directory: terrarum
         run: |
           npm ci
           npm run build
@@ -87,8 +87,8 @@ jobs:
           cp -r the-rising-archive/out/. _site/the-rising-archive/
           mkdir -p _site/attack-on-titan-archive
           cp -r attack-on-titan-archive/out/. _site/attack-on-titan-archive/
-          mkdir -p _site/voyager
-          cp -r voyager/out/. _site/voyager/
+          mkdir -p _site/terrarum
+          cp -r terrarum/out/. _site/terrarum/
 
       - uses: actions/upload-pages-artifact@v3
         with:

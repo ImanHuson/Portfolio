@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { MEDIA, asset, small } from "@/lib/content/media";
 import { SOURCES } from "@/lib/content/sources";
 
-export const metadata: Metadata = { title: "Sources and credits", description: "Every reference and every image licence used on Voyager." };
+export const metadata: Metadata = { title: "Sources and credits", description: "Every reference and every image licence used on Terrarum." };
 
 const TYPE: Record<string, string> = {
   official: "Official body",

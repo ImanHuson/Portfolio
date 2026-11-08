@@ -58,6 +58,15 @@
 [data-display="mincho"] {
   --display: var(--font-mincho), "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
+[data-display="bricolage"] {
+  --display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+}
+[data-display="archivo"] {
+  --display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+}
+[data-display="archivo"] .font-display { letter-spacing: -0.02em; font-weight: 650; }
+/* Thaana and other non-Latin native names: the script's own face. */
+.native-script { font-family: var(--font-thaana), var(--display); line-height: 1.5; }
 
 @theme inline {
   --color-bg: var(--bg);
@@ -114,6 +123,18 @@ p { text-wrap: pretty; }
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Maldives: faint horizontal tide lines. Switzerland: a visible type grid. */
+[data-motif="tide"]::before, [data-motif="grid"]::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+[data-motif="tide"]::before {
+  opacity: 0.35;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 22px, color-mix(in srgb, var(--line) 60%, transparent) 22px 23px);
+}
+[data-motif="grid"]::before {
+  opacity: 0.5;
+  background-image: repeating-linear-gradient(to right, transparent 0 calc(100% / 12 - 1px), color-mix(in srgb, var(--line) 55%, transparent) calc(100% / 12 - 1px) calc(100% / 12));
 }
 [data-motif] > * { position: relative; z-index: 1; }
 

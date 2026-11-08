@@ -9,7 +9,7 @@
  * when their research is, from what that research finds, not guessed now.
  */
 
-export type DisplayFace = "atlas" | "mincho";
+export type DisplayFace = "atlas" | "mincho" | "bricolage" | "archivo";
 
 export interface Tokens {
   bg: string;
@@ -38,7 +38,10 @@ export interface Theme {
   /** CSS filter applied to documentary photographs in this country. */
   photo: string;
   /** Background texture: a fixed, non-scrolling layer. */
-  motif: "none" | "washi";
+  motif: "none" | "washi" | "tide" | "grid";
+  /** How native names are set: vertically (Japanese), inline in their own
+   * direction (Thaana, right to left), or as a stack of several languages. */
+  native: "vertical" | "inline" | "stack";
   /** Hero composition for the country page. */
   hero: "print-left-vertical-name" | "default";
   motion: { enter: "rise" | "ink"; durationMs: number };
@@ -69,6 +72,7 @@ export const ATLAS: Theme = {
   display: "atlas",
   photo: "none",
   motif: "none",
+  native: "inline",
   hero: "default",
   motion: { enter: "rise", durationMs: 520 },
   globe: "#e2b45a",
@@ -107,16 +111,89 @@ export const THEMES: Record<string, Theme> = {
     display: "mincho",
     photo: "saturate(0.92) contrast(1.03)",
     motif: "washi",
+    native: "vertical",
     hero: "print-left-vertical-name",
     motion: { enter: "ink", durationMs: 620 },
     globe: "#e0573f",
+  },
+  maldives: {
+    id: "maldives",
+    status: "designed",
+    rationale:
+      "Lagoon-white ground and reef-deep ink, with a coral accent: the islands are built of coral, and so is Malé's Friday Mosque. The native name is set in Thaana, right to left, as the Library of Congress study describes the script. A rounded, open grotesque (Bricolage) for display, nothing like Japan's book face. Faint horizontal tide lines instead of paper grain; photographs left bright and clear.",
+    light: {
+      bg: "#eef4f3",
+      surface: "#e1ecea",
+      ink: "#0d2a33",
+      muted: "#47606a",
+      line: "#c3d6d4",
+      accent: "#b8452f",
+      accentText: "#a83d28",
+      onAccent: "#fff8f2",
+      band: "#0b3c4c",
+      onBand: "#e9f4f2",
+    },
+    dark: {
+      bg: "#081d24",
+      surface: "#0e2a33",
+      ink: "#e3f0ee",
+      muted: "#9db6bc",
+      line: "#1f4450",
+      accent: "#ef7458",
+      accentText: "#f2896f",
+      onAccent: "#1a0904",
+      band: "#0b3c4c",
+      onBand: "#e9f4f2",
+    },
+    display: "bricolage",
+    photo: "saturate(1.04)",
+    motif: "tide",
+    native: "inline",
+    hero: "default",
+    motion: { enter: "rise", durationMs: 560 },
+    globe: "#3fb6b0",
+  },
+  switzerland: {
+    id: "switzerland",
+    status: "designed",
+    rationale:
+      "Swiss Style typography (the International Typographic Style grew up in Basel and Zurich): a tight grotesque (Archivo), flush-left text on a visible grid, near-white ground, black ink and the federal red as the one accent. The four official names are stacked, because the constitution gives the country four national languages. Photographs kept crisp and neutral.",
+    light: {
+      bg: "#f5f5f3",
+      surface: "#ebebe8",
+      ink: "#141414",
+      muted: "#555553",
+      line: "#d2d2ce",
+      accent: "#d52b1e",
+      accentText: "#b8231a",
+      onAccent: "#ffffff",
+      band: "#1d2a33",
+      onBand: "#f1f1ee",
+    },
+    dark: {
+      bg: "#121314",
+      surface: "#1b1d1f",
+      ink: "#ededea",
+      muted: "#a4a6a8",
+      line: "#2e3134",
+      accent: "#d52b1e",
+      accentText: "#f2685c",
+      onAccent: "#ffffff",
+      band: "#1d2a33",
+      onBand: "#f1f1ee",
+    },
+    display: "archivo",
+    photo: "contrast(1.02)",
+    motif: "grid",
+    native: "stack",
+    hero: "default",
+    motion: { enter: "rise", durationMs: 420 },
+    globe: "#e8473b",
   },
 };
 
 /** Globe accents for countries whose theme is not designed yet. */
 const DRAFT_ACCENTS: Record<string, string> = {
-  maldives: "#3fb6b0",
-  switzerland: "#9ec3d8",
   "saudi-arabia": "#c9a76b",
   china: "#c8514a",
   indonesia: "#d08a4a",

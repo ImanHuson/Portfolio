@@ -1,5 +1,5 @@
 /**
- * The Voyager content model. Pages render these shapes; they never hold facts
+ * The Terrarum content model. Pages render these shapes; they never hold facts
  * themselves. A country is added by adding data (lib/content/<country>/), a
  * theme (lib/themes.ts) and a research dossier (research/countries/<slug>/),
  * not by writing new page components.
@@ -62,6 +62,8 @@ export interface Passage {
   body: string[];
   cite: Cite;
   status: ReviewStatus;
+  /** A place in this country the passage leads to. */
+  seeAlso?: { place: string; label: string };
   /** Optional comparison drawn beside the text (same sources as the passage). */
   figure?: { caption: string; rows: { label: string; value: number; display: string }[] };
 }
@@ -72,7 +74,9 @@ export type License =
   | "CC BY 2.0"
   | "CC BY 2.5"
   | "CC BY 4.0"
+  | "CC BY 3.0"
   | "CC BY-SA 2.0"
+  | "CC BY-SA 2.5"
   | "CC BY-SA 3.0"
   | "CC BY-SA 4.0"
   | "ODbL 1.0";
@@ -117,6 +121,9 @@ export interface PanoScene {
   yaw: number;
   pitch?: number;
   hfov?: number;
+  /** Partial panoramas: horizontal and vertical angle of view in degrees. */
+  haov?: number;
+  vaov?: number;
   description: string;
   hotspots?: { yaw: number; pitch: number; text: string }[];
 }
@@ -188,6 +195,12 @@ export interface Region {
   facts: Fact[];
   cities: string[];
   pendingCities: Pending[];
+  /** The sub-areas drawn on the region map (prefectures, atolls, cantons). */
+  areasGeo: { url: string; key: string; only: string[]; labelProp?: string };
+  /** Where the region map frames: [[west, south], [east, north]]. */
+  bounds: [[number, number], [number, number]];
+  /** Optional picture beside the definition (an artwork or landscape). */
+  image?: string;
   gaps: Gap[];
   status: ReviewStatus;
 }
@@ -225,6 +238,9 @@ export interface CountryEntry {
   /** Where the globe marker sits (capital or a central point). */
   marker: LatLng;
   status: CountryStatus;
+  /** BCP 47 tag and direction of the native name (ja, dv rtl, de/fr/it/rm). */
+  nativeLang?: string;
+  nativeDir?: "ltr" | "rtl";
   collection: "founding" | "expansion";
   /** One-line hint shown while a country is still in research. */
   researchNote: string;
@@ -235,11 +251,20 @@ export interface Country {
   summary: string;
   facts: Fact[];
   hero: string;
+  /** Photograph used for the country's card on the home page. */
+  card: string;
   regionsGeo: string;
+  /** Frame for the regions map: [[west, south], [east, north]]. */
+  regionsBounds: [[number, number], [number, number]];
+  /** Draw each region as a dot too (island nations, where shapes are specks). */
+  regionsAsPoints?: boolean;
+  /** What the regions are (a convention, cantons, atolls) in one or two lines. */
+  regionsHeading: string;
+  regionsNote: string;
   regions: string[];
   pendingRegions: { geoKey: string; name: string; native?: string }[];
   passages: Passage[];
-  timeline: { periods: TimelinePeriod[]; cite: Cite; caveat: string };
+  timeline: { title: string; periods: TimelinePeriod[]; cite: Cite; caveat: string };
   journeys: Journey[];
   gaps: Gap[];
 }

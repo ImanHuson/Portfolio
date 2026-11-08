@@ -35,7 +35,7 @@ export function Figure({
         className={`${isPhoto ? "photo" : ""} ${imgClassName}`}
       />
       {credit === "below" && (
-        <figcaption className="mt-2 text-[13px] leading-snug text-muted">
+        <figcaption className="mt-2 text-[13px] leading-snug text-muted" data-pagefind-ignore>
           {caption && <span className="text-ink">{caption} </span>}
           <Credit id={id} />
         </figcaption>

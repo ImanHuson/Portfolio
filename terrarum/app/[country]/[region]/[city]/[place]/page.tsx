@@ -7,8 +7,10 @@ import { Crumbs } from "@/components/ui/Crumbs";
 import { Facts } from "@/components/ui/Facts";
 import { Credit, Figure } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
+import { NativeName } from "@/components/ui/NativeName";
 import { Passage } from "@/components/ui/Passage";
 import { PlaceCard } from "@/components/ui/PlaceCard";
+import { SaveButton } from "@/components/ui/SaveButton";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { allStaticParams, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
@@ -40,12 +42,13 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
   const refs = makeRefs([...p.facts.map((f) => f.cite), ...p.passages.map((x) => x.cite)]);
   const related = p.related.map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const pano = p.panoramas[0];
+  const lang = c.entry.nativeLang?.split(" ")[0];
   // Interleave the story with the photographs: one image after each passage.
   const gallery = [...p.gallery];
 
   return (
     <ThemeShell country={country}>
-      <main id="main">
+      <main id="main" data-pagefind-body>
         <section className="mx-auto max-w-[1400px] px-4 pt-8 md:px-8 lg:pt-10">
           <Crumbs
             trail={[
@@ -59,11 +62,14 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
           <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)]">
             <Figure id={p.hero} priority sizes="(min-width:1024px) 66vw, 100vw" className="enter" imgClassName="aspect-[3/2] w-full object-cover" />
             <div className="flex gap-6 lg:flex-col lg:gap-8">
-              {p.native && <p className="tategaki enter-2 font-display text-5xl text-accent md:text-7xl" lang="ja" aria-hidden>{p.native}</p>}
+              <NativeName text={p.native} entry={c.entry} size="md" className="enter-2" />
               <div className="enter-3 self-end lg:self-start">
                 <p className="text-sm text-muted">{p.kind}</p>
                 <h1 className="mt-2 font-display text-4xl leading-[1.05] tracking-tight md:text-6xl">{p.name}</h1>
                 <p className="mt-4 text-lg">{p.summary}</p>
+                <div className="mt-5">
+                  <SaveButton href={`/${country}/${region}/${city}/${place}/`} title={p.name} kind={`${p.kind}, ${ci.name}`} />
+                </div>
               </div>
             </div>
           </div>
@@ -107,14 +113,14 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
               <>
                 <p className="mt-3 max-w-[60ch] opacity-80">{pano.description}</p>
                 <div className="mt-8">
-                  <Panorama src={media(pano.media).src} title={pano.title} yaw={pano.yaw} alt={media(pano.media).alt} />
+                  <Panorama src={media(pano.media).src} title={pano.title} yaw={pano.yaw} haov={pano.haov} vaov={pano.vaov} alt={media(pano.media).alt} />
                   <p className="mt-2 text-[13px] opacity-75"><Credit id={pano.media} /></p>
                 </div>
               </>
             ) : (
               <p className="mt-3 max-w-[60ch] opacity-80">
-                There is no 360° view of {p.name} here yet. No openly licensed panorama of it could be found, and a made-up one would not be
-                the place. The photographs above are real; the map below shows where it is.
+                There is no 360° view of {p.name} here yet: no openly licensed 360° photograph of it turned up in the open collections searched.
+                The photographs above are real; the map below shows where it is.
               </p>
             )}
           </div>
@@ -131,7 +137,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
           <div>
             <h2 id="where-h" className="font-display text-3xl">Where it is</h2>
             <p className="mt-3 text-muted">
-              {p.where.lat.toFixed(4)}° N, {p.where.lng.toFixed(4)}° E. Position from {p.where.ref}.
+              {Math.abs(p.where.lat).toFixed(4)}° {p.where.lat >= 0 ? "N" : "S"}, {Math.abs(p.where.lng).toFixed(4)}° {p.where.lng >= 0 ? "E" : "W"}. Position from {p.where.ref}.
             </p>
             <p className="mt-6 text-sm">
               <Link href={`/${country}/${region}/${city}/`} className="underline underline-offset-4">All of {ci.name} on one map</Link>
@@ -144,7 +150,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
             <h2 id="next-h" className="font-display text-3xl md:text-4xl">Next, in {ci.name}</h2>
             <div className="mt-10 grid gap-10 md:grid-cols-2">
               {related.map(({ p: rp, href }) => (
-                <PlaceCard key={rp.slug} place={rp} href={href} />
+                <PlaceCard lang={lang} key={rp.slug} place={rp} href={href} />
               ))}
             </div>
           </div>

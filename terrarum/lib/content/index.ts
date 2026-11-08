@@ -1,14 +1,19 @@
 import { COUNTRIES } from "./countries";
-import { japan, regions, cities, places } from "./japan";
+import * as JP from "./japan";
+import * as MV from "./maldives";
+import * as CH from "./switzerland";
 import { source } from "./sources";
 import type { City, Country, Place, Region, Source } from "./types";
 
 /** Lookup layer. Pages ask here; adding a country means registering it below. */
 const COUNTRY_DATA: Record<string, { country: Country; regions: Region[]; cities: City[]; places: Place[] }> = {
-  japan: { country: japan, regions, cities, places },
+  japan: { country: JP.japan, regions: JP.regions, cities: JP.cities, places: JP.places },
+  maldives: { country: MV.maldives, regions: MV.regions, cities: MV.cities, places: MV.places },
+  switzerland: { country: CH.switzerland, regions: CH.regions, cities: CH.cities, places: CH.places },
 };
 
 export const openCountrySlugs = () => Object.keys(COUNTRY_DATA);
+export const allPlaceSlugs = (c: string) => COUNTRY_DATA[c]?.places.map((p) => p.slug) ?? [];
 export const getCountry = (slug: string) => COUNTRY_DATA[slug]?.country;
 export const getRegion = (c: string, r: string) => COUNTRY_DATA[c]?.regions.find((x) => x.slug === r);
 export const getCity = (c: string, s: string) => COUNTRY_DATA[c]?.cities.find((x) => x.slug === s);

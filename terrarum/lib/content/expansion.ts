@@ -1,7 +1,8 @@
 /**
- * The order countries open after the founding eleven: international tourist
- * arrivals (overnight visitors), UN Tourism's measure. Mirrors
- * research/expansion.md, which holds the reasoning and the source trail.
+ * How countries are added. The founding eleven open in the user's order; after
+ * them, batches of 5 to 10, chosen for what there is to explore (places,
+ * history, culture) with international tourist arrivals as a guide, not a
+ * strict ranking. Mirrors research/expansion.md.
  *
  * STATUS: provisional. UN Tourism's country table for 2024 could not be read
  * from this environment; the figures below come from secondary compilations
@@ -13,7 +14,7 @@ export interface Ranked {
   country: string;
   arrivals: string;
   year: number;
-  inVoyager: "founding" | "next" | "later";
+  inTerrarum: "founding" | "next" | "later";
   note?: string;
 }
 
@@ -26,17 +27,17 @@ export const RANKING_SOURCES = [
 ];
 
 export const RANKING: Ranked[] = [
-  { rank: 1, country: "France", arrivals: "102.0 million", year: 2024, inVoyager: "founding" },
-  { rank: 2, country: "Spain", arrivals: "93.8 million", year: 2024, inVoyager: "founding" },
-  { rank: 3, country: "United States", arrivals: "72.4 million", year: 2024, inVoyager: "founding", note: "Compilations differ between 72.3 and 73.4 million." },
-  { rank: 4, country: "Türkiye", arrivals: "60.6 million", year: 2024, inVoyager: "founding", note: "Türkiye's ministry reports over 62 million by counting citizens resident abroad; UN Tourism's figure does not." },
-  { rank: 5, country: "Italy", arrivals: "57.8 million", year: 2024, inVoyager: "founding" },
-  { rank: 6, country: "Mexico", arrivals: "45.0 million", year: 2024, inVoyager: "next" },
-  { rank: 7, country: "United Kingdom", arrivals: "41.8 million", year: 2024, inVoyager: "next" },
-  { rank: 8, country: "Germany", arrivals: "37.5 million", year: 2024, inVoyager: "next" },
-  { rank: 9, country: "Japan", arrivals: "36.9 million", year: 2024, inVoyager: "founding", note: "Japan's own statistics: 36.87 million." },
-  { rank: 10, country: "Greece", arrivals: "36.0 million", year: 2024, inVoyager: "later" },
-  { rank: 11, country: "Thailand", arrivals: "not confirmed", year: 2024, inVoyager: "later", note: "Ranked here by one compilation without a figure; needs the primary number." },
+  { rank: 1, country: "France", arrivals: "102.0 million", year: 2024, inTerrarum: "founding" },
+  { rank: 2, country: "Spain", arrivals: "93.8 million", year: 2024, inTerrarum: "founding" },
+  { rank: 3, country: "United States", arrivals: "72.4 million", year: 2024, inTerrarum: "founding", note: "Compilations differ between 72.3 and 73.4 million." },
+  { rank: 4, country: "Türkiye", arrivals: "60.6 million", year: 2024, inTerrarum: "founding", note: "Türkiye's ministry reports over 62 million by counting citizens resident abroad; UN Tourism's figure does not." },
+  { rank: 5, country: "Italy", arrivals: "57.8 million", year: 2024, inTerrarum: "founding" },
+  { rank: 6, country: "Mexico", arrivals: "45.0 million", year: 2024, inTerrarum: "next" },
+  { rank: 7, country: "United Kingdom", arrivals: "41.8 million", year: 2024, inTerrarum: "next" },
+  { rank: 8, country: "Germany", arrivals: "37.5 million", year: 2024, inTerrarum: "next" },
+  { rank: 9, country: "Japan", arrivals: "36.9 million", year: 2024, inTerrarum: "founding", note: "Japan's own statistics: 36.87 million." },
+  { rank: 10, country: "Greece", arrivals: "36.0 million", year: 2024, inTerrarum: "later" },
+  { rank: 11, country: "Thailand", arrivals: "not confirmed", year: 2024, inTerrarum: "later", note: "Ranked here by one compilation without a figure; needs the primary number." },
 ];
 
 export const RANKING_CAVEATS = [

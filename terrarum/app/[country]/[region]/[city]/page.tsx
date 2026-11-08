@@ -6,12 +6,16 @@ import { Crumbs } from "@/components/ui/Crumbs";
 import { Facts } from "@/components/ui/Facts";
 import { Credit, Figure } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
+import { NativeName } from "@/components/ui/NativeName";
 import { Passage } from "@/components/ui/Passage";
 import { PlaceCard } from "@/components/ui/PlaceCard";
+import { SaveButton } from "@/components/ui/SaveButton";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
+import { themeFor } from "@/lib/themes";
 import { allStaticParams, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
 import { media } from "@/lib/content/media";
+import { boundsOf } from "@/lib/geo";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -32,20 +36,26 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
   if (!c || !r || !ci) notFound();
   const places = ci.places.map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const refs = makeRefs([...ci.facts.map((f) => f.cite), ...ci.passages.map((p) => p.cite)]);
-  const [grid, court, heritage] = ci.passages;
+  const lang = c.entry.nativeLang?.split(" ")[0];
+  const head = ci.passages.slice(0, 2);
+  const tail = ci.passages.slice(2);
+  const WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
   const pano = ci.panoramas[0];
 
   return (
     <ThemeShell country={country}>
-      <main id="main">
+      <main id="main" data-pagefind-body>
         <section className="relative">
           <div className="mx-auto grid max-w-[1400px] gap-8 px-4 pt-8 md:px-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:pt-12">
-            <div className="order-2 flex gap-6 lg:order-1">
-              <p className="tategaki enter font-display text-6xl text-accent md:text-8xl" lang="ja" aria-hidden>{ci.native}</p>
+            <div className={`order-2 flex gap-6 lg:order-1 ${themeFor(country)?.native === "vertical" ? "" : "flex-col justify-between"}`}>
+              <NativeName text={ci.native} entry={c.entry} className="enter" />
               <div className="enter-2 flex flex-col justify-end">
                 <Crumbs trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { href: `/${country}/${region}/`, label: r.name }, { label: ci.name }]} />
                 <h1 className="mt-4 font-display text-5xl leading-none tracking-tight md:text-7xl">{ci.name}</h1>
                 <p className="mt-5 max-w-[34ch] text-lg">{ci.summary}</p>
+                <div className="mt-5">
+                  <SaveButton href={`/${country}/${region}/${city}/`} title={ci.name} kind={`City, ${c.entry.name}`} />
+                </div>
               </div>
             </div>
             <Figure id={ci.hero} priority sizes="(min-width:1024px) 66vw, 100vw" className="enter order-1 lg:order-2" imgClassName="aspect-[3/2] w-full object-cover" />
@@ -58,22 +68,24 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
 
         <section aria-labelledby="places-h" className="border-t border-line">
           <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-            <h2 id="places-h" className="font-display text-3xl md:text-4xl">Three places in Kyoto</h2>
+            <h2 id="places-h" className="font-display text-3xl md:text-4xl">{WORDS[places.length] ?? places.length} places in {ci.name}</h2>
             <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
               <div className="grid content-start gap-10">
-                {places.map(({ p, href }) => (
-                  <PlaceCard key={p.slug} place={p} href={href} />
-                )).slice(0, 2)}
+                {places.slice(0, places.length >= 3 ? 2 : 1).map(({ p, href }) => (
+                  <PlaceCard lang={lang} key={p.slug} place={p} href={href} />
+                ))}
               </div>
               <div className="grid content-start gap-6">
                 <AtlasMap
                   mode="streets"
                   label={`Street map of ${ci.name} with its researched places`}
-                  bounds={[[135.745, 34.955], [135.8, 35.015]]}
+                  bounds={boundsOf(places.map(({ p }) => p.where), 0.3, 0.008)}
                   pins={places.map(({ p, href }) => ({ label: p.name, lng: p.where.lng, lat: p.where.lat, href }))}
                   className="h-[min(70vh,600px)] min-h-[360px]"
                 />
-                <PlaceCard place={places[2].p} href={places[2].href} />
+                {places.slice(places.length >= 3 ? 2 : 1).map(({ p, href }) => (
+                  <PlaceCard lang={lang} key={p.slug} place={p} href={href} />
+                ))}
               </div>
             </div>
           </div>
@@ -82,8 +94,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
         <section className="border-t border-line bg-surface">
           <div className="mx-auto grid max-w-[1400px] gap-12 px-4 py-20 md:px-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
             <div className="space-y-14">
-              <Passage p={grid} refs={refs} />
-              <Passage p={court} refs={refs} />
+              {head.map((x) => <Passage key={x.id} p={x} refs={refs} />)}
             </div>
             {ci.artwork && <Figure id={ci.artwork} sizes="(min-width:1024px) 40vw, 100vw" imgClassName="w-full" className="self-start" />}
           </div>
@@ -94,14 +105,14 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
             <h2 id="pano-h" className="font-display text-3xl md:text-4xl">Arriving: {pano.title}</h2>
             <p className="mt-3 max-w-[60ch] text-muted">{pano.description}</p>
             <div className="mt-8">
-              <Panorama src={media(pano.media).src} title={pano.title} yaw={pano.yaw} alt={media(pano.media).alt} />
+              <Panorama src={media(pano.media).src} title={pano.title} yaw={pano.yaw} haov={pano.haov} vaov={pano.vaov} alt={media(pano.media).alt} />
               <p className="mt-2 text-[13px] text-muted"><Credit id={pano.media} /></p>
             </div>
           </section>
         )}
 
         <div className="mx-auto max-w-[1400px] px-4 pb-20 md:px-8">
-          <Passage p={heritage} refs={refs} />
+          <div className="space-y-14">{tail.map((x) => <Passage key={x.id} p={x} refs={refs} />)}</div>
         </div>
 
         <div className="mx-auto max-w-[1400px] space-y-12 px-4 py-16 md:px-8">

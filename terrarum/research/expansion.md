@@ -1,12 +1,27 @@
 # Country expansion record
 
-Rule (from the brief): after the founding collection, countries open in descending order of **international tourist arrivals** (overnight visitors), UN Tourism's measure. Domestic tourism, population, search interest and attraction counts may inform tie-breaks but never replace the ranking.
+## Rules (the user's, November 2026)
 
-The site renders this record from `lib/content/expansion.ts` on `/method/#expansion`. Keep the two in step.
+1. **The founding eleven open in the order the user listed them:** Japan, Maldives, Switzerland, Saudi Arabia, China, Indonesia, France, Spain, Italy, United States, Türkiye. Japan is open; Maldives and Switzerland are the next pair (Milestone 3).
+2. **After the eleven, countries are added in batches of 5 to 10**, never all at once, so each batch can be researched properly.
+3. **Choosing a batch:** international tourist arrivals are a guide, not a strict ranking. What decides is that the country has a lot to explore: places, history and culture. A country high on arrivals but thin on what this site can show (for example one dominated by transit or shopping trips) can wait; a slightly lower one with deep history and culture can come first. Write the reason for each pick here.
 
-## Founding collection (by choice, not by rank)
+## Candidates for the first batch after the eleven
 
-Japan, Maldives, Switzerland, Saudi Arabia, China, Indonesia, France, Spain, Italy, United States, Türkiye. The brief says "ten" in several places and lists eleven (Indonesia was added); eleven is used.
+Ordered roughly by arrivals, each with the reason it earns a place. Not yet researched: the reasons are directions to check, not facts.
+
+| Country | Why it fits | Arrivals guide (2024, secondary) |
+|---|---|---|
+| Mexico | Pre-Columbian cities, colonial towns, food culture | ~45.0 m |
+| United Kingdom | Long recorded history, museums, regional cultures | ~41.8 m |
+| Greece | Classical sites, islands, Byzantine heritage | ~36.0 m |
+| Thailand | Temples, royal capitals, food and markets | not confirmed |
+| Germany | Medieval towns, Rhine, a deep cultural record | ~37.5 m |
+| Egypt | Ancient sites along the Nile, Islamic Cairo | to check |
+| India | Many civilisations, religions and regional cultures | to check |
+| Portugal | Maritime history, old towns | to check |
+| Morocco | Medinas, Atlas mountains, Saharan routes | to check |
+| Peru | Inca and earlier cultures, Andean life | to check |
 
 ## 2024 ranking (provisional)
 
@@ -39,9 +54,9 @@ UN Tourism's country table (Tourism Data Dashboard) is behind an interactive app
 
 ## Phase plan
 
-- Phase 1 (founding): Japan open; ten in research. Order of work after Japan: two countries that test the system hardest (Milestone 3), suggested Maldives (atolls, sea, no conventional regions) and Saudi Arabia (desert, sacred sites with access restrictions), then the rest.
-- Phase 2: Mexico, United Kingdom, Germany, if the primary data confirms the order.
-- Phase 3: continue down the ranking.
+- Phase 1 (founding eleven, in the user's order): Japan open; Maldives and Switzerland next (Milestone 3: an atoll nation with no conventional regions and an Alpine federation of cantons test the content model and themes hardest); then Saudi Arabia, China, Indonesia, France, Spain, Italy, United States, Türkiye.
+- Phase 2: a batch of 5 to 10 from the candidates above, picked by the interest rule.
+- Later phases: further batches of 5 to 10.
 
 ## Update log
 

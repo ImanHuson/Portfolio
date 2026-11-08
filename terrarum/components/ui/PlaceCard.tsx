@@ -3,7 +3,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Figure } from "./Figure";
 import type { Place } from "@/lib/content/types";
 
-export function PlaceCard({ place, href, size = "md" }: { place: Place; href: string; size?: "lg" | "md" }) {
+export function PlaceCard({ place, href, size = "md", lang }: { place: Place; href: string; size?: "lg" | "md"; lang?: string }) {
   return (
     <Link href={href} className="lift press zoom group block">
       <div className="overflow-hidden">
@@ -17,7 +17,7 @@ export function PlaceCard({ place, href, size = "md" }: { place: Place; href: st
       <p className="mt-4 text-sm text-muted">{place.kind}</p>
       <h3 className={`font-display ${size === "lg" ? "text-3xl" : "text-2xl"} mt-1 leading-tight`}>
         {place.name}
-        {place.native && <span className="ml-2 inline-block text-[0.7em] text-muted" lang="ja">{place.native}</span>}
+        {place.native && <span className="ml-2 inline-block text-[0.7em] text-muted" lang={lang}>{place.native}</span>}
       </h3>
       <p className="mt-2 max-w-[52ch] text-muted">{place.summary}</p>
       <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-accent-text group-hover:underline">

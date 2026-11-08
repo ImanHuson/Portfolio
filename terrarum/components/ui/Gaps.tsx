@@ -4,7 +4,7 @@ import type { Gap } from "@/lib/content/types";
 export function Gaps({ gaps }: { gaps: Gap[] }) {
   if (!gaps.length) return null;
   return (
-    <details className="group border-t border-line pt-4 text-sm">
+    <details className="group border-t border-line pt-4 text-sm" data-pagefind-ignore>
       <summary className="cursor-pointer list-none text-muted hover:text-ink">
         <span className="underline decoration-line underline-offset-4">Not covered yet ({gaps.length})</span>
       </summary>
