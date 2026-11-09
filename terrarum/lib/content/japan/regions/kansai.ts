@@ -8,7 +8,7 @@ export const region: Region =
     name: "Kansai",
     native: "関西",
     geoKey: "kansai",
-    summary: "The old heartland of the imperial court, around Kyoto, Osaka, Nara and Kobe.",
+    summary: "The old heartland of the imperial court: Nara and Kyoto, the capitals; Osaka, the merchant city; Himeji’s castle on the road west; and the temple mountain of Kōyasan.",
     definition: {
       id: "kansai-definition",
       heading: "Where Kansai ends",
@@ -21,19 +21,132 @@ export const region: Region =
     facts: [
       { label: "Kinki major metropolitan area", value: "19.2 million people", asOf: "2020 census", note: "The statistical area around Osaka, Sakai, Kyoto and Kobe, not the whole region", cite: ["stat-handbook-2026"] },
       { label: "Kyoto City", value: "1,464,000 people", asOf: "2020 census", cite: ["stat-handbook-2026"] },
+      { label: "Osaka City", value: "2,752,000 people", asOf: "2020 census", cite: ["stat-handbook-2026"] },
     ],
-    cities: ["kyoto", "nara", "osaka"],
-    pendingCities: [{ name: "Osaka", native: "大阪" }, { name: "Nara", native: "奈良" }, { name: "Kobe", native: "神戸" }, { name: "Ōtsu", native: "大津" }, { name: "Uji", native: "宇治" }],
+    cities: ["kyoto", "nara", "osaka", "himeji", "koyasan"],
+    pendingCities: [],
     areasGeo: { url: "/data/jp-prefectures.json", key: "region", only: ["kansai"], labelProp: "name" },
     bounds: [[134.2, 33.4], [137.0, 35.8]],
-    gaps: [
-      { topic: "Official definitions compared", why: "How the Union of Kansai Governments and national ministries define the region is not yet researched." },
-      { topic: "Osaka, Nara, Kobe and the countryside", why: "Listed, not yet researched." },
-    ],
+    gaps: [],
     status: "fact-checked",
   };
 
 export const cities: City[] = [
+  {
+    slug: "himeji",
+    kind: "city",
+    name: "Himeji",
+    native: "姫路",
+    where: { lat: 34.8154, lng: 134.6855, ref: "OpenStreetMap relation 900269 (Himeji City)" },
+    summary: "A castle town on the road from Kansai to western Japan, built around the white castle that survived the war when the city around it did not.",
+    facts: [
+      { label: "Castle", value: "World Heritage since 1993", cite: ["stat-handbook-2026"] },
+      { label: "Old province", value: "Harima", cite: ["hyogo-harima"] },
+    ],
+    passages: [
+      {
+        id: "himeji-corridor",
+        heading: "On the road west",
+        covers: ["geography", "differences"],
+        body: [
+          "Himeji lies in Harima, the old province in the southwest of what is now Hyōgo Prefecture, on the corridor that joined the capital region of Kyoto and Osaka to the rest of western Japan. The rivers of the Banshū plain made it good farmland, and the Harimanada, the sea to the south, fed it. That position is why so many castles were built in the area, and why Himeji’s was the one that mattered.",
+        ],
+        cite: ["hyogo-harima", "himeji-history"],
+        status: "fact-checked",
+      },
+      {
+        id: "himeji-town",
+        heading: "A town laid out by rank",
+        covers: ["history", "architecture", "life"],
+        body: [
+          "Ikeda Terumasa, who held the castle from 1600, ringed the town as well as the castle with moats and earth banks, so that Himeji had three layers of defence: the outer town, a middle ring where the samurai lived, and the castle itself. The higher a samurai’s rank, the closer he lived to the centre; merchants and craftsmen lived just beyond the middle moat, and some districts were named for their trades, such as Zaimoku-machi, the lumber town, and Takajō-machi, the falconers’ town.",
+          "After the domains were abolished in 1871 the castle became an army base, and the samurai quarter in front of its main gate a parade ground. In 1945 American air raids destroyed the city, but the castle came through almost untouched.",
+        ],
+        cite: ["himeji-history"],
+        places: ["himeji-castle"],
+        status: "fact-checked",
+      },
+      {
+        id: "himeji-food",
+        heading: "Oden with ginger and almond toast",
+        covers: ["food", "identity", "life"],
+        body: [
+          "Himeji was once known for growing ginger and making soy sauce, and the two meet in its own way of eating oden, the simmered hotpot: here it comes with ginger soy sauce poured over it. The habit seems to have taken hold in the late 1930s and early 1940s, and more than 100 places in the city now serve it. For breakfast, Himeji’s cafés serve almond toast, bread spread thickly with a sweet almond butter.",
+        ],
+        cite: ["hyogo-gourmet"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "himeji-view",
+    panoramas: [],
+    places: ["himeji-castle"],
+    nearby: ["osaka", "kyoto"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "koyasan",
+    kind: "town",
+    name: "Kōyasan",
+    native: "高野山",
+    where: { lat: 34.2158, lng: 135.5873, ref: "OpenStreetMap relation 3288891 (Kōya town)" },
+    summary: "A town of temples on a mountain plateau in Wakayama, founded by the monk Kūkai in 816 as the centre of Shingon Buddhism.",
+    facts: [
+      { label: "Founded", value: "816, by Kūkai (Kōbō Daishi)", cite: ["koya-jinai", "koya-kukai"] },
+      { label: "Temples", value: "117, of which 51 or 52 take in guests (the temple and the prefecture count differently)", cite: ["koya-kongobuji", "wakayama-koyasan"] },
+      { label: "World Heritage", value: "Since 2004, with the Kii Mountain Range pilgrimage sites", cite: ["stat-handbook-2026"] },
+    ],
+    passages: [
+      {
+        id: "koya-founding",
+        heading: "A mountain chosen from China",
+        covers: ["history", "geography"],
+        body: [
+          "Kūkai, born in 774 in Sanuki on Shikoku, went to China in 804 and studied esoteric Buddhism in Chang’an under the master Huiguo. In 816 Emperor Saga granted him the mountain, and he and his disciples cut a path, cleared the forest and began building a monastery on its high, level ground far from the capital.",
+          "The temple tells how he found it: before sailing home from China he threw a ritual implement into the air, praying to be shown where to build. In Japan a hunter with a black dog and a white dog led him across the Kinokawa River into the mountains, a goddess of the mountain promised her help, and he found the implement caught in a pine tree on a quiet plateau.",
+        ],
+        cite: ["koya-kukai", "koya-kongobuji"],
+        status: "fact-checked",
+      },
+      {
+        id: "koya-temple-town",
+        heading: "A whole mountain that is one temple",
+        covers: ["architecture", "identity", "differences"],
+        body: [
+          "Kōyasan has no single temple in the usual sense: the mountain as a whole is the temple, and its main hall is the Kondō of the Danjō Garan, where nearly all the great ceremonies are held. The Garan is the first place Kūkai built, laid out to express the world of the Womb Realm mandala; its Konpon Daitō, begun in 816 and finished in 887, is believed to be Japan’s first square two-storey pagoda. Around it, 117 temples stand along the streets.",
+          "Until 1872 women were not allowed on the mountain at all, and prayed instead at halls by each of its entrances; one of those halls survives.",
+        ],
+        cite: ["koya-kongobuji", "koya-meguru"],
+        status: "fact-checked",
+      },
+      {
+        id: "koya-life",
+        heading: "Staying in a temple",
+        covers: ["life"],
+        body: [
+          "About half of the mountain’s 117 temples take in guests, and staying in one is how most visitors meet Kōyasan’s daily life. Guests are asked to dress modestly at the sacred sites, to change out of the temple’s yukata before the morning service, and to keep to the places where photography is allowed. At Kongōbu-ji, visitors are given tea and a rice cracker in its great hall of 169 tatami mats.",
+        ],
+        cite: ["koya-kongobuji", "koya-jinai"],
+        status: "fact-checked",
+      },
+      {
+        id: "koya-food",
+        heading: "Temple cooking",
+        covers: ["food"],
+        body: [
+          "The temples that take guests serve shōjin ryōri, the Buddhist cooking made only from vegetables and wild plants, with nothing from animals. Kōyasan’s own specialities are kōya-dōfu, freeze-dried tofu, and goma-dōfu, a smooth tofu made with sesame; both turn up in the restaurants along the road between Okunoin and the Danjō Garan as well.",
+        ],
+        cite: ["wakayama-koyasan"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "kongobuji-daito",
+    panoramas: [],
+    places: ["okunoin", "kongobu-ji"],
+    nearby: ["osaka", "nara"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "osaka",
     kind: "city",
@@ -293,6 +406,138 @@ export const cities: City[] = [
 
 
 export const places: Place[] = [
+  {
+    slug: "himeji-castle",
+    name: "Himeji Castle",
+    native: "姫路城",
+    kind: "Castle",
+    where: { lat: 34.8393, lng: 134.694, ref: "OpenStreetMap way 23707900" },
+    summary: "The White Heron: a castle whose keep has stood since 1609, through the end of the samurai and the bombing of the city around it.",
+    matters:
+      "Himeji’s keep has stood since 1609, through the end of the samurai, an army garrison and the firebombing of its city. Its walls, gates, galleries and the town plan around it show how a castle of that age actually worked.",
+    facts: [
+      { label: "Keep built", value: "1601-1609, by Ikeda Terumasa", cite: ["himeji-history"] },
+      { label: "World Heritage", value: "1993, one of Japan’s first", cite: ["stat-handbook-2026"] },
+      { label: "Restoration", value: "Keep dismantled and rebuilt, 1956-1964", cite: ["himeji-history"] },
+    ],
+    passages: [
+      {
+        id: "himeji-white-heron",
+        heading: "The White Heron",
+        body: [
+          "A fortress at Himeji is first recorded in 1561, held by the Kuroda clan. Toyotomi Hideyoshi made it his base for taking the west of Honshu and built a three-storey keep there. After the Battle of Sekigahara in 1600, Tokugawa Ieyasu gave the castle and the province of Harima to his son-in-law Ikeda Terumasa, who between 1601 and 1609 built a new, larger keep. Its white plastered walls gave the castle its name, the White Heron.",
+          "Under the Tokugawa the lords of Himeji changed more often than almost anywhere else. The castle guarded the route west, so it was never left to a child: when a lord died without an adult heir, his family was moved elsewhere at once.",
+        ],
+        cite: ["himeji-history"],
+        images: ["himeji-postcard"],
+        status: "fact-checked",
+      },
+      {
+        id: "himeji-survived",
+        heading: "Saved, and taken apart",
+        body: [
+          "After the end of the domains the castle became a base for the army’s 10th Regiment, and neglect and lack of money for repairs wore the old buildings down. In 1945 the keep was covered with camouflage, and when American bombers destroyed the city of Himeji the castle survived almost unharmed; local stories tell of a firebomb that landed inside without exploding.",
+          "Between 1956 and 1964 the entire keep was dismantled, repaired and put back together. Finding timbers big enough was the hardest part: one trunk meant to replace a main pillar broke while it was being brought from the Kiso mountains.",
+        ],
+        cite: ["himeji-history"],
+        images: ["himeji-interior"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "himeji-keep",
+    gallery: ["himeji-walls", "himeji-ishiotoshi", "himeji-gable", "himeji-view", "himeji-sakura", "himeji-hanami", "himeji-night"],
+    panoramas: [],
+    related: ["osaka-castle", "nijo-castle"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "okunoin",
+    name: "Okunoin",
+    native: "奥之院",
+    kind: "Mausoleum and cemetery",
+    where: { lat: 34.2188, lng: 135.6054, ref: "OpenStreetMap way 243384577" },
+    summary: "The resting place of Kōbō Daishi, approached through a forest of cedars and graves, where lanterns have been kept burning for a thousand years.",
+    matters:
+      "For Shingon Buddhists, Kōbō Daishi did not die but entered eternal meditation here, and the forest of graves and memorials that lines the way to his mausoleum is people wanting to be near him.",
+    facts: [
+      { label: "Kūkai entombed", value: "835, fifty days after his death", cite: ["koya-kukai"] },
+      { label: "Hall of Lanterns", value: "Enlarged to its present size in 1023 by Fujiwara no Michinaga", cite: ["koya-meguru"] },
+    ],
+    passages: [
+      {
+        id: "okunoin-daishi",
+        heading: "Where the Daishi waits",
+        body: [
+          "Kūkai died on 21 March 835, at the age of 62, sitting in meditation. On the fiftieth day, as he had asked, his disciples placed his body in a grotto at Okunoin. The mausoleum there, the Gobyō, is one of the centres of faith on the mountain, the place where Kōbō Daishi is said to have entered the next world, and an inscription at the great gate of Kōyasan says he appears every morning to make his rounds.",
+        ],
+        cite: ["koya-kukai", "koya-meguru"],
+        images: ["okunoin-torodo-front"],
+        status: "fact-checked",
+      },
+      {
+        id: "okunoin-lanterns",
+        heading: "Lanterns that never go out",
+        body: [
+          "The Hall of Lanterns in front of the mausoleum was built by Kūkai’s successor Shinzen and enlarged to its present size by the statesman Fujiwara no Michinaga in 1023. Some of its lanterns have been kept alight continuously: one given by Emperor Shirakawa, and one offered by a poor woman who cut off and sold her hair to pay for it. Sutras are chanted there six times a day, and on 13 August and from 1 to 3 October the hall reopens at night for lantern festivals.",
+        ],
+        cite: ["koya-meguru"],
+        images: ["okunoin-torodo"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "okunoin-graves",
+    gallery: ["okunoin-stone-lanterns", "okunoin-mausoleum", "okunoin-lanterns-moss", "okunoin-jizo", "okunoin-stream"],
+    panoramas: [],
+    related: ["kongobu-ji", "todai-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "kongobu-ji",
+    name: "Kongōbu-ji",
+    native: "金剛峯寺",
+    kind: "Head temple of Kōyasan Shingon Buddhism",
+    where: { lat: 34.2139, lng: 135.5837, ref: "OpenStreetMap way 1363855538" },
+    summary: "The head temple of the Kōyasan school of Shingon Buddhism, a former memorial temple of Hideyoshi’s with Japan’s largest rock garden.",
+    matters:
+      "Kongōbu-ji is where the mountain is run from. Its buildings carry the history of how Kōyasan survived the age of the warlords, and its rooms the story of one of them, Hideyoshi’s nephew, who died here.",
+    facts: [
+      { label: "As Kongōbu-ji", value: "Since 1869, when two temples were merged", cite: ["koya-jinai"] },
+      { label: "Main hall", value: "Rebuilt 1863", cite: ["koya-jinai"] },
+      { label: "Banryūtei", value: "2,340 m², Japan’s largest rock garden", cite: ["koya-jinai"] },
+    ],
+    passages: [
+      {
+        id: "kongobuji-hideyoshi",
+        heading: "Spared by a warlord",
+        body: [
+          "In the late sixteenth century Toyotomi Hideyoshi prepared to attack Kōyasan, and the monk Ōgo, known as Mokujiki, negotiated its survival. Hideyoshi let him build a temple on this site, and in 1593 he added a second, Seigan-ji, in memory of his mother. The two stood side by side until 1869, when they were merged and renamed Kongōbu-ji. Its lanterns still carry two crests: on the right that of the shrine whose gods guard the mountain, on the left the paulownia of the Toyotomi.",
+          "In the Willow Room, Hideyoshi’s nephew and heir Toyotomi Hidetsugu took his own life in 1595.",
+        ],
+        cite: ["koya-jinai"],
+        images: ["kongobuji-lantern"],
+        status: "fact-checked",
+      },
+      {
+        id: "kongobuji-buildings",
+        heading: "Rain barrels and a garden of dragons",
+        body: [
+          "The main hall was rebuilt in 1863 after several fires. Its roof is laid in cypress bark fixed with bamboo nails, and on top of it stand wooden barrels that collected rainwater, so that monks could climb up and wet the roof against flying sparks.",
+          "The Banryūtei rock garden, made in 1984 for the 1,150th anniversary of Kūkai’s entry into eternal meditation, covers 2,340 square metres. Its 140 stones, granite from Shikoku where Kūkai was born, form a pair of dragons rising from a sea of clouds of white sand from Kyoto.",
+        ],
+        cite: ["koya-jinai"],
+        images: ["kongobuji-rock-garden"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "kongobuji-main",
+    gallery: ["kongobuji-steps", "kongobuji-gate", "kongobuji-courtyard", "kongobuji-carving", "kongobuji-daito"],
+    panoramas: [],
+    related: ["okunoin", "todai-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "osaka-castle",
     name: "Osaka Castle",
