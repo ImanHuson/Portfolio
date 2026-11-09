@@ -26,7 +26,7 @@ export default function SourcesPage() {
 
       <section aria-labelledby="refs-h" className="mt-16">
         <h2 id="refs-h" className="text-2xl font-semibold">References ({SOURCES.length})</h2>
-        <ul className="mt-6 grid gap-x-12 lg:grid-cols-2">
+        <ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-x-12 break-words lg:grid-cols-2">
           {SOURCES.map((s) => (
             <li key={s.id} id={s.id} className="border-t border-line py-5 scroll-mt-20">
               <p className="text-sm text-muted">{TYPE[s.type]}</p>
@@ -45,7 +45,7 @@ export default function SourcesPage() {
         <p className="mt-2 max-w-[62ch] text-muted">
           Each is published under the licence shown and hosted here as a resized copy. Share-alike licences carry over to these copies.
         </p>
-        <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-x-8 gap-y-10 break-words sm:grid-cols-2 lg:grid-cols-4">
           {MEDIA.map((m) => (
             <li key={m.id}>
               <img
