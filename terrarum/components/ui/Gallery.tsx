@@ -11,7 +11,7 @@ const ORDER = Object.keys(SIDES) as Side[];
  * other seasons, after dark, from above, the past). Each photo is captioned
  * with the side it shows and credited in full; selecting one opens a viewer.
  */
-export function Gallery({ ids, name, headingId, tour }: { ids: string[]; name: string; headingId: string; tour?: { url: string; label: string; by: string } }) {
+export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: string[]; name: string; headingId: string; tour?: { url: string; label: string; by: string }; layout?: "wall" | "emaki" }) {
   const items: GalleryItem[] = ids
     .map((id) => media(id))
     .sort((a, b) => ORDER.indexOf(a.side ?? "detail") - ORDER.indexOf(b.side ?? "detail"))
@@ -36,6 +36,7 @@ export function Gallery({ ids, name, headingId, tour }: { ids: string[]; name: s
   const sides = new Set(items.map((i) => i.side)).size;
   return (
     <section aria-labelledby={headingId} className="border-t border-line">
+      <div className="country-rule" aria-hidden />
       <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
         <h2 id={headingId} className="font-display text-3xl md:text-4xl">
           Every side of {name}
@@ -52,7 +53,7 @@ export function Gallery({ ids, name, headingId, tour }: { ids: string[]; name: s
             </a>
           </p>
         )}
-        <GalleryViewer items={items} />
+        <GalleryViewer items={items} layout={layout} />
       </div>
     </section>
   );

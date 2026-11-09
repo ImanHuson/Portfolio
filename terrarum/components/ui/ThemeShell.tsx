@@ -6,7 +6,7 @@ export function ThemeShell({ country, children }: { country: string; children: R
   const theme = themeFor(country);
   if (!theme) return <>{children}</>;
   return (
-    <div data-theme={theme.id} data-display={theme.display} data-motif={theme.motif} style={themeStyle(theme)} className="min-h-dvh">
+    <div data-theme={theme.id} data-display={theme.display} data-motif={theme.motif} data-gallery={theme.gallery} data-heading={theme.heading} style={themeStyle(theme)} className="min-h-dvh">
       {children}
     </div>
   );

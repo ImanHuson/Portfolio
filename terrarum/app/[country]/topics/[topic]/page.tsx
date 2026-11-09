@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Widget } from "@/components/chapter/Widget";
 import { Crumbs } from "@/components/ui/Crumbs";
+import { NativeName } from "@/components/ui/NativeName";
+import { themeFor } from "@/lib/themes";
 import { Facts } from "@/components/ui/Facts";
 import { Figure } from "@/components/ui/Figure";
 import { Bars, Passage } from "@/components/ui/Passage";
@@ -36,20 +38,23 @@ export default async function ChapterPage({ params }: PageProps<"/[country]/topi
   const lang = c.entry.nativeLang?.split(" ")[0];
   const refs = makeRefs([...(ch.facts ?? []).map((f) => f.cite), ...ch.passages.map((p) => p.cite)]);
   const others = c.chapters.filter((x) => x.slug !== ch.slug);
+  const vertical = themeFor(country)?.native === "vertical";
 
   return (
     <ThemeShell country={country}>
       <main id="main" data-pagefind-body>
         <header className="mx-auto grid max-w-[1400px] gap-8 px-4 pb-16 pt-8 md:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end lg:pt-12">
-          <div className="enter-2 lg:pb-4">
-            <Crumbs trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { label: ch.title }]} />
-            {ch.native && (
-              <p className="mt-6 font-display text-2xl text-accent-text" lang={lang}>
-                {ch.native}
-              </p>
+          <div className={`enter-2 flex gap-6 lg:pb-4 ${vertical ? "" : "flex-col"}`}>
+            {vertical ? (
+              <NativeName text={ch.native} entry={c.entry} size="md" />
+            ) : (
+              ch.native && <p className="font-display text-2xl text-accent-text" lang={lang}>{ch.native}</p>
             )}
-            <h1 className="mt-2 font-display text-5xl leading-[1.05] tracking-tight md:text-6xl">{ch.title}</h1>
-            <p className="mt-5 max-w-[46ch] text-lg">{ch.summary}</p>
+            <div className="flex min-w-0 flex-col justify-end">
+              <Crumbs trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { label: ch.title }]} />
+              <h1 className="mt-4 font-display text-5xl leading-[1.05] tracking-tight md:text-6xl">{ch.title}</h1>
+              <p className="mt-5 max-w-[46ch] text-lg">{ch.summary}</p>
+            </div>
           </div>
           <Figure id={ch.hero} priority sizes="(min-width:1024px) 58vw, 100vw" className="enter" imgClassName="aspect-[3/2] w-full object-cover" />
         </header>
@@ -141,6 +146,7 @@ export default async function ChapterPage({ params }: PageProps<"/[country]/topi
           </section>
         )}
 
+        <div className="country-rule" aria-hidden />
         <section aria-labelledby="more-h" className="border-t border-line bg-surface">
           <div className="mx-auto max-w-[1400px] px-4 py-16 md:px-8">
             <h2 id="more-h" className="font-display text-3xl">More about {c.entry.name}</h2>

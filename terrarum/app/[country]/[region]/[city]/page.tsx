@@ -89,6 +89,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
           </div>
         </section>
 
+        <div className="country-rule" aria-hidden />
         <section aria-labelledby="about-h" className="border-t border-line bg-surface">
           <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:px-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14">
             <nav aria-label={`About ${ci.name}`} className="lg:sticky lg:top-24 lg:self-start">

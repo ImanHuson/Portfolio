@@ -42,6 +42,11 @@ export interface Theme {
   /** How native names are set: vertically (Japanese), inline in their own
    * direction (Thaana, right to left), or as a stack of several languages. */
   native: "vertical" | "inline" | "stack";
+  /** How a place's photographs are laid out: a hand-scroll strip read right
+   * to left like an emakimono, or the shared masonry wall. */
+  gallery: "emaki" | "wall";
+  /** Section headings' accent: a brush stroke drawn under them, or none. */
+  heading: "brush" | "plain";
   /** Hero composition for the country page. */
   hero: "print-left-vertical-name" | "default";
   motion: { enter: "rise" | "ink"; durationMs: number };
@@ -73,6 +78,8 @@ export const ATLAS: Theme = {
   photo: "none",
   motif: "none",
   native: "inline",
+  gallery: "wall",
+  heading: "plain",
   hero: "default",
   motion: { enter: "rise", durationMs: 520 },
   globe: "#e2b45a",
@@ -83,7 +90,7 @@ export const THEMES: Record<string, Theme> = {
     id: "japan",
     status: "designed",
     rationale:
-      "Washi-toned ground, sumi-indigo ink and shu vermilion (the lacquer red of shrine gates, which Fushimi Inari's own site explains as mercury-and-earth pigment). Mincho display type, the Japanese book face descended from Ming woodblock lettering. Place names set vertically, as they are on signs and in print. Photos slightly cooled and held back; the Edo woodblock prints carry the colour.",
+      "Washi-toned ground, sumi-indigo ink and shu vermilion (the lacquer red of shrine gates, which Fushimi Inari's own site explains as mercury-and-earth pigment). Mincho display type, the Japanese book face descended from Ming woodblock lettering. Place names set vertically, as they are on signs and in print. Photos slightly cooled and held back; the Edo woodblock prints carry the colour. Galleries unroll as a hand-scroll (emakimono), read right to left; section rules are seigaiha, the overlapping-wave pattern; headings take a short vermilion brush stroke drawn in as they come into view; pages arrive the way ink soaks into paper.",
     light: {
       bg: "#f1ede4",
       surface: "#e8e2d5",
@@ -112,6 +119,8 @@ export const THEMES: Record<string, Theme> = {
     photo: "saturate(0.92) contrast(1.03)",
     motif: "washi",
     native: "vertical",
+    gallery: "emaki",
+    heading: "brush",
     hero: "print-left-vertical-name",
     motion: { enter: "ink", durationMs: 620 },
     globe: "#e0573f",
@@ -149,6 +158,8 @@ export const THEMES: Record<string, Theme> = {
     photo: "saturate(1.04)",
     motif: "tide",
     native: "inline",
+    gallery: "wall",
+    heading: "plain",
     hero: "default",
     motion: { enter: "rise", durationMs: 560 },
     globe: "#3fb6b0",
@@ -186,6 +197,8 @@ export const THEMES: Record<string, Theme> = {
     photo: "contrast(1.02)",
     motif: "grid",
     native: "stack",
+    gallery: "wall",
+    heading: "plain",
     hero: "default",
     motion: { enter: "rise", durationMs: 420 },
     globe: "#e8473b",

@@ -74,6 +74,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
           <Facts facts={c.facts} refs={refs} className="lg:grid-cols-4" />
         </section>
 
+        <div className="country-rule" aria-hidden />
         <section aria-labelledby="regions-h" className="border-y border-line bg-surface">
           <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-16 md:px-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
             <AtlasMap
@@ -109,6 +110,28 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
             </div>
           </div>
         </section>
+
+        {c.chapters.length > 0 && (
+          <section aria-labelledby="chapters-h" className="mx-auto max-w-[1400px] px-4 pt-20 md:px-8">
+            <h2 id="chapters-h" className="font-display text-3xl md:text-4xl">Know {e.name}</h2>
+            <ul className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+              {c.chapters.map((ch, i) => (
+                <li key={ch.slug} className={i === 0 ? "sm:col-span-2 lg:row-span-2" : ""}>
+                  <Link href={`/${slug}/topics/${ch.slug}/`} className="lift press zoom group block">
+                    <div className="overflow-hidden">
+                      <Figure id={ch.hero} credit="none" sizes={i === 0 ? "(min-width:1024px) 48vw, 100vw" : "(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw"} imgClassName={`w-full object-cover ${i === 0 ? "aspect-[4/3]" : "aspect-[4/3]"}`} />
+                    </div>
+                    <p className={`mt-4 font-display ${i === 0 ? "text-3xl" : "text-xl"} group-hover:text-accent-text`}>
+                      {ch.title}
+                      {ch.native && <span className="ml-2 text-[0.7em] text-muted" lang={lang}>{ch.native}</span>}
+                    </p>
+                    <p className="mt-2 max-w-[48ch] text-sm text-muted">{ch.summary}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section aria-labelledby="start-h" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
           <h2 id="start-h" className="font-display text-3xl md:text-4xl">

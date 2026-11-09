@@ -16,6 +16,7 @@ import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { allStaticParams, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
 import { imgSrc, media } from "@/lib/content/media";
+import { themeFor } from "@/lib/themes";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -94,7 +95,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
           </div>
         </section>
 
-        <Gallery ids={p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)))} name={p.name} headingId="sides-h" tour={p.tour} />
+        <Gallery ids={p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)))} name={p.name} headingId="sides-h" tour={p.tour} layout={themeFor(country)?.gallery} />
 
         {pano && (
           <section aria-labelledby="look-h" className="border-t border-line bg-band text-on-band">

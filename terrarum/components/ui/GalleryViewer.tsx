@@ -36,8 +36,9 @@ function Credit({ c }: { c: GalleryItem["credit"] }) {
  * a plain link to its large copy; with it, the link opens a native <dialog>
  * that pages with buttons, arrow keys or a swipe, and returns focus on close.
  */
-export function GalleryViewer({ items }: { items: GalleryItem[] }) {
+export function GalleryViewer({ items, layout = "wall" }: { items: GalleryItem[]; layout?: "wall" | "emaki" }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const strip = useRef<HTMLUListElement>(null);
   const [at, setAt] = useState(0);
   const swipe = useRef<number | null>(null);
   const n = items.length;
@@ -55,11 +56,43 @@ export function GalleryViewer({ items }: { items: GalleryItem[] }) {
   }, [go]);
 
   const it = items[at];
+  const open = (i: number) => {
+    setAt(i);
+    dialog.current?.showModal();
+  };
+  /** Unroll the hand-scroll by about one picture, in reading direction (leftward). */
+  const unroll = (d: 1 | -1) => {
+    const el = strip.current;
+    if (!el) return;
+    el.scrollBy({ left: -d * el.clientWidth * 0.8, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  };
+  const emaki = layout === "emaki";
   return (
     <>
-      <ul className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3">
+      {emaki && (
+        <div className="mt-8 flex items-center justify-between gap-4 text-sm text-muted">
+          <p>Read from right to left, as a hand-scroll unrolls.</p>
+          <div className="flex gap-1" data-js-only>
+            <button type="button" onClick={() => unroll(-1)} className="press border border-line p-2 hover:border-accent hover:text-accent-text">
+              <CaretRight size={18} aria-hidden />
+              <span className="sr-only">Back</span>
+            </button>
+            <button type="button" onClick={() => unroll(1)} className="press border border-line p-2 hover:border-accent hover:text-accent-text">
+              <CaretLeft size={18} aria-hidden />
+              <span className="sr-only">Unroll further</span>
+            </button>
+          </div>
+        </div>
+      )}
+      <ul
+        ref={strip}
+        dir={emaki ? "rtl" : undefined}
+        tabIndex={emaki ? 0 : undefined}
+        aria-label={emaki ? "Photographs, scrolling sideways" : undefined}
+        className={emaki ? "emaki mt-4 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6" : "mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3"}
+      >
         {items.map((m, i) => (
-          <li key={m.id} className="mb-8 break-inside-avoid">
+          <li key={m.id} dir={emaki ? "ltr" : undefined} className={emaki ? "emaki-item shrink-0 snap-start" : "mb-8 break-inside-avoid"}>
             <figure>
               <a
                 href={m.large}
@@ -67,23 +100,22 @@ export function GalleryViewer({ items }: { items: GalleryItem[] }) {
                 onClick={(e) => {
                   if (e.metaKey || e.ctrlKey || e.shiftKey) return;
                   e.preventDefault();
-                  setAt(i);
-                  dialog.current?.showModal();
+                  open(i);
                 }}
               >
                 <img
                   src={m.src}
                   srcSet={m.srcSet}
-                  sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw"
+                  sizes={emaki ? "(min-width:768px) 40vw, 85vw" : "(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw"}
                   width={m.w}
                   height={m.h}
                   alt={m.alt}
                   loading="lazy"
                   decoding="async"
-                  className="photo h-auto w-full bg-surface"
+                  className={emaki ? "photo h-full w-auto max-w-none bg-surface" : "photo h-auto w-full bg-surface"}
                 />
               </a>
-              <figcaption className="mt-2 text-[13px] leading-snug text-muted" data-pagefind-ignore>
+              <figcaption className={`mt-2 text-[13px] leading-snug text-muted ${emaki ? "max-w-[36ch]" : ""}`} data-pagefind-ignore>
                 <span className="font-medium text-ink">{m.side}.</span> <Credit c={m.credit} />.
               </figcaption>
             </figure>
