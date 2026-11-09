@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AtlasMap } from "@/components/map/AtlasMap";
 import { Panorama } from "@/components/pano/Panorama";
@@ -13,7 +14,7 @@ import { SaveButton } from "@/components/ui/SaveButton";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { themeFor } from "@/lib/themes";
-import { allStaticParams, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
+import { allStaticParams, cityPath, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
 import { imgSrc, media } from "@/lib/content/media";
 import { boundsOf } from "@/lib/geo";
 
@@ -37,9 +38,13 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
   const places = ci.places.map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const refs = makeRefs([...ci.facts.map((f) => f.cite), ...ci.passages.map((p) => p.cite)]);
   const lang = c.entry.nativeLang?.split(" ")[0];
-  const head = ci.passages.slice(0, 2);
-  const tail = ci.passages.slice(2);
-  const WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
+  const WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+  const nearby = ci.nearby.flatMap((n) => {
+    const nc = getCity(country, n);
+    if (nc) return [{ href: cityPath(country, n).href, name: nc.name, hero: nc.hero, summary: nc.summary }];
+    const np = getPlace(country, n);
+    return np ? [{ href: placePath(country, n).href, name: np.name, hero: np.hero, summary: np.summary }] : [];
+  });
   const pano = ci.panoramas[0];
 
   return (
@@ -69,34 +74,56 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
         <section aria-labelledby="places-h" className="border-t border-line">
           <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
             <h2 id="places-h" className="font-display text-3xl md:text-4xl">{WORDS[places.length] ?? places.length} places in {ci.name}</h2>
-            <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-              <div className="grid content-start gap-10">
-                {places.slice(0, places.length >= 3 ? 2 : 1).map(({ p, href }) => (
-                  <PlaceCard lang={lang} key={p.slug} place={p} href={href} />
-                ))}
-              </div>
-              <div className="grid content-start gap-6">
-                <AtlasMap
-                  mode="streets"
-                  label={`Street map of ${ci.name} with its researched places`}
-                  bounds={boundsOf(places.map(({ p }) => p.where), 0.3, 0.008)}
-                  pins={places.map(({ p, href }) => ({ label: p.name, lng: p.where.lng, lat: p.where.lat, href }))}
-                  className="h-[min(70vh,600px)] min-h-[360px]"
-                />
-                {places.slice(places.length >= 3 ? 2 : 1).map(({ p, href }) => (
-                  <PlaceCard lang={lang} key={p.slug} place={p} href={href} />
-                ))}
-              </div>
+            <AtlasMap
+              mode="streets"
+              label={`Street map of ${ci.name} with its places`}
+              bounds={boundsOf(places.map(({ p }) => p.where), 0.3, 0.008)}
+              pins={places.map(({ p, href }) => ({ label: p.name, lng: p.where.lng, lat: p.where.lat, href }))}
+              className="mt-10 h-[min(62vh,560px)] min-h-[340px]"
+            />
+            <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+              {places.map(({ p, href }) => (
+                <PlaceCard lang={lang} key={p.slug} place={p} href={href} />
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="border-t border-line bg-surface">
-          <div className="mx-auto grid max-w-[1400px] gap-12 px-4 py-20 md:px-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
-            <div className="space-y-14">
-              {head.map((x) => <Passage key={x.id} p={x} refs={refs} />)}
+        <section aria-labelledby="about-h" className="border-t border-line bg-surface">
+          <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:px-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14">
+            <nav aria-label={`About ${ci.name}`} className="lg:sticky lg:top-24 lg:self-start">
+              <h2 id="about-h" className="font-display text-2xl">About {ci.name}</h2>
+              <ol className="mt-4 hidden space-y-2.5 border-l border-line pl-4 text-sm lg:block">
+                {ci.passages.map((x) => (
+                  <li key={x.id}>
+                    <a href={`#${x.id}`} className="text-muted hover:text-accent-text">{x.heading}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+            <div className="space-y-20">
+              {ci.passages.map((x, i) => {
+                const pic = x.images?.[0] ?? (i === 0 ? ci.artwork : undefined);
+                const links = (x.places ?? []).filter((s) => getPlace(country, s)).map((s) => ({ pl: getPlace(country, s)!, href: placePath(country, s).href }));
+                return (
+                  <div key={x.id} className="grid items-start gap-8 xl:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] xl:gap-12">
+                    <div>
+                      <Passage p={x} refs={refs} />
+                      {links.length > 0 && (
+                        <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                          {links.map(({ pl, href }) => (
+                            <li key={pl.slug}>
+                              <Link href={href} className="font-medium text-accent-text underline decoration-line underline-offset-4 hover:decoration-current">{pl.name}</Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    {pic && <Figure id={pic} sizes="(min-width:1280px) 28vw, 100vw" className="xl:mt-14" imgClassName="w-full" />}
+                  </div>
+                );
+              })}
             </div>
-            {ci.artwork && <Figure id={ci.artwork} sizes="(min-width:1024px) 40vw, 100vw" imgClassName="w-full" className="self-start" />}
           </div>
         </section>
 
@@ -111,9 +138,26 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
           </section>
         )}
 
-        <div className="mx-auto max-w-[1400px] px-4 pb-20 md:px-8">
-          <div className="space-y-14">{tail.map((x) => <Passage key={x.id} p={x} refs={refs} />)}</div>
-        </div>
+        {nearby.length > 0 && (
+          <section aria-labelledby="nearby-h" className="border-t border-line">
+            <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
+              <h2 id="nearby-h" className="font-display text-3xl md:text-4xl">Nearby</h2>
+              <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+                {nearby.map((n) => (
+                  <li key={n.href}>
+                    <Link href={n.href} className="lift press zoom group block">
+                      <div className="overflow-hidden">
+                        <Figure id={n.hero} credit="none" sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" imgClassName="aspect-[4/3] w-full object-cover" />
+                      </div>
+                      <p className="mt-3 font-display text-xl group-hover:text-accent-text">{n.name}</p>
+                      <p className="mt-1 text-sm text-muted">{n.summary}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         <div className="mx-auto max-w-[1400px] space-y-12 px-4 py-16 md:px-8">
           <Gaps gaps={ci.gaps} />

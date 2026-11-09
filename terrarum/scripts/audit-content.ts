@@ -105,13 +105,13 @@ for (const check of checks) {
     }
     ok("PLACES-OK", before);
   } else if (check === "cites") {
-    if (!placeSlugs.every((s) => getPlace(country, s)) || !citySlugs.every((s) => getCity(country, s))) fail("scope not built yet, citations cannot be checked in full");
+    // Checks whatever exists; "scope" reports what is still missing.
     const passages: Passage[] = [
       ...c.passages,
       ...c.chapters.flatMap((ch) => ch.passages),
       ...regionSlugs.flatMap((r) => { const g = getRegion(country, r); return g ? [g.definition] : []; }),
-      ...citySlugs.flatMap((s) => getCity(country, s)?.passages ?? []),
-      ...placeSlugs.flatMap((s) => getPlace(country, s)?.passages ?? []),
+      ...c.regions.flatMap((r) => getRegion(country, r)?.cities ?? []).flatMap((s) => getCity(country, s)?.passages ?? []),
+      ...c.regions.flatMap((r) => getRegion(country, r)?.cities ?? []).flatMap((s) => getCity(country, s)?.places ?? []).flatMap((s) => getPlace(country, s)?.passages ?? []),
     ];
     const facts = [
       ...c.facts,

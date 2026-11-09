@@ -377,7 +377,7 @@ export const cities: City[] = [
           "Kyoto eats from its own vegetables, from freshwater fish of Lake Biwa and from a handful of sea fish prized here, among them hamo, the pike conger, and guji, the tilefish, along with yuba made from soy milk skin and fu, cakes of wheat gluten. The same ingredients go into the city’s formal restaurant cooking and into obanzai, the everyday home cooking of Kyoto households.",
           "Nishiki Market, called Kyoto’s kitchen, is where both kinds of cooking shop, and the crush there at the end of the year, as people buy for the New Year, is itself a Kyoto tradition.",
         ],
-        cite: ["nishiki-about", "kyoto-culture"],
+        cite: ["nishiki-history", "kyoto-culture"],
         places: ["nishiki-market"],
         status: "fact-checked",
       },

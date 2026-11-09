@@ -66,14 +66,14 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
         <section aria-labelledby="cities-h" className="border-t border-line bg-surface">
           <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
             <h2 id="cities-h" className="font-display text-3xl md:text-4xl">Cities</h2>
-            <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)]">
+            <div className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {cities.map((city) => (
-                <Link key={city.slug} href={cityPath(country, city.slug).href} className="lift press zoom group grid gap-6 md:grid-cols-2">
+                <Link key={city.slug} href={cityPath(country, city.slug).href} className="lift press zoom group block">
                   <div className="overflow-hidden">
-                    <Figure id={city.hero} credit="none" sizes="(min-width:768px) 33vw, 100vw" imgClassName="aspect-[4/5] w-full object-cover" />
+                    <Figure id={city.hero} credit="none" sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw" imgClassName="aspect-[4/3] w-full object-cover" />
                   </div>
-                  <div className="self-end">
-                    <h3 className="font-display text-4xl">
+                  <div className="mt-5">
+                    <h3 className="font-display text-3xl">
                       {city.name} {city.native && <span className="text-2xl text-muted" lang={c.entry.nativeLang?.split(" ")[0]}>{city.native}</span>}
                     </h3>
                     <p className="mt-3 text-muted">{city.summary}</p>
@@ -83,7 +83,7 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
                   </div>
                 </Link>
               ))}
-              <div>
+              {r.pendingCities.length > 0 && <div>
                 <h3 className="text-sm text-muted">Not researched yet</h3>
                 <ul className="mt-3">
                   {r.pendingCities.map((p) => (
@@ -93,7 +93,7 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div>}
             </div>
           </div>
         </section>
