@@ -22,7 +22,7 @@ export const region: Region =
       { label: "Kinki major metropolitan area", value: "19.2 million people", asOf: "2020 census", note: "The statistical area around Osaka, Sakai, Kyoto and Kobe, not the whole region", cite: ["stat-handbook-2026"] },
       { label: "Kyoto City", value: "1,464,000 people", asOf: "2020 census", cite: ["stat-handbook-2026"] },
     ],
-    cities: ["kyoto", "nara"],
+    cities: ["kyoto", "nara", "osaka"],
     pendingCities: [{ name: "Osaka", native: "大阪" }, { name: "Nara", native: "奈良" }, { name: "Kobe", native: "神戸" }, { name: "Ōtsu", native: "大津" }, { name: "Uji", native: "宇治" }],
     areasGeo: { url: "/data/jp-prefectures.json", key: "region", only: ["kansai"], labelProp: "name" },
     bounds: [[134.2, 33.4], [137.0, 35.8]],
@@ -34,6 +34,73 @@ export const region: Region =
   };
 
 export const cities: City[] = [
+  {
+    slug: "osaka",
+    kind: "city",
+    name: "Osaka",
+    native: "大阪",
+    where: { lat: 34.6938, lng: 135.5015, ref: "OpenStreetMap relation 358674 (Osaka City)" },
+    summary: "A port and merchant city at the head of Osaka Bay, Japan’s gateway to Asia in the fifth century and the kitchen of the nation in the seventeenth.",
+    facts: [
+      { label: "Osaka City", value: "2,752,000 people", asOf: "2020 census", cite: ["stat-handbook-2026"] },
+      { label: "Kinki metropolitan area", value: "19.2 million people around Osaka, Sakai, Kyoto and Kobe", asOf: "2020 census", cite: ["stat-handbook-2026"] },
+      { label: "Oldest imperial palace", value: "Naniwa Palace, 645", cite: ["osaka-history"] },
+    ],
+    passages: [
+      {
+        id: "osaka-port",
+        heading: "Where the rivers meet the Inland Sea",
+        covers: ["geography", "history"],
+        body: [
+          "Osaka stands where rivers flowing down to Osaka Bay meet the busy Seto Inland Sea. In the fifth century its port, Naniwazu, believed to have stood in what is now Chūō ward, was Japan’s gateway to Korea and China, and the people who came through it brought new crafts, metalworking, ceramics and, before long, Buddhism.",
+          "In 645 Emperor Kōtoku moved the capital here. The ruins of his Naniwa Palace, considered the oldest imperial palace in Japan, are now a park in the city.",
+        ],
+        cite: ["osaka-history"],
+        status: "fact-checked",
+      },
+      {
+        id: "osaka-castle-town",
+        heading: "From a fortified temple to a castle town",
+        covers: ["history", "architecture"],
+        body: [
+          "In 1496 the priest Rennyo began building a temple and monks’ lodging on the Uemachi Plateau, the high ground of the city, and Ishiyama Hongan-ji grew into a fortress. Oda Nobunaga besieged it for more than ten years until most of it burned. His successor, Toyotomi Hideyoshi, built Osaka Castle on the site in 1583; the moats and widened rivers he dug turned the town into a port and transport hub linked to the sea.",
+        ],
+        cite: ["osaka-history", "osakajo-official"],
+        places: ["osaka-castle"],
+        status: "fact-checked",
+      },
+      {
+        id: "osaka-kitchen",
+        heading: "The kitchen of the nation",
+        covers: ["food", "history", "differences"],
+        body: [
+          "Once the Tokugawa had moved the seat of power to Edo, Osaka rebuilt itself from the ashes as a city of trade. Rice and food from all over the country were bought and sold here and shipped on to the rest of Japan, and Osaka became known as the kitchen of the nation.",
+          "An old saying sets it against Kyoto: Kyoto spends its money on clothes, Osaka on eating. The bay was so rich in fish that it was nicknamed Naniwa, the fish garden; the knives came from nearby Sakai and the sake from Ikeda, Itami and Nada; and merchants who did business over meals pushed the cooks to refine their craft. The city’s word for all this is kuidaore, which its tourism bureau renders as eating to your heart’s content.",
+        ],
+        cite: ["osaka-history", "osaka-kuidaore"],
+        places: ["dotonbori"],
+        status: "fact-checked",
+      },
+      {
+        id: "osaka-culture",
+        heading: "Theatre for townspeople",
+        covers: ["identity", "life"],
+        body: [
+          "Its merchants’ money built a culture of its own, aimed at ordinary townspeople: the puppet theatre jōruri, the forerunner of Bunraku, and Osaka’s own kabuki. The city also had schools whose scholars shaped the country; Tekijuku, founded for Western science and medicine, was one of them.",
+          "Dōtonbori, the canal street that grew up around its theatres, is still where the city goes out to eat and be entertained.",
+        ],
+        cite: ["osaka-history", "osaka-dotonbori"],
+        places: ["dotonbori"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "osakajo-skyline",
+    panoramas: [],
+    places: ["osaka-castle", "dotonbori", "shitenno-ji"],
+    nearby: ["kyoto", "nara"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "nara",
     kind: "city",
@@ -226,6 +293,138 @@ export const cities: City[] = [
 
 
 export const places: Place[] = [
+  {
+    slug: "osaka-castle",
+    name: "Osaka Castle",
+    native: "大阪城",
+    kind: "Castle and museum",
+    where: { lat: 34.6874, lng: 135.5259, ref: "OpenStreetMap way 34619038" },
+    summary: "Hideyoshi’s castle, twice destroyed and twice rebuilt, its walls and moats from the Tokugawa and its tower raised by the people of Osaka in 1931.",
+    matters:
+      "The castle has been at the centre of almost every turn of Japanese history since the sixteenth century: a temple fortress that held off Nobunaga, Hideyoshi’s seat, the last stand of his family, a Tokugawa stronghold, an army base, and now a park and museum paid for by the city’s own people.",
+    facts: [
+      { label: "Built", value: "1583, by Toyotomi Hideyoshi", cite: ["osaka-history"] },
+      { label: "Main tower", value: "The third, rebuilt in 1931 with citizens’ donations", cite: ["osakajo-official"] },
+      { label: "Protected as", value: "Special Historic Site; most old buildings are Important Cultural Properties", cite: ["osakajo-official"] },
+    ],
+    passages: [
+      {
+        id: "osakajo-story",
+        heading: "Every turn of the story",
+        body: [
+          "The castle grew out of Ishiyama Hongan-ji, the fortified temple that fought Oda Nobunaga. Toyotomi Hideyoshi built his castle on its site, and it fell in the sieges of Osaka that began in 1614, which ended his family’s line. The Tokugawa shogunate rebuilt it, it burned in the upheaval of the Meiji Restoration, the army held it after that, and after the Second World War its grounds were laid out as a park.",
+          "The stone walls, moats and old buildings standing today, among them the Ōte gate and its turrets, all date from the Tokugawa rebuilding or later. The area is a Special Historic Site, and most of those buildings are Important Cultural Properties.",
+        ],
+        cite: ["osakajo-official", "nijo-overview"],
+        images: ["osakajo-inner-moat"],
+        status: "fact-checked",
+      },
+      {
+        id: "osakajo-tower",
+        heading: "A tower the people paid for",
+        body: [
+          "The main tower is the third: after Hideyoshi’s and the Tokugawa’s, it was rebuilt in 1931 with money given by the people of Osaka. It has been a museum from the start, showing changing displays on Hideyoshi, the age of civil war and the castle’s history. In 1997 it was registered as a national Tangible Cultural Property, and in 2025 the city designated it a cultural property of its own.",
+        ],
+        cite: ["osakajo-official"],
+        images: ["osakajo-print"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "osakajo-tower",
+    gallery: ["osakajo-walls-autumn", "osakajo-outer-moat", "osakajo-giant-stone", "osakajo-boat", "osakajo-museum-building", "osakajo-skyline"],
+    panoramas: [],
+    related: ["dotonbori", "shitenno-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "dotonbori",
+    name: "Dōtonbori",
+    native: "道頓堀",
+    kind: "Canal street and entertainment district",
+    where: { lat: 34.6687, lng: 135.5032, ref: "OpenStreetMap way 174727837" },
+    summary: "A canal dug in 1612 that became Osaka’s theatre street and is now its brightest stretch of restaurants and giant signs.",
+    matters:
+      "Dōtonbori is where Osaka’s merchant culture went to be entertained, and where its appetite is on show today, under some of the most famous signs in Japan.",
+    facts: [
+      { label: "Canal dug", value: "1612, paid for by Dōton Yasui", cite: ["osaka-dotonbori"] },
+      { label: "Theatres", value: "One remains, the Shōchikuza by Ebisu Bridge", cite: ["osaka-dotonbori"] },
+    ],
+    passages: [
+      {
+        id: "dotonbori-canal",
+        heading: "A canal named for the man who paid for it",
+        body: [
+          "The district takes its name from Dōton Yasui, who spent his fortune having the canal dug in 1612. Theatres and kabuki moved in along its banks, teahouses multiplied around them, and Dōtonbori became the city’s place for food and live entertainment.",
+          "Only one theatre is left, the Shōchikuza near Ebisu Bridge, along with a hall for comedy. The street is lined on both sides with restaurants that are busy all year, and a riverside walk now runs along the canal.",
+        ],
+        cite: ["osaka-dotonbori"],
+        images: ["dotonbori-1890s"],
+        status: "fact-checked",
+      },
+      {
+        id: "dotonbori-signs",
+        heading: "Signs as big as buildings",
+        body: [
+          "Dōtonbori is known for its giant three-dimensional signs, for the Shōchikuza theatre, the Kani Dōraku crab restaurant and the Glico confectionery company among them. They advertise the city’s way of eating as much as any one restaurant: kuidaore, eating to your heart’s content.",
+        ],
+        cite: ["osaka-dotonbori", "osaka-kuidaore"],
+        images: ["dotonbori-glico"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "dotonbori-dusk",
+    gallery: ["dotonbori-arch", "dotonbori-day", "dotonbori-daruma", "dotonbori-takoyaki", "dotonbori-lanterns"],
+    panoramas: [],
+    related: ["osaka-castle", "shitenno-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "shitenno-ji",
+    name: "Shitennō-ji",
+    native: "四天王寺",
+    kind: "Buddhist temple",
+    where: { lat: 34.6547, lng: 135.5168, ref: "OpenStreetMap way 579077537" },
+    summary: "One of Japan’s first Buddhist temples, founded in 593 by Prince Shōtoku and rebuilt in its original plan after typhoon and war.",
+    matters:
+      "Its layout, gate, pagoda, main hall and lecture hall in one line from south to north, is among the oldest in Japan and preserves a style from sixth- and seventh-century China and Korea. Destroyed again and again, it has been rebuilt each time to that same plan.",
+    facts: [
+      { label: "Founded", value: "593", cite: ["shitennoji-history"] },
+      { label: "Grounds", value: "About 110,000 m²", cite: ["shitennoji-history"] },
+      { label: "Treasures", value: "Over 500 National Treasures and Important Cultural Properties", cite: ["shitennoji-history"] },
+    ],
+    passages: [
+      {
+        id: "shitennoji-vow",
+        heading: "A prince’s vow",
+        body: [
+          "The Nihon Shoki, Japan’s oldest official history, tells that during the war between the Soga clan, who favoured Buddhism, and Mononobe no Moriya, Prince Shōtoku carved images of the Four Heavenly Kings and vowed that if the Soga won he would build them a temple and work for the salvation of all people. The Soga won, and in 593 he founded Shitennō-ji, the temple of the Four Heavenly Kings.",
+          "Its plan sets the Middle Gate, the five-storey pagoda, the Golden Hall and the Lecture Hall in a straight line from south to north, enclosed by a cloister. The arrangement, named after the temple, came from China and the Korean peninsula and is one of the oldest building layouts in Japan.",
+        ],
+        cite: ["shitennoji-history"],
+        images: ["shitennoji-chumon"],
+        status: "fact-checked",
+      },
+      {
+        id: "shitennoji-rebuilt",
+        heading: "Typhoon, air raid, and the same plan again",
+        body: [
+          "On 21 September 1934 the Muroto typhoon brought down the pagoda, tilted the Golden Hall and destroyed the gate. The pagoda was rebuilt by 1940, and then the air raid on Osaka of 13 March 1945 burned almost the whole temple. The main compound was rebuilt in 1963, faithful to the style of its Asuka-period founding, and most other buildings since.",
+          "After the war the temple left the Tendai school and founded the Wa sect, of which it is the head temple. Its grounds cover about 110,000 square metres, and its treasure hall holds more than 500 National Treasures and Important Cultural Properties.",
+        ],
+        cite: ["shitennoji-history"],
+        images: ["shitennoji-night"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "shitennoji-pagoda",
+    gallery: ["shitennoji-grounds", "shitennoji-raisando", "shitennoji-lanterns", "shitennoji-statue", "shitennoji-koshindo"],
+    panoramas: [],
+    related: ["osaka-castle", "dotonbori"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "todai-ji",
     name: "Tōdai-ji",
