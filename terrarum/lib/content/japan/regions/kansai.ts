@@ -22,7 +22,7 @@ export const region: Region =
       { label: "Kinki major metropolitan area", value: "19.2 million people", asOf: "2020 census", note: "The statistical area around Osaka, Sakai, Kyoto and Kobe, not the whole region", cite: ["stat-handbook-2026"] },
       { label: "Kyoto City", value: "1,464,000 people", asOf: "2020 census", cite: ["stat-handbook-2026"] },
     ],
-    cities: ["kyoto"],
+    cities: ["kyoto", "nara"],
     pendingCities: [{ name: "Osaka", native: "大阪" }, { name: "Nara", native: "奈良" }, { name: "Kobe", native: "神戸" }, { name: "Ōtsu", native: "大津" }, { name: "Uji", native: "宇治" }],
     areasGeo: { url: "/data/jp-prefectures.json", key: "region", only: ["kansai"], labelProp: "name" },
     bounds: [[134.2, 33.4], [137.0, 35.8]],
@@ -34,6 +34,81 @@ export const region: Region =
   };
 
 export const cities: City[] = [
+  {
+    slug: "nara",
+    kind: "city",
+    name: "Nara",
+    native: "奈良",
+    where: { lat: 34.6845, lng: 135.8048, ref: "OpenStreetMap relation 3227707 (Nara City)" },
+    summary: "Japan’s capital before Kyoto: a city of great temples, a sacred shrine forest and deer that walk its streets.",
+    facts: [
+      { label: "Capital", value: "Heijō-kyō, from 710 until the court moved to Kyoto in 794", cite: ["nara-first"] },
+      { label: "World Heritage", value: "Eight sites in the city, listed in 1998 as the Historic Monuments of Ancient Nara", cite: ["nara-first", "kasuga-about"] },
+      { label: "Deer", value: "1,687 counted in July 2026", cite: ["naradeer-number"] },
+    ],
+    passages: [
+      {
+        id: "nara-capital",
+        heading: "The first great capital",
+        covers: ["history", "differences"],
+        body: [
+          "Nara, then called Heijō-kyō, was founded as the capital in 710 and laid out on a grid after the capital of China. It stayed the capital until the court moved to Kyoto in 794, so the city is the older layer beneath much of what Kyoto later became. Envoys sent again and again to China brought back its learning, and the eighth-century culture that grew from it, called Tenpyō, produced Buddhist art, sculpture and crafts that later Japanese culture built on.",
+          "The state built great temples here to pray for the peace of the country, Tōdai-ji and Kōfuku-ji among them, and they were centres of learning as much as of worship.",
+        ],
+        cite: ["nara-first"],
+        status: "fact-checked",
+      },
+      {
+        id: "nara-layout",
+        heading: "A palace field in the west, a sacred forest in the east",
+        covers: ["geography"],
+        body: [
+          "The site of the imperial palace is now a wide open field in the west of the city, with its audience hall, its Suzaku Gate, where foreign envoys were first received, and an east garden rebuilt from excavation and old records. In the east, the city climbs into Nara Park and the wooded hills of Kasuga and Wakakusa, where Kasuga Taisha stands in its primeval forest.",
+        ],
+        cite: ["nara-heijo", "nara-first"],
+        places: ["nara-park", "kasuga-taisha"],
+        status: "fact-checked",
+      },
+      {
+        id: "nara-naramachi",
+        heading: "Naramachi, the old merchant town",
+        covers: ["architecture", "life"],
+        body: [
+          "Beside the park, Naramachi was part of the old capital, then a religious centre and later the town’s market quarter. Its townhouses and temples date from the Edo period to the years after the Second World War. Red cloth monkeys hang under the eaves: migawarizaru, charms that take misfortune in a person’s place, traditionally one for each member of the household.",
+          "Its temple, Gangō-ji, descends from Asuka-dera, Japan’s oldest Buddhist temple, which was moved here with the capital; some of its roof tiles are older than the move. Mochiidono, the shopping street leading into the district, is said to be the oldest in Japan still trading.",
+        ],
+        cite: ["naramachi"],
+        status: "fact-checked",
+      },
+      {
+        id: "nara-food",
+        heading: "Tea porridge and persimmon-leaf sushi",
+        covers: ["food", "differences"],
+        body: [
+          "Nara’s old breakfast was cha-gayu, rice cooked in roasted tea and eaten with pickles; narazuke, vegetables soaked in sake lees, has been made for more than 1,300 years. Nara is inland, far from the sea, and fish was once precious, so for kaki-no-ha-zushi mackerel or salmon is salted, laid on vinegared rice and wrapped in persimmon leaves to keep it from drying out. Manjū, the bean-filled buns found all over Japan, are said to have been first made here in the fourteenth century.",
+        ],
+        cite: ["nara-gourmet"],
+        status: "fact-checked",
+      },
+      {
+        id: "nara-identity",
+        heading: "A city that keeps its deer",
+        covers: ["identity", "life"],
+        body: [
+          "For more than twelve centuries the deer of Nara have been protected as messengers of the god of Kasuga, and they are as much a part of the city as its temples. They are counted every July; in 2026 there were 1,687, the most in the preservation foundation’s records.",
+        ],
+        cite: ["naradeer-history", "naradeer-number"],
+        places: ["nara-park"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "narapark-wakakusa",
+    panoramas: [],
+    places: ["todai-ji", "kasuga-taisha", "nara-park"],
+    nearby: ["kyoto", "osaka"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "kyoto",
     kind: "city",
@@ -151,6 +226,149 @@ export const cities: City[] = [
 
 
 export const places: Place[] = [
+  {
+    slug: "todai-ji",
+    name: "Tōdai-ji",
+    native: "東大寺",
+    kind: "Buddhist temple",
+    where: { lat: 34.6882, lng: 135.8398, ref: "OpenStreetMap way 1134669589" },
+    summary: "The temple of the Great Buddha, built by imperial command in the eighth century and housed in the largest wooden building in the world.",
+    matters:
+      "Tōdai-ji was the head of a state network of temples meant to protect the whole country, and its bronze Buddha was the most ambitious undertaking of the age. Burned twice and rebuilt twice, it shows how much each era was willing to spend to keep it.",
+    facts: [
+      { label: "Great Buddha", value: "Begun 743, completed 749, dedicated 752", cite: ["todaiji-history"] },
+      { label: "Great Buddha Hall", value: "57 m wide, 50.5 m deep, 48.7 m high", cite: ["todaiji-daibutsuden"] },
+      { label: "Present hall", value: "Dedicated 1709", cite: ["todaiji-history"] },
+      { label: "World Heritage", value: "Since 1998, with the Historic Monuments of Ancient Nara", cite: ["kasuga-about"] },
+    ],
+    passages: [
+      {
+        id: "todaiji-shomu",
+        heading: "An emperor’s Great Buddha",
+        body: [
+          "The temple began as Kinshō-ji, founded in 728 for the repose of Emperor Shōmu’s son, Crown Prince Motoi. In 741 Shōmu ordered a network of official temples across the provinces, and this one became its head. In 743 he proclaimed the making of a colossal image of Vairocana, the Buddha whose light shines over everything; it was finished in 749 and dedicated in 752 with a lavish ceremony.",
+          "As head of the system, Tōdai-ji held rites for the peace of the nation and the prosperity of the people, and it trained scholar monks in Buddhist doctrine.",
+        ],
+        cite: ["todaiji-history"],
+        images: ["todaiji-shomu"],
+        status: "fact-checked",
+      },
+      {
+        id: "todaiji-fires",
+        heading: "Burned twice, rebuilt twice",
+        body: [
+          "In 855 an earthquake threw the Buddha’s head to the ground; it was quickly restored. In 1180 Taira no Shigehira attacked the temples of Nara and more than half of Tōdai-ji, the Great Buddha Hall with it, burned. The monk Chōgen led the rebuilding: the Buddha was consecrated again in 1185 and the hall finished in 1195.",
+          "In 1567 the temple burned again in fighting between the Miyoshi and Matsunaga clans. With the country at war, the only repair possible was to cover the Buddha’s head with copper sheets. A full restoration came only in the Edo period, when the monk Kōkei gathered donations across the country: the Buddha was reconsecrated in 1692 and the present hall dedicated in 1709.",
+        ],
+        cite: ["todaiji-history"],
+        images: ["todaiji-face"],
+        status: "fact-checked",
+      },
+      {
+        id: "todaiji-hall",
+        heading: "Smaller than it was, and still the largest",
+        body: [
+          "The hall built in the eighth century and the one rebuilt in 1195 were both eleven bays wide. Kōkei’s hall had to be cut to seven bays, because only limited funds could be raised, but it keeps the original height and depth. Even so it is the largest wooden building in the world: 57 metres wide, 50.5 deep and 48.7 high.",
+          "In front of it stands a bronze octagonal lantern from the founding of the temple, its panels cast with celestial musicians and with lions running across clouds.",
+        ],
+        cite: ["todaiji-daibutsuden"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "todaiji-hall",
+    gallery: ["todaiji-nandaimon", "todaiji-daibutsu", "todaiji-halo", "todaiji-autumn", "todaiji-crowds"],
+    panoramas: [],
+    related: ["kasuga-taisha", "nara-park"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "kasuga-taisha",
+    name: "Kasuga Taisha",
+    native: "春日大社",
+    kind: "Shinto shrine",
+    where: { lat: 34.6805, lng: 135.8461, ref: "OpenStreetMap way 1134481286" },
+    summary: "A vermilion shrine in a primeval forest at the foot of sacred Mount Mikasa, hung with three thousand lanterns given by worshippers.",
+    matters:
+      "Founded for the gods that guarded the new capital, Kasuga Taisha is the head of some 3,000 shrines across Japan, and its rites and buildings have been renewed on the same pattern for more than twelve centuries.",
+    facts: [
+      { label: "Founded", value: "9 November 768", cite: ["kasuga-about"] },
+      { label: "Branch shrines", value: "About 3,000 across Japan", cite: ["kasuga-about"] },
+      { label: "Lanterns", value: "About 3,000, all given by worshippers", cite: ["kasuga-about"] },
+      { label: "Festivals", value: "More than 2,200 a year", cite: ["kasuga-about"] },
+    ],
+    passages: [
+      {
+        id: "kasuga-gods",
+        heading: "Four gods for the new capital",
+        body: [
+          "By the shrine’s account, when the capital was built at Nara some 1,300 years ago, the god Takemikazuchi came from Kashima Shrine to dwell on the summit of Mount Mikasa, for the good of the country and its people. On 9 November 768, by order of Empress Shōtoku, the statesman Fujiwara no Nagate built halls at the foot of the mountain and enshrined four gods there: Takemikazuchi, Futsunushi from Katori Shrine, and Amenokoyane and Himegami from Hiraoka Shrine.",
+        ],
+        cite: ["kasuga-about"],
+        status: "fact-checked",
+      },
+      {
+        id: "kasuga-renewal",
+        heading: "Renewed every twenty years",
+        body: [
+          "The vermilion pillars, white walls and roofs of cypress bark look as they did at the founding because of Shikinen Zōtai, a ceremony held every twenty years in which the buildings are repaired and the shrine’s tools and ritual objects renewed. Services are still offered every morning and evening, and more than 2,200 festivals are held each year.",
+          "Some 3,000 lanterns have been given by worshippers. The cloister leading to the Middle Gate is lined with hanging ones, and in the hall called Fujinami-no-ya they are kept lit, so that visitors can see the shrine by their flickering light.",
+        ],
+        cite: ["kasuga-about", "kasuga-guidance"],
+        images: ["kasuga-mantoro"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "kasuga-chumon",
+    gallery: ["kasuga-deer-lanterns", "kasuga-cloister", "kasuga-bronze-lanterns", "kasuga-deer-ema", "kasuga-forest", "kasuga-albumen"],
+    panoramas: [],
+    related: ["nara-park", "todai-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "nara-park",
+    name: "Nara Park",
+    native: "奈良公園",
+    kind: "Park and deer sanctuary",
+    where: { lat: 34.6829, lng: 135.8546, ref: "OpenStreetMap way 456314269" },
+    summary: "The open lawns and woods between Nara’s great temples and the hills, where some 1,700 wild deer, a protected national monument, live among the visitors.",
+    matters:
+      "The deer of Nara have been protected as sacred messengers for more than twelve centuries and as a national Natural Monument since 1957. That they nearly vanished after the war, and now number more than ever, is a story of what protection can do.",
+    facts: [
+      { label: "Deer counted", value: "1,687 (411 stags, 990 does, 286 fawns)", asOf: "16 July 2026", cite: ["naradeer-number"] },
+      { label: "Natural Monument", value: "Provisionally 1947, fully 1957", cite: ["naradeer-history"] },
+      { label: "Lowest point", value: "About 80 deer, in 1946", cite: ["naradeer-history"] },
+    ],
+    passages: [
+      {
+        id: "narapark-messengers",
+        heading: "Messengers of the god",
+        body: [
+          "According to Kasuga Taisha’s records, in the reign of Empress Shōtoku the god of Kashima came to Mount Mikasa to guard the capital riding a white deer, and from then on the deer were protected and cared for as the god’s messengers.",
+          "The chaos of the war years undid that. Poaching cut their number to about 80 by 1946. In 1947 the deer were provisionally named a national Natural Monument, and in 1957 the designation was made final.",
+        ],
+        cite: ["naradeer-history"],
+        images: ["narapark-doe-fawn"],
+        status: "fact-checked",
+      },
+      {
+        id: "narapark-count",
+        heading: "Counted every July",
+        body: [
+          "The Nara Deer Preservation Foundation counts the deer every summer. On 16 July 2026 it found 1,687: 411 stags, 990 does and 286 fawns, 222 more than the year before and the highest total in its records.",
+        ],
+        cite: ["naradeer-number"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "narapark-lawn",
+    gallery: ["narapark-senbei", "narapark-deer-face", "narapark-stag", "narapark-spring", "narapark-autumn", "narapark-wakakusa", "narapark-forest"],
+    panoramas: [],
+    related: ["todai-ji", "kasuga-taisha"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "arashiyama",
     name: "Arashiyama",
