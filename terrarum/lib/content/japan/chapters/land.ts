@@ -1,0 +1,190 @@
+import type { Chapter } from "../../types";
+
+/** Brief section A for Japan. Every figure is from the source it cites. */
+export const land: Chapter = {
+  slug: "land",
+  title: "Land and nature",
+  native: "国土と自然",
+  summary: "A long, steep, still-moving archipelago: more mountain than plain, two thirds forest, snow on one coast and typhoons on the other.",
+  hero: "jp-land-fuji",
+  facts: [
+    { label: "Area", value: "377,980 km²", asOf: "January 2026", cite: ["stat-handbook-2026"] },
+    { label: "Islands", value: "14,125, by the 2023 count", cite: ["gsi-islands"] },
+    { label: "Highest point", value: "Mount Fuji, 3,776 m", cite: ["stat-handbook-2026"] },
+    { label: "Forest and fields", value: "67% of the land", asOf: "2020", cite: ["stat-handbook-2026"] },
+  ],
+  passages: [
+    {
+      id: "land-where",
+      heading: "An archipelago in a crescent",
+      body: [
+        "Japan lies off the eastern edge of Eurasia, between about 20° and 45° north. Its islands run in a curve from northeast to southwest, parallel to the continent and separated from it by the Sea of Japan. Five are counted as main islands: Hokkaido, Honshu, Shikoku, Kyushu and Okinawa. Honshu alone holds 231,244 of the country’s 377,980 km², six tenths of the whole.",
+        "The country is governed through 47 prefectures, and within them 1,718 municipalities plus the 23 special wards of Tokyo. Mergers promoted by law have cut the number of municipalities nearly in half since March 1999, when there were 3,232. The eight regions this site uses to group the prefectures (Hokkaido, Tōhoku, Kantō, Chūbu, Kansai, Chūgoku, Shikoku, and Kyūshū with Okinawa) are a convention, not a level of government.",
+      ],
+      cite: ["stat-handbook-2026"],
+      covers: ["location", "divisions"],
+      status: "fact-checked",
+      figure: {
+        caption: "Area of the five main islands, km², as of January 2026 (Geospatial Information Authority of Japan, via the Statistical Handbook).",
+        rows: [
+          { label: "Honshu", value: 231244, display: "231,244 km²" },
+          { label: "Hokkaido", value: 83422, display: "83,422 km²" },
+          { label: "Kyushu", value: 42229, display: "42,229 km²" },
+          { label: "Shikoku", value: 18802, display: "18,802 km²" },
+          { label: "Okinawa", value: 2282, display: "2,282 km²" },
+        ],
+      },
+    },
+    {
+      id: "land-islands",
+      heading: "Fourteen thousand islands, give or take",
+      body: [
+        "For 35 years the figure everyone used was 6,852, from a Japan Coast Guard count published in 1987. In February 2023 the Geospatial Information Authority counted again, using its digital base map of January 2022 and the same rule: naturally formed land at least 0.1 km round. It found 14,125. Nothing new had been discovered; the maps had simply become far more detailed. The country’s area and territory did not change, and the authority expects the count to keep moving with erosion, rising seas and volcanic eruptions.",
+        "The islands are spread unevenly. Nagasaki has the most, 1,479, closely followed by Hokkaido with 1,473 and Kagoshima with 1,256. Nine prefectures, most of them inland, have none at all.",
+      ],
+      cite: ["gsi-islands", "gsi-islands-pref"],
+      covers: ["coasts"],
+      images: ["jp-land-seto", "jp-land-driftice"],
+      status: "fact-checked",
+      figure: {
+        caption: "Islands per prefecture, the five with the most (Geospatial Information Authority of Japan, 2023).",
+        rows: [
+          { label: "Nagasaki", value: 1479, display: "1,479" },
+          { label: "Hokkaido", value: 1473, display: "1,473" },
+          { label: "Kagoshima", value: 1256, display: "1,256" },
+          { label: "Iwate", value: 861, display: "861" },
+          { label: "Okinawa", value: 691, display: "691" },
+        ],
+      },
+    },
+    {
+      id: "land-mountains",
+      heading: "Three quarters mountain",
+      body: [
+        "Mountains and hills cover about three quarters of Japan. They are steep and cut deep by ravines, with hilly ground between them and the plains, so farms, towns and cities crowd onto the flat land that is left.",
+        "Mount Fuji, at 3,776 metres, is the highest point. The nine peaks after it are all above 3,100 metres, led by Kitadake at 3,193; Ainotake and Oku-Hotaka both reach 3,190.",
+      ],
+      cite: ["stat-handbook-2026"],
+      covers: ["mountains"],
+      images: ["jp-land-hida", "jp-land-ide-sakura"],
+      status: "fact-checked",
+    },
+    {
+      id: "land-geology",
+      heading: "Earthquakes and 111 active volcanoes",
+      body: [
+        "The islands sit in the world’s newest mobile belt, a stretch of the Earth’s crust that is still being reshaped. That is why earthquakes are so frequent and active volcanoes so common: Japan counts 111, many of them inside national parks.",
+        "Some stand right beside cities, as the photographs of Sakurajima smoking above Kagoshima show.",
+      ],
+      cite: ["stat-handbook-2026", "moe-nps-site"],
+      covers: ["geology"],
+      images: ["jp-land-sakurajima", "jp-land-sakurajima-sat"],
+      status: "fact-checked",
+    },
+    {
+      id: "land-waters",
+      heading: "Short rivers and one great lake",
+      body: [
+        "With the mountains so close to the sea, no river is long. The longest, the Shinano, is 367 km; the Tone is 322 km and the Ishikari 268 km, and no other reaches 260. Inland water, rivers and lakes together, takes up 3.6% of the country.",
+        "Lake Biwa, at 669.3 km², is about four times the size of the next largest lake, Kasumigaura (168.2 km²).",
+      ],
+      cite: ["stat-handbook-2026"],
+      covers: ["waters"],
+      images: ["jp-land-shinano", "jp-land-biwa"],
+      status: "fact-checked",
+      figure: {
+        caption: "The five largest lakes, km², as of January 2026 (Geospatial Information Authority of Japan, via the Statistical Handbook).",
+        rows: [
+          { label: "Lake Biwa", value: 669.3, display: "669.3 km²" },
+          { label: "Kasumigaura", value: 168.2, display: "168.2 km²" },
+          { label: "Saroma", value: 151.6, display: "151.6 km²" },
+          { label: "Inawashiro", value: 103.2, display: "103.2 km²" },
+          { label: "Nakaumi", value: 85.8, display: "85.8 km²" },
+        ],
+      },
+    },
+    {
+      id: "land-forests",
+      heading: "Two thirds forest",
+      body: [
+        "Forest and fields cover 25.34 million hectares, 67.0% of the land, and farmland another 11.6%. Between them they account for about eight tenths of the country. Homes, factories and everything else people have built stand on 5.2%.",
+      ],
+      cite: ["stat-handbook-2026"],
+      covers: ["forests"],
+      images: ["jp-land-yaku-forest"],
+      status: "fact-checked",
+      figure: {
+        caption: "Land by use, 2020 (Ministry of Land, Infrastructure, Transport and Tourism, via the Statistical Handbook).",
+        rows: [
+          { label: "Forest and fields", value: 67.0, display: "67.0%" },
+          { label: "Farmland", value: 11.6, display: "11.6%" },
+          { label: "Developed land", value: 5.2, display: "5.2%" },
+          { label: "Roads", value: 3.8, display: "3.8%" },
+          { label: "Inland water", value: 3.6, display: "3.6%" },
+        ],
+      },
+    },
+    {
+      id: "land-satoyama",
+      heading: "Satoyama, the country people keep",
+      body: [
+        "With little flat land for rice, people in the countryside also lived off the forests close by, for fuel, building timber and food. The Japanese word for these lived-in edges of the hills is satoyama. Taken together with their villages, secondary woods, paddies, reservoirs and grassland, such areas make up about 40% of Japan.",
+        "Some species depend on that care. The endangered Asian fawnlily flowers in woods that people thin, letting spring light reach the ground; farm ponds hold dragonflies, frogs and fish; on the Aso grasslands in Kumamoto, fields are burned each early spring to keep them open. More than half the habitats of threatened species are in these areas, and the government’s biodiversity strategy counts the decline of that care as one of the crises facing Japan’s wildlife.",
+      ],
+      cite: ["hlj-biodiv", "cbd-jp"],
+      covers: ["landscapes"],
+      images: ["jp-land-terraces", "jp-land-nishigaoka"],
+      status: "fact-checked",
+    },
+    {
+      id: "land-climate",
+      heading: "Snow on one coast, rain on the other",
+      body: [
+        "Japan’s climate is temperate and maritime, but the mountain spine of Honshu splits it in two. In winter the northwest monsoon crosses the Sea of Japan and drops heavy snow on the coast facing it, while the Pacific side stays dry. In summer the southeast monsoon brings heat and humidity to the Pacific side. There are two rainy spells, one in early summer and one in autumn, and from summer into autumn typhoons arrive from the south.",
+        "Over 1991-2020 an average of 25.1 typhoons formed each year, most in August; 11.7 passed within 300 km of a weather station in Japan, and 3.0 made landfall on the four largest islands. The normals below show the split: Kanazawa, on the Sea of Japan, gets 301 mm of rain and snow in December, Tokyo 58 mm.",
+      ],
+      cite: ["stat-handbook-2026", "jma-typhoon"],
+      covers: ["climate"],
+      images: ["jp-land-modis-snow", "jp-land-tokage"],
+      widget: "jp-climate",
+      status: "fact-checked",
+    },
+    {
+      id: "land-wildlife",
+      heading: "Animals found nowhere else",
+      body: [
+        "From subarctic Hokkaido to the subtropical Nansei and Ogasawara islands, more than 90,000 species are known in Japan, and estimates including the undescribed run to 300,000. Cut off from the continent by sea, the islands have many of their own: about 40% of land mammals and vascular plants, 60% of reptiles and 80% of amphibians live nowhere else. The Japanese macaque is one of them; Japan is the only developed country with wild monkeys.",
+        "The seas around hold 50 of the world’s 127 kinds of marine mammals. In Shiretoko, Steller’s sea eagles, brown bears and orcas share one peninsula. In the Ryukyu Islands, 19 of the 21 mammals found only there are on the national Red List of threatened species.",
+      ],
+      cite: ["cbd-jp", "hlj-biodiv"],
+      covers: ["wildlife"],
+      images: ["jp-land-macaque", "jp-land-ptarmigan"],
+      status: "fact-checked",
+    },
+    {
+      id: "land-parks",
+      heading: "Thirty-five national parks",
+      body: [
+        "The first national parks were designated in 1934: the Seto Inland Sea, Unzen and Kirishima in March, and Akan, Daisetsuzan, Nikkō, the Chūbu mountains and Aso in December. The 35th, Hidaka Mountains-Erimo-Tokachi in Hokkaido, was added in June 2024 and is now the largest, at 245,668 hectares of land. Hokkaido has seven; only five prefectures have none.",
+        "Five natural areas are on UNESCO’s World Heritage list: Shirakami-Sanchi and Yakushima since 1993, Shiretoko since 2005, the Ogasawara Islands since 2011, and since 2021 Amami-Ōshima, Tokunoshima, the north of Okinawa Island and Iriomote, islands known for their many endemic and endangered animals.",
+      ],
+      cite: ["moe-nps-overview", "stat-handbook-2026"],
+      covers: ["protected"],
+      images: ["jp-land-otoko-falls"],
+      widget: "jp-parks",
+      status: "fact-checked",
+    },
+    {
+      id: "land-cities",
+      heading: "Half the people in three city regions",
+      body: [
+        "If most of the land is forest, most of the people are in cities. At the 2020 census, 66.4 million people, 52.6% of the population, lived in the three great metropolitan areas around Tokyo, Osaka and Nagoya. Those areas cover 33,599 km², less than a tenth of the country, and around Tokyo the density reaches 2,804.7 people per square kilometre.",
+      ],
+      cite: ["stat-handbook-2026"],
+      covers: ["landscapes"],
+      images: ["jp-land-kobe-night"],
+      status: "fact-checked",
+    },
+  ],
+  status: "fact-checked",
+};

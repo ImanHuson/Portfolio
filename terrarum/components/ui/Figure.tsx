@@ -1,4 +1,4 @@
-import { asset, media, small } from "@/lib/content/media";
+import { imgSrc, imgSrcSet, media } from "@/lib/content/media";
 
 /** An image with its credit always attached: creator, licence, source. */
 export function Figure({
@@ -23,8 +23,8 @@ export function Figure({
   return (
     <figure className={className}>
       <img
-        src={asset(m.src)}
-        srcSet={`${small(m)} 900w, ${asset(m.src)} ${m.width}w`}
+        src={imgSrc(m, 1280)}
+        srcSet={imgSrcSet(m)}
         sizes={sizes}
         width={m.width}
         height={m.height}

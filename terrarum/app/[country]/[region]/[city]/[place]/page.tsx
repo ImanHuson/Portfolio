@@ -5,6 +5,7 @@ import { AtlasMap } from "@/components/map/AtlasMap";
 import { Panorama } from "@/components/pano/Panorama";
 import { Crumbs } from "@/components/ui/Crumbs";
 import { Facts } from "@/components/ui/Facts";
+import { Gallery } from "@/components/ui/Gallery";
 import { Credit, Figure } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
 import { NativeName } from "@/components/ui/NativeName";
@@ -14,7 +15,7 @@ import { SaveButton } from "@/components/ui/SaveButton";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { allStaticParams, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
-import { media } from "@/lib/content/media";
+import { imgSrc, media } from "@/lib/content/media";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: PageProps<"/[country]/[region
   return {
     title: `${p.name}, ${getCity(country, placePath(country, place).city.slug)!.name}`,
     description: p.summary,
-    openGraph: { images: [{ url: `.${hero.src}`, width: hero.width, height: hero.height, alt: hero.alt }] },
+    openGraph: { images: [{ url: hero.remote ? imgSrc(hero, 1280) : `.${hero.src}`, alt: hero.alt }] },
   };
 }
 
@@ -40,11 +41,10 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
   const p = getPlace(country, place);
   if (!c || !r || !ci || !p || !ci.places.includes(p.slug)) notFound();
   const refs = makeRefs([...p.facts.map((f) => f.cite), ...p.passages.map((x) => x.cite)]);
-  const related = p.related.map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
+  // Links to places not built yet are skipped here; the content audit fails on them.
+  const related = p.related.filter((s) => getPlace(country, s)).map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const pano = p.panoramas[0];
   const lang = c.entry.nativeLang?.split(" ")[0];
-  // Interleave the story with the photographs: one image after each passage.
-  const gallery = [...p.gallery];
 
   return (
     <ThemeShell country={country}>
@@ -83,48 +83,31 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
           <Facts facts={p.facts} refs={refs} />
         </section>
 
-        {p.passages.map((x, i) => {
-          const img = gallery[i];
-          const flip = i % 2 === 1;
-          return (
-            <section key={x.id} className={`border-t border-line ${i % 2 === 0 ? "bg-surface" : ""}`}>
-              <div className="mx-auto grid max-w-[1400px] items-start gap-10 px-4 py-16 md:px-8 lg:grid-cols-2">
-                <div className={flip ? "lg:order-2" : ""}>
-                  <Passage p={x} refs={refs} />
-                </div>
-                {img && <Figure id={img} sizes="(min-width:1024px) 45vw, 100vw" imgClassName="w-full max-h-[78vh] object-cover" />}
+        <section aria-label={`About ${p.name}`} className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] space-y-20 px-4 py-20 md:px-8">
+            {p.passages.map((x) => (
+              <div key={x.id} className="grid items-start gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
+                <Passage p={x} refs={refs} />
+                {x.images?.[0] && <Figure id={x.images[0]} sizes="(min-width:1024px) 30vw, 100vw" className="lg:mt-14" imgClassName="w-full" />}
               </div>
-            </section>
-          );
-        })}
-
-        {gallery.length > p.passages.length && (
-          <section aria-label="More photographs" className="mx-auto grid max-w-[1400px] gap-8 px-4 py-16 md:grid-cols-2 md:px-8">
-            {gallery.slice(p.passages.length).map((id) => (
-              <Figure key={id} id={id} sizes="(min-width:768px) 45vw, 100vw" imgClassName="aspect-[4/3] w-full object-cover" />
             ))}
-          </section>
-        )}
-
-        <section aria-labelledby="look-h" className="border-t border-line bg-band text-on-band">
-          <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-            <h2 id="look-h" className="font-display text-3xl md:text-4xl">{pano ? `Look around: ${pano.title}` : "Look around"}</h2>
-            {pano ? (
-              <>
-                <p className="mt-3 max-w-[60ch] opacity-80">{pano.description}</p>
-                <div className="mt-8">
-                  <Panorama src={media(pano.media).src} title={pano.title} yaw={pano.yaw} haov={pano.haov} vaov={pano.vaov} alt={media(pano.media).alt} />
-                  <p className="mt-2 text-[13px] opacity-75"><Credit id={pano.media} /></p>
-                </div>
-              </>
-            ) : (
-              <p className="mt-3 max-w-[60ch] opacity-80">
-                There is no 360° view of {p.name} here yet: no openly licensed 360° photograph of it turned up in the open collections searched.
-                The photographs above are real; the map below shows where it is.
-              </p>
-            )}
           </div>
         </section>
+
+        <Gallery ids={p.gallery} name={p.name} headingId="sides-h" tour={p.tour} />
+
+        {pano && (
+          <section aria-labelledby="look-h" className="border-t border-line bg-band text-on-band">
+            <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
+              <h2 id="look-h" className="font-display text-3xl md:text-4xl">Look around: {pano.title}</h2>
+              <p className="mt-3 max-w-[60ch] opacity-80">{pano.description}</p>
+              <div className="mt-8">
+                <Panorama src={imgSrc(media(pano.media))} title={pano.title} yaw={pano.yaw} haov={pano.haov} vaov={pano.vaov} alt={media(pano.media).alt} />
+                <p className="mt-2 text-[13px] opacity-75"><Credit id={pano.media} /></p>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section aria-labelledby="where-h" className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:px-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <AtlasMap

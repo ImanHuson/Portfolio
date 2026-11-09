@@ -81,6 +81,7 @@ export const switzerland: Country = {
       { name: "Today's constitution", from: "1999", to: "1999", start: 1999, end: 1999, note: "The Federal Constitution of 18 April 1999." },
     ],
   },
+  chapters: [],
   journeys: [
     {
       slug: "a-walk-through-bern",
@@ -139,6 +140,7 @@ export const regions: Region[] = [
 export const cities: City[] = [
   {
     slug: "bern",
+    kind: "city",
     name: "Bern",
     where: { lat: 46.948, lng: 7.4474, ref: "Old City, map label position" },
     summary: "The federal city: a medieval town in a loop of the Aare, where the Swiss parliament and government sit.",
@@ -184,6 +186,7 @@ export const cities: City[] = [
     artwork: "ch-bern-aare",
     panoramas: [],
     places: ["zytglogge", "federal-palace"],
+    nearby: [],
     gaps: [
       { topic: "The Minster, the bear park and the Aare", why: "Not yet researched." },
       { topic: "Einstein in Bern", why: "His years here (1902-09) deserve a page; not yet sourced beyond the letter quoted." },

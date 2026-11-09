@@ -18,4 +18,46 @@ export function hasMedia(id: string) {
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const asset = (path: string) => `${BASE}${path}`;
-export const small = (m: MediaAsset) => asset(m.src.replace(/\.webp$/, "-sm.webp"));
+
+/**
+ * Commons serves resized copies only at fixed widths (others are refused or
+ * throttled for sites that link to it), from its thumbnail host. A visitor is
+ * never sent the original: some are 12,000 px and 20 MB. Files narrower than a
+ * step are served whole from the upload host.
+ */
+const COMMONS_STEPS = [330, 500, 960, 1280, 1920, 3840];
+const THUMB = "https://thumb.wikimedia.org/wikipedia/commons/thumb";
+const UPLOAD = "https://upload.wikimedia.org/wikipedia/commons";
+
+function commonsUrl(m: MediaAsset, w: number) {
+  const { path } = m.remote!;
+  const file = encodeURIComponent(path.split("/").pop()!);
+  const dir = path.split("/").slice(0, 2).join("/");
+  if (w >= m.width) return `${UPLOAD}/${dir}/${file}`;
+  return `${THUMB}/${dir}/${file}/${w}px-${file}`;
+}
+
+/** The Commons widths this file can be served at, smallest first. */
+function steps(m: MediaAsset) {
+  const s = COMMONS_STEPS.filter((x) => x < m.width);
+  return s.length ? s : [m.width];
+}
+
+/** URL of an image at about `w` pixels wide (the largest allowed copy when omitted). */
+export function imgSrc(m: MediaAsset, w?: number): string {
+  if (m.remote) {
+    const st = steps(m);
+    return commonsUrl(m, w ? (st.find((x) => x >= w) ?? st[st.length - 1]) : st[st.length - 1]);
+  }
+  if (w && w <= 900) return asset(m.src!.replace(/\.webp$/, "-sm.webp"));
+  return asset(m.src!);
+}
+
+/** srcset for responsive images, local or remote. */
+export function imgSrcSet(m: MediaAsset): string {
+  if (m.remote) return steps(m).filter((x) => x >= 500 || x === m.width).map((x) => `${commonsUrl(m, x)} ${x}w`).join(", ");
+  return `${imgSrc(m, 900)} 900w, ${asset(m.src!)} ${m.width}w`;
+}
+
+/** A small copy for cards and lists. */
+export const small = (m: MediaAsset) => imgSrc(m, 900);

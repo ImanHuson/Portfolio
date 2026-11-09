@@ -1,138 +1,8 @@
-import { countryEntry } from "./countries";
-import type { City, Country, Place, Region } from "./types";
+import type { City, Place, Region } from "../../types";
 
-/**
- * Japan: the first open country. Every passage here was written from the
- * sources it cites (lib/content/sources.ts), read in November 2026; the
- * research notes behind it are in research/countries/japan/.
- */
+/** Kansai: Kyoto, Nara, Osaka, Himeji and Kōyasan. */
 
-export const japan: Country = {
-  entry: countryEntry("japan")!,
-  summary:
-    "An island country off the eastern edge of Asia: five main islands and more than 14,000 smaller ones, three quarters of it mountain and hill.",
-  facts: [
-    { label: "Where", value: "About 20° to 45° N and 123° to 154° E, off the eastern seaboard of Eurasia", cite: ["stat-handbook-2026"] },
-    { label: "Main islands", value: "Hokkaido, Honshu, Shikoku, Kyushu and Okinawa, with more than 14,000 smaller islands", cite: ["stat-handbook-2026"] },
-    { label: "Area", value: "377,980 km²", asOf: "January 2026", cite: ["stat-handbook-2026"] },
-    { label: "Terrain", value: "Mountains and hills cover about three quarters of the land", cite: ["stat-handbook-2026"] },
-    { label: "Population", value: "123.80 million", asOf: "2024", cite: ["stat-handbook-2026"] },
-    { label: "Prefectures", value: "47", cite: ["stat-handbook-2026"] },
-    { label: "Foreign visitors", value: "42.68 million in 2025 (provisional), up from 36.87 million in 2024", asOf: "2025", cite: ["stat-handbook-2026"] },
-  ],
-  hero: "cma-shono",
-  card: "kyoto-yasaka",
-  regionsGeo: "/data/jp-regions.json",
-  regionsBounds: [[127, 25.5], [146, 45.6]],
-  regionsHeading: "Eight regions, one open",
-  regionsNote: "Japan’s regions are a convention, not a level of government. Kansai is researched; the others are on the map and waiting.",
-  regions: ["kansai"],
-  pendingRegions: [
-    { geoKey: "hokkaido", name: "Hokkaido", native: "北海道" },
-    { geoKey: "tohoku", name: "Tōhoku", native: "東北" },
-    { geoKey: "kanto", name: "Kantō", native: "関東" },
-    { geoKey: "chubu", name: "Chūbu", native: "中部" },
-    { geoKey: "chugoku", name: "Chūgoku", native: "中国" },
-    { geoKey: "shikoku", name: "Shikoku", native: "四国" },
-    { geoKey: "kyushu", name: "Kyūshū and Okinawa", native: "九州・沖縄" },
-  ],
-  passages: [
-    {
-      id: "land",
-      heading: "A long, steep archipelago",
-      body: [
-        "The islands run in a crescent from northeast to southwest, separated from the continent by the Sea of Japan. They sit on one of the world’s youngest mobile belts, which is why earthquakes are frequent and active volcanoes are common.",
-        "Steep mountains cut by ravines take up most of the land, so people, farms and cities crowd onto the plains and the hills between them.",
-      ],
-      cite: ["stat-handbook-2026"],
-      status: "fact-checked",
-    },
-    {
-      id: "belief",
-      heading: "Two faiths, counted twice",
-      body: [
-        "Buddhism reached Japan from the continent around the sixth century and mixed with Shinto, the older local faith, for more than a thousand years, until the Meiji government ordered the two separated in the late nineteenth century.",
-        "Official counts reflect that history. At the end of 2016 the Agency for Cultural Affairs’ yearbook recorded 84.7 million Shinto and 87.7 million Buddhist adherents, 182.2 million in all, in a country of about 126 million people. Religious bodies report their own numbers and define “adherent” as they choose, and many households belong to a shrine and a temple at once. The figures describe membership rolls, not what any one person believes.",
-      ],
-      cite: ["nippon-adherents", "bunka-religious-juridical"],
-      status: "fact-checked",
-      figure: {
-        caption: "Religious adherents reported to the Agency for Cultural Affairs at the end of 2016, against Japan’s population.",
-        rows: [
-          { label: "Shinto adherents", value: 84.7, display: "84.7 million" },
-          { label: "Buddhist adherents", value: 87.7, display: "87.7 million" },
-          { label: "All adherents, every faith", value: 182.2, display: "182.2 million" },
-          { label: "People in Japan", value: 126, display: "about 126 million" },
-        ],
-      },
-    },
-    {
-      id: "food",
-      heading: "Washoku, a way of eating",
-      body: [
-        "Washoku, the traditional dietary culture of Japan, is on UNESCO’s list of intangible cultural heritage, one of 23 Japanese entries as of December 2025, alongside Noh, Bunraku, Kabuki and sake-making with koji mould.",
-        "In Kyoto, Nishiki Market is where the city’s restaurants and home cooks have bought seasonal ingredients for four centuries.",
-      ],
-      cite: ["stat-handbook-2026", "nishiki-history"],
-      status: "fact-checked",
-      seeAlso: { place: "nishiki-market", label: "Go to Nishiki Market" },
-    },
-    {
-      id: "language",
-      heading: "More than one language",
-      body: [
-        "Japanese is not the archipelago’s only language. UNESCO’s Atlas of the World’s Languages in Danger lists eight endangered languages in Japan, among them Ainu, Hachijō and several Ryukyuan languages of the southern islands.",
-        "Ainu, the language of the Indigenous Ainu people of Hokkaido and the far north, is the only one rated critically endangered: its youngest speakers are grandparents, who use it partially and rarely.",
-      ],
-      cite: ["japantimes-ainu", "ninjal-endangered"],
-      status: "fact-checked",
-    },
-  ],
-  timeline: {
-    title: "From the Jōmon to Reiwa",
-    cite: ["columbia-afe-timeline", "nippon-kyoto-millennium"],
-    caveat:
-      "Period names and dates are conventions historians use, and they disagree, most of all before about 600 CE. Columbia’s timeline, used here, ends the Nara period in 814; most references end it in 794, when the court moved to Heian-kyō (Kyoto), and so does this page.",
-    periods: [
-      { name: "Jōmon", native: "縄文", from: "prehistory", to: "c. 300 BCE", start: -1400, end: -300, note: "Hunter-gatherer culture named for its hand-made, cord-marked pottery. Its start is dated very differently by different sources." },
-      { name: "Yayoi", native: "弥生", from: "c. 300 BCE", to: "c. 300 CE", start: -300, end: 250, note: "Farming society using metal and wheel-turned pottery." },
-      { name: "Kofun", native: "古墳", from: "250", to: "538", start: 250, end: 538, note: "Great earthen burial mounds and clay haniwa figures; the Yamato clan emerges, whose rulers began the imperial line." },
-      { name: "Asuka", native: "飛鳥", from: "538", to: "710", start: 538, end: 710, note: "Buddhism arrives; the Taika Reform of 645 reorganises government on Chinese models." },
-      { name: "Nara", native: "奈良", from: "710", to: "794", start: 710, end: 794, note: "The first permanent capital, at Nara." },
-      { name: "Heian", native: "平安", from: "794", to: "1185", start: 794, end: 1185, note: "Court culture flowers in the new capital, Heian-kyō: poetry, diaries, The Tale of Genji." },
-      { name: "Kamakura", native: "鎌倉", from: "1185", to: "1333", start: 1185, end: 1333, note: "Military rule begins; the shoguns govern from Kamakura while the court stays in Kyoto." },
-      { name: "Muromachi", native: "室町", from: "1336", to: "1573", start: 1336, end: 1573, note: "A warrior government based in Kyoto’s Muromachi district; Zen-influenced arts; long civil wars." },
-      { name: "Unification", native: "安土桃山", from: "1568", to: "1598", start: 1573, end: 1600, note: "The country is reunified by force. Also called Azuchi-Momoyama." },
-      { name: "Edo", native: "江戸", from: "1600", to: "1867", start: 1600, end: 1868, note: "Tokugawa rule from Edo (Tokyo); two and a half centuries of peace and a vigorous urban culture." },
-      { name: "Meiji", native: "明治", from: "1868", to: "1912", start: 1868, end: 1912, note: "Rapid modernisation. In 1869 the emperor moves to Tokyo and Kyoto stops being the capital." },
-      { name: "Taishō", native: "大正", from: "1912", to: "1926", start: 1912, end: 1926, note: "" },
-      { name: "Shōwa", native: "昭和", from: "1926", to: "1989", start: 1926, end: 1989, note: "" },
-      { name: "Heisei", native: "平成", from: "1989", to: "2019", start: 1989, end: 2019, note: "" },
-      { name: "Reiwa", native: "令和", from: "2019", to: "present", start: 2019, end: 2026, note: "" },
-    ],
-  },
-  journeys: [
-    {
-      slug: "a-day-in-kyoto",
-      title: "Market, temple, mountain: a day in Kyoto",
-      summary: "Three places that show three sides of the old capital: what it eats, how it prays, and the mountain it climbs.",
-      stops: [
-        { place: "nishiki-market", why: "Start where the city shops: the narrow covered street that has fed Kyoto’s kitchens since at least 1615." },
-        { place: "kiyomizu-dera", why: "Cross to the eastern hills for the temple whose wooden stage hangs over the slope of Mt Otowa." },
-        { place: "fushimi-inari-taisha", why: "End in the south, walking up Inariyama through the vermilion gates." },
-      ],
-      limits: "A suggested order, not a timed itinerary: it gives no opening hours, fares or travel times, which change and are not tracked here. Only Nishiki Market has a 360° view.",
-    },
-  ],
-  gaps: [
-    { topic: "Seven of eight regions", why: "Only Kansai is researched. The others show on the map but have no pages yet." },
-    { topic: "Writing systems and the history of Japanese", why: "Not yet sourced well enough to publish." },
-    { topic: "Contemporary life, work and cities", why: "No researched content yet; Tokyo has no page." },
-    { topic: "Video", why: "No authorised embed has been verified yet (see ASSET_GAPS.md)." },
-  ],
-};
-
-export const regions: Region[] = [
+export const region: Region = 
   {
     slug: "kansai",
     name: "Kansai",
@@ -161,12 +31,12 @@ export const regions: Region[] = [
       { topic: "Osaka, Nara, Kobe and the countryside", why: "Listed, not yet researched." },
     ],
     status: "fact-checked",
-  },
-];
+  };
 
 export const cities: City[] = [
   {
     slug: "kyoto",
+    kind: "city",
     name: "Kyoto",
     native: "京都",
     where: { lat: 35.0116, lng: 135.7681, ref: "central Kyoto, map label position" },
@@ -211,16 +81,9 @@ export const cities: City[] = [
     ],
     hero: "kyoto-yasaka",
     artwork: "cma-gion",
-    panoramas: [
-      {
-        id: "kyoto-station-plaza",
-        media: "pano-kyoto-station",
-        title: "Kyoto Station, the bus plaza",
-        yaw: 40,
-        description: "The plaza in front of Kyoto Station, where most visitors first arrive. An older photograph; the licence metadata does not record when it was taken.",
-      },
-    ],
-    places: ["nishiki-market", "kiyomizu-dera", "fushimi-inari-taisha"],
+    panoramas: [],
+    places: ["nishiki-market", "kiyomizu-dera", "fushimi-inari-taisha", "kinkaku-ji"],
+    nearby: [],
     gaps: [
       { topic: "Neighbourhoods and everyday life", why: "Gion, the machiya townhouses and the Kamo River are not yet researched." },
       { topic: "Fourteen of the seventeen World Heritage monuments", why: "Only Kiyomizu-dera has a page." },
@@ -229,7 +92,76 @@ export const cities: City[] = [
   },
 ];
 
+
 export const places: Place[] = [
+  {
+    slug: "kinkaku-ji",
+    name: "Kinkaku-ji",
+    native: "金閣寺",
+    kind: "Zen temple",
+    where: { lat: 35.0395, lng: 135.7295, ref: "OpenStreetMap way 98115917" },
+    summary: "A shogun’s retirement villa turned Zen temple, its pavilion covered in gold leaf above a garden pond in Kyoto’s northwest.",
+    matters:
+      "The Golden Pavilion is what is left of the palace from which Ashikaga Yoshimitsu ran Japan at the height of his power, and its three storeys stack three ways of building on top of one another. It burned in 1950 and was rebuilt to the same design, which is part of its story too.",
+    facts: [
+      { label: "Official name", value: "Rokuon-ji (鹿苑寺), after Yoshimitsu’s posthumous name", cite: ["kinkaku-about"] },
+      { label: "Belongs to", value: "The Shōkoku-ji branch of Rinzai Zen", cite: ["kinkaku-about", "jpsearch-kinkaku"] },
+      { label: "Grounds", value: "About 132,000 m², of which the garden takes 92,400 m²", cite: ["kinkaku-guide"] },
+      { label: "Protected as", value: "Special Historic Site and Special Scenic Spot (the garden); World Heritage since 1994", cite: ["jpsearch-kinkaku", "kinkaku-about"] },
+      { label: "Getting round", value: "Wheelchair-accessible as far as the pavilion; steps after it", cite: ["kinkaku-faq"] },
+    ],
+    passages: [
+      {
+        id: "kinkaku-villa",
+        heading: "A shogun’s villa first",
+        body: [
+          "In the 1220s the court noble Saionji Kintsune built a villa and clan temple here, at the foot of the Kitayama hills. It fell into ruin after the Kamakura government collapsed, and in 1397 the third Ashikaga shogun, Yoshimitsu, took the site over and rebuilt it as his Kitayama palace.",
+          "Yoshimitsu had handed the title of shogun to his nine-year-old son in 1394 and taken Buddhist orders the next year, but he kept power. He moved the business of government to Kitayama, received envoys of the Ming emperor there and built up a large collection of Chinese works of art, the start of what is called Kitayama culture. In 1408 Emperor Go-Komatsu came on a state visit. Yoshimitsu died that year, and his son turned the palace into a Zen temple, as his father had asked.",
+        ],
+        cite: ["kinkaku-about", "jpsearch-kinkaku"],
+        images: ["kinkaku-yoshimitsu"],
+        status: "fact-checked",
+      },
+      {
+        id: "kinkaku-three-storeys",
+        heading: "Three storeys, three ways of building",
+        body: [
+          "The pavilion is a relic hall, built to keep relics of the Buddha. Each floor is in a different style. The ground floor, Hōsui-in, follows shinden-zukuri, the palace architecture of the Heian court. The middle floor, Chōon-dō, is in the style of a samurai house of the Kamakura period. The top floor, Kukkyō-chō, is built like a Chinese Zen temple.",
+          "The upper two floors are lacquered and covered in pure gold leaf; the roof is laid with thin shingles of sawara cypress and topped by a phoenix. In Yoshimitsu’s day the ground floor held a statue of the Buddha with two attendants, the middle floor an image of Kannon, and the top floor the relics.",
+        ],
+        cite: ["kinkaku-guide", "kinkaku-about"],
+        images: ["kinkaku-gilded"],
+        status: "fact-checked",
+      },
+      {
+        id: "kinkaku-fire",
+        heading: "Burned in 1950, built again in 1955",
+        body: [
+          "Most of the palace buildings were lost in the Ōnin War of 1467 to 1477, but the pavilion survived, and between 1904 and 1906 it was taken apart and repaired. In 1950 a student monk of the temple set it on fire. The building burned to the ground, and a statue of Yoshimitsu inside it, a National Treasure, was lost with it. The phoenix had already been taken down and survives.",
+          "The pavilion was rebuilt to the same design in 1955, working from the records of the Meiji-period repair, and in 1987 the lacquer and gold leaf were renewed and the ceiling painting and a statue of Yoshimitsu restored. Yukio Mishima drew on the arson for his novel The Temple of the Golden Pavilion.",
+        ],
+        cite: ["jpsearch-kinkaku", "kyotodesign-kinkaku", "kinkaku-guide"],
+        status: "fact-checked",
+      },
+      {
+        id: "kinkaku-garden",
+        heading: "The garden around the mirror pond",
+        body: [
+          "Kyōko-chi, the mirror pond, covers about 6,600 m² and holds islands of different sizes and named stones. Uphill, water drops 2.3 metres over Ryūmon Falls onto a stone set at an angle, a carp climbing the falls in the Chinese story of the carp that became a dragon.",
+          "Higher still is Sekka-tei, a small teahouse made in the Edo period, when the declining pavilion and its garden were being restored, at the request of the tea master Kanamori Sōwa for Emperor Go-Mizunoo. Its name refers to the setting sun over the pavilion, which is at its best from here. The hall of Fudō-dō keeps a stone statue of Fudō Myōō that is shown only at Setsubun and on 16 August.",
+        ],
+        cite: ["kinkaku-guide"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "kinkaku-pond",
+    gallery: ["kinkaku-path", "kinkaku-pines", "kinkaku-hojo-doors", "kinkaku-gravel", "kinkaku-sekkatei", "kinkaku-ema", "kinkaku-fudodo", "kinkaku-snow", "kinkaku-autumn"],
+    panoramas: [],
+    tour: { url: "https://www.shokoku-ji.jp/vr/kinkakuji/", label: "Walk the grounds in the temple’s own 360° tour", by: "Shōkoku-ji" },
+    related: ["ryoan-ji", "arashiyama"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "nishiki-market",
     name: "Nishiki Market",
@@ -288,16 +220,7 @@ export const places: Place[] = [
     ],
     hero: "nishiki-tsukemono",
     gallery: ["nishiki-ignis", "nishiki-kintoki", "nishiki-hirousu", "nishiki-tofu", "nishiki-tenmangu", "nishiki-1"],
-    panoramas: [
-      {
-        id: "nishiki-tenmangu-gate",
-        media: "pano-nishiki-tenmangu",
-        title: "The gate of Nishiki Tenmangū",
-        yaw: -60,
-        description:
-          "Standing in the gateway of Nishiki Tenmangū, a small shrine at the east end of the market: the shrine on one side, a covered shopping arcade on the other. Drag to look round.",
-      },
-    ],
+    panoramas: [],
     related: ["kiyomizu-dera", "fushimi-inari-taisha"],
     gaps: [
       { topic: "Shop numbers and opening hours", why: "They change and are not tracked here." },
@@ -368,7 +291,6 @@ export const places: Place[] = [
     panoramas: [],
     related: ["kiyomizu-dera", "nishiki-market"],
     gaps: [
-      { topic: "360° view", why: "No openly licensed panorama of the shrine was found. Listed in ASSET_GAPS.md." },
       { topic: "Festivals and the shrine’s year", why: "The rite calendar is published by the shrine but not yet researched." },
     ],
     status: "fact-checked",
@@ -425,7 +347,6 @@ export const places: Place[] = [
     panoramas: [],
     related: ["fushimi-inari-taisha", "nishiki-market"],
     gaps: [
-      { topic: "360° view", why: "No openly licensed panorama of the temple was found. Listed in ASSET_GAPS.md." },
       { topic: "The Otowa waterfall today and the temple’s annual rites", why: "Not yet researched." },
     ],
     status: "fact-checked",

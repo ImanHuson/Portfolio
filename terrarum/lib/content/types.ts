@@ -1,3 +1,5 @@
+import type { ChapterSlug, Side } from "./brief";
+
 /**
  * The Terrarum content model. Pages render these shapes; they never hold facts
  * themselves. A country is added by adding data (lib/content/<country>/), a
@@ -62,6 +64,14 @@ export interface Passage {
   body: string[];
   cite: Cite;
   status: ReviewStatus;
+  /** Brief topics this passage covers (keys of CHAPTER_TOPICS / CITY_TOPICS in brief.ts). */
+  covers?: string[];
+  /** Pictures that belong with this passage, by media id. */
+  images?: string[];
+  /** Places in this country the passage is about, linked beside it. */
+  places?: string[];
+  /** An interactive piece shown full width under the passage (components/chapter/Widget.tsx). */
+  widget?: "jp-climate" | "jp-parks";
   /** A place in this country the passage leads to. */
   seeAlso?: { place: string; label: string };
   /** Optional comparison drawn beside the text (same sources as the passage). */
@@ -96,8 +106,16 @@ export interface MediaAsset {
   repository: string;
   license: License;
   licenseUrl: string;
-  /** Path under public/, without basePath. */
-  src: string;
+  /** Path under public/, without basePath (local copies). */
+  src?: string;
+  /**
+   * Files served from Wikimedia Commons' own image host instead of a local
+   * copy: GitHub Pages caps a site at 1 GB, and full galleries for every
+   * country would pass it. `file` is the Commons file name, underscores for spaces.
+   */
+  remote?: { host: "commons"; file: string; /** "a/ab/<file>", the hashed directory the host serves it from. */ path: string };
+  /** For gallery photos: which side of the place it shows (brief.ts SIDES). */
+  side?: Side;
   width: number;
   height: number;
   alt: string;
@@ -155,6 +173,8 @@ export interface Place {
   hero: string;
   gallery: string[];
   panoramas: PanoScene[];
+  /** A virtual tour published by the place itself: linked, never embedded or copied. */
+  tour?: { url: string; label: string; by: string };
   /** Other places in this collection worth seeing next. */
   related: string[];
   gaps: Gap[];
@@ -163,6 +183,8 @@ export interface Place {
 
 export interface City {
   slug: string;
+  /** City, town, village, or a natural area visited from a town. */
+  kind: "city" | "town" | "village" | "area";
   name: string;
   native?: string;
   where: LatLng;
@@ -173,6 +195,10 @@ export interface City {
   artwork?: string;
   panoramas: PanoScene[];
   places: string[];
+  /** Places elsewhere in the country that are worth combining with this one. */
+  nearby: string[];
+  /** Brief 6B topics that do not apply here, with the reason. */
+  notApplicable?: { topic: string; why: string }[];
   gaps: Gap[];
   status: ReviewStatus;
 }
@@ -226,6 +252,20 @@ export interface Journey {
   limits: string;
 }
 
+/** A country-wide chapter for one of the brief's content areas (A, D-J). */
+export interface Chapter {
+  slug: ChapterSlug;
+  title: string;
+  native?: string;
+  summary: string;
+  hero: string;
+  passages: Passage[];
+  facts?: Fact[];
+  /** Brief topics with no real content in this country, and why. */
+  notApplicable?: { topic: string; why: string }[];
+  status: ReviewStatus;
+}
+
 export type CountryStatus = "open" | "in-research";
 
 /** Every country the platform knows about, open or not. */
@@ -266,5 +306,6 @@ export interface Country {
   passages: Passage[];
   timeline: { title: string; periods: TimelinePeriod[]; cite: Cite; caveat: string };
   journeys: Journey[];
+  chapters: Chapter[];
   gaps: Gap[];
 }

@@ -1,5 +1,5 @@
 import { COUNTRIES } from "./countries";
-import * as JP from "./japan";
+import * as JP from "./japan/index";
 import * as MV from "./maldives";
 import * as CH from "./switzerland";
 import { source } from "./sources";

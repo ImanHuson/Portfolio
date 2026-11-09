@@ -1,3 +1,4 @@
+import { JAPAN_SOURCES } from "./japan/sources";
 import type { Source } from "./types";
 
 /**
@@ -318,6 +319,8 @@ export const SOURCES: Source[] = [
     notes: "Public domain. Country shapes for the globe; Japanese prefectures and their region field for the regions map (simplified).",
   },
 ];
+
+SOURCES.push(...JAPAN_SOURCES);
 
 export const SOURCE_BY_ID = new Map(SOURCES.map((s) => [s.id, s]));
 

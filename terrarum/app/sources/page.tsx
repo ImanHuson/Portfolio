@@ -49,7 +49,7 @@ export default function SourcesPage() {
           {MEDIA.map((m) => (
             <li key={m.id}>
               <img
-                src={m.kind === "panorama" ? asset(m.src) : small(m)}
+                src={small(m)}
                 alt={m.alt}
                 width={m.width}
                 height={m.height}

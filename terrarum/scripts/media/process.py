@@ -35,6 +35,7 @@ LIC = {
     ("by-sa", "3.0"): ("CC BY-SA 3.0", "https://creativecommons.org/licenses/by-sa/3.0/"),
     ("by", "3.0"): ("CC BY 3.0", "https://creativecommons.org/licenses/by/3.0/"),
     ("by-sa", "4.0"): ("CC BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0/"),
+    ("pdm", "1.0"): ("Public domain", "https://creativecommons.org/publicdomain/mark/1.0/"),
 }
 
 # Written by looking at each image, not from its title.
@@ -70,7 +71,6 @@ ALT = {
     "mv-mosque-window": ("A carved wooden lattice screen beneath a panel of Arabic calligraphy.", "Hukuru Miskiy, Malé"),
     "mv-mosque-cemetery": ("Rows of carved coral gravestones, some with rounded tops and some pointed, in the mosque's cemetery.", "Hukuru Miskiy, Malé"),
     "mv-mosque-cemetery2": ("Two coral stone mausoleums with carved panels and wooden doors, among gravestones.", "Hukuru Miskiy, Malé"),
-    "pano-mv-fishmarket": ("360° strip photograph of the quay in front of Malé Fish Market, with market sheds and moored boats.", "Malé Fish Market"),
     "ch-bern-hero": ("Bern's old town on its hill above autumn trees, roofs packed together and the Minster spire rising in the middle.", "Bern, from the Rosengarten"),
     "ch-bern-aare": ("Houses along the bank of the green Aare below the old town, the Minster spire above them.", "Bern, the Aare"),
     "ch-zyt-cc0": ("The Zytglogge clock tower at the end of an arcaded street, its large clock face and astronomical dial below a pointed spire.", "Zytglogge, Bern"),
@@ -83,8 +83,6 @@ ALT = {
     "ch-finster": ("The Finsteraarhorn seen from the air: a dark rock pyramid above snowfields and glaciers.", "Finsteraarhorn, Bernese Alps"),
     "cma-shono": ("Woodblock print: travellers bent under hats and capes run up a slope through slanting rain past swaying bamboo.", "Shōno, on the Tōkaidō road"),
     "cma-gion": ("Woodblock print: women with umbrellas pass beneath a stone torii in a shrine precinct under heavy snow.", "The Gion Shrine, Kyoto"),
-    "pano-kyoto-station": ("360° photograph of the plaza in front of Kyoto Station.", "Kyoto Station, Kyoto"),
-    "pano-nishiki-tenmangu": ("360° photograph at the gateway of Nishiki Tenmangū and a covered arcade.", "Nishiki Tenmangū, Kyoto"),
 }
 
 
@@ -117,7 +115,6 @@ def save(img, key, out):
 
 def main():
     os.makedirs(os.path.join(ROOT, "public", "media"), exist_ok=True)
-    os.makedirs(os.path.join(ROOT, "public", "pano"), exist_ok=True)
     registry = []
     picks = {}
     for name in sorted(os.listdir(HERE)):
@@ -144,33 +141,6 @@ def main():
             item.pop("modified")
         save(Image.open(f), key, item)
         registry.append(item)
-    for key, p in json.load(open(os.path.join(HERE, "panos-commons.json"))).items():
-        f = os.path.join(SRC, f"{key}.jpg")
-        if key not in ALT or not os.path.exists(f):
-            continue
-        img = Image.open(f).convert("RGB")
-        img.save(os.path.join(ROOT, "public", "pano", f"{key}.jpg"), quality=88)
-        lic, lurl = LIC[(p["license"], p["lv"])]
-        alt, loc = ALT[key]
-        registry.append({
-            "id": key, "kind": "panorama", "title": p["title"], "creator": creator_name(p.get("creator")),
-            "sourceUrl": p["landing"], "repository": "Wikimedia Commons", "license": lic, "licenseUrl": lurl,
-            "src": f"/pano/{key}.jpg", "width": img.size[0], "height": img.size[1], "alt": alt, "location": loc,
-            "modified": "Resized and re-encoded as JPEG", "accessed": ACCESSED, "status": "license-verified", "hosting": "local-copy",
-        })
-    for fid, p in json.load(open(os.path.join(HERE, "openverse-panos.json"))).items():
-        key = {"3667254503": "pano-kyoto-station", "4259644860": "pano-nishiki-tenmangu"}[fid]
-        f = os.path.join(SRC, f"pano-{fid}.jpg")
-        img = Image.open(f).convert("RGB")
-        img.save(os.path.join(ROOT, "public", "pano", f"{key}.jpg"), quality=90)
-        lic, lurl = LIC[(p["license"], p["license_version"])]
-        alt, loc = ALT[key]
-        registry.append({
-            "id": key, "kind": "panorama", "title": p["title"], "creator": p["creator"], "creatorUrl": p.get("creator_url"),
-            "sourceUrl": p["foreign_landing_url"], "repository": "Flickr", "license": lic, "licenseUrl": lurl,
-            "src": f"/pano/{key}.jpg", "width": img.size[0], "height": img.size[1], "alt": alt, "location": loc,
-            "modified": "Re-encoded as JPEG", "accessed": ACCESSED, "status": "license-verified", "hosting": "local-copy",
-        })
     for cid, key in (("126086", "cma-shono"), ("106961", "cma-gion")):
         a = json.load(open(os.path.join(HERE, f"{cid}.json")))["data"]
         alt, loc = ALT[key]
@@ -183,6 +153,25 @@ def main():
         }
         save(Image.open(os.path.join(SRC, f"cma-{cid}.jpg")), key, item)
         registry.append(item)
+    # Remote picks (scripts/media/remote-<country>.json, written by pick.py):
+    # photos served from Commons' own image host, credited from the file page.
+    for name in sorted(os.listdir(HERE)):
+        if not (name.startswith("remote-") and name.endswith(".json")):
+            continue
+        for key, p in json.load(open(os.path.join(HERE, name))).items():
+            lic, lurl = LIC[(p["license"], p["lv"])]
+            item = {
+                "id": key, "kind": p.get("kind", "photo"), "title": p["title"].replace("_", " "), "creator": p["creator"],
+                "sourceUrl": p["landing"], "repository": "Wikimedia Commons", "license": lic, "licenseUrl": lurl,
+                "remote": {"host": "commons", "file": p["file"], "path": p["path"]},
+                "width": p["w"], "height": p["h"], "alt": p["alt"], "side": p["side"],
+                "accessed": p.get("accessed", ACCESSED), "status": "license-verified", "hosting": "embed",
+            }
+            for k in ("location", "date"):
+                if p.get(k):
+                    item[k] = p[k]
+            registry.append(item)
+
     with open(os.path.join(ROOT, "lib", "content", "media.generated.json"), "w") as fh:
         json.dump(registry, fh, indent=1, ensure_ascii=False)
     print(len(registry), "assets")

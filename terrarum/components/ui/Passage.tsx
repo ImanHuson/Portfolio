@@ -19,9 +19,27 @@ export function Passage({ p, refs, level = 2 }: { p: P; refs: Refs; level?: 2 | 
   );
 }
 
-/** A plain proportional comparison: values as lengths, no tracks, no chart chrome. */
-export function Bars({ figure }: { figure: NonNullable<P["figure"]> }) {
+/** A plain proportional comparison: values as lengths, no tracks, no chart chrome.
+ * `compact` puts label, bar and value on one row, for figures beside long text. */
+export function Bars({ figure, compact = false }: { figure: NonNullable<P["figure"]>; compact?: boolean }) {
   const max = Math.max(...figure.rows.map((r) => r.value));
+  if (compact)
+    return (
+      <figure>
+        <dl className="space-y-3">
+          {figure.rows.map((r) => (
+            <div key={r.label} className="grid grid-cols-[minmax(6rem,9rem)_minmax(0,1fr)] items-center gap-x-4 gap-y-1">
+              <dt className="text-sm">{r.label}</dt>
+              <dd className="flex items-center gap-3">
+                <span className="block h-2 bg-accent" style={{ width: `${Math.max(2, (r.value / max) * 100)}%` }} aria-hidden />
+                <span className="shrink-0 text-sm">{r.display}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <figcaption className="mt-4 text-[13px] leading-snug text-muted">{figure.caption}</figcaption>
+      </figure>
+    );
   return (
     <figure>
       <dl className="space-y-5">
@@ -31,7 +49,7 @@ export function Bars({ figure }: { figure: NonNullable<P["figure"]> }) {
               <span>{r.label}</span>
             </dt>
             <dd className="mt-1">
-              <span className="block font-display text-2xl tabular-nums md:text-3xl">{r.display}</span>
+              <span className="block font-display text-2xl md:text-3xl">{r.display}</span>
               <span className="mt-2 block h-1.5 bg-accent" style={{ width: `${(r.value / max) * 100}%` }} aria-hidden />
             </dd>
           </div>

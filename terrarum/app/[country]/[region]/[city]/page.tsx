@@ -14,7 +14,7 @@ import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { themeFor } from "@/lib/themes";
 import { allStaticParams, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
-import { media } from "@/lib/content/media";
+import { imgSrc, media } from "@/lib/content/media";
 import { boundsOf } from "@/lib/geo";
 
 export const dynamicParams = false;
@@ -105,7 +105,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
             <h2 id="pano-h" className="font-display text-3xl md:text-4xl">Arriving: {pano.title}</h2>
             <p className="mt-3 max-w-[60ch] text-muted">{pano.description}</p>
             <div className="mt-8">
-              <Panorama src={media(pano.media).src} title={pano.title} yaw={pano.yaw} haov={pano.haov} vaov={pano.vaov} alt={media(pano.media).alt} />
+              <Panorama src={imgSrc(media(pano.media))} title={pano.title} yaw={pano.yaw} haov={pano.haov} vaov={pano.vaov} alt={media(pano.media).alt} />
               <p className="mt-2 text-[13px] text-muted"><Credit id={pano.media} /></p>
             </div>
           </section>

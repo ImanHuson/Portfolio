@@ -95,6 +95,7 @@ export const maldives: Country = {
       { name: "Independence", from: "1965", to: "present", start: 1965, end: 2026, note: "" },
     ],
   },
+  chapters: [],
   journeys: [
     {
       slug: "a-morning-in-male",
@@ -152,6 +153,7 @@ export const regions: Region[] = [
 export const cities: City[] = [
   {
     slug: "male",
+    kind: "city",
     name: "Malé",
     native: "މާލެ",
     where: { lat: 4.1779879, lng: 73.5107387, ref: "OpenStreetMap relation 6599336" },
@@ -195,6 +197,7 @@ export const cities: City[] = [
     artwork: "mv-male-detail",
     panoramas: [],
     places: ["male-fish-market", "hukuru-miskiy"],
+    nearby: [],
     gaps: [
       { topic: "Hulhumalé and the land reclaimed for it", why: "Not yet researched." },
       { topic: "The Grand Friday Mosque and the National Museum", why: "Not yet researched." },
@@ -306,18 +309,7 @@ export const places: Place[] = [
     ],
     hero: "mv-fishmonger",
     gallery: ["mv-dhoni"],
-    panoramas: [
-      {
-        id: "fish-market-2005",
-        media: "pano-mv-fishmarket",
-        title: "The quay in front of the market, 2005",
-        yaw: -35,
-        haov: 360,
-        vaov: 38,
-        description:
-          "A full-circle photograph taken on 9 February 2005 on the quay in front of the market: the open-sided market sheds on one side, gas cylinders and coconuts for sale, and boats moored along the waterfront on the other. You can turn all the way round but not look far up or down, because the photo is a strip, and it is twenty years old.",
-      },
-    ],
+    panoramas: [],
     related: ["hukuru-miskiy"],
     gaps: [
       { topic: "The market's own history", why: "When it was built and how it is run are not yet sourced; this page is about the fishery it serves." },

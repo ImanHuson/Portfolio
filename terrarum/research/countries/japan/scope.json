@@ -1,0 +1,53 @@
+{
+  "$comment": "What 'Japan is complete' means. The brief's country content system (sections A-J) is the definition: A geography, B cities, towns and villages, C destinations, D food, E history, F belief, G everyday life, H architecture and art, I music, literature and performance, J language. Chapters carry A and D-J; regions, cities and places carry B and C. scripts/audit-content.ts checks the data against this file, and against the brief's topic lists in lib/content/brief.ts.",
+  "country": "japan",
+  "chapters": ["land", "history", "belief", "food", "life", "art", "performance", "language"],
+  "minImagesPerPlace": 8,
+  "minSidesPerPlace": 4,
+  "regions": {
+    "hokkaido": {
+      "sapporo": ["odori-park", "sapporo-clock-tower", "nijo-market"],
+      "shiraoi": ["upopoy"],
+      "shiretoko": ["shiretoko-five-lakes", "furepe-falls"]
+    },
+    "tohoku": {
+      "hiraizumi": ["chuson-ji", "motsu-ji"],
+      "matsushima": ["zuigan-ji", "matsushima-bay"]
+    },
+    "kanto": {
+      "tokyo": ["senso-ji", "meiji-jingu", "imperial-palace-east-gardens", "shibuya-crossing", "tokyo-national-museum"],
+      "nikko": ["nikko-toshogu", "shinkyo", "kegon-falls"],
+      "kamakura": ["kotoku-in", "tsurugaoka-hachimangu"]
+    },
+    "chubu": {
+      "kanazawa": ["kenroku-en", "higashi-chaya", "21st-century-museum"],
+      "shirakawa-go": ["ogimachi"],
+      "fujiyoshida": ["mount-fuji", "chureito-pagoda", "kitaguchi-hongu-fuji-sengen"],
+      "matsumoto": ["matsumoto-castle"]
+    },
+    "kansai": {
+      "kyoto": ["nishiki-market", "fushimi-inari-taisha", "kiyomizu-dera", "kinkaku-ji", "ryoan-ji", "nijo-castle", "gion", "arashiyama"],
+      "nara": ["todai-ji", "kasuga-taisha", "nara-park"],
+      "osaka": ["osaka-castle", "dotonbori", "shitenno-ji"],
+      "himeji": ["himeji-castle"],
+      "koyasan": ["okunoin", "kongobu-ji"]
+    },
+    "chugoku": {
+      "hiroshima": ["atomic-bomb-dome", "peace-memorial-park", "shukkei-en"],
+      "miyajima": ["itsukushima-shrine", "mount-misen"],
+      "izumo": ["izumo-taisha"]
+    },
+    "shikoku": {
+      "matsuyama": ["dogo-onsen-honkan", "matsuyama-castle"],
+      "naoshima": ["chichu-art-museum", "naoshima-pumpkins"],
+      "iya-valley": ["iya-kazurabashi"]
+    },
+    "kyushu": {
+      "fukuoka": ["nakasu-yatai", "ohori-park", "kushida-shrine"],
+      "dazaifu": ["dazaifu-tenmangu"],
+      "nagasaki": ["oura-church", "dejima", "glover-garden"],
+      "naha": ["shuri-castle", "makishi-market", "shikina-en"],
+      "yakushima": ["shiratani-unsuikyo", "jomon-sugi"]
+    }
+  }
+}
