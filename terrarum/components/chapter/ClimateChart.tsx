@@ -69,7 +69,7 @@ export function ClimateChart({ stations, source }: { stations: ClimateNormals[];
       <details className="mt-4 text-sm">
         <summary className="cursor-pointer font-medium">The numbers for {s.station}</summary>
         <div className="mt-3 overflow-x-auto">
-          <table className="w-full min-w-[560px] text-right">
+          <table className="w-full min-w-[560px] text-right tabular-nums">
             <thead>
               <tr className="text-muted">
                 <th className="py-1 pr-3 text-left font-normal" scope="col">Month</th>

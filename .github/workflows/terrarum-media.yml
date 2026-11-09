@@ -1,0 +1,17 @@
+name: Terrarum media check
+# Monthly: confirm every photo Terrarum serves from Wikimedia Commons still
+# exists. A failure lists the files to replace; pages keep working meanwhile
+# on the site's own small fallback copies.
+on:
+  schedule:
+    - cron: "17 3 9 * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 terrarum/scripts/media/check-remote.py

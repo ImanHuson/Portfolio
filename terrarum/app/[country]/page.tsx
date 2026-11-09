@@ -137,17 +137,17 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
           <h2 id="start-h" className="font-display text-3xl md:text-4xl">
             Start in <Link href={cityPath(slug, firstCity.slug).href} className="underline decoration-line underline-offset-8 hover:decoration-current">{firstCity.name}</Link>
           </h2>
-          {starts.length >= 3 ? (
-            <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-              <PlaceCard lang={lang} place={starts[starts.length - 1].p} href={starts[starts.length - 1].href} size="lg" />
-              <div className="grid gap-10">
-                {starts.slice(0, -1).map((s) => <PlaceCard lang={lang} key={s.p.slug} place={s.p} href={s.href} />)}
-              </div>
-            </div>
-          ) : (
-            <div className="mt-10 grid gap-10 md:grid-cols-2">
-              {starts.map((s) => <PlaceCard lang={lang} key={s.p.slug} place={s.p} href={s.href} size="lg" />)}
-            </div>
+          <div className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            {starts.slice(0, 6).map((s) => (
+              <PlaceCard lang={lang} key={s.p.slug} place={s.p} href={s.href} />
+            ))}
+          </div>
+          {starts.length > 6 && (
+            <p className="mt-10">
+              <Link href={cityPath(slug, firstCity.slug).href} className="font-medium text-accent-text underline underline-offset-4">
+                All {starts.length} places in {firstCity.name}
+              </Link>
+            </p>
           )}
         </section>
 

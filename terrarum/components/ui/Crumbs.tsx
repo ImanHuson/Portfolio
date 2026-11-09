@@ -8,7 +8,7 @@ export function Crumbs({ trail }: { trail: { href?: string; label: string }[] })
           <li key={t.label} className="flex items-center gap-2">
             {i > 0 && <span aria-hidden>/</span>}
             {t.href ? (
-              <Link href={t.href} className="hover:text-ink underline-offset-2 hover:underline">{t.label}</Link>
+              <Link href={t.href} className="inline-block py-1 hover:text-ink underline-offset-2 hover:underline">{t.label}</Link>
             ) : (
               <span aria-current="page" className="text-ink">{t.label}</span>
             )}

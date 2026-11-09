@@ -105,7 +105,7 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
           id="park-pref"
           value={sel}
           onChange={(e) => setSel(e.target.value)}
-          className="mt-2 w-full border border-line bg-bg px-3 py-2"
+          className="mt-2 w-full border border-line bg-bg px-3 py-2 text-ink"
         >
           <option value="">All of Japan ({parks.length} parks)</option>
           {prefectures.map((p) => (
@@ -138,7 +138,7 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
                 <span className="font-medium">{p.name}</span>
                 <span className="block text-[13px] text-muted">{p.prefectures.map(nameOf).join(", ")}</span>
               </span>
-              <span className="shrink-0 text-right text-sm">
+              <span className="shrink-0 text-right text-sm tabular-nums">
                 {p.designated.slice(0, 4)}
                 <span className="block text-[13px] text-muted">
                   {Math.round(p.areaHa / 100).toLocaleString("en")} km²{p.landOnly ? " of land" : ""}

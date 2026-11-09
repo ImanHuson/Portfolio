@@ -1,6 +1,6 @@
 import { ArrowSquareOut } from "@phosphor-icons/react/dist/ssr";
 import { SIDES, type Side } from "@/lib/content/brief";
-import { imgSrc, imgSrcSet, media } from "@/lib/content/media";
+import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import { GalleryViewer, type GalleryItem } from "./GalleryViewer";
 
 const ORDER = Object.keys(SIDES) as Side[];
@@ -20,6 +20,7 @@ export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: 
       src: imgSrc(m, 960),
       srcSet: imgSrcSet(m),
       large: imgSrc(m, 1920),
+      fallback: m.fallback ? asset(m.fallback) : undefined,
       w: m.width,
       h: m.height,
       alt: m.alt,

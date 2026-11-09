@@ -1,4 +1,4 @@
-import { imgSrc, imgSrcSet, media } from "@/lib/content/media";
+import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 
 /** An image with its credit always attached: creator, licence, source. */
 export function Figure({
@@ -29,6 +29,7 @@ export function Figure({
         width={m.width}
         height={m.height}
         alt={m.alt}
+        data-fallback={m.fallback ? asset(m.fallback) : undefined}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
         decoding="async"

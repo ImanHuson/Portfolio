@@ -50,6 +50,10 @@ export interface Theme {
   /** Hero composition for the country page. */
   hero: "print-left-vertical-name" | "default";
   motion: { enter: "rise" | "ink"; durationMs: number };
+  /** Optional sound design: field recordings (ids in lib/content/sounds.ts),
+   * off until the reader turns them on. The first bed whose path prefix
+   * matches the page plays in a loop; `greet` plays once when sound starts. */
+  sound?: { beds: { path: string; id: string }[]; greet?: string };
   /** Accent used for this country's marker on the globe. */
   globe: string;
 }
@@ -123,6 +127,14 @@ export const THEMES: Record<string, Theme> = {
     heading: "brush",
     hero: "print-left-vertical-name",
     motion: { enter: "ink", durationMs: 620 },
+    sound: {
+      beds: [
+        { path: "/japan/topics/land/", id: "jp-higurashi" },
+        { path: "/japan/kansai/koyasan/", id: "jp-higurashi" },
+        { path: "/japan/", id: "jp-suikinkutsu" },
+      ],
+      greet: "jp-bonsho",
+    },
     globe: "#e0573f",
   },
   maldives: {

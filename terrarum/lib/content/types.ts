@@ -114,6 +114,8 @@ export interface MediaAsset {
    * country would pass it. `file` is the Commons file name, underscores for spaces.
    */
   remote?: { host: "commons"; file: string; /** "a/ab/<file>", the hashed directory the host serves it from. */ path: string };
+  /** A small local copy (public/media/c/) used if the remote file fails to load. */
+  fallback?: string;
   /** For gallery photos: which side of the place it shows (brief.ts SIDES). */
   side?: Side;
   width: number;

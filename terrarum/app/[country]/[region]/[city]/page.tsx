@@ -38,7 +38,6 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
   const places = ci.places.map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const refs = makeRefs([...ci.facts.map((f) => f.cite), ...ci.passages.map((p) => p.cite)]);
   const lang = c.entry.nativeLang?.split(" ")[0];
-  const WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
   const nearby = ci.nearby.flatMap((n) => {
     const nc = getCity(country, n);
     if (nc) return [{ href: cityPath(country, n).href, name: nc.name, hero: nc.hero, summary: nc.summary }];
@@ -73,7 +72,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
 
         <section aria-labelledby="places-h" className="border-t border-line">
           <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-            <h2 id="places-h" className="font-display text-3xl md:text-4xl">{WORDS[places.length] ?? places.length} places in {ci.name}</h2>
+            <h2 id="places-h" className="font-display text-3xl md:text-4xl">{places.length} places in {ci.name}</h2>
             <AtlasMap
               mode="streets"
               label={`Street map of ${ci.name} with its places`}

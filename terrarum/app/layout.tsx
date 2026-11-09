@@ -28,7 +28,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const index = searchIndex();
   return (
     <html lang="en" className={`${atlas.variable} ${mincho.variable} ${bricolage.variable} ${thaana.variable} ${archivo.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://thumb.wikimedia.org" />
+      </head>
       <body className="min-h-dvh antialiased">
+        {/* If a photo hosted on Wikimedia Commons fails to load, swap in the
+            site's own small copy (scripts/media/fallbacks.py). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.dataset.fallback&&t.getAttribute('src')!==t.dataset.fallback){t.removeAttribute('srcset');t.src=t.dataset.fallback}},true)",
+          }}
+        />
         <noscript>
           <style>{`[data-js-only]{display:none!important}`}</style>
         </noscript>

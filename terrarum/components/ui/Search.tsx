@@ -85,7 +85,7 @@ export function Search({ index }: { index: SearchItem[] }) {
           loadPagefind();
           dialog.current?.showModal();
         }}
-        className="press flex items-center gap-2 rounded-sm px-2 py-2 text-[#c9c4bb] hover:text-white sm:px-3"
+        className="press flex items-center gap-2 rounded-sm px-1.5 py-2 text-[#c9c4bb] hover:text-white sm:px-3"
         aria-haspopup="dialog"
         data-js-only
       >

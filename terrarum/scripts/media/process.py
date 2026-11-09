@@ -181,6 +181,8 @@ def main():
             for k in ("location", "date"):
                 if p.get(k):
                     item[k] = p[k]
+            if os.path.exists(os.path.join(ROOT, "public", "media", "c", f"{key}.webp")):
+                item["fallback"] = f"/media/c/{key}.webp"
             registry.append(item)
 
     with open(os.path.join(ROOT, "lib", "content", "media.generated.json"), "w") as fh:

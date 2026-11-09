@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { MEDIA, asset, small } from "@/lib/content/media";
+import { MEDIA, small } from "@/lib/content/media";
 import { SOURCES } from "@/lib/content/sources";
+import { SOUNDS } from "@/lib/content/sounds";
 
 export const metadata: Metadata = { title: "Sources and credits", description: "Every reference and every image licence used on Terrarum." };
 
@@ -43,7 +44,7 @@ export default function SourcesPage() {
       <section aria-labelledby="media-h" className="mt-20">
         <h2 id="media-h" className="text-2xl font-semibold">Images ({MEDIA.length})</h2>
         <p className="mt-2 max-w-[62ch] text-muted">
-          Each is published under the licence shown and hosted here as a resized copy. Share-alike licences carry over to these copies.
+          Each is published under the licence shown. Most are shown from Wikimedia Commons&rsquo; own thumbnail server at the size your screen needs, with a small copy kept here in case that server cannot be reached; the rest are hosted here as resized copies. Share-alike licences carry over to these copies.
         </p>
         <ul className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-x-8 gap-y-10 break-words sm:grid-cols-2 lg:grid-cols-4">
           {MEDIA.map((m) => (
@@ -61,6 +62,24 @@ export default function SourcesPage() {
                 {m.creator}. <a href={m.sourceUrl} className="underline underline-offset-2">{m.repository}</a>,{" "}
                 <a href={m.licenseUrl} className="underline underline-offset-2">{m.license}</a>.
                 {m.modified ? ` ${m.modified}.` : ""}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="sound-h" id="sound" className="mt-20 max-w-[70ch] scroll-mt-20">
+        <h2 id="sound-h" className="text-2xl font-semibold">Sound ({SOUNDS.length})</h2>
+        <p className="mt-2 text-muted">
+          Field recordings a country can play when you turn sound on in the header. Off unless you choose it. Each is a quiet mono copy, loudness evened out and faded at the ends.
+        </p>
+        <ul className="mt-6 divide-y divide-line border-y border-line">
+          {SOUNDS.map((s) => (
+            <li key={s.id} className="py-4">
+              <p className="font-medium">{s.title}</p>
+              <p className="text-sm text-muted">
+                {s.creator}, {s.date}. <a href={s.sourceUrl} className="underline underline-offset-2">Wikimedia Commons</a>,{" "}
+                <a href={s.licenseUrl} className="underline underline-offset-2">{s.license}</a>.
               </p>
             </li>
           ))}

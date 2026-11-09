@@ -797,7 +797,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Arashiyama, Kyoto"
+  "location": "Arashiyama, Kyoto",
+  "fallback": "/media/c/arashi-albumen.webp"
  },
  {
   "id": "arashi-autumn",
@@ -820,7 +821,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tenryū-ji, Kyoto"
+  "location": "Tenryū-ji, Kyoto",
+  "fallback": "/media/c/arashi-autumn.webp"
  },
  {
   "id": "arashi-bamboo",
@@ -843,7 +845,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Sagano, Kyoto"
+  "location": "Sagano, Kyoto",
+  "fallback": "/media/c/arashi-bamboo.webp"
  },
  {
   "id": "arashi-bridge-close",
@@ -866,7 +869,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Arashiyama, Kyoto"
+  "location": "Arashiyama, Kyoto",
+  "fallback": "/media/c/arashi-bridge-close.webp"
  },
  {
   "id": "arashi-gorge",
@@ -889,7 +893,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Arashiyama, Kyoto"
+  "location": "Arashiyama, Kyoto",
+  "fallback": "/media/c/arashi-gorge.webp"
  },
  {
   "id": "arashi-macaque",
@@ -912,7 +917,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Arashiyama, Kyoto"
+  "location": "Arashiyama, Kyoto",
+  "fallback": "/media/c/arashi-macaque.webp"
  },
  {
   "id": "arashi-night",
@@ -935,7 +941,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Arashiyama, Kyoto"
+  "location": "Arashiyama, Kyoto",
+  "fallback": "/media/c/arashi-night.webp"
  },
  {
   "id": "arashi-sogenchi",
@@ -958,7 +965,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tenryū-ji, Kyoto"
+  "location": "Tenryū-ji, Kyoto",
+  "fallback": "/media/c/arashi-sogenchi.webp"
  },
  {
   "id": "arashi-togetsukyo",
@@ -981,7 +989,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Arashiyama, Kyoto"
+  "location": "Arashiyama, Kyoto",
+  "fallback": "/media/c/arashi-togetsukyo.webp"
  },
  {
   "id": "dotonbori-1890s",
@@ -1005,7 +1014,8 @@
   "status": "license-verified",
   "hosting": "embed",
   "location": "Dōtonbori, Osaka",
-  "date": "1890-1900"
+  "date": "1890-1900",
+  "fallback": "/media/c/dotonbori-1890s.webp"
  },
  {
   "id": "dotonbori-arch",
@@ -1028,7 +1038,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-arch.webp"
  },
  {
   "id": "dotonbori-daruma",
@@ -1051,7 +1062,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-daruma.webp"
  },
  {
   "id": "dotonbori-day",
@@ -1074,7 +1086,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-day.webp"
  },
  {
   "id": "dotonbori-dusk",
@@ -1097,7 +1110,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-dusk.webp"
  },
  {
   "id": "dotonbori-glico",
@@ -1120,7 +1134,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-glico.webp"
  },
  {
   "id": "dotonbori-lanterns",
@@ -1143,7 +1158,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-lanterns.webp"
  },
  {
   "id": "dotonbori-takoyaki",
@@ -1166,7 +1182,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Dōtonbori, Osaka"
+  "location": "Dōtonbori, Osaka",
+  "fallback": "/media/c/dotonbori-takoyaki.webp"
  },
  {
   "id": "gion-doorway",
@@ -1189,7 +1206,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Gion, Kyoto"
+  "location": "Gion, Kyoto",
+  "fallback": "/media/c/gion-doorway.webp"
  },
  {
   "id": "gion-dusk",
@@ -1212,7 +1230,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Hanamikōji, Gion, Kyoto"
+  "location": "Hanamikōji, Gion, Kyoto",
+  "fallback": "/media/c/gion-dusk.webp"
  },
  {
   "id": "gion-float",
@@ -1235,7 +1254,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Gion Festival, Kyoto"
+  "location": "Gion Festival, Kyoto",
+  "fallback": "/media/c/gion-float.webp"
  },
  {
   "id": "gion-hanamikoji",
@@ -1258,7 +1278,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Hanamikōji, Gion, Kyoto"
+  "location": "Hanamikōji, Gion, Kyoto",
+  "fallback": "/media/c/gion-hanamikoji.webp"
  },
  {
   "id": "gion-hoko",
@@ -1281,7 +1302,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Gion Festival, Kyoto"
+  "location": "Gion Festival, Kyoto",
+  "fallback": "/media/c/gion-hoko.webp"
  },
  {
   "id": "gion-shirakawa",
@@ -1304,7 +1326,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shirakawa, Gion, Kyoto"
+  "location": "Shirakawa, Gion, Kyoto",
+  "fallback": "/media/c/gion-shirakawa.webp"
  },
  {
   "id": "gion-yasaka-gate",
@@ -1327,7 +1350,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Yasaka Shrine, Kyoto"
+  "location": "Yasaka Shrine, Kyoto",
+  "fallback": "/media/c/gion-yasaka-gate.webp"
  },
  {
   "id": "gion-yasaka-lanterns",
@@ -1350,7 +1374,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Yasaka Shrine, Kyoto"
+  "location": "Yasaka Shrine, Kyoto",
+  "fallback": "/media/c/gion-yasaka-lanterns.webp"
  },
  {
   "id": "gion-yasaka-night",
@@ -1373,7 +1398,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Yasaka Shrine, Kyoto"
+  "location": "Yasaka Shrine, Kyoto",
+  "fallback": "/media/c/gion-yasaka-night.webp"
  },
  {
   "id": "himeji-gable",
@@ -1396,7 +1422,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-gable.webp"
  },
  {
   "id": "himeji-hanami",
@@ -1419,7 +1446,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-hanami.webp"
  },
  {
   "id": "himeji-interior",
@@ -1442,7 +1470,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-interior.webp"
  },
  {
   "id": "himeji-ishiotoshi",
@@ -1465,7 +1494,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-ishiotoshi.webp"
  },
  {
   "id": "himeji-keep",
@@ -1488,7 +1518,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-keep.webp"
  },
  {
   "id": "himeji-night",
@@ -1511,7 +1542,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-night.webp"
  },
  {
   "id": "himeji-postcard",
@@ -1534,7 +1566,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Museu Paulista da USP collection"
+  "location": "Museu Paulista da USP collection",
+  "fallback": "/media/c/himeji-postcard.webp"
  },
  {
   "id": "himeji-sakura",
@@ -1557,7 +1590,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-sakura.webp"
  },
  {
   "id": "himeji-view",
@@ -1580,7 +1614,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-view.webp"
  },
  {
   "id": "himeji-walls",
@@ -1603,7 +1638,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Himeji Castle, Hyōgo"
+  "location": "Himeji Castle, Hyōgo",
+  "fallback": "/media/c/himeji-walls.webp"
  },
  {
   "id": "inari-albumen",
@@ -1626,7 +1662,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Fushimi Inari Taisha, Kyoto"
+  "location": "Fushimi Inari Taisha, Kyoto",
+  "fallback": "/media/c/inari-albumen.webp"
  },
  {
   "id": "inari-festival",
@@ -1649,7 +1686,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Fushimi Inari Taisha, Kyoto"
+  "location": "Fushimi Inari Taisha, Kyoto",
+  "fallback": "/media/c/inari-festival.webp"
  },
  {
   "id": "inari-hall-lanterns",
@@ -1672,7 +1710,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Fushimi Inari Taisha, Kyoto"
+  "location": "Fushimi Inari Taisha, Kyoto",
+  "fallback": "/media/c/inari-hall-lanterns.webp"
  },
  {
   "id": "inari-kyoto-view",
@@ -1695,7 +1734,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Mount Inari, Kyoto"
+  "location": "Mount Inari, Kyoto",
+  "fallback": "/media/c/inari-kyoto-view.webp"
  },
  {
   "id": "inari-otsuka",
@@ -1718,7 +1758,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Mount Inari, Kyoto"
+  "location": "Mount Inari, Kyoto",
+  "fallback": "/media/c/inari-otsuka.webp"
  },
  {
   "id": "inari-romon-night",
@@ -1741,7 +1782,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Fushimi Inari Taisha, Kyoto"
+  "location": "Fushimi Inari Taisha, Kyoto",
+  "fallback": "/media/c/inari-romon-night.webp"
  },
  {
   "id": "jp-land-biwa",
@@ -1764,7 +1806,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Lake Biwa, Shiga"
+  "location": "Lake Biwa, Shiga",
+  "fallback": "/media/c/jp-land-biwa.webp"
  },
  {
   "id": "jp-land-driftice",
@@ -1787,7 +1830,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shiretoko Peninsula, Hokkaido"
+  "location": "Shiretoko Peninsula, Hokkaido",
+  "fallback": "/media/c/jp-land-driftice.webp"
  },
  {
   "id": "jp-land-fuji",
@@ -1810,7 +1854,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Mount Fuji"
+  "location": "Mount Fuji",
+  "fallback": "/media/c/jp-land-fuji.webp"
  },
  {
   "id": "jp-land-hida",
@@ -1833,7 +1878,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Hida Mountains (Northern Alps)"
+  "location": "Hida Mountains (Northern Alps)",
+  "fallback": "/media/c/jp-land-hida.webp"
  },
  {
   "id": "jp-land-ide-sakura",
@@ -1856,7 +1902,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ōide Park, Nagano"
+  "location": "Ōide Park, Nagano",
+  "fallback": "/media/c/jp-land-ide-sakura.webp"
  },
  {
   "id": "jp-land-kobe-night",
@@ -1879,7 +1926,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kobe, Hyōgo"
+  "location": "Kobe, Hyōgo",
+  "fallback": "/media/c/jp-land-kobe-night.webp"
  },
  {
   "id": "jp-land-macaque",
@@ -1902,7 +1950,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Japan"
+  "location": "Japan",
+  "fallback": "/media/c/jp-land-macaque.webp"
  },
  {
   "id": "jp-land-modis-snow",
@@ -1925,7 +1974,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Japan"
+  "location": "Japan",
+  "fallback": "/media/c/jp-land-modis-snow.webp"
  },
  {
   "id": "jp-land-nishigaoka",
@@ -1948,7 +1998,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nishigaoka, Hyōgo"
+  "location": "Nishigaoka, Hyōgo",
+  "fallback": "/media/c/jp-land-nishigaoka.webp"
  },
  {
   "id": "jp-land-otoko-falls",
@@ -1971,7 +2022,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shiretoko Peninsula, Hokkaido"
+  "location": "Shiretoko Peninsula, Hokkaido",
+  "fallback": "/media/c/jp-land-otoko-falls.webp"
  },
  {
   "id": "jp-land-ptarmigan",
@@ -1994,7 +2046,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Mount Tsubakuro, Northern Alps"
+  "location": "Mount Tsubakuro, Northern Alps",
+  "fallback": "/media/c/jp-land-ptarmigan.webp"
  },
  {
   "id": "jp-land-sakurajima",
@@ -2017,7 +2070,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kagoshima"
+  "location": "Kagoshima",
+  "fallback": "/media/c/jp-land-sakurajima.webp"
  },
  {
   "id": "jp-land-sakurajima-sat",
@@ -2040,7 +2094,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kagoshima Bay"
+  "location": "Kagoshima Bay",
+  "fallback": "/media/c/jp-land-sakurajima-sat.webp"
  },
  {
   "id": "jp-land-seto",
@@ -2063,7 +2118,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Mount Washū, Okayama"
+  "location": "Mount Washū, Okayama",
+  "fallback": "/media/c/jp-land-seto.webp"
  },
  {
   "id": "jp-land-shinano",
@@ -2086,7 +2142,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Niigata"
+  "location": "Niigata",
+  "fallback": "/media/c/jp-land-shinano.webp"
  },
  {
   "id": "jp-land-terraces",
@@ -2109,7 +2166,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Japan"
+  "location": "Japan",
+  "fallback": "/media/c/jp-land-terraces.webp"
  },
  {
   "id": "jp-land-tokage",
@@ -2132,7 +2190,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Western Pacific"
+  "location": "Western Pacific",
+  "fallback": "/media/c/jp-land-tokage.webp"
  },
  {
   "id": "jp-land-yaku-forest",
@@ -2155,7 +2214,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Yakushima, Kagoshima"
+  "location": "Yakushima, Kagoshima",
+  "fallback": "/media/c/jp-land-yaku-forest.webp"
  },
  {
   "id": "kasuga-albumen",
@@ -2178,7 +2238,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-albumen.webp"
  },
  {
   "id": "kasuga-bronze-lanterns",
@@ -2201,7 +2262,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-bronze-lanterns.webp"
  },
  {
   "id": "kasuga-chumon",
@@ -2224,7 +2286,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-chumon.webp"
  },
  {
   "id": "kasuga-cloister",
@@ -2247,7 +2310,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-cloister.webp"
  },
  {
   "id": "kasuga-deer-ema",
@@ -2270,7 +2334,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-deer-ema.webp"
  },
  {
   "id": "kasuga-deer-lanterns",
@@ -2293,7 +2358,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-deer-lanterns.webp"
  },
  {
   "id": "kasuga-forest",
@@ -2316,7 +2382,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-forest.webp"
  },
  {
   "id": "kasuga-mantoro",
@@ -2339,7 +2406,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasuga Taisha, Nara"
+  "location": "Kasuga Taisha, Nara",
+  "fallback": "/media/c/kasuga-mantoro.webp"
  },
  {
   "id": "kinkaku-autumn",
@@ -2362,7 +2430,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-autumn.webp"
  },
  {
   "id": "kinkaku-ema",
@@ -2385,7 +2454,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-ema.webp"
  },
  {
   "id": "kinkaku-fudodo",
@@ -2408,7 +2478,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Fudō-dō, Kinkaku-ji, Kyoto"
+  "location": "Fudō-dō, Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-fudodo.webp"
  },
  {
   "id": "kinkaku-gilded",
@@ -2431,7 +2502,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-gilded.webp"
  },
  {
   "id": "kinkaku-gravel",
@@ -2454,7 +2526,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-gravel.webp"
  },
  {
   "id": "kinkaku-hojo-doors",
@@ -2477,7 +2550,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Hōjō, Kinkaku-ji, Kyoto"
+  "location": "Hōjō, Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-hojo-doors.webp"
  },
  {
   "id": "kinkaku-path",
@@ -2500,7 +2574,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-path.webp"
  },
  {
   "id": "kinkaku-pines",
@@ -2523,7 +2598,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-pines.webp"
  },
  {
   "id": "kinkaku-pond",
@@ -2546,7 +2622,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-pond.webp"
  },
  {
   "id": "kinkaku-sekkatei",
@@ -2569,7 +2646,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Sekka-tei, Kinkaku-ji, Kyoto"
+  "location": "Sekka-tei, Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-sekkatei.webp"
  },
  {
   "id": "kinkaku-snow",
@@ -2592,7 +2670,8 @@
   "accessed": "2026-11-08",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kinkaku-ji, Kyoto"
+  "location": "Kinkaku-ji, Kyoto",
+  "fallback": "/media/c/kinkaku-snow.webp"
  },
  {
   "id": "kinkaku-yoshimitsu",
@@ -2616,7 +2695,8 @@
   "status": "license-verified",
   "hosting": "embed",
   "location": "Rokuon-ji (Kinkaku-ji) collection",
-  "date": "15th century"
+  "date": "15th century",
+  "fallback": "/media/c/kinkaku-yoshimitsu.webp"
  },
  {
   "id": "kiyo-autumn",
@@ -2639,7 +2719,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kiyomizu-dera, Kyoto"
+  "location": "Kiyomizu-dera, Kyoto",
+  "fallback": "/media/c/kiyo-autumn.webp"
  },
  {
   "id": "kiyo-jizo",
@@ -2662,7 +2743,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kiyomizu-dera, Kyoto"
+  "location": "Kiyomizu-dera, Kyoto",
+  "fallback": "/media/c/kiyo-jizo.webp"
  },
  {
   "id": "kiyo-niomon-crowd",
@@ -2685,7 +2767,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kiyomizu-dera, Kyoto"
+  "location": "Kiyomizu-dera, Kyoto",
+  "fallback": "/media/c/kiyo-niomon-crowd.webp"
  },
  {
   "id": "kiyo-old-gate",
@@ -2708,7 +2791,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kiyomizu-dera, Kyoto"
+  "location": "Kiyomizu-dera, Kyoto",
+  "fallback": "/media/c/kiyo-old-gate.webp"
  },
  {
   "id": "kiyo-roof",
@@ -2731,7 +2815,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kiyomizu-dera, Kyoto"
+  "location": "Kiyomizu-dera, Kyoto",
+  "fallback": "/media/c/kiyo-roof.webp"
  },
  {
   "id": "kongobuji-carving",
@@ -2754,7 +2839,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-carving.webp"
  },
  {
   "id": "kongobuji-courtyard",
@@ -2777,7 +2863,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-courtyard.webp"
  },
  {
   "id": "kongobuji-daito",
@@ -2800,7 +2887,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Danjō Garan, Kōyasan"
+  "location": "Danjō Garan, Kōyasan",
+  "fallback": "/media/c/kongobuji-daito.webp"
  },
  {
   "id": "kongobuji-gate",
@@ -2823,7 +2911,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-gate.webp"
  },
  {
   "id": "kongobuji-lantern",
@@ -2846,7 +2935,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-lantern.webp"
  },
  {
   "id": "kongobuji-main",
@@ -2869,7 +2959,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-main.webp"
  },
  {
   "id": "kongobuji-rock-garden",
@@ -2892,7 +2983,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-rock-garden.webp"
  },
  {
   "id": "kongobuji-steps",
@@ -2915,7 +3007,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kongōbu-ji, Kōyasan"
+  "location": "Kongōbu-ji, Kōyasan",
+  "fallback": "/media/c/kongobuji-steps.webp"
  },
  {
   "id": "narapark-autumn",
@@ -2938,7 +3031,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara Park, Nara"
+  "location": "Nara Park, Nara",
+  "fallback": "/media/c/narapark-autumn.webp"
  },
  {
   "id": "narapark-deer-face",
@@ -2961,7 +3055,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara Park, Nara"
+  "location": "Nara Park, Nara",
+  "fallback": "/media/c/narapark-deer-face.webp"
  },
  {
   "id": "narapark-doe-fawn",
@@ -2984,7 +3079,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara Park, Nara"
+  "location": "Nara Park, Nara",
+  "fallback": "/media/c/narapark-doe-fawn.webp"
  },
  {
   "id": "narapark-forest",
@@ -3007,7 +3103,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Kasugayama Primeval Forest, Nara"
+  "location": "Kasugayama Primeval Forest, Nara",
+  "fallback": "/media/c/narapark-forest.webp"
  },
  {
   "id": "narapark-lawn",
@@ -3030,7 +3127,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara Park, Nara"
+  "location": "Nara Park, Nara",
+  "fallback": "/media/c/narapark-lawn.webp"
  },
  {
   "id": "narapark-senbei",
@@ -3053,7 +3151,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara Park, Nara"
+  "location": "Nara Park, Nara",
+  "fallback": "/media/c/narapark-senbei.webp"
  },
  {
   "id": "narapark-spring",
@@ -3076,7 +3175,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/narapark-spring.webp"
  },
  {
   "id": "narapark-stag",
@@ -3099,7 +3199,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara Park, Nara"
+  "location": "Nara Park, Nara",
+  "fallback": "/media/c/narapark-stag.webp"
  },
  {
   "id": "narapark-wakakusa",
@@ -3122,7 +3223,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nara"
+  "location": "Nara",
+  "fallback": "/media/c/narapark-wakakusa.webp"
  },
  {
   "id": "nijo-autumn",
@@ -3145,7 +3247,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-autumn.webp"
  },
  {
   "id": "nijo-garden",
@@ -3168,7 +3271,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-garden.webp"
  },
  {
   "id": "nijo-honmaru-porch",
@@ -3191,7 +3295,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-honmaru-porch.webp"
  },
  {
   "id": "nijo-karamon",
@@ -3214,7 +3319,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-karamon.webp"
  },
  {
   "id": "nijo-karamon-detail",
@@ -3237,7 +3343,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-karamon-detail.webp"
  },
  {
   "id": "nijo-ninomaru",
@@ -3260,7 +3367,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-ninomaru.webp"
  },
  {
   "id": "nijo-stone-walls",
@@ -3283,7 +3391,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-stone-walls.webp"
  },
  {
   "id": "nijo-watchtower",
@@ -3306,7 +3415,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-watchtower.webp"
  },
  {
   "id": "nijo-watchtower-night",
@@ -3329,7 +3439,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nijō Castle, Kyoto"
+  "location": "Nijō Castle, Kyoto",
+  "fallback": "/media/c/nijo-watchtower-night.webp"
  },
  {
   "id": "nishiki-arcade",
@@ -3352,7 +3463,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nishiki Market, Kyoto"
+  "location": "Nishiki Market, Kyoto",
+  "fallback": "/media/c/nishiki-arcade.webp"
  },
  {
   "id": "nishiki-crowd",
@@ -3375,7 +3487,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nishiki Market, Kyoto"
+  "location": "Nishiki Market, Kyoto",
+  "fallback": "/media/c/nishiki-crowd.webp"
  },
  {
   "id": "nishiki-entrance",
@@ -3398,7 +3511,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nishiki Market, Kyoto"
+  "location": "Nishiki Market, Kyoto",
+  "fallback": "/media/c/nishiki-entrance.webp"
  },
  {
   "id": "nishiki-evening",
@@ -3421,7 +3535,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nishiki Market, Kyoto"
+  "location": "Nishiki Market, Kyoto",
+  "fallback": "/media/c/nishiki-evening.webp"
  },
  {
   "id": "nishiki-seafood",
@@ -3444,7 +3559,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Nishiki Market, Kyoto"
+  "location": "Nishiki Market, Kyoto",
+  "fallback": "/media/c/nishiki-seafood.webp"
  },
  {
   "id": "okunoin-graves",
@@ -3467,7 +3583,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-graves.webp"
  },
  {
   "id": "okunoin-jizo",
@@ -3490,7 +3607,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-jizo.webp"
  },
  {
   "id": "okunoin-lanterns-moss",
@@ -3513,7 +3631,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-lanterns-moss.webp"
  },
  {
   "id": "okunoin-mausoleum",
@@ -3536,7 +3655,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-mausoleum.webp"
  },
  {
   "id": "okunoin-stone-lanterns",
@@ -3559,7 +3679,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-stone-lanterns.webp"
  },
  {
   "id": "okunoin-stream",
@@ -3582,7 +3703,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-stream.webp"
  },
  {
   "id": "okunoin-torodo",
@@ -3605,7 +3727,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōrōdō, Okunoin, Kōyasan"
+  "location": "Tōrōdō, Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-torodo.webp"
  },
  {
   "id": "okunoin-torodo-front",
@@ -3628,7 +3751,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Okunoin, Kōyasan"
+  "location": "Okunoin, Kōyasan",
+  "fallback": "/media/c/okunoin-torodo-front.webp"
  },
  {
   "id": "osakajo-boat",
@@ -3651,7 +3775,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-boat.webp"
  },
  {
   "id": "osakajo-giant-stone",
@@ -3674,7 +3799,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-giant-stone.webp"
  },
  {
   "id": "osakajo-inner-moat",
@@ -3697,7 +3823,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-inner-moat.webp"
  },
  {
   "id": "osakajo-museum-building",
@@ -3720,7 +3847,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-museum-building.webp"
  },
  {
   "id": "osakajo-outer-moat",
@@ -3743,7 +3871,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-outer-moat.webp"
  },
  {
   "id": "osakajo-print",
@@ -3766,7 +3895,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Rijksmuseum collection"
+  "location": "Rijksmuseum collection",
+  "fallback": "/media/c/osakajo-print.webp"
  },
  {
   "id": "osakajo-skyline",
@@ -3789,7 +3919,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-skyline.webp"
  },
  {
   "id": "osakajo-tower",
@@ -3812,7 +3943,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-tower.webp"
  },
  {
   "id": "osakajo-walls-autumn",
@@ -3835,7 +3967,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Osaka Castle, Osaka"
+  "location": "Osaka Castle, Osaka",
+  "fallback": "/media/c/osakajo-walls-autumn.webp"
  },
  {
   "id": "ryoanji-autumn",
@@ -3858,7 +3991,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-autumn.webp"
  },
  {
   "id": "ryoanji-calligraphy",
@@ -3881,7 +4015,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-calligraphy.webp"
  },
  {
   "id": "ryoanji-garden",
@@ -3904,7 +4039,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-garden.webp"
  },
  {
   "id": "ryoanji-garden-spring",
@@ -3927,7 +4063,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-garden-spring.webp"
  },
  {
   "id": "ryoanji-masamoto",
@@ -3950,7 +4087,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-masamoto.webp"
  },
  {
   "id": "ryoanji-moss",
@@ -3973,7 +4111,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-moss.webp"
  },
  {
   "id": "ryoanji-pond",
@@ -3996,7 +4135,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-pond.webp"
  },
  {
   "id": "ryoanji-shrubs",
@@ -4019,7 +4159,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-shrubs.webp"
  },
  {
   "id": "ryoanji-steps",
@@ -4042,7 +4183,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Ryōan-ji, Kyoto"
+  "location": "Ryōan-ji, Kyoto",
+  "fallback": "/media/c/ryoanji-steps.webp"
  },
  {
   "id": "shitennoji-chumon",
@@ -4065,7 +4207,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-chumon.webp"
  },
  {
   "id": "shitennoji-grounds",
@@ -4088,7 +4231,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-grounds.webp"
  },
  {
   "id": "shitennoji-koshindo",
@@ -4111,7 +4255,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji Kōshin-dō, Osaka"
+  "location": "Shitennō-ji Kōshin-dō, Osaka",
+  "fallback": "/media/c/shitennoji-koshindo.webp"
  },
  {
   "id": "shitennoji-lanterns",
@@ -4134,7 +4279,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-lanterns.webp"
  },
  {
   "id": "shitennoji-night",
@@ -4157,7 +4303,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-night.webp"
  },
  {
   "id": "shitennoji-pagoda",
@@ -4180,7 +4327,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-pagoda.webp"
  },
  {
   "id": "shitennoji-raisando",
@@ -4203,7 +4351,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-raisando.webp"
  },
  {
   "id": "shitennoji-statue",
@@ -4226,7 +4375,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Shitennō-ji, Osaka"
+  "location": "Shitennō-ji, Osaka",
+  "fallback": "/media/c/shitennoji-statue.webp"
  },
  {
   "id": "todaiji-autumn",
@@ -4249,7 +4399,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-autumn.webp"
  },
  {
   "id": "todaiji-crowds",
@@ -4272,7 +4423,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-crowds.webp"
  },
  {
   "id": "todaiji-daibutsu",
@@ -4295,7 +4447,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-daibutsu.webp"
  },
  {
   "id": "todaiji-face",
@@ -4318,7 +4471,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-face.webp"
  },
  {
   "id": "todaiji-hall",
@@ -4341,7 +4495,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-hall.webp"
  },
  {
   "id": "todaiji-halo",
@@ -4364,7 +4519,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-halo.webp"
  },
  {
   "id": "todaiji-nandaimon",
@@ -4387,7 +4543,8 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-nandaimon.webp"
  },
  {
   "id": "todaiji-shomu",
@@ -4410,6 +4567,7 @@
   "accessed": "2026-11-09",
   "status": "license-verified",
   "hosting": "embed",
-  "location": "Tōdai-ji, Nara"
+  "location": "Tōdai-ji, Nara",
+  "fallback": "/media/c/todaiji-shomu.webp"
  }
 ]

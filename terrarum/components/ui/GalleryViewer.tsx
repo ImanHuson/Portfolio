@@ -8,6 +8,7 @@ export interface GalleryItem {
   src: string;
   srcSet: string;
   large: string;
+  fallback?: string;
   w: number;
   h: number;
   alt: string;
@@ -110,6 +111,7 @@ export function GalleryViewer({ items, layout = "wall" }: { items: GalleryItem[]
                   width={m.w}
                   height={m.h}
                   alt={m.alt}
+                  data-fallback={m.fallback}
                   loading="lazy"
                   decoding="async"
                   className={emaki ? "photo h-full w-auto max-w-none bg-surface" : "photo h-auto w-full bg-surface"}
@@ -126,7 +128,7 @@ export function GalleryViewer({ items, layout = "wall" }: { items: GalleryItem[]
       <dialog
         ref={dialog}
         aria-label="Photo viewer"
-        className="gallery-dialog m-0 h-dvh max-h-none w-screen max-w-none bg-bg p-0 text-ink backdrop:bg-black/80"
+        className="gallery-dialog m-0 h-dvh overscroll-contain max-h-none w-screen max-w-none bg-bg p-0 text-ink backdrop:bg-black/80"
         onClick={(e) => e.target === dialog.current && dialog.current?.close()}
       >
         {it && (
@@ -136,7 +138,7 @@ export function GalleryViewer({ items, layout = "wall" }: { items: GalleryItem[]
                 {at + 1} of {n}
                 <span className="ml-3 text-ink">{it.side}</span>
               </p>
-              <button type="button" onClick={() => dialog.current?.close()} className="press -mr-2 p-2 hover:text-accent-text" autoFocus>
+              <button type="button" onClick={() => dialog.current?.close()} className="press -mr-2 p-2 hover:text-accent-text">
                 <X size={22} aria-hidden />
                 <span className="sr-only">Close viewer</span>
               </button>
@@ -159,6 +161,7 @@ export function GalleryViewer({ items, layout = "wall" }: { items: GalleryItem[]
                 width={it.w}
                 height={it.h}
                 alt={it.alt}
+                data-fallback={it.fallback}
                 className="gallery-shot photo max-h-full w-auto max-w-full object-contain"
               />
               <button type="button" onClick={() => go(-1)} className="press absolute left-1 top-1/2 hidden -translate-y-1/2 p-3 hover:text-accent-text md:block">
