@@ -188,7 +188,7 @@ p { text-wrap: pretty; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .lift { transition: transform 260ms var(--ease-out); }
   .lift:hover { transform: translateY(-3px); }
-  .zoom img { transition: transform 600ms var(--ease-out); }
+  .zoom img { transition: transform 300ms var(--ease-out); }
   .zoom:hover img { transform: scale(1.03); }
 }
 
@@ -265,8 +265,8 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 
 /* Photo viewer: the shot settles in; no movement under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .gallery-shot { animation: shot 240ms var(--ease-out) both; }
-  @keyframes shot { from { opacity: 0; transform: scale(0.985); } }
+  .gallery-shot { animation: shot 180ms var(--ease-out) both; }
+  @keyframes shot { from { opacity: 0; transform: scale(0.99); } }
   .gallery-dialog[open] { animation: viewer 200ms var(--ease-out) both; }
   @keyframes viewer { from { opacity: 0; } }
 }
@@ -324,15 +324,13 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 .cine-img { transform-origin: 60% 45%; }
 @media (prefers-reduced-motion: no-preference) {
   .cine-img { animation: drift 26s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
-  .cine-copy > * { animation: rise 900ms var(--ease-out) both; }
+  .cine-copy > * { animation: rise 700ms var(--ease-out) both; }
   .cine-copy > *:nth-child(2) { animation-delay: 120ms; }
   .cine-copy > *:nth-child(3) { animation-delay: 240ms; }
   .cine-copy > *:nth-child(4) { animation-delay: 360ms; }
-  .cine-kanji { animation: kanji 2400ms var(--ease-out) 200ms both; }
 }
 @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
-@keyframes kanji { from { opacity: 0; transform: translateY(4vh); } }
 .cine-scrim {
   background:
     linear-gradient(to top, rgb(6 8 14 / 0.95) 0%, rgb(6 8 14 / 0.88) 35%, rgb(6 8 14 / 0.7) 60%, transparent 85%),
@@ -354,12 +352,14 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 @keyframes slide-first { 0%, 25% { opacity: 1; } 29%, 96% { opacity: 0; } 100% { opacity: 1; } }
 
 /* Scroll-told passages: the pinned frame shows the active step's photograph. */
-.story-frame { opacity: 0; transition: opacity 900ms var(--ease-out); }
+.story-frame { opacity: 0; transition: opacity 700ms var(--ease-out); }
 .story-frame[data-active] { opacity: 1; }
 .story-frame img { transition: transform 1600ms var(--ease-out); transform: scale(1.04); }
 .story-frame[data-active] img { transform: scale(1); }
+/* Reduced motion: the photograph still fades to the next, but nothing moves. */
 @media (prefers-reduced-motion: reduce) {
-  .story-frame, .story-frame img { transition: none; transform: none; }
+  .story-frame { transition: opacity 300ms ease; }
+  .story-frame img, .story-frame[data-active] img { transition: none; transform: none; }
 }
 /* Steps not being read recede, but only once the script is running and only
    where the pinned frame exists; otherwise every step reads at full strength. */
