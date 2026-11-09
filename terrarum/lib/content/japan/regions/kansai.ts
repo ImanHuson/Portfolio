@@ -51,6 +51,7 @@ export const cities: City[] = [
     passages: [
       {
         id: "grid",
+        covers: ["history", "architecture"],
         heading: "A capital drawn on a grid",
         body: [
           "Emperor Kanmu ordered the capital moved here in 794 and had it laid out on the model of Chinese capitals such as Chang’an and Luoyang: an 84-metre avenue, Suzaku-ōji, ran north to south, with streets in a symmetrical grid on either side.",
@@ -61,6 +62,7 @@ export const cities: City[] = [
       },
       {
         id: "court",
+        covers: ["history"],
         heading: "The court stayed, the power moved",
         body: [
           "Shoguns set up governments in Kamakura and later in Edo, but the imperial court stayed in Kyoto, and much of the country’s political and cultural life with it, until 1869.",
@@ -70,6 +72,7 @@ export const cities: City[] = [
       },
       {
         id: "heritage",
+        covers: ["architecture"],
         heading: "Seventeen monuments, not the whole city",
         body: [
           "The World Heritage listing covers 17 properties: 13 Buddhist temples, three Shinto shrines and Nijō Castle, spread across Kyoto, Uji and Ōtsu. Only buildings and gardens with Japan’s highest protection were eligible.",
@@ -78,22 +81,310 @@ export const cities: City[] = [
         cite: ["kyoto-city-heritage"],
         status: "fact-checked",
       },
+      {
+        id: "kyoto-basin",
+        heading: "A basin closed in by mountains",
+        covers: ["geography"],
+        body: [
+          "Kyoto lies in a basin with mountains on three sides, and about three quarters of the city’s area, which runs a long way north to south, is forest. The ring of hills shapes everything from the views to the weather: summers are hot, with an average high of 33.7°C in August, and January nights fall close to freezing.",
+          "When the capital moved to Tokyo in 1869 the city answered with public works, the so-called Kyoto Policy: the Lake Biwa Canal, a public water supply and the city’s first streetcars.",
+        ],
+        cite: ["kyoto-overview", "stat-handbook-2026"],
+        status: "fact-checked",
+      },
+      {
+        id: "kyoto-survived",
+        heading: "Rebuilt by its townspeople",
+        covers: ["history", "differences"],
+        body: [
+          "Kyoto has been wrecked by war more than once, and each time, the city says, it was its own townspeople, the machishū, who brought it back. Losing the capital in 1869 halved its population of 400,000. In the Second World War it suffered no major air raids, though many houses were pulled down and people and resources left the city.",
+          "Its mountains also left little room for large factories. Kyoto became instead a city of universities and of technology companies, many of them founded here since the Meiji era, some by combining old crafts such as ceramics with new industry.",
+        ],
+        cite: ["kyoto-overview", "kyoto-univ"],
+        status: "fact-checked",
+      },
+      {
+        id: "kyoto-treasures",
+        heading: "A fifth of the country’s National Treasures",
+        covers: ["architecture", "identity"],
+        body: [
+          "The city holds more than 2,000 shrines and temples and 14 of the components of its World Heritage listing. About a fifth of Japan’s National Treasures and some 15% of its Important Cultural Properties are in Kyoto.",
+          "The city describes itself as the place where much of what is now called Japanese culture took shape, out of the meeting of the court’s refinement and the Zen-influenced culture of the samurai: the tea ceremony, flower arrangement and Japanese cuisine among them. Since 1978 it has called itself a city open to the free exchange of world culture, and the national Agency for Cultural Affairs is moving its headquarters here.",
+        ],
+        cite: ["kyoto-overview", "kyoto-culture"],
+        status: "fact-checked",
+      },
+      {
+        id: "kyoto-food",
+        heading: "Obanzai and the kitchen of Kyoto",
+        covers: ["food"],
+        body: [
+          "Kyoto eats from its own vegetables, from freshwater fish of Lake Biwa and from a handful of sea fish prized here, among them hamo, the pike conger, and guji, the tilefish, along with yuba made from soy milk skin and fu, cakes of wheat gluten. The same ingredients go into the city’s formal restaurant cooking and into obanzai, the everyday home cooking of Kyoto households.",
+          "Nishiki Market, called Kyoto’s kitchen, is where both kinds of cooking shop, and the crush there at the end of the year, as people buy for the New Year, is itself a Kyoto tradition.",
+        ],
+        cite: ["nishiki-about", "kyoto-culture"],
+        places: ["nishiki-market"],
+        status: "fact-checked",
+      },
+      {
+        id: "kyoto-life",
+        heading: "A city that lives by the seasons",
+        covers: ["life", "identity"],
+        body: [
+          "People in Kyoto have long kept the seasons in their daily lives, in food, customs and the year’s events. In the heat of summer, households splash water on the street in front of their doors to cool it, a custom called uchimizu, and the traditional townhouses, Kyō-machiya, are built to let air through. The Gion, Aoi and Jidai festivals are the city’s three great festivals; at the end of the Bon season, the Gozan Okuribi bonfires on the surrounding mountains send the spirits of the ancestors back, and small Jizōbon festivals bind each neighbourhood together.",
+          "It is also a young city. Kyoto has 36 universities and colleges and about 150,000 students, a tenth of everyone who lives here.",
+        ],
+        cite: ["kyoto-overview", "kyoto-univ"],
+        places: ["gion"],
+        status: "fact-checked",
+      },
     ],
     hero: "kyoto-yasaka",
     artwork: "cma-gion",
     panoramas: [],
-    places: ["nishiki-market", "kiyomizu-dera", "fushimi-inari-taisha", "kinkaku-ji"],
-    nearby: [],
-    gaps: [
-      { topic: "Neighbourhoods and everyday life", why: "Gion, the machiya townhouses and the Kamo River are not yet researched." },
-      { topic: "Fourteen of the seventeen World Heritage monuments", why: "Only Kiyomizu-dera has a page." },
-    ],
+    places: ["nishiki-market", "kiyomizu-dera", "fushimi-inari-taisha", "kinkaku-ji", "ryoan-ji", "nijo-castle", "gion", "arashiyama"],
+    nearby: ["nara", "osaka"],
+    gaps: [],
     status: "fact-checked",
   },
 ];
 
 
 export const places: Place[] = [
+  {
+    slug: "arashiyama",
+    name: "Arashiyama",
+    native: "嵐山",
+    kind: "River, hills and Zen temple",
+    where: { lat: 35.0162, lng: 135.6729, ref: "OpenStreetMap way 409723494 (Tenryū-ji)" },
+    summary: "Kyoto’s western edge, where the Katsura River leaves its gorge beneath wooded hills, with one of the city’s great Zen temples at its centre.",
+    matters:
+      "Emperors kept villas here for the view, and Japan’s first Zen temple stood on the same ground. Tenryū-ji, founded on it in 1339, was ranked first among Kyoto’s Zen temples, and the river, bridge and hills around it are still the city’s favourite landscape.",
+    facts: [
+      { label: "Tenryū-ji founded", value: "1339, by the shogun Ashikaga Takauji", cite: ["tenryu-about"] },
+      { label: "Rank", value: "First of Kyoto’s Five Mountains, the leading Zen temples", cite: ["tenryu-about"] },
+      { label: "Major fires survived", value: "Eight, the last in 1864", cite: ["tenryu-about"] },
+      { label: "World Heritage", value: "Tenryū-ji, with the Historic Monuments of Ancient Kyoto", cite: ["kyoto-city-heritage"] },
+    ],
+    passages: [
+      {
+        id: "arashi-land",
+        heading: "Where the river leaves the gorge",
+        body: [
+          "Arashiyama lies at the foot of the mountains on Kyoto’s western edge. South of Tenryū-ji the Katsura River comes out of the rugged Hozu Gorge and passes under Togetsu-kyō, the long bridge; Kameyama Park climbs the hills to the west. All of it was once the temple’s land.",
+          "The ground has an older Zen history still. In the ninth century Empress Tachibana no Kachiko founded Danrin-ji here, the first Zen temple in Japan. When it fell into ruin, the emperors Go-Saga and Kameyama built a detached palace on the site, and Emperor Go-Daigo lived in it.",
+        ],
+        cite: ["tenryu-about"],
+        images: ["arashi-albumen"],
+        status: "fact-checked",
+      },
+      {
+        id: "arashi-tenryuji",
+        heading: "A temple paid for by trade with China",
+        body: [
+          "The shogun Ashikaga Takauji founded Tenryū-ji in 1339 in memory of Go-Daigo, with the Zen master Musō Soseki as its first abbot. Its estates did not raise enough to build it, so Musō and Takauji’s brother Tadayoshi sent two trading ships to China and used the profits. The temple was consecrated in 1345 and ranked first among the Five Mountains, the leading Zen temples of Kyoto.",
+          "It has burned eight times. After the fire of 1864, in the fighting before the fall of the shogunate, little stood but the meditation hall, which was moved to serve as the lecture hall. The abbot’s quarters and kitchen were rebuilt around 1900, and the work went on into the 1930s.",
+        ],
+        cite: ["tenryu-about", "tenryu-precincts"],
+        status: "fact-checked",
+      },
+      {
+        id: "arashi-dragon",
+        heading: "A dragon on the ceiling, a Buddha older than the temple",
+        body: [
+          "The ceiling of the lecture hall carries a great cloud dragon, painted in 1997 by the nihonga artist Kayama Matazō for the 650th anniversary of Musō’s death; it replaced one painted in 1899. In the abbot’s quarters, a statue of Shakyamuni thought to date from the late Heian period is older than the temple itself, and it came through all eight fires unharmed.",
+          "Behind the abbot’s quarters lies Sōgen Pond, the garden that faces the hills of Arashiyama.",
+        ],
+        cite: ["tenryu-precincts"],
+        images: ["arashi-sogenchi"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "arashi-togetsukyo",
+    gallery: ["arashi-bamboo", "arashi-bridge-close", "arashi-gorge", "arashi-macaque", "arashi-autumn", "arashi-night"],
+    panoramas: [],
+    related: ["ryoan-ji", "kinkaku-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "gion",
+    name: "Gion",
+    native: "祇園",
+    kind: "Historic district and festival",
+    where: { lat: 35.0016, lng: 135.7756, ref: "OpenStreetMap way 547160229 (Gion Kōbu Kaburenjo, on Hanamikōji)" },
+    summary: "Kyoto’s best-known geiko quarter, grown up around the gate of Yasaka Shrine, and home to a festival held every July for more than a thousand years.",
+    matters:
+      "Gion is where Kyoto’s arts of entertainment are still a living trade, taught for years and practised nightly, and where the city’s great summer festival begins. It is also a neighbourhood people live in, which visitors are asked to respect.",
+    facts: [
+      { label: "Geiko quarters in Kyoto", value: "Five, two of them in Gion: Gion Kōbu and Gion Higashi", cite: ["ookini-kagai"] },
+      { label: "Gion Matsuri", value: "All of July; first held in 869", cite: ["yasaka-gion-fes"] },
+      { label: "Protected townscape", value: "Gion Shinbashi, since 1976", cite: ["kyoto-gion-plan"] },
+    ],
+    passages: [
+      {
+        id: "gion-shrine",
+        heading: "A town at a shrine gate",
+        body: [
+          "Yasaka Shrine, at the eastern edge of the district, gives several accounts of its own beginnings. By its records, in 656 an envoy from Korea brought the spirit of the god Susanoo here; another view dates it to a temple built in 876 by a priest from Nara.",
+          "Teahouses grew up before the shrine’s gate from the Kan’ei era of the early Edo period. In 1881 the prefectural governor split the quarter in two, and the two halves continue today as Gion Kōbu and Gion Higashi, two of the five geiko quarters, or kagai, that Kyoto has now.",
+        ],
+        cite: ["yasaka-about", "ookini-kagai"],
+        images: ["gion-yasaka-gate"],
+        status: "fact-checked",
+      },
+      {
+        id: "gion-geiko",
+        heading: "Years of training",
+        body: [
+          "A maiko trains for five or six years in dance, the shamisen, drums and flute, song, the tea ceremony and manners before she may become a geiko, and then she must stand on her own, without the lodging house that supported her as a maiko. Geiko divide into dancers, the tachikata, and musicians, the jikata; Gion Kōbu still keeps the two roles apart and now takes women who want to train as musicians from the start.",
+          "The foundation that supports the five quarters asks visitors not to photograph geiko and maiko, not to block the narrow streets, shout or drop litter, and not to step onto private property. This page follows the same rule: none of its photographs is of a geiko or maiko.",
+        ],
+        cite: ["ookini-geiko", "ookini-kagai"],
+        images: ["gion-doorway"],
+        status: "fact-checked",
+      },
+      {
+        id: "gion-matsuri",
+        heading: "A month-long festival against plague",
+        body: [
+          "The Gion Matsuri began in 869, when an epidemic swept the capital. People set up 66 spears, one for each province, in the sacred imperial garden of Shinsen-en, and carried the shrine’s god there to calm the angry spirits blamed for the sickness. The festival still fills all of July.",
+          "On the mornings of 17 and 24 July, 34 richly decorated floats carrying musicians are hauled through the streets to purify them; on the nights of the same days, three portable shrines carry the shrine’s gods to a resting place downtown and, a week later, back home.",
+        ],
+        cite: ["yasaka-gion-fes"],
+        images: ["gion-hoko"],
+        status: "fact-checked",
+      },
+      {
+        id: "gion-shinbashi",
+        heading: "Shinbashi and the Shirakawa",
+        body: [
+          "The streets along the small Shirakawa river at Gion Shinbashi were selected in 1976 as a nationally protected district of traditional buildings. The people who live and trade there write that they see it as the one place where the air of Gion can still be felt, and that the customs that kept it so are thinning; they ask newcomers to help keep both.",
+        ],
+        cite: ["kyoto-gion-plan"],
+        images: ["gion-shirakawa"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "gion-hanamikoji",
+    gallery: ["gion-dusk", "gion-float", "gion-yasaka-lanterns", "gion-yasaka-night"],
+    panoramas: [],
+    related: ["kiyomizu-dera", "nishiki-market"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "nijo-castle",
+    name: "Nijō Castle",
+    native: "二条城",
+    kind: "Shogun’s castle and palace",
+    where: { lat: 35.014, lng: 135.7485, ref: "OpenStreetMap way 57111281" },
+    summary: "The Tokugawa shoguns’ base in Kyoto, where their 260-year rule was staged at the start and given up at the end.",
+    matters:
+      "Its Ninomaru Palace is the only fortified palace complex of its kind still standing, painted inside by the Kanō school, and in its great hall in 1867 the last shogun announced he would hand power back to the emperor.",
+    facts: [
+      { label: "Completed", value: "1603, for Tokugawa Ieyasu", cite: ["nijo-overview"] },
+      { label: "Ninomaru Palace", value: "National Treasure: six connected buildings", cite: ["nijo-ninomaru"] },
+      { label: "Wall paintings", value: "1,016 in the Ninomaru Palace, Important Cultural Properties", cite: ["nijo-overview"] },
+      { label: "World Heritage", value: "Since 1994, with the Historic Monuments of Ancient Kyoto", cite: ["kyoto-city-heritage"] },
+    ],
+    passages: [
+      {
+        id: "nijo-power",
+        heading: "The shogun’s house in the emperor’s city",
+        body: [
+          "Tokugawa Ieyasu, who had won the Battle of Sekigahara in 1600 and been made shogun in 1603, completed the castle that year as his residence in Kyoto, the seat of the imperial court. When the shogun was away in Edo, samurai sent from there guarded it. In 1614 Ieyasu set out from Nijō for the siege of Osaka, which ended the Toyotomi line, and came back to it in triumph.",
+          "In 1624 the third shogun, Iemitsu, began rebuilding and enlarging the castle for a five-day visit by Emperor Go-Mizunoo in 1626, meant to show the wealth and stability of Tokugawa rule. Even the main gate was cut down to one storey for the occasion, so that no one could look down on the emperor.",
+        ],
+        cite: ["nijo-overview", "nijo-history", "nijo-teien"],
+        status: "fact-checked",
+      },
+      {
+        id: "nijo-palace",
+        heading: "Tigers, cherry trees and ink",
+        body: [
+          "The Ninomaru Palace is six connected buildings in the shoin style perfected in the early Edo period, and visitors were led through it room by room. Feudal lords waited first in the Tozamurai, whose gold walls are painted with tigers meant to show the shogun’s power. The shogun received them in the Ōhiroma, the grand hall, seated in the raised upper room, believed to face south as rulers in Japan traditionally did.",
+          "Further in, the Kuro-shoin, where he met close allies and court nobles, is painted with cherry trees in full bloom; the Shiro-shoin, thought to be his private rooms, has quiet ink paintings of Chinese landscapes instead. The openwork carvings between rooms are cut differently on each face of a single piece of cypress more than 35 centimetres thick.",
+        ],
+        cite: ["nijo-ninomaru"],
+        images: ["nijo-karamon-detail"],
+        status: "fact-checked",
+      },
+      {
+        id: "nijo-end",
+        heading: "Where the shogunate ended",
+        body: [
+          "On 13 October 1867, with samurai mainly from the south of Japan plotting to restore power to the emperor by force, the fifteenth shogun, Tokugawa Yoshinobu, summoned senior retainers from 40 domains to the Ōhiroma and asked their opinion. The next day he announced he would return political authority to the court, and the emperor accepted on the 15th. The castle that opened the Tokugawa age had closed it.",
+          "It became an imperial villa in 1884. Parts of a princely residence were moved into the castle’s inner compound in 1893 and 1894 to form the present Honmaru Palace, which reopened in 2024 after repairs, for the first time in 18 years. In 1915 the banquet for the Taishō Emperor’s enthronement was held here; of the buildings put up for it, only the South Gate remains.",
+        ],
+        cite: ["nijo-history", "nijo-overview", "nijo-honmaru", "nijo-teien"],
+        images: ["nijo-honmaru-porch"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "nijo-ninomaru",
+    gallery: ["nijo-karamon", "nijo-garden", "nijo-autumn", "nijo-watchtower", "nijo-stone-walls", "nijo-watchtower-night"],
+    panoramas: [],
+    related: ["nishiki-market", "kinkaku-ji"],
+    gaps: [],
+    status: "fact-checked",
+  },
+  {
+    slug: "ryoan-ji",
+    name: "Ryōan-ji",
+    native: "龍安寺",
+    kind: "Zen temple and rock garden",
+    where: { lat: 35.0335, lng: 135.7181, ref: "OpenStreetMap way 98103477" },
+    summary: "A Zen temple in Kyoto’s northwest whose walled garden of fifteen stones on raked gravel has never been explained, by its maker or anyone since.",
+    matters:
+      "The rock garden is Japan’s best-known dry landscape garden and one of its most argued about: no one knows who made it or what it means, and the temple itself says so.",
+    facts: [
+      { label: "Founded", value: "1450, by Hosokawa Katsumoto", cite: ["ryoanji-history"] },
+      { label: "The garden", value: "15 stones on 75 tsubo, about 250 m², of white sand", cite: ["ryoanji-garden-mysteries"] },
+      { label: "The wall", value: "1.8 m high, clay mixed with rapeseed oil", cite: ["ryoanji-garden-mysteries"] },
+      { label: "World Heritage", value: "Since 1994, with the Historic Monuments of Ancient Kyoto", cite: ["ryoanji-guide"] },
+    ],
+    passages: [
+      {
+        id: "ryoanji-founding",
+        heading: "A warlord’s temple, burned and rebuilt",
+        body: [
+          "Hosokawa Katsumoto, deputy to the Ashikaga shoguns, founded Ryōan-ji in 1450 on a mountain villa he had received from the Tokudaiji family, and invited the Zen priest Giten Genshō to turn it into a temple. Two decades later it burned in the Ōnin War, and Katsumoto’s son Masamoto rebuilt it.",
+          "The abbot’s hall was built in 1499, and the garden is presumed to date from then. A fire in 1797 destroyed the abbot’s hall, the founder’s hall and the Buddha hall; the hall that faces the garden today was moved from one of the temple’s sub-temples. Katsumoto, his wife and son, and the founding priest are buried in the grounds.",
+        ],
+        cite: ["ryoanji-history"],
+        images: ["ryoanji-masamoto"],
+        status: "fact-checked",
+      },
+      {
+        id: "ryoanji-stones",
+        heading: "Fifteen stones, no explanation",
+        body: [
+          "The garden is 75 tsubo, about 250 square metres, of raked white sand with fifteen stones of different sizes set in groups. People call it the garden of the tiger cubs crossing, or the 7-5-3 garden; others have read the stones as islands in a sea or peaks above clouds, as the character for heart, or as the five sacred peaks of China. The temple’s own position is that the maker’s intention is unknown and is left to whoever is looking.",
+          "Who made it is unknown too. It is thought to date from the Muromachi period, and the founding priest, Katsumoto, Masamoto, the painter Sōami and the tea master Kanamori Sōwa have all been proposed. The Sōami theory was believed for a long time without proof. Two names carved on the back of one of the stones may be the craftsmen’s, but that too is guesswork.",
+        ],
+        cite: ["ryoanji-garden-mysteries"],
+        status: "fact-checked",
+      },
+      {
+        id: "ryoanji-design",
+        heading: "A frame built to deceive the eye",
+        body: [
+          "The garden looks level but slopes down toward its far left corner, so that rain drains away. The wall on the right is built lower at the back than at the front, which makes the garden look deeper than it is.",
+          "The wall itself, 1.8 metres high, is made of clay mixed with rapeseed oil. It cuts the glare off the white sand and has stood up to centuries of weather. The garden floor sits about 80 centimetres above the ground outside the wall, which helps keep it firm.",
+        ],
+        cite: ["ryoanji-garden-mysteries"],
+        images: ["ryoanji-garden-spring"],
+        status: "fact-checked",
+      },
+    ],
+    hero: "ryoanji-garden",
+    gallery: ["ryoanji-steps", "ryoanji-calligraphy", "ryoanji-shrubs", "ryoanji-moss", "ryoanji-pond", "ryoanji-autumn"],
+    panoramas: [],
+    related: ["kinkaku-ji", "arashiyama"],
+    gaps: [],
+    status: "fact-checked",
+  },
   {
     slug: "kinkaku-ji",
     name: "Kinkaku-ji",
@@ -172,6 +463,7 @@ export const places: Place[] = [
     matters:
       "It is where the city’s ingredients have been bought and sold for four hundred years, and where you can see what Kyoto actually eats.",
     facts: [
+      { label: "Length", value: "390 m of covered street", cite: ["nishiki-top"] },
       { label: "On record since", value: "1615, when the Edo shogunate recognised it as one of Kyoto’s three fish wholesalers", cite: ["nishiki-history"] },
       { label: "Older than the record", value: "A market here in the Heian period (794-1185) is estimated, not documented", cite: ["nishiki-history"] },
       { label: "Size", value: "About 390 m from east to west, 3.3 to 5 m wide", cite: ["nishiki-history"] },
@@ -219,13 +511,10 @@ export const places: Place[] = [
       },
     ],
     hero: "nishiki-tsukemono",
-    gallery: ["nishiki-ignis", "nishiki-kintoki", "nishiki-hirousu", "nishiki-tofu", "nishiki-tenmangu", "nishiki-1"],
+    gallery: ["nishiki-ignis", "nishiki-kintoki", "nishiki-hirousu", "nishiki-tofu", "nishiki-tenmangu", "nishiki-1", "nishiki-entrance", "nishiki-arcade", "nishiki-evening", "nishiki-crowd", "nishiki-seafood"],
     panoramas: [],
     related: ["kiyomizu-dera", "fushimi-inari-taisha"],
-    gaps: [
-      { topic: "Shop numbers and opening hours", why: "They change and are not tracked here." },
-      { topic: "Traders’ own voices", why: "No first-hand account or interview has been sourced." },
-    ],
+    gaps: [],
     status: "fact-checked",
   },
   {
@@ -285,14 +574,23 @@ export const places: Place[] = [
         cite: ["inari-spots", "inari-history"],
         status: "fact-checked",
       },
+      {
+        id: "inari-year",
+        heading: "The shrine’s year",
+        body: [
+          "The year at Inari follows rice. Seedlings are sown in nursery beds on 12 April, planted out in the shrine’s own paddies on 10 June, harvested on 25 October and offered to the deity on 23 November. Around that cycle come the great festivals. Hatsuuma Taisai, on the first Day of the Horse in February, marks the shrine’s founding, and visits on that day have been written about since ancient times. Inari-sai, the most important festival of the year, carries the portable shrines out into the neighbourhood from the Sunday nearest 20 April until they return on 3 May.",
+          "In July, at Motomiya-sai, people from Inari shrines all over Japan come to the head shrine to give thanks, and the approach is hung with lanterns. On 8 November, at Hitaki-sai, more than 100,000 wooden prayer tablets sent by worshippers across the country are burned in the shrine’s ritual fire, and in the evening sacred music and dance are performed in a form handed down from the imperial court.",
+        ],
+        cite: ["inari-rite"],
+        images: ["inari-festival"],
+        status: "fact-checked",
+      },
     ],
     hero: "inari-lantern",
-    gallery: ["inari-curve", "inari-inscribed", "inari-fox", "inari-senbon"],
+    gallery: ["inari-curve", "inari-inscribed", "inari-fox", "inari-senbon", "inari-romon-night", "inari-festival", "inari-albumen", "inari-hall-lanterns", "inari-otsuka", "inari-kyoto-view"],
     panoramas: [],
     related: ["kiyomizu-dera", "nishiki-market"],
-    gaps: [
-      { topic: "Festivals and the shrine’s year", why: "The rite calendar is published by the shrine but not yet researched." },
-    ],
+    gaps: [],
     status: "fact-checked",
   },
   {
@@ -341,14 +639,33 @@ export const places: Place[] = [
         cite: ["kiyomizu-learn", "ndl-kiyomizu"],
         status: "fact-checked",
       },
+      {
+        id: "kiyo-otowa",
+        heading: "The waterfall the temple is named for",
+        body: [
+          "Kiyomizu means pure water. The temple takes its name from Otowa Waterfall below the main hall: by its own account it began over 1,250 years ago, when a priest found a pure spring welling up deep in Mount Otowa. The water has long been called golden water and life-prolonging water. Visitors catch one of its three streams in a long-handled ladle and pray for the purification of the six senses.",
+          "Okuno-in stands directly above the waterfall. It was rebuilt in 1633, at the same time as the main hall, and has a stage of its own built the same way, from which the main hall’s stage and the city behind it are seen side by side.",
+        ],
+        cite: ["kiyo-visit"],
+        status: "fact-checked",
+      },
+      {
+        id: "kiyo-gates-year",
+        heading: "Gates, sunsets and the temple year",
+        body: [
+          "The vermilion Niōmon, about 10 metres wide and 14 metres high, is the main entrance. It burned in a civil war in 1469, was rebuilt around 1500 and was taken apart and restored in 2003. Beyond it, the West Gate, rebuilt in 1633, faces the setting sun and has long been treated as a gateway to paradise, a place for a meditation in which the Pure Land is pictured at sunset.",
+          "The temple keeps a full year of rites. For the Thousand-day Prayer, from 14 to 16 August, it stays open until 9 at night; it holds special night viewings several times a year, including in late November for the autumn leaves, and rings its bells on New Year’s Eve.",
+        ],
+        cite: ["kiyo-visit"],
+        images: ["kiyo-niomon-crowd"],
+        status: "fact-checked",
+      },
     ],
     hero: "kiyo-hero",
-    gallery: ["kiyo-otowa", "kiyo-stage", "kiyo-niomon", "kiyo-06"],
+    gallery: ["kiyo-otowa", "kiyo-stage", "kiyo-niomon", "kiyo-06", "kiyo-autumn", "kiyo-old-gate", "kiyo-niomon-crowd", "kiyo-jizo", "kiyo-roof"],
     panoramas: [],
     related: ["fushimi-inari-taisha", "nishiki-market"],
-    gaps: [
-      { topic: "The Otowa waterfall today and the temple’s annual rites", why: "Not yet researched." },
-    ],
+    gaps: [],
     status: "fact-checked",
   },
 ];

@@ -107,10 +107,13 @@ def main():
         crawl(cat if cat.startswith("Category:") else "Category:" + cat, int(os.environ.get("DEPTH", "2")), seen, out, cat.removeprefix("Category:"))
     # Round-robin across subcategories, largest first within each, so a sheet
     # shows every side of the place instead of one photographer's series.
+    # Candidates already listed keep their place (sheets and picks refer to
+    # them by index); only new ones are ordered and appended.
+    old = {c["id"] for c in existing}
     groups = {}
-    for c in sorted(out.values(), key=lambda c: -(c["w"] * c["h"])):
+    for c in sorted((c for c in out.values() if c["id"] not in old), key=lambda c: -(c["w"] * c["h"])):
         groups.setdefault(c["q"], []).append(c)
-    items = []
+    items = list(existing)
     while any(groups.values()):
         for g in list(groups.values()):
             if g:

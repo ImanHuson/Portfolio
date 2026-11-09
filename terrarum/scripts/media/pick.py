@@ -63,7 +63,14 @@ def verify(landing, file_url):
     found = [f for f in found if f]
     lic = min(found, key=lambda f: RANK[f[0]]) if found else None
     m = re.search(r'id="fileinfotpl_aut"[^>]*>.*?</td>\s*<td[^>]*>(.*?)</td>', page, re.S)
-    author = text(m.group(1)) if m else None
+    author = text(re.sub(r"(?is)<style.*?</style>|<sup.*?</sup>", " ", m.group(1))) if m else None
+    if author:
+        author = re.sub(r"\s*\(talk\)|\s*\(contribs\)|\s*\(\d{4}[–-]\d{0,4}\)|^Photograph by\s+|\s*\(\s*www\.[^)]*\)\.?", "", author).strip()
+        if re.fullmatch(r"(?i)(myself|own work|self|i, the copyright holder.*)", author):
+            users = re.findall(r'title="User:([^"/]+)"', page)
+            author = users[0] if users else author
+        if re.fullmatch(r"(?i)(unknown author\s*)+", author):
+            author = "Unknown photographer"
     canonical = re.search(r'<link rel="canonical" href="([^"]+)"', page)
     time.sleep(1.5)
     return {"license": lic, "author": author, "page": canonical.group(1) if canonical else url, "all": found}

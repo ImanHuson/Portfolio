@@ -94,7 +94,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
           </div>
         </section>
 
-        <Gallery ids={p.gallery} name={p.name} headingId="sides-h" tour={p.tour} />
+        <Gallery ids={p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)))} name={p.name} headingId="sides-h" tour={p.tour} />
 
         {pano && (
           <section aria-labelledby="look-h" className="border-t border-line bg-band text-on-band">

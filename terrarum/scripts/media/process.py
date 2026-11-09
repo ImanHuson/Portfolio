@@ -113,6 +113,15 @@ def save(img, key, out):
     out["width"], out["height"] = big.size
 
 
+# Which side of its place each local photo shows (see lib/content/brief.ts SIDES).
+SIDE = {
+    "nishiki-tsukemono": "detail", "nishiki-ignis": "people", "nishiki-kintoki": "detail", "nishiki-hirousu": "detail",
+    "nishiki-tofu": "detail", "nishiki-tenmangu": "surroundings", "nishiki-1": "people",
+    "inari-lantern": "approach", "inari-curve": "approach", "inari-inscribed": "detail", "inari-fox": "detail", "inari-senbon": "approach",
+    "kiyo-hero": "exterior", "kiyo-otowa": "view", "kiyo-stage": "exterior", "kiyo-niomon": "approach", "kiyo-06": "night",
+}
+
+
 def main():
     os.makedirs(os.path.join(ROOT, "public", "media"), exist_ok=True)
     registry = []
@@ -139,6 +148,8 @@ def main():
         if key in ARTWORK:
             item["date"], item["repository"] = ARTWORK[key]
             item.pop("modified")
+        if key in SIDE:
+            item["side"] = SIDE[key]
         save(Image.open(f), key, item)
         registry.append(item)
     for cid, key in (("126086", "cma-shono"), ("106961", "cma-gion")):
