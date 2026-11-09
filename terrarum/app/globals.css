@@ -55,6 +55,20 @@
     color-scheme: dark;
   }
 }
+/* A theme can hold one scheme when its identity depends on it (Japan's night). */
+[data-theme][data-scheme="dark"] {
+  --bg: var(--d-bg);
+  --surface: var(--d-surface);
+  --ink: var(--d-ink);
+  --muted: var(--d-muted);
+  --line: var(--d-line);
+  --accent: var(--d-accent);
+  --accent-text: var(--d-accentText);
+  --on-accent: var(--d-onAccent);
+  --band: var(--d-band);
+  --on-band: var(--d-onBand);
+  color-scheme: dark;
+}
 [data-display="mincho"] {
   --display: var(--font-mincho), "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
@@ -289,3 +303,101 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
   }
 }
 @keyframes brush { from { transform: scaleX(0); opacity: 0.4; } to { transform: scaleX(1); opacity: 1; } }
+
+
+/* ------------------------------------------------------------------ */
+/* Sumi ground (Japan): a fixed atmosphere, never on scrolling content. */
+[data-motif] > .atmos {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    /* Bokashi: the graded band of prussian blue at the top of Hiroshige's skies. */
+    linear-gradient(180deg, color-mix(in srgb, #2b3f7a 42%, transparent) 0%, color-mix(in srgb, #2b3f7a 14%, transparent) 22vh, transparent 46vh),
+    radial-gradient(60vw 50vh at 8% 0%, color-mix(in srgb, #3b4f8f 24%, transparent), transparent 70%),
+    radial-gradient(50vw 45vh at 100% 100%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 72%),
+    radial-gradient(120vw 90vh at 50% 50%, transparent 55%, rgb(3 4 8 / 0.55) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, #1a2340), var(--bg) 60%);
+}
+[data-ground="sumi"][data-motif="washi"]::before { z-index: 0; opacity: 0.07; mix-blend-mode: screen; }
+
+/* Cinematic hero: a full-screen photograph that drifts, words low on the left. */
+.cine { min-height: 100svh; }
+.cine-img { transform-origin: 60% 45%; }
+@media (prefers-reduced-motion: no-preference) {
+  .cine-img { animation: drift 26s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .cine-copy > * { animation: rise 900ms var(--ease-out) both; }
+  .cine-copy > *:nth-child(2) { animation-delay: 120ms; }
+  .cine-copy > *:nth-child(3) { animation-delay: 240ms; }
+  .cine-copy > *:nth-child(4) { animation-delay: 360ms; }
+  .cine-kanji { animation: kanji 2400ms var(--ease-out) 200ms both; }
+}
+@keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes kanji { from { opacity: 0; transform: translateY(4vh); } }
+.cine-scrim {
+  background:
+    linear-gradient(to top, rgb(6 8 14 / 0.95) 0%, rgb(6 8 14 / 0.88) 35%, rgb(6 8 14 / 0.7) 60%, transparent 85%),
+    linear-gradient(to bottom, rgb(6 8 14 / 0.72) 0%, transparent 22%),
+    linear-gradient(to right, rgb(6 8 14 / 0.55) 0%, transparent 55%);
+}
+/* One vertical column, sized so the whole name fits the height it is given. */
+.cine-kanji {
+  font-size: min(30vh, calc(118vh / var(--n, 3)), 24rem); line-height: 0.92;
+  white-space: nowrap;
+  color: var(--ink); opacity: 0.16; letter-spacing: 0.02em;
+}
+/* Slides for heroes with several photographs: a slow cross-dissolve. */
+@media (prefers-reduced-motion: no-preference) {
+  .cine-slides > :not(:first-child) { opacity: 0; animation: slide var(--slide-total) linear infinite; animation-delay: var(--slide-at); }
+  .cine-slides > :first-child { animation: slide-first var(--slide-total) linear infinite; }
+}
+@keyframes slide { 0% { opacity: 0; } 4%, 25% { opacity: 1; } 29%, 100% { opacity: 0; } }
+@keyframes slide-first { 0%, 25% { opacity: 1; } 29%, 96% { opacity: 0; } 100% { opacity: 1; } }
+
+/* Scroll-told passages: the pinned frame shows the active step's photograph. */
+.story-frame { opacity: 0; transition: opacity 900ms var(--ease-out); }
+.story-frame[data-active] { opacity: 1; }
+.story-frame img { transition: transform 1600ms var(--ease-out); transform: scale(1.04); }
+.story-frame[data-active] img { transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .story-frame, .story-frame img { transition: none; transform: none; }
+}
+/* Steps not being read recede, but only once the script is running and only
+   where the pinned frame exists; otherwise every step reads at full strength. */
+@media (min-width: 1024px) {
+  [data-story][data-live] .story-step { transition: opacity 600ms var(--ease-out); }
+  [data-story][data-live] .story-step:not([data-active]) { opacity: 0.4; }
+}
+
+/* Hand-scroll (emaki): photographs at varied heights along one row. */
+.scroll-item:nth-child(3n + 1) .scroll-shot { height: min(64vh, 640px); }
+.scroll-item:nth-child(3n + 2) .scroll-shot { height: min(46vh, 460px); margin-top: 12vh; }
+.scroll-item:nth-child(3n) .scroll-shot { height: min(54vh, 540px); margin-top: 4vh; }
+@media (max-width: 767px) {
+  .scroll-item .scroll-shot { height: 52vh !important; margin-top: 0 !important; }
+}
+.scroll-track[data-pinned] { will-change: transform; }
+
+/* Section reveal: content settles upward as it arrives. Movement only, never
+   opacity, so nothing is invisible in a full-page capture, in print, or if the
+   scroll timeline never runs. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .settle { animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  }
+}
+@keyframes settle { from { transform: translateY(40px); } }
+
+/* Night maps: street tiles inverted into the sumi ground; pins are HTML and stay true. */
+[data-ground="sumi"] [data-map-mode="streets"] .maplibregl-canvas { filter: invert(0.92) hue-rotate(185deg) saturate(0.45) brightness(0.92) contrast(0.95); }
+
+/* Hinoki: the hand-scroll runs between two wooden rollers, and the figures are
+   divided by wooden rules, as a notice board or shoji frame is. */
+[data-ground="sumi"] .emaki { border-block: 3px solid var(--material); padding-block: 4vh; }
+[data-ground="sumi"] .fact-rule { border-color: color-mix(in srgb, var(--material) 70%, transparent); }
+
+/* Labels laid over photographs: ivory, with a short vermilion mark beside them. */
+.photo-label { color: #f1e9da; display: inline-flex; align-items: center; gap: 0.6em; }
+.photo-label::before { content: ""; width: 1.4em; height: 2px; background: #e0573f; flex: none; }
+/* Tiles: a long, deep scrim from the bottom, so their text holds on any photograph. */
+.tile-scrim { background: linear-gradient(to top, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
+.tile-scrim-side { background: linear-gradient(to right, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }

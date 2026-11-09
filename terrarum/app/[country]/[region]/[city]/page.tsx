@@ -3,20 +3,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AtlasMap } from "@/components/map/AtlasMap";
 import { Panorama } from "@/components/pano/Panorama";
-import { Crumbs } from "@/components/ui/Crumbs";
-import { Facts } from "@/components/ui/Facts";
-import { Credit, Figure } from "@/components/ui/Figure";
+import { CinemaHero } from "@/components/story/CinemaHero";
+import { Collage } from "@/components/story/Collage";
+import { FactBand } from "@/components/story/Statement";
+import { Story, type StoryStep } from "@/components/story/Story";
+import { Credit } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
-import { NativeName } from "@/components/ui/NativeName";
 import { Passage } from "@/components/ui/Passage";
-import { PlaceCard } from "@/components/ui/PlaceCard";
 import { SaveButton } from "@/components/ui/SaveButton";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
-import { themeFor } from "@/lib/themes";
 import { allStaticParams, cityPath, getCity, getCountry, getPlace, getRegion, makeRefs, placePath } from "@/lib/content";
 import { imgSrc, media } from "@/lib/content/media";
 import { boundsOf } from "@/lib/geo";
+import { themeFor } from "@/lib/themes";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -46,86 +46,74 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
   });
   const pano = ci.panoramas[0];
 
+  // Each passage is told beside a photograph: its own, else a place's, else the city's print.
+  const used = new Set<string>(ci.passages.flatMap((x) => x.images ?? []));
+  const pool = places.map(({ p }) => p.hero).filter((id) => !used.has(id));
+  const steps: StoryStep[] = ci.passages.map((x, i) => {
+    // The city's print opens its story, as it did beside the first passage.
+    const image = x.images?.[0] ?? (i === 0 && ci.artwork && !used.has(ci.artwork) ? ci.artwork : undefined) ?? pool.shift() ?? ci.hero;
+    used.add(image);
+    const links = (x.places ?? []).filter((s) => getPlace(country, s)).map((s) => ({ pl: getPlace(country, s)!, href: placePath(country, s).href }));
+    return {
+      key: x.id,
+      image,
+      content: (
+        <div>
+          <Passage p={x} refs={refs} />
+          {links.length > 0 && (
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              {links.map(({ pl, href }) => (
+                <li key={pl.slug}>
+                  <Link href={href} className="font-medium text-accent-text underline decoration-line underline-offset-4 hover:decoration-current">{pl.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ),
+    };
+  });
+
   return (
     <ThemeShell country={country}>
       <main id="main" data-pagefind-body>
-        <section className="relative">
-          <div className="mx-auto grid max-w-[1400px] gap-8 px-4 pt-8 md:px-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:pt-12">
-            <div className={`order-2 flex gap-6 lg:order-1 ${themeFor(country)?.native === "vertical" ? "" : "flex-col justify-between"}`}>
-              <NativeName text={ci.native} entry={c.entry} className="enter" />
-              <div className="enter-2 flex flex-col justify-end">
-                <Crumbs trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { href: `/${country}/${region}/`, label: r.name }, { label: ci.name }]} />
-                <h1 className="mt-4 font-display text-5xl leading-none tracking-tight md:text-7xl">{ci.name}</h1>
-                <p className="mt-5 max-w-[34ch] text-lg">{ci.summary}</p>
-                <div className="mt-5">
-                  <SaveButton href={`/${country}/${region}/${city}/`} title={ci.name} kind={`City, ${c.entry.name}`} />
-                </div>
-              </div>
-            </div>
-            <Figure id={ci.hero} priority sizes="(min-width:1024px) 66vw, 100vw" className="enter order-1 lg:order-2" imgClassName="aspect-[3/2] w-full object-cover" />
-          </div>
+        <CinemaHero
+          ids={[ci.hero, ...places.slice(0, 3).map(({ p }) => p.hero)]}
+          kicker={`${r.name}, ${c.entry.name}`}
+          title={ci.name}
+          summary={ci.summary}
+          native={ci.native}
+          entry={c.entry}
+          trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { href: `/${country}/${region}/`, label: r.name }, { label: ci.name }]}
+        >
+          <SaveButton href={`/${country}/${region}/${city}/`} title={ci.name} kind={`City, ${c.entry.name}`} />
+        </CinemaHero>
+
+        <section aria-label="Key facts" className="relative isolate overflow-hidden pt-[16vh]">
+          {themeFor(country)?.native === "vertical" && ci.native && (
+            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...ci.native].length } as React.CSSProperties}>
+              {ci.native}
+            </p>
+          )}
+          <FactBand facts={ci.facts} refs={refs} />
         </section>
 
-        <section aria-label="Key facts" className="mx-auto max-w-[1400px] px-4 py-16 md:px-8">
-          <Facts facts={ci.facts} refs={refs} className="lg:grid-cols-5" />
-        </section>
-
-        <section aria-labelledby="places-h" className="border-t border-line">
-          <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-            <h2 id="places-h" className="font-display text-3xl md:text-4xl">{places.length} places in {ci.name}</h2>
-            <AtlasMap
-              mode="streets"
-              label={`Street map of ${ci.name} with its places`}
-              bounds={boundsOf(places.map(({ p }) => p.where), 0.3, 0.008)}
-              pins={places.map(({ p, href }) => ({ label: p.name, lng: p.where.lng, lat: p.where.lat, href }))}
-              className="mt-10 h-[min(62vh,560px)] min-h-[340px]"
-            />
-            <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-              {places.map(({ p, href }) => (
-                <PlaceCard lang={lang} key={p.slug} place={p} href={href} />
-              ))}
-            </div>
+        <section aria-labelledby="places-h" className="mx-auto max-w-[1400px] px-4 pb-[12vh] md:px-8">
+          <h2 id="places-h" className="settle font-display text-4xl md:text-6xl">{places.length} places in {ci.name}</h2>
+          <div className="mt-12">
+            <Collage lang={lang} items={places.map(({ p, href }) => ({ href, image: p.hero, title: p.name, kicker: p.kind, native: p.native, summary: p.summary }))} />
           </div>
+          <AtlasMap
+            mode="streets"
+            label={`Street map of ${ci.name} with its places`}
+            bounds={boundsOf(places.map(({ p }) => p.where), 0.3, 0.008)}
+            pins={places.map(({ p, href }) => ({ label: p.name, lng: p.where.lng, lat: p.where.lat, href }))}
+            className="mt-[12vh] h-[min(80vh,720px)] min-h-[360px]"
+          />
         </section>
 
         <div className="country-rule" aria-hidden />
-        <section aria-labelledby="about-h" className="border-t border-line bg-surface">
-          <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:px-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14">
-            <nav aria-label={`About ${ci.name}`} className="lg:sticky lg:top-24 lg:self-start">
-              <h2 id="about-h" className="font-display text-2xl">About {ci.name}</h2>
-              <ol className="mt-4 hidden space-y-2.5 border-l border-line pl-4 text-sm lg:block">
-                {ci.passages.map((x) => (
-                  <li key={x.id}>
-                    <a href={`#${x.id}`} className="text-muted hover:text-accent-text">{x.heading}</a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
-            <div className="space-y-20">
-              {ci.passages.map((x, i) => {
-                const pic = x.images?.[0] ?? (i === 0 ? ci.artwork : undefined);
-                const links = (x.places ?? []).filter((s) => getPlace(country, s)).map((s) => ({ pl: getPlace(country, s)!, href: placePath(country, s).href }));
-                return (
-                  <div key={x.id} className="grid items-start gap-8 xl:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] xl:gap-12">
-                    <div>
-                      <Passage p={x} refs={refs} />
-                      {links.length > 0 && (
-                        <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                          {links.map(({ pl, href }) => (
-                            <li key={pl.slug}>
-                              <Link href={href} className="font-medium text-accent-text underline decoration-line underline-offset-4 hover:decoration-current">{pl.name}</Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                    {pic && <Figure id={pic} sizes="(min-width:1280px) 28vw, 100vw" className="xl:mt-14" imgClassName="w-full" />}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <Story steps={steps} label={`About ${ci.name}`} flip />
 
         {pano && (
           <section aria-labelledby="pano-h" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
@@ -139,27 +127,15 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
         )}
 
         {nearby.length > 0 && (
-          <section aria-labelledby="nearby-h" className="border-t border-line">
-            <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-              <h2 id="nearby-h" className="font-display text-3xl md:text-4xl">Nearby</h2>
-              <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-                {nearby.map((n) => (
-                  <li key={n.href}>
-                    <Link href={n.href} className="lift press zoom group block">
-                      <div className="overflow-hidden">
-                        <Figure id={n.hero} credit="none" sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" imgClassName="aspect-[4/3] w-full object-cover" />
-                      </div>
-                      <p className="mt-3 font-display text-xl group-hover:text-accent-text">{n.name}</p>
-                      <p className="mt-1 text-sm text-muted">{n.summary}</p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <section aria-labelledby="nearby-h" className="mx-auto max-w-[1400px] px-4 py-[14vh] md:px-8">
+            <h2 id="nearby-h" className="settle font-display text-3xl md:text-5xl">Nearby</h2>
+            <div className="mt-10">
+              <Collage lang={lang} items={nearby.map((n) => ({ href: n.href, image: n.hero, title: n.name, summary: n.summary }))} />
             </div>
           </section>
         )}
 
-        <div className="mx-auto max-w-[1400px] space-y-12 px-4 py-16 md:px-8">
+        <div className="mx-auto max-w-[1400px] space-y-12 border-t border-line px-4 py-16 md:px-8">
           <Gaps gaps={ci.gaps} />
           <SourceList refs={refs} />
         </div>

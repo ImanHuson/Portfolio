@@ -3,14 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AtlasMap } from "@/components/map/AtlasMap";
 import { Panorama } from "@/components/pano/Panorama";
-import { Crumbs } from "@/components/ui/Crumbs";
-import { Facts } from "@/components/ui/Facts";
+import { CinemaHero } from "@/components/story/CinemaHero";
+import { Collage } from "@/components/story/Collage";
+import { FactBand, Statement } from "@/components/story/Statement";
+import { Story, type StoryStep } from "@/components/story/Story";
 import { Gallery } from "@/components/ui/Gallery";
-import { Credit, Figure } from "@/components/ui/Figure";
+import { Credit } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
-import { NativeName } from "@/components/ui/NativeName";
 import { Passage } from "@/components/ui/Passage";
-import { PlaceCard } from "@/components/ui/PlaceCard";
 import { SaveButton } from "@/components/ui/SaveButton";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
@@ -47,55 +47,47 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
   const pano = p.panoramas[0];
   const lang = c.entry.nativeLang?.split(" ")[0];
 
+  // The story pairs each passage with a photograph: its own if it has one,
+  // otherwise the next unused photograph of the place, in visit order.
+  const used = new Set(p.passages.flatMap((x) => x.images ?? []));
+  const pool = p.gallery.filter((id) => !used.has(id));
+  const steps: StoryStep[] = p.passages.map((x) => {
+    const own = x.images?.[0];
+    const image = own ?? pool.shift() ?? p.hero;
+    used.add(image);
+    return { key: x.id, image, content: <Passage p={x} refs={refs} /> };
+  });
+  // The gallery keeps every side of the place, including photographs the story also uses.
+  const galleryIds = p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)));
+
   return (
     <ThemeShell country={country}>
       <main id="main" data-pagefind-body>
-        <section className="mx-auto max-w-[1400px] px-4 pt-8 md:px-8 lg:pt-10">
-          <Crumbs
-            trail={[
-              { href: "/", label: "Globe" },
-              { href: `/${country}/`, label: c.entry.name },
-              { href: `/${country}/${region}/`, label: r.name },
-              { href: `/${country}/${region}/${city}/`, label: ci.name },
-              { label: p.name },
-            ]}
-          />
-          <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)]">
-            <Figure id={p.hero} priority sizes="(min-width:1024px) 66vw, 100vw" className="enter" imgClassName="aspect-[3/2] w-full object-cover" />
-            <div className="flex gap-6 lg:flex-col lg:gap-8">
-              <NativeName text={p.native} entry={c.entry} size="md" className="enter-2" />
-              <div className="enter-3 self-end lg:self-start">
-                <p className="text-sm text-muted">{p.kind}</p>
-                <h1 className="mt-2 font-display text-4xl leading-[1.05] tracking-tight md:text-6xl">{p.name}</h1>
-                <p className="mt-4 text-lg">{p.summary}</p>
-                <div className="mt-5">
-                  <SaveButton href={`/${country}/${region}/${city}/${place}/`} title={p.name} kind={`${p.kind}, ${ci.name}`} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CinemaHero
+          ids={[p.hero]}
+          kicker={p.kind}
+          title={p.name}
+          summary={p.summary}
+          native={p.native}
+          entry={c.entry}
+          trail={[
+            { href: "/", label: "Globe" },
+            { href: `/${country}/`, label: c.entry.name },
+            { href: `/${country}/${region}/`, label: r.name },
+            { href: `/${country}/${region}/${city}/`, label: ci.name },
+            { label: p.name },
+          ]}
+        >
+          <SaveButton href={`/${country}/${region}/${city}/${place}/`} title={p.name} kind={`${p.kind}, ${ci.name}`} />
+        </CinemaHero>
 
-        <section aria-labelledby="matters-h" className="mx-auto grid max-w-[1400px] gap-10 px-4 py-16 md:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-          <div>
-            <h2 id="matters-h" className="text-sm text-muted">Why it matters</h2>
-            <p className="mt-3 font-display text-2xl leading-snug md:text-3xl">{p.matters}</p>
-          </div>
-          <Facts facts={p.facts} refs={refs} />
-        </section>
+        <Statement id="matters-h" label="Why it matters" text={p.matters} watermark={themeFor(country)?.native === "vertical" ? p.native : undefined} lang={lang} />
+        <FactBand facts={p.facts} refs={refs} />
 
-        <section aria-label={`About ${p.name}`} className="border-t border-line">
-          <div className="mx-auto max-w-[1400px] space-y-20 px-4 py-20 md:px-8">
-            {p.passages.map((x) => (
-              <div key={x.id} className="grid items-start gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
-                <Passage p={x} refs={refs} />
-                {x.images?.[0] && <Figure id={x.images[0]} sizes="(min-width:1024px) 30vw, 100vw" className="lg:mt-14" imgClassName="w-full" />}
-              </div>
-            ))}
-          </div>
-        </section>
+        <div className="country-rule" aria-hidden />
+        <Story steps={steps} label={`About ${p.name}`} />
 
-        <Gallery ids={p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)))} name={p.name} headingId="sides-h" tour={p.tour} layout={themeFor(country)?.gallery} />
+        <Gallery ids={galleryIds} name={p.name} headingId="sides-h" tour={p.tour} layout={themeFor(country)?.gallery} />
 
         {pano && (
           <section aria-labelledby="look-h" className="border-t border-line bg-band text-on-band">
@@ -110,37 +102,35 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
           </section>
         )}
 
-        <section aria-labelledby="where-h" className="mx-auto grid max-w-[1400px] gap-10 px-4 py-20 md:px-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+        <section aria-labelledby="where-h" className="settle mx-auto grid max-w-[1400px] items-end gap-10 px-4 py-[14vh] md:px-8 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)]">
           <AtlasMap
             mode="streets"
             label={`Street map around ${p.name}`}
             bounds={[[p.where.lng - 0.012, p.where.lat - 0.008], [p.where.lng + 0.012, p.where.lat + 0.008]]}
             pins={[{ label: p.name, lng: p.where.lng, lat: p.where.lat, current: true }]}
-            className="h-[min(60vh,520px)] min-h-[320px]"
+            className="h-[min(72vh,640px)] min-h-[340px]"
           />
           <div>
-            <h2 id="where-h" className="font-display text-3xl">Where it is</h2>
-            <p className="mt-3 text-muted">
+            <h2 id="where-h" className="font-display text-3xl md:text-5xl">Where it is</h2>
+            <p className="mt-4 text-muted">
               {Math.abs(p.where.lat).toFixed(4)}° {p.where.lat >= 0 ? "N" : "S"}, {Math.abs(p.where.lng).toFixed(4)}° {p.where.lng >= 0 ? "E" : "W"}. Position from {p.where.ref}.
             </p>
             <p className="mt-6 text-sm">
-              <Link href={`/${country}/${region}/${city}/`} className="underline underline-offset-4">All of {ci.name} on one map</Link>
+              <Link href={`/${country}/${region}/${city}/`} className="underline underline-offset-4 hover:text-accent-text">All of {ci.name} on one map</Link>
             </p>
           </div>
         </section>
 
-        <section aria-labelledby="next-h" className="border-t border-line">
-          <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-            <h2 id="next-h" className="font-display text-3xl md:text-4xl">Next, in {ci.name}</h2>
-            <div className="mt-10 grid gap-10 md:grid-cols-2">
-              {related.map(({ p: rp, href }) => (
-                <PlaceCard lang={lang} key={rp.slug} place={rp} href={href} />
-              ))}
+        {related.length > 0 && (
+          <section aria-labelledby="next-h" className="mx-auto max-w-[1400px] px-4 pb-[14vh] md:px-8">
+            <h2 id="next-h" className="settle font-display text-3xl md:text-5xl">Next, in {ci.name}</h2>
+            <div className="mt-10">
+              <Collage lang={lang} items={related.map(({ p: rp, href }) => ({ href, image: rp.hero, title: rp.name, kicker: rp.kind, native: rp.native, summary: rp.summary }))} />
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        <div className="mx-auto max-w-[1400px] space-y-12 px-4 py-16 md:px-8">
+        <div className="mx-auto max-w-[1400px] space-y-12 border-t border-line px-4 py-16 md:px-8">
           <Gaps gaps={p.gaps} />
           <SourceList refs={refs} />
         </div>

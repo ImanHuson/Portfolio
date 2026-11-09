@@ -20,6 +20,7 @@ export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: 
       src: imgSrc(m, 960),
       srcSet: imgSrcSet(m),
       large: imgSrc(m, 1920),
+      thumb: imgSrc(m, 330),
       fallback: m.fallback ? asset(m.fallback) : undefined,
       w: m.width,
       h: m.height,
@@ -34,28 +35,39 @@ export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: 
         sourceUrl: m.sourceUrl,
       },
     }));
+  if (!items.length) return null;
   const sides = new Set(items.map((i) => i.side)).size;
-  return (
-    <section aria-labelledby={headingId} className="border-t border-line">
-      <div className="country-rule" aria-hidden />
-      <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
-        <h2 id={headingId} className="font-display text-3xl md:text-4xl">
-          Every side of {name}
-        </h2>
-        <p className="mt-3 max-w-[60ch] text-muted">
-          {items.length} photographs from {sides} angles, in the order a visit runs. Select one to see it large.
+  const header = (
+    <div>
+      <h2 id={headingId} className="font-display text-3xl md:text-5xl">
+        Every side of {name}
+      </h2>
+      <p className="mt-3 max-w-[60ch] text-muted">
+        {items.length} photographs from {sides} angles, in the order a visit runs. Select one to see it large.
+      </p>
+      {tour && (
+        <p className="mt-5">
+          <a href={tour.url} className="press inline-flex items-center gap-2 border border-line px-4 py-2.5 font-medium hover:border-accent hover:text-accent-text">
+            {tour.label}
+            <ArrowSquareOut size={16} aria-hidden />
+            <span className="sr-only">(opens {tour.by}’s website)</span>
+          </a>
         </p>
-        {tour && (
-          <p className="mt-5">
-            <a href={tour.url} className="press inline-flex items-center gap-2 border border-line px-4 py-2.5 font-medium hover:border-accent hover:text-accent-text">
-              {tour.label}
-              <ArrowSquareOut size={16} aria-hidden />
-              <span className="sr-only">(opens {tour.by}’s website)</span>
-            </a>
-          </p>
-        )}
-        <GalleryViewer items={items} layout={layout} />
-      </div>
+      )}
+    </div>
+  );
+  return (
+    <section aria-labelledby={headingId} className="relative">
+      <div className="country-rule" aria-hidden />
+      {layout === "emaki" ? (
+        <div className="py-[8vh] lg:py-0">
+          <GalleryViewer items={items} layout="emaki" header={header} />
+        </div>
+      ) : (
+        <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">
+          <GalleryViewer items={items} layout="wall" header={header} />
+        </div>
+      )}
     </section>
   );
 }

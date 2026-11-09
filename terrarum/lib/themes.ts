@@ -47,6 +47,14 @@ export interface Theme {
   gallery: "emaki" | "wall";
   /** Section headings' accent: a brush stroke drawn under them, or none. */
   heading: "brush" | "plain";
+  /** The page ground: a fixed atmosphere (layered glows, vignette, grain) or
+   * the plain token colour. */
+  ground: "sumi" | "plain";
+  /** Colour scheme: follow the reader's setting, or hold one because the
+   * identity depends on it (Japan's night ground). */
+  scheme: "auto" | "dark";
+  /** A secondary material tone (Japan: hinoki wood), for rules and rollers. */
+  material?: string;
   /** Hero composition for the country page. */
   hero: "print-left-vertical-name" | "default";
   motion: { enter: "rise" | "ink"; durationMs: number };
@@ -84,6 +92,8 @@ export const ATLAS: Theme = {
   native: "inline",
   gallery: "wall",
   heading: "plain",
+  ground: "plain",
+  scheme: "auto",
   hero: "default",
   motion: { enter: "rise", durationMs: 520 },
   globe: "#e2b45a",
@@ -94,7 +104,7 @@ export const THEMES: Record<string, Theme> = {
     id: "japan",
     status: "designed",
     rationale:
-      "Washi-toned ground, sumi-indigo ink and shu vermilion (the lacquer red of shrine gates, which Fushimi Inari's own site explains as mercury-and-earth pigment). Mincho display type, the Japanese book face descended from Ming woodblock lettering. Place names set vertically, as they are on signs and in print. Photos slightly cooled and held back; the Edo woodblock prints carry the colour. Galleries unroll as a hand-scroll (emakimono), read right to left; section rules are seigaiha, the overlapping-wave pattern; headings take a short vermilion brush stroke drawn in as they come into view; pages arrive the way ink soaks into paper.",
+      "Sumi night: a dark sumi-indigo ground with a fixed atmosphere (an indigo glow from the upper left, a faint ember from the lower right, a vignette, washi grain), so photographs and Edo prints carry the colour, as a lit room carries what hangs in it. A graded indigo band across the top of the ground, the bokashi of Hiroshige's skies. Ivory text, hinoki wood for rules and the hand-scroll's rollers, shu vermilion as the single accent (the lacquer red of shrine gates, which Fushimi Inari's own site explains as mercury-and-earth pigment). Mincho display type, the Japanese book face descended from Ming woodblock lettering, set large. Native names set vertically, as on signs and in print, and repeated huge and faint as a typographic image. Every page opens on a full-screen photograph; passages are told beside a pinned photograph; galleries unroll as a hand-scroll (emakimono), read right to left; section rules are seigaiha; headings take a vermilion brush stroke. Research and reasons: research/design/japan-direction.md.",
     light: {
       bg: "#f1ede4",
       surface: "#e8e2d5",
@@ -108,16 +118,16 @@ export const THEMES: Record<string, Theme> = {
       onBand: "#efe9dc",
     },
     dark: {
-      bg: "#11151f",
-      surface: "#181e2b",
-      ink: "#ebe5d8",
-      muted: "#a3a8b4",
-      line: "#2c3446",
+      bg: "#0b0e16",
+      surface: "#131826",
+      ink: "#ece4d4",
+      muted: "#aaa697",
+      line: "#283043",
       accent: "#e0573f",
-      accentText: "#ef7a63",
+      accentText: "#f08068",
       onAccent: "#140c09",
-      band: "#1b2747",
-      onBand: "#efe9dc",
+      band: "#121a30",
+      onBand: "#ece4d4",
     },
     display: "mincho",
     photo: "saturate(0.92) contrast(1.03)",
@@ -125,6 +135,9 @@ export const THEMES: Record<string, Theme> = {
     native: "vertical",
     gallery: "emaki",
     heading: "brush",
+    ground: "sumi",
+    scheme: "dark",
+    material: "#b38b5d",
     hero: "print-left-vertical-name",
     motion: { enter: "ink", durationMs: 620 },
     sound: {
@@ -172,6 +185,8 @@ export const THEMES: Record<string, Theme> = {
     native: "inline",
     gallery: "wall",
     heading: "plain",
+    ground: "plain",
+    scheme: "auto",
     hero: "default",
     motion: { enter: "rise", durationMs: 560 },
     globe: "#3fb6b0",
@@ -211,6 +226,8 @@ export const THEMES: Record<string, Theme> = {
     native: "stack",
     gallery: "wall",
     heading: "plain",
+    ground: "plain",
+    scheme: "auto",
     hero: "default",
     motion: { enter: "rise", durationMs: 420 },
     globe: "#e8473b",
@@ -248,5 +265,6 @@ export function themeStyle(theme: Theme): React.CSSProperties {
     ...vars(theme.dark, "d"),
     "--photo-filter": theme.photo,
     "--enter-ms": `${theme.motion.durationMs}ms`,
+    "--material": theme.material ?? "var(--line)",
   } as React.CSSProperties;
 }

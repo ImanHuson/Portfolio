@@ -242,7 +242,7 @@ export function AtlasMap({ mode, bounds, pins = [], areas, label, className = ""
   }, [mode, bounds, pins, areas, router]);
 
   return (
-    <div className={`relative overflow-hidden border border-line bg-surface ${className}`}>
+    <div data-map-mode={mode} className={`relative overflow-hidden border border-line bg-surface ${className}`}>
       <div ref={host} className="absolute inset-0" style={{ position: "absolute", inset: 0 }} role="region" aria-label={label} />
       {failed && <p className="absolute inset-4 text-sm text-muted">The map could not be drawn on this device. The places are listed beside it.</p>}
       <noscript>
