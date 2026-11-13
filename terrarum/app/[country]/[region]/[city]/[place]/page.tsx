@@ -7,6 +7,7 @@ import { CinemaHero } from "@/components/story/CinemaHero";
 import { Collage } from "@/components/story/Collage";
 import { FactBand, Statement } from "@/components/story/Statement";
 import { Story, type StoryStep } from "@/components/story/Story";
+import { SeasonNow } from "@/components/ornament/SeasonNow";
 import { Gallery } from "@/components/ui/Gallery";
 import { Credit } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
@@ -46,6 +47,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
   const related = p.related.filter((s) => getPlace(country, s)).map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const pano = p.panoramas[0];
   const lang = c.entry.nativeLang?.split(" ")[0];
+  const orn = themeFor(country)?.ornament;
 
   // The story pairs each passage with a photograph: its own if it has one,
   // otherwise the next unused photograph of the place, in visit order.
@@ -78,16 +80,17 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
             { label: p.name },
           ]}
         >
-          <SaveButton href={`/${country}/${region}/${city}/${place}/`} title={p.name} kind={`${p.kind}, ${ci.name}`} />
+          <SaveButton href={`/${country}/${region}/${city}/${place}/`} title={p.name} kind={`${p.kind}, ${ci.name}`} seal={orn?.hanko ? p.native : undefined} />
         </CinemaHero>
 
         <Statement id="matters-h" label="Why it matters" text={p.matters} watermark={themeFor(country)?.native === "vertical" ? p.native : undefined} lang={lang} />
         <FactBand facts={p.facts} refs={refs} />
+        {orn?.seasons && <SeasonNow place={p.name} lat={p.where.lat} lng={p.where.lng} timeZone={orn.timeZone} />}
 
         <div className="country-rule" aria-hidden />
         <Story steps={steps} label={`About ${p.name}`} />
 
-        <Gallery ids={galleryIds} name={p.name} headingId="sides-h" tour={p.tour} layout={themeFor(country)?.gallery} />
+        <Gallery ids={galleryIds} name={p.name} headingId="sides-h" tour={p.tour} layout={themeFor(country)?.gallery} mounted={orn?.mount === "kakejiku"} />
 
         {pano && (
           <section aria-labelledby="look-h" className="border-t border-line bg-band text-on-band">

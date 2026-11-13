@@ -79,6 +79,7 @@ export const land: Chapter = {
       cite: ["stat-handbook-2026", "moe-nps-site"],
       covers: ["geology"],
       images: ["jp-land-sakurajima", "jp-land-sakurajima-sat"],
+      widget: "jp-quakes",
       status: "fact-checked",
     },
     {

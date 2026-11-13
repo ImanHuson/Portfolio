@@ -1,3 +1,4 @@
+import { Petals } from "@/components/ornament/Petals";
 import { themeFor, themeStyle } from "@/lib/themes";
 
 /** Puts a country's identity on everything inside it: tokens for both colour
@@ -15,12 +16,14 @@ export function ThemeShell({ country, children }: { country: string; children: R
       data-heading={theme.heading}
       data-ground={theme.ground}
       data-scheme={theme.scheme}
+      data-ornament={theme.ornament ? "" : undefined}
       style={themeStyle(theme)}
       className="min-h-dvh"
     >
       {/* A fixed atmosphere behind everything: light and depth instead of a flat colour. */}
       {theme.ground !== "plain" && <div className="atmos" aria-hidden />}
       {children}
+      {theme.ornament?.petals && <Petals />}
     </div>
   );
 }

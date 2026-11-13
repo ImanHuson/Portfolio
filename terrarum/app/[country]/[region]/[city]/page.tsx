@@ -8,6 +8,7 @@ import { Collage } from "@/components/story/Collage";
 import { FactBand } from "@/components/story/Statement";
 import { Story, type StoryStep } from "@/components/story/Story";
 import { Credit } from "@/components/ui/Figure";
+import { SeasonNow } from "@/components/ornament/SeasonNow";
 import { Gaps } from "@/components/ui/Gaps";
 import { Passage } from "@/components/ui/Passage";
 import { SaveButton } from "@/components/ui/SaveButton";
@@ -38,6 +39,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
   const places = ci.places.map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
   const refs = makeRefs([...ci.facts.map((f) => f.cite), ...ci.passages.map((p) => p.cite)]);
   const lang = c.entry.nativeLang?.split(" ")[0];
+  const orn = themeFor(country)?.ornament;
   const nearby = ci.nearby.flatMap((n) => {
     const nc = getCity(country, n);
     if (nc) return [{ href: cityPath(country, n).href, name: nc.name, hero: nc.hero, summary: nc.summary }];
@@ -86,7 +88,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
           entry={c.entry}
           trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { href: `/${country}/${region}/`, label: r.name }, { label: ci.name }]}
         >
-          <SaveButton href={`/${country}/${region}/${city}/`} title={ci.name} kind={`City, ${c.entry.name}`} />
+          <SaveButton href={`/${country}/${region}/${city}/`} title={ci.name} kind={`City, ${c.entry.name}`} seal={orn?.hanko ? ci.native : undefined} />
         </CinemaHero>
 
         <section aria-label="Key facts" className="relative isolate overflow-hidden pt-[16vh]">
@@ -97,6 +99,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
           )}
           <FactBand facts={ci.facts} refs={refs} />
         </section>
+        {orn?.seasons && <SeasonNow place={ci.name} lat={ci.where.lat} lng={ci.where.lng} timeZone={orn.timeZone} />}
 
         <section aria-labelledby="places-h" className="mx-auto max-w-[1400px] px-4 pb-[12vh] md:px-8">
           <h2 id="places-h" className="settle font-display text-4xl md:text-6xl">{places.length} places in {ci.name}</h2>

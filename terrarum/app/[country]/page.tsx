@@ -6,6 +6,8 @@ import { CinemaHero } from "@/components/story/CinemaHero";
 import { Collage } from "@/components/story/Collage";
 import { FactBand } from "@/components/story/Statement";
 import { Story, type StoryStep } from "@/components/story/Story";
+import { Omikuji } from "@/components/ornament/Omikuji";
+import { SeasonNow } from "@/components/ornament/SeasonNow";
 import { Gaps } from "@/components/ui/Gaps";
 import { Bars, Passage } from "@/components/ui/Passage";
 import { Cite, SourceList } from "@/components/ui/Refs";
@@ -34,6 +36,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
   if (!c) notFound();
   const e = c.entry;
   const lang = e.nativeLang?.split(" ")[0];
+  const orn = themeFor(slug)?.ornament;
   const regions = c.regions.map((r) => getRegion(slug, r)!);
   const firstCity = getCity(slug, regions[0].cities[0])!;
   const starts = firstCity.places.map((p) => ({ p: getPlace(slug, p)!, href: placePath(slug, p).href }));
@@ -84,6 +87,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
           )}
           <FactBand facts={c.facts} refs={refs} />
         </section>
+        {orn?.seasons && <SeasonNow place={orn.capital.name} lat={orn.capital.lat} lng={orn.capital.lng} timeZone={orn.timeZone} />}
 
         <div className="country-rule" aria-hidden />
         <section aria-labelledby="regions-h" className="relative">
@@ -158,6 +162,12 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
             </p>
           )}
         </section>
+
+        {orn?.omikuji && (
+          <Omikuji
+            lots={regions.flatMap((r) => r.cities.flatMap((cs) => getCity(slug, cs)!.places.map((ps) => getPlace(slug, ps)!).map((pl) => ({ href: placePath(slug, pl.slug).href, name: pl.name, native: pl.native, kind: pl.kind }))))}
+          />
+        )}
 
         <div className="country-rule" aria-hidden />
         <Story steps={steps} label={`About ${e.name}`} />

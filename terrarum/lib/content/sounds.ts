@@ -1,7 +1,7 @@
 /**
- * Field recordings a country's theme can play, off until the reader turns
- * sound on. Each is a real recording of the place or thing named, licence and
- * author checked on its Commons file page; encoded here as quiet mono AAC
+ * Recordings a country's theme can play, off until the reader turns sound on:
+ * for Japan, its own instruments (koto and shakuhachi), licence and author
+ * checked on each Commons file page; encoded here as quiet mono AAC
  * (loudness-normalised, faded at the ends so a loop does not click).
  */
 export interface Sound {
@@ -21,40 +21,28 @@ export interface Sound {
 
 export const SOUNDS: Sound[] = [
   {
-    id: "jp-suikinkutsu",
-    file: "sound/jp-suikinkutsu.m4a",
-    title: "Water dripping into a suikinkutsu, the buried echo jar of a garden basin, at Taizō-in, Kyoto",
-    short: "Suikinkutsu, Taizō-in",
-    creator: "Fg2",
-    date: "30 December 2008",
+    id: "jp-koto",
+    file: "sound/jp-koto.m4a",
+    title: "A woman plays a 13-string koto",
+    short: "Koto",
+    creator: "Torsodog",
+    date: "24 May 2006",
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Koto_performance.ogg",
+    loop: true,
+  },
+  {
+    id: "jp-shakuhachi",
+    file: "sound/jp-shakuhachi.m4a",
+    title: "Shika no Tōne (The Distant Cry of the Deer), a honkyoku for shakuhachi, played by Araki Kodō III (Victor 13029), the first three minutes",
+    short: "Shakuhachi, Shika no Tōne",
+    creator: "Araki Kodō III (1879–1935); restoration by Torsodog",
+    date: "recorded between 1925 and 1937",
     license: "Public domain",
     licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Suikinkutsu-LS100128.ogg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Shikanotoone_new.ogg",
     loop: true,
-  },
-  {
-    id: "jp-higurashi",
-    file: "sound/jp-higurashi.m4a",
-    title: "Higurashi cicadas at 7 in the evening, 28 July 2018",
-    short: "Higurashi, July evening",
-    creator: "あおもりくま (aomorikuma)",
-    date: "28 July 2018",
-    license: "CC BY-SA 3.0",
-    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Higurashi_20180728_1902.ogg",
-    loop: true,
-  },
-  {
-    id: "jp-bonsho",
-    file: "sound/jp-bonsho.m4a",
-    title: "The bonshō, the great temple bell, of Chōmei-ji, Shiga, struck once",
-    short: "Bonshō, Chōmei-ji",
-    creator: "Jnn",
-    date: "2006",
-    license: "CC BY 2.1 JP",
-    licenseUrl: "https://creativecommons.org/licenses/by/2.1/jp/deed.en",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Bonsyou5599.ogg",
-    loop: false,
   },
 ];
 

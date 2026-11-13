@@ -3,6 +3,8 @@ import { Credit } from "@/components/ui/Figure";
 import { NativeName } from "@/components/ui/NativeName";
 import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import type { CountryEntry } from "@/lib/content/types";
+import { SIGNATURE } from "@/lib/ornament";
+import { themeFor } from "@/lib/themes";
 
 type Trail = { href?: string; label: string }[];
 
@@ -31,6 +33,7 @@ export function CinemaHero({
   children?: React.ReactNode;
 }) {
   const slides = ids.slice(0, 4);
+  const signature = themeFor(entry.slug)?.ornament?.signature;
   const total = slides.length * 9;
   return (
     <section data-hero className="cine relative isolate flex flex-col overflow-hidden text-[#f3ece0]">
@@ -58,20 +61,24 @@ export function CinemaHero({
         })}
       </div>
       <div className="cine-scrim absolute inset-0 -z-10" aria-hidden />
+      {signature && (
+        // Yozakura: Kamisaka Sekka's willow and cherry, cut from his print, hanging into the frame.
+        <img src={asset(SIGNATURE.file)} alt="" aria-hidden width={1200} height={850} loading="eager" fetchPriority="low" decoding="async" data-yozakura className="yozakura pointer-events-none absolute -right-[3vw] top-0 z-0 h-auto select-none" />
+      )}
 
 
-      <div className="mx-auto w-full max-w-[1400px] px-4 pt-6 md:px-8 [&_a]:text-[#e9e1d2] [&_nav]:text-[#d6cfc2] [&_span[aria-current]]:text-white">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pt-6 md:px-8 [&_a]:text-[#e9e1d2] [&_nav]:text-[#d6cfc2] [&_span[aria-current]]:text-white">
         <Crumbs trail={trail} />
       </div>
 
-      <div className="mx-auto mt-auto grid w-full max-w-[1400px] items-end gap-8 px-4 pb-6 pt-24 md:px-8 md:pb-[9vh] lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="relative z-10 mx-auto mt-auto grid w-full max-w-[1400px] items-end gap-8 px-4 pb-6 pt-24 md:px-8 md:pb-[9vh] lg:grid-cols-[minmax(0,1fr)_auto]">
         <div className="cine-copy max-w-[52rem]">
           {kicker && <p className="photo-label text-sm font-medium tracking-wide">{kicker}</p>}
           <h1 className="mt-3 font-display text-5xl leading-[1.02] tracking-tight md:text-7xl lg:text-8xl">{title}</h1>
           {summary && <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-[#e6dfd2] md:text-xl">{summary}</p>}
           {children && <div className="mt-7">{children}</div>}
         </div>
-        {native && <NativeName text={native} entry={entry} size="md" className="hidden self-end lg:block" />}
+        {native && <NativeName text={native} entry={entry} size="md" className="write-in hidden self-end lg:block" />}
       </div>
 
       <p className="mx-auto w-full max-w-[1400px] px-4 pb-3 text-[12px] leading-snug text-[#d2cbbe] md:absolute md:bottom-3 md:right-8 md:w-auto md:max-w-[70ch] md:px-0 md:pb-0 md:text-right [&_a]:decoration-[#d2cbbe]/50" data-pagefind-ignore>

@@ -7,7 +7,7 @@ import type { SearchItem } from "@/lib/content";
 export function SiteHeader({ index }: { index: SearchItem[] }) {
   return (
     <header
-      className="sticky top-0 z-40 border-b border-[#2a313a] bg-[#0d1014]/92 text-[#e8e4dc] backdrop-blur"
+      className="glass-bar sticky top-0 z-40 text-[#e8e4dc]"
       style={{ viewTransitionName: "site-header" }}
     >
       <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-3 px-4 md:px-8">

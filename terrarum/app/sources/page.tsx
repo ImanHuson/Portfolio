@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MEDIA, small } from "@/lib/content/media";
 import { SOURCES } from "@/lib/content/sources";
 import { SOUNDS } from "@/lib/content/sounds";
+import { ARTWORKS } from "@/lib/ornament";
 
 export const metadata: Metadata = { title: "Sources and credits", description: "Every reference and every image licence used on Terrarum." };
 
@@ -71,7 +72,7 @@ export default function SourcesPage() {
       <section aria-labelledby="sound-h" id="sound" className="mt-20 max-w-[70ch] scroll-mt-20">
         <h2 id="sound-h" className="text-2xl font-semibold">Sound ({SOUNDS.length})</h2>
         <p className="mt-2 text-muted">
-          Field recordings a country can play when you turn sound on in the header. Off unless you choose it. Each is a quiet mono copy, loudness evened out and faded at the ends.
+          Recordings a country can play when you turn sound on in the header. Off unless you choose it. Each is a quiet mono copy, loudness evened out and faded at the ends.
         </p>
         <ul className="mt-6 divide-y divide-line border-y border-line">
           {SOUNDS.map((s) => (
@@ -80,6 +81,23 @@ export default function SourcesPage() {
               <p className="text-sm text-muted">
                 {s.creator}, {s.date}. <a href={s.sourceUrl} className="underline underline-offset-2">Wikimedia Commons</a>,{" "}
                 <a href={s.licenseUrl} className="underline underline-offset-2">{s.license}</a>.
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="orn-h" id="ornament" className="mt-20 max-w-[70ch] scroll-mt-20">
+        <h2 id="orn-h" className="text-2xl font-semibold">Paintings and prints used as ornament ({Object.keys(ARTWORKS).length})</h2>
+        <p className="mt-2 text-muted">
+          Japan&rsquo;s branches, seasonal prints and the cloth that mounts its photographs are cut from these works, all from the Cleveland Museum of Art&rsquo;s open collection.
+        </p>
+        <ul className="mt-6 divide-y divide-line border-y border-line">
+          {Object.values(ARTWORKS).map((a) => (
+            <li key={a.url} className="py-4">
+              <p className="font-medium">{a.title}</p>
+              <p className="text-sm text-muted">
+                {a.artist}, {a.date}, {a.medium}. <a href={a.url} className="underline underline-offset-2">Cleveland Museum of Art</a>, {a.license}.
               </p>
             </li>
           ))}

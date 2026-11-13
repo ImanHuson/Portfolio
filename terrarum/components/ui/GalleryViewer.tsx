@@ -14,6 +14,8 @@ export interface GalleryItem {
   h: number;
   alt: string;
   side: string;
+  /** The side's key in lib/content/brief SIDES (for its Japanese label). */
+  sideKey?: string;
   credit: { what: string; creator: string; date?: string; license: string; licenseUrl: string; sourceUrl: string };
 }
 
@@ -43,7 +45,19 @@ function Credit({ c }: { c: GalleryItem["credit"] }) {
  * copy; with it, the link opens a <dialog> that pages with buttons, arrow keys
  * or a swipe, and returns focus on close.
  */
-export function GalleryViewer({ items, layout = "wall", header }: { items: GalleryItem[]; layout?: "wall" | "emaki"; header?: React.ReactNode }) {
+/** The sides of a place, as a Japanese scroll's label would name them. */
+const SIDE_JA: Record<string, string> = {
+  approach: "参道", exterior: "外観", interior: "内部", detail: "細部", grounds: "境内", surroundings: "周辺",
+  view: "眺望", people: "人々", season: "季節", night: "夜景", aerial: "空撮", history: "往時",
+};
+
+export interface Mount {
+  brocade: string;
+  side: string;
+  ichimonji: string;
+}
+
+export function GalleryViewer({ items, layout = "wall", header, mount }: { items: GalleryItem[]; layout?: "wall" | "emaki"; header?: React.ReactNode; mount?: Mount }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const pin = useRef<HTMLDivElement>(null);
   const view = useRef<HTMLDivElement>(null);
@@ -118,6 +132,46 @@ export function GalleryViewer({ items, layout = "wall", header }: { items: Galle
     };
   }, [emaki]);
 
+  // Hung scrolls sway with how fast the strip moves, then settle: a damped
+  // spring sampled each frame while the gallery is on screen. Nothing moves
+  // under reduced motion.
+  useEffect(() => {
+    if (!emaki || !mount || !track.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = track.current;
+    const mounts = [...t.querySelectorAll<HTMLElement>("[data-mount]")];
+    const gain = mounts.map((_, i) => 0.75 + ((i * 37) % 10) / 20);
+    let raf = 0;
+    let x0 = t.getBoundingClientRect().left;
+    let angle = 0;
+    let vel = 0;
+    let last = 0;
+    const tick = () => {
+      const x = t.getBoundingClientRect().left;
+      const dx = x - x0;
+      x0 = x;
+      const target = Math.max(-5, Math.min(5, dx * 0.22));
+      vel += (target - angle) * 0.08 - vel * 0.16;
+      angle += vel;
+      if (Math.abs(angle) < 0.01 && Math.abs(vel) < 0.01) angle = vel = 0;
+      // Write only on change, so a still strip costs one layout read a frame and nothing else.
+      if (angle !== last) mounts.forEach((m, i) => (m.style.transform = angle ? `rotate(${(angle * gain[i]).toFixed(3)}deg)` : ""));
+      last = angle;
+      raf = requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver(([e]) => {
+      cancelAnimationFrame(raf);
+      if (e.isIntersecting) {
+        x0 = t.getBoundingClientRect().left;
+        raf = requestAnimationFrame(tick);
+      }
+    });
+    io.observe(t);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [emaki, mount]);
+
   const it = items[at];
   const open = (i: number) => {
     setAt(i);
@@ -173,12 +227,19 @@ export function GalleryViewer({ items, layout = "wall", header }: { items: Galle
           >
             <ul ref={track} data-pinned={pinned ? "" : undefined} className="scroll-track flex w-max items-start gap-[5vw] px-4 md:px-[6vw]">
               {items.map((m, i) => (
-                <li key={m.id} dir="ltr" className="scroll-item shrink-0">
+                <li key={m.id} dir="ltr" className={`scroll-item shrink-0 ${mount ? "pt-8" : ""}`}>
                   <figure>
-                    {link(
-                      m,
-                      i,
-                      <img
+                    {mount ? (
+                      <div
+                        data-mount
+                        className="kakejiku"
+                        style={{ "--brocade": `url(${mount.brocade})`, "--brocade-side": `url(${mount.side})`, "--ichimonji": `url(${mount.ichimonji})` } as React.CSSProperties}
+                      >
+                        <span className="kakejiku-futai left-[34%]" aria-hidden />
+                        <span className="kakejiku-futai right-[34%]" aria-hidden />
+                        <div className="kakejiku-top" aria-hidden />
+                        <div className="kakejiku-band" aria-hidden />
+                        {link(m, i, <img
                         src={m.src}
                         srcSet={m.srcSet}
                         sizes="(min-width:768px) 50vw, 85vw"
@@ -189,9 +250,29 @@ export function GalleryViewer({ items, layout = "wall", header }: { items: Galle
                         loading="lazy"
                         decoding="async"
                         className="scroll-shot photo w-auto max-w-[86vw] bg-surface object-cover"
-                      />,
+                      />)}
+                        <div className="kakejiku-band" aria-hidden />
+                        <div className="h-10" aria-hidden />
+                        <span className="kakejiku-roller" aria-hidden />
+                        {m.sideKey && SIDE_JA[m.sideKey] && (
+                          <span lang="ja" aria-hidden className="kakejiku-label">{SIDE_JA[m.sideKey]}</span>
+                        )}
+                      </div>
+                    ) : (
+                      link(m, i, <img
+                        src={m.src}
+                        srcSet={m.srcSet}
+                        sizes="(min-width:768px) 50vw, 85vw"
+                        width={m.w}
+                        height={m.h}
+                        alt={m.alt}
+                        data-fallback={m.fallback}
+                        loading="lazy"
+                        decoding="async"
+                        className="scroll-shot photo w-auto max-w-[86vw] bg-surface object-cover"
+                      />)
                     )}
-                    <figcaption className="mt-3 max-w-[34ch] text-[13px] leading-snug text-muted" data-pagefind-ignore>
+                    <figcaption className={`max-w-[34ch] text-[13px] leading-snug text-muted ${mount ? "mt-5" : "mt-3"}`} data-pagefind-ignore>
                       <span className="block font-display text-base text-ink">{m.side}.</span> <Credit c={m.credit} />.
                     </figcaption>
                   </figure>

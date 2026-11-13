@@ -401,3 +401,126 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 /* Tiles: a long, deep scrim from the bottom, so their text holds on any photograph. */
 .tile-scrim { background: linear-gradient(to top, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
 .tile-scrim-side { background: linear-gradient(to right, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
+
+/* ------------------------------------------------------------------ */
+/* Brush-written Japanese (Yuji Syuku), feathered like sumi on paper.
+   Only Japanese text: English stays in the book face. */
+[data-theme="japan"] [lang="ja"] {
+  font-family: var(--font-brush), "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-weight: 400;
+  filter: url(#sumi);
+}
+/* Large brush names are written in, top to bottom, the way the brush moves. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-theme="japan"] .write-in { animation: write-in 1100ms cubic-bezier(0.65, 0, 0.35, 1) 150ms both; }
+  @supports (animation-timeline: view()) {
+    [data-theme="japan"] .cine-kanji { animation: write-in linear both; animation-timeline: view(); animation-range: entry 10% cover 45%; }
+  }
+}
+@keyframes write-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* ------------------------------------------------------------------ */
+/* Glass: a web approximation of a glass material (backdrop blur, a lit top
+   edge, a hairline border). Only on small controls and bars that sit over
+   photographs, never behind running text. Solid where transparency is reduced. */
+.glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.05)), rgb(14 18 28 / 0.32);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.28), 0 10px 30px rgb(0 0 0 / 0.25);
+  color: #f3ece0;
+}
+.glass-bar {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02)), rgb(10 13 20 / 0.42);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.04);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass-bar { -webkit-backdrop-filter: none; backdrop-filter: none; background: #121722; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Yozakura: Sekka's willow and cherry hanging into every Japan opening. */
+/* Sized to frame the corner, not cover the subject; the cut edges of the print fade out. */
+.yozakura {
+  width: min(40vw, 600px); filter: drop-shadow(0 6px 18px rgb(0 0 0 / 0.45)); transform-origin: 70% 0;
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 100% 0%, #000 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 100% 100% at 100% 0%, #000 68%, transparent 100%);
+}
+@media (max-width: 767px) { .yozakura { width: 78vw; opacity: 0.85; } }
+@media (prefers-reduced-motion: no-preference) {
+  .yozakura { animation: bough 9s ease-in-out infinite alternate; }
+}
+@keyframes bough { from { transform: rotate(-1.2deg); } to { transform: rotate(1deg); } }
+
+/* The season now: its branch arrives as the strip comes into view. */
+.season-branch { filter: drop-shadow(0 8px 20px rgb(0 0 0 / 0.5)); }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .season-branch { animation: branch-in linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+  }
+}
+@keyframes branch-in { from { transform: translateX(6vw) rotate(4deg); } to { transform: none; } }
+
+/* ------------------------------------------------------------------ */
+/* Hanko: saving a place in Japan presses a red seal, as a temple stamps a goshuin book. */
+.hanko {
+  display: inline-grid; place-items: center; width: 2.6rem; height: 2.6rem; padding: 0.15rem;
+  background: #b5241b; color: #fbf3e6; border-radius: 0.35rem;
+  box-shadow: inset 0 0 0 2px rgb(251 243 230 / 0.85), inset 0 0 0 4px #b5241b;
+  filter: url(#sumi);
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family: var(--font-brush), serif; font-size: 0.72rem; line-height: 1; letter-spacing: 0.02em;
+}
+.hanko[data-size="lg"] { width: 5.5rem; height: 5.5rem; font-size: 1.45rem; border-radius: 0.6rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .hanko[data-press] { animation: stamp 360ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+}
+@keyframes stamp { 0% { transform: scale(1.6) rotate(-8deg); opacity: 0; } 60% { transform: scale(0.94) rotate(-3deg); opacity: 1; } 100% { transform: scale(1) rotate(-3deg); } }
+
+/* ------------------------------------------------------------------ */
+/* Omikuji: the hexagonal box shakes, a stick drops, a slip unrolls. */
+.omikuji-box {
+  width: 4.5rem; height: 7rem; position: relative;
+  background: linear-gradient(90deg, #6b4a2b, #a77b4f 30%, #c49867 50%, #a77b4f 70%, #6b4a2b);
+  clip-path: polygon(25% 0, 75% 0, 100% 12%, 100% 100%, 0 100%, 0 12%);
+  box-shadow: inset 0 -6px 0 rgb(0 0 0 / 0.25);
+}
+.omikuji-box::after { content: "おみくじ"; position: absolute; inset: 1.4rem 0 auto; text-align: center; writing-mode: vertical-rl; text-orientation: upright; margin-inline: auto; width: 100%; color: #fbf3e6; font-family: var(--font-brush), serif; font-size: 1rem; filter: url(#sumi); }
+@media (prefers-reduced-motion: no-preference) {
+  .omikuji-box[data-shake] { animation: shake 480ms ease-in-out; }
+  .omikuji-slip { animation: unroll 420ms cubic-bezier(0.23, 1, 0.32, 1) both; transform-origin: top; }
+}
+@media (prefers-reduced-motion: reduce) { .omikuji-slip { animation: fade-in 200ms ease-out both; } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes shake { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(-14deg); } 35% { transform: rotate(12deg); } 55% { transform: rotate(-10deg); } 75% { transform: rotate(7deg); } }
+@keyframes unroll { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+.omikuji-slip { background: #f5efe2; color: #1d1a16; box-shadow: 0 18px 40px rgb(0 0 0 / 0.45); }
+
+/* ------------------------------------------------------------------ */
+/* Kakejiku: each photograph hung as a scroll, in the cloth of a real 17th-century
+   mounting: gold karakusa brocade, gold-thread ichimonji strips, a wooden roller. */
+.kakejiku { position: relative; transform-origin: 50% -1.4rem; padding: 0 0.9rem 1.1rem; background: var(--brocade-side) repeat-y left top / 0.9rem auto, var(--brocade-side) repeat-y right top / 0.9rem auto, var(--brocade) repeat center / 40rem auto; background-color: #d8cbb0; }
+.kakejiku::before { content: ""; position: absolute; left: 50%; top: -1.4rem; width: 38%; height: 1.4rem; translate: -50% 0; border: 1.5px solid #8a7a5c; border-bottom: 0; border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+.kakejiku-top { height: 2.6rem; }
+.kakejiku-band { height: 0.6rem; background: var(--ichimonji) center / cover; }
+.kakejiku-futai { position: absolute; top: 0; width: 0.55rem; height: 3.6rem; background: var(--ichimonji) center / cover; box-shadow: 0 1px 2px rgb(0 0 0 / 0.3); }
+.kakejiku-roller { position: absolute; left: -0.9rem; right: -0.9rem; bottom: -0.55rem; height: 0.9rem; border-radius: 0.45rem; background: linear-gradient(180deg, #4a2f1c, #2a1a10 55%, #140c07); box-shadow: 0 6px 14px rgb(0 0 0 / 0.5); }
+.kakejiku-roller::before, .kakejiku-roller::after { content: ""; position: absolute; top: -0.12rem; width: 1rem; height: 1.14rem; border-radius: 0.3rem; background: linear-gradient(180deg, #e3c27a, #a07c3a 60%, #6b5125); }
+.kakejiku-roller::before { left: -0.5rem; }
+.kakejiku-roller::after { right: -0.5rem; }
+/* Mounted photographs are shorter, so the scroll with its mount and roller fits under the heading. */
+.scroll-item:nth-child(3n + 1) .kakejiku .scroll-shot { height: min(44vh, 480px); }
+.scroll-item:nth-child(3n + 2) .kakejiku .scroll-shot { height: min(34vh, 380px); margin-top: 0; }
+.scroll-item:nth-child(3n + 2) .kakejiku { margin-top: 8vh; }
+.scroll-item:nth-child(3n) .kakejiku .scroll-shot { height: min(40vh, 440px); margin-top: 0; }
+.scroll-item:nth-child(3n) .kakejiku { margin-top: 3vh; }
+@media (max-width: 767px) { .scroll-item .kakejiku { margin-top: 0 !important; } .kakejiku .scroll-shot { height: 44vh !important; } }
+.kakejiku-label { position: absolute; top: 3.2rem; right: -2.3rem; writing-mode: vertical-rl; text-orientation: upright; font-size: 1.05rem; color: var(--ink); }
+@media (max-width: 767px) { .kakejiku-label { display: none; } }
+
+/* Petals: a full-screen canvas above the page, never catching the pointer. */
+.petals { position: fixed; inset: 0; z-index: 45; pointer-events: none; }

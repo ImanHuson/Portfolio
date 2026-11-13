@@ -11,6 +11,8 @@ export interface Saved {
   href: string;
   title: string;
   kind: string;
+  /** Where a country stamps what you save (Japan: a hanko), the text of the seal. */
+  seal?: string;
   savedAt: string;
 }
 

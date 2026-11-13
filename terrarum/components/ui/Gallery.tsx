@@ -1,6 +1,7 @@
 import { ArrowSquareOut } from "@phosphor-icons/react/dist/ssr";
 import { SIDES, type Side } from "@/lib/content/brief";
 import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
+import { MOUNT } from "@/lib/ornament";
 import { GalleryViewer, type GalleryItem } from "./GalleryViewer";
 
 const ORDER = Object.keys(SIDES) as Side[];
@@ -11,7 +12,7 @@ const ORDER = Object.keys(SIDES) as Side[];
  * other seasons, after dark, from above, the past). Each photo is captioned
  * with the side it shows and credited in full; selecting one opens a viewer.
  */
-export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: string[]; name: string; headingId: string; tour?: { url: string; label: string; by: string }; layout?: "wall" | "emaki" }) {
+export function Gallery({ ids, name, headingId, tour, layout = "wall", mounted = false }: { ids: string[]; name: string; headingId: string; tour?: { url: string; label: string; by: string }; layout?: "wall" | "emaki"; mounted?: boolean }) {
   const items: GalleryItem[] = ids
     .map((id) => media(id))
     .sort((a, b) => ORDER.indexOf(a.side ?? "detail") - ORDER.indexOf(b.side ?? "detail"))
@@ -26,6 +27,7 @@ export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: 
       h: m.height,
       alt: m.alt,
       side: m.side ? SIDES[m.side] : "",
+      sideKey: m.side,
       credit: {
         what: m.kind === "artwork" ? m.title : "Photo",
         creator: m.creator,
@@ -61,7 +63,7 @@ export function Gallery({ ids, name, headingId, tour, layout = "wall" }: { ids: 
       <div className="country-rule" aria-hidden />
       {layout === "emaki" ? (
         <div className="py-[8vh] lg:py-0">
-          <GalleryViewer items={items} layout="emaki" header={header} />
+          <GalleryViewer items={items} layout="emaki" header={header} mount={mounted ? { brocade: asset(MOUNT.brocade), side: asset(MOUNT.side), ichimonji: asset(MOUNT.ichimonji) } : undefined} />
         </div>
       ) : (
         <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-8">

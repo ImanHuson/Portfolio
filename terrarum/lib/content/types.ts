@@ -71,7 +71,7 @@ export interface Passage {
   /** Places in this country the passage is about, linked beside it. */
   places?: string[];
   /** An interactive piece shown full width under the passage (components/chapter/Widget.tsx). */
-  widget?: "jp-climate" | "jp-parks";
+  widget?: "jp-climate" | "jp-parks" | "jp-quakes";
   /** A place in this country the passage leads to. */
   seeAlso?: { place: string; label: string };
   /** Optional comparison drawn beside the text (same sources as the passage). */

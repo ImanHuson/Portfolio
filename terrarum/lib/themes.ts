@@ -55,6 +55,11 @@ export interface Theme {
   scheme: "auto" | "dark";
   /** A secondary material tone (Japan: hinoki wood), for rules and rollers. */
   material?: string;
+  /** Things that identify the country, each tied to a job on the page. Japan:
+   * yozakura on every opening, a branch for Japan's current season, petals
+   * while scrolling, a hanko seal for saving, an omikuji draw, photographs
+   * mounted as hanging scrolls. `timeZone` decides the season and the clock. */
+  ornament?: { signature: boolean; seasons: boolean; petals: boolean; hanko: boolean; omikuji: boolean; mount: "kakejiku" | "none"; timeZone: string; capital: { name: string; lat: number; lng: number } };
   /** Hero composition for the country page. */
   hero: "print-left-vertical-name" | "default";
   motion: { enter: "rise" | "ink"; durationMs: number };
@@ -138,15 +143,15 @@ export const THEMES: Record<string, Theme> = {
     ground: "sumi",
     scheme: "dark",
     material: "#b38b5d",
+    ornament: { signature: true, seasons: true, petals: true, hanko: true, omikuji: true, mount: "kakejiku", timeZone: "Asia/Tokyo", capital: { name: "Tokyo", lat: 35.6895, lng: 139.6917 } },
     hero: "print-left-vertical-name",
     motion: { enter: "ink", durationMs: 620 },
     sound: {
       beds: [
-        { path: "/japan/topics/land/", id: "jp-higurashi" },
-        { path: "/japan/kansai/koyasan/", id: "jp-higurashi" },
-        { path: "/japan/", id: "jp-suikinkutsu" },
+        { path: "/japan/topics/", id: "jp-shakuhachi" },
+        { path: "/japan/kansai/koyasan/", id: "jp-shakuhachi" },
+        { path: "/japan/", id: "jp-koto" },
       ],
-      greet: "jp-bonsho",
     },
     globe: "#e0573f",
   },
