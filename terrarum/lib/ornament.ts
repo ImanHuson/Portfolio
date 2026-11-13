@@ -78,8 +78,5 @@ export function seasonOf(date: Date, timeZone: string): Season {
   return "winter";
 }
 
-/** The year-round signature: yozakura, cherry at night. */
-export const SIGNATURE = { file: "/media/ink/yozakura.webp", from: "willowCherry" as const };
-
 /** The cloth of a real scroll mounting, used to mount photographs. */
 export const MOUNT = { brocade: "/media/ink/brocade.webp", side: "/media/ink/brocade-side.webp", ichimonji: "/media/ink/ichimonji.webp", from: "takao" as const };

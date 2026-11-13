@@ -1,8 +1,7 @@
 """Japan's branches: cut-outs from Kamisaka Sekka's woodblock plates in
 "Flowers of a Hundred Worlds" (Momoyogusa, 1909-10), Cleveland Museum of Art
 Open Access (CC0). Each design is lifted off its paper so it can hang on the
-night ground: the cherry and willow as the year-round yozakura, and one
-branch per season for the seasonal plate.
+night ground: one branch per season for the seasonal plate.
 
     python3 scripts/media/ink.py            # fetch (once) and cut every recipe
     python3 scripts/media/ink.py autumn     # one recipe
@@ -26,7 +25,6 @@ UA = "Mozilla/5.0 (X11; Linux x86_64) Chrome/120 TerrarumAtlas/1.0 (https://iman
 # colour; "hue" keeps saturated pixels within hue ranges (degrees).
 # crop: (left, top, right, bottom) as fractions of the plate.
 RECIPES = {
-    "yozakura": dict(cma=154162, keep="paper", thr=12, crop=(0.02, 0.03, 0.97, 0.965)),
     # Spring: the cherry in blossom from the same plate, cropped to the flowering boughs.
     "spring": dict(cma=154162, keep="paper", thr=12, crop=(0.08, 0.42, 0.97, 0.965)),
     "summer": dict(cma=154136, keep="paper", thr=12, crop=(0.02, 0.03, 0.98, 0.965), lift=(62, 66, 70)),
@@ -104,10 +102,9 @@ def save(name, r, rgba):
     big = rgba.copy()
     big.thumbnail((1200, 1200))
     big.save(os.path.join(OUT, f"{name}.webp"), "WEBP", quality=78, alpha_quality=90, method=6)
-    if name != "yozakura":
-        plate = Image.open(fetch(r.get("plate", r["cma"]))).convert("RGB")
-        plate.thumbnail((1400, 1400))
-        plate.save(os.path.join(OUT, f"{name}-plate.webp"), "WEBP", quality=84, method=6)
+    plate = Image.open(fetch(r.get("plate", r["cma"]))).convert("RGB")
+    plate.thumbnail((1400, 1400))
+    plate.save(os.path.join(OUT, f"{name}-plate.webp"), "WEBP", quality=84, method=6)
     print(name, big.size)
 
 

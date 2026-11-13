@@ -85,8 +85,9 @@ async function sakura(b) {
   const [ctx, p] = await open(b);
   for (const r of JAPAN) {
     await p.goto(B + r); await wait(p, 1000);
-    const ok = await p.evaluate(() => { const i = document.querySelector('[data-yozakura]'); return !!i && i.complete && i.naturalWidth > 0 && i.getBoundingClientRect().width > 100; });
-    if (!ok) fail(`${r}: no loaded yozakura`);
+    // The hero branch was removed at the user's request (Nov 2026): no ornament over the opening photograph.
+    const over = await p.evaluate(() => !!document.querySelector('[data-hero] [data-yozakura]'));
+    if (over) fail(`${r}: ornament over the hero photograph`);
   }
   // Petals change as the page scrolls.
   await p.goto(B + KINKAKU); await wait(p, 1000);
@@ -123,7 +124,7 @@ async function sakura(b) {
   // Another country has none of it.
   await p3.goto(B + CONTROL); await wait(p3, 800);
   const ctl = await p3.evaluate(() => ({ y: !!document.querySelector('[data-yozakura]'), c: !!document.querySelector('canvas.petals'), s: !!document.querySelector('[data-season]') }));
-  if (ctl.y || ctl.c || ctl.s) fail(`Maldives carries Japan ornament ${JSON.stringify(ctl)}`);
+  if (ctl.c || ctl.s) fail(`Maldives carries Japan ornament ${JSON.stringify(ctl)}`);
   await c3.close();
   return `${JAPAN.length} routes, 4 seasons`;
 }

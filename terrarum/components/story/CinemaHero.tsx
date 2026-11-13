@@ -3,8 +3,6 @@ import { Credit } from "@/components/ui/Figure";
 import { NativeName } from "@/components/ui/NativeName";
 import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import type { CountryEntry } from "@/lib/content/types";
-import { SIGNATURE } from "@/lib/ornament";
-import { themeFor } from "@/lib/themes";
 
 type Trail = { href?: string; label: string }[];
 
@@ -33,7 +31,6 @@ export function CinemaHero({
   children?: React.ReactNode;
 }) {
   const slides = ids.slice(0, 4);
-  const signature = themeFor(entry.slug)?.ornament?.signature;
   const total = slides.length * 9;
   return (
     <section data-hero className="cine relative isolate flex flex-col overflow-hidden text-[#f3ece0]">
@@ -61,10 +58,6 @@ export function CinemaHero({
         })}
       </div>
       <div className="cine-scrim absolute inset-0 -z-10" aria-hidden />
-      {signature && (
-        // Yozakura: Kamisaka Sekka's willow and cherry, cut from his print, hanging into the frame.
-        <img src={asset(SIGNATURE.file)} alt="" aria-hidden width={1200} height={850} loading="eager" fetchPriority="low" decoding="async" data-yozakura className="yozakura pointer-events-none absolute -right-[3vw] top-0 z-0 h-auto select-none" />
-      )}
 
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pt-6 md:px-8 [&_a]:text-[#e9e1d2] [&_nav]:text-[#d6cfc2] [&_span[aria-current]]:text-white">

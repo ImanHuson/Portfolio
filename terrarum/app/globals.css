@@ -443,18 +443,6 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 }
 
 /* ------------------------------------------------------------------ */
-/* Yozakura: Sekka's willow and cherry hanging into every Japan opening. */
-/* Sized to frame the corner, not cover the subject; the cut edges of the print fade out. */
-.yozakura {
-  width: min(40vw, 600px); filter: drop-shadow(0 6px 18px rgb(0 0 0 / 0.45)); transform-origin: 70% 0;
-  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 100% 0%, #000 68%, transparent 100%);
-  mask-image: radial-gradient(ellipse 100% 100% at 100% 0%, #000 68%, transparent 100%);
-}
-@media (max-width: 767px) { .yozakura { width: 78vw; opacity: 0.85; } }
-@media (prefers-reduced-motion: no-preference) {
-  .yozakura { animation: bough 9s ease-in-out infinite alternate; }
-}
-@keyframes bough { from { transform: rotate(-1.2deg); } to { transform: rotate(1deg); } }
 
 /* The season now: its branch arrives as the strip comes into view. */
 .season-branch { filter: drop-shadow(0 8px 20px rgb(0 0 0 / 0.5)); }
