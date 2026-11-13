@@ -1,53 +1,161 @@
 {
   "$comment": "What 'Japan is complete' means. The brief's country content system (sections A-J) is the definition: A geography, B cities, towns and villages, C destinations, D food, E history, F belief, G everyday life, H architecture and art, I music, literature and performance, J language. Chapters carry A and D-J; regions, cities and places carry B and C. scripts/audit-content.ts checks the data against this file, and against the brief's topic lists in lib/content/brief.ts.",
   "country": "japan",
-  "chapters": ["land", "history", "belief", "food", "life", "art", "performance", "language"],
+  "chapters": [
+    "land",
+    "history",
+    "belief",
+    "food",
+    "life",
+    "art",
+    "performance",
+    "language"
+  ],
   "minImagesPerPlace": 8,
   "minSidesPerPlace": 4,
   "regions": {
     "hokkaido": {
-      "sapporo": ["odori-park", "sapporo-clock-tower", "nijo-market"],
-      "shiraoi": ["upopoy"],
-      "shiretoko": ["shiretoko-five-lakes", "furepe-falls"]
+      "sapporo": [],
+      "shiraoi": [
+        "upopoy"
+      ],
+      "shiretoko": [
+        "shiretoko-five-lakes"
+      ],
+      "hakodate": [
+        "goryokaku"
+      ]
     },
     "tohoku": {
-      "hiraizumi": ["chuson-ji", "motsu-ji"],
-      "matsushima": ["zuigan-ji", "matsushima-bay"]
+      "hiraizumi": [
+        "chuson-ji"
+      ],
+      "matsushima": [
+        "zuigan-ji"
+      ],
+      "aomori": [
+        "sannai-maruyama"
+      ],
+      "rikuzentakata": [
+        "takata-matsubara"
+      ]
     },
     "kanto": {
-      "tokyo": ["senso-ji", "meiji-jingu", "imperial-palace-east-gardens", "shibuya-crossing", "tokyo-national-museum"],
-      "nikko": ["nikko-toshogu", "shinkyo", "kegon-falls"],
-      "kamakura": ["kotoku-in", "tsurugaoka-hachimangu"]
+      "tokyo": [
+        "senso-ji",
+        "meiji-jingu",
+        "imperial-palace-east-gardens"
+      ],
+      "nikko": [
+        "nikko-toshogu"
+      ],
+      "kamakura": [
+        "kotoku-in"
+      ]
     },
     "chubu": {
-      "kanazawa": ["kenroku-en", "higashi-chaya", "21st-century-museum"],
-      "shirakawa-go": ["ogimachi"],
-      "fujiyoshida": ["mount-fuji", "chureito-pagoda", "kitaguchi-hongu-fuji-sengen"],
-      "matsumoto": ["matsumoto-castle"]
+      "fujiyoshida": [
+        "mount-fuji"
+      ],
+      "kanazawa": [
+        "kenroku-en"
+      ],
+      "shirakawa-go": [
+        "ogimachi"
+      ],
+      "matsumoto": [
+        "matsumoto-castle"
+      ]
     },
     "kansai": {
-      "kyoto": ["nishiki-market", "fushimi-inari-taisha", "kiyomizu-dera", "kinkaku-ji", "ryoan-ji", "nijo-castle", "gion", "arashiyama"],
-      "nara": ["todai-ji", "kasuga-taisha", "nara-park"],
-      "osaka": ["osaka-castle", "dotonbori", "shitenno-ji"],
-      "himeji": ["himeji-castle"],
-      "koyasan": ["okunoin", "kongobu-ji"]
+      "kyoto": [
+        "nishiki-market",
+        "fushimi-inari-taisha",
+        "kiyomizu-dera",
+        "kinkaku-ji",
+        "ryoan-ji",
+        "nijo-castle",
+        "gion",
+        "arashiyama"
+      ],
+      "nara": [
+        "todai-ji",
+        "kasuga-taisha"
+      ],
+      "ikaruga": [
+        "horyu-ji"
+      ],
+      "osaka": [
+        "osaka-castle",
+        "dotonbori"
+      ],
+      "himeji": [
+        "himeji-castle"
+      ],
+      "koyasan": [
+        "okunoin",
+        "kongobu-ji"
+      ]
     },
     "chugoku": {
-      "hiroshima": ["atomic-bomb-dome", "peace-memorial-park", "shukkei-en"],
-      "miyajima": ["itsukushima-shrine", "mount-misen"],
-      "izumo": ["izumo-taisha"]
+      "hiroshima": [
+        "peace-memorial-park"
+      ],
+      "miyajima": [
+        "itsukushima-shrine"
+      ],
+      "izumo": [
+        "izumo-taisha"
+      ]
     },
     "shikoku": {
-      "matsuyama": ["dogo-onsen-honkan", "matsuyama-castle"],
-      "naoshima": ["chichu-art-museum", "naoshima-pumpkins"],
-      "iya-valley": ["iya-kazurabashi"]
+      "matsuyama": [
+        "dogo-onsen-honkan",
+        "ishite-ji"
+      ],
+      "takamatsu": [
+        "ritsurin-garden"
+      ]
     },
     "kyushu": {
-      "fukuoka": ["nakasu-yatai", "ohori-park", "kushida-shrine"],
-      "dazaifu": ["dazaifu-tenmangu"],
-      "nagasaki": ["oura-church", "dejima", "glover-garden"],
-      "naha": ["shuri-castle", "makishi-market", "shikina-en"],
-      "yakushima": ["shiratani-unsuikyo", "jomon-sugi"]
+      "fukuoka": [],
+      "dazaifu": [
+        "dazaifu-tenmangu"
+      ],
+      "nagasaki": [
+        "oura-church",
+        "dejima"
+      ],
+      "naha": [
+        "shuri-castle"
+      ],
+      "yakushima": [
+        "yakusugi-forest"
+      ]
     }
+  },
+  "$selection": "Places chosen by research/countries/japan/place-selection.md (2026-11-13, agreed with the owner): a place gets its own page only if it has a top designation (World Heritage component, National Treasure building, Special Historic Site or Special Place of Scenic Beauty), is the only place for a story the atlas must tell, or is among the places most visitors to the region go to. Viewpoints, bridges, markets and streets inside a bigger place are sections of that place or of the city page. Cities with an empty list carry their folded sights on the city page.",
+  "reserve": {
+    "$comment": "First additions if a region gets another page, in order; see place-selection.md.",
+    "kanto": [
+      "tomioka-silk-mill"
+    ],
+    "chubu": [
+      "kamikochi",
+      "sado-gold-mines"
+    ],
+    "chugoku": [
+      "iwami-ginzan"
+    ],
+    "shikoku": [
+      "naoshima"
+    ],
+    "tohoku": [
+      "motsu-ji"
+    ],
+    "kyushu": [
+      "shikina-en",
+      "kumamoto-castle"
+    ]
   }
 }

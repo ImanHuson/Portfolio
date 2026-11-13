@@ -15,11 +15,9 @@
 /japan/kansai/kyoto/nishiki-market/
 /japan/kansai/kyoto/ryoan-ji/
 /japan/kansai/nara/kasuga-taisha/
-/japan/kansai/nara/nara-park/
 /japan/kansai/nara/todai-ji/
 /japan/kansai/osaka/dotonbori/
 /japan/kansai/osaka/osaka-castle/
-/japan/kansai/osaka/shitenno-ji/
 /japan/topics/land/
 /japan/
 /japan/kansai/
