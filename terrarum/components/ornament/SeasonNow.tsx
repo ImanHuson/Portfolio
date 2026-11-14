@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { SEASONS, seasonOf, type Season } from "@/lib/ornament";
+import { KO, koSpan, koStart, microseasonOf } from "@/lib/content/japan/microseasons";
 
 /** WMO weather codes (as Open-Meteo returns them) in plain words. */
 function sky(code: number, day: boolean) {
@@ -74,10 +75,15 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
   const s = SEASONS[season];
   const time = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone }).format(date);
   const day = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone }).format(date);
+  const { ko, n, sekki } = microseasonOf(date, timeZone);
+  // The old calendar's seasons turn at Risshun, Rikka, Risshū and Rittō, weeks before the month-based ones.
+  const OLD: Season[] = ["spring", "summer", "autumn", "winter"];
+  const oldSeason = OLD[Math.floor(ko.sekki / 6)];
+  const turned = !forced && oldSeason !== season ? KO[Math.floor(ko.sekki / 6) * 18] : null;
 
   return (
     <section aria-labelledby="now-h" data-season={season} className="relative isolate overflow-hidden py-[12vh]">
-      <div className="mx-auto grid max-w-[1400px] items-end gap-10 px-4 md:px-8 sm:grid-cols-[auto_minmax(0,1fr)]">
+      <div className="mx-auto grid max-w-[1400px] items-end gap-10 px-4 md:px-8 sm:grid-cols-[auto_minmax(0,1fr)] lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,30rem)]">
         <p lang="ja" aria-hidden className="tategaki w-fit justify-self-start font-display text-[clamp(5rem,14vw,10rem)] leading-none text-accent">
           {s.ja}
         </p>
@@ -101,6 +107,27 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
               Weather from <a href="https://open-meteo.com/" className="underline decoration-line underline-offset-2 hover:decoration-current">Open-Meteo</a>.
             </p>
           )}
+        </div>
+        {/* The old calendar's microseason: 72 of them, about five days each. */}
+        <div data-microseason className="flex gap-6 border-line sm:col-span-2 lg:col-span-1 lg:border-l lg:pl-10">
+          <p lang="ja" aria-hidden className="tategaki shrink-0 font-display text-[clamp(2.75rem,5vw,4.25rem)] leading-[1.05] text-ink">
+            {ko.ja}
+          </p>
+          <div className="min-w-0 self-end">
+            <p className="text-sm font-medium tracking-wide text-muted">
+              Microseason {n + 1} of 72
+            </p>
+            <p className="mt-3 font-display text-2xl leading-snug md:text-3xl">{ko.en}</p>
+            <p className="mt-1 italic text-muted">{ko.romaji}</p>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted">
+              About {koSpan(ko)}, in <span lang="ja">{sekki.ja}</span> {sekki.romaji}, {sekki.en.toLowerCase()}.
+              {turned && <> By the old calendar, {oldSeason} has already begun, on about {koStart(turned)}.</>}
+            </p>
+            <p className="mt-3 text-[13px] leading-snug text-muted">
+              The old calendar splits the year into 24 seasons and 72 microseasons; names and dates from{" "}
+              <a href="https://www.nippon.com/en/features/h00124/" className="underline decoration-line underline-offset-2 hover:decoration-current">Nippon.com</a>.
+            </p>
+          </div>
         </div>
       </div>
     </section>

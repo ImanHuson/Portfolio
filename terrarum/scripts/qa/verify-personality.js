@@ -101,16 +101,19 @@ async function sakura(b) {
   if (a && (b1 === a || b2 === b1)) fail('petal canvas does not change while scrolling');
   await ctx.close();
   // The season follows Japan's date; the strip carries no picture (prints were removed as pasted-on).
-  for (const [iso, want, ja] of [['2026-11-13T03:00:00Z', 'autumn', '秋'], ['2026-04-05T03:00:00Z', 'spring', '春'], ['2026-07-20T03:00:00Z', 'summer', '夏'], ['2027-01-20T03:00:00Z', 'winter', '冬']]) {
+  // Each date's microseason is checked against the Nippon.com table: 地始凍 (12–16 Nov), 玄鳥至 (5–9 Apr), 鷹乃学習 (17–22 Jul), 款冬華 (20–24 Jan).
+  for (const [iso, want, ja, kō] of [['2026-11-13T03:00:00Z', 'autumn', '秋', '地始凍'], ['2026-04-05T03:00:00Z', 'spring', '春', '玄鳥至'], ['2026-07-20T03:00:00Z', 'summer', '夏', '鷹乃学習'], ['2027-01-20T03:00:00Z', 'winter', '冬', '款冬華']]) {
     const [c, q] = await open(b);
     await q.clock.setFixedTime(new Date(iso));
     await q.goto(B + '/japan/kansai/kyoto/'); await wait(q, 1200);
-    const m = await q.evaluate(() => { const s = document.querySelector('[data-season]'); return s ? { season: s.dataset.season, text: s.textContent, imgs: s.querySelectorAll('img').length } : null; });
+    const m = await q.evaluate(() => { const s = document.querySelector('[data-season]'); const k = s && s.querySelector('[data-microseason] [lang="ja"]'); return s ? { season: s.dataset.season, text: s.textContent, imgs: s.querySelectorAll('img').length, ko: k && k.textContent.trim() } : null; });
     if (!m) fail(`${iso}: no season strip`);
     else {
       if (m.season !== want) fail(`${iso}: season ${m.season}, want ${want}`);
       if (!m.text.includes(ja)) fail(`${iso}: no ${ja}`);
       if (m.imgs) fail(`${iso}: the strip still shows ${m.imgs} image(s)`);
+      if (!/Microseason \d+ of 72/.test(m.text)) fail(`${iso}: no microseason`);
+      if (m.ko !== kō) fail(`${iso}: microseason ${m.ko}, want ${kō}`);
     }
     await c.close();
   }

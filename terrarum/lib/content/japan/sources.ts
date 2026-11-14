@@ -438,4 +438,7 @@ export const JAPAN_SOURCES: Source[] = [
   jta("jta-r2-01164", "R2-01164", "Chinese Juniper Trees, Kenchōji", "Lanxi Daolong, a Chinese Zen master, came to Japan in 1246 and headed Kenchōji, completed in 1253; seven junipers more than 760 years old."),
   { id: "visitnikko-toshogu", title: "Nikko Toshogu Shrine", publisher: "Nikko Official Guide (Nikko City Tourism Association)", url: "https://www.visitnikko.jp/spots/nikko-toshogu-shrine", accessed: K, type: "official",
     notes: "Ieyasu enshrined after his death in 1616; twenty years later Iemitsu built the complex; 55 buildings including eight National Treasures, notably Yōmeimon; the sleeping cat, the elephants carved by an artist who had never seen one, the three monkeys." },
+  // The old calendar ("right now" strip)
+  { id: "nippon-72", title: "Japan’s 72 Microseasons", publisher: "Nippon.com (Nippon Communications Foundation)", url: "https://www.nippon.com/en/features/h00124/", accessed: "2026-11-14", type: "secondary",
+    notes: "24 sekki from Risshun to Daikan, each split into three kō of about five days, 72 in all; the names came from China and were rewritten for Japan in 1685 by the court astronomer Shibukawa Shunkai; the dates in its table are approximate and can move by a day; readings vary between sources. The full table is parsed into lib/content/japan/microseasons.ts." },
 ];
