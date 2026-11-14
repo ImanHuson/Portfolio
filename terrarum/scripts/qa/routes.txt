@@ -21,3 +21,12 @@
 /japan/topics/land/
 /japan/
 /japan/kansai/
+/japan/kanto/
+/japan/kanto/tokyo/
+/japan/kanto/nikko/
+/japan/kanto/kamakura/
+/japan/kanto/tokyo/senso-ji/
+/japan/kanto/tokyo/meiji-jingu/
+/japan/kanto/tokyo/imperial-palace-east-gardens/
+/japan/kanto/nikko/nikko-toshogu/
+/japan/kanto/kamakura/kotoku-in/

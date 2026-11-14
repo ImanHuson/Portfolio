@@ -11,7 +11,7 @@ export function Statement({ label, text, id, watermark, lang }: { label: string;
   return (
     <section aria-labelledby={id} className="relative isolate overflow-hidden">
       {watermark && (
-        <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[6vh] -z-10 font-display max-md:text-[clamp(5rem,38vw,9rem)] max-md:opacity-10" style={{ "--n": [...(watermark ?? "")].length } as React.CSSProperties}>
+        <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[6vh] -z-10 font-display max-md:text-[clamp(5rem,38vw,9rem)] max-md:opacity-10" style={{ "--n": [...(watermark ?? "")].length, fontSize: `min(30vh, calc(80vh / ${[...(watermark ?? "")].length}), 24rem)` } as React.CSSProperties}>
           {watermark}
         </p>
       )}

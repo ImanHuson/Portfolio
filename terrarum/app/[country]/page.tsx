@@ -38,7 +38,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
   const lang = e.nativeLang?.split(" ")[0];
   const orn = themeFor(slug)?.ornament;
   const regions = c.regions.map((r) => getRegion(slug, r)!);
-  const firstCity = getCity(slug, regions[0].cities[0])!;
+  const firstCity = getCity(slug, c.startCity ?? regions[0].cities[0])!;
   const starts = firstCity.places.map((p) => ({ p: getPlace(slug, p)!, href: placePath(slug, p).href }));
   const journey = c.journeys[0];
   const stops = journey?.stops.map((s) => ({ ...s, p: getPlace(slug, s.place)!, href: placePath(slug, s.place).href })) ?? [];

@@ -305,6 +305,8 @@ export interface Country {
   regionsNote: string;
   regions: string[];
   pendingRegions: { geoKey: string; name: string; native?: string }[];
+  /** The city the country page offers as the place to start (default: the first region's first city). */
+  startCity?: string;
   passages: Passage[];
   timeline: { title: string; periods: TimelinePeriod[]; cite: Cite; caveat: string };
   journeys: Journey[];

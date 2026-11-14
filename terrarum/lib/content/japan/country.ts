@@ -27,11 +27,12 @@ export const japan: Country = {
   regionsBounds: [[127, 25.5], [146, 45.6]],
   regionsHeading: "Eight regions, one open",
   regionsNote: "Japan’s regions are a convention, not a level of government. Kansai is researched; the others are on the map and waiting.",
-  regions: ["kansai"],
+  regions: ["kanto", "kansai"],
+  // Kyoto is the deepest city so far and the slice the brief asked for first.
+  startCity: "kyoto",
   pendingRegions: [
     { geoKey: "hokkaido", name: "Hokkaido", native: "北海道" },
     { geoKey: "tohoku", name: "Tōhoku", native: "東北" },
-    { geoKey: "kanto", name: "Kantō", native: "関東" },
     { geoKey: "chubu", name: "Chūbu", native: "中部" },
     { geoKey: "chugoku", name: "Chūgoku", native: "中国" },
     { geoKey: "shikoku", name: "Shikoku", native: "四国" },

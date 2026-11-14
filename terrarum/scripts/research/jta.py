@@ -55,11 +55,21 @@ def show(n):
 
 def url(n):
     r = next(x for x in rows() if x["n"] == n)
+    # The 2018 (平成30年) entries are numbered in the same order as the bulk file:
+    # row n is page H30-<n>. Checked on rows 431, 510-533.
+    if "平成30年" in str(r["yr"]):
+        print(f"{SITE}H30-{int(n):05d}.html")
+        return
     # Untitled rows: search by the opening words of the text instead.
     key = (r["et"] or "").strip() or " ".join((r["eb"] or "").split()[:6])
-    body = urllib.parse.urlencode({"keyword": key}).encode()
-    res = subprocess.run(["curl", "-s", "-m", "60", "-A", UA, "--data-binary", "@-", SITE + "cgi-bin/search.cgi"], input=body, capture_output=True)
-    ids = sorted(set(re.findall(r"/tagengo-db/en/((?:R\d|H3\d)-\d{5})\.html", res.stdout.decode("utf-8", "ignore"))))
+    # The search takes GET (a POST returns the default listing); ask for 100 hits.
+    q = urllib.parse.urlencode({"keyword": key, "page_size": 100})
+    res = subprocess.run(["curl", "-s", "-m", "60", "-A", UA, f"{SITE}cgi-bin/search.cgi?{q}"], capture_output=True)
+    ids = sorted(set(re.findall(r"((?:R\d|H3\d)-\d{5})\.html", res.stdout.decode("utf-8", "ignore"))))
+    # Page ids carry the fiscal year (令和2年 -> R2-); try those first.
+    m = re.match(r"令和(\d+)年", str(r["yr"]))
+    if m:
+        ids = [i for i in ids if i.startswith(f"R{m.group(1)}-")] + [i for i in ids if not i.startswith(f"R{m.group(1)}-")]
     want = norm(r["eb"])[:160]
     rs = os.path.join(os.path.dirname(__file__), "rs.py")
     for i in ids:
