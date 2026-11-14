@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AtlasMap } from "@/components/map/AtlasMap";
+import { SeasonNow } from "@/components/ornament/SeasonNow";
 import { CinemaHero } from "@/components/story/CinemaHero";
 import { Collage } from "@/components/story/Collage";
 import { FactBand } from "@/components/story/Statement";
@@ -10,6 +11,7 @@ import { Passage } from "@/components/ui/Passage";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { allStaticParams, cityPath, getCity, getCountry, getRegion, makeRefs } from "@/lib/content";
+import { themeFor } from "@/lib/themes";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -31,6 +33,7 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
   const refs = makeRefs([...r.facts.map((f) => f.cite), r.definition.cite]);
 
   const lang = c.entry.nativeLang?.split(" ")[0];
+  const orn = themeFor(country)?.ornament;
 
   return (
     <ThemeShell country={country}>
@@ -48,6 +51,9 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
         <section aria-label="Key facts" className="pt-[12vh]">
           <FactBand facts={r.facts} refs={refs} />
         </section>
+
+        {/* The region's time and weather are taken at its first city. */}
+        {orn?.seasons && <SeasonNow place={r.name} lat={cities[0].where.lat} lng={cities[0].where.lng} timeZone={orn.timeZone} />}
 
         <section aria-labelledby="cities-h" className="mx-auto max-w-[1400px] px-4 pb-[12vh] md:px-8">
           <h2 id="cities-h" className="settle font-display text-4xl md:text-6xl">{cities.length === 1 ? "One city" : `${cities.length} cities`} to enter</h2>

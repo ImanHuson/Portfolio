@@ -100,22 +100,20 @@ async function sakura(b) {
   const b2 = await shot();
   if (a && (b1 === a || b2 === b1)) fail('petal canvas does not change while scrolling');
   await ctx.close();
-  // The season follows Japan's date, each with its own plate.
-  const plates = new Set();
-  for (const [iso, want] of [['2026-11-13T03:00:00Z', 'autumn'], ['2026-04-05T03:00:00Z', 'spring'], ['2026-07-20T03:00:00Z', 'summer'], ['2027-01-20T03:00:00Z', 'winter']]) {
+  // The season follows Japan's date; the strip carries no picture (prints were removed as pasted-on).
+  for (const [iso, want, ja] of [['2026-11-13T03:00:00Z', 'autumn', '秋'], ['2026-04-05T03:00:00Z', 'spring', '春'], ['2026-07-20T03:00:00Z', 'summer', '夏'], ['2027-01-20T03:00:00Z', 'winter', '冬']]) {
     const [c, q] = await open(b);
     await q.clock.setFixedTime(new Date(iso));
     await q.goto(B + '/japan/kansai/kyoto/'); await wait(q, 1200);
-    const m = await q.evaluate(() => { const s = document.querySelector('[data-season]'); const i = s && s.querySelector('figure img'); return s ? { season: s.dataset.season, plate: i && i.getAttribute('src'), loaded: !!i && i.complete && i.naturalWidth > 0 } : null; });
+    const m = await q.evaluate(() => { const s = document.querySelector('[data-season]'); return s ? { season: s.dataset.season, text: s.textContent, imgs: s.querySelectorAll('img').length } : null; });
     if (!m) fail(`${iso}: no season strip`);
     else {
       if (m.season !== want) fail(`${iso}: season ${m.season}, want ${want}`);
-      if (!m.loaded) fail(`${iso}: plate not loaded`);
-      plates.add(m.plate);
+      if (!m.text.includes(ja)) fail(`${iso}: no ${ja}`);
+      if (m.imgs) fail(`${iso}: the strip still shows ${m.imgs} image(s)`);
     }
     await c.close();
   }
-  if (plates.size !== 4) fail(`seasonal plates not all different: ${[...plates].join(', ')}`);
   // Reduced motion: no petals.
   const [c3, p3] = await open(b, { reducedMotion: 'reduce' });
   await p3.goto(B + KINKAKU); await wait(p3, 800); await scrollBy(p3, 900); await wait(p3, 200);
@@ -217,7 +215,7 @@ async function live(b) {
   const jpTime = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' }).format(new Date());
   const [hh] = jpTime.split(':');
   if (!new RegExp(`${hh}:\\d\\d`).test(now)) fail(`Kyoto strip lacks Japan time ${jpTime}: ${now.slice(0, 120)}`);
-  if (!/°C|could not be reached/.test(now)) fail('Kyoto strip shows neither weather nor an unavailable note');
+
   await ctx.close();
   // Blocked: honest failure states.
   const [c2, p2] = await open(b);
@@ -227,7 +225,10 @@ async function live(b) {
   if (!blocked) fail('quake map: no failure note with USGS blocked');
   await p2.goto(B + '/japan/kansai/kyoto/'); await wait(p2, 2000);
   const w = await p2.evaluate(() => document.querySelector('[data-season]')?.textContent || '');
-  if (!/could not be reached/.test(w)) fail('Kyoto strip: no unavailable note with Open-Meteo blocked');
+  // Weather that fails is left out quietly: the time and season still show, with no error text.
+  const jt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', timeZone: 'Asia/Tokyo' }).format(new Date());
+  if (!new RegExp(`${jt}:\\d\\d`).test(w)) fail(`Kyoto strip lost its time with Open-Meteo blocked: ${w.slice(0, 120)}`);
+  if (/could not be reached|°C|Open-Meteo/.test(w)) fail(`Kyoto strip shows weather text with Open-Meteo blocked: ${w.slice(0, 120)}`);
   await c2.close();
   return `quakes ${q.up}`;
 }

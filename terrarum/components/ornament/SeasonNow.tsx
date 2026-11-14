@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { ARTWORKS, SEASONS, seasonOf, type Season } from "@/lib/ornament";
-import { asset } from "@/lib/content/media";
+import { SEASONS, seasonOf, type Season } from "@/lib/ornament";
 
 /** WMO weather codes (as Open-Meteo returns them) in plain words. */
 function sky(code: number, day: boolean) {
@@ -44,10 +43,11 @@ const snapshot = () => now || (now = Date.now());
 type Weather = { t: number; code: number; day: boolean } | "unavailable" | null;
 
 /**
- * Japan right now: the time there, its season (and the print that stands for
- * it, from Kamisaka Sekka's "Flowers of a Hundred Worlds"), and the weather from Open-Meteo. All of it is live, so it needs
- * JavaScript; without it the strip is not shown. `?season=` overrides the
- * season, for checking the other three.
+ * Japan right now: the time there and its season, worked out in the browser so
+ * they always show, plus the weather from Open-Meteo when it answers. Weather
+ * that fails or takes more than six seconds is simply left out, so no page
+ * shows a gap or an error. Needs JavaScript; without it the strip is not
+ * shown. `?season=` overrides the season, for checking the other three.
  */
 export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: number; lng: number; timeZone: string }) {
   const t = useSyncExternalStore(subscribe, snapshot, () => 0);
@@ -55,14 +55,16 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
 
   useEffect(() => {
     const ctl = new AbortController();
+    const slow = setTimeout(() => ctl.abort(), 6000);
     fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day&timezone=${encodeURIComponent(timeZone)}`, { signal: ctl.signal })
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((d) => setWeather({ t: Math.round(d.current.temperature_2m), code: d.current.weather_code, day: d.current.is_day === 1 }))
-      .catch((e) => {
-        if (!ctl.signal.aborted) setWeather("unavailable");
-        return e;
-      });
-    return () => ctl.abort();
+      .catch(() => setWeather("unavailable"))
+      .finally(() => clearTimeout(slow));
+    return () => {
+      clearTimeout(slow);
+      ctl.abort();
+    };
   }, [lat, lng, timeZone]);
 
   if (!t) return null;
@@ -72,12 +74,11 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
   const s = SEASONS[season];
   const time = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone }).format(date);
   const day = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone }).format(date);
-  const plate = ARTWORKS[s.plate.from];
 
   return (
     <section aria-labelledby="now-h" data-season={season} className="relative isolate overflow-hidden py-[12vh]">
-      <div className="mx-auto grid max-w-[1400px] items-end gap-10 px-4 md:px-8 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,30rem)]">
-        <p lang="ja" aria-hidden className="tategaki font-display text-[clamp(5rem,14vw,10rem)] leading-none text-accent">
+      <div className="mx-auto grid max-w-[1400px] items-end gap-10 px-4 md:px-8 sm:grid-cols-[auto_minmax(0,1fr)]">
+        <p lang="ja" aria-hidden className="tategaki w-fit justify-self-start font-display text-[clamp(5rem,14vw,10rem)] leading-none text-accent">
           {s.ja}
         </p>
         <div>
@@ -94,15 +95,13 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
                 {weather.t}°C and {sky(weather.code, weather.day)}.
               </span>
             )}
-            {weather === "unavailable" && <span>The weather service could not be reached just now.</span>}
           </p>
+          {weather && weather !== "unavailable" && (
+            <p className="mt-2 text-[13px] text-muted">
+              Weather from <a href="https://open-meteo.com/" className="underline decoration-line underline-offset-2 hover:decoration-current">Open-Meteo</a>.
+            </p>
+          )}
         </div>
-        <figure className="max-lg:max-w-[30rem]">
-          <img src={asset(s.plate.file)} alt={s.plate.alt} loading="lazy" decoding="async" className="w-full shadow-[0_18px_40px_rgb(0_0_0/0.5)]" />
-          <figcaption className="mt-2 text-[13px] leading-snug text-muted">
-            <a href={plate.url} className="underline decoration-line underline-offset-2 hover:decoration-current">{plate.title}</a>, {plate.artist}, {plate.date}, CC0. Weather: Open-Meteo.
-          </figcaption>
-        </figure>
       </div>
     </section>
   );

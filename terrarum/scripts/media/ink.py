@@ -1,39 +1,22 @@
-"""Japan's branches: cut-outs from Kamisaka Sekka's woodblock plates in
-"Flowers of a Hundred Worlds" (Momoyogusa, 1909-10), Cleveland Museum of Art
-Open Access (CC0). Each design is lifted off its paper so it can hang on the
-night ground: one branch per season for the seasonal plate.
+"""The cloth of a real hanging-scroll mounting for the Japan gallery: the gold
+karakusa brocade and the gold-thread ichimonji strip from Kiyohara Yukinobu's
+"Autumn in Takao" (Cleveland Museum of Art, CC0).
 
-    python3 scripts/media/ink.py            # fetch (once) and cut every recipe
-    python3 scripts/media/ink.py autumn     # one recipe
+    python3 scripts/media/ink.py
 
-Raw scans go to media-src/ink/ (gitignored); output to public/media/ink/ as
-WebP with alpha, plus a full-plate WebP per season for the "right now" strip.
-Needs Pillow, numpy and scikit-image.
+Raw scans go to media-src/ink/ (gitignored); output to public/media/ink/.
+Sekka's seasonal plates and cut-out branches used to be made here too; they
+were removed from the site (Nov 2026) because they looked pasted on.
 """
-import json, os, subprocess, sys
-import numpy as np
-from PIL import Image, ImageFilter
-from skimage import color, morphology
+import json, os, subprocess
+
+from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 SRC = os.path.join(ROOT, "media-src", "ink")
 OUT = os.path.join(ROOT, "public", "media", "ink")
 UA = "Mozilla/5.0 (X11; Linux x86_64) Chrome/120 TerrarumAtlas/1.0 (https://imanhuson.github.io/Portfolio/terrarum/)"
-
-# keep: how pixels are chosen. "paper" keeps everything far from the paper
-# colour; "hue" keeps saturated pixels within hue ranges (degrees).
-# crop: (left, top, right, bottom) as fractions of the plate.
-RECIPES = {
-    # Spring: the cherry in blossom from the same plate, cropped to the flowering boughs.
-    "spring": dict(cma=154162, keep="paper", thr=12, crop=(0.08, 0.42, 0.97, 0.965)),
-    "summer": dict(cma=154136, keep="paper", thr=12, crop=(0.02, 0.03, 0.98, 0.965), lift=(62, 66, 70)),
-    # Autumn: Kiyohara Yukinobu's maple branch on silk ("Autumn in Takao"), the painting only.
-    "autumn": dict(cma=156124, keep="paper", thr=11, crop=(0.12, 0.22, 0.97, 0.66), plate=154180),
-    # Winter: Ogata Korin's ink plum; sumi strokes become pale ink on the night ground.
-    "winter": dict(cma=151078, keep="ink", crop=(0.1, 0.06, 0.9, 0.66), plate=154167),
-}
-
 
 def fetch(cma):
     os.makedirs(SRC, exist_ok=True)
@@ -43,69 +26,6 @@ def fetch(cma):
         url = (meta["images"].get("print") or meta["images"]["web"])["url"]
         subprocess.run(["curl", "-s", "-m", "180", "-A", UA, "-o", path, url], check=True)
     return path
-
-
-def paper_colour(lab):
-    h, w = lab.shape[:2]
-    inner = lab[h // 10: -h // 10, w // 10: -w // 10].reshape(-1, 3)
-    vals, counts = np.unique(np.round(inner / 4).astype(int), axis=0, return_counts=True)
-    mode = vals[counts.argmax()] * 4
-    return inner[np.sqrt(((inner - mode) ** 2).sum(-1)) < 6].mean(axis=0)
-
-
-def cut(name):
-    r = RECIPES[name]
-    im = Image.open(fetch(r["cma"])).convert("RGB")
-    im.thumbnail((2400, 2400))
-    W, H = im.size
-    l, t, rt, b = r["crop"]
-    im = im.crop((int(l * W), int(t * H), int(rt * W), int(b * H)))
-    a = np.asarray(im).astype(float) / 255
-    lab = color.rgb2lab(a)
-    paper = paper_colour(lab)
-    if r["keep"] == "paper":
-        m = np.sqrt(((lab - paper) ** 2).sum(-1)) > r["thr"]
-    elif r["keep"] == "ink":
-        # Sumi on silk: opacity follows how much darker than the silk a pixel is,
-        # and the stroke is redrawn in pale ink so it reads on the night ground.
-        dens = np.clip((paper[0] - lab[..., 0] - 4) / 32, 0, 1)
-        dens[: im.size[1] // 60] = 0
-        a8 = (dens ** 0.6 * 255).astype("uint8")
-        ivory = Image.new("RGB", im.size, (240, 233, 218))
-        ivory.putalpha(Image.fromarray(a8).filter(ImageFilter.GaussianBlur(0.6)))
-        ivory = ivory.crop(ivory.getbbox())
-        return save(name, r, ivory)
-    else:
-        hsv = np.asarray(im.convert("HSV")).astype(float)
-        hue = hsv[..., 0] * 360 / 255
-        sat = hsv[..., 1] / 255
-        m = np.zeros(hue.shape, bool)
-        for lo, hi in r["hues"]:
-            m |= (hue >= lo) & (hue <= hi)
-        m &= sat > r["sat"]
-    m = morphology.remove_small_objects(m, max_size=80)
-    m = morphology.closing(m, morphology.disk(2))
-    alpha = Image.fromarray((m * 255).astype("uint8")).filter(ImageFilter.GaussianBlur(1.1))
-    rgba = im.copy()
-    if r.get("lift"):
-        # Black sumi strokes vanish on the night ground: lift them to a dark ink grey.
-        arr = np.asarray(rgba).astype(float)
-        dark = arr.sum(-1) < 150
-        arr[dark] = np.maximum(arr[dark], r["lift"])
-        rgba = Image.fromarray(arr.astype("uint8"))
-    rgba.putalpha(alpha)
-    return save(name, r, rgba.crop(rgba.getbbox()))
-
-
-def save(name, r, rgba):
-    os.makedirs(OUT, exist_ok=True)
-    # The cut-outs themselves are no longer used (the user found them cheap
-    # next to the full prints, Nov 2026); only the plates are written.
-    plate = Image.open(fetch(r.get("plate", r["cma"]))).convert("RGB")
-    plate.thumbnail((1400, 1400))
-    plate.save(os.path.join(OUT, f"{name}-plate.webp"), "WEBP", quality=84, method=6)
-    print(name, plate.size)
-
 
 def mount():
     """The cloth of a real hanging-scroll mounting (Kiyohara Yukinobu's "Autumn in
@@ -121,7 +41,5 @@ def mount():
         img.save(os.path.join(OUT, f"{name}.webp"), "WEBP", quality=q, method=6)
         print(name, img.size)
 
-
 if __name__ == "__main__":
-    for n in sys.argv[1:] or [*RECIPES, "mount"]:
-        mount() if n == "mount" else cut(n)
+    mount()
