@@ -28,5 +28,6 @@
 /japan/kanto/tokyo/senso-ji/
 /japan/kanto/tokyo/meiji-jingu/
 /japan/kanto/tokyo/imperial-palace-east-gardens/
+/japan/kanto/tokyo/shibuya/
 /japan/kanto/nikko/nikko-toshogu/
 /japan/kanto/kamakura/kotoku-in/

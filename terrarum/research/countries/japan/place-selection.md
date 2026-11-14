@@ -248,3 +248,7 @@ Demand: Fukuoka 11.0% (a gateway airport), Okinawa 5.6%, Ōita 3.4%, Kumamoto 2.
 - **Kumamoto Castle's current access** to the keep and grounds was not confirmed beyond "restoration ongoing".
 - **Photo rules** at Upopoy's museum and Okunoin's inner precinct were not checked.
 - **Sensō-ji demand:** no figure for the temple itself; the Taitō ward figure seen was a search snippet and is not used.
+
+## Addendum, 14 November 2026: Shibuya restored
+
+The owner asked whether Shibuya deserved more than a mention. It does, on this file's own criterion 3: the Tokyo Metropolitan Government's 2025 survey of foreign visitors (`tmg-inbound-2025`, https://www.metro.tokyo.lg.jp/information/press/2026/06/2026063029) puts Shibuya first of all Tokyo areas visited, at 60.3%, for the fourth year running, and in the top three for 19 of the 20 countries and regions surveyed. The cut above rested on "no designation" and prefecture-level demand only; this site-level figure was not found then. Shibuya now has a district page (the crossing, Hachikō, its shops), like Gion and Dōtonbori in Kansai. Japan's total is 44.
