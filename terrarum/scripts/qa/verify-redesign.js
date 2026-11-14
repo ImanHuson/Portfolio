@@ -111,19 +111,35 @@ const tx = (p) => p.evaluate(() => { const t = document.querySelector('.scroll-t
 
 async function emaki(b) {
   const r = '/japan/kansai/kyoto/fushimi-inari-taisha/';
-  // Wide, motion allowed: pinned and unrolled by scrolling.
+  // Wide: page scrolling passes over the strip (no pin, the strip does not move);
+  // a mouse drag and the arrows move it, and a drag does not open a photograph.
   {
     const [ctx, p] = await page(b);
     await p.goto(B + r); await settle(p, 2000);
-    const info = await p.evaluate(() => { const v = document.querySelector('[data-emaki] .emaki'); const t = document.querySelector('.scroll-track'); return { over: t.scrollWidth - v.clientWidth, top: document.querySelector('[data-emaki]').getBoundingClientRect().top + scrollY }; });
-    await p.evaluate((y) => scrollTo(0, y - 56), info.top); await settle(p, 800);
-    const x0 = await tx(p);
-    for (let i = 0; i < 40; i++) { await p.mouse.wheel(0, 300); await p.waitForTimeout(40); }
-    await settle(p, 1500);
-    const x1 = await tx(p);
-    const moved = Math.abs(x1 - x0);
-    if (!(info.over > 0 && moved >= 0.9 * info.over)) fail(`1440: overflow ${info.over}, moved ${moved}`);
-    console.log(`1440: strip overflow ${Math.round(info.over)} px, moved ${Math.round(moved)} px`);
+    const top = await p.evaluate(() => document.querySelector('[data-emaki]').getBoundingClientRect().top + scrollY);
+    await p.evaluate((y) => scrollTo(0, y - 300), top); await settle(p, 600);
+    const s0 = await p.evaluate(() => ({ y: scrollY, left: document.querySelector('[data-emaki] .emaki').scrollLeft }));
+    const box = await p.evaluate(() => { const r = document.querySelector('[data-emaki] .emaki').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+    await p.mouse.move(box.x, Math.min(box.y, 800));
+    for (let i = 0; i < 10; i++) { await p.mouse.wheel(0, 200); await p.waitForTimeout(40); }
+    await settle(p, 600);
+    const s1 = await p.evaluate(() => ({ y: scrollY, left: document.querySelector('[data-emaki] .emaki').scrollLeft, pins: document.querySelectorAll('.pin-spacer').length }));
+    if (s1.y - s0.y < 1500) fail(`1440: page did not scroll past the gallery (${s0.y} -> ${s1.y})`);
+    if (s1.left !== s0.left) fail(`1440: vertical scrolling moved the strip (${s0.left} -> ${s1.left})`);
+    if (s1.pins) fail('1440: the gallery is still pinned');
+    await p.evaluate((y) => scrollTo(0, y - 100), top); await settle(p, 600);
+    const v = await p.evaluate(() => { const r = document.querySelector('[data-emaki] .emaki img').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+    const before = await p.evaluate(() => document.querySelector('[data-emaki] .emaki').scrollLeft);
+    await p.mouse.move(v.x, v.y); await p.mouse.down();
+    for (let i = 1; i <= 10; i++) { await p.mouse.move(v.x + i * 40, v.y); await p.waitForTimeout(16); }
+    await p.mouse.up(); await settle(p, 400);
+    const after = await p.evaluate(() => ({ left: document.querySelector('[data-emaki] .emaki').scrollLeft, open: !!document.querySelector('dialog[open]') }));
+    if (Math.abs(after.left - before) < 300) fail(`1440: dragging moved the strip ${Math.abs(after.left - before)} px`);
+    if (after.open) fail('1440: a drag opened the viewer');
+    await p.getByRole('button', { name: 'Unroll further' }).click(); await settle(p, 900);
+    const arrow = await p.evaluate(() => document.querySelector('[data-emaki] .emaki').scrollLeft);
+    if (Math.abs(arrow - after.left) < 200) fail('1440: the arrow did not unroll the strip');
+    console.log(`1440: page scrolled ${s1.y - s0.y} px past it with the strip still; drag moved ${Math.round(Math.abs(after.left - before))} px`);
     await ctx.close();
   }
   // Phone: a native sideways scroller, no transform.

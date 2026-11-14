@@ -44,9 +44,8 @@ const snapshot = () => now || (now = Date.now());
 type Weather = { t: number; code: number; day: boolean } | "unavailable" | null;
 
 /**
- * Japan right now: the time there, its season (and the branch and print that
- * stand for it, from Kamisaka Sekka's "Flowers of a Hundred Worlds" and older
- * painters), and the weather from Open-Meteo. All of it is live, so it needs
+ * Japan right now: the time there, its season (and the print that stands for
+ * it, from Kamisaka Sekka's "Flowers of a Hundred Worlds"), and the weather from Open-Meteo. All of it is live, so it needs
  * JavaScript; without it the strip is not shown. `?season=` overrides the
  * season, for checking the other three.
  */
@@ -73,13 +72,11 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
   const s = SEASONS[season];
   const time = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone }).format(date);
   const day = new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone }).format(date);
-  const branch = ARTWORKS[s.branch.from];
   const plate = ARTWORKS[s.plate.from];
 
   return (
     <section aria-labelledby="now-h" data-season={season} className="relative isolate overflow-hidden py-[12vh]">
-      <img src={asset(s.branch.file)} alt={s.branch.alt} loading="lazy" decoding="async" data-season-branch className="season-branch pointer-events-none absolute right-[-4vw] top-[4vh] -z-10 h-auto w-[min(60vw,820px)] opacity-90 max-md:top-0 max-md:w-[80vw] max-md:opacity-50 max-md:[mask-image:linear-gradient(#000_35%,transparent_70%)]" />
-      <div className="mx-auto grid max-w-[1400px] items-end gap-10 px-4 md:px-8 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,22rem)]">
+      <div className="mx-auto grid max-w-[1400px] items-end gap-10 px-4 md:px-8 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,30rem)]">
         <p lang="ja" aria-hidden className="tategaki font-display text-[clamp(5rem,14vw,10rem)] leading-none text-accent">
           {s.ja}
         </p>
@@ -100,10 +97,10 @@ export function SeasonNow({ place, lat, lng, timeZone }: { place: string; lat: n
             {weather === "unavailable" && <span>The weather service could not be reached just now.</span>}
           </p>
         </div>
-        <figure className="max-lg:max-w-[22rem]">
+        <figure className="max-lg:max-w-[30rem]">
           <img src={asset(s.plate.file)} alt={s.plate.alt} loading="lazy" decoding="async" className="w-full shadow-[0_18px_40px_rgb(0_0_0/0.5)]" />
           <figcaption className="mt-2 text-[13px] leading-snug text-muted">
-            <a href={plate.url} className="underline decoration-line underline-offset-2 hover:decoration-current">{plate.title}</a>, {plate.artist}, {plate.date}, CC0. Branch: <a href={branch.url} className="underline decoration-line underline-offset-2 hover:decoration-current">{branch.title}</a>, {branch.artist}. Weather: Open-Meteo.
+            <a href={plate.url} className="underline decoration-line underline-offset-2 hover:decoration-current">{plate.title}</a>, {plate.artist}, {plate.date}, CC0. Weather: Open-Meteo.
           </figcaption>
         </figure>
       </div>

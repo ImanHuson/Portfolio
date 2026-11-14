@@ -140,24 +140,25 @@ async function scroll(b) {
     });
     if (!m.n || m.mounted !== m.n) fail(`${r}: ${m.mounted}/${m.n} photos mounted`);
   }
-  // Sway while scrolling, settle after; the strip unrolls to its end.
+  // Sway while the strip is dragged, settle after; the arrows unroll it to its end.
   await p.goto(B + KINKAKU); await wait(p, 1000);
-  await p.evaluate(() => document.querySelector('.scroll-item').scrollIntoView({ block: 'center' }));
+  await p.evaluate(() => document.querySelector('[data-emaki]').scrollIntoView({ block: 'start' }));
   await wait(p, 800);
-  const top = await p.evaluate(() => { const s = document.querySelector('.scroll-item').closest('section'); return s.getBoundingClientRect().top + scrollY; });
-  await p.evaluate((y) => scrollTo(0, y - 10), top); await wait(p, 600);
+  const pt = await p.evaluate(() => { const r = document.querySelector('[data-emaki] .emaki img').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
   let maxAngle = 0;
-  for (let i = 0; i < 10; i++) {
-    await p.mouse.wheel(0, 140); await p.waitForTimeout(35);
+  await p.mouse.move(pt.x, pt.y); await p.mouse.down();
+  for (let i = 1; i <= 12; i++) {
+    await p.mouse.move(pt.x + i * 60, pt.y); await p.waitForTimeout(16);
     const a = await p.evaluate(() => Math.max(...[...document.querySelectorAll('[data-mount]')].map((e) => { const t = e.style.transform.match(/rotate\((-?[\d.]+)deg\)/); return t ? Math.abs(+t[1]) : 0; })));
     maxAngle = Math.max(maxAngle, a);
   }
+  await p.mouse.up();
   if (maxAngle < 0.5) fail(`mounts never swayed (max ${maxAngle.toFixed(2)}°)`);
   await wait(p, 2500);
   const rest = await p.evaluate(() => Math.max(...[...document.querySelectorAll('[data-mount]')].map((e) => { const t = e.style.transform.match(/rotate\((-?[\d.]+)deg\)/); return t ? Math.abs(+t[1]) : 0; })));
   if (rest > 0.15) fail(`mounts did not settle (${rest.toFixed(2)}°)`);
-  // Unroll to the end: the last photo comes fully into view.
-  for (let i = 0; i < 40; i++) { await p.mouse.wheel(0, 300); await p.waitForTimeout(30); }
+  // Unroll to the end with the arrow: the last photo comes fully into view.
+  for (let i = 0; i < 20; i++) { await p.getByRole('button', { name: 'Unroll further' }).click(); await p.waitForTimeout(250); }
   await wait(p, 900);
   const last = await p.evaluate(() => { const items = [...document.querySelectorAll('.scroll-item')]; const r = items[items.length - 1].getBoundingClientRect(); return { l: r.left, r: r.right, w: innerWidth }; });
   if (!(last.l >= -2 && last.r <= last.w + 2)) fail(`last scroll not fully shown at the end (${Math.round(last.l)}..${Math.round(last.r)} of ${last.w})`);

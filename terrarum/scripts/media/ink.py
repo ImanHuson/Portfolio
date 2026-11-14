@@ -99,13 +99,12 @@ def cut(name):
 
 def save(name, r, rgba):
     os.makedirs(OUT, exist_ok=True)
-    big = rgba.copy()
-    big.thumbnail((1200, 1200))
-    big.save(os.path.join(OUT, f"{name}.webp"), "WEBP", quality=78, alpha_quality=90, method=6)
+    # The cut-outs themselves are no longer used (the user found them cheap
+    # next to the full prints, Nov 2026); only the plates are written.
     plate = Image.open(fetch(r.get("plate", r["cma"]))).convert("RGB")
     plate.thumbnail((1400, 1400))
     plate.save(os.path.join(OUT, f"{name}-plate.webp"), "WEBP", quality=84, method=6)
-    print(name, big.size)
+    print(name, plate.size)
 
 
 def mount():

@@ -1,8 +1,8 @@
 /**
- * Japan's ornaments: paintings and prints from the Cleveland Museum of Art's
- * open collection (CC0), cut from their paper by scripts/media/ink.py. They
- * are decoration taken from real Japanese art, never from invented motifs,
- * and every one is credited on /sources/.
+ * Japan's ornaments: Kamisaka Sekka's prints and a scroll mounting from the
+ * Cleveland Museum of Art's open collection (CC0), prepared by
+ * scripts/media/ink.py. They are decoration taken from real Japanese art,
+ * never from invented motifs, and every one is credited on /sources/.
  */
 export interface Artwork {
   title: string;
@@ -20,9 +20,8 @@ export const ARTWORKS: Record<string, Artwork> = {
   willowCherry: { title: `${MOMO}: Willow and Cherry`, artist: SEKKA, date: "1909–10", medium: "colour woodblock print with gold and silver", url: "https://clevelandart.org/art/1988.23.2.2", license: "CC0 1.0" },
   morningGlories: { title: `${MOMO}: Morning Glories`, artist: SEKKA, date: "1909–10", medium: "colour woodblock print with gold and silver", url: "https://clevelandart.org/art/1988.23.1.15", license: "CC0 1.0" },
   lateAutumn: { title: `${MOMO}: Late Autumn`, artist: SEKKA, date: "1909–10", medium: "colour woodblock print with gold and silver", url: "https://clevelandart.org/art/1988.23.3.17", license: "CC0 1.0" },
+  takao: { title: "Autumn in Takao", artist: "Kiyohara Yukinobu (1643–1682)", date: "late 1600s", medium: "hanging scroll, ink and colour on silk (its mounting cloth dresses the gallery)", url: "https://clevelandart.org/art/1991.55", license: "CC0 1.0" },
   plum: { title: `${MOMO}: Plum`, artist: SEKKA, date: "1909–10", medium: "colour woodblock print with gold and silver", url: "https://clevelandart.org/art/1988.23.2.6", license: "CC0 1.0" },
-  takao: { title: "Autumn in Takao", artist: "Kiyohara Yukinobu (1643–1682)", date: "late 1600s", medium: "hanging scroll, ink and colour on silk", url: "https://clevelandart.org/art/1991.55", license: "CC0 1.0" },
-  korinPlum: { title: "Plum Tree", artist: "Ogata Kōrin (1658–1716)", date: "c. 1700", medium: "hanging scroll, ink on silk", url: "https://clevelandart.org/art/1983.10", license: "CC0 1.0" },
 };
 
 export type Season = "spring" | "summer" | "autumn" | "winter";
@@ -32,8 +31,6 @@ export interface SeasonLook {
   en: string;
   /** What the season is known for, shown beside its plate. */
   sign: string;
-  /** The cut-out branch (public/media/ink/<season>.webp) and its source. */
-  branch: { file: string; from: keyof typeof ARTWORKS; alt: string };
   /** The full plate (public/media/ink/<season>-plate.webp) and its source. */
   plate: { file: string; from: keyof typeof ARTWORKS; alt: string };
 }
@@ -43,28 +40,24 @@ export const SEASONS: Record<Season, SeasonLook> = {
     ja: "春",
     en: "Spring",
     sign: "cherry blossom",
-    branch: { file: "/media/ink/spring.webp", from: "willowCherry", alt: "Cherry boughs in flower among willow fronds" },
     plate: { file: "/media/ink/spring-plate.webp", from: "willowCherry", alt: "Kamisaka Sekka's print of a willow hanging over a cherry in flower" },
   },
   summer: {
     ja: "夏",
     en: "Summer",
     sign: "morning glories",
-    branch: { file: "/media/ink/summer.webp", from: "morningGlories", alt: "Blue morning glories climbing between bamboo poles" },
     plate: { file: "/media/ink/summer-plate.webp", from: "morningGlories", alt: "Kamisaka Sekka's print of morning glories on a bamboo fence" },
   },
   autumn: {
     ja: "秋",
     en: "Autumn",
     sign: "red maple leaves",
-    branch: { file: "/media/ink/autumn.webp", from: "takao", alt: "A red maple branch with a poem slip hung on it" },
     plate: { file: "/media/ink/autumn-plate.webp", from: "lateAutumn", alt: "Kamisaka Sekka's print of red maples and fallen leaves by a stream" },
   },
   winter: {
     ja: "冬",
     en: "Winter",
     sign: "plum blossom",
-    branch: { file: "/media/ink/winter.webp", from: "korinPlum", alt: "An ink-painted plum branch in flower, drawn in pale ink" },
     plate: { file: "/media/ink/winter-plate.webp", from: "plum", alt: "Kamisaka Sekka's print of a dark plum trunk with white blossoms" },
   },
 };

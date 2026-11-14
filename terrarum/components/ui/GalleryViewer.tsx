@@ -59,11 +59,9 @@ export interface Mount {
 
 export function GalleryViewer({ items, layout = "wall", header, mount }: { items: GalleryItem[]; layout?: "wall" | "emaki"; header?: React.ReactNode; mount?: Mount }) {
   const dialog = useRef<HTMLDialogElement>(null);
-  const pin = useRef<HTMLDivElement>(null);
   const view = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLUListElement>(null);
   const [at, setAt] = useState(0);
-  const [pinned, setPinned] = useState(false);
   const swipe = useRef<number | null>(null);
   const n = items.length;
   const go = useCallback((d: number) => setAt((i) => (i + d + n) % n), [n]);
@@ -80,55 +78,60 @@ export function GalleryViewer({ items, layout = "wall", header, mount }: { items
     return () => el.removeEventListener("keydown", key);
   }, [go]);
 
-  // Pin and unroll on wide screens; undo everything when the media query stops matching.
+  // The strip scrolls only when the reader asks it to: drag it with a mouse,
+  // swipe it with a trackpad or finger, use the arrows or the keyboard. Page
+  // scrolling passes straight over it (an earlier version pinned the page and
+  // turned vertical scrolling into sliding; the user found that forced).
   useEffect(() => {
-    if (!emaki || !pin.current || !track.current || !view.current) return;
-    let alive = true;
-    let undo = () => {};
-    (async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
-      if (!alive) return;
-      gsap.registerPlugin(ScrollTrigger);
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-        const t = track.current!;
-        const v = view.current!;
-        const distance = () => Math.max(0, t.scrollWidth - v.clientWidth);
-        if (distance() < 40) return;
-        setPinned(true);
-        // The view is right-to-left, so the strip starts at its right end and moves right.
-        const tween = gsap.to(t, {
-          x: () => distance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: pin.current!,
-            // Below the site header (3.5rem), so the heading stays in view while pinned.
-            start: "top 56px",
-            end: () => `+=${distance()}`,
-            pin: true,
-            scrub: 0.6,
-            invalidateOnRefresh: true,
-          },
-        });
-        // Keyboard: bring a focused photograph into view by scrolling to its point on the scroll.
-        const items = [...t.querySelectorAll<HTMLElement>(".scroll-item")];
-        const onFocus = (e: FocusEvent) => {
-          const i = items.findIndex((li) => li.contains(e.target as Node));
-          const st = tween.scrollTrigger;
-          if (i < 0 || !st) return;
-          window.scrollTo({ top: st.start + (st.end - st.start) * (items.length > 1 ? i / (items.length - 1) : 0), behavior: "auto" });
-        };
-        t.addEventListener("focusin", onFocus);
-        return () => {
-          t.removeEventListener("focusin", onFocus);
-          setPinned(false);
-        };
-      });
-      undo = () => mm.revert();
-    })();
+    const v = view.current;
+    if (!emaki || !v) return;
+    let start: { x: number; left: number } | null = null;
+    let moved = false;
+    const down = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      start = { x: e.clientX, left: v.scrollLeft };
+      moved = false;
+    };
+    const move = (e: PointerEvent) => {
+      if (!start) return;
+      const dx = e.clientX - start.x;
+      if (!moved && Math.abs(dx) < 6) return;
+      if (!moved) {
+        moved = true;
+        v.setPointerCapture(e.pointerId);
+        v.dataset.dragging = "";
+      }
+      v.scrollLeft = start.left - dx;
+    };
+    const up = (e: PointerEvent) => {
+      if (!start) return;
+      start = null;
+      if (v.hasPointerCapture(e.pointerId)) v.releasePointerCapture(e.pointerId);
+      delete v.dataset.dragging;
+    };
+    // A drag must not also open the photograph it ended on.
+    const click = (e: MouseEvent) => {
+      if (moved) {
+        e.preventDefault();
+        e.stopPropagation();
+        moved = false;
+      }
+    };
+    v.addEventListener("pointerdown", down);
+    v.addEventListener("pointermove", move);
+    v.addEventListener("pointerup", up);
+    v.addEventListener("pointercancel", up);
+    v.addEventListener("click", click, true);
+    // Links and images would otherwise start the browser's own drag and cancel ours.
+    const noNativeDrag = (e: DragEvent) => e.preventDefault();
+    v.addEventListener("dragstart", noNativeDrag);
     return () => {
-      alive = false;
-      undo();
+      v.removeEventListener("dragstart", noNativeDrag);
+      v.removeEventListener("pointerdown", down);
+      v.removeEventListener("pointermove", move);
+      v.removeEventListener("pointerup", up);
+      v.removeEventListener("pointercancel", up);
+      v.removeEventListener("click", click, true);
     };
   }, [emaki]);
 
@@ -201,13 +204,13 @@ export function GalleryViewer({ items, layout = "wall", header, mount }: { items
   return (
     <>
       {emaki ? (
-        <div ref={pin} data-emaki className="relative lg:flex lg:h-[calc(100svh-56px)] lg:flex-col lg:justify-center">
+        <div data-emaki className="relative">
           <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-end justify-between gap-4 px-4 md:px-8">
             <div>
               {header}
-              <p className="mt-2 text-sm text-muted">Read from right to left, as a hand-scroll unrolls.</p>
+              <p className="mt-2 text-sm text-muted">Read from right to left, as a hand-scroll unrolls. Drag the strip or use the arrows.</p>
             </div>
-            <div className={`flex gap-1 ${pinned ? "invisible" : ""}`} data-js-only>
+            <div className="flex gap-1" data-js-only>
               <button type="button" onClick={() => unroll(-1)} className="press border border-line p-2 hover:border-accent hover:text-accent-text">
                 <CaretRight size={18} aria-hidden />
                 <span className="sr-only">Back</span>
@@ -221,11 +224,11 @@ export function GalleryViewer({ items, layout = "wall", header, mount }: { items
           <div
             ref={view}
             dir="rtl"
-            tabIndex={pinned ? -1 : 0}
+            tabIndex={0}
             aria-label="Photographs, read right to left as a hand-scroll unrolls"
-            className={`emaki mt-8 ${pinned ? "overflow-hidden" : "overflow-x-auto"} pb-6`}
+            className="emaki mt-8 overflow-x-auto pb-6"
           >
-            <ul ref={track} data-pinned={pinned ? "" : undefined} className="scroll-track flex w-max items-start gap-[5vw] px-4 md:px-[6vw]">
+            <ul ref={track} className="scroll-track flex w-max items-start gap-[5vw] px-4 md:px-[6vw]">
               {items.map((m, i) => (
                 <li key={m.id} dir="ltr" className={`scroll-item shrink-0 ${mount ? "pt-8" : ""}`}>
                   <figure>

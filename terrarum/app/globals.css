@@ -277,6 +277,10 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 .emaki-item a { display: block; height: min(60vh, 520px); }
 @media (max-width: 640px) { .emaki-item a { height: 46vh; } }
 .emaki:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+/* Drag to unroll with a mouse; images must not start their own drag. */
+@media (hover: hover) and (pointer: fine) { .emaki { cursor: grab; } }
+.emaki[data-dragging] { cursor: grabbing; user-select: none; }
+.emaki img, .emaki a { -webkit-user-drag: none; user-select: none; }
 
 /* Japan's section rule: seigaiha, overlapping waves, in the theme's line colour. */
 .country-rule { display: none; }
@@ -375,7 +379,6 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 @media (max-width: 767px) {
   .scroll-item .scroll-shot { height: 52vh !important; margin-top: 0 !important; }
 }
-.scroll-track[data-pinned] { will-change: transform; }
 
 /* Section reveal: content settles upward as it arrives. Movement only, never
    opacity, so nothing is invisible in a full-page capture, in print, or if the
@@ -444,14 +447,6 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 
 /* ------------------------------------------------------------------ */
 
-/* The season now: its branch arrives as the strip comes into view. */
-.season-branch { filter: drop-shadow(0 8px 20px rgb(0 0 0 / 0.5)); }
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .season-branch { animation: branch-in linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
-  }
-}
-@keyframes branch-in { from { transform: translateX(6vw) rotate(4deg); } to { transform: none; } }
 
 /* ------------------------------------------------------------------ */
 /* Hanko: saving a place in Japan presses a red seal, as a temple stamps a goshuin book. */
