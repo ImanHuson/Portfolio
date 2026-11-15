@@ -188,8 +188,11 @@ p { text-wrap: pretty; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .lift { transition: transform 260ms var(--ease-out); }
   .lift:hover { transform: translateY(-3px); }
-  .zoom img { transition: transform 300ms var(--ease-out); }
-  .zoom:hover img { transform: scale(1.03); }
+  /* `scale`, not `transform`, so it composes with a scroll drift on the same image. */
+  .zoom img { transition: scale 400ms var(--ease-out); }
+  .zoom:hover img { scale: 1.04; }
+  .tile .photo-label::before { transition: width 300ms var(--ease-out); }
+  .tile:hover .photo-label::before { width: 2.4em; }
 }
 
 @layer components {
@@ -402,6 +405,22 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 .photo-label { color: #f1e9da; display: inline-flex; align-items: center; gap: 0.6em; }
 .photo-label::before { content: ""; width: 1.4em; height: 2px; background: #e0573f; flex: none; }
 /* Tiles: a long, deep scrim from the bottom, so their text holds on any photograph. */
+/* Collage tiles: only the name sits on the photograph. Its band is sized to
+   the name (the text block plus 5rem above it): dark enough behind the words
+   for ivory type on a white photograph, then fading out, so the rest of the
+   photo stays clear. No blur: a backdrop blur, or a blurred copy, over a
+   drifting photo is redrawn every frame and halved the scroll frame rate. */
+.tile-band {
+  background: linear-gradient(to top, rgb(6 8 14 / 0.8) 0%, rgb(6 8 14 / 0.66) calc(100% - 5rem), rgb(6 8 14 / 0.3) calc(100% - 2.5rem), rgb(6 8 14 / 0) 100%);
+}
+/* The photo is 116% of its frame and drifts through it while the tile crosses
+   the screen, so it reads as a window onto something behind the page. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .tile-img { animation: drift-y linear both; animation-timeline: view(); animation-range: cover; }
+  }
+}
+@keyframes drift-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 .tile-scrim { background: linear-gradient(to top, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
 .tile-scrim-side { background: linear-gradient(to right, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
 

@@ -244,7 +244,8 @@ async function contrast(b) {
         const rc = el.getBoundingClientRect();
         let bg;
         const hero = el.closest('[data-hero]');
-        const tile = el.closest('a.zoom');
+        const band = el.closest('.tile-text')?.querySelector('.tile-band');
+        const tile = !band && el.closest('a.zoom')?.querySelector('.tile-scrim, .tile-scrim-side') ? el.closest('a.zoom') : null;
         const frame = el.closest('.story-frame');
         if (hero) {
           // Composite the hero's three scrims over a white photograph at the text's worst point.
@@ -257,6 +258,13 @@ async function contrast(b) {
           const aT = stops(fromTop, [[0, 0.72], [0.22, 0], [1, 0]]);
           const aL = stops(fromLeft, [[0, 0.55], [0.55, 0], [1, 0]]);
           bg = over(SCRIM, aL, over(SCRIM, aT, over(SCRIM, aB, [255, 255, 255])));
+        } else if (band) {
+          // Collage band (globals.css .tile-band): 0.8 at the bottom, 0.66 at 5rem below its
+          // top, 0.3 at 2.5rem, 0 at the top. Worst case: the text's top edge over a white photo.
+          const br = band.getBoundingClientRect();
+          const fromTop = br.bottom - rc.top < 0 ? 0 : rc.top - br.top, H = br.height;
+          const a = fromTop >= 80 ? 0.66 + (0.8 - 0.66) * ((fromTop - 80) / (H - 80)) : fromTop >= 40 ? 0.3 + 0.36 * ((fromTop - 40) / 40) : 0.3 * (fromTop / 40);
+          bg = over(SCRIM, a, [255, 255, 255]);
         } else if (tile) {
           const tr = tile.getBoundingClientRect();
           const fromBottom = (tr.bottom - rc.top) / tr.height;
