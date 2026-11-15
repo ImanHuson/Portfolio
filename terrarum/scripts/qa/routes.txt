@@ -42,3 +42,9 @@
 /japan/chugoku/hiroshima/peace-memorial-park/
 /japan/chugoku/miyajima/itsukushima-shrine/
 /japan/chugoku/izumo/izumo-taisha/
+/japan/shikoku/
+/japan/shikoku/matsuyama/
+/japan/shikoku/takamatsu/
+/japan/shikoku/matsuyama/dogo-onsen-honkan/
+/japan/shikoku/matsuyama/ishite-ji/
+/japan/shikoku/takamatsu/ritsurin-garden/

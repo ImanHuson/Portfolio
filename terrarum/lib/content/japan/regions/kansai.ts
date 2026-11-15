@@ -576,7 +576,7 @@ export const places: Place[] = [
       },
     ],
     hero: "horyuji-kondo-pagoda",
-    gallery: ["horyuji-pagoda", "horyuji-nio", "horyuji-kairo", "horyuji-blossom-walk", "horyuji-toin-court"],
+    gallery: ["horyuji-approach", "horyuji-chumon", "horyuji-cloud-brackets", "horyuji-nio", "horyuji-kairo", "horyuji-pagoda", "horyuji-yumedono", "horyuji-yumedono-finial", "horyuji-toin-court", "horyuji-blossom-walk"],
     panoramas: [],
     related: ["todai-ji", "kasuga-taisha"],
     gaps: [],
