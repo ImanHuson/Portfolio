@@ -66,3 +66,11 @@
 /japan/tohoku/matsushima/zuigan-ji/
 /japan/tohoku/aomori/sannai-maruyama/
 /japan/tohoku/rikuzentakata/takata-matsubara/
+/japan/hokkaido/
+/japan/hokkaido/sapporo/
+/japan/hokkaido/shiraoi/
+/japan/hokkaido/shiretoko/
+/japan/hokkaido/hakodate/
+/japan/hokkaido/shiraoi/upopoy/
+/japan/hokkaido/shiretoko/shiretoko-five-lakes/
+/japan/hokkaido/hakodate/goryokaku/
