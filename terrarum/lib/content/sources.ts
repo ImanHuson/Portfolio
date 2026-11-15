@@ -19,7 +19,7 @@ export const SOURCES: Source[] = [
     accessed: A,
     type: "government-statistics",
     notes:
-      "Ch. 1 (land: 377,980 km², more than 14,000 smaller islands, mountains about three quarters of the area); Ch. 2 (population 123.80 million in 2024; Kyoto City 1,464 thousand at the 2020 census; Kinki major metropolitan area 19.2 million); climate normals for Kyoto; Ch. 9 (foreign visitors 36.87 million in 2024, 42.68 million in 2025, 2025 provisional); Ch. 16 (World Heritage list; Washoku on the UNESCO intangible heritage list).",
+      "Ch. 1 (land: 377,980 km², more than 14,000 smaller islands, mountains about three quarters of the area); Ch. 2 (population 123.80 million in 2024; Kyoto City 1,464 thousand and Hiroshima City 1,201 thousand at the 2020 census, Table 2.10; Kinki major metropolitan area 19.2 million); Appendix 1 (2024 estimates by prefecture: Tottori 531, Shimane 642, Okayama 1,831, Hiroshima 2,714, Yamaguchi 1,281 thousand); climate normals for Kyoto; Ch. 9 (foreign visitors 36.87 million in 2024, 42.68 million in 2025, 2025 provisional); Ch. 16 (World Heritage list; Washoku on the UNESCO intangible heritage list).",
   },
   {
     id: "columbia-afe-timeline",

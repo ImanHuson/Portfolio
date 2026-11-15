@@ -4,7 +4,7 @@ import { themeFor, themeStyle } from "@/lib/themes";
 /** Puts a country's identity on everything inside it: tokens for both colour
  * schemes (or one held scheme), its display face, texture and ground. Pages
  * never branch on country. */
-export function ThemeShell({ country, children }: { country: string; children: React.ReactNode }) {
+export function ThemeShell({ country, quiet, children }: { country: string; quiet?: boolean; children: React.ReactNode }) {
   const theme = themeFor(country);
   if (!theme) return <>{children}</>;
   return (
@@ -23,7 +23,8 @@ export function ThemeShell({ country, children }: { country: string; children: R
       {/* A fixed atmosphere behind everything: light and depth instead of a flat colour. */}
       {theme.ground !== "plain" && <div className="atmos" aria-hidden />}
       {children}
-      {theme.ornament?.petals && <Petals />}
+      {/* Memorials stay still: no drifting petals over them. */}
+      {theme.ornament?.petals && !quiet && <Petals />}
     </div>
   );
 }

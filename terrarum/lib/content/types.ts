@@ -165,6 +165,8 @@ export interface Gap {
 
 export interface Place {
   slug: string;
+  /** A memorial or other place of mourning: the theme drops its playful ornament (drifting petals). */
+  quiet?: boolean;
   name: string;
   native?: string;
   kind: string;

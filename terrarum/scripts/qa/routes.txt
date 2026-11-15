@@ -35,3 +35,10 @@
 /japan/kanto/tokyo/akihabara/
 /japan/kanto/nikko/nikko-toshogu/
 /japan/kanto/kamakura/kotoku-in/
+/japan/chugoku/
+/japan/chugoku/hiroshima/
+/japan/chugoku/miyajima/
+/japan/chugoku/izumo/
+/japan/chugoku/hiroshima/peace-memorial-park/
+/japan/chugoku/miyajima/itsukushima-shrine/
+/japan/chugoku/izumo/izumo-taisha/

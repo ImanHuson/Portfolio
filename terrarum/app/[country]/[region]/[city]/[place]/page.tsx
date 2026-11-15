@@ -68,7 +68,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
   const galleryIds = p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)));
 
   return (
-    <ThemeShell country={country}>
+    <ThemeShell country={country} quiet={p.quiet}>
       <main id="main" data-pagefind-body>
         <CinemaHero
           ids={[p.hero]}
