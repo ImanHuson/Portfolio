@@ -48,3 +48,12 @@
 /japan/shikoku/matsuyama/dogo-onsen-honkan/
 /japan/shikoku/matsuyama/ishite-ji/
 /japan/shikoku/takamatsu/ritsurin-garden/
+/japan/chubu/
+/japan/chubu/fujiyoshida/
+/japan/chubu/kanazawa/
+/japan/chubu/shirakawa-go/
+/japan/chubu/matsumoto/
+/japan/chubu/fujiyoshida/mount-fuji/
+/japan/chubu/kanazawa/kenroku-en/
+/japan/chubu/shirakawa-go/ogimachi/
+/japan/chubu/matsumoto/matsumoto-castle/
