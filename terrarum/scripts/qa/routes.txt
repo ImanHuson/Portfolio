@@ -2,6 +2,7 @@
 /japan/kansai/koyasan/
 /japan/kansai/kyoto/
 /japan/kansai/nara/
+/japan/kansai/ikaruga/
 /japan/kansai/osaka/
 /japan/kansai/himeji/himeji-castle/
 /japan/kansai/koyasan/kongobu-ji/
@@ -16,6 +17,7 @@
 /japan/kansai/kyoto/ryoan-ji/
 /japan/kansai/nara/kasuga-taisha/
 /japan/kansai/nara/todai-ji/
+/japan/kansai/ikaruga/horyu-ji/
 /japan/kansai/osaka/dotonbori/
 /japan/kansai/osaka/osaka-castle/
 /japan/topics/land/

@@ -42,12 +42,16 @@ Kyoto's three places were chosen partly by what legitimate media exists. Only Ni
 - Kyoto Station building's architect and opening year (only a Commons file title supports 1997).
 - Whether the festival photo in Nishiki Market (men in 錦 happi coats) shows the Gion Festival's Nishigoza mikoshi. The market association says Nishiki carries one of the festival's mikoshi, but the photo is undated and uncaptioned, so the page does not link the two.
 - 2024 country ranking of international arrivals (see `research/expansion.md`).
+- Ikaruga (15 Nov 2026): the Fujinoki burial mound. The Agency for Cultural Affairs' records name its finds (crown, shoes, saddle fittings, beads of two burials) and a 2004 council record raises them to National Treasure, but no source read here places the mound in Ikaruga (only search summaries do), so the town page leaves it out. The town's own site (town.ikaruga.nara.jp) resets https connections from here.
+- Ikaruga: tatsuta-age, the fried dish said to be named for the river's maples. Only recipe sites and a city press release that "there is a theory" support it; the town page marks food as not applicable instead of using it.
 
 ## Media discovery
 
 - Openverse (`api.openverse.org`, anonymous, `page_size` ≤ 20) worked; Wikimedia Commons' API and Openverse thumbnails returned 429 from the build container; the Commons file host worked with standard thumbnail widths (1920, 1280) and a slow, backing-off downloader.
 - Cleveland Museum of Art Open Access (CC0) supplied two Hiroshige prints at print resolution.
 - Panoramas: Flickr user vitroid (CC BY 2.0), 1024×512 only. A search tagged "Inari" returned Nezu Shrine in Tokyo (tags `nezu`, `tokyo`); rejected as the wrong place.
+- Hōryū-ji's own site (horyuji.or.jp) sends the wrong intermediate certificate (GlobalSign RSA DV SSL CA 2018 for a certificate issued by GCC R46 DV TLS CA 2025). It was read with the 2025 intermediate fetched from GlobalSign's AIA address and added to the trust bundle; verification stays on.
+- Openverse's Hōryū-ji results are crowded by one photographer's "Primarina in Ikaruga" series (a toy figure); filter it out.
 - Video: none verified. YouTube embeds of official channels (JNTO, the temples) were not checked from here.
 
 ## Content gaps
@@ -57,3 +61,4 @@ Seven of eight regions; Tokyo; writing systems; contemporary life; festivals cal
 ## Update log
 
 - 2026-11-08: research, fact-check, media, vertical slice built.
+- 2026-11-15: Ikaruga and Hōryū-ji, completing Kansai. Draft lines cut or fenced on re-reading: "orchards" and "the Tatsuta along its western edge" (unsourced); "in the generation before" (Hōryū-ji is a century before Nara); "poets made its maples a byword" (no source read); the Shaka triad's dates, where the two sources disagree (kept to "after the prince died in 622"); "clay" guardians and temple "fire drills" (not in the sources).

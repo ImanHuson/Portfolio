@@ -76,8 +76,12 @@ def main():
     for i, c in enumerate(cands):
         x, y = (i % cols) * cw, (i // cols) * (ch + 22)
         f = fetch(c)
-        if f:
-            im = Image.open(f).convert("RGB")
+        try:
+            im = Image.open(f).convert("RGB") if f else None
+        except Exception:  # Commons sometimes answers with an HTML error page
+            os.remove(f)
+            im = None
+        if im:
             im.thumbnail((cw - 6, ch - 4))
             sheet.paste(im, (x + 3 + (cw - 6 - im.width) // 2, y + 2 + (ch - 4 - im.height) // 2))
         draw.text((x + 4, y + ch + 2), f"{start + i} {c['w']}x{c['h']} {(c.get('q') or '')[:22]}", fill="black", font=font)

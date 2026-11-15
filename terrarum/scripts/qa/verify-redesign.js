@@ -76,9 +76,14 @@ async function kanji(b) {
     await p.goto(B + r);
     const m = await p.evaluate(() => {
       const k = [...document.querySelectorAll('.cine-kanji[aria-hidden]')].filter((e) => getComputedStyle(e).display !== 'none');
-      return k.map((e) => parseFloat(getComputedStyle(e).fontSize));
+      return k.map((e) => {
+        // The column must end inside its clipping section, or the last character is cut off.
+        const box = e.closest('section')?.getBoundingClientRect(), kr = e.getBoundingClientRect();
+        return { size: parseFloat(getComputedStyle(e).fontSize), overflow: box ? Math.round(kr.bottom - box.bottom) : 0 };
+      });
     });
-    if (!m.length || Math.max(...m) < 120) fail(`${r}: kanji sizes ${JSON.stringify(m)}`);
+    if (!m.length || Math.max(...m.map((x) => x.size)) < 120) fail(`${r}: kanji sizes ${JSON.stringify(m)}`);
+    for (const x of m) if (x.overflow > 0) fail(`${r}: kanji column runs ${x.overflow}px past its section and is cut off`);
   }
   await p.goto(B + CONTROL);
   if ((await p.$$('.cine-kanji')).length) fail('control: Maldives page has a kanji watermark');

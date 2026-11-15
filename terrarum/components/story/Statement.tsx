@@ -9,9 +9,13 @@ import { Cite } from "@/components/ui/Refs";
  */
 export function Statement({ label, text, id, watermark, lang }: { label: string; text: string; id: string; watermark?: string; lang?: string }) {
   return (
-    <section aria-labelledby={id} className="relative isolate overflow-hidden">
+    <section
+      aria-labelledby={id}
+      className={`relative isolate overflow-hidden ${watermark ? "kanji-host" : ""}`}
+      style={watermark ? ({ "--n": [...watermark].length, "--kfs": `min(30vh, calc(80vh / ${[...watermark].length}), 24rem)`, "--kt": "6vh" } as React.CSSProperties) : undefined}
+    >
       {watermark && (
-        <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[6vh] -z-10 font-display max-md:text-[clamp(5rem,38vw,9rem)] max-md:opacity-10" style={{ "--n": [...(watermark ?? "")].length, fontSize: `min(30vh, calc(80vh / ${[...(watermark ?? "")].length}), 24rem)` } as React.CSSProperties}>
+        <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[6vh] -z-10 font-display max-md:text-[clamp(5rem,38vw,9rem)] max-md:opacity-10">
           {watermark}
         </p>
       )}

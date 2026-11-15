@@ -345,8 +345,20 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
     linear-gradient(to right, rgb(6 8 14 / 0.55) 0%, transparent 55%);
 }
 /* One vertical column, sized so the whole name fits the height it is given. */
+/* A section holding a watermark column sets --n (characters) and may set --kfs
+   (font size) and --kt (top offset); on wider screens it is at least as tall as
+   the column, so the last character is never cut off by its overflow:hidden
+   (every city, place and chapter clipped it, by 40-650 px, until Nov 2026). */
+.kanji-host { --kfs: min(30vh, calc(118vh / var(--n, 3)), 24rem); }
+@media (min-width: 768px) {
+  .kanji-host {
+    min-height: calc(var(--kt, 4vh) + var(--n, 3) * 1.06 * var(--kfs) + 4vh);
+    display: flex; flex-direction: column; justify-content: center; /* text sits level with the column's middle */
+  }
+  .kanji-host > :not(.cine-kanji) { width: 100%; }
+}
 .cine-kanji {
-  font-size: min(30vh, calc(118vh / var(--n, 3)), 24rem); line-height: 0.92;
+  font-size: var(--kfs, min(30vh, calc(118vh / var(--n, 3)), 24rem)); line-height: 0.92;
   white-space: nowrap;
   color: var(--ink); opacity: 0.16; letter-spacing: 0.02em;
 }

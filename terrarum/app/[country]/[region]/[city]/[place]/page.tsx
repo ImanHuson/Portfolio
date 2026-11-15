@@ -44,7 +44,12 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
   if (!c || !r || !ci || !p || !ci.places.includes(p.slug)) notFound();
   const refs = makeRefs([...p.facts.map((f) => f.cite), ...p.passages.map((x) => x.cite)]);
   // Links to places not built yet are skipped here; the content audit fails on them.
-  const related = p.related.filter((s) => getPlace(country, s)).map((s) => ({ p: getPlace(country, s)!, href: placePath(country, s).href }));
+  const related = p.related.filter((s) => getPlace(country, s)).map((s) => {
+    const path = placePath(country, s);
+    return { p: getPlace(country, s)!, href: path.href, city: path.city };
+  });
+  // Related places can sit in another city (Hōryū-ji's are in Nara): say so.
+  const sameCity = related.every((r) => r.city.slug === ci.slug);
   const pano = p.panoramas[0];
   const lang = c.entry.nativeLang?.split(" ")[0];
   const orn = themeFor(country)?.ornament;
@@ -126,9 +131,9 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
 
         {related.length > 0 && (
           <section aria-labelledby="next-h" className="mx-auto max-w-[1400px] px-4 pb-[14vh] md:px-8">
-            <h2 id="next-h" className="settle font-display text-3xl md:text-5xl">Next, in {ci.name}</h2>
+            <h2 id="next-h" className="settle font-display text-3xl md:text-5xl">{sameCity ? `Next, in ${ci.name}` : "Next, nearby"}</h2>
             <div className="mt-10">
-              <Collage lang={lang} items={related.map(({ p: rp, href }) => ({ href, image: rp.hero, title: rp.name, kicker: rp.kind, native: rp.native, summary: rp.summary }))} />
+              <Collage lang={lang} items={related.map(({ p: rp, href, city }) => ({ href, image: rp.hero, title: rp.name, kicker: city.slug === ci.slug ? rp.kind : `${rp.kind} · ${city.name}`, native: rp.native, summary: rp.summary }))} />
             </div>
           </section>
         )}

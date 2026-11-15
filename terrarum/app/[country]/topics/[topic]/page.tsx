@@ -96,7 +96,7 @@ export default async function ChapterPage({ params }: PageProps<"/[country]/topi
         />
 
         {ch.facts && ch.facts.length > 0 && (
-          <section aria-label="Key figures" className="relative isolate overflow-hidden pt-[16vh]">
+          <section aria-label="Key figures" className={`relative isolate overflow-hidden pt-[16vh] ${vertical && ch.native ? "kanji-host" : ""}`} style={vertical && ch.native ? ({ "--n": [...ch.native].length } as React.CSSProperties) : undefined}>
             {vertical && ch.native && (
               <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(ch.native ?? "")].length } as React.CSSProperties}>
                 {ch.native}

@@ -74,13 +74,14 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
     ),
   }));
 
+  const kanji = themeFor(slug)?.native === "vertical" && !!e.native;
   return (
     <ThemeShell country={slug}>
       <main id="main" data-pagefind-body>
         <CinemaHero ids={heroes} kicker="Country" title={e.name} summary={c.summary} native={e.native} entry={e} trail={[{ href: "/", label: "Globe" }, { label: e.name }]} />
 
-        <section aria-label="Key facts" className="relative isolate overflow-hidden pt-[16vh]">
-          {themeFor(slug)?.native === "vertical" && e.native && (
+        <section aria-label="Key facts" className={`relative isolate overflow-hidden pt-[16vh] ${kanji ? "kanji-host" : ""}`} style={kanji ? ({ "--n": [...e.native!].length } as React.CSSProperties) : undefined}>
+          {kanji && (
             <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(e.native ?? "")].length } as React.CSSProperties}>
               {e.native}
             </p>
@@ -157,7 +158,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
           {starts.length > 6 && (
             <p className="mt-10">
               <Link href={cityPath(slug, firstCity.slug).href} className="font-medium text-accent-text underline underline-offset-4">
-                All {starts.length} places in {firstCity.name}
+                {starts.length === 1 ? "The place" : `All ${starts.length} places`} in {firstCity.name}
               </Link>
             </p>
           )}
