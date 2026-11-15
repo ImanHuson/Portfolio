@@ -123,6 +123,8 @@ export interface MediaAsset {
   alt: string;
   /** Where it was taken or what it shows, in plain words. */
   location?: string;
+  /** Where the subject sits (CSS object-position), so a cover crop keeps it: "30% 50%". */
+  focus?: string;
   /** Date of the work, for artworks and dated photos. */
   date?: string;
   /** What we changed (crop, resize, format), for share-alike licences. */

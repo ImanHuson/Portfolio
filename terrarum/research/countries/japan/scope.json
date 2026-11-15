@@ -45,7 +45,9 @@
         "senso-ji",
         "meiji-jingu",
         "imperial-palace-east-gardens",
-        "shibuya"
+        "shibuya",
+        "shinjuku",
+        "akihabara"
       ],
       "nikko": [
         "nikko-toshogu"
@@ -139,7 +141,9 @@
   "reserve": {
     "$comment": "First additions if a region gets another page, in order; see place-selection.md.",
     "kanto": [
-      "tomioka-silk-mill"
+      "tomioka-silk-mill",
+      "ginza",
+      "marunouchi-tokyo-station"
     ],
     "chubu": [
       "kamikochi",

@@ -1,7 +1,7 @@
 import { Crumbs } from "@/components/ui/Crumbs";
 import { Credit } from "@/components/ui/Figure";
 import { NativeName } from "@/components/ui/NativeName";
-import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
+import { asset, coverSizes, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import type { CountryEntry } from "@/lib/content/types";
 
 type Trail = { href?: string; label: string }[];
@@ -42,7 +42,7 @@ export function CinemaHero({
               key={id}
               src={imgSrc(m, 1920)}
               srcSet={imgSrcSet(m)}
-              sizes="100vw"
+              sizes={coverSizes(m, 100, 100)}
               width={m.width}
               height={m.height}
               alt={i === 0 ? m.alt : ""}
@@ -52,7 +52,7 @@ export function CinemaHero({
               fetchPriority={i === 0 ? "high" : "auto"}
               decoding={i === 0 ? "sync" : "async"}
               className={`cine-img absolute inset-0 h-full w-full object-cover ${m.kind === "photo" ? "photo" : ""}`}
-              style={{ "--slide-at": `${i * 9}s` } as React.CSSProperties}
+              style={{ "--slide-at": `${i * 9}s`, objectPosition: m.focus } as React.CSSProperties}
             />
           );
         })}

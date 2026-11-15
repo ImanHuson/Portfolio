@@ -1,5 +1,5 @@
 import { Credit } from "@/components/ui/Figure";
-import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
+import { asset, coverSizes, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import { StoryDriver } from "./StoryDriver";
 
 export interface StoryStep {
@@ -29,7 +29,7 @@ export function Story({ steps, label, flip = false }: { steps: StoryStep[]; labe
                   <img
                     src={imgSrc(m, 1920)}
                     srcSet={imgSrcSet(m)}
-                    sizes="60vw"
+                    sizes={coverSizes(m, 60, 100)}
                     width={m.width}
                     height={m.height}
                     alt=""

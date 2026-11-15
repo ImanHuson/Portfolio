@@ -29,5 +29,7 @@
 /japan/kanto/tokyo/meiji-jingu/
 /japan/kanto/tokyo/imperial-palace-east-gardens/
 /japan/kanto/tokyo/shibuya/
+/japan/kanto/tokyo/shinjuku/
+/japan/kanto/tokyo/akihabara/
 /japan/kanto/nikko/nikko-toshogu/
 /japan/kanto/kamakura/kotoku-in/
