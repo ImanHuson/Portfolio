@@ -57,3 +57,12 @@
 /japan/chubu/kanazawa/kenroku-en/
 /japan/chubu/shirakawa-go/ogimachi/
 /japan/chubu/matsumoto/matsumoto-castle/
+/japan/tohoku/
+/japan/tohoku/hiraizumi/
+/japan/tohoku/matsushima/
+/japan/tohoku/aomori/
+/japan/tohoku/rikuzentakata/
+/japan/tohoku/hiraizumi/chuson-ji/
+/japan/tohoku/matsushima/zuigan-ji/
+/japan/tohoku/aomori/sannai-maruyama/
+/japan/tohoku/rikuzentakata/takata-matsubara/

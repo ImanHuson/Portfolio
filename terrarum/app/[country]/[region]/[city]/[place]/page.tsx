@@ -65,7 +65,7 @@ export default async function PlacePage({ params }: PageProps<"/[country]/[regio
     return { key: x.id, image, content: <Passage p={x} refs={refs} /> };
   });
   // The gallery keeps every side of the place, including photographs the story also uses.
-  const galleryIds = p.gallery.filter((id) => !p.passages.some((x) => x.images?.includes(id)));
+  const galleryIds = p.gallery;
 
   return (
     <ThemeShell country={country} quiet={p.quiet}>
