@@ -20,12 +20,12 @@ export function Story({ steps, label, flip = false }: { steps: StoryStep[]; labe
   return (
     <section aria-label={label} data-story className="relative">
       <div className={`mx-auto grid max-w-[1600px] lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
-        <div className="relative hidden lg:block" aria-hidden>
+        <div className="relative hidden lg:block">
           <div data-story-media className="sticky top-14 h-[calc(100svh-3.5rem)] overflow-hidden">
             {steps.map((s, i) => {
               const m = media(s.image);
               return (
-                <figure key={s.key} data-frame={i} data-active={i === 0 ? "" : undefined} className="story-frame absolute inset-0">
+                <figure key={s.key} data-frame={i} data-active={i === 0 ? "" : undefined} inert={i !== 0} className="story-frame absolute inset-0">
                   <img
                     src={imgSrc(m, 1920)}
                     srcSet={imgSrcSet(m)}
@@ -38,7 +38,7 @@ export function Story({ steps, label, flip = false }: { steps: StoryStep[]; labe
                     decoding="async"
                     className={`h-full w-full ${m.kind === "artwork" ? "object-contain p-[6vh]" : "object-cover"} ${m.kind === "photo" ? "photo" : ""}`}
                   />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgb(6_8_14/0.85)] to-transparent px-6 pb-4 pt-16 text-[12px] leading-snug text-[#d2cbbe]">
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgb(6_8_14/0.92)] from-40% to-transparent px-6 pb-4 pt-16 text-[12px] leading-snug text-[#d2cbbe]">
                     <Credit id={s.image} />
                   </figcaption>
                 </figure>

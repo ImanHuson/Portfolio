@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Map as MLMap, LngLatBoundsLike } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { whenNear } from "@/lib/whenNear";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const FEED = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson";
@@ -58,7 +59,7 @@ export function QuakeMap() {
   useEffect(() => {
     if (!quakes || !host.current) return;
     let disposed = false;
-    (async () => {
+    const stopNear = whenNear(host.current, async () => {
       const ml = (await import("maplibre-gl")).default;
       if (disposed || !host.current) return;
       const read = (n: string) => getComputedStyle(host.current!).getPropertyValue(n).trim() || "#888";
@@ -71,6 +72,7 @@ export function QuakeMap() {
         dragRotate: false,
         cooperativeGestures: true,
       });
+      map.getCanvas().setAttribute("aria-label", "Map of earthquakes of magnitude 2.5 and above around Japan in the last seven days");
       mapRef.current = map;
       map.touchZoomRotate.disableRotation();
       map.once("load", async () => {
@@ -96,9 +98,10 @@ export function QuakeMap() {
           },
         });
       });
-    })();
+    });
     return () => {
       disposed = true;
+      stopNear();
       mapRef.current?.remove();
       mapRef.current = null;
     };
@@ -114,7 +117,7 @@ export function QuakeMap() {
             The USGS earthquake feed could not be reached just now, so the live map is empty. The feed is public and updates every few minutes; try again later.
           </p>
         ) : (
-          <div ref={host} style={{ position: "relative" }} className="h-[min(72vh,620px)] min-h-[380px] w-full bg-surface" role="region" aria-label="Map of earthquakes of magnitude 2.5 and above around Japan in the last seven days" />
+          <div ref={host} style={{ position: "relative" }} className="h-[min(72vh,620px)] min-h-[380px] w-full bg-surface" />
         )}
         <p className="mt-3 text-[13px] text-muted">
           Live: earthquakes of magnitude 2.5 and above in and around Japan in the last seven days, from the US Geological Survey (public domain).{" "}

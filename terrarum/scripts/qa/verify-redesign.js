@@ -275,7 +275,9 @@ async function contrast(b) {
           const a = side ? stops(fromLeft, S) : stops(fromBottom, S);
           bg = over(SCRIM, a, [255, 255, 255]);
         } else if (frame) {
-          bg = over(SCRIM, 0.6, [255, 255, 255]);
+          // Story frame caption (Story.tsx): 0.92 over its bottom 40%, where the credit sits;
+          // modelled a little lower. The old 0.85-to-transparent gradient left 3.3:1 here.
+          bg = over(SCRIM, 0.88, [255, 255, 255]);
         } else {
           // Walk up for an opaque background; otherwise the brightest point of the atmosphere.
           bg = null;

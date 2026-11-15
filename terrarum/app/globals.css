@@ -369,10 +369,13 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
   .story-frame img, .story-frame[data-active] img { transition: none; transform: none; }
 }
 /* Steps not being read recede, but only once the script is running and only
-   where the pinned frame exists; otherwise every step reads at full strength. */
+   where the pinned frame exists; otherwise every step reads at full strength.
+   They recede by colour, not opacity: at 0.4 opacity the text fell to 3.3:1
+   (axe, Nov 2026), and no opacity kept the light themes' links at AA. The
+   theme's muted colour is AA on its own ground, and links keep theirs. */
 @media (min-width: 1024px) {
-  [data-story][data-live] .story-step { transition: opacity 600ms var(--ease-out); }
-  [data-story][data-live] .story-step:not([data-active]) { opacity: 0.4; }
+  [data-story][data-live] .story-step :is(h2, h3, p) { transition: color 600ms var(--ease-out); }
+  [data-story][data-live] .story-step:not([data-active]) :is(h2, h3, p) { color: var(--muted); }
 }
 
 /* Hand-scroll (emaki): photographs at varied heights along one row. */

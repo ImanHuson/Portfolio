@@ -121,7 +121,7 @@ export default async function ChapterPage({ params }: PageProps<"/[country]/topi
         <div className="country-rule" aria-hidden />
         {segments.map((seg, i) => (
           <div key={seg.key}>
-            <Story steps={seg.steps} label={i === 0 ? ch.title : `${ch.title}, continued`} flip={i % 2 === 1} />
+            <Story steps={seg.steps} label={i === 0 ? ch.title : `${ch.title}: ${ch.passages.find((x) => x.id === seg.steps[0].key)?.heading}`} flip={i % 2 === 1} />
             {seg.widget && (
               <section aria-label={`${ch.passages.find((x) => x.id === seg.key)?.heading}: explore the data`} className="settle mx-auto max-w-[1400px] px-4 py-[10vh] md:px-8">
                 <Widget name={seg.widget} />
