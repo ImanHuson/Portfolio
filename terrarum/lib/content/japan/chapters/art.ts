@@ -1,0 +1,124 @@
+import type { Chapter } from "../../types";
+
+/** Brief section H for Japan. Every statement is from the source it cites. */
+export const art: Chapter = {
+  slug: "art",
+  title: "Architecture and art",
+  native: "建築と美術",
+  summary: "Wooden halls thirteen centuries old, a study room that set the pattern for every house after it, gold-leaf screens, porcelain made for Dutch ships, and museums dug into islands.",
+  hero: "toshogu-yomeimon",
+  facts: [
+    { label: "Oldest wooden buildings", value: "Hōryū-ji, the oldest surviving in the world", cite: ["horyuji-intro"] },
+    { label: "First porcelain", value: "Arita, after the 1610s", cite: ["jta-r2-01921"] },
+    { label: "Wajima lacquer", value: "More than 100 steps a piece", cite: ["jta-r4-00536"] },
+    { label: "Setouchi Triennale", value: "Every three years since 2010", cite: ["jta-r2-01890"] },
+  ],
+  passages: [
+    {
+      id: "art-temples",
+      heading: "Halls of wood",
+      body: [
+        "Japan’s great buildings are timber. The halls of Hōryū-ji, near Nara, are the oldest surviving wooden structures in the world. When Hōryū-ji’s Main Hall caught fire in January 1949 and its wall paintings were damaged, the shock led to the Law for the Protection of Cultural Properties the next year.",
+        "Wood could also be made to dazzle. The shrine at Nikkō where Tokugawa Ieyasu is enshrined was rebuilt in 1636 as 55 buildings that follow the natural terrain, covered in lacquer, colour and carving. Its Yōmeimon gate alone carries more than 500 carved figures. One of its twelve pillars was deliberately carved upside down, so that the gate would never be perfect and so never begin to decline.",
+      ],
+      cite: ["horyuji-intro", "bunka-boka-day", "visitnikko-toshogu", "toshogu-buildings", "jta-r2-00012"],
+      covers: ["religious"],
+      images: ["horyuji-pagoda", "toshogu-yomeimon-detail"],
+      places: ["horyu-ji", "nikko-toshogu"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-shoin",
+      heading: "The room every house copied",
+      body: [
+        "The traditional Japanese room can be traced to one small study in Kyoto. In 1486 Ashikaga Yoshimasa completed the Tōgudō at his Higashiyama villa. One of its four rooms, the Dōjinsai, measures four and a half tatami mats and was his own study. It has a desk built into the wall, staggered shelves for displaying precious Chinese objects, a floor of tatami, sliding paper screens that let in light, and a view over a garden.",
+        "This is the shoin-zukuri style, named after that built-in desk. It became the main form of house-building in the Edo period and is still the basis of traditional architecture. The same small room is seen as the forerunner of the tearoom.",
+      ],
+      cite: ["jta-r1-00459"],
+      covers: ["traditional"],
+      images: ["nijo-ninomaru"],
+      places: ["nijo-castle"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-castles-farms",
+      heading: "White keeps and praying-hand roofs",
+      body: [
+        "Himeji Castle took its present form between 1601 and 1609, when Ikeda Terumasa, newly given the province, rebuilt it with a larger keep. It is known as White Heron Castle. The city around it was destroyed by air raids in 1945 and the castle came through almost untouched. Its keep was taken apart and rebuilt between 1956 and 1964.",
+        "At the other end of the scale is the farmhouse. In the village of Ogimachi the houses are called gasshō, praying hands, for roofs like two hands pressed together. The form developed in the middle of the Edo period for two reasons: deep snow, and silkworms, which were raised in the warm, airy attics.",
+      ],
+      cite: ["himeji-history", "jta-r2-00117", "jta-r2-00136"],
+      covers: ["palaces", "vernacular"],
+      images: ["himeji-keep", "shirakawa-wada"],
+      places: ["himeji-castle", "ogimachi", "matsumoto-castle"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-painting",
+      heading: "Gold screens",
+      body: [
+        "Much Japanese painting was made for rooms, on folding screens and sliding wall panels. The Kano school, founded by Kano Masanobu (1434–1530), was influenced by Chinese painting. The Rinpa school is tied instead to Yamato-e, the native genre, and the two are usually contrasted.",
+        "Rinpa began in a Kyoto workshop. Tawaraya Sōtatsu (c. 1570–1640) ran a shop that made painted fans, paper for lanterns and interior decoration to order. Around 1616 he worked with the calligrapher and craftsman Hon’ami Kōetsu on the Saga Books, editions of the Japanese classics designed to recapture the refinement of the Heian court. Rinpa work is known for close study of nature, delicate colour, abstraction and precious materials such as gold leaf and lapis lazuli. Sōtatsu’s Wind and Thunder God Screens, two deities on a broad field of gold, are a National Treasure.",
+      ],
+      cite: ["jta-r1-01716"],
+      covers: ["painting", "design"],
+      images: ["eastgardens-edo-screen", "izumo-hiroshige"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-brush",
+      heading: "The way of writing",
+      body: [
+        "Writing with a brush is an art in its own right, called shodō, the way of writing. The shape and force of a person’s strokes are said to reveal their nature, and a skilled calligrapher can put great depth into a single character. For a statesman or an official, a refined hand was a professional necessity.",
+        "It also unified the country on paper. In the early Edo period, as writing spread beyond the aristocracy, the shogunate’s documents were written in one style, the “noble house style”. Speech differed greatly from region to region, but this hand was the same everywhere, and it quickly became the standard. A piece of calligraphy from the shogun himself was a great honour: the Ii family kept a memo jotted by Tokugawa Ieyasu as a treasure.",
+      ],
+      cite: ["jta-r1-01555"],
+      covers: ["calligraphy"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-sculpture",
+      heading: "Carved in blocks, cast in bronze",
+      body: [
+        "Two statues of Indian scholar-monks at Kōfuku-ji in Nara, attributed to Unkei (1150–1223) and dated to around 1212, are counted among the finest works of Japanese sculpture. They are built from assembled blocks of wood, and their eyes are crystal, which brings the faces alive.",
+        "The Great Buddha of Kamakura, a bronze begun in 1252, is 11.35 metres high and weighs 121 tons. It has sat in the open since the hall around it was destroyed.",
+      ],
+      cite: ["jta-r1-00254", "jta-r1-01383"],
+      covers: ["sculpture"],
+      images: ["kotokuin-buddha"],
+      places: ["kotoku-in", "todai-ji"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-clay-silk-lacquer",
+      heading: "Porcelain, silk and lacquer",
+      body: [
+        "Japanese porcelain began with an invasion. Korean potters were brought to the province of Hizen, in Kyūshū, after Toyotomi Hideyoshi’s failed campaigns of the 1590s. In the 1610s the right stone was found near Arita, which became the first place in Japan to make porcelain. Its early ware is blue and white; coloured overglaze followed in the 1640s. Around 1644 civil war stopped China’s exports and Dutch traders turned to Arita instead. The porcelain left through the port of Imari, which is how it came to be called Imari ware.",
+        "Kyoto’s luxury was silk. Fine textiles had been woven there since the Heian period, and after the Ōnin War (1467–1477) destroyed the city the weavers regrouped in the quarter the western army had occupied, Nishijin, “western position”. The work is still divided among specialist workshops, one for each step from dyeing the thread to weaving, and some cloth is woven with strips of lacquered paper coated in gold or silver leaf.",
+        "Lacquer is the sap of the urushi tree, and finds suggest it has been used in Japan since the Jōmon period. At Wajima a single piece takes more than 100 steps, and the base coat is strengthened with a local powdered earth.",
+      ],
+      cite: ["jta-r2-01921", "jta-r2-01452", "jta-r4-00536"],
+      covers: ["ceramics", "textiles", "crafts"],
+      images: ["upopoy-robe"],
+      status: "fact-checked",
+    },
+    {
+      id: "art-now",
+      heading: "Concrete, and art in the open",
+      body: [
+        "In Hiroshima, Tange Kenzō (1913–2005) designed the Peace Memorial Museum, which opened in 1955; in 2006 it became the first post-war building to be named an Important Cultural Property. His cenotaph in the park outside is modelled on a clay haniwa figure.",
+        "On Naoshima, in the Seto Inland Sea, an art project began in 1989 with a campsite supervised by the architect Andō Tadao (born 1941). It grew into museums of his design, among them the Chichu Art Museum of 2004, built underground so as not to disturb the view of the sea, where Monet’s Water Lilies are shown by natural light alone. In the village of Honmura, old houses were restored and artists invited to turn them into works.",
+        "Since 2010 the Setouchi Triennale, an art festival held every three years, has spread across islands hit hard by depopulation. Much of the work is made for one particular place, often with the people who live there, and a few of the festival’s public toilets, a bathhouse and its ferry terminals are artworks themselves.",
+      ],
+      cite: ["jta-r1-00475", "jta-r1-00494", "jta-r2-01886", "jta-r2-01890"],
+      covers: ["contemporary", "public"],
+      images: ["hpeace-museum", "hpeace-cenotaph"],
+      places: ["peace-memorial-park"],
+      status: "fact-checked",
+    },
+  ],
+  notApplicable: [
+    { topic: "photography", why: "Not written yet: no source on Japanese photography has been read for this atlas, and nothing is said without one." },
+  ],
+  status: "fact-checked",
+};
