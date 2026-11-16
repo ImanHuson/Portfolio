@@ -25,6 +25,7 @@
 /japan/topics/belief/
 /japan/topics/food/
 /japan/topics/art/
+/japan/topics/performance/
 /japan/topics/language/
 /japan/
 /japan/kansai/

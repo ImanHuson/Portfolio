@@ -108,3 +108,11 @@ Sources: JTA texts read in full from the bulk file and matched to their page ids
 Cut on re-reading: "the shogun" for Yoshimasa, a line that white walls gave Himeji its name, "steep thatched" for gasshō roofs, "its most lavish descendant" for Rinpa, "gold leaf above all", "sculpture in Japan is mostly Buddhist, and its greatest name is Unkei", "Europe knew it as Imari ware" (the text says the name came from shipping through Imari), "modern Japanese architecture found its voice in Hiroshima", and Naoshima as "one of the country's best-known art sites".
 
 Photography is marked not written: no source was read. Also missing for the same reason: ukiyo-e prints (the corpus mentions them only in passing; prints by Hiroshige are shown with their museum credits but nothing is claimed about the genre), ink painting, gardens, tea-house architecture, mingei, manga and graphic design, and architects other than Tange and Andō. The Kano sliding-panel text at Myōhō-in was read but its page id could not be matched, so it is not cited.
+
+## 16 Nov 2026: Music, literature and performance chapter
+
+Sources: JTA texts read in full and matched to their page ids by text (the Chūson-ji noh stage R1-00019, noh on Sado R1-01451, kabuki H30-01116, gagaku R1-01552, Bashō in Ōtsu R2-01414, Takachiho yokagura R1-01024, the Awa puppet theatre R2-01791, San'yūtei Enchō R1-00106, the Yokote Masuda Manga Museum R3-00432), Columbia's Heian essay for the Tale of Genji, Sei Shōnagon and waka, and the Akihabara and geiko sources already in use.
+
+Cut on re-reading: syllable counts for waka and haiku (no source here gives them), "storytellers who need only a cushion", kabuki as "the loud counterpart" and "fully formed by about 1700", "eleventh-century" for the Tale of Genji, "the poet most people can quote", "nineteenth-century Edo", stories "everyone in the audience once knew", and a sentence that attributed the Awa puppet theatre's description to Bunraku.
+
+Marked not written, because no source was read: contemporary music and film. Also missing: the shamisen, shakuhachi and taiko as instruments in their own right, folk song, Awa Odori (its text was read but its page id could not be matched, so it is not cited), modern literature, anime as an industry beyond Akihabara.
