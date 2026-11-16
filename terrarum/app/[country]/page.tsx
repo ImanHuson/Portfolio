@@ -133,8 +133,8 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
                 return (
                   <li key={ch.slug} className="settle">
                     <Link href={`/${slug}/topics/${ch.slug}/`} className="press zoom group relative block overflow-hidden">
-                      <img src={imgSrc(m, 1920)} srcSet={imgSrcSet(m)} sizes="(min-width:1024px) 90vw, 100vw" width={m.width} height={m.height} alt={m.alt} loading="lazy" decoding="async" className="photo aspect-[4/3] w-full object-cover md:aspect-[21/9]" />
-                      <div className="tile-scrim-side absolute inset-0" aria-hidden />
+                      <img src={imgSrc(m, 1920)} srcSet={imgSrcSet(m)} sizes={c.chapters.length > 1 ? "(min-width:1024px) 45vw, 100vw" : "(min-width:1024px) 90vw, 100vw"} width={m.width} height={m.height} alt={m.alt} loading="lazy" decoding="async" className={`photo aspect-[4/3] w-full object-cover ${c.chapters.length > 1 ? "md:aspect-[16/10]" : "md:aspect-[21/9]"}`} />
+                      <div className={`${c.chapters.length > 1 ? "tile-scrim" : "tile-scrim-side"} absolute inset-0`} aria-hidden />
                       <div className="absolute inset-y-0 left-0 flex max-w-[40rem] flex-col justify-end gap-3 p-6 text-[#f3ece0] md:p-12">
                         <h3 className="font-display text-3xl md:text-5xl">{ch.title}</h3>
                         {ch.native && <p className="order-first font-display text-5xl text-[#f08068] md:text-7xl" lang={lang} aria-hidden>{ch.native}</p>}
