@@ -781,6 +781,44 @@ export const JAPAN_SOURCES: Source[] = [
     notes: "Inscribed in 2013 on the Representative List; a social practice of skills, knowledge and traditions about producing, preparing and eating food, tied to respect for nature; seen most clearly at New Year, with pounded rice cakes and symbolic dishes shared by families and communities; favours local ingredients such as rice, fish, vegetables and edible wild plants; passed down at home at shared mealtimes.",
   },
 
+  // Language chapter (16 Nov 2026). The Columbia essay's school kanji counts (881 and 1,850) are from an older list and are not used.
+  {
+    id: "afe-language",
+    title: "The Japanese Language",
+    publisher: "Asia for Educators, Columbia University (essay by Amy Vladeck Heinrich)",
+    url: "https://afe.easia.columbia.edu/special/japan_600ce_language.htm",
+    accessed: "2026-11-16",
+    type: "academic",
+    notes: "Japanese is spoken almost exclusively in Japan or by Japanese abroad; about 100 distinct syllables plus a single consonant n; g always hard; long vowels held twice as long (Tōkyō as To-o-kyo-o); syllables are never accented; sounds such as l and v are missing, so France becomes Huransu; particles such as wa and o mark how words relate; the subject is often left out and singular and plural rarely distinguished; verbs and adjectives both change for tense; levels of politeness change verbs, nouns and pronouns with the listener's status (a different word for father when speaking to him and about him); Chinese characters (kanji) used from about 1,400 years ago, read both for meaning and for sound; kana developed from kanji to show sound; two syllabaries of forty-six symbols each, hiragana for endings, particles and other Japanese words, katakana for loan words (terebi, aisu kurīmu), foreign names and emphasis; written horizontally left to right or, more usually, in vertical columns running right to left, so books open from what is the back of an English book; students learn about two thousand symbols; in the Meiji era some wanted to switch to the roman alphabet or to English; after the Second World War the written language was simplified and standardised.",
+  },
+  {
+    id: "bunka-endangered",
+    title: "消滅の危機にある言語・方言 (Endangered languages and dialects)",
+    publisher: "Agency for Cultural Affairs",
+    url: "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/kikigengo/index.html",
+    accessed: "2026-11-16",
+    type: "official",
+    notes: "UNESCO's Atlas of the World's Languages in Danger (3rd edition, February 2009) lists about 2,500 languages, eight of them in Japan: Ainu critically endangered; Yaeyama and Yonaguni severely endangered; Hachijō, Amami, Kunigami, Okinawa and Miyako definitely endangered. UNESCO does not distinguish language from dialect; in Japan the seven other than Ainu are generally called dialects. The dialects of the areas hit by the 2011 earthquake were named in the reconstruction policy of July 2011. The agency funds surveys, records and revival work.",
+  },
+  {
+    id: "bunka-joyo",
+    title: "常用漢字表（平成22年内閣告示第2号）(Jōyō kanji list, Cabinet Notice No. 2 of 2010)",
+    publisher: "Agency for Cultural Affairs",
+    url: "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/",
+    accessed: "2026-11-16",
+    type: "official",
+    notes: "The list of kanji for general use was issued by cabinet notice on 30 November 2010, replacing the notice of 1981. The page does not state the number of characters; the site gives none.",
+  },
+  {
+    id: "ninjal-endangered-db",
+    title: "Database of Endangered Languages of Japan",
+    publisher: "National Institute for Japanese Language and Linguistics",
+    url: "https://kikigengo.ninjal.ac.jp/en/",
+    accessed: "2026-11-16",
+    type: "academic",
+    notes: "Open-access word lists of many endangered languages and dialects, each word with its pronunciation by a native speaker, and transcribed and translated oral texts gathered in the field.",
+  },
+
   // Shinjuku and Akihabara (added 15 Nov 2026, after the 2025 survey's full area list)
   { id: "tmg-inbound-2025-summary", title: "令和7年 国・地域別外国人旅行者行動特性調査 結果概要 (2025 survey of foreign visitors to Tokyo: summary, attachment 1)", publisher: "Tokyo Metropolitan Government, Bureau of Industrial and Labor Affairs", url: "https://www.metro.tokyo.lg.jp/documents/d/tosei/20260630_17_01", accessed: "2026-11-15", type: "official",
     notes: "Places visited, 16,008 respondents who visited Tokyo, multiple answers: Shibuya 60.3%, Ginza 54.1%, Tokyo Station/Marunouchi/Nihonbashi 51.8%, Shinjuku/Ōkubo 50.8%, Asakusa 46.9%, Akihabara 45.1%, Ueno 36.9%, Harajuku/Omotesandō/Aoyama 34.1%, Ikebukuro 26.5%, Roppongi/Akasaka 23.0%." },

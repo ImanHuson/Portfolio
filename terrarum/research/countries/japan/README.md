@@ -92,3 +92,11 @@ Sources: the Ministry of Agriculture's WASHOKU booklet (36 pages; the pages on t
 Cut on re-reading: "burdock" in the vegetable list, "a warm current and a cold one" (the booklet names the currents, not their temperatures), "in the nineteenth century" for the end of the meat ban, "the chemist" and "was named" for Ikeda and umami, rice farming "from the continent", "temple kitchens", "Portuguese and Spanish" for the Nanban trade, "after 1868", "grows less than 40% of its own food" (the booklet gives a self-sufficiency ratio), a gloss of nigiri as "a slice of fish on a ball of rice", "stall-keeper" for Hanaya Yohei, "pine" for kadomatsu and "spiced" for otoso.
 
 The booklet's chronology prints as a table whose period columns do not survive text extraction, so the chapter gives no period for tofu, Eisai's tea, honzen ryōri or the first cookbook beyond what the entries themselves say. Not covered: ramen, curry rice, convenience-store food, school lunches, tea and sweets in any detail, whisky and beer; the booklet's pages on nutrition, arrangement, chopsticks and sweets were not read.
+
+## 16 Nov 2026: Language chapter
+
+Sources read in full: Columbia's Asia for Educators essay on the Japanese language, the Agency for Cultural Affairs page on endangered languages and dialects (UNESCO's 2009 atlas: eight in Japan), the agency's page for the 2010 jōyō kanji cabinet notice, NINJAL's endangered-languages database front page, plus the Upopoy and JTA texts on Ainu already in use.
+
+Not used from the Columbia essay: its school kanji counts (881 and 1,850), which are from an older list. The agency's notice page does not state the number of jōyō kanji, so the chapter gives the date of the list and no count. Cut on re-reading: "a working language", particles "follow a noun", a word-by-word gloss of the example sentence, "most of them a consonant followed by a vowel", "four beats", "the hardest thing for a learner", "no neat English equivalent", "in print", "Japanese had no script of its own", "the oldest neighbour inside the country", "the most serious category", "in the far south-west" for Yaeyama and Yonaguni.
+
+Not covered because no source here supports it: the number of speakers, whether Japanese is related to any other language, regional dialects such as Kansai speech, keigo in detail, foreign residents' languages, sign language.
