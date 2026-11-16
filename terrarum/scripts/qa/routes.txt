@@ -22,6 +22,7 @@
 /japan/kansai/osaka/osaka-castle/
 /japan/topics/land/
 /japan/topics/history/
+/japan/topics/belief/
 /japan/
 /japan/kansai/
 /japan/kanto/

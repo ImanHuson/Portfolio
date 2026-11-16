@@ -732,6 +732,35 @@ export const JAPAN_SOURCES: Source[] = [
     notes: "Occupation 1945-1952 under General Douglas MacArthur; armed forces abolished; a new constitution placed sovereignty with the people and kept the emperor as a symbol; the Diet supreme; women given equal rights including the vote; Article 9; before the war two thirds of farmland was rented and farmers were over half the labour force; land reform gave farm families the land they worked; by 1949 about half of industrial workers belonged to a union; the break-up of the zaibatsu was not carried through.",
   },
 
+  // Belief chapter (16 Nov 2026).
+  {
+    id: "jinja-honcho-shinto",
+    title: "Shinto",
+    publisher: "Jinja Honcho (Association of Shinto Shrines)",
+    url: "https://www.jinjahoncho.or.jp/en/shinto/",
+    accessed: "2026-11-16",
+    type: "official",
+    notes: "Shinto has no founder, no dogma and no doctrine; respect and gratitude toward the kami found in all things and places, which bring the blessings and the harshness of nature; kami include ancestors and spirits of nature; jinja in their tens of thousands; a gathering to honour the kami is a matsuri, some solemn and inside the sanctuary, many spilling into the community; the oldest surviving myths were recorded over 1,300 years ago; Amaterasu-Ōmikami the most revered kami.",
+  },
+  {
+    id: "jinja-honcho-faq",
+    title: "Frequently asked questions",
+    publisher: "Jinja Honcho (Association of Shinto Shrines)",
+    url: "https://www.jinjahoncho.or.jp/en/faq/",
+    accessed: "2026-11-16",
+    type: "official",
+    notes: "No founder and no scriptures; the Kojiki and Nihon shoki, eighth-century histories, recount the myths; kami include mythical figures, past emperors and historical people, with no absolute god and no hierarchy; about 80,000 jinja and around 20,000 priests in Jinja Shinto; every person is regarded as a parishioner of a local jinja (ujigami); about 80% of the population visits a jinja at New Year (hatsumōde); rites at the first visit of a newborn, Shichi-go-san at three, five and seven, and weddings; a torii marks the border between the secular and the sacred and distinguishes a jinja from a Buddhist temple; the constitution requires strict separation of state and religion; most people who practise Shinto describe themselves as having no religion or as Buddhist; prayer: coins, two deep bows, two claps, one bow; omamori amulets; daily offering of food and drink to the kami.",
+  },
+  {
+    id: "sotozen-history",
+    title: "History of the Soto Zen School",
+    publisher: "Sotoshu (Sōtō Zen School, official site)",
+    url: "https://www.sotozen.com/eng/about/history/index.html",
+    accessed: "2026-11-16",
+    type: "official",
+    notes: "Dōgen studied in Song China, returned at 28, wrote A Universal Recommendation of Zazen and settled at Eihei-ji in Echizen; Rinzai Zen had the support of the shogunate and nobility and set up the Five Mountains temples in Kyoto and Kamakura, Sōtō spread in the countryside; the Tokugawa shogunate's temple and parishioner system (jidan seido) organised and controlled temples countrywide; after the Meiji Restoration the government separated Shinto and Buddhism and Buddhism was persecuted (haibutsu kishaku); today about 15,000 temples and some eight million adherents.",
+  },
+
   // Shinjuku and Akihabara (added 15 Nov 2026, after the 2025 survey's full area list)
   { id: "tmg-inbound-2025-summary", title: "令和7年 国・地域別外国人旅行者行動特性調査 結果概要 (2025 survey of foreign visitors to Tokyo: summary, attachment 1)", publisher: "Tokyo Metropolitan Government, Bureau of Industrial and Labor Affairs", url: "https://www.metro.tokyo.lg.jp/documents/d/tosei/20260630_17_01", accessed: "2026-11-15", type: "official",
     notes: "Places visited, 16,008 respondents who visited Tokyo, multiple answers: Shibuya 60.3%, Ginza 54.1%, Tokyo Station/Marunouchi/Nihonbashi 51.8%, Shinjuku/Ōkubo 50.8%, Asakusa 46.9%, Akihabara 45.1%, Ueno 36.9%, Harajuku/Omotesandō/Aoyama 34.1%, Ikebukuro 26.5%, Roppongi/Akasaka 23.0%." },

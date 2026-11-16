@@ -76,3 +76,11 @@ Sources read in full: Columbia's Asia for Educators essays (Heian, the samurai c
 Cut or changed on re-reading against the sources: "the future Tokyo" for Edo (not in the essays), "fan-shaped" and "empty island" for Dejima, "mostly" from the lower samurai, "unions were legalised" (a few existed before the war), "ruled from Shuri Castle" (the text calls it the dynasty's monument), "growing rich on sea trade", and "before the twentieth century" for the Mongol invasions (the essay says before the Second World War). Not used from the samurai essay: 1263 for Khubilai as emperor of China and 1333 for the Ashikaga (the timeline's 1336 is used).
 
 Not covered because no source here supports it: the annexation of Korea by year, the Ainu and the settlement of Hokkaidō under Meiji, the annexation of Ryukyu, the death tolls of the war and the bombings, and anything after 1990 beyond population figures and the 2011 tsunami. web-japan.org, mofa.go.jp and Britannica refuse this machine.
+
+## 16 Nov 2026: Religion and belief chapter
+
+Sources read in full: Jinja Honcho's Shinto page and FAQ, the Sōtō school's own history page, and texts already used on place pages (Hōryū-ji, Tōdai-ji, Kōyasan, Kōtoku-in, Kenchō-ji, Daishō-in, Chūson-ji, Muryōkō-in, Meiji Jingū, the Shikoku pilgrimage, Izumo's Kamiari festival, the Hidden Christian sites, Upopoy).
+
+Cut on re-reading: that the myths "are not holy books in the sense a Bible is"; that the court was building temples "within a few decades"; "the emperor" and "bronze" for the Nara Great Buddha (the temple's history page as noted gives neither); that Kūkai "rests in meditation still" (the source says he died in meditation and was laid in a grotto); a line that the schools differ in what they ask a person to do; "reciting his name" as a gloss of nenbutsu; Confucianism as "more a set of ideas than a religion"; that temples have "halls for images of the Buddha"; "small" for the Konjikidō; that Bon is Buddhist (the Sapporo text only describes the dancing); that the parishioner system "tied households to temples".
+
+Not covered because no source here supports it: numbers of adherents by religion (the Agency for Cultural Affairs yearbook was not read), Tendai and Nichiren, new religions, Okinawan belief, Islam and other faiths of residents.
