@@ -25,13 +25,12 @@ export const japan: Country = {
   card: "kyoto-yasaka",
   regionsGeo: "/data/jp-regions.json",
   regionsBounds: [[127, 25.5], [146, 45.6]],
-  regionsHeading: "Eight regions, seven open",
-  regionsNote: "Japan’s regions are a convention, not a level of government. Seven are researched; Kyūshū with Okinawa is on the map and still to come.",
-  regions: ["hokkaido", "tohoku", "kanto", "chubu", "kansai", "chugoku", "shikoku"],
+  regionsHeading: "Eight regions",
+  regionsNote: "Japan’s regions are a convention, not a level of government. All eight are open.",
+  regions: ["hokkaido", "tohoku", "kanto", "chubu", "kansai", "chugoku", "shikoku", "kyushu"],
   // Kyoto is the deepest city so far and the slice the brief asked for first.
   startCity: "kyoto",
   pendingRegions: [
-    { geoKey: "kyushu", name: "Kyūshū and Okinawa", native: "九州・沖縄" },
   ],
   passages: [
     {
@@ -123,7 +122,6 @@ export const japan: Country = {
     },
   ],
   gaps: [
-    { topic: "One of eight regions", why: "Kyūshū with Okinawa shows on the map but has no pages yet." },
     { topic: "Writing systems and the history of Japanese", why: "Not yet sourced well enough to publish." },
     { topic: "Contemporary life and work", why: "No chapter yet; city pages such as Tokyo’s cover only parts of it." },
     { topic: "Video", why: "No authorised embed has been verified yet (see ASSET_GAPS.md)." },

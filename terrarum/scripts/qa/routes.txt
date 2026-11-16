@@ -74,3 +74,14 @@
 /japan/hokkaido/shiraoi/upopoy/
 /japan/hokkaido/shiretoko/shiretoko-five-lakes/
 /japan/hokkaido/hakodate/goryokaku/
+/japan/kyushu/
+/japan/kyushu/fukuoka/
+/japan/kyushu/dazaifu/
+/japan/kyushu/nagasaki/
+/japan/kyushu/naha/
+/japan/kyushu/yakushima/
+/japan/kyushu/dazaifu/dazaifu-tenmangu/
+/japan/kyushu/nagasaki/oura-church/
+/japan/kyushu/nagasaki/dejima/
+/japan/kyushu/naha/shuri-castle/
+/japan/kyushu/yakushima/yakusugi-forest/
