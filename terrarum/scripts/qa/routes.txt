@@ -23,6 +23,7 @@
 /japan/topics/land/
 /japan/topics/history/
 /japan/topics/belief/
+/japan/topics/food/
 /japan/
 /japan/kansai/
 /japan/kanto/

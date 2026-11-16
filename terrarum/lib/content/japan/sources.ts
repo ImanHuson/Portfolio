@@ -761,6 +761,26 @@ export const JAPAN_SOURCES: Source[] = [
     notes: "Dōgen studied in Song China, returned at 28, wrote A Universal Recommendation of Zazen and settled at Eihei-ji in Echizen; Rinzai Zen had the support of the shogunate and nobility and set up the Five Mountains temples in Kyoto and Kamakura, Sōtō spread in the countryside; the Tokugawa shogunate's temple and parishioner system (jidan seido) organised and controlled temples countrywide; after the Meiji Restoration the government separated Shinto and Buddhism and Buddhism was persecuted (haibutsu kishaku); today about 15,000 temples and some eight million adherents.",
   },
 
+  // Food chapter (16 Nov 2026).
+  {
+    id: "maff-washoku",
+    title: "WASHOKU: Traditional Dietary Cultures of the Japanese",
+    publisher: "Ministry of Agriculture, Forestry and Fisheries (booklet, editorial committee chaired by Isao Kumakura)",
+    url: "https://www.maff.go.jp/e/data/publish/attach/pdf/index-20.pdf",
+    accessed: "2026-11-16",
+    type: "official",
+    notes: "Home washoku is cooked rice, miso soup, main and side dishes and pickles; 'one soup and three dishes' adds three dishes to rice, soup and pickles, rice front left and soup front right, everything there to eat rice with, so nikujaga, korokke and tonkatsu count as side dishes; two soups and five dishes for guests in the Edo period; short sticky Japonica rice, used for onigiri and sushi; glutinous rice for mochi and sekihan; vegetables and seafood the two bases, about 150 kinds of vegetable on sale, meat generally prohibited until the country opened; fishing grounds where the Japan and Oyashio currents meet; soft water, 1,800 mm of rain a year, suits kombu and katsuobushi dashi; wasabi's antibacterial action with raw fish; dashi the most important element of taste (kombu, katsuobushi, niboshi, dried shiitake); Kikunae Ikeda identified glutamic acid as an umami component in 1907; fermented seasonings miso, soy sauce (five kinds), vinegar, mirin; narezushi; chronology: wet-rice farming arrives, Emperor Tenmu's ban of 675 on beef, horse, dog, monkey and chicken, tofu from China, Eisai brings powdered tea from Song China, Dōgen's Tenzo kyōkun, vegetarian temple food, honzen ryōri of the samurai, Sen no Rikyū and kaiseki, chili and Western sweets by Nanban trade, Ryōri monogatari the first printed cookbook, eateries in Edo-period cities, Western and semi-Western dishes from Meiji, self-sufficiency under 40%; itadakimasu and gochisōsama as thanks before and after eating; lacquer bowls held in the hand; naorai after shrine rites; osechi (kuromame for health, kazunoko for descendants, tazukuri for harvest), ozōni and otoso, kadomatsu; imoni-kai in Yamagata (taro, beef, soy sauce) and Miyagi (taro, pork, miso); square mochi in the east and round in the west, the line at Chūbu; Tokyo ozōni on katsuobushi dashi with soy sauce; miso types (Sendai salty red, Saikyō sweet white in Kansai, Hatchō soybean miso); omiki sake shared after rites.",
+  },
+  {
+    id: "unesco-washoku",
+    title: "Washoku, traditional dietary cultures of the Japanese, notably for the celebration of New Year",
+    publisher: "UNESCO Intangible Cultural Heritage",
+    url: "https://ich.unesco.org/en/RL/washoku-traditional-dietary-cultures-of-the-japanese-notably-for-the-celebration-of-new-year-00869",
+    accessed: "2026-11-16",
+    type: "heritage-body",
+    notes: "Inscribed in 2013 on the Representative List; a social practice of skills, knowledge and traditions about producing, preparing and eating food, tied to respect for nature; seen most clearly at New Year, with pounded rice cakes and symbolic dishes shared by families and communities; favours local ingredients such as rice, fish, vegetables and edible wild plants; passed down at home at shared mealtimes.",
+  },
+
   // Shinjuku and Akihabara (added 15 Nov 2026, after the 2025 survey's full area list)
   { id: "tmg-inbound-2025-summary", title: "令和7年 国・地域別外国人旅行者行動特性調査 結果概要 (2025 survey of foreign visitors to Tokyo: summary, attachment 1)", publisher: "Tokyo Metropolitan Government, Bureau of Industrial and Labor Affairs", url: "https://www.metro.tokyo.lg.jp/documents/d/tosei/20260630_17_01", accessed: "2026-11-15", type: "official",
     notes: "Places visited, 16,008 respondents who visited Tokyo, multiple answers: Shibuya 60.3%, Ginza 54.1%, Tokyo Station/Marunouchi/Nihonbashi 51.8%, Shinjuku/Ōkubo 50.8%, Asakusa 46.9%, Akihabara 45.1%, Ueno 36.9%, Harajuku/Omotesandō/Aoyama 34.1%, Ikebukuro 26.5%, Roppongi/Akasaka 23.0%." },
