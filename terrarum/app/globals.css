@@ -338,11 +338,18 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 }
 @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+/* The scrim is only as large as the words need (the photograph was dimmed over
+   85% of its height before): a band under the breadcrumb, a strip for the credit
+   line, and .cine-shade behind the text block itself. verify-redesign.js contrast
+   models these same numbers over a white photograph. */
 .cine-scrim {
   background:
-    linear-gradient(to top, rgb(6 8 14 / 0.95) 0%, rgb(6 8 14 / 0.88) 35%, rgb(6 8 14 / 0.7) 60%, transparent 85%),
-    linear-gradient(to bottom, rgb(6 8 14 / 0.72) 0%, transparent 22%),
-    linear-gradient(to right, rgb(6 8 14 / 0.55) 0%, transparent 55%);
+    linear-gradient(to top, rgb(6 8 14 / 0.88) 0, rgb(6 8 14 / 0.88) 8rem, transparent 14rem),
+    linear-gradient(to bottom, rgb(6 8 14 / 0.8) 0, rgb(6 8 14 / 0.8) 5rem, transparent 10rem);
+}
+.cine-shade::before {
+  content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); width: 100vw;
+  background: linear-gradient(to bottom, transparent 0, rgb(6 8 14 / 0.7) 6rem, rgb(6 8 14 / 0.78) 100%);
 }
 /* One vertical column, sized so the whole name fits the height it is given. */
 /* A section holding a watermark column sets --n (characters) and may set --kfs
@@ -362,13 +369,15 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
   white-space: nowrap;
   color: var(--ink); opacity: 0.16; letter-spacing: 0.02em;
 }
-/* Slides for heroes with several photographs: a slow cross-dissolve. */
+/* Slides for heroes with several photographs: a slow cross-dissolve, each
+   easing in from a slight zoom. Keyframes are written by CinemaHero for its count. */
+.cine-slides > :not(:first-child) { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .cine-slides > :not(:first-child) { opacity: 0; animation: slide var(--slide-total) linear infinite; animation-delay: var(--slide-at); }
-  .cine-slides > :first-child { animation: slide-first var(--slide-total) linear infinite; }
+  .cine-slides > .cine-img {
+    animation: var(--slide-fade) var(--slide-total) linear infinite, var(--slide-zoom) var(--slide-total) linear infinite;
+    animation-delay: var(--slide-at);
+  }
 }
-@keyframes slide { 0% { opacity: 0; } 4%, 25% { opacity: 1; } 29%, 100% { opacity: 0; } }
-@keyframes slide-first { 0%, 25% { opacity: 1; } 29%, 96% { opacity: 0; } 100% { opacity: 1; } }
 
 /* Scroll-told passages: the pinned frame shows the active step's photograph. */
 .story-frame { opacity: 0; transition: opacity 700ms var(--ease-out); }

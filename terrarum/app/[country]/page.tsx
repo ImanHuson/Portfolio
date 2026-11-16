@@ -59,7 +59,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
     );
 
   const firstChapter = c.chapters[0];
-  const heroes = [firstChapter?.hero, firstCity.hero, ...starts.slice(0, 3).map((x) => x.p.hero)].filter((x): x is string => !!x).slice(0, 4);
+  const heroes = c.heroes ?? [firstChapter?.hero, firstCity.hero, ...starts.slice(0, 3).map((x) => x.p.hero)].filter((x): x is string => !!x).slice(0, 4);
   // The country's own passages are told beside its print and its places.
   const pool = [c.hero, ...starts.map((x) => x.p.hero).filter((h) => !heroes.includes(h)), ...starts.map((x) => x.p.hero)];
   const told = [lead, ...paired].filter((x): x is P => !!x);

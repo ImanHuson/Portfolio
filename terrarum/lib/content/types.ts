@@ -297,6 +297,8 @@ export interface Country {
   summary: string;
   facts: Fact[];
   hero: string;
+  /** The opening slideshow: the country's best-known places and sights, in order. Without it the page derives one. */
+  heroes?: string[];
   /** Photograph used for the country's card on the home page. */
   card: string;
   regionsGeo: string;

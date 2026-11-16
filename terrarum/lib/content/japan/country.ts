@@ -22,7 +22,9 @@ export const japan: Country = {
     { label: "Foreign visitors", value: "42.68 million in 2025 (provisional), up from 36.87 million in 2024", asOf: "2025", cite: ["stat-handbook-2026"] },
   ],
   hero: "cma-shono",
-  card: "kyoto-yasaka",
+  // Mount Fuji from Fujiyoshida, Fushimi Inari, Itsukushima, Kinkaku-ji, Himeji, Shibuya, Arashiyama, Shirakawa-gō.
+  heroes: ["fuji-chureito-sakura", "inari-tunnel", "itsuku-torii-blue", "kinkaku-reflection", "himeji-sakura", "shibuya-crossing-crowd", "arashi-bamboo", "shirakawa-snow-house"],
+  card: "fuji-chureito-sakura",
   regionsGeo: "/data/jp-regions.json",
   regionsBounds: [[127, 25.5], [146, 45.6]],
   regionsHeading: "Eight regions",

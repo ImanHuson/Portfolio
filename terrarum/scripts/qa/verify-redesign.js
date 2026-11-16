@@ -255,14 +255,18 @@ async function contrast(b) {
         if (hero) {
           // Composite the hero's three scrims over a white photograph at the text's worst point.
           const hr = hero.getBoundingClientRect();
-          const fromBottom = (hr.bottom - rc.top) / hr.height; // top edge of the text: least scrim
           const fromTop = (rc.top - hr.top) / hr.height;
-          const fromLeft = (rc.right - hr.left) / hr.width; // right edge: least left scrim
           const stops = (t, s) => { for (let i = 1; i < s.length; i++) if (t <= s[i][0]) { const [t0, a0] = s[i - 1], [t1, a1] = s[i]; return a0 + (a1 - a0) * ((t - t0) / (t1 - t0)); } return s[s.length - 1][1]; };
-          const aB = stops(fromBottom, [[0, 0.95], [0.35, 0.88], [0.6, 0.7], [0.85, 0], [1, 0]]);
-          const aT = stops(fromTop, [[0, 0.72], [0.22, 0], [1, 0]]);
-          const aL = stops(fromLeft, [[0, 0.55], [0.55, 0], [1, 0]]);
-          bg = over(SCRIM, aL, over(SCRIM, aT, over(SCRIM, aB, [255, 255, 255])));
+          // globals.css: .cine-scrim (credit strip in rem from the bottom, band under the breadcrumb)
+          // and .cine-shade (behind the text block, 0 at its top to 0.7 at 6rem, 0.78 at its foot).
+          const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+          const pxB = (hr.bottom - rc.top) / rem;
+          const aB = stops(pxB, [[0, 0.88], [8, 0.88], [14, 0], [1e6, 0]]);
+          const aT = stops((rc.top - hr.top) / rem, [[0, 0.8], [5, 0.8], [10, 0], [1e6, 0]]);
+          const sh = el.closest('[data-shade]');
+          let aS = 0;
+          if (sh) { const sr = sh.getBoundingClientRect(); const d = (rc.top - sr.top) / rem; aS = d <= 6 ? 0.7 * Math.max(0, d) / 6 : 0.7 + 0.08 * ((d - 6) / Math.max(1, sr.height / rem - 6)); }
+          bg = over(SCRIM, aS, over(SCRIM, aT, over(SCRIM, aB, [255, 255, 255])));
         } else if (band) {
           // Collage band (globals.css .tile-band): 0.8 at the bottom, 0.66 at 5rem below its
           // top, 0.3 at 2.5rem, 0 at the top. Worst case: the text's top edge over a white photo.

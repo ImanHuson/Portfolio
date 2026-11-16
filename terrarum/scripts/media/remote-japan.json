@@ -321,20 +321,20 @@
   "w": 5184
  },
  "arashi-bamboo": {
-  "accessed": "2026-11-09",
-  "alt": "A path running between walls of tall green bamboo in the Sagano grove.",
-  "creator": "Benh LIEU SONG from Torcy, France",
-  "file": "Arashiyama_Bamboo_Grove_(44050138950).jpg",
-  "h": 6000,
-  "landing": "https://commons.wikimedia.org/wiki/File:Arashiyama_Bamboo_Grove_(44050138950).jpg",
+  "accessed": "2026-11-16",
+  "alt": "A path curving between brushwood fences through a grove of tall green bamboo in soft evening light.",
+  "creator": "Bjørn Christian Tørrissen",
+  "file": "Arashiyama-Bamboo-Grove-Sunset.jpg",
+  "h": 3648,
+  "landing": "https://commons.wikimedia.org/wiki/File:Arashiyama-Bamboo-Grove-Sunset.jpg",
   "license": "by-sa",
-  "location": "Sagano, Kyoto",
-  "lv": "2.0",
-  "path": "7/75/Arashiyama_Bamboo_Grove_(44050138950).jpg",
-  "place": "arashiyama",
-  "side": "approach",
-  "title": "Arashiyama_Bamboo_Grove_(44050138950)",
-  "w": 4000
+  "location": "Arashiyama, Kyoto",
+  "lv": "4.0",
+  "path": "8/83/Arashiyama-Bamboo-Grove-Sunset.jpg",
+  "place": "jphero",
+  "side": "grounds",
+  "title": "Arashiyama-Bamboo-Grove-Sunset",
+  "w": 5472
  },
  "arashi-bridge-close": {
   "accessed": "2026-11-09",
@@ -1365,6 +1365,23 @@
   "title": "Chureito Pagoda and Mount Fuji 20241022",
   "w": 6199
  },
+ "fuji-chureito-sakura": {
+  "accessed": "2026-11-16",
+  "alt": "Snow-capped Mount Fuji under a clear blue sky, seen over cherry trees in bloom and the town of Fujiyoshida, with the red five-storey Chūreitō pagoda at the right.",
+  "creator": "Reginald Pentinio",
+  "file": "Chuurei-tou_Fujiyoshida_17025277650_c59733d6ba_o.jpg",
+  "focus": "62% 50%",
+  "h": 3336,
+  "landing": "https://commons.wikimedia.org/wiki/File:Chuurei-tou_Fujiyoshida_17025277650_c59733d6ba_o.jpg",
+  "license": "by",
+  "location": "Arakurayama Sengen Park, Fujiyoshida",
+  "lv": "2.0",
+  "path": "6/66/Chuurei-tou_Fujiyoshida_17025277650_c59733d6ba_o.jpg",
+  "place": "jphero",
+  "side": "season",
+  "title": "Chuurei-tou Fujiyoshida 17025277650 c59733d6ba o",
+  "w": 5004
+ },
  "fuji-crater": {
   "accessed": "2026-11-15",
   "alt": "Inside the summit crater: steep walls of red and grey volcanic rock with patches of snow, under a deep blue sky.",
@@ -1396,6 +1413,22 @@
   "side": "people",
   "title": "Mt",
   "w": 5456
+ },
+ "fuji-kawaguchi-autumn": {
+  "accessed": "2026-11-16",
+  "alt": "Mount Fuji with a dusting of snow across Lake Kawaguchi, a maple in deep red autumn leaf filling the right of the frame.",
+  "creator": "Alpsdake",
+  "file": "Autumn_leaf_color_and_Mount_Fuji_from_Lake_Kawaguchi.jpg",
+  "h": 3456,
+  "landing": "https://commons.wikimedia.org/wiki/File:Autumn_leaf_color_and_Mount_Fuji_from_Lake_Kawaguchi.jpg",
+  "license": "by-sa",
+  "location": "Lake Kawaguchi",
+  "lv": "4.0",
+  "path": "c/ca/Autumn_leaf_color_and_Mount_Fuji_from_Lake_Kawaguchi.jpg",
+  "place": "jphero",
+  "side": "season",
+  "title": "Autumn leaf color and Mount Fuji from Lake Kawaguchi",
+  "w": 5184
  },
  "fuji-kawaguchiko": {
   "accessed": "2026-11-15",
@@ -2535,19 +2568,20 @@
   "w": 4256
  },
  "himeji-sakura": {
-  "accessed": "2026-11-09",
-  "alt": "The keep above a sea of cherry blossom under a clear spring sky.",
+  "accessed": "2026-11-16",
+  "alt": "The white keep of Himeji Castle framed by cherry trees in full bloom, a red bridge crossing the moat below.",
   "creator": "Seattleite7",
   "file": "Himeji_Castle_with_cherry_blossoms_from_Himeji_Zoo.jpg",
+  "focus": "55% 50%",
   "h": 3264,
   "landing": "https://commons.wikimedia.org/wiki/File:Himeji_Castle_with_cherry_blossoms_from_Himeji_Zoo.jpg",
   "license": "by-sa",
-  "location": "Himeji Castle, Hyōgo",
+  "location": "Himeji Castle",
   "lv": "4.0",
   "path": "a/ac/Himeji_Castle_with_cherry_blossoms_from_Himeji_Zoo.jpg",
-  "place": "himeji",
+  "place": "jphero",
   "side": "season",
-  "title": "Himeji_Castle_with_cherry_blossoms_from_Himeji_Zoo",
+  "title": "Himeji Castle with cherry blossoms from Himeji Zoo",
   "w": 4912
  },
  "himeji-view": {
@@ -3240,6 +3274,22 @@
   "title": "KTO1907-011_(48339284907)",
   "w": 5472
  },
+ "inari-tunnel": {
+  "accessed": "2026-11-16",
+  "alt": "A stone path running through a tunnel of closely set vermilion torii, their posts inscribed in black with donors’ names and dates.",
+  "creator": "Luka Peternel",
+  "file": "Fushimi-Inari-Shrine-Senbon-Torii-2016-Luka-Peternel.jpg",
+  "h": 3648,
+  "landing": "https://commons.wikimedia.org/wiki/File:Fushimi-Inari-Shrine-Senbon-Torii-2016-Luka-Peternel.jpg",
+  "license": "by-sa",
+  "location": "Fushimi Inari Taisha, Kyoto",
+  "lv": "4.0",
+  "path": "e/e4/Fushimi-Inari-Shrine-Senbon-Torii-2016-Luka-Peternel.jpg",
+  "place": "jphero",
+  "side": "approach",
+  "title": "Fushimi-Inari-Shrine-Senbon-Torii-2016-Luka-Peternel",
+  "w": 5472
+ },
  "ishite-corridor": {
   "accessed": "2026-11-15",
   "alt": "A long covered corridor of wooden posts and stone paving leading toward the temple, lanterns hung from its beams.",
@@ -3479,6 +3529,22 @@
   "side": "exterior",
   "title": "Itsukushima Shrine Torii Gate (13890465459)",
   "w": 4000
+ },
+ "itsuku-torii-blue": {
+  "accessed": "2026-11-16",
+  "alt": "The great vermilion torii of Itsukushima standing in bright blue sea at high tide, wooded shore and mountains behind.",
+  "creator": "JordyMeow",
+  "file": "Itsukushima_Gate.jpg",
+  "h": 2803,
+  "landing": "https://commons.wikimedia.org/wiki/File:Itsukushima_Gate.jpg",
+  "license": "by-sa",
+  "location": "Itsukushima Shrine, Miyajima",
+  "lv": "3.0",
+  "path": "0/0e/Itsukushima_Gate.jpg",
+  "place": "jphero",
+  "side": "view",
+  "title": "Itsukushima Gate",
+  "w": 4200
  },
  "itsuku-torii-shrine": {
   "accessed": "2026-11-15",
@@ -4514,6 +4580,23 @@
   "title": "20260427_Goldener_Pavillon_01_im_Kinkaku-Ji-Tempel,_Kyoto,_Japan_anagoria",
   "w": 12000
  },
+ "kinkaku-reflection": {
+  "accessed": "2026-11-16",
+  "alt": "The gold-leafed pavilion of Kinkaku-ji among pines at the edge of its pond, mirrored in the water with blue sky and white clouds.",
+  "creator": "Basile Morin",
+  "file": "Water_reflection_of_Kinkaku-ji_Temple_with_blue_sky_and_white_clouds,_Kyoto,_Japan.jpg",
+  "focus": "58% 50%",
+  "h": 4355,
+  "landing": "https://commons.wikimedia.org/wiki/File:Water_reflection_of_Kinkaku-ji_Temple_with_blue_sky_and_white_clouds,_Kyoto,_Japan.jpg",
+  "license": "by-sa",
+  "location": "Kinkaku-ji, Kyoto",
+  "lv": "4.0",
+  "path": "0/01/Water_reflection_of_Kinkaku-ji_Temple_with_blue_sky_and_white_clouds,_Kyoto,_Japan.jpg",
+  "place": "jphero",
+  "side": "exterior",
+  "title": "Water reflection of Kinkaku-ji Temple with blue sky and white clouds, Kyoto, Japan",
+  "w": 6532
+ },
  "kinkaku-sekkatei": {
   "alt": "Sekka-tei, a small thatched teahouse in the temple garden, with weathered wooden walls and a bamboo lattice window.",
   "creator": "そらみみ",
@@ -5380,20 +5463,20 @@
   "w": 5606
  },
  "meiji-torii": {
-  "accessed": "2026-11-13",
-  "alt": "A tall plain wooden torii over the gravel approach through the forest, visitors walking beneath it.",
-  "creator": "William J Sisti from Morristown, NJ, USA",
-  "file": "India_Adventure_-_Tokyo_IMG_1091_(13002356434).jpg",
-  "h": 3000,
-  "landing": "https://commons.wikimedia.org/wiki/File:India_Adventure_-_Tokyo_IMG_1091_(13002356434).jpg",
+  "accessed": "2026-11-16",
+  "alt": "A great torii of plain cypress wood over the wide gravel approach to Meiji Jingu, visitors walking beneath it in the shade of tall forest.",
+  "creator": "Bjørn Christian Tørrissen",
+  "file": "Meiji-Torii-2018.jpg",
+  "h": 3607,
+  "landing": "https://commons.wikimedia.org/wiki/File:Meiji-Torii-2018.jpg",
   "license": "by-sa",
-  "location": "Meiji Jingū, Shibuya, Tokyo",
-  "lv": "2.0",
-  "path": "7/78/India_Adventure_-_Tokyo_IMG_1091_(13002356434).jpg",
-  "place": "tk-meiji",
+  "location": "Meiji Jingu, Tokyo",
+  "lv": "4.0",
+  "path": "8/89/Meiji-Torii-2018.jpg",
+  "place": "jpthumb",
   "side": "approach",
-  "title": "India_Adventure_-_Tokyo_IMG_1091_(13002356434)",
-  "w": 4000
+  "title": "Meiji-Torii-2018",
+  "w": 4742
  },
  "miyajima-deer": {
   "accessed": "2026-11-15",
@@ -6244,6 +6327,22 @@
   "side": "history",
   "title": "Het_kasteel_van_Osaka,_RP-P-2014-18-9-5",
   "w": 5146
+ },
+ "osakajo-sakura": {
+  "accessed": "2026-11-16",
+  "alt": "The white and green main tower of Osaka Castle, trimmed in gold, seen through branches of cherry blossom against a blue sky.",
+  "creator": "Luka Peternel",
+  "file": "Osaka-Castle-cherry-blossom-2018-Luka-Peternel.jpg",
+  "h": 3648,
+  "landing": "https://commons.wikimedia.org/wiki/File:Osaka-Castle-cherry-blossom-2018-Luka-Peternel.jpg",
+  "license": "by-sa",
+  "location": "Osaka Castle",
+  "lv": "4.0",
+  "path": "b/b0/Osaka-Castle-cherry-blossom-2018-Luka-Peternel.jpg",
+  "place": "jpthumb",
+  "side": "season",
+  "title": "Osaka-Castle-cherry-blossom-2018-Luka-Peternel",
+  "w": 5472
  },
  "osakajo-skyline": {
   "accessed": "2026-11-09",
@@ -7175,6 +7274,22 @@
   "title": "Five-Storey_Pagoda_of_Sensō-ji,_Asakusa_-_New_Year's_Day_2021_(50786251791)",
   "w": 6240
  },
+ "sensoji-pagoda-gate": {
+  "accessed": "2026-11-16",
+  "alt": "The five-storey pagoda of Sensō-ji beside the red Hōzōmon gate with its great lantern, under a blue sky with thin cloud.",
+  "creator": "Vasyl Gladysh",
+  "file": "Pagode_à_5_étages_Senso-ji.jpg",
+  "h": 4000,
+  "landing": "https://commons.wikimedia.org/wiki/File:Pagode_%C3%A0_5_%C3%A9tages_Senso-ji.jpg",
+  "license": "by-sa",
+  "location": "Sensō-ji, Tokyo",
+  "lv": "4.0",
+  "path": "2/23/Pagode_à_5_étages_Senso-ji.jpg",
+  "place": "jphero",
+  "side": "exterior",
+  "title": "Pagode à 5 étages Senso-ji",
+  "w": 6000
+ },
  "sensoji-skytree": {
   "accessed": "2026-11-13",
   "alt": "The top storeys of the pagoda beside the Tokyo Skytree tower, old and new against one sky.",
@@ -7238,6 +7353,22 @@
   "side": "people",
   "title": "Shibuya_Crossing_(53331461185)",
   "w": 6000
+ },
+ "shibuya-crossing-crowd": {
+  "accessed": "2026-11-16",
+  "alt": "A crowd crossing Shibuya’s scramble at night under walls of lit signs and video screens.",
+  "creator": "Landry Miguel",
+  "file": "Shibuya_Crossing.jpg",
+  "h": 3385,
+  "landing": "https://commons.wikimedia.org/wiki/File:Shibuya_Crossing.jpg",
+  "license": "by-sa",
+  "location": "Shibuya, Tokyo",
+  "lv": "4.0",
+  "path": "6/6c/Shibuya_Crossing.jpg",
+  "place": "jphero",
+  "side": "night",
+  "title": "Shibuya Crossing",
+  "w": 5078
  },
  "shibuya-crossing-night": {
   "accessed": "2026-11-15",
@@ -7416,6 +7547,22 @@
   "side": "night",
   "title": "-i---i-_(53075357717)",
   "w": 6000
+ },
+ "shinjuku-neon": {
+  "accessed": "2026-11-16",
+  "alt": "Buildings along a Shinjuku avenue at night, their fronts lit in green, blue and pink with stacked signs for restaurants and karaoke.",
+  "creator": "Basile Morin",
+  "file": "Colorful_illuminated_facades_of_buildings_at_night,_with_green,_blue_and_pink_lights,_Kabukicho,_Shinjuku,_Tokyo.jpg",
+  "h": 3928,
+  "landing": "https://commons.wikimedia.org/wiki/File:Colorful_illuminated_facades_of_buildings_at_night,_with_green,_blue_and_pink_lights,_Kabukicho,_Shinjuku,_Tokyo.jpg",
+  "license": "by-sa",
+  "location": "Shinjuku, Tokyo",
+  "lv": "4.0",
+  "path": "9/9c/Colorful_illuminated_facades_of_buildings_at_night,_with_green,_blue_and_pink_lights,_Kabukicho,_Shinjuku,_Tokyo.jpg",
+  "place": "jpthumb",
+  "side": "night",
+  "title": "Colorful illuminated facades of buildings at night, with green, blue and pink lights, Kabukicho, Shinjuku, Tokyo",
+  "w": 4877
  },
  "shinjuku-omoide": {
   "accessed": "2026-11-15",
@@ -7610,6 +7757,39 @@
   "side": "season",
   "title": "Shirakawa-go 20170202-5",
   "w": 5184
+ },
+ "shirakawa-snow-house": {
+  "accessed": "2026-11-16",
+  "alt": "A steep-thatched gasshō-style farmhouse under deep snow beside a pond, snowy wooded hills behind.",
+  "creator": "Raita Futo from Tokyo, Japan",
+  "file": "Shirakawa-go_winter_(51815452116).jpg",
+  "focus": "60% 50%",
+  "h": 3834,
+  "landing": "https://commons.wikimedia.org/wiki/File:Shirakawa-go_winter_(51815452116).jpg",
+  "license": "by",
+  "location": "Ogimachi, Shirakawa-gō",
+  "lv": "2.0",
+  "path": "8/84/Shirakawa-go_winter_(51815452116).jpg",
+  "place": "jphero",
+  "side": "season",
+  "title": "Shirakawa-go winter (51815452116)",
+  "w": 5751
+ },
+ "shirakawa-snow-village": {
+  "accessed": "2026-11-16",
+  "alt": "Snow-laden thatched farmhouses in Ogimachi under a clear blue sky, white mountains across the valley.",
+  "creator": "Raita Futo from Tokyo, Japan",
+  "file": "Winter_in_Shirakawa-go_(51815451686).jpg",
+  "h": 3939,
+  "landing": "https://commons.wikimedia.org/wiki/File:Winter_in_Shirakawa-go_(51815451686).jpg",
+  "license": "by",
+  "location": "Ogimachi, Shirakawa-gō",
+  "lv": "2.0",
+  "path": "c/ca/Winter_in_Shirakawa-go_(51815451686).jpg",
+  "place": "jphero",
+  "side": "season",
+  "title": "Winter in Shirakawa-go (51815451686)",
+  "w": 5908
  },
  "shirakawa-spring": {
   "accessed": "2026-11-15",
