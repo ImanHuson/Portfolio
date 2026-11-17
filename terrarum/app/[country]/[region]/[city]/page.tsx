@@ -94,9 +94,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
 
         <section aria-label="Key facts" className={`relative isolate overflow-hidden pt-[16vh] ${kanji ? "kanji-host" : ""}`} style={kanji ? ({ "--n": [...ci.native!].length } as React.CSSProperties) : undefined}>
           {kanji && (
-            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...ci.native!].length } as React.CSSProperties}>
-              {ci.native}
-            </p>
+            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...ci.native!].length } as React.CSSProperties} data-k={ci.native} />
           )}
           <FactBand facts={ci.facts} refs={refs} />
         </section>

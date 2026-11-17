@@ -105,7 +105,7 @@ export const life: Chapter = {
       id: "life-homes",
       heading: "More homes than households",
       body: [
-        "Japan had 65 million dwellings in 2023 and 56 million households to live in them. Nine million homes stood vacant, 13.8% of the total, the highest share ever recorded. Of the homes people actually live in, 60.9% are owned by their occupants; 52.7% are detached houses and 44.9% are apartments, a share that keeps rising.",
+        "Japan had 65 million dwellings in 2023 and 56 million households to live in them. Nine million homes stood vacant, 13.8% of the total, the highest share ever recorded. Of the homes people live in, 60.9% are owned by their occupants; 52.7% are detached houses and 44.9% are apartments, a share that keeps rising.",
         "The traditional interior, with its tatami floor, sliding paper screens and built-in shelves, goes back to a study built in Kyoto in 1486, and its style is still the basis of traditional house-building.",
       ],
       cite: ["stat-handbook-2026", "jta-r1-00459"],

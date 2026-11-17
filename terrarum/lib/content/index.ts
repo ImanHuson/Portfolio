@@ -67,6 +67,7 @@ export interface SearchItem {
 }
 
 /** Static search index: places, cities, regions, countries, topics. */
+/** Names, summaries and headings only: it is serialised into every page, and Pagefind holds the full text. */
 export function searchIndex(): SearchItem[] {
   const items: SearchItem[] = [];
   for (const e of COUNTRIES) {
@@ -75,8 +76,8 @@ export function searchIndex(): SearchItem[] {
   for (const [c, d] of Object.entries(COUNTRY_DATA)) {
     for (const r of d.regions) items.push({ title: r.name, native: r.native, kind: `Region of ${d.country.entry.name}`, href: `/${c}/${r.slug}/`, terms: `${r.summary} kinki`, status: "open" });
     for (const city of d.cities) items.push({ title: city.name, native: city.native, kind: "City", href: cityPath(c, city.slug).href, terms: `${city.summary} ${city.passages.map((p) => p.heading).join(" ")}`, status: "open" });
-    for (const p of d.places) items.push({ title: p.name, native: p.native, kind: p.kind, href: placePath(c, p.slug).href, terms: `${p.summary} ${p.passages.map((x) => x.heading + " " + x.body.join(" ")).join(" ")}`, status: "open" });
-    for (const p of d.country.passages) items.push({ title: p.heading, kind: `Topic in ${d.country.entry.name}`, href: `/${c}/#${p.id}`, terms: p.body.join(" "), status: "open" });
+    for (const p of d.places) items.push({ title: p.name, native: p.native, kind: p.kind, href: placePath(c, p.slug).href, terms: `${p.summary} ${p.passages.map((x) => x.heading).join(" ")}`, status: "open" });
+    for (const p of d.country.passages) items.push({ title: p.heading, kind: `Topic in ${d.country.entry.name}`, href: `/${c}/#${p.id}`, terms: p.body[0]?.slice(0, 160) ?? "", status: "open" });
     items.push({ title: `History of ${d.country.entry.name}`, kind: "Timeline", href: `/${c}/#history`, terms: d.country.timeline.periods.map((x) => x.name).join(" "), status: "open" });
     for (const j of d.country.journeys) items.push({ title: j.title, kind: "Journey", href: `/${c}/#journey-${j.slug}`, terms: j.summary, status: "open" });
   }

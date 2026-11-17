@@ -1,6 +1,7 @@
 import { Crumbs } from "@/components/ui/Crumbs";
 import { Credit } from "@/components/ui/Figure";
 import { NativeName } from "@/components/ui/NativeName";
+import { SlideLoader } from "@/components/story/SlideLoader";
 import { asset, coverSizes, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import type { CountryEntry } from "@/lib/content/types";
 
@@ -51,15 +52,18 @@ export function CinemaHero({
           return (
             <img
               key={id}
-              src={imgSrc(m, 1920)}
-              srcSet={imgSrcSet(m)}
+              src={i === 0 ? imgSrc(m, 1920) : undefined}
+              srcSet={i === 0 ? imgSrcSet(m) : undefined}
+              data-src={i === 0 ? undefined : imgSrc(m, 1920)}
+              data-srcset={i === 0 ? undefined : imgSrcSet(m)}
+              data-js-only={i === 0 ? undefined : ""}
               sizes={coverSizes(m, 100, 100)}
               width={m.width}
               height={m.height}
               alt={i === 0 ? m.alt : ""}
               aria-hidden={i === 0 ? undefined : true}
               data-fallback={m.fallback ? asset(m.fallback) : undefined}
-              loading={i === 0 ? "eager" : "lazy"}
+              loading="eager"
               fetchPriority={i === 0 ? "high" : "auto"}
               decoding={i === 0 ? "sync" : "async"}
               className={`cine-img absolute inset-0 h-full w-full object-cover ${m.kind === "photo" ? "photo" : ""}`}
@@ -68,6 +72,7 @@ export function CinemaHero({
           );
         })}
       </div>
+      {n > 1 && <SlideLoader />}
       <div className="cine-scrim absolute inset-0 -z-10" aria-hidden />
 
 

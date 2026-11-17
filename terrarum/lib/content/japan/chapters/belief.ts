@@ -70,7 +70,7 @@ export const belief: Chapter = {
     },
     {
       id: "belief-practice",
-      heading: "What people actually do",
+      heading: "Prayers, charms and pilgrims",
       body: [
         "People go to pray or give thanks on no fixed day. At the offering box you toss in some coins, bow twice deeply, clap twice and bow once more. About 80% of the population visits a shrine at New Year, a custom called hatsumōde; Meiji Jingū in Tokyo receives more of these visitors than any other shrine.",
         "Shrines also mark the turns of a life: a newborn’s first visit, Shichi-go-san for children of three, five and seven, and weddings, where the couple seal the vow with three cups of sake. Visitors take home omamori, amulets for protection. Behind the scenes, priests begin each day by cleaning the grounds and offering food and drink to the kami.",

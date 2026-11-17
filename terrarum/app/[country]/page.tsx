@@ -82,9 +82,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
 
         <section aria-label="Key facts" className={`relative isolate overflow-hidden pt-[16vh] ${kanji ? "kanji-host" : ""}`} style={kanji ? ({ "--n": [...e.native!].length } as React.CSSProperties) : undefined}>
           {kanji && (
-            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(e.native ?? "")].length } as React.CSSProperties}>
-              {e.native}
-            </p>
+            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(e.native ?? "")].length } as React.CSSProperties} data-k={e.native} />
           )}
           <FactBand facts={c.facts} refs={refs} />
         </section>

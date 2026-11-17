@@ -214,9 +214,11 @@ p { text-wrap: pretty; }
 .pnlm-about-msg { display: none !important; }
 
 /* Globe markers: real buttons placed by MapLibre. */
+/* Each marker is a 24 px target centred on its point (WCAG 2.5.8); the label hangs beside it
+   outside the button's box, so close neighbours (France, Spain, Switzerland) don't overlap. */
 .globe-marker {
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 8px 6px 2px; margin-left: -8px;
+  position: relative; display: grid; place-items: center;
+  width: 24px; height: 24px; padding: 0; margin-left: -12px;
   background: none; border: 0; cursor: pointer;
   color: #e8e4dc; font: 500 13px/1 var(--font-atlas), system-ui, sans-serif;
 }
@@ -226,10 +228,11 @@ p { text-wrap: pretty; }
 }
 .globe-marker[data-open="false"] .globe-dot { background: transparent; border: 2px solid var(--m); }
 .globe-label {
+  position: absolute; left: calc(100% + 2px); top: 50%; transform: translateY(-50%); white-space: nowrap;
   padding: 3px 6px; background: rgb(13 16 20 / 0.72); border-radius: 2px;
   opacity: 0.85; transition: opacity 160ms var(--ease-out);
 }
-.globe-marker[data-open="false"] .globe-label { opacity: 0; }
+.globe-marker[data-open="false"] .globe-label { opacity: 0; pointer-events: none; }
 .globe-marker[data-open="true"] .globe-label { opacity: 1; font-weight: 650; font-size: 14px; }
 .globe-marker:hover .globe-label, .globe-marker:focus-visible .globe-label { opacity: 1; background: rgb(13 16 20 / 0.95); }
 .globe-marker:focus-visible { outline: 2px solid #e2b45a; outline-offset: 2px; }
@@ -364,6 +367,8 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
   }
   .kanji-host > :not(.cine-kanji) { width: 100%; }
 }
+/* The characters are generated content: a decorative watermark, not text (WCAG 1.4.3 exempts pure decoration). */
+.cine-kanji::before { content: attr(data-k); }
 .cine-kanji {
   font-size: var(--kfs, min(30vh, calc(118vh / var(--n, 3)), 24rem)); line-height: 0.92;
   white-space: nowrap;
@@ -549,4 +554,6 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 @media (max-width: 767px) { .kakejiku-label { display: none; } }
 
 /* Petals: a full-screen canvas above the page, never catching the pointer. */
-.petals { position: fixed; inset: 0; z-index: 45; pointer-events: none; }
+/* Petals drift on the ground, with the atmosphere, under every text block and photograph:
+   above the content they crossed headings and the chapter contents (premium pass, Nov 2026). */
+.petals { position: fixed; inset: 0; z-index: 0; pointer-events: none; }

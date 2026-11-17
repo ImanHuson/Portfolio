@@ -15,9 +15,7 @@ export function Statement({ label, text, id, watermark, lang }: { label: string;
       style={watermark ? ({ "--n": [...watermark].length, "--kfs": `min(30vh, calc(80vh / ${[...watermark].length}), 24rem)`, "--kt": "6vh" } as React.CSSProperties) : undefined}
     >
       {watermark && (
-        <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[6vh] -z-10 font-display max-md:text-[clamp(5rem,38vw,9rem)] max-md:opacity-10">
-          {watermark}
-        </p>
+        <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[6vh] -z-10 font-display max-md:text-[clamp(5rem,38vw,9rem)] max-md:opacity-10" data-k={watermark} />
       )}
       <div className="settle mx-auto max-w-[1100px] px-4 py-[16vh] md:px-8">
         <h2 id={id} className="text-sm font-medium tracking-wide text-accent-text">{label}</h2>

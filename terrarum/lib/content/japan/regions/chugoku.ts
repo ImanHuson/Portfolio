@@ -389,7 +389,7 @@ export const places: Place[] = [
         id: "izumo-approach",
         heading: "A path that slopes down",
         body: [
-          "Past the gate at the end of the shop street, the approach does something unusual: it slopes downward toward the shrine. It passes a small purification shrine, crosses the Soga River and runs on between pines. The middle of the path is left for the gods. Where the pines end, two bronze statues show scenes from Ōkuninushi’s story, one of them his meeting with the Rabbit of Inaba, which lay wounded by the roadside and to which he alone was kind.",
+          "Past the gate at the end of the shop street, the approach slopes downward toward the shrine, which is unusual. It passes a small purification shrine, crosses the Soga River and runs on between pines. The middle of the path is left for the gods. Where the pines end, two bronze statues show scenes from Ōkuninushi’s story, one of them his meeting with the Rabbit of Inaba, which lay wounded by the roadside and to which he alone was kind.",
         ],
         cite: ["jta-r3-00187"],
         images: ["izumo-torii"],

@@ -590,7 +590,7 @@ export const places: Place[] = [
     where: { lat: 34.8393, lng: 134.694, ref: "OpenStreetMap way 23707900" },
     summary: "The White Heron: a castle whose keep has stood since 1609, through the end of the samurai and the bombing of the city around it.",
     matters:
-      "Himeji’s keep has stood since 1609, through the end of the samurai, an army garrison and the firebombing of its city. Its walls, gates, galleries and the town plan around it show how a castle of that age actually worked.",
+      "Himeji’s keep has stood since 1609, through the end of the samurai, an army garrison and the firebombing of its city. Its walls, gates, galleries and the town plan around it show how a castle of that age worked.",
     facts: [
       { label: "Keep built", value: "1601-1609, by Ikeda Terumasa", cite: ["himeji-history"] },
       { label: "World Heritage", value: "1993, one of Japan’s first", cite: ["stat-handbook-2026"] },
@@ -1211,7 +1211,7 @@ export const places: Place[] = [
     where: { lat: 35.0050244, lng: 135.7655699, ref: "OpenStreetMap way 772134672" },
     summary: "A covered street of about 390 metres in central Kyoto, lined with food shops, known as Kyoto’s kitchen.",
     matters:
-      "It is where the city’s ingredients have been bought and sold for four hundred years, and where you can see what Kyoto actually eats.",
+      "It is where the city’s ingredients have been bought and sold for four hundred years, and where you can see what Kyoto eats.",
     facts: [
       { label: "Length", value: "390 m of covered street", cite: ["nishiki-top"] },
       { label: "On record since", value: "1615, when the Edo shogunate recognised it as one of Kyoto’s three fish wholesalers", cite: ["nishiki-history"] },

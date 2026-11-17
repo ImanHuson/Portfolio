@@ -62,7 +62,7 @@ export const cities: City[] = [
         heading: "A weaving town",
         covers: ["history", "identity", "life"],
         body: [
-          "Fujiyoshida calls itself a weaving town, and has made textiles for more than a thousand years. The climate and altitude made rice hard to grow, so the tenth-century Engishiki records the region paying its taxes in silk instead. In the Edo period, when sumptuary laws kept city clothing to drab browns and greys, the town’s weavers found their market in the one loophole: brilliant linings.",
+          "Fujiyoshida calls itself a weaving town, and has made textiles for more than a thousand years. The climate and altitude made rice hard to grow, so the tenth-century Engishiki records the region paying its taxes in silk instead. In the Edo period, when sumptuary laws kept city clothing to drab browns and greys, the town’s weavers found their market in brilliant linings, which the laws left open.",
           "The textile money built a night-time quarter, Gekkoji, at its height from the mid-1920s to the mid-1950s, when merchants came there to entertain clients. It is still the only real nightlife district around the Fuji Five Lakes.",
         ],
         cite: ["jta-r1-00164", "jta-r1-00163"],

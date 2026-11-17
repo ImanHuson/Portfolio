@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <noscript>
-          <style>{`[data-js-only]{display:none!important}`}</style>
+          <style>{`[data-js-only]{display:none!important}.cine-slides>.cine-img:first-child{animation:none!important;opacity:1!important}`}</style>
         </noscript>
         {/* Sumi: the faint feathering of ink soaking into paper, for brush-written Japanese. */}
         <svg width="0" height="0" aria-hidden focusable="false" style={{ position: "absolute" }}>
