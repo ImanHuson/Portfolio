@@ -6,7 +6,7 @@ export const language: Chapter = {
   title: "Language",
   native: "言葉",
   summary: "One language spoken almost nowhere else, written in three scripts at once, with eight smaller languages at its edges that are in danger of falling silent.",
-  hero: "shinjuku-neon",
+  hero: "dotonbori-takoyaki",
   facts: [
     { label: "Scripts in daily use", value: "Kanji, hiragana and katakana", cite: ["afe-language"] },
     { label: "Chinese characters adopted", value: "About 1,400 years ago", cite: ["afe-language"] },

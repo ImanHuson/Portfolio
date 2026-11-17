@@ -6,7 +6,7 @@ export const life: Chapter = {
   title: "Everyday life and customs",
   native: "暮らし",
   summary: "How people speak to each other, what they eat with, how they get to work, and what the numbers say about homes that are getting smaller and emptier.",
-  hero: "tokyo-scramble",
+  hero: "dogo-night",
   facts: [
     { label: "Rail’s share of travel", value: "71.6% of passenger-kilometres", asOf: "fiscal 2023", cite: ["stat-handbook-2026"] },
     { label: "Straight to university", value: "61.4% of school leavers", asOf: "2025", cite: ["stat-handbook-2026"] },

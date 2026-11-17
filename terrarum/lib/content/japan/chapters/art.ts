@@ -6,7 +6,7 @@ export const art: Chapter = {
   title: "Architecture and art",
   native: "建築と美術",
   summary: "Wooden halls thirteen centuries old, a study room that set the pattern for every house after it, gold-leaf screens, porcelain made for Dutch ships, and museums dug into islands.",
-  hero: "toshogu-yomeimon",
+  hero: "toshogu-yomeimon-front",
   facts: [
     { label: "Oldest wooden buildings", value: "Hōryū-ji, the oldest surviving in the world", cite: ["horyuji-intro"] },
     { label: "First porcelain", value: "Arita, after the 1610s", cite: ["jta-r2-01921"] },

@@ -6,7 +6,7 @@ export const history: Chapter = {
   title: "History",
   native: "歴史",
   summary: "Ten thousand years of hunters and potters, a court that borrowed from China, seven centuries of warrior rule, and a modern state built, lost and rebuilt within eighty years.",
-  hero: "horyuji-kondo-pagoda",
+  hero: "eastgardens-edo-screen",
   facts: [
     { label: "Jōmon period", value: "From about 13,000 BCE, for about 10,000 years", cite: ["jomon-japan-period"] },
     { label: "Warrior government", value: "1185 to 1868", cite: ["afe-samurai"] },

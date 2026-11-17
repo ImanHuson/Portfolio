@@ -96,28 +96,42 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
               label={`Map of ${e.name}. Open areas link to their page.`}
               bounds={c.regionsBounds}
               areas={{ url: c.regionsGeo, key: "region", open, labels, asPoints: c.regionsAsPoints }}
-              className="h-[min(88vh,820px)] min-h-[420px]"
+              className="order-last h-[min(60vh,560px)] min-h-[360px] lg:order-none lg:h-[min(88vh,820px)] lg:min-h-[420px]"
             />
             <div className="settle">
               <h2 id="regions-h" className="font-display text-4xl md:text-6xl">{c.regionsHeading}</h2>
               <p className="mt-5 max-w-[46ch] text-muted">{c.regionsNote}</p>
-              <ul className="mt-10">
-                {regions.map((r) => (
-                  <li key={r.slug}>
-                    <Link href={`/${slug}/${r.slug}/`} className="press group flex items-baseline gap-4 py-3">
-                      <span className="font-display text-4xl text-ink group-hover:text-accent-text md:text-5xl">{r.name}</span>
-                      {r.native && <span className="font-display text-2xl text-accent" lang={lang}>{r.native}</span>}
-                    </Link>
-                  </li>
-                ))}
+              <ol className="mt-8 border-b border-line">
+                {regions.map((r, i) => {
+                  const rc = r.cities.map((cs) => getCity(slug, cs)!);
+                  const nPlaces = rc.reduce((n, x) => n + x.places.length, 0);
+                  return (
+                    <li key={r.slug} className="border-t border-line">
+                      <Link href={`/${slug}/${r.slug}/`} className="press group grid grid-cols-[2rem_minmax(0,1fr)_auto] items-baseline gap-x-3 py-4">
+                        <span className="text-[13px] tabular-nums text-muted">{i + 1}</span>
+                        <span className="min-w-0">
+                          <span className="flex flex-wrap items-baseline gap-x-3">
+                            <span className="font-display text-3xl text-ink group-hover:text-accent-text md:text-4xl">{r.name}</span>
+                            {r.native && <span className="font-display text-xl text-accent-text" lang={lang}>{r.native}</span>}
+                          </span>
+                          <span className="mt-1 block text-[15px] leading-snug text-muted">{rc.map((x) => x.name).join(" · ")}</span>
+                        </span>
+                        <span className="text-[13px] tabular-nums text-muted">
+                          {nPlaces} {nPlaces === 1 ? "place" : "places"}
+                          <span aria-hidden className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
                 {c.pendingRegions.map((r) => (
-                  <li key={r.geoKey} className="flex items-baseline gap-3 py-1.5 text-muted">
+                  <li key={r.geoKey} className="flex items-baseline gap-3 border-t border-line py-3 text-muted">
                     <span className="font-display text-xl">{r.name}</span>
                     {r.native && <span className="text-sm" lang={lang}>{r.native}</span>}
                     <span className="ml-auto text-[13px]">In research</span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </div>
         </section>

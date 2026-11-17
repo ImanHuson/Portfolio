@@ -28,7 +28,9 @@ export const japan: Country = {
   regionsGeo: "/data/jp-regions.json",
   regionsBounds: [[127, 25.5], [146, 45.6]],
   regionsHeading: "Eight regions",
-  regionsNote: "Japan’s regions are a convention, not a level of government. All eight are open.",
+  // The regions are listed north to south, Hokkaidō to Kyūshū and Okinawa.
+  regionsDirection: ["North", "South"],
+  regionsNote: "Japan’s regions are a convention, not a level of government. They run here from north to south; each opens on its cities and places.",
   regions: ["hokkaido", "tohoku", "kanto", "chubu", "kansai", "chugoku", "shikoku", "kyushu"],
   // Kyoto is the deepest city so far and the slice the brief asked for first.
   startCity: "kyoto",

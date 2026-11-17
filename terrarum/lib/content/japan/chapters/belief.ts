@@ -6,7 +6,7 @@ export const belief: Chapter = {
   title: "Religion and belief",
   native: "信仰",
   summary: "Two traditions share the same people: kami honoured at some 80,000 shrines, and a Buddhism that arrived from the continent and split into schools of ritual, faith and sitting still.",
-  hero: "inari-tunnel",
+  hero: "kiyo-autumn",
   facts: [
     { label: "Shinto shrines", value: "About 80,000", cite: ["jinja-honcho-faq"] },
     { label: "Shrine visits at New Year", value: "About 80% of the population", cite: ["jinja-honcho-faq"] },

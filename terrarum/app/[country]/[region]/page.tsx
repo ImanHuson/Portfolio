@@ -8,6 +8,7 @@ import { FactBand } from "@/components/story/Statement";
 import { Figure } from "@/components/ui/Figure";
 import { Gaps } from "@/components/ui/Gaps";
 import { Passage } from "@/components/ui/Passage";
+import { RegionNav, RegionNeighbours } from "@/components/ui/RegionNav";
 import { SourceList } from "@/components/ui/Refs";
 import { ThemeShell } from "@/components/ui/ThemeShell";
 import { allStaticParams, cityPath, getCity, getCountry, getRegion, makeRefs } from "@/lib/content";
@@ -33,6 +34,7 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
   const refs = makeRefs([...r.facts.map((f) => f.cite), r.definition.cite]);
 
   const lang = c.entry.nativeLang?.split(" ")[0];
+  const allRegions = c.regions.map((x) => getRegion(country, x)!);
   const orn = themeFor(country)?.ornament;
 
   return (
@@ -47,6 +49,8 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
           entry={c.entry}
           trail={[{ href: "/", label: "Globe" }, { href: `/${country}/`, label: c.entry.name }, { label: r.name }]}
         />
+
+        <RegionNav country={country} countryName={c.entry.name} regions={allRegions} current={r.slug} lang={lang} />
 
         <section aria-label="Key facts" className="pt-[12vh]">
           <FactBand facts={r.facts} refs={refs} />
@@ -90,6 +94,8 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
             {r.image && <Figure id={r.image} sizes="(min-width:1024px) 40vw, 100vw" className="mt-10" imgClassName="w-full" />}
           </div>
         </section>
+
+        <RegionNeighbours country={country} regions={allRegions} current={r.slug} direction={c.regionsDirection ?? ["Previous region", "Next region"]} />
 
         <div className="mx-auto max-w-[1400px] space-y-12 border-t border-line px-4 py-16 md:px-8">
           <Gaps gaps={r.gaps} />

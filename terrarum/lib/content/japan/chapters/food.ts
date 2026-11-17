@@ -6,7 +6,7 @@ export const food: Chapter = {
   title: "Food",
   native: "食",
   summary: "A meal built around a bowl of rice, a stock made from seaweed and dried fish, and a map on which even the shape of a rice cake changes from east to west.",
-  hero: "nishiki-tsukemono",
+  hero: "nishiki-seafood",
   facts: [
     { label: "Basic meal", value: "Rice, soup, pickles and three dishes", cite: ["maff-washoku"] },
     { label: "Umami identified", value: "1907, by Kikunae Ikeda", cite: ["maff-washoku"] },

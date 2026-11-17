@@ -6,7 +6,7 @@ export const performance: Chapter = {
   title: "Music, literature and performance",
   native: "芸能と文学",
   summary: "Court music played since the eighth century, masked drama on a stage with a painted pine, a theatre where men play every part, a poem about a frog, and storytellers who wrote their own ghost stories.",
-  hero: "aomori-nebuta-raijin",
+  hero: "aomori-nebuta-wave",
   facts: [
     { label: "Gagaku", value: "Performed since the eighth century", cite: ["jta-r1-01552"] },
     { label: "Noh", value: "Since the fourteenth century", cite: ["jta-r1-00019"] },

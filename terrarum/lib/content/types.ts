@@ -302,6 +302,8 @@ export interface Country {
   /** Photograph used for the country's card on the home page. */
   card: string;
   regionsGeo: string;
+  /** How to name the step to the previous and next region, e.g. ["North", "South"]. */
+  regionsDirection?: [string, string];
   /** Frame for the regions map: [[west, south], [east, north]]. */
   regionsBounds: [[number, number], [number, number]];
   /** Draw each region as a dot too (island nations, where shapes are specks). */
