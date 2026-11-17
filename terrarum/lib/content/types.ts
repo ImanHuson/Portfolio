@@ -222,6 +222,8 @@ export interface Region {
   native?: string;
   /** Matches the `region` property in the country's region GeoJSON. */
   geoKey: string;
+  /** The region's own opening photograph, shown before its cities' heroes. Never a city or place hero. */
+  hero?: string;
   summary: string;
   definition: Passage;
   facts: Fact[];

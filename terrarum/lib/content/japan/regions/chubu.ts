@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "chubu",
   name: "Chūbu",
   native: "中部",
+  hero: "fuji-aerial",
   geoKey: "chubu",
   summary: "Central Honshū: Mount Fuji and the town at the foot of its pilgrims’ trail, the Maeda lords’ Kanazawa, the thatched villages of Shirakawa-gō, and the black castle of Matsumoto.",
   definition: {

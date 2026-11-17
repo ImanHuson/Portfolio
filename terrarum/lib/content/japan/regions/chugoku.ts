@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "chugoku",
   name: "Chūgoku",
   native: "中国",
+  hero: "itsuku-sunset",
   geoKey: "chugoku",
   summary: "Western Honshū: Hiroshima, rebuilt around the memorial of the first atomic bombing; Miyajima, the sacred island whose shrine gate stands in the sea; and Izumo, where Japan’s oldest chronicles set nearly a third of their myths.",
   definition: {

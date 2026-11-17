@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "hokkaido",
   name: "Hokkaidō",
   native: "北海道",
+  hero: "goko-autumn-peaks",
   geoKey: "hokkaido",
   summary: "The northern island: Sapporo and its snow, Shiraoi and the national centre for the Ainu, the indigenous people of the north, the wild peninsula of Shiretoko, and Hakodate, one of Japan’s first ports open to the world.",
   definition: {

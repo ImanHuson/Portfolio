@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "kyushu",
   name: "Kyūshū and Okinawa",
   native: "九州・沖縄",
+  hero: "yakusugi-meoto",
   geoKey: "kyushu",
   summary: "The south-west, Japan’s old door to Asia and Europe: Fukuoka on Hakata Bay, Dazaifu and its shrine to the god of learning, Nagasaki of the Dutch traders and the Hidden Christians, Naha and the castle of the Ryukyu kings, and the ancient cedars of Yakushima.",
   definition: {

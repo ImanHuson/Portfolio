@@ -41,7 +41,7 @@ export default async function RegionPage({ params }: PageProps<"/[country]/[regi
     <ThemeShell country={country}>
       <main id="main" data-pagefind-body>
         <CinemaHero
-          ids={cities.map((x) => x.hero)}
+          ids={[...(r.hero ? [r.hero] : []), ...cities.map((x) => x.hero)]}
           kicker={`Region of ${c.entry.name}`}
           title={r.name}
           summary={r.summary}

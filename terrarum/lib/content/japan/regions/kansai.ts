@@ -7,6 +7,7 @@ export const region: Region =
     slug: "kansai",
     name: "Kansai",
     native: "関西",
+    hero: "arashi-togetsukyo",
     geoKey: "kansai",
     summary: "The old heartland of the imperial court: Nara and Kyoto, the capitals, and Ikaruga, Prince Shōtoku’s temple town; Osaka, the merchant city; Himeji’s castle on the road west; and the temple mountain of Kōyasan.",
     definition: {

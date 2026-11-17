@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "tohoku",
   name: "Tōhoku",
   native: "東北",
+  hero: "zuiganji-godaido",
   geoKey: "tohoku",
   summary: "The north of Honshu: Hiraizumi, where the Ōshū Fujiwara built temples to the Buddhist Pure Land in the twelfth century; Matsushima’s bay of islands and Date Masamune’s Zen temple; Aomori, with a Jōmon village lived in for a thousand years; and Rikuzentakata, on the shore the 2011 tsunami struck.",
   definition: {

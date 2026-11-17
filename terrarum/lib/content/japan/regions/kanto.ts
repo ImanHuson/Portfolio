@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "kanto",
   name: "Kantō",
   native: "関東",
+  hero: "shinjuku-tocho-view",
   geoKey: "kanto",
   summary: "Tokyo, the capital and Japan’s largest city; Nikkō in the mountains to the north, where the first Tokugawa shogun is enshrined; and Kamakura by the sea, where Japan’s first warrior government ruled.",
   definition: {

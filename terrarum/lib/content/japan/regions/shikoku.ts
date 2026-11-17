@@ -6,6 +6,7 @@ export const region: Region = {
   slug: "shikoku",
   name: "Shikoku",
   native: "四国",
+  hero: "ritsurin-island",
   geoKey: "shikoku",
   summary: "The island of the 88-temple pilgrimage: Matsuyama, with a castle on a hill in the middle of the city and the bathhouse of Dōgo Onsen, and Takamatsu, the Matsudaira lords’ port, with Ritsurin Garden.",
   definition: {

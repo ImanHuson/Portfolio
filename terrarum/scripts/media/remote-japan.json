@@ -6630,7 +6630,8 @@
   "place": "sh2",
   "side": "grounds",
   "title": "Ritsurin Garden 20170610-1",
-  "w": 5184
+  "w": 5184,
+  "focus": "50% 72%"
  },
  "ritsurin-kikugetsutei": {
   "accessed": "2026-11-15",
