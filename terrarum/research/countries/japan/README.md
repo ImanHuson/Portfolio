@@ -116,3 +116,13 @@ Sources: JTA texts read in full and matched to their page ids by text (the Chūs
 Cut on re-reading: syllable counts for waka and haiku (no source here gives them), "storytellers who need only a cushion", kabuki as "the loud counterpart" and "fully formed by about 1700", "eleventh-century" for the Tale of Genji, "the poet most people can quote", "nineteenth-century Edo", stories "everyone in the audience once knew", and a sentence that attributed the Awa puppet theatre's description to Bunraku.
 
 Marked not written, because no source was read: contemporary music and film. Also missing: the shamisen, shakuhachi and taiko as instruments in their own right, folk song, Awa Odori (its text was read but its page id could not be matched, so it is not cited), modern literature, anime as an industry beyond Akihabara.
+
+## 17 Nov 2026: Everyday life and customs chapter; all eight chapters open
+
+Sources: the Statistical Handbook (households, births, transport shares, convenience stores, hours worked, housing, schooling, rural ageing), and sources already read for other pages and chapters (Columbia on language and the occupation, Jinja Honcho's FAQ, the Kyoto geiko foundation, the washoku booklet, the Shikoku pilgrimage, Dōgo Onsen, Nishijin, Wajima, Nebuta, Ogimachi's preservation society, Shinjuku Station, Nishiki, Nakamise, Akihabara, the Setouchi Triennale).
+
+Cut on re-reading: a sentence on the host's care at a formal meal (only a fragment of the booklet's sentence had been read), "three-storey wooden" for the Dōgo bathhouse (from a photo, not the source), kimono "at their grandest", "that division of labour is typical of craft work", "organised from below", "thatched" and "industry" for Ogimachi, "all three figures were lower" for working hours (the annual change is not given), "the oldest kind of shopping street" and "the newest", and "farming and fishing" narrowed to what the handbook says.
+
+Thin or missing because no source was read: greetings beyond speech levels (bowing, gifts, shoes off), onsen etiquette, school clubs and entrance exams, commuting, company life, the shinkansen, and recent trends beyond the population figures.
+
+`npx tsx scripts/audit-content.ts japan all` now passes every check: scope, chapters, cities, places, cites, pano.
