@@ -103,6 +103,19 @@ export const art: Chapter = {
       status: "fact-checked",
     },
     {
+      id: "art-photography",
+      heading: "The first studios",
+      body: [
+        "Nagasaki University Library keeps more than 7,900 photographs of Japan from the last years of the Edo period and the Meiji period. Among the photographers are foreigners such as Felice Beato, Raimund von Stillfried and Adolfo Farsari, and Japanese ones such as Ueno Hikoma (1838–1904), Kusakabe Kinbei (1841–1934) and Uchida Kuichi (1844–1875).",
+        "Shimooka Renjō, born in 1823, had trained to be a painter of the Kano school. He learned photography from Henry Heusken, the interpreter at the American consulate, and from a professional named J. Wilson, and in 1862 he opened Japan’s first commercial photo studio, at Noge in Yokohama. He trained so many of the people who built the trade that he is called the founder of Japanese photography.",
+        "Some of the old views on this site, of the shrines at Fushimi Inari and Kasuga and the cedar avenue at Nikkō, are hand-coloured albumen prints by photographers whose names are unknown.",
+      ],
+      cite: ["ndl-shimooka", "nagasaki-oldphoto"],
+      covers: ["photography"],
+      images: ["inari-albumen", "nikko-cedars-old"],
+      status: "fact-checked",
+    },
+    {
       id: "art-now",
       heading: "Concrete, and art in the open",
       body: [
@@ -116,9 +129,6 @@ export const art: Chapter = {
       places: ["peace-memorial-park"],
       status: "fact-checked",
     },
-  ],
-  notApplicable: [
-    { topic: "photography", why: "Not written yet: no source on Japanese photography has been read for this atlas, and nothing is said without one." },
   ],
   status: "fact-checked",
 };

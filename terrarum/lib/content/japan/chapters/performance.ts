@@ -102,6 +102,34 @@ export const performance: Chapter = {
       status: "fact-checked",
     },
     {
+      id: "performance-film",
+      heading: "A century of cinema",
+      body: [
+        "Japanese film has a forerunner in the Edo period. In 1803 Kameya Tōraku adapted a magic lantern imported from Holland into utsushie, picture shows accompanied by shamisen, drums and jōruri singing. That pairing of images and the spoken word led to the benshi, the narrator peculiar to Japanese film. Moving pictures themselves arrived from the United States and France in 1896 and 1897. Men played the women’s parts, as in kabuki, until a movement for “pure film” in the late 1910s brought in actresses and the close-up. Talkies took off with the success of Shochiku’s Madamu to nyōbō in 1931.",
+        "Censorship tightened. The Film Law of 1939 required film workers to register and scripts to be censored before shooting. After defeat came a golden age. Kurosawa Akira’s Rashomon won the Golden Lion at Venice; the first Japanese colour feature, Karumen kokyō ni kaeru, appeared in 1951, and Gojira, Godzilla, in 1954. In 1958 cinemas sold 1,127 million tickets, an all-time high, and by 1960 the country had 7,457 cinemas and made more than 547 features a year.",
+        "As television spread in the 1960s the studios lost ground. A new generation of directors came forward, Ōshima Nagisa among them, and films could now be made outside the major studios. Animation took another road. Its history in Japan is traced to 1917, and after the film company Toei founded an animation studio in 1956 the country became, in the National Film Archive’s phrase, an “animation nation”. In 2025 Japanese cinemas sold 188.8 million tickets, and Japanese films took 75.6% of the box office.",
+      ],
+      cite: ["nfaj-history", "eiren-stats"],
+      covers: ["film"],
+      images: ["shinjuku-godzilla"],
+      places: ["shinjuku"],
+      status: "fact-checked",
+    },
+    {
+      id: "performance-music",
+      heading: "Still on disc",
+      body: [
+        "In Japan physical recordings are still worth more than digital music. In 2024 the industry produced 104.5 million CDs, production of CD singles rose 12%, and vinyl reached 7.9 billion yen, more than 7 billion for the first time since 1989. Physical products were worth 205.2 billion yen; digital music, mostly streaming, reached a record 123.3 billion. Together recorded music came to 328.5 billion yen.",
+        "Most new music is Japanese. Of 9,601 new audio releases in 2024, 7,188 were Japanese, and pop and kayōkyoku made up 5,209 of them; anime had 508. The industry’s Artist of the Year award went to Nakamori Akina in 1987 and since then to, among others, Utada Hikaru, Hamasaki Ayumi, ARASHI, AKB48, which has its own theatre in Akihabara, and, in 2025, Mrs. GREEN APPLE.",
+        "Foreign music has a long welcome here too. The Beatles played the Nippon Budokan in Tokyo, the indoor arena for the martial arts events of the 1964 Olympics, in 1966, and they have won the international Artist of the Year award more often than anyone.",
+      ],
+      cite: ["riaj-yearbook-2025", "jta-r1-03065", "gotokyo-akihabara-area"],
+      covers: ["contemporaryMusic"],
+      images: ["akiba-akb48"],
+      places: ["akihabara", "imperial-palace-east-gardens"],
+      status: "fact-checked",
+    },
+    {
       id: "performance-now",
       heading: "Manga, and what kabuki became",
       body: [
@@ -111,14 +139,10 @@ export const performance: Chapter = {
       ],
       cite: ["jta-h30-01116", "jta-r3-00432", "gotokyo-akihabara-area", "akiba-otaku"],
       covers: ["industries"],
-      images: ["akiba-chuodori-day", "akiba-akb48"],
+      images: ["akiba-chuodori-day"],
       places: ["akihabara"],
       status: "fact-checked",
     },
-  ],
-  notApplicable: [
-    { topic: "contemporaryMusic", why: "Not written yet: no source on Japan’s popular or contemporary music has been read for this atlas, and nothing is said without one." },
-    { topic: "film", why: "Not written yet: no source on Japanese cinema has been read. The only sourced facts so far are that Japan’s first cinema stood in Asakusa and that Enchō’s stories were filmed." },
   ],
   status: "fact-checked",
 };

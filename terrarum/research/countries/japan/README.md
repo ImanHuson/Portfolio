@@ -126,3 +126,11 @@ Cut on re-reading: a sentence on the host's care at a formal meal (only a fragme
 Thin or missing because no source was read: greetings beyond speech levels (bowing, gifts, shoes off), onsen etiquette, school clubs and entrance exams, commuting, company life, the shinkansen, and recent trends beyond the population figures.
 
 `npx tsx scripts/audit-content.ts japan all` now passes every check: scope, chapters, cities, places, cites, pano.
+
+## 17 Nov 2026: photography, contemporary music and film written
+
+Sources: the National Film Archive of Japan's "Nihon Eiga" history exhibition page and the Motion Picture Producers Association's statistics table (film); the Recording Industry Association of Japan's 2025 yearbook, figures for 2024, and the JTA text on Kitanomaru Garden (music); the National Diet Library's biography of Shimooka Renjō and Nagasaki University Library's database of Bakumatsu-Meiji photographs (photography). Film and music are in Music, literature and performance; photography is in Architecture and art. No topic in the brief is now marked unwritten.
+
+Cut on re-reading: that the benshi "stood beside the screen and spoke the story", "a record never matched", "television ended the boom", audiences "loyal to home-grown films", Japan as "one of the few places" still buying discs (no comparison was read), "sales" of CD singles (the yearbook gives production), glosses of kayōkyoku, ARASHI, AKB48 and Mrs. GREEN APPLE, photography arriving "with the treaty ports", Japanese photographers "learning from" foreigners in general, Ueno Hikoma at work "in the same years", and prints "sold to visitors as souvenirs".
+
+Still thin: photography after the Meiji period (no source read), and film after the 1960s apart from the 2025 statistics. Wikipedia, the Met and MOMAT refuse this machine; the Tokyo Photographic Art Museum's English site redirects to an audio guide.
