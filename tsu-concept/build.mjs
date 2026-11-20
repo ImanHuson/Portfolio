@@ -155,7 +155,7 @@ page({
 </div></div>
 <div class="section"><div class="wrap">
   <h2>Latest announcements</h2>
-  <ul class="ann-list">${ann.items.slice(0, 5).map((a) => annItem(a)).join("")}</ul>
+  <ul class="ann-list">${ann.items.slice(0, 4).map((a) => annItem(a)).join("")}</ul>
   <p class="more"><a href="announcements/">All announcements</a></p>
 </div></div>
 <div class="section"><div class="wrap cols-2">
