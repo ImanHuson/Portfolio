@@ -97,7 +97,7 @@ def main():
             "landing": v["page"], "w": c["w"], "h": c["h"], "side": p["side"], "alt": p["alt"], "location": p.get("location"),
             "place": key, "accessed": time.strftime("%Y-%m-%d"),
         }
-        for k in ("kind", "date", "creator"):
+        for k in ("kind", "date", "creator", "focus"):
             if p.get(k):
                 store[mid][k] = p[k]
         print(f"ok {mid} {v['license']} {store[mid]['creator'][:40]}")

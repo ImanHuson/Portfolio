@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Map as MLMap, Marker, LngLatBoundsLike, StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { whenNear } from "@/lib/whenNear";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -85,7 +86,7 @@ export function AtlasMap({ mode, bounds, pins = [], areas, label, className = ""
     const markers: Marker[] = [];
     const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    (async () => {
+    const stopNear = whenNear(host.current, async () => {
       const ml = (await import("maplibre-gl")).default;
       if (disposed || !host.current) return;
       const scope = host.current;
@@ -117,6 +118,7 @@ export function AtlasMap({ mode, bounds, pins = [], areas, label, className = ""
           pitchWithRotate: false,
           cooperativeGestures: true,
         });
+        map.getCanvas().setAttribute("aria-label", label);
         map.touchZoomRotate.disableRotation();
         map.addControl(new ml.NavigationControl({ showCompass: false }), "top-right");
         map.on("error", (e) => console.warn("map:", e.error?.message));
@@ -206,6 +208,7 @@ export function AtlasMap({ mode, bounds, pins = [], areas, label, className = ""
                 el.dataset.open = String(!!areas.open[k]);
                 el.textContent = text;
                 el.setAttribute("aria-hidden", "true");
+                el.setAttribute("role", "presentation"); // MapLibre would add role=button + "Map marker"
                 // With dots drawn, sit the label above its dot instead of on it.
                 const opts = areas.asPoints ? { element: el, anchor: "bottom" as const, offset: [0, -11] as [number, number] } : { element: el };
                 markers.push(new ml.Marker(opts).setLngLat(labelPoint(f.geometry)).addTo(map));
@@ -224,6 +227,10 @@ export function AtlasMap({ mode, bounds, pins = [], areas, label, className = ""
               });
             }
             el.innerHTML = `<span class="map-pin-dot" aria-hidden="true"></span><span class="map-pin-label">${p.label}${p.native ? ` <span lang="${p.nativeLang ?? ""}">${p.native}</span>` : ""}</span>`;
+            // MapLibre labels every marker "Map marker" with role=button unless
+            // told otherwise; the name must be the visible text, the role a link.
+            el.setAttribute("aria-label", p.native ? `${p.label} ${p.native}` : p.label);
+            el.setAttribute("role", p.href ? "link" : "img");
             markers.push(new ml.Marker({ element: el, anchor: "left" }).setLngLat([p.lng, p.lat]).addTo(map));
           }
           map.getContainer().style.setProperty("--pin-ink", ink);
@@ -232,18 +239,19 @@ export function AtlasMap({ mode, bounds, pins = [], areas, label, className = ""
         console.warn("map unavailable:", err);
         if (!disposed) setFailed(true);
       }
-    })();
+    });
 
     return () => {
       disposed = true;
+      stopNear();
       markers.forEach((m) => m.remove());
       map?.remove();
     };
-  }, [mode, bounds, pins, areas, router]);
+  }, [mode, bounds, pins, areas, router, label]);
 
   return (
     <div data-map-mode={mode} className={`relative overflow-hidden border border-line bg-surface ${className}`}>
-      <div ref={host} className="absolute inset-0" style={{ position: "absolute", inset: 0 }} role="region" aria-label={label} />
+      <div ref={host} className="absolute inset-0" style={{ position: "absolute", inset: 0 }} />
       {failed && <p className="absolute inset-4 text-sm text-muted">The map could not be drawn on this device. The places are listed beside it.</p>}
       <noscript>
         <p className="absolute inset-4 text-sm text-muted">The map needs JavaScript. The places are listed beside it.</p>

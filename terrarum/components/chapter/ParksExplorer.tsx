@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Map as MLMap, LngLatBoundsLike } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { whenNear } from "@/lib/whenNear";
 import type { NationalPark } from "@/lib/content/japan/data/parks";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -32,7 +33,7 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
 
   useEffect(() => {
     let disposed = false;
-    (async () => {
+    const stopNear = whenNear(host.current, async () => {
       try {
         const ml = (await import("maplibre-gl")).default;
         if (disposed || !host.current) return;
@@ -46,6 +47,8 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
           dragRotate: false,
           cooperativeGestures: true,
         });
+        // One labelled region per map: MapLibre's canvas, not a wrapper around it.
+        map.getCanvas().setAttribute("aria-label", "Map of Japan's prefectures shaded by number of national parks. Choose a prefecture on the map or from the list.");
         mapRef.current = map;
         map.touchZoomRotate.disableRotation();
         map.once("load", async () => {
@@ -74,9 +77,10 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
       } catch {
         setMapOk(false);
       }
-    })();
+    });
     return () => {
       disposed = true;
+      stopNear();
       mapRef.current?.remove();
       mapRef.current = null;
     };
@@ -91,7 +95,7 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
     <div className="grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
       <div>
         {mapOk ? (
-          <div ref={host} style={{ position: "relative" }} className="h-[min(70vh,600px)] min-h-[380px] w-full" role="region" aria-label="Map of Japan's prefectures shaded by number of national parks. Choose a prefecture on the map or from the list." />
+          <div ref={host} style={{ position: "relative" }} className="h-[min(70vh,600px)] min-h-[380px] w-full" />
         ) : (
           <p className="text-muted">The map could not load; the list beside it has every park.</p>
         )}
@@ -131,7 +135,7 @@ export function ParksExplorer({ parks, prefectures, source }: { parks: NationalP
           {sel ? `${shown.length} national park${shown.length === 1 ? "" : "s"} reach into ${nameOf(sel)}.` : `All ${parks.length}, oldest first.`}
           {sel && !shown.length ? " None of the 35 does." : ""}
         </p>
-        <ol className="mt-3 max-h-[440px] divide-y divide-line overflow-y-auto border-y border-line">
+        <ol tabIndex={0} aria-label="National parks" className="mt-3 max-h-[440px] divide-y divide-line overflow-y-auto border-y border-line focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
           {shown.map((p) => (
             <li key={p.name} className="flex items-baseline justify-between gap-4 py-2.5">
               <span>

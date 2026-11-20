@@ -171,8 +171,9 @@ export function Globe({ countries, onSelect }: { countries: GlobeCountry[]; onSe
           markers.push(new ml.Marker({ element: el, anchor: "left" }).setLngLat([c.lng, c.lat]).addTo(map));
         }
 
-        // A slow drift until the reader touches the globe. Not under reduced motion.
-        let spinning = !reduce;
+        // A slow drift until the reader touches the globe. Not under reduced motion, and not on a
+        // software renderer (SwiftShader, llvmpipe), where every frame blocks the main thread.
+        let spinning = !reduce && !softwareGL(map.getCanvas());
         const stopSpin = () => {
           spinning = false;
         };
@@ -189,7 +190,7 @@ export function Globe({ countries, onSelect }: { countries: GlobeCountry[]; onSe
         map.once("load", () => {
           if (disposed) return;
           setState("ready");
-          if (!reduce) raf = requestAnimationFrame(spin);
+          if (spinning) raf = requestAnimationFrame(spin);
         });
       } catch (err) {
         console.warn("globe unavailable:", err);
@@ -235,4 +236,17 @@ export function Globe({ countries, onSelect }: { countries: GlobeCountry[]; onSe
       )}
     </div>
   );
+}
+
+/** True when WebGL is drawn on the CPU, so a continuous animation would starve the page. */
+function softwareGL(canvas: HTMLCanvasElement): boolean {
+  try {
+    const gl = (canvas.getContext("webgl2") ?? canvas.getContext("webgl")) as WebGLRenderingContext | null;
+    if (!gl) return false;
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const r = String(gl.getParameter(info ? info.UNMASKED_RENDERER_WEBGL : gl.RENDERER));
+    return /swiftshader|llvmpipe|software/i.test(r);
+  } catch {
+    return false;
+  }
 }

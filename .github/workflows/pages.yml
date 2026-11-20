@@ -60,19 +60,22 @@ jobs:
         working-directory: the-rising-archive
         run: |
           npm ci
-          npm run build
+          # next/font downloads from Google Fonts at build time; a failed fetch fails the build, so retry.
+          npm run build || (sleep 20 && npm run build) || (sleep 45 && npm run build)
 
       - name: Build attack-on-titan-archive
         working-directory: attack-on-titan-archive
         run: |
           npm ci
-          npm run build
+          # next/font downloads from Google Fonts at build time; a failed fetch fails the build, so retry.
+          npm run build || (sleep 20 && npm run build) || (sleep 45 && npm run build)
 
       - name: Build terrarum
         working-directory: terrarum
         run: |
           npm ci
-          npm run build
+          # next/font downloads from Google Fonts at build time; a failed fetch fails the build, so retry.
+          npm run build || (sleep 20 && npm run build) || (sleep 45 && npm run build)
 
       - name: Build tsu-concept
         working-directory: tsu-concept

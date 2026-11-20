@@ -76,6 +76,7 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
     };
   });
 
+  const kanji = themeFor(country)?.native === "vertical" && !!ci.native;
   return (
     <ThemeShell country={country}>
       <main id="main" data-pagefind-body>
@@ -91,18 +92,16 @@ export default async function CityPage({ params }: PageProps<"/[country]/[region
           <SaveButton href={`/${country}/${region}/${city}/`} title={ci.name} kind={`City, ${c.entry.name}`} seal={orn?.hanko ? ci.native : undefined} />
         </CinemaHero>
 
-        <section aria-label="Key facts" className="relative isolate overflow-hidden pt-[16vh]">
-          {themeFor(country)?.native === "vertical" && ci.native && (
-            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...ci.native].length } as React.CSSProperties}>
-              {ci.native}
-            </p>
+        <section aria-label="Key facts" className={`relative isolate overflow-hidden pt-[16vh] ${kanji ? "kanji-host" : ""}`} style={kanji ? ({ "--n": [...ci.native!].length } as React.CSSProperties) : undefined}>
+          {kanji && (
+            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...ci.native!].length } as React.CSSProperties} data-k={ci.native} />
           )}
           <FactBand facts={ci.facts} refs={refs} />
         </section>
         {orn?.seasons && <SeasonNow place={ci.name} lat={ci.where.lat} lng={ci.where.lng} timeZone={orn.timeZone} />}
 
         <section aria-labelledby="places-h" className="mx-auto max-w-[1400px] px-4 pb-[12vh] md:px-8">
-          <h2 id="places-h" className="settle font-display text-4xl md:text-6xl">{places.length} places in {ci.name}</h2>
+          <h2 id="places-h" className="settle font-display text-4xl md:text-6xl">{places.length === 1 ? "One place" : `${places.length} places`} in {ci.name}</h2>
           <div className="mt-12">
             <Collage lang={lang} items={places.map(({ p, href }) => ({ href, image: p.hero, title: p.name, kicker: p.kind, native: p.native, summary: p.summary }))} />
           </div>

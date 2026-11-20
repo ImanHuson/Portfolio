@@ -96,11 +96,9 @@ export default async function ChapterPage({ params }: PageProps<"/[country]/topi
         />
 
         {ch.facts && ch.facts.length > 0 && (
-          <section aria-label="Key figures" className="relative isolate overflow-hidden pt-[16vh]">
+          <section aria-label="Key figures" className={`relative isolate overflow-hidden pt-[16vh] ${vertical && ch.native ? "kanji-host" : ""}`} style={vertical && ch.native ? ({ "--n": [...ch.native].length } as React.CSSProperties) : undefined}>
             {vertical && ch.native && (
-              <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(ch.native ?? "")].length } as React.CSSProperties}>
-                {ch.native}
-              </p>
+              <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(ch.native ?? "")].length } as React.CSSProperties} data-k={ch.native} />
             )}
             <FactBand facts={ch.facts} refs={refs} />
           </section>
@@ -121,7 +119,7 @@ export default async function ChapterPage({ params }: PageProps<"/[country]/topi
         <div className="country-rule" aria-hidden />
         {segments.map((seg, i) => (
           <div key={seg.key}>
-            <Story steps={seg.steps} label={i === 0 ? ch.title : `${ch.title}, continued`} flip={i % 2 === 1} />
+            <Story steps={seg.steps} label={i === 0 ? ch.title : `${ch.title}: ${ch.passages.find((x) => x.id === seg.steps[0].key)?.heading}`} flip={i % 2 === 1} />
             {seg.widget && (
               <section aria-label={`${ch.passages.find((x) => x.id === seg.key)?.heading}: explore the data`} className="settle mx-auto max-w-[1400px] px-4 py-[10vh] md:px-8">
                 <Widget name={seg.widget} />

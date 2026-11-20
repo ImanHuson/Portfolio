@@ -3,6 +3,9 @@
 import { CaretLeft, CaretRight, X } from "@phosphor-icons/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+/** `sizes` for a shot drawn `vh` tall at its natural width (the scroll's photos are sized by height). */
+const heightSizes = (w: number, h: number, vh: number) => `${Math.ceil((vh * w) / h)}vh`;
+
 export interface GalleryItem {
   id: string;
   src: string;
@@ -245,7 +248,7 @@ export function GalleryViewer({ items, layout = "wall", header, mount }: { items
                         {link(m, i, <img
                         src={m.src}
                         srcSet={m.srcSet}
-                        sizes="(min-width:768px) 50vw, 85vw"
+                        sizes={heightSizes(m.w, m.h, 44)}
                         width={m.w}
                         height={m.h}
                         alt={m.alt}
@@ -265,7 +268,7 @@ export function GalleryViewer({ items, layout = "wall", header, mount }: { items
                       link(m, i, <img
                         src={m.src}
                         srcSet={m.srcSet}
-                        sizes="(min-width:768px) 50vw, 85vw"
+                        sizes={heightSizes(m.w, m.h, 64)}
                         width={m.w}
                         height={m.h}
                         alt={m.alt}

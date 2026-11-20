@@ -1,7 +1,8 @@
 import { Crumbs } from "@/components/ui/Crumbs";
 import { Credit } from "@/components/ui/Figure";
 import { NativeName } from "@/components/ui/NativeName";
-import { asset, imgSrc, imgSrcSet, media } from "@/lib/content/media";
+import { SlideLoader } from "@/components/story/SlideLoader";
+import { asset, coverSizes, imgSrc, imgSrcSet, media } from "@/lib/content/media";
 import type { CountryEntry } from "@/lib/content/types";
 
 type Trail = { href?: string; label: string }[];
@@ -30,33 +31,48 @@ export function CinemaHero({
   trail: Trail;
   children?: React.ReactNode;
 }) {
-  const slides = ids.slice(0, 4);
-  const total = slides.length * 9;
+  // Up to eight slides, seven seconds each; the keyframes depend on the count,
+  // so they are written here (pure CSS: the show runs without JS).
+  const slides = ids.slice(0, 8);
+  const n = slides.length;
+  const total = n * 7;
+  const pc = (sec: number) => `${((sec / total) * 100).toFixed(3)}%`;
+  const frames =
+    n > 1
+      ? `@keyframes cine-s${n}{0%{opacity:0}${pc(1.4)},${pc(7)}{opacity:1}${pc(8.4)},100%{opacity:0}}` +
+        `@keyframes cine-f${n}{0%,${pc(7)}{opacity:1}${pc(8.4)},${pc(total - 1.4)}{opacity:0}100%{opacity:1}}` +
+        `@keyframes cine-k${n}{0%{transform:scale(1.1)}${pc(8.4)},100%{transform:scale(1)}}`
+      : "";
   return (
     <section data-hero className="cine relative isolate flex flex-col overflow-hidden text-[#f3ece0]">
+      {frames && <style dangerouslySetInnerHTML={{ __html: frames }} />}
       <div className={`absolute inset-0 -z-20 ${slides.length > 1 ? "cine-slides" : ""}`} style={{ "--slide-total": `${total}s` } as React.CSSProperties}>
         {slides.map((id, i) => {
           const m = media(id);
           return (
             <img
               key={id}
-              src={imgSrc(m, 1920)}
-              srcSet={imgSrcSet(m)}
-              sizes="100vw"
+              src={i === 0 ? imgSrc(m, 1920) : undefined}
+              srcSet={i === 0 ? imgSrcSet(m) : undefined}
+              data-src={i === 0 ? undefined : imgSrc(m, 1920)}
+              data-srcset={i === 0 ? undefined : imgSrcSet(m)}
+              data-js-only={i === 0 ? undefined : ""}
+              sizes={coverSizes(m, 100, 100)}
               width={m.width}
               height={m.height}
               alt={i === 0 ? m.alt : ""}
               aria-hidden={i === 0 ? undefined : true}
               data-fallback={m.fallback ? asset(m.fallback) : undefined}
-              loading={i === 0 ? "eager" : "lazy"}
+              loading="eager"
               fetchPriority={i === 0 ? "high" : "auto"}
               decoding={i === 0 ? "sync" : "async"}
               className={`cine-img absolute inset-0 h-full w-full object-cover ${m.kind === "photo" ? "photo" : ""}`}
-              style={{ "--slide-at": `${i * 9}s` } as React.CSSProperties}
+              style={{ "--slide-at": `${i * 7}s`, "--slide-fade": i === 0 ? `cine-f${n}` : `cine-s${n}`, "--slide-zoom": `cine-k${n}`, objectPosition: m.focus } as React.CSSProperties}
             />
           );
         })}
       </div>
+      {n > 1 && <SlideLoader />}
       <div className="cine-scrim absolute inset-0 -z-10" aria-hidden />
 
 
@@ -64,7 +80,7 @@ export function CinemaHero({
         <Crumbs trail={trail} />
       </div>
 
-      <div className="relative z-10 mx-auto mt-auto grid w-full max-w-[1400px] items-end gap-8 px-4 pb-6 pt-24 md:px-8 md:pb-[9vh] lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div data-shade className="cine-shade relative z-10 mx-auto mt-auto grid w-full max-w-[1400px] items-end gap-8 px-4 pb-6 pt-24 md:px-8 md:pb-[9vh] lg:grid-cols-[minmax(0,1fr)_auto]">
         <div className="cine-copy max-w-[52rem]">
           {kicker && <p className="photo-label text-sm font-medium tracking-wide">{kicker}</p>}
           <h1 className="mt-3 font-display text-5xl leading-[1.02] tracking-tight md:text-7xl lg:text-8xl">{title}</h1>
@@ -74,13 +90,15 @@ export function CinemaHero({
         {native && <NativeName text={native} entry={entry} size="md" className="write-in hidden self-end lg:block" />}
       </div>
 
-      <p className="mx-auto w-full max-w-[1400px] px-4 pb-3 text-[12px] leading-snug text-[#d2cbbe] md:absolute md:bottom-3 md:right-8 md:w-auto md:max-w-[70ch] md:px-0 md:pb-0 md:text-right [&_a]:decoration-[#d2cbbe]/50" data-pagefind-ignore>
+      <p className="mx-auto w-full max-w-[1400px] px-4 pb-3 text-[12px] leading-snug text-[#d2cbbe] md:absolute md:bottom-3 md:right-8 md:w-auto md:max-w-[84ch] md:px-0 md:pb-0 md:text-right [&_a]:decoration-[#d2cbbe]/50" data-pagefind-ignore>
+        {n > 4 && "Photographs: "}
         {slides.map((id, i) => (
           <span key={id}>
             {i > 0 && "; "}
-            <Credit id={id} />
+            <Credit id={id} brief={n > 4} />
           </span>
         ))}
+        {n > 4 && "."}
       </p>
     </section>
   );

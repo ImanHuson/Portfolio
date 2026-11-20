@@ -16,7 +16,11 @@ export function StoryDriver() {
     const frames = [...root.querySelectorAll<HTMLElement>("[data-frame]")];
     const show = (i: number) => {
       steps.forEach((s, j) => s.toggleAttribute("data-active", j === i));
-      frames.forEach((f, j) => f.toggleAttribute("data-active", j === i));
+      frames.forEach((f, j) => {
+        f.toggleAttribute("data-active", j === i);
+        // Hidden frames keep their credit links out of the tab order.
+        f.toggleAttribute("inert", j !== i);
+      });
     };
     const io = new IntersectionObserver(
       (entries) => {

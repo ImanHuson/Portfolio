@@ -7,3 +7,8 @@
 
 # TSU concept research: raw page snapshots stay local (evidence only, not republished)
 tsu-concept/research/**/*.html
+
+# Hallmark lint screenshots
+.hallmark/shots/
+# TSU's own stylesheet, read for brand colours only; not republished
+tsu-concept/research/content-src/custom.css.txt

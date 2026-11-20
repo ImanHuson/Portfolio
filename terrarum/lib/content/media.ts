@@ -59,5 +59,15 @@ export function imgSrcSet(m: MediaAsset): string {
   return `${imgSrc(m, 900)} 900w, ${asset(m.src!)} ${m.width}w`;
 }
 
+/**
+ * `sizes` for a photo that covers a box `vw` wide and `vh` tall (object-cover).
+ * It is drawn at the larger of the box width and the box height times its own
+ * aspect, so a 3:2 hero in a portrait phone box is about 2.5 screens wide;
+ * "100vw" made phones fetch a third of what they draw and blur it.
+ */
+export function coverSizes(m: MediaAsset, vw: number, vh: number): string {
+  return `max(${vw}vw, ${Math.ceil((vh * m.width) / m.height)}vh)`;
+}
+
 /** A small copy for cards and lists. */
 export const small = (m: MediaAsset) => imgSrc(m, 900);

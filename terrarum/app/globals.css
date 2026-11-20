@@ -188,8 +188,11 @@ p { text-wrap: pretty; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .lift { transition: transform 260ms var(--ease-out); }
   .lift:hover { transform: translateY(-3px); }
-  .zoom img { transition: transform 300ms var(--ease-out); }
-  .zoom:hover img { transform: scale(1.03); }
+  /* `scale`, not `transform`, so it composes with a scroll drift on the same image. */
+  .zoom img { transition: scale 400ms var(--ease-out); }
+  .zoom:hover img { scale: 1.04; }
+  .tile .photo-label::before { transition: width 300ms var(--ease-out); }
+  .tile:hover .photo-label::before { width: 2.4em; }
 }
 
 @layer components {
@@ -211,9 +214,11 @@ p { text-wrap: pretty; }
 .pnlm-about-msg { display: none !important; }
 
 /* Globe markers: real buttons placed by MapLibre. */
+/* Each marker is a 24 px target centred on its point (WCAG 2.5.8); the label hangs beside it
+   outside the button's box, so close neighbours (France, Spain, Switzerland) don't overlap. */
 .globe-marker {
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 8px 6px 2px; margin-left: -8px;
+  position: relative; display: grid; place-items: center;
+  width: 24px; height: 24px; padding: 0; margin-left: -12px;
   background: none; border: 0; cursor: pointer;
   color: #e8e4dc; font: 500 13px/1 var(--font-atlas), system-ui, sans-serif;
 }
@@ -223,10 +228,11 @@ p { text-wrap: pretty; }
 }
 .globe-marker[data-open="false"] .globe-dot { background: transparent; border: 2px solid var(--m); }
 .globe-label {
+  position: absolute; left: calc(100% + 2px); top: 50%; transform: translateY(-50%); white-space: nowrap;
   padding: 3px 6px; background: rgb(13 16 20 / 0.72); border-radius: 2px;
   opacity: 0.85; transition: opacity 160ms var(--ease-out);
 }
-.globe-marker[data-open="false"] .globe-label { opacity: 0; }
+.globe-marker[data-open="false"] .globe-label { opacity: 0; pointer-events: none; }
 .globe-marker[data-open="true"] .globe-label { opacity: 1; font-weight: 650; font-size: 14px; }
 .globe-marker:hover .globe-label, .globe-marker:focus-visible .globe-label { opacity: 1; background: rgb(13 16 20 / 0.95); }
 .globe-marker:focus-visible { outline: 2px solid #e2b45a; outline-offset: 2px; }
@@ -335,25 +341,48 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 }
 @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+/* The scrim is only as large as the words need (the photograph was dimmed over
+   85% of its height before): a band under the breadcrumb, a strip for the credit
+   line, and .cine-shade behind the text block itself. verify-redesign.js contrast
+   models these same numbers over a white photograph. */
 .cine-scrim {
   background:
-    linear-gradient(to top, rgb(6 8 14 / 0.95) 0%, rgb(6 8 14 / 0.88) 35%, rgb(6 8 14 / 0.7) 60%, transparent 85%),
-    linear-gradient(to bottom, rgb(6 8 14 / 0.72) 0%, transparent 22%),
-    linear-gradient(to right, rgb(6 8 14 / 0.55) 0%, transparent 55%);
+    linear-gradient(to top, rgb(6 8 14 / 0.88) 0, rgb(6 8 14 / 0.88) 8rem, transparent 14rem),
+    linear-gradient(to bottom, rgb(6 8 14 / 0.8) 0, rgb(6 8 14 / 0.8) 5rem, transparent 10rem);
+}
+.cine-shade::before {
+  content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); width: 100vw;
+  background: linear-gradient(to bottom, transparent 0, rgb(6 8 14 / 0.7) 6rem, rgb(6 8 14 / 0.78) 100%);
 }
 /* One vertical column, sized so the whole name fits the height it is given. */
+/* A section holding a watermark column sets --n (characters) and may set --kfs
+   (font size) and --kt (top offset); on wider screens it is at least as tall as
+   the column, so the last character is never cut off by its overflow:hidden
+   (every city, place and chapter clipped it, by 40-650 px, until Nov 2026). */
+.kanji-host { --kfs: min(30vh, calc(118vh / var(--n, 3)), 24rem); }
+@media (min-width: 768px) {
+  .kanji-host {
+    min-height: calc(var(--kt, 4vh) + var(--n, 3) * 1.06 * var(--kfs) + 4vh);
+    display: flex; flex-direction: column; justify-content: center; /* text sits level with the column's middle */
+  }
+  .kanji-host > :not(.cine-kanji) { width: 100%; }
+}
+/* The characters are generated content: a decorative watermark, not text (WCAG 1.4.3 exempts pure decoration). */
+.cine-kanji::before { content: attr(data-k); }
 .cine-kanji {
-  font-size: min(30vh, calc(118vh / var(--n, 3)), 24rem); line-height: 0.92;
+  font-size: var(--kfs, min(30vh, calc(118vh / var(--n, 3)), 24rem)); line-height: 0.92;
   white-space: nowrap;
   color: var(--ink); opacity: 0.16; letter-spacing: 0.02em;
 }
-/* Slides for heroes with several photographs: a slow cross-dissolve. */
+/* Slides for heroes with several photographs: a slow cross-dissolve, each
+   easing in from a slight zoom. Keyframes are written by CinemaHero for its count. */
+.cine-slides > :not(:first-child) { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .cine-slides > :not(:first-child) { opacity: 0; animation: slide var(--slide-total) linear infinite; animation-delay: var(--slide-at); }
-  .cine-slides > :first-child { animation: slide-first var(--slide-total) linear infinite; }
+  .cine-slides > .cine-img {
+    animation: var(--slide-fade) var(--slide-total) linear infinite, var(--slide-zoom) var(--slide-total) linear infinite;
+    animation-delay: var(--slide-at);
+  }
 }
-@keyframes slide { 0% { opacity: 0; } 4%, 25% { opacity: 1; } 29%, 100% { opacity: 0; } }
-@keyframes slide-first { 0%, 25% { opacity: 1; } 29%, 96% { opacity: 0; } 100% { opacity: 1; } }
 
 /* Scroll-told passages: the pinned frame shows the active step's photograph. */
 .story-frame { opacity: 0; transition: opacity 700ms var(--ease-out); }
@@ -366,10 +395,13 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
   .story-frame img, .story-frame[data-active] img { transition: none; transform: none; }
 }
 /* Steps not being read recede, but only once the script is running and only
-   where the pinned frame exists; otherwise every step reads at full strength. */
+   where the pinned frame exists; otherwise every step reads at full strength.
+   They recede by colour, not opacity: at 0.4 opacity the text fell to 3.3:1
+   (axe, Nov 2026), and no opacity kept the light themes' links at AA. The
+   theme's muted colour is AA on its own ground, and links keep theirs. */
 @media (min-width: 1024px) {
-  [data-story][data-live] .story-step { transition: opacity 600ms var(--ease-out); }
-  [data-story][data-live] .story-step:not([data-active]) { opacity: 0.4; }
+  [data-story][data-live] .story-step :is(h2, h3, p) { transition: color 600ms var(--ease-out); }
+  [data-story][data-live] .story-step:not([data-active]) :is(h2, h3, p) { color: var(--muted); }
 }
 
 /* Hand-scroll (emaki): photographs at varied heights along one row. */
@@ -402,6 +434,22 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 .photo-label { color: #f1e9da; display: inline-flex; align-items: center; gap: 0.6em; }
 .photo-label::before { content: ""; width: 1.4em; height: 2px; background: #e0573f; flex: none; }
 /* Tiles: a long, deep scrim from the bottom, so their text holds on any photograph. */
+/* Collage tiles: only the name sits on the photograph. Its band is sized to
+   the name (the text block plus 5rem above it): dark enough behind the words
+   for ivory type on a white photograph, then fading out, so the rest of the
+   photo stays clear. No blur: a backdrop blur, or a blurred copy, over a
+   drifting photo is redrawn every frame and halved the scroll frame rate. */
+.tile-band {
+  background: linear-gradient(to top, rgb(6 8 14 / 0.8) 0%, rgb(6 8 14 / 0.66) calc(100% - 5rem), rgb(6 8 14 / 0.3) calc(100% - 2.5rem), rgb(6 8 14 / 0) 100%);
+}
+/* The photo is 116% of its frame and drifts through it while the tile crosses
+   the screen, so it reads as a window onto something behind the page. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .tile-img { animation: drift-y linear both; animation-timeline: view(); animation-range: cover; }
+  }
+}
+@keyframes drift-y { from { transform: translateY(-6%); } to { transform: translateY(6%); } }
 .tile-scrim { background: linear-gradient(to top, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
 .tile-scrim-side { background: linear-gradient(to right, rgb(6 8 14 / 0.92) 0%, rgb(6 8 14 / 0.8) 45%, rgb(6 8 14 / 0.45) 70%, transparent 100%); }
 
@@ -506,4 +554,6 @@ a.map-pin:hover .map-pin-label, a.map-pin:focus-visible .map-pin-label { text-de
 @media (max-width: 767px) { .kakejiku-label { display: none; } }
 
 /* Petals: a full-screen canvas above the page, never catching the pointer. */
-.petals { position: fixed; inset: 0; z-index: 45; pointer-events: none; }
+/* Petals drift on the ground, with the atmosphere, under every text block and photograph:
+   above the content they crossed headings and the chapter contents (premium pass, Nov 2026). */
+.petals { position: fixed; inset: 0; z-index: 0; pointer-events: none; }

@@ -59,7 +59,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
     );
 
   const firstChapter = c.chapters[0];
-  const heroes = [firstChapter?.hero, firstCity.hero, ...starts.slice(0, 3).map((x) => x.p.hero)].filter((x): x is string => !!x).slice(0, 4);
+  const heroes = c.heroes ?? [firstChapter?.hero, firstCity.hero, ...starts.slice(0, 3).map((x) => x.p.hero)].filter((x): x is string => !!x).slice(0, 4);
   // The country's own passages are told beside its print and its places.
   const pool = [c.hero, ...starts.map((x) => x.p.hero).filter((h) => !heroes.includes(h)), ...starts.map((x) => x.p.hero)];
   const told = [lead, ...paired].filter((x): x is P => !!x);
@@ -74,16 +74,15 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
     ),
   }));
 
+  const kanji = themeFor(slug)?.native === "vertical" && !!e.native;
   return (
     <ThemeShell country={slug}>
       <main id="main" data-pagefind-body>
         <CinemaHero ids={heroes} kicker="Country" title={e.name} summary={c.summary} native={e.native} entry={e} trail={[{ href: "/", label: "Globe" }, { label: e.name }]} />
 
-        <section aria-label="Key facts" className="relative isolate overflow-hidden pt-[16vh]">
-          {themeFor(slug)?.native === "vertical" && e.native && (
-            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(e.native ?? "")].length } as React.CSSProperties}>
-              {e.native}
-            </p>
+        <section aria-label="Key facts" className={`relative isolate overflow-hidden pt-[16vh] ${kanji ? "kanji-host" : ""}`} style={kanji ? ({ "--n": [...e.native!].length } as React.CSSProperties) : undefined}>
+          {kanji && (
+            <p aria-hidden lang={lang} className="cine-kanji tategaki pointer-events-none absolute right-[2vw] top-[4vh] -z-10 font-display max-md:hidden" style={{ "--n": [...(e.native ?? "")].length } as React.CSSProperties} data-k={e.native} />
           )}
           <FactBand facts={c.facts} refs={refs} />
         </section>
@@ -97,28 +96,42 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
               label={`Map of ${e.name}. Open areas link to their page.`}
               bounds={c.regionsBounds}
               areas={{ url: c.regionsGeo, key: "region", open, labels, asPoints: c.regionsAsPoints }}
-              className="h-[min(88vh,820px)] min-h-[420px]"
+              className="order-last h-[min(60vh,560px)] min-h-[360px] lg:order-none lg:h-[min(88vh,820px)] lg:min-h-[420px]"
             />
             <div className="settle">
               <h2 id="regions-h" className="font-display text-4xl md:text-6xl">{c.regionsHeading}</h2>
               <p className="mt-5 max-w-[46ch] text-muted">{c.regionsNote}</p>
-              <ul className="mt-10">
-                {regions.map((r) => (
-                  <li key={r.slug}>
-                    <Link href={`/${slug}/${r.slug}/`} className="press group flex items-baseline gap-4 py-3">
-                      <span className="font-display text-4xl text-ink group-hover:text-accent-text md:text-5xl">{r.name}</span>
-                      {r.native && <span className="font-display text-2xl text-accent" lang={lang}>{r.native}</span>}
-                    </Link>
-                  </li>
-                ))}
+              <ol className="mt-8 border-b border-line">
+                {regions.map((r, i) => {
+                  const rc = r.cities.map((cs) => getCity(slug, cs)!);
+                  const nPlaces = rc.reduce((n, x) => n + x.places.length, 0);
+                  return (
+                    <li key={r.slug} className="border-t border-line">
+                      <Link href={`/${slug}/${r.slug}/`} className="press group grid grid-cols-[2rem_minmax(0,1fr)_auto] items-baseline gap-x-3 py-4">
+                        <span className="text-[13px] tabular-nums text-muted">{i + 1}</span>
+                        <span className="min-w-0">
+                          <span className="flex flex-wrap items-baseline gap-x-3">
+                            <span className="font-display text-3xl text-ink group-hover:text-accent-text md:text-4xl">{r.name}</span>
+                            {r.native && <span className="font-display text-xl text-accent-text" lang={lang}>{r.native}</span>}
+                          </span>
+                          <span className="mt-1 block text-[15px] leading-snug text-muted">{rc.map((x) => x.name).join(" · ")}</span>
+                        </span>
+                        <span className="text-[13px] tabular-nums text-muted">
+                          {nPlaces} {nPlaces === 1 ? "place" : "places"}
+                          <span aria-hidden className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
                 {c.pendingRegions.map((r) => (
-                  <li key={r.geoKey} className="flex items-baseline gap-3 py-1.5 text-muted">
+                  <li key={r.geoKey} className="flex items-baseline gap-3 border-t border-line py-3 text-muted">
                     <span className="font-display text-xl">{r.name}</span>
                     {r.native && <span className="text-sm" lang={lang}>{r.native}</span>}
                     <span className="ml-auto text-[13px]">In research</span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </div>
         </section>
@@ -132,8 +145,8 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
                 return (
                   <li key={ch.slug} className="settle">
                     <Link href={`/${slug}/topics/${ch.slug}/`} className="press zoom group relative block overflow-hidden">
-                      <img src={imgSrc(m, 1920)} srcSet={imgSrcSet(m)} sizes="(min-width:1024px) 90vw, 100vw" width={m.width} height={m.height} alt={m.alt} loading="lazy" decoding="async" className="photo aspect-[4/3] w-full object-cover md:aspect-[21/9]" />
-                      <div className="tile-scrim-side absolute inset-0" aria-hidden />
+                      <img src={imgSrc(m, 1920)} srcSet={imgSrcSet(m)} sizes={c.chapters.length > 1 ? "(min-width:1024px) 45vw, 100vw" : "(min-width:1024px) 90vw, 100vw"} width={m.width} height={m.height} alt={m.alt} loading="lazy" decoding="async" className={`photo aspect-[4/3] w-full object-cover ${c.chapters.length > 1 ? "md:aspect-[16/10]" : "md:aspect-[21/9]"}`} />
+                      <div className={`${c.chapters.length > 1 ? "tile-scrim" : "tile-scrim-side"} absolute inset-0`} aria-hidden />
                       <div className="absolute inset-y-0 left-0 flex max-w-[40rem] flex-col justify-end gap-3 p-6 text-[#f3ece0] md:p-12">
                         <h3 className="font-display text-3xl md:text-5xl">{ch.title}</h3>
                         {ch.native && <p className="order-first font-display text-5xl text-[#f08068] md:text-7xl" lang={lang} aria-hidden>{ch.native}</p>}
@@ -157,7 +170,7 @@ export default async function CountryPage({ params }: PageProps<"/[country]">) {
           {starts.length > 6 && (
             <p className="mt-10">
               <Link href={cityPath(slug, firstCity.slug).href} className="font-medium text-accent-text underline underline-offset-4">
-                All {starts.length} places in {firstCity.name}
+                {starts.length === 1 ? "The place" : `All ${starts.length} places`} in {firstCity.name}
               </Link>
             </p>
           )}

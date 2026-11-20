@@ -78,3 +78,49 @@ show; none of it is measured research, so it is treated as consensus, not proof.
 
 All content, citations, URLs, credits, the sound design, accessibility (WCAG AA),
 reading without JavaScript, and static export.
+
+## Round 6: place cards (Nov 2026)
+
+The user found the collage tiles flat and asked about a 3D tilt, depth-map
+parallax and frosted glass. Thirteen sites were measured in a browser (glass,
+gradients, photos moving inside their frames) and screenshotted: Aman, HOSHINO
+Resorts and HOSHINOYA Kyoto, MySwitzerland, Kyoto Travel, JNTO, National
+Geographic, Condé Nast Traveler, Apple, Leica, Locomotive, darkroom.engineering.
+Lusion, Aesop, Rolex, Bottega Veneta and Awwwards gave no usable reading
+(WebGL-only, or a blocked automated browser).
+
+- **No glass on content cards anywhere.** Glass appears only on chrome:
+  headers and small buttons (MySwitzerland, Leica, Kyoto Travel).
+- **The premium sites keep the photograph clean.** Text sits below or beside
+  it (Aman, Apple, Leica, Condé Nast, HOSHINOYA), or in a solid label that
+  overlaps the photo's edge (HOSHINO Resorts, Leica, MySwitzerland's
+  Matterhorn).
+- **Long dark overlays carrying text are the tourism-board look** (JNTO,
+  MySwitzerland's tiles).
+- Photos moving inside their frames were rare. Motion on cards is a short fade
+  on load (Aman, 0.5 s) or a reveal on hover (Locomotive).
+
+What changed in `Collage`:
+- The summary moved off the photograph, below it.
+- Only the name sits on the photo, on a band sized to the text block plus 5rem
+  above it. Before, a scrim covered 70% of every tile; the band now covers
+  about a third on desktop and 40 to 47% on phones.
+- Phone tiles are 4:5, so the band stays under half the tile.
+- The photo is 116% of its frame and drifts through it on a CSS `view()`
+  timeline.
+- On hover, the photo grows slightly (`scale`, so it composes with the drift)
+  and the vermilion mark lengthens.
+- `sizes` accounts for the photo being drawn wider than a portrait tile.
+
+**Blur was built, measured and removed.** On the Kyoto page, median frame time
+while scrolling, desktop:
+
+| Version | Median frame time |
+|---|---|
+| Old version | 16.7 ms |
+| With `backdrop-filter` | 33.4 ms |
+| With a blurred copy of the photo | 33.3 ms |
+| Without blur | 16.7 ms |
+
+The drift itself costs nothing. A blur over a moving photo is redrawn every
+frame. Don't add one to scrolling content.

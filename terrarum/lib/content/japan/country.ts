@@ -22,21 +22,19 @@ export const japan: Country = {
     { label: "Foreign visitors", value: "42.68 million in 2025 (provisional), up from 36.87 million in 2024", asOf: "2025", cite: ["stat-handbook-2026"] },
   ],
   hero: "cma-shono",
-  card: "kyoto-yasaka",
+  // Mount Fuji from Fujiyoshida, Fushimi Inari, Itsukushima, Kinkaku-ji, Himeji, Shibuya, Arashiyama, Shirakawa-gō.
+  heroes: ["fuji-chureito-sakura", "inari-tunnel", "itsuku-torii-blue", "kinkaku-reflection", "himeji-sakura", "shibuya-crossing-crowd", "arashi-bamboo", "shirakawa-snow-house"],
+  card: "fuji-chureito-sakura",
   regionsGeo: "/data/jp-regions.json",
   regionsBounds: [[127, 25.5], [146, 45.6]],
-  regionsHeading: "Eight regions, one open",
-  regionsNote: "Japan’s regions are a convention, not a level of government. Kansai is researched; the others are on the map and waiting.",
-  regions: ["kanto", "kansai"],
+  regionsHeading: "Eight regions",
+  // The regions are listed north to south, Hokkaidō to Kyūshū and Okinawa.
+  regionsDirection: ["North", "South"],
+  regionsNote: "Japan’s regions are a convention, not a level of government. They run here from north to south; each opens on its cities and places.",
+  regions: ["hokkaido", "tohoku", "kanto", "chubu", "kansai", "chugoku", "shikoku", "kyushu"],
   // Kyoto is the deepest city so far and the slice the brief asked for first.
   startCity: "kyoto",
   pendingRegions: [
-    { geoKey: "hokkaido", name: "Hokkaido", native: "北海道" },
-    { geoKey: "tohoku", name: "Tōhoku", native: "東北" },
-    { geoKey: "chubu", name: "Chūbu", native: "中部" },
-    { geoKey: "chugoku", name: "Chūgoku", native: "中国" },
-    { geoKey: "shikoku", name: "Shikoku", native: "四国" },
-    { geoKey: "kyushu", name: "Kyūshū and Okinawa", native: "九州・沖縄" },
   ],
   passages: [
     {
@@ -128,9 +126,8 @@ export const japan: Country = {
     },
   ],
   gaps: [
-    { topic: "Seven of eight regions", why: "Only Kansai is researched. The others show on the map but have no pages yet." },
     { topic: "Writing systems and the history of Japanese", why: "Not yet sourced well enough to publish." },
-    { topic: "Contemporary life, work and cities", why: "No researched content yet; Tokyo has no page." },
+    { topic: "Contemporary life and work", why: "No chapter yet; city pages such as Tokyo’s cover only parts of it." },
     { topic: "Video", why: "No authorised embed has been verified yet (see ASSET_GAPS.md)." },
   ],
 };

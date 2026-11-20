@@ -123,6 +123,8 @@ export interface MediaAsset {
   alt: string;
   /** Where it was taken or what it shows, in plain words. */
   location?: string;
+  /** Where the subject sits (CSS object-position), so a cover crop keeps it: "30% 50%". */
+  focus?: string;
   /** Date of the work, for artworks and dated photos. */
   date?: string;
   /** What we changed (crop, resize, format), for share-alike licences. */
@@ -163,6 +165,8 @@ export interface Gap {
 
 export interface Place {
   slug: string;
+  /** A memorial or other place of mourning: the theme drops its playful ornament (drifting petals). */
+  quiet?: boolean;
   name: string;
   native?: string;
   kind: string;
@@ -218,6 +222,8 @@ export interface Region {
   native?: string;
   /** Matches the `region` property in the country's region GeoJSON. */
   geoKey: string;
+  /** The region's own opening photograph, shown before its cities' heroes. Never a city or place hero. */
+  hero?: string;
   summary: string;
   definition: Passage;
   facts: Fact[];
@@ -293,9 +299,13 @@ export interface Country {
   summary: string;
   facts: Fact[];
   hero: string;
+  /** The opening slideshow: the country's best-known places and sights, in order. Without it the page derives one. */
+  heroes?: string[];
   /** Photograph used for the country's card on the home page. */
   card: string;
   regionsGeo: string;
+  /** How to name the step to the previous and next region, e.g. ["North", "South"]. */
+  regionsDirection?: [string, string];
   /** Frame for the regions map: [[west, south], [east, north]]. */
   regionsBounds: [[number, number], [number, number]];
   /** Draw each region as a dot too (island nations, where shapes are specks). */

@@ -45,8 +45,16 @@ export function Figure({
   );
 }
 
-export function Credit({ id }: { id: string }) {
+/** `brief` is for long lists (a hero's slides): creator linked to the source, then the licence. */
+export function Credit({ id, brief = false }: { id: string; brief?: boolean }) {
   const m = media(id);
+  if (brief)
+    return (
+      <span>
+        <a href={m.sourceUrl} className="underline decoration-line underline-offset-2 hover:decoration-current">{m.creator}</a>{" "}
+        (<a href={m.licenseUrl} className="underline decoration-line underline-offset-2 hover:decoration-current">{m.license}</a>)
+      </span>
+    );
   return (
     <span>
       {m.kind === "artwork" ? (

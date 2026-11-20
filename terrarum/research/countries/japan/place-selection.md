@@ -252,3 +252,24 @@ Demand: Fukuoka 11.0% (a gateway airport), Okinawa 5.6%, Ōita 3.4%, Kumamoto 2.
 ## Addendum, 14 November 2026: Shibuya restored
 
 The owner asked whether Shibuya deserved more than a mention. It does, on this file's own criterion 3: the Tokyo Metropolitan Government's 2025 survey of foreign visitors (`tmg-inbound-2025`, https://www.metro.tokyo.lg.jp/information/press/2026/06/2026063029) puts Shibuya first of all Tokyo areas visited, at 60.3%, for the fourth year running, and in the top three for 19 of the 20 countries and regions surveyed. The cut above rested on "no designation" and prefecture-level demand only; this site-level figure was not found then. Shibuya now has a district page (the crossing, Hachikō, its shops), like Gion and Dōtonbori in Kansai. Japan's total is 44.
+
+## Addendum, 15 November 2026: Shinjuku and Akihabara added; Ginza and Tokyo Station on reserve
+
+The owner asked for Shinjuku and Akihabara to be checked the same way. The full area list in the same survey's summary (attachment 1, `tmg-inbound-2025-summary`, https://www.metro.tokyo.lg.jp/documents/d/tosei/20260630_17_01; 16,008 respondents who visited Tokyo, multiple answers) is:
+
+| Area | Visited |
+|---|---|
+| Shibuya | 60.3% |
+| Ginza | 54.1% |
+| Tokyo Station, Marunouchi, Nihonbashi | 51.8% |
+| Shinjuku, Ōkubo | 50.8% |
+| Asakusa | 46.9% (carried by Sensō-ji) |
+| Akihabara | 45.1% |
+| Ueno | 36.9% |
+| Harajuku, Omotesandō, Aoyama | 34.1% (Meiji Jingū is next to it) |
+| Ikebukuro | 26.5% |
+| Roppongi, Akasaka | 23.0% |
+
+Both pass criterion 3, and each also carries a story no other page tells: Shinjuku the world's busiest station (Guinness, 2,704,703 a day in 2022) and Shinjuku Gyoen; Akihabara the postwar radio market and otaku culture (criterion 2). Japan's total is 46.
+
+**The same numbers put Ginza (54.1%) and the Tokyo Station area (51.8%) above Shinjuku.** They were not built because the owner asked only about Shinjuku and Akihabara and earlier asked for fewer places. Both are first on the Kantō reserve. A cut-off that is consistent with this table is "every area at 45% or more"; applying it means adding those two.

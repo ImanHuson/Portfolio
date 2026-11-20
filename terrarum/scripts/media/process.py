@@ -178,7 +178,7 @@ def main():
                 "width": p["w"], "height": p["h"], "alt": p["alt"], "side": p["side"],
                 "accessed": p.get("accessed", ACCESSED), "status": "license-verified", "hosting": "embed",
             }
-            for k in ("location", "date"):
+            for k in ("location", "date", "focus"):
                 if p.get(k):
                     item[k] = p[k]
             if os.path.exists(os.path.join(ROOT, "public", "media", "c", f"{key}.webp")):
