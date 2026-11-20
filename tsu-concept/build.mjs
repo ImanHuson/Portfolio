@@ -329,7 +329,7 @@ page({
     <thead><tr><th scope="col">Page</th><th scope="col" class="num">Perf. before</th><th scope="col" class="num">Access. before</th><th scope="col" class="num">LCP before</th><th scope="col" class="num">Weight before</th><th scope="col" class="num">Perf. after</th><th scope="col" class="num">Access. after</th><th scope="col" class="num">LCP after</th><th scope="col" class="num">Weight after</th></tr></thead>
     <tbody>${PAGES.slice(0, 4).map(([k, label]) => row(label, base[k].median, after?.[k]?.median)).join("")}</tbody>
   </table></div>
-  <p class="meta">Before: tsu.edu.ph on ${esc(site.fetched)}. After: ${after ? `this concept on GitHub Pages, ${esc(after._measured || "")}` : "measured after deployment"}. Measured from a cloud machine outside the Philippines with Lighthouse's simulated slow 4G, so absolute times differ from a phone in Tarlac. Both sites were measured the same way.</p>
+  <p class="meta">Before: tsu.edu.ph on ${esc(site.fetched)}. After: ${after ? `this concept on GitHub Pages, ${after._measured ? fmtDate(after._measured) : ""}` : "measured after deployment"}. Measured from a cloud machine outside the Philippines with Lighthouse's simulated slow 4G, so absolute times differ from a phone in Tarlac. Both sites were measured the same way.</p>
 </div></div>
 <div class="section"><div class="wrap prose">
   <h2>What I changed, and why</h2>
