@@ -10,10 +10,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 60,
-      "lcpMs": 1200.6493,
+      "lcpMs": 1201.4442,
       "cls": 0,
-      "tbtMs": 12,
-      "bytes": 60215,
+      "tbtMs": 0,
+      "bytes": 60565,
       "requests": 5
     },
     "runs": [
@@ -24,36 +24,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1201.1853,
-        "cls": 0,
-        "tbtMs": 47,
-        "bytes": 60215,
-        "requests": 5
-      },
-      {
-        "seoExclNoindex": 100,
-        "noindexHeld": 1,
-        "performance": 100,
-        "accessibility": 100,
-        "bestPractices": 100,
-        "seo": 60,
-        "lcpMs": 1050.9375,
-        "cls": 0.05993002477378054,
-        "tbtMs": 0,
-        "bytes": 60215,
-        "requests": 5
-      },
-      {
-        "seoExclNoindex": 100,
-        "noindexHeld": 1,
-        "performance": 100,
-        "accessibility": 100,
-        "bestPractices": 100,
-        "seo": 60,
-        "lcpMs": 1200.6493,
+        "lcpMs": 1201.69,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 60215,
+        "bytes": 60565,
         "requests": 5
       },
       {
@@ -63,23 +37,49 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1200.2222,
-        "cls": 0,
-        "tbtMs": 12,
-        "bytes": 60215,
-        "requests": 5
-      },
-      {
-        "seoExclNoindex": 100,
-        "noindexHeld": 1,
-        "performance": 100,
-        "accessibility": 100,
-        "bestPractices": 100,
-        "seo": 60,
-        "lcpMs": 1201.7841,
+        "lcpMs": 1201.4442,
         "cls": 0,
         "tbtMs": 15,
-        "bytes": 60215,
+        "bytes": 60565,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1201.178,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 60565,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1202.4063,
+        "cls": 0,
+        "tbtMs": 29,
+        "bytes": 60565,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1051.4355,
+        "cls": 0.05993002477378054,
+        "tbtMs": 0,
+        "bytes": 60565,
         "requests": 5
       }
     ]
@@ -93,10 +93,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 60,
-      "lcpMs": 1202.1679,
+      "lcpMs": 1201.7469,
       "cls": 0,
       "tbtMs": 0,
-      "bytes": 57792,
+      "bytes": 58647,
       "requests": 5
     },
     "runs": [
@@ -107,10 +107,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1051.0404,
-        "cls": 0.05993002477378054,
+        "lcpMs": 1201.7469,
+        "cls": 0,
         "tbtMs": 0,
-        "bytes": 57792,
+        "bytes": 58647,
         "requests": 5
       },
       {
@@ -120,10 +120,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1202.1679,
+        "lcpMs": 1204.107,
         "cls": 0,
-        "tbtMs": 0,
-        "bytes": 57792,
+        "tbtMs": 13,
+        "bytes": 58647,
         "requests": 5
       },
       {
@@ -133,10 +133,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1260,
+        "lcpMs": 1201.307,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 57792,
+        "bytes": 58647,
         "requests": 5
       },
       {
@@ -146,10 +146,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1201.0544,
+        "lcpMs": 1206.8252,
         "cls": 0,
-        "tbtMs": 0,
-        "bytes": 57792,
+        "tbtMs": 2,
+        "bytes": 58647,
         "requests": 5
       },
       {
@@ -159,10 +159,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1204.2956,
+        "lcpMs": 1201.5138,
         "cls": 0,
-        "tbtMs": 18,
-        "bytes": 57792,
+        "tbtMs": 0,
+        "bytes": 58647,
         "requests": 5
       }
     ]
@@ -176,10 +176,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 60,
-      "lcpMs": 1350.8114,
+      "lcpMs": 1351.5571,
       "cls": 0,
-      "tbtMs": 3,
-      "bytes": 77368,
+      "tbtMs": 0,
+      "bytes": 78219,
       "requests": 5
     },
     "runs": [
@@ -190,36 +190,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1352.7736,
-        "cls": 0,
-        "tbtMs": 47,
-        "bytes": 77368,
-        "requests": 5
-      },
-      {
-        "seoExclNoindex": 100,
-        "noindexHeld": 1,
-        "performance": 100,
-        "accessibility": 100,
-        "bestPractices": 100,
-        "seo": 60,
-        "lcpMs": 1350.9103,
-        "cls": 0,
-        "tbtMs": 3,
-        "bytes": 77368,
-        "requests": 5
-      },
-      {
-        "seoExclNoindex": 100,
-        "noindexHeld": 1,
-        "performance": 100,
-        "accessibility": 100,
-        "bestPractices": 100,
-        "seo": 60,
-        "lcpMs": 1350.8114,
+        "lcpMs": 1352.3824,
         "cls": 0,
         "tbtMs": 4,
-        "bytes": 77368,
+        "bytes": 78219,
         "requests": 5
       },
       {
@@ -229,10 +203,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1350.5192,
+        "lcpMs": 1351.5571,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 77368,
+        "bytes": 78219,
         "requests": 5
       },
       {
@@ -242,10 +216,36 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1350.422938337344,
+        "lcpMs": 1351.2994778758402,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 77368,
+        "bytes": 78219,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1351.5273517134767,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 78219,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1353.2697673346017,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 78219,
         "requests": 5
       }
     ]
@@ -259,10 +259,10 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 60,
-      "lcpMs": 1351.3547,
+      "lcpMs": 1352.0421,
       "cls": 0,
       "tbtMs": 0,
-      "bytes": 64760,
+      "bytes": 65618,
       "requests": 5
     },
     "runs": [
@@ -273,10 +273,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1351.3547,
+        "lcpMs": 1350.7382,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 64760,
+        "bytes": 65618,
         "requests": 5
       },
       {
@@ -286,10 +286,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1355.4866,
+        "lcpMs": 1352.0421,
         "cls": 0,
-        "tbtMs": 8,
-        "bytes": 64760,
+        "tbtMs": 9,
+        "bytes": 65618,
         "requests": 5
       },
       {
@@ -299,10 +299,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1350.6821,
+        "lcpMs": 1352.2616,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 64760,
+        "bytes": 65618,
         "requests": 5
       },
       {
@@ -312,10 +312,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1350.7157,
-        "cls": 0,
+        "lcpMs": 1352.1425,
+        "cls": 0.05993002477378054,
         "tbtMs": 0,
-        "bytes": 64760,
+        "bytes": 65618,
         "requests": 5
       },
       {
@@ -325,10 +325,10 @@
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 60,
-        "lcpMs": 1351.3634,
+        "lcpMs": 1350.9711,
         "cls": 0,
         "tbtMs": 0,
-        "bytes": 64760,
+        "bytes": 65618,
         "requests": 5
       }
     ]
