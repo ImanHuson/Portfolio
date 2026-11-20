@@ -1,0 +1,336 @@
+{
+  "_base": "https://imanhuson.github.io/Portfolio/tsu-concept/",
+  "_measured": "2026-11-20",
+  "home": {
+    "n": 5,
+    "median": {
+      "seoExclNoindex": 100,
+      "noindexHeld": 1,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 60,
+      "lcpMs": 1141.267,
+      "cls": 0,
+      "tbtMs": 17,
+      "bytes": 37647,
+      "requests": 5
+    },
+    "runs": [
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1187,
+        "cls": 0,
+        "tbtMs": 60,
+        "bytes": 37649,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1141.267,
+        "cls": 0,
+        "tbtMs": 19,
+        "bytes": 37643,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1147,
+        "cls": 0,
+        "tbtMs": 17,
+        "bytes": 37647,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1058.956,
+        "cls": 0.05993002477378054,
+        "tbtMs": 0,
+        "bytes": 37645,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1132,
+        "cls": 0,
+        "tbtMs": 2,
+        "bytes": 37649,
+        "requests": 5
+      }
+    ]
+  },
+  "admissions": {
+    "n": 5,
+    "median": {
+      "seoExclNoindex": 100,
+      "noindexHeld": 1,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 60,
+      "lcpMs": 1080,
+      "cls": 0,
+      "tbtMs": 0,
+      "bytes": 37255,
+      "requests": 5
+    },
+    "runs": [
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1050.7240000000002,
+        "cls": 0.05993002477378054,
+        "tbtMs": 8,
+        "bytes": 37261,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1109,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 37236,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1080,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 37224,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1143,
+        "cls": 0,
+        "tbtMs": 27,
+        "bytes": 37255,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1054.405,
+        "cls": 0.05993002477378054,
+        "tbtMs": 0,
+        "bytes": 37277,
+        "requests": 5
+      }
+    ]
+  },
+  "announcements": {
+    "n": 5,
+    "median": {
+      "seoExclNoindex": 100,
+      "noindexHeld": 1,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 60,
+      "lcpMs": 1093.865,
+      "cls": 0,
+      "tbtMs": 0,
+      "bytes": 39987,
+      "requests": 5
+    },
+    "runs": [
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1093.865,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 40023,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1123,
+        "cls": 0,
+        "tbtMs": 19,
+        "bytes": 39987,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1080,
+        "cls": 0.05993002477378054,
+        "tbtMs": 0,
+        "bytes": 40002,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1074.521,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 39949,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1212,
+        "cls": 0,
+        "tbtMs": 82,
+        "bytes": 39941,
+        "requests": 5
+      }
+    ]
+  },
+  "calendar": {
+    "n": 5,
+    "median": {
+      "seoExclNoindex": 100,
+      "noindexHeld": 1,
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 60,
+      "lcpMs": 1109,
+      "cls": 0,
+      "tbtMs": 1,
+      "bytes": 38035,
+      "requests": 5
+    },
+    "runs": [
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1129,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 37994,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1113,
+        "cls": 0,
+        "tbtMs": 6,
+        "bytes": 38035,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1080,
+        "cls": 0.05993002477378054,
+        "tbtMs": 4,
+        "bytes": 38050,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1109,
+        "cls": 0,
+        "tbtMs": 0,
+        "bytes": 38028,
+        "requests": 5
+      },
+      {
+        "seoExclNoindex": 100,
+        "noindexHeld": 1,
+        "performance": 100,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 60,
+        "lcpMs": 1104.804,
+        "cls": 0,
+        "tbtMs": 1,
+        "bytes": 38052,
+        "requests": 5
+      }
+    ]
+  }
+}
