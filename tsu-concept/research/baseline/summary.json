@@ -1,0 +1,397 @@
+{
+  "admissions": {
+    "url": "https://www.tsu.edu.ph/admissions/",
+    "lighthouse": "12.8.2",
+    "runs": [
+      {
+        "performance": 90,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2736.8820000000005,
+        "fcpMs": 2036.8095,
+        "cls": 0,
+        "tbtMs": 197,
+        "bytes": 945473,
+        "requests": 32
+      },
+      {
+        "performance": 92,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2760.8349999999996,
+        "fcpMs": 2140.045,
+        "cls": 0,
+        "tbtMs": 158,
+        "bytes": 945378,
+        "requests": 32
+      },
+      {
+        "performance": 89,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2832.648000000001,
+        "fcpMs": 2206.986000000001,
+        "cls": 0,
+        "tbtMs": 202.5,
+        "bytes": 945430,
+        "requests": 32
+      },
+      {
+        "performance": 81,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 3985.065,
+        "fcpMs": 2060.7095,
+        "cls": 0,
+        "tbtMs": 188.5,
+        "bytes": 946045,
+        "requests": 32
+      },
+      {
+        "performance": 91,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2638.41,
+        "fcpMs": 2069.293,
+        "cls": 0,
+        "tbtMs": 187,
+        "bytes": 945630,
+        "requests": 32
+      }
+    ],
+    "median": {
+      "performance": 90,
+      "accessibility": 83,
+      "bestPractices": 89,
+      "seo": 85,
+      "lcpMs": 2760.8349999999996,
+      "fcpMs": 2069.293,
+      "cls": 0,
+      "tbtMs": 188.5,
+      "bytes": 945473,
+      "requests": 32
+    },
+    "n": 5
+  },
+  "announcements": {
+    "url": "https://www.tsu.edu.ph/announcements/",
+    "lighthouse": "12.8.2",
+    "runs": [
+      {
+        "performance": 89,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2598.078999999999,
+        "fcpMs": 1860.3849999999995,
+        "cls": 0,
+        "tbtMs": 246,
+        "bytes": 945856,
+        "requests": 32
+      },
+      {
+        "performance": 83,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 3816.506499999999,
+        "fcpMs": 1898.7999999999997,
+        "cls": 0,
+        "tbtMs": 203.5,
+        "bytes": 945358,
+        "requests": 32
+      },
+      {
+        "performance": 93,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2524.694,
+        "fcpMs": 1820.8924999999997,
+        "cls": 0,
+        "tbtMs": 174,
+        "bytes": 945311,
+        "requests": 32
+      },
+      {
+        "performance": 81,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 3868.7442500000006,
+        "fcpMs": 2088.4435000000003,
+        "cls": 0,
+        "tbtMs": 177,
+        "bytes": 945390,
+        "requests": 32
+      },
+      {
+        "performance": 92,
+        "accessibility": 83,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 2541.049,
+        "fcpMs": 1972.176,
+        "cls": 0,
+        "tbtMs": 206.5,
+        "bytes": 945481,
+        "requests": 32
+      }
+    ],
+    "median": {
+      "performance": 89,
+      "accessibility": 83,
+      "bestPractices": 89,
+      "seo": 85,
+      "lcpMs": 2598.078999999999,
+      "fcpMs": 1898.7999999999997,
+      "cls": 0,
+      "tbtMs": 203.5,
+      "bytes": 945390,
+      "requests": 32
+    },
+    "n": 5
+  },
+  "calendar": {
+    "url": "https://www.tsu.edu.ph/academics/offices/admission-and-registration-office/academic-calendar/",
+    "lighthouse": "12.8.2",
+    "runs": [
+      {
+        "performance": 57.99999999999999,
+        "accessibility": 79,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 61763.936050000135,
+        "fcpMs": 2030.8498000000004,
+        "cls": 0.1966452049151889,
+        "tbtMs": 172,
+        "bytes": 12200378,
+        "requests": 34
+      },
+      {
+        "performance": 62,
+        "accessibility": 79,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 4141.005999999999,
+        "fcpMs": 1972.227,
+        "cls": 0,
+        "tbtMs": 801.8559999999995,
+        "bytes": 12200440,
+        "requests": 34
+      },
+      {
+        "performance": 62,
+        "accessibility": 79,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 60877.27599999994,
+        "fcpMs": 1842.1504999999997,
+        "cls": 0,
+        "tbtMs": 372.2265,
+        "bytes": 12200717,
+        "requests": 35
+      },
+      {
+        "performance": 73,
+        "accessibility": 79,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 3973.817499999999,
+        "fcpMs": 2062.318,
+        "cls": 0,
+        "tbtMs": 394.5149999999994,
+        "bytes": 12200482,
+        "requests": 34
+      },
+      {
+        "performance": 67,
+        "accessibility": 79,
+        "bestPractices": 89,
+        "seo": 85,
+        "lcpMs": 58958.2359999998,
+        "fcpMs": 1994.4440000000002,
+        "cls": 0,
+        "tbtMs": 200,
+        "bytes": 12200439,
+        "requests": 34
+      }
+    ],
+    "median": {
+      "performance": 62,
+      "accessibility": 79,
+      "bestPractices": 89,
+      "seo": 85,
+      "lcpMs": 58958.2359999998,
+      "fcpMs": 1994.4440000000002,
+      "cls": 0,
+      "tbtMs": 372.2265,
+      "bytes": 12200440,
+      "requests": 34
+    },
+    "n": 5
+  },
+  "colleges": {
+    "url": "https://www.tsu.edu.ph/academics/colleges/",
+    "lighthouse": "12.8.2",
+    "runs": [
+      {
+        "performance": 68,
+        "accessibility": 85,
+        "bestPractices": 86,
+        "seo": 85,
+        "lcpMs": 12351.480000000005,
+        "fcpMs": 1907.3749999999998,
+        "cls": 0,
+        "tbtMs": 189.5,
+        "bytes": 4375909,
+        "requests": 44
+      },
+      {
+        "performance": 70,
+        "accessibility": 85,
+        "bestPractices": 86,
+        "seo": 85,
+        "lcpMs": 11394.04199999999,
+        "fcpMs": 1838.3205,
+        "cls": 0,
+        "tbtMs": 170.5,
+        "bytes": 4375981,
+        "requests": 44
+      },
+      {
+        "performance": 69,
+        "accessibility": 85,
+        "bestPractices": 86,
+        "seo": 85,
+        "lcpMs": 14755.425999999998,
+        "fcpMs": 1849.8775000000005,
+        "cls": 0,
+        "tbtMs": 168.5,
+        "bytes": 4375819,
+        "requests": 44
+      },
+      {
+        "performance": 70,
+        "accessibility": 85,
+        "bestPractices": 86,
+        "seo": 85,
+        "lcpMs": 10324.939999999999,
+        "fcpMs": 1806.8089999999997,
+        "cls": 0,
+        "tbtMs": 180,
+        "bytes": 4375546,
+        "requests": 44
+      },
+      {
+        "performance": 69,
+        "accessibility": 85,
+        "bestPractices": 86,
+        "seo": 85,
+        "lcpMs": 11730.895000000002,
+        "fcpMs": 1988.3120000000004,
+        "cls": 0,
+        "tbtMs": 182,
+        "bytes": 4375827,
+        "requests": 44
+      }
+    ],
+    "median": {
+      "performance": 69,
+      "accessibility": 85,
+      "bestPractices": 86,
+      "seo": 85,
+      "lcpMs": 11730.895000000002,
+      "fcpMs": 1849.8775000000005,
+      "cls": 0,
+      "tbtMs": 180,
+      "bytes": 4375827,
+      "requests": 44
+    },
+    "n": 5
+  },
+  "home": {
+    "url": "https://www.tsu.edu.ph/",
+    "lighthouse": "12.8.2",
+    "runs": [
+      {
+        "performance": 64,
+        "accessibility": 67,
+        "bestPractices": 89,
+        "seo": 92,
+        "lcpMs": 10254.0044,
+        "fcpMs": 2209.8263,
+        "cls": 0.0169229321929302,
+        "tbtMs": 171,
+        "bytes": 7303892,
+        "requests": 93
+      },
+      {
+        "performance": 68,
+        "accessibility": 67,
+        "bestPractices": 89,
+        "seo": 92,
+        "lcpMs": 4784.436,
+        "fcpMs": 2464.0240999999996,
+        "cls": 0.0169229321929302,
+        "tbtMs": 256,
+        "bytes": 7320299,
+        "requests": 94
+      },
+      {
+        "performance": 72,
+        "accessibility": 67,
+        "bestPractices": 89,
+        "seo": 92,
+        "lcpMs": 4765.636549999999,
+        "fcpMs": 2414.0402,
+        "cls": 0.0169229321929302,
+        "tbtMs": 171.5000000000009,
+        "bytes": 7310253,
+        "requests": 93
+      },
+      {
+        "performance": 63,
+        "accessibility": 67,
+        "bestPractices": 89,
+        "seo": 92,
+        "lcpMs": 10782.454450000001,
+        "fcpMs": 2317.4994,
+        "cls": 0.0169229321929302,
+        "tbtMs": 168,
+        "bytes": 7799864,
+        "requests": 94
+      },
+      {
+        "performance": 69,
+        "accessibility": 67,
+        "bestPractices": 89,
+        "seo": 92,
+        "lcpMs": 4971.8811000000005,
+        "fcpMs": 2391.7162,
+        "cls": 0.0169229321929302,
+        "tbtMs": 210.5,
+        "bytes": 7317488,
+        "requests": 94
+      }
+    ],
+    "median": {
+      "performance": 68,
+      "accessibility": 67,
+      "bestPractices": 89,
+      "seo": 92,
+      "lcpMs": 4971.8811000000005,
+      "fcpMs": 2391.7162,
+      "cls": 0.0169229321929302,
+      "tbtMs": 171.5000000000009,
+      "bytes": 7317488,
+      "requests": 94
+    },
+    "n": 5
+  }
+}

@@ -1,0 +1,2480 @@
+{
+  "home": {
+    "url": "https://www.tsu.edu.ph/",
+    "checkedAt": "2026-11-20T14:10:25.837Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 15,
+          "examples": [
+            ".glide__bullet--active",
+            "button[data-glide-dir=\"=1\"]",
+            "button[data-glide-dir=\"=2\"]"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "help": "Links must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag244",
+            "wcag412"
+          ],
+          "nodes": 20,
+          "examples": [
+            ".glide__slide--clone.glide__slide:nth-child(1) > .is-normal > .hero-body > .container > .is-centered.columns > a[href=\"\"][target=\"_blank\"]",
+            ".glide__slide--active > .is-normal > .hero-body > .container > .is-centered.columns > a[href=\"\"][target=\"_blank\"]",
+            ".glide__slide:nth-child(3) > .is-normal > .hero-body > .container > .is-centered.columns > a[href=\"\"][target=\"_blank\"]"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        },
+        {
+          "id": "target-size",
+          "impact": "serious",
+          "help": "All touch targets must be 24px large, or leave sufficient space",
+          "tags": [
+            "wcag22aa",
+            "wcag258"
+          ],
+          "nodes": 12,
+          "examples": [
+            "button[data-glide-dir=\"=1\"]",
+            "button[data-glide-dir=\"=2\"]",
+            "button[data-glide-dir=\"=3\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 2,
+          "examples": [
+            ".is-size-6",
+            "div:nth-child(3) > p"
+          ]
+        },
+        {
+          "id": "target-size",
+          "impact": "serious",
+          "help": "All touch targets must be 24px large, or leave sufficient space",
+          "tags": [
+            "wcag22aa",
+            "wcag258"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".glide__slide--active > .is-normal > .hero-body > .container > .is-centered.columns > a[href=\"\"][target=\"_blank\"]"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "Home - Tarlac State University",
+      "headings": [
+        "H4 Office of the University President",
+        "H4 Transparency Seal",
+        "H4 Freedom of Information",
+        "H2 Latest News",
+        "H4 TSU joins launch of CHED-AIT micro-credential program in Tha",
+        "H4 OLMS unveils local heritage art exhibit for LIS Month 2026",
+        "H4 TSU hosts EFL Week 2026 Central Luzon kick-off activity",
+        "H4 Pres. Mendoza receives DAP's Galing PMDP Award",
+        "H2 Announcements",
+        "H4 CONDUCT OF ASYNCHRONOUS CLASSES ON OCTOBER 30-31, 2026",
+        "H4 TSU hosts Professional Disc Golf Association Asia (PDGA Asia",
+        "H4 Congratulations, Hon. Banting!",
+        "H4 LIFTING OF THE FLEXIBLE LEARNING WEEK (NOVEMBER 2-7, 2026)",
+        "H4 Share",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 0,
+      "images": 40,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light",
+        "Freedom of Information"
+      ],
+      "linksNoText": 25
+    },
+    "w320": {
+      "scrollWidth": 365,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Office of the University President",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transparency Seal",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Freedom of Information",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "cls": "glide__bullet glide__bullet--active",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "cls": "glide__bullet",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "cls": "glide__bullet",
+          "outline": false,
+          "boxShadow": true
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  },
+  "admissions": {
+    "url": "https://www.tsu.edu.ph/admissions/",
+    "checkedAt": "2026-11-20T14:10:42.669Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 9,
+          "examples": [
+            "li:nth-child(1) > a[href$=\"freshmen-students/\"]",
+            "li:nth-child(2) > a[href$=\"transferees/\"]",
+            "a[href$=\"foreign-students/\"]"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "Admissions - Tarlac State University",
+      "headings": [
+        "H1 Admissions",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 1,
+      "images": 14,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light"
+      ],
+      "linksNoText": 5
+    },
+    "w320": {
+      "scrollWidth": 843,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Freshmen Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transferees",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Foreign Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Graduate Studies Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "School of Law Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Cross Enrollees, Special Students and Re",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Shifters",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Second Courser",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Retention Policies",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Data Privacy Notice",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "FOI Portal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transparency Seal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Citizen's Charter",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bid Opportunities",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Publications",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "I.M.O.C.",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Contact Us",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "News",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Announcements",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Downloads",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "TSU to work for a ‘disaster resilient’ B",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "CHED, TSU partner for nationwide capacit",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 843,
+      "clientWidth": 640
+    }
+  },
+  "freshmen": {
+    "url": "https://www.tsu.edu.ph/admissions/freshmen-students/",
+    "checkedAt": "2026-11-20T14:10:57.948Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 25,
+          "examples": [
+            "h1",
+            ".amplify-menu-header > span",
+            ".is-active"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "Admission Policies - Tarlac State University",
+      "headings": [
+        "H1 Admission Policies",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 1,
+      "images": 14,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light"
+      ],
+      "linksNoText": 5
+    },
+    "w320": {
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Freshmen Students",
+          "cls": "is-active",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transferees",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Foreign Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Graduate Studies Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "School of Law Students",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Cross Enrollees, Special Students and Re",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Shifters",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Second Courser",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Retention Policies",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Data Privacy Notice",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "FOI Portal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transparency Seal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Citizen's Charter",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bid Opportunities",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Publications",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "I.M.O.C.",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Contact Us",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "News",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Announcements",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Downloads",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "TSU to work for a ‘disaster resilient’ B",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "CHED, TSU partner for nationwide capacit",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  },
+  "announcements": {
+    "url": "https://www.tsu.edu.ph/announcements/",
+    "checkedAt": "2026-11-20T14:11:10.640Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "div:nth-child(3) > p"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "Announcements - Tarlac State University",
+      "headings": [
+        "H1 Announcements",
+        "H4 2026 Announcements",
+        "H4 2025 Announcements",
+        "H4 2024 Announcements",
+        "H4 2023 Announcements",
+        "H4 2022 Announcements",
+        "H4 2021 Announcements",
+        "H4 2020 Announcements",
+        "H4 2019 Annoucements",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 1,
+      "images": 14,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light"
+      ],
+      "linksNoText": 5
+    },
+    "w320": {
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "2026 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2025 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2024 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2023 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2022 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2021 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2020 Announcements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "2019 Annoucements",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "Data Privacy Notice",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "FOI Portal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transparency Seal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Citizen's Charter",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bid Opportunities",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Publications",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "I.M.O.C.",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Contact Us",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  },
+  "announcements-2026": {
+    "url": "https://www.tsu.edu.ph/announcements/2026-announcements/",
+    "checkedAt": "2026-11-20T14:11:23.819Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 3,
+          "examples": [
+            ".is-6-tablet.is-3-desktop.column:nth-child(2) > .aos-animate.amplify-card.amplify-image-card > .card-content.has-equal-height > .content.has-equal-height > .has-margin-bottom-5 > .has-text-grey",
+            ".is-6-tablet.is-3-desktop.column:nth-child(3) > .aos-animate.amplify-card.amplify-image-card > .card-content.has-equal-height > .content.has-equal-height > .has-margin-bottom-5 > .has-text-grey",
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".is-info"
+          ]
+        },
+        {
+          "id": "link-in-text-block",
+          "impact": "serious",
+          "help": "Links must be distinguishable without relying on color",
+          "tags": [
+            "wcag2a",
+            "wcag141"
+          ],
+          "nodes": 2,
+          "examples": [
+            ".is-6-tablet.is-3-desktop.column:nth-child(2) > .aos-animate.amplify-card.amplify-image-card > .card-content.has-equal-height > .content.has-equal-height > .has-margin-bottom-5 > .has-text-dark",
+            ".is-6-tablet.is-3-desktop.column:nth-child(3) > .aos-animate.amplify-card.amplify-image-card > .card-content.has-equal-height > .content.has-equal-height > .has-margin-bottom-5 > .has-text-dark"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "2026 Announcements - Tarlac State University",
+      "headings": [
+        "H1 2026 Announcements",
+        "H4 CONDUCT OF ASYNCHRONOUS CLASSES ON OCTOBER 30-31, 2026",
+        "H4 TSU hosts Professional Disc Golf Association Asia (PDGA Asia",
+        "H4 Congratulations, Hon. Banting!",
+        "H4 LIFTING OF THE FLEXIBLE LEARNING WEEK (NOVEMBER 2-7, 2026)",
+        "H4 TSU CONCEPCION EXTENSION CAMPUS SHIFT TO ASYNCHRONOUS CLASSE",
+        "H4 TSU College Admission Evaluation (TSU-CAE) online applicatio",
+        "H4 SHIFT TO ASYNCHRONOUS CLASSES FOR SEPTEMBER 21, 2026",
+        "H4 TSU College of Medicine Admission A.Y. 2026-2027",
+        "H4 CONTINUED ONLINE CLASSES FOR SEPTEMBER 7-12, 2026",
+        "H4 ADDENDUM TO ADVISORY NO. 52",
+        "H4 37th Commencement Exercises",
+        "H4 Congratulations, Hon. Samson and Hon. Dela Cruz!",
+        "H4 POSTPONEMENT OF THE INVESTITURE CEREMONY",
+        "H4 CONTINUED ASYNCHRONOUS LEARNING MODALITY AND PERSONNEL WORK ",
+        "H4 SHIFT TO ASYNCHRONOUS LEARNING MODALITY AND PERSONNEL WELFAR",
+        "H4 CHED SIKAP opens Batch 4 and 5",
+        "H4 Sail with us into ASEAN 2026!",
+        "H4 RESUMPTION OF FACE-TO-FACE CLASSES",
+        "H4 TSU Swimming Team 2026",
+        "H4 17th ANNIVERSARY OF THE MAGNA CARTA OF WOMEN",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 1,
+      "images": 33,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light"
+      ],
+      "linksNoText": 5
+    },
+    "w320": {
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "CONDUCT OF ASYNCHRONOUS CLASSES ON OCTOB",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "TSU hosts Professional Disc Golf Associa",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Congratulations, Hon. Banting!",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "LIFTING OF THE FLEXIBLE LEARNING WEEK (N",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "TSU CONCEPCION EXTENSION CAMPUS SHIFT TO",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "TSU College Admission Evaluation (TSU-CA",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "SHIFT TO ASYNCHRONOUS CLASSES FOR SEPTEM",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "TSU College of Medicine Admission A.Y. 2",
+          "cls": "has-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Read more",
+          "cls": "button is-link",
+          "outline": false,
+          "boxShadow": true
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  },
+  "calendar": {
+    "url": "https://www.tsu.edu.ph/academics/offices/admission-and-registration-office/academic-calendar/",
+    "checkedAt": "2026-11-20T14:11:37.549Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "help": "Links must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag244",
+            "wcag412"
+          ],
+          "nodes": 15,
+          "examples": [
+            ".is-4-tablet.column:nth-child(1) > .aos-animate.amplify-card.amplify-image-card > .media > .has-margin-4.is-centered.media-left > .is-64x64.image",
+            ".is-4-tablet.column:nth-child(2) > .aos-animate.amplify-card.amplify-image-card > .media > .has-margin-4.is-centered.media-left > .is-64x64.image",
+            ".is-4-tablet.column:nth-child(3) > .aos-animate.amplify-card.amplify-image-card > .media > .has-margin-4.is-centered.media-left > .is-64x64.image"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 7,
+          "examples": [
+            "h1",
+            ".amplify-menu-header > span",
+            ".menu-list > li:nth-child(1) > a"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "Academic Calendar - Tarlac State University",
+      "headings": [
+        "H1 Academic Calendar",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 1,
+      "images": 16,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light"
+      ],
+      "linksNoText": 20
+    },
+    "w320": {
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transcript of Records",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Downloads",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Academic Calendar",
+          "cls": "is-active",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "1st Semester Collegiate Academic Calenda",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "2nd Semester Collegiate Academic Calenda",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Midyear Collegiate Academic Calendar 202",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "1st Trimester Schedule for Graduate Scho",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "2nd Trimester Schedule for Graduate Scho",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "3rd Trimester Schedule for Graduate Scho",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "1st Semester Collegiate Academic Calenda",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "2nd Semester Collegiate Academic Calenda",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "1st Trimester Schedule for Graduate Scho",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "2nd Trimester Schedule for Graduate Scho",
+          "cls": "is-text-dark",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  },
+  "colleges": {
+    "url": "https://www.tsu.edu.ph/academics/colleges/",
+    "checkedAt": "2026-11-20T14:11:49.827Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 13,
+          "examples": [
+            ".menu-list > li:nth-child(1) > a",
+            ".menu-list > li:nth-child(2) > a",
+            ".menu-list > li:nth-child(3) > a"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "Colleges - Tarlac State University",
+      "headings": [
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 0,
+      "images": 27,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light",
+        "College of Education",
+        "College of Engineering",
+        "College of Science",
+        "School of Law"
+      ],
+      "linksNoText": 5
+    },
+    "w320": {
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Office of the Vice President for Academi",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Quality Policy and Objectives",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Organizational Chart",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Functional Chart",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Academic Programs",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Online Resources",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Colleges",
+          "cls": "is-active",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Offices",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Downloads",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "VPAA Citizen's Charter",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Arts and Social Sciences",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Architecture and Fine Arts",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Business and Accountancy",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Computer Studies",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Criminal Justice Education",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Education",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College of Engineering",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  },
+  "ccs": {
+    "url": "https://www.tsu.edu.ph/academics/colleges/college-of-computer-studies/",
+    "checkedAt": "2026-11-20T14:12:02.772Z",
+    "axe": {
+      "violations": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "help": "Buttons must have discernible text",
+          "tags": [
+            "wcag2a",
+            "wcag412"
+          ],
+          "nodes": 1,
+          "examples": [
+            ".delete"
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 1,
+          "examples": [
+            "#pst-source"
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "tags": [
+            "wcag2a",
+            "wcag311"
+          ],
+          "nodes": 1,
+          "examples": [
+            "html"
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "critical",
+          "help": "Zooming and scaling must not be disabled",
+          "tags": [
+            "wcag2aa",
+            "wcag144"
+          ],
+          "nodes": 1,
+          "examples": [
+            "meta[name=\"viewport\"]"
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodes": 48,
+          "examples": [
+            "h3",
+            ".card-content > .content > p:nth-child(2)",
+            ".card-content > .content > p:nth-child(3)"
+          ]
+        }
+      ]
+    },
+    "structure": {
+      "lang": null,
+      "title": "College of Computer Studies - Tarlac State University",
+      "headings": [
+        "H3 Contact Information",
+        "H5 Quick Links",
+        "H5 Latest Articles",
+        "H5 Featured Article",
+        "H5 Get in Touch",
+        "H5 Contact Details",
+        "H5 Office Hours",
+        "H4 We use cookies"
+      ],
+      "h1Count": 0,
+      "images": 20,
+      "imagesNoAlt": 1,
+      "imagesFilenameAlt": [
+        "Logo Header Light"
+      ],
+      "linksNoText": 5
+    },
+    "w320": {
+      "scrollWidth": 320,
+      "clientWidth": 320
+    },
+    "keyboard": {
+      "first25": [
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "navbar-item",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "glightbox image",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "glightbox image is-square has-margin-top",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "glightbox image is-square has-margin-top",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "glightbox image is-square has-margin-top",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bachelor of Science in Information Techn",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bachelor of Science in Information Techn",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bachelor of Science in Information Techn",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bachelor of Science in Information Syste",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bachelor of Science in Computer Science",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Master in Information Technology",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "College News Events and Activities",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Faculty",
+          "cls": "",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Data Privacy Notice",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "FOI Portal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Transparency Seal",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Citizen's Charter",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Bid Opportunities",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Publications",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "I.M.O.C.",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Contact Us",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "News",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Announcements",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "Downloads",
+          "cls": "has-text-primary",
+          "outline": true,
+          "boxShadow": false
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "cls": "image is-64x64",
+          "outline": true,
+          "boxShadow": false
+        }
+      ],
+      "menuButtonReached": false,
+      "skipLinkFirst": false,
+      "focusIndicatorShare": "25/25",
+      "menuButton": {
+        "tag": "A",
+        "role": "button",
+        "href": null,
+        "tabindex": null,
+        "tabbable": true
+      }
+    },
+    "zoom200": {
+      "scrollWidth": 640,
+      "clientWidth": 640
+    }
+  }
+}
