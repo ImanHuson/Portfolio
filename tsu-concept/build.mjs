@@ -9,6 +9,7 @@ const ann = json("content/announcements.json");
 const cal = json("content/calendar.json");
 const adm = json("content/admissions.json");
 const ccs = json("content/ccs.json");
+const photos = json("content/photos.json");
 const base = json("research/baseline/summary.json");
 const after = existsSync(here("research/after/summary.json")) ? json("research/after/summary.json") : null;
 
@@ -98,8 +99,19 @@ ${body}
   return r;
 }
 
-const band = (h1, lede, crumbs = "", extra = "") =>
-  `<div class="band"><div class="wrap">${crumbs}<h1>${h1}</h1>${lede ? `<p class="lede">${lede}</p>` : ""}${extra}</div></div>`;
+// Licence-free (CC0) stock photos, always captioned as stock so nobody takes them for TSU people
+const photoFig = (name, r) => {
+  const p = photos[name];
+  const srcset = p.sizes.map((w) => `${r}img/${name}-${w}.webp ${w}w`).join(", ");
+  return `<figure class="photo band-photo"><img src="${r}img/${name}-640.webp" srcset="${srcset}" sizes="(min-width: 60rem) 34rem, 100vw" width="${p.w}" height="${p.h}" alt="${esc(p.alt)}" decoding="async">
+  <figcaption>Stock photo (${esc(p.license)}) by <a href="${esc(p.landing)}">${esc(p.creator)}</a>. Not TSU students.</figcaption></figure>`;
+};
+const band = (h1, lede, crumbs = "", extra = "", photo = "") => {
+  const text = `${crumbs}<h1>${h1}</h1>${lede ? `<p class="lede">${lede}</p>` : ""}${extra}`;
+  return photo
+    ? `<div class="band has-photo"><div class="wrap band-grid"><div class="band-text">${text}</div>${photo}</div></div>`
+    : `<div class="band"><div class="wrap">${text}</div></div>`;
+};
 const crumb = (r, items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map(([t, h]) => `<a href="${r}${h}">${esc(t)}</a>`).join(" / ")}</nav>`;
 
 const annItem = (a, { showKind = true, level = "h3" } = {}) => `<li class="ann" data-kind="${a.kind}">
@@ -122,6 +134,7 @@ const upItem = (e) => {
 rmSync(here("dist"), { recursive: true, force: true });
 mkdirSync(here("dist"), { recursive: true });
 cpSync(here("src/fonts"), here("dist/fonts"), { recursive: true });
+cpSync(here("src/img"), here("dist/img"), { recursive: true });
 cpSync(here("src/styles.css"), here("dist/styles.css"));
 cpSync(here("src/app.js"), here("dist/app.js"));
 writeFileSync(here("dist/favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#800000"/><rect x="6" y="22" width="20" height="4" fill="#ffc632"/></svg>`);
@@ -139,7 +152,7 @@ page({
     <li><a href="calendar/"><span class="t">Academic calendar 2026-2027<span>Enrollment, exams and breaks</span></span>${icon("arrow-right")}</a></li>
     <li><a href="admissions/"><span class="t">Admissions<span>Freshmen, transferees, graduate and law</span></span>${icon("arrow-right")}</a></li>
     <li><a href="https://student.tsu.edu.ph"><span class="t">Student portal<span>Opens student.tsu.edu.ph</span></span>${icon("arrow-up-right")}</a></li>
-  </ul>`)}
+  </ul>`, photoFig("graduates", ""))}
 <div class="section"><div class="wrap now-grid">
   <section class="panel" aria-labelledby="h-coming">
     <h2 id="h-coming">${icon("calendar-blank")}Coming up</h2>
@@ -233,7 +246,7 @@ const admNotices = ann.items.filter((a) => a.kind === "admission");
 page({
   path: "admissions/", title: "Admissions", nav: "admissions/",
   desc: "How to apply to Tarlac State University: freshmen, transferees, shifters, graduate, law and foreign students.",
-  body: `${band("Admissions", "Choose how you are applying. Each type has its own requirements.")}
+  body: `${band("Admissions", "Choose how you are applying. Each type has its own requirements.", "", "", photoFig("studying", "../"))}
 <div class="section"><div class="wrap cols-2">
   <section aria-labelledby="h-types">
     <h2 id="h-types">Who are you applying as?</h2>
@@ -255,7 +268,7 @@ const cae = admNotices.find((a) => /CAE/.test(a.title));
 page({
   path: "admissions/freshmen/", title: "Applying as a freshman", nav: "admissions/",
   desc: "Requirements and documents for new freshmen applying to Tarlac State University.",
-  body: `${band("Applying as a freshman", "For students applying to college for the first time. New freshmen start in the first semester only.", crumb("../../", [["Admissions", "admissions/"]]))}
+  body: `${band("Applying as a freshman", "For students applying to college for the first time. New freshmen start in the first semester only.", crumb("../../", [["Admissions", "admissions/"]]), "", photoFig("freshman", "../../"))}
 <div class="section"><div class="wrap">
   <h2>Apply online</h2>
   <p>Every freshman applicant takes the TSU College Admission Evaluation (TSU-CAE). Applications are online.</p>
@@ -348,7 +361,7 @@ page({
     <li>This is a front end only. The real site runs on the Umbraco CMS; every change here could be made in its templates and content, but I haven't built that.</li>
     <li>Content is a copy from ${esc(site.fetched)}. Only five pages and one college are rebuilt.</li>
     <li>${ann.leftOut} announcements that name individual people are left out, to follow the Data Privacy Act.</li>
-    <li>There are no photos yet. I'll add campus photos I take myself, without identifiable people.</li>
+    <li>The photos are licence-free (CC0) stock, captioned as stock on every page. They are not TSU students or TSU's campus. My own campus photos would be better.</li>
     <li>The task test with classmates hasn't been run yet, so this page doesn't claim students find things faster.</li>
   </ul>
   <h2>Rules I worked under</h2>

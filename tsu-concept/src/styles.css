@@ -291,7 +291,17 @@ main:has(#f-general:checked) .month:not(:has([data-kind="general"])) { display: 
 .site-footer dd { margin: 0; }
 .foot-note { grid-column: 1 / -1; border-top: 1px solid var(--chrome-line); padding-top: 1.25rem; }
 
-/* Photo slot: only rendered when a photo exists */
+/* Header band with a photo: beside the text from 60rem, below it on smaller screens */
+.band-grid { display: grid; gap: 1.75rem; }
+.band-text { min-width: 0; }
+@media (min-width: 60rem) {
+  .band-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 34rem); gap: 3rem; align-items: start; }
+  .has-photo .tasks { grid-template-columns: minmax(0, 1fr); }
+}
+.band .band-photo figcaption { color: var(--band-muted); }
+.band .band-photo figcaption a { color: var(--band-ink); }
+
+/* Photo figure */
 .photo { margin: 0; }
 .photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
 .photo figcaption { font-size: 0.875rem; color: var(--muted); padding-top: 0.4rem; }

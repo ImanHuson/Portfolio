@@ -1,0 +1,38 @@
+{
+  "graduates": {
+    "w": 1024,
+    "h": 683,
+    "sizes": [
+      640,
+      1024
+    ],
+    "alt": "Graduates in black gowns with red hoods walk away along a tree-lined campus path.",
+    "creator": "rawpixel",
+    "license": "CC0 1.0",
+    "landing": "https://www.rawpixel.com/image/6043504/photo-image-public-domain-black-person"
+  },
+  "freshman": {
+    "w": 960,
+    "h": 640,
+    "sizes": [
+      640,
+      960
+    ],
+    "alt": "A young woman in a white blouse holds a folder, standing in tall grass.",
+    "creator": "Nguyen Nguyen on StockSnap",
+    "license": "CC0 1.0",
+    "landing": "https://stocksnap.io/photo/people-girl-I2OTMEM17A"
+  },
+  "studying": {
+    "w": 960,
+    "h": 640,
+    "sizes": [
+      640,
+      960
+    ],
+    "alt": "A student's arm rests beside an open laptop and a notebook on a desk.",
+    "creator": "Startup Stock Photos on StockSnap",
+    "license": "CC0 1.0",
+    "landing": "https://stocksnap.io/photo/working-laptop-7FQSNWO04W"
+  }
+}

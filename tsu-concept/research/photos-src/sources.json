@@ -1,0 +1,32 @@
+{
+ "graduates": {
+  "title": "Graduating students mortarboards",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/6043504/photo-image-public-domain-black-person",
+  "file": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmwyODY0ODQyNTkzMi1pbWFnZS1reWJlbnJqeC5qcGc.jpg",
+  "openverse": "a60f7cbc-a762-4199-befd-f2626c4d1399"
+ },
+ "freshman": {
+  "title": "People Girl",
+  "creator": "Nguyen Nguyen",
+  "license": "cc0",
+  "license_version": "1.0",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/people-girl-I2OTMEM17A",
+  "file": "https://cdn.stocksnap.io/img-thumbs/960w/I2OTMEM17A.jpg",
+  "openverse": "b5b65fba-9bd6-4095-b55a-915b44c39513"
+ },
+ "studying": {
+  "title": "Working Laptop",
+  "creator": "Startup Stock Photos",
+  "license": "cc0",
+  "license_version": "1.0",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/working-laptop-7FQSNWO04W",
+  "file": "https://cdn.stocksnap.io/img-thumbs/960w/7FQSNWO04W.jpg",
+  "openverse": "27729b3a-5682-4627-bb26-19e063ca808a"
+ }
+}
