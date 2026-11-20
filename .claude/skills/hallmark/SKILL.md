@@ -8,7 +8,7 @@ metadata:
 ---
 
 > **Local note (ImanHuson/Portfolio).** Vendored from Nutlope/hallmark `skills/hallmark` (MIT, 04977e1); `agents/` (an OpenAI agent file) dropped, nothing else changed. In this repo:
-> - **Scope:** a brand-new standalone page or site that isn't a cinematic 3D build (those go through `premium-3d-website`). Never run it on the existing archives or the portfolio unless the user names Hallmark (its own rule). Its Floor forbids things those sites use on purpose (tracked labels, middle-dot meta lines).
+> - **Scope (chosen adaptively, see CLAUDE.md point 6):** usually leads on a new standalone page with no design system yet. On an existing project (the archives, the portfolio), use it only as a second check (`audit <path>` or `sloplint`), never as a redesign. Treat Floor findings that contradict a project's deliberate conventions (tracked labels, `·` meta lines) as waived, and fix the rest. Cinematic 3D builds go through `premium-3d-website`.
 > - **Step 1 "Ask once":** answer material, audience, use and tone from the brief and CLAUDE.md first. Ask the user only what can't be inferred, in one message (CLAUDE.md's "don't ask what you can decide").
 > - **Paid steps need permission first:** the comp step (`scripts/imagegen.mjs`, Together AI images, signal 9) costs money. `TOGETHER_API_KEY` is not set here; never ask for it in chat, and ask before any paid call per CLAUDE.md. Imagery follows CLAUDE.md's find, then make, then generate order.
 > - **Never run `scripts/install-hook.mjs` or `scripts/install.mjs`:** the first writes an auto-firing Write/Edit hook into `.claude/settings.json`, the second copies the skill into `~/.claude`. The skill is already installed here as a repo skill.
