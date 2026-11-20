@@ -4,3 +4,6 @@
 # API keys for the image-generation skills (level-3, story-illustrator) are read from here; never commit it
 .env
 .env.*
+
+# Hallmark lint screenshots
+.hallmark/shots/
