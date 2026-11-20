@@ -1,0 +1,331 @@
+import { JAPAN_SOURCES } from "./japan/sources";
+import type { Source } from "./types";
+
+/**
+ * Every reference used on the site. Each was opened and read for the claims
+ * that cite it (not taken from a search snippet). `notes` says what it
+ * supports and where it needs care.
+ */
+const A = "2026-11-08";
+
+export const SOURCES: Source[] = [
+  // Japan, national
+  {
+    id: "stat-handbook-2026",
+    title: "Statistical Handbook of Japan 2026",
+    publisher: "Statistics Bureau of Japan, Ministry of Internal Affairs and Communications",
+    url: "https://www.stat.go.jp/english/data/handbook/index.html",
+    published: "September 2026",
+    accessed: A,
+    type: "government-statistics",
+    notes:
+      "Ch. 1 (land: 377,980 km², more than 14,000 smaller islands, mountains about three quarters of the area); Ch. 2 (population 123.80 million in 2024; Kyoto City 1,464 thousand and Hiroshima City 1,201 thousand at the 2020 census, Table 2.10; Kinki major metropolitan area 19.2 million); Appendix 1 (2024 estimates by prefecture: Tottori 531, Shimane 642, Okayama 1,831, Hiroshima 2,714, Yamaguchi 1,281; Tokushima 685, Kagawa 917, Ehime 1,276, Kōchi 656 thousand; Kagawa the smallest prefecture by area, 1,877 km²; Niigata 2,099, Toyama 997, Ishikawa 1,098, Fukui 739, Yamanashi 791, Nagano 1,987, Gifu 1,916, Shizuoka 3,527, Aichi 7,460 thousand; Nagoya City 2,332 thousand at the 2020 census; Hokkaidō 5,043 thousand on 83,422 km²; Fukuoka 5,092, Saga 788, Nagasaki 1,252, Kumamoto 1,697, Ōita 1,085, Miyazaki 1,033, Kagoshima 1,532, Okinawa 1,466 thousand; Fukuoka City 1,612 thousand at the 2020 census; Sapporo City 1,973 thousand at the 2020 census; Aomori 1,165, Iwate 1,145, Miyagi 2,248, Akita 897, Yamagata 1,011, Fukushima 1,743 thousand); Ch. 1 (Mt. Fuji 3,776 m); the World Heritage table (Shirakawa-gō and Gokayama 1995; Yakushima 1993; Gusuku Sites and Related Properties of the Kingdom of Ryukyu 2000; Shiretoko 2005; Hiraizumi 2011; Hidden Christian Sites in the Nagasaki Region 2018; Fujisan 2013; Jomon Prehistoric Sites in Northern Japan 2021, 17 sites in Hokkaido, Aomori, Iwate and Akita, showing more than 10,000 years of hunting, gathering and fishing life); climate normals for Kyoto; Ch. 9 (foreign visitors 36.87 million in 2024, 42.68 million in 2025, 2025 provisional); Ch. 16 (World Heritage list; Washoku on the UNESCO intangible heritage list). History chapter (16 Nov 2026): Ch. 2, 123.80 million in 2024, 12th in the world, population in a phase of decline; 28.6% aged 65 or over in 2020 (USA 16.1%, Italy 23.4%); total fertility rate a record low 1.15 in 2024; household size about 5 from the 1920s to the mid-1950s, 2.21 in 2020, 38.1% one-person households. Ch. 3, growth over 10% a year in the 1960s (savings and investment, labour moving from primary to secondary industry, foreign technology); the yen revalued in December 1971 from 360 to the dollar, held for 22 years; first oil crisis October 1973 and negative growth in 1974, the first since the war; the bubble of the late 1980s, share prices falling at the start of 1990, then land. Everyday life chapter (16 Nov 2026): Ch. 2, 55.70 million private households in 2020, 54.2% nuclear-family and 38.1% one-person; mothers' average age at first birth 31.0 in 2024, 25.7 in 1975. Ch. 9, railways 71.6% of domestic passenger-kilometres in fiscal 2023, airlines 18.1% (a record), motor vehicles 9.8%. Ch. 10, 22,714 convenience stores (corporations only) in 2021 with goods sales of 4.64 trillion yen. Ch. 12, 135.1 hours worked a month per regular employee in 2025, 1,621 a year, of which overtime 9.8 a month. Ch. 14, 65 million dwellings and 56 million households in 2023; 9 million vacant, 13.8%, the highest ratio ever; 60.9% of occupied dwellings owned; 52.7% detached houses, 44.9% apartments, the share of apartments rising. Ch. 16, a 6-3-3 school system with 9 years compulsory; 61.4% of 2025 upper-secondary graduates went straight to university or junior college. Ch. 5, in rural areas rapid ageing and the exodus of young people make it hard to secure workers.",
+  },
+  {
+    id: "columbia-afe-timeline",
+    title: "Japan: Timeline of Historical Periods",
+    publisher: "Asia for Educators, Columbia University",
+    url: "https://afe.easia.columbia.edu/timelines/japan_timeline.htm",
+    accessed: A,
+    type: "academic",
+    notes:
+      "Period names and conventional dates. Gives Nara as 710-814, where most references give 710-794 (the move to Heian-kyō); the site uses 794 and says so.",
+  },
+  {
+    id: "nippon-kyoto-millennium",
+    title: "Imperial City: Kyoto's Millennium as Japan's Capital",
+    publisher: "Nippon.com (Nippon Communications Foundation)",
+    url: "https://www.nippon.com/en/japan-topics/g00993/",
+    accessed: A,
+    type: "news",
+    notes:
+      "Founding of Heian-kyō by Emperor Kanmu in 794 on Chinese models; Ōnin War (1467-77) fought in its streets; Emperor Meiji's move to Tokyo in 1869.",
+  },
+  {
+    id: "nippon-adherents",
+    title: "Believe It or Not! Religious Adherents Outnumber People in Japan",
+    publisher: "Nippon.com, from the Agency for Cultural Affairs' Religious Yearbook",
+    url: "https://www.nippon.com/en/features/h00226/believe-it-or-not!-religious-adherents-outnumber-people-in-japan.html",
+    accessed: A,
+    type: "news",
+    notes:
+      "182.2 million adherents at end-2016 (84.7 million Shinto, 87.7 million Buddhist) against about 126 million people. Buddhism arrived from the continent around the sixth century; the two faiths intermingled for over a thousand years until the Meiji government ordered them separated. Yearbook counts are reported by religious bodies themselves, which define 'adherent' as they wish; many people are counted by both Shinto and Buddhist bodies. Figures are end-2016.",
+  },
+  {
+    id: "bunka-religious-juridical",
+    title: "Religious Juridical Persons and Administration of Religious Affairs",
+    publisher: "Agency for Cultural Affairs, Government of Japan",
+    url: "https://www.bunka.go.jp/english/policy/religious_institutions/",
+    accessed: A,
+    type: "official",
+    notes: "How religious organisations are registered; the Religious Yearbook (Shūkyō Nenkan) is compiled from their own reports.",
+  },
+  {
+    id: "ninjal-endangered",
+    title: "Endangered Languages and Dialects in Japan",
+    publisher: "National Institute for Japanese Language and Linguistics (NINJAL)",
+    url: "https://www.ninjal.ac.jp/english/research/project-3/institute/endangered-languages/",
+    accessed: A,
+    type: "academic",
+    notes: "NINJAL's research programme on the languages UNESCO lists as endangered in Japan.",
+  },
+  {
+    id: "japantimes-ainu",
+    title: "Efforts underway to save Ainu language and culture",
+    publisher: "The Japan Times",
+    url: "https://www.japantimes.co.jp/2022/02/21/special-supplements/efforts-underway-save-ainu-language-culture/",
+    published: "2022-02-21",
+    accessed: A,
+    type: "news",
+    notes: "Cites the third edition of UNESCO's Atlas of the World's Languages in Danger: eight endangered languages in Japan, including Ainu, Hachijō and several Ryukyuan languages; Ainu is the only one rated critically endangered.",
+  },
+  // Kyoto
+  {
+    id: "kyoto-city-heritage",
+    title: "World Heritage: Historic Monuments of Ancient Kyoto",
+    publisher: "City of Kyoto",
+    url: "https://www2.city.kyoto.lg.jp/bunshi/bunkazai/sekaiisan-e.htm",
+    accessed: A,
+    type: "official",
+    notes: "17 properties in Kyoto, Uji and Ōtsu, inscribed in December 1994 at the 18th session of the World Heritage Committee.",
+  },
+  {
+    id: "unesco-688",
+    title: "Historic Monuments of Ancient Kyoto (Kyoto, Uji and Otsu Cities)",
+    publisher: "UNESCO World Heritage Centre",
+    url: "https://whc.unesco.org/en/list/688/",
+    accessed: A,
+    type: "heritage-body",
+    notes: "The listing itself. The page refused automated access from this build environment (HTTP 403); facts are taken from the City of Kyoto page above.",
+  },
+  // Places
+  {
+    id: "nishiki-history",
+    title: "History of Nishiki Market",
+    publisher: "Kyoto Nishiki Market Shopping Street Promotion Association",
+    url: "https://kyoto-nishiki.or.jp/en/about",
+    accessed: A,
+    type: "official",
+    notes:
+      "1615 recognition by the Edo shogunate (one of three fish wholesalers); a Heian-period market estimated, not recorded; groundwater at 15-18 °C; about 390 m east-west, 3.3-5 m wide; Itō Jakuchū born here and his role in a 1771-74 dispute; role in the Gion Festival.",
+  },
+  {
+    id: "inari-about",
+    title: "Greetings from the Head Priest",
+    publisher: "Fushimi Inari Taisha",
+    url: "https://inari.jp/en/about/",
+    accessed: A,
+    type: "official",
+    notes: "Some 30,000 Inari shrines in Japan; this is the head shrine; Inari Ōkami took up residence on the mountain in 711 by the traditional calendar.",
+  },
+  {
+    id: "inari-history",
+    title: "History",
+    publisher: "Fushimi Inari Taisha",
+    url: "https://inari.jp/en/history/",
+    accessed: A,
+    type: "official",
+    notes: "Yamashirokoku Fudoki origin story and the Hata clan; Engishiki listing; Sei Shōnagon's climb; destruction in the Ōnin war and rebuilding in 1499. The shrine's own account of its origins.",
+  },
+  {
+    id: "inari-faq",
+    title: "FAQ",
+    publisher: "Fushimi Inari Taisha",
+    url: "https://inari.jp/en/faq/",
+    accessed: A,
+    type: "official",
+    notes: "Foxes as unseen messengers (byakko-san), not the deity; torii as offerings since the start of the Edo period; around 10,000 torii; precinct about 870,000 m².",
+  },
+  {
+    id: "inari-spots",
+    title: "Precinct map: Inariyama, Main Gate, Main Shrine, Okusha Hōhaisho",
+    publisher: "Fushimi Inari Taisha",
+    url: "https://inari.jp/en/map/",
+    accessed: A,
+    type: "official",
+    notes: "Inariyama 233 m, southernmost of the 36 Higashiyama peaks; Main Gate attributed to Toyotomi Hideyoshi, 1589, confirmed by an ink inscription found in repairs; main shrine rebuilt 1499.",
+  },
+  {
+    id: "kiyomizu-learn",
+    title: "Learn about Kiyomizu-dera",
+    publisher: "Kiyomizu-dera Temple",
+    url: "https://www.kiyomizudera.or.jp/en/learn/",
+    accessed: A,
+    type: "official",
+    notes:
+      "Founded 778; the founding story of Kenshin (Enchin) and Sakanoue no Tamuramaro; grounds of 130,000 m² with about thirty buildings and the National Treasure Main Hall; destroyed by fire more than ten times; the stage of over 166 hinoki boards, re-laid in a 12-year restoration from 2008, nearly 13 m high.",
+  },
+  {
+    id: "kiyomizu-home",
+    title: "Kiyomizu-dera Temple (home page)",
+    publisher: "Kiyomizu-dera Temple",
+    url: "https://www.kiyomizudera.or.jp/en/",
+    accessed: A,
+    type: "official",
+    notes: "Kannon as a deity of great mercy and compassion; the principal image with eleven faces and forty-two arms, known as Kiyomizu Kannon-san.",
+  },
+  {
+    id: "ndl-kiyomizu",
+    title: "Kiyomizu-dera (Column: Kansai)",
+    publisher: "National Diet Library, Japan",
+    url: "https://ndl.go.jp/scenery/e/column/kansai/kiyomizudera.html",
+    accessed: A,
+    type: "official",
+    notes: "Japanese-language page. The present Main Hall was rebuilt in 1633 (Kan'ei 10) with the help of shogun Tokugawa Iemitsu and is a National Treasure; hall about 18 m high, stage about 13 m; stage floor of hinoki from Kiso and Tenryū.",
+  },
+  // Maldives
+  {
+    id: "mbs-census-2022",
+    title: "Population Census 2022: Summary",
+    publisher: "Maldives Bureau of Statistics",
+    url: "https://statisticsmaldives.gov.mv/mbs/wp-content/uploads/2024/02/Population-Census-2022-Summary.pdf",
+    published: "February 2024",
+    accessed: A,
+    type: "government-statistics",
+    notes: "515,132 residents (382,639 Maldivians, 132,493 foreigners); about 41% in the Malé area (Malé, Hulhumalé, Villimalé, Hulhulé), 46% on administrative islands, 10% on resorts, 3% on industrial islands.",
+  },
+  {
+    id: "mbs-migration-2022",
+    title: "Population Census 2022: Migration Summary",
+    publisher: "Maldives Bureau of Statistics",
+    url: "https://statisticsmaldives.gov.mv/mbs/wp-content/uploads/2024/02/Migration-Summary.pdf",
+    published: "February 2024",
+    accessed: A,
+    type: "government-statistics",
+    notes: "Malé hosts 210,053 people including foreigners; 4% annual growth of usual residents over seven years, foreign population 9%; four wards (Henveiru, Galolhu, Machchangoalhi, Maafannu); Kaafu (K.) Atoll 42,677 residents, 22,864 foreign and 19,813 Maldivian, mostly because of resorts and industrial islands.",
+  },
+  {
+    id: "loc-maldives",
+    title: "Maldives: A Country Study (History; Geography; Language)",
+    publisher: "U.S. Library of Congress, Federal Research Division (mirrored at countrystudies.us)",
+    url: "https://countrystudies.us/maldives/1.htm",
+    accessed: A,
+    type: "academic",
+    notes: "Written in the mid-1990s; used only for stable history, geography and language. About 1,200 coral islands in a double chain of atolls on a 960 km submarine ridge; islands 1 to 2 km², 1 to 1.5 m above mean sea level; Theravada Buddhism from Ceylon; conversion of the last Buddhist king in 1153; Ibn Battutah in the 1340s; Portuguese 1558-73; 1887 protectorate agreement; independence 1965; Dhivehi from Elu; Thaana, 24 letters, right to left; 'atoll' comes from Dhivehi.",
+  },
+  {
+    id: "fao-maldives-2009",
+    title: "Fishery and Aquaculture Country Profile: Maldives",
+    publisher: "Food and Agriculture Organization of the United Nations",
+    url: "https://www.fao.org/fishery/docs/DOCUMENT/fcp/en/FI_CP_MV.pdf",
+    published: "July 2009",
+    accessed: A,
+    type: "official",
+    notes: "Skipjack (kalhubilamas) 65-75% of the catch, yellowfin 10-17%, both mostly pole and line with live bait from lagoons and reefs; single-day trips once usual, mechanised masdhoni now make 2-3 day trips; 979 vessels in 2008, 867 of them pole-and-line masdhoni; dried and smoked 'Maldive fish' exported to Sri Lanka; no auction centres, small markets at landing places; about 14,000 full-time fishers. Figures are 2008-09.",
+  },
+  {
+    id: "visitmaldives-mosques",
+    title: "Mosques in Maldives: a standing testament to the local craftsmanship",
+    publisher: "Visit Maldives (Maldives Marketing and Public Relations Corporation)",
+    url: "https://visitmaldives.com/en/experience/mosques-in-maldives-a-standing-testament-to-the-local-craftsmanship",
+    accessed: A,
+    type: "official",
+    notes: "Coral stone architecture flourished from the mid-17th to early 19th centuries; six coral stone mosques remain; Hukuru Miskiy completed in 1658 after two years, under Sultan Ibrahim Iskandar, of interlocking carved coral blocks, lacquer and woodcarving inside; 17th-century cemetery, rounded tops for women and pointed for men, gilded inscriptions for royalty, placed on UNESCO's tentative list in 2013; the Grand Friday Mosque opened 1984.",
+  },
+  {
+    id: "coral-stone-mosques",
+    title: "Malé Friday Mosque",
+    publisher: "Coral Stone Mosques of Maldives (documentation and restoration project)",
+    url: "https://coralstonemosques.com/?p=96",
+    accessed: A,
+    type: "heritage-body",
+    notes: "Built 1658 under Sultan Ibrahim Iskandhar I, replacing the mosque of 1153 built by the first Muslim sultan; still in worship; original except a corrugated metal roof covering and floor covering; hypostyle plan with two prayer halls, six antechambers (fenda), chambers for the sultan and guards; interlocking dry-jointed coral stone on a carved plinth; coffered ceiling with lacquered turned supports; drum-like minaret of plastered coral stone with metal bands; three coral stone wells, a sundial, a cemetery with sultans' mausoleums.",
+  },
+  // Switzerland
+  {
+    id: "ch-constitution",
+    title: "Federal Constitution of the Swiss Confederation (English translation, with the Parliament Act)",
+    publisher: "Swiss Parliament",
+    url: "https://www.parlament.ch/centers/documents/en/20240301_BV-en.pdf",
+    published: "Status as of 1 March 2024",
+    accessed: A,
+    type: "official",
+    notes: "Art. 1 names the 26 cantons; Art. 4: German, French, Italian and Romansh are the national languages; Art. 70: German, French and Italian official, Romansh for Romansh speakers. Parliament Act Art. 32: the Federal Assembly meets in Bern; Government and Administration Organisation Act Art. 58: the official seat of the Federal Council is the City of Bern. English is not an official language; the translation has no legal force.",
+  },
+  {
+    id: "ch-population-2025",
+    title: "Population in 2025: growth slows, ageing intensifies",
+    publisher: "Federal Statistical Office (published via admin.ch)",
+    url: "https://www.seco.admin.ch/en/newnsb/eHho7S2A2revQdhyPSYmt",
+    published: "20 August 2026",
+    accessed: A,
+    type: "government-statistics",
+    notes: "Permanent resident population 9,127,100 on 31 December 2025, up 0.8%; people aged 65 or over now outnumber those under 20.",
+  },
+  {
+    id: "be-kennzahlen-2024",
+    title: "Kennzahlen Kanton Bern (2024)",
+    publisher: "Canton of Bern, Finance Administration",
+    url: "https://www.fin.be.ch/content/dam/fin/dokumente/de/finanzverwaltung/statistik/kennzahlen-und-porträt/Kennzahlen_BE_gesamt_2014-2024_de.pdf",
+    accessed: A,
+    type: "government-statistics",
+    notes: "1,071,216 permanent residents at end of 2024; 335 municipalities, largest Bern (137,995), smallest Rebévelier (32); highest point Finsteraarhorn 4,274 m, lowest Wynau 401.5 m; area 595,847 ha; 42.9% farmland, 32.2% forest, 7.5% settlement.",
+  },
+  {
+    id: "be-constitution",
+    title: "Verfassung des Kantons Bern (Constitution of the Canton of Bern), Art. 6",
+    publisher: "Canton of Bern (copy published by the Federal Office for Housing)",
+    url: "https://www.bwo.admin.ch/dam/de/sd-web/QPTDv58Hg2xL/verfassung_kt_be.pdf",
+    accessed: A,
+    type: "official",
+    notes: "German-language text. German and French are the canton's languages; French is the official language in the Bernese Jura, both in Seeland and Biel/Bienne, German elsewhere.",
+  },
+  {
+    id: "swissinfo-bern",
+    title: "The medieval pearl on the Aare",
+    publisher: "SWI swissinfo.ch (Swiss Broadcasting Corporation)",
+    url: "https://www.swissinfo.ch/eng/the-medieval-pearl-on-the-aare/7814422",
+    accessed: A,
+    type: "news",
+    notes: "Founded 1191 by Berthold V of Zähringen on a loop of the Aare; UNESCO World Heritage since 1983; fire of 1405 destroyed about two thirds of the wooden houses, rebuilt in sandstone, arcades from this period; six kilometres of arcades; 11 sixteenth-century fountains, ten with original Renaissance figures; Einstein's 1902 letter on the arcades; Zytglogge built 1218-20, 16th-century clock movement driving astronomical clock and figures, a rooster crowing three times.",
+  },
+  {
+    id: "parlament-building",
+    title: "Das Parlamentsgebäude in Bern (100 years of the Parliament Building)",
+    publisher: "Swiss Parliament and Federal Office for Buildings and Logistics",
+    url: "https://www.parlament.ch/centers/documents/de/parlamentsgebaeude-d.pdf",
+    published: "14 January 2002",
+    accessed: A,
+    type: "official",
+    notes: "German-language text. Inaugurated 1 April 1902 by the United Federal Assembly, set between Bundeshaus West (1852-57) and Bundeshaus Ost (1888-92); architect Hans Wilhelm Auer (1847-1906), who wanted the building to represent all of Switzerland: stone from 11 cantons, materials and craftsmen from every region, a Brienz carved room shown at the 1900 Paris World Exhibition; 33 artists; 16.2% of the 7,198,000-franc cost spent on art.",
+  },
+  {
+    id: "loc-ortelius",
+    title: "Ortelius: A Legendary Mapmaker",
+    publisher: "Library of Congress, Worlds Revealed blog",
+    url: "https://blogs.loc.gov/maps/2020/04/ortelius-a-legendary-mapmaker/",
+    published: "April 2020",
+    accessed: A,
+    type: "heritage-body",
+    notes: "Ortelius published the first modern atlas, Theatrum Orbis Terrarum (Theatre of the World), in Antwerp in 1570. The site's name comes from it.",
+  },
+  // Media and geodata providers
+  {
+    id: "osm",
+    title: "OpenStreetMap",
+    publisher: "OpenStreetMap contributors",
+    url: "https://www.openstreetmap.org/copyright",
+    accessed: A,
+    type: "dataset",
+    notes: "Coordinates of places (looked up through Nominatim) and the street basemap, under the ODbL.",
+  },
+  {
+    id: "natural-earth",
+    title: "Natural Earth: Admin 0 countries (1:110m) and Admin 1 states/provinces (1:10m)",
+    publisher: "Natural Earth",
+    url: "https://www.naturalearthdata.com/",
+    accessed: A,
+    type: "dataset",
+    notes: "Public domain. Country shapes for the globe; Japanese prefectures and their region field for the regions map (simplified).",
+  },
+];
+
+SOURCES.push(...JAPAN_SOURCES);
+
+export const SOURCE_BY_ID = new Map(SOURCES.map((s) => [s.id, s]));
+
+export function source(id: string): Source {
+  const s = SOURCE_BY_ID.get(id);
+  if (!s) throw new Error(`Unknown source id: ${id}`);
+  return s;
+}
