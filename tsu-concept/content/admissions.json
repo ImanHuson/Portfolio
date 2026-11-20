@@ -1,0 +1,72 @@
+{
+  "source": "https://www.tsu.edu.ph/admissions/",
+  "types": [
+    {
+      "label": "Freshmen",
+      "summary": "Applying to college for the first time.",
+      "here": "admissions/freshmen/",
+      "source": "https://www.tsu.edu.ph/admissions/freshmen-students/"
+    },
+    {
+      "label": "Transferees",
+      "summary": "Coming from another college or university.",
+      "source": "https://www.tsu.edu.ph/admissions/transferees/"
+    },
+    {
+      "label": "Shifters",
+      "summary": "Already at TSU, moving to another program.",
+      "source": "https://www.tsu.edu.ph/admissions/shifters/"
+    },
+    {
+      "label": "Second coursers",
+      "summary": "Already hold a degree and want another.",
+      "source": "https://www.tsu.edu.ph/admissions/second-courser/"
+    },
+    {
+      "label": "Cross enrollees, special students and returnees",
+      "summary": "Taking subjects at TSU from another school, or coming back after a break.",
+      "source": "https://www.tsu.edu.ph/admissions/cross-enrollees-special-students-and-returnees/"
+    },
+    {
+      "label": "Graduate studies",
+      "summary": "Master's and doctoral programs.",
+      "source": "https://www.tsu.edu.ph/admissions/graduate-studies-students/"
+    },
+    {
+      "label": "School of Law",
+      "summary": "Law school applicants.",
+      "source": "https://www.tsu.edu.ph/admissions/school-of-law-students/"
+    },
+    {
+      "label": "Foreign students",
+      "summary": "Applicants who are not Filipino citizens.",
+      "source": "https://www.tsu.edu.ph/university-president/offices/office-of-international-affairs/admission/"
+    }
+  ],
+  "freshmen": {
+    "source": "https://www.tsu.edu.ph/admissions/freshmen-students/",
+    "applyUrl": "https://cat.tsu.edu.ph/",
+    "applyLabel": "TSU College Admission Evaluation (TSU-CAE) online application",
+    "documents": [
+      "Form 138 (report card)",
+      "Certificate of Good Moral Character",
+      "Health Examination Certificate",
+      "Copy of authenticated birth certificate"
+    ],
+    "rules": [
+      "Students are accepted regardless of age, sex, nationality, religious beliefs, socio-economic status or political affiliation.",
+      "You must have graduated from a recognized secondary school.",
+      "New freshmen are not accepted in the second semester or summer.",
+      "If you have already enrolled in any college subject, you apply as a transferee, not a freshman.",
+      "Students from vocational courses, or courses that don't lead to a degree, are admitted as beginning freshmen.",
+      "You pledge to follow the rules and regulations of TSU."
+    ],
+    "requirements": [
+      "Qualify in the TSU College Admission Evaluation.",
+      "Meet the average grade requirement (GWA) set by TSU or by CHED.",
+      "Qualify in the interview.",
+      "Qualify in the physical or health examination.",
+      "Submit complete and valid credentials."
+    ]
+  }
+}

@@ -74,6 +74,10 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build tsu-concept
+        working-directory: tsu-concept
+        run: npm run build
+
       - name: Assemble Pages artifact
         run: |
           mkdir -p _site
@@ -89,6 +93,8 @@ jobs:
           cp -r attack-on-titan-archive/out/. _site/attack-on-titan-archive/
           mkdir -p _site/terrarum
           cp -r terrarum/out/. _site/terrarum/
+          mkdir -p _site/tsu-concept
+          cp -r tsu-concept/dist/. _site/tsu-concept/
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,0 +1,28 @@
+{
+  "name": "College of Computer Studies",
+  "source": "https://www.tsu.edu.ph/academics/colleges/college-of-computer-studies/",
+  "collegesSource": "https://www.tsu.edu.ph/academics/colleges/",
+  "programs": [
+    { "level": "Undergraduate", "items": [
+      "Bachelor of Science in Computer Science",
+      "Bachelor of Science in Information Technology, specialized in Web and Mobile Application",
+      "Bachelor of Science in Information Technology, specialized in Network Administration",
+      "Bachelor of Science in Information Technology, specialized in Technical Service Management",
+      "Bachelor of Science in Information Systems, specialized in Business Analytics"
+    ] },
+    { "level": "Graduate", "items": ["Master in Information Technology"] }
+  ],
+  "contact": { "email": "ccs_dean@tsu.edu.ph", "phone": "(045) 606 8173", "phoneHref": "tel:+63456068173", "label": "Office of the Dean" },
+  "otherColleges": [
+    "College of Architecture and Fine Arts",
+    "College of Arts and Social Sciences",
+    "College of Business and Accountancy",
+    "College of Criminal Justice Education",
+    "College of Education",
+    "College of Engineering",
+    "College of Industrial Technology",
+    "College of Public Administration and Governance",
+    "College of Science",
+    "School of Law"
+  ]
+}

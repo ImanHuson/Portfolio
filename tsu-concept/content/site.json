@@ -1,0 +1,109 @@
+{
+  "name": "Tarlac State University",
+  "fetched": "20 November 2026",
+  "author": "Iman Kasim",
+  "nav": [
+    {
+      "label": "Admissions",
+      "href": "admissions/"
+    },
+    {
+      "label": "Announcements",
+      "href": "announcements/"
+    },
+    {
+      "label": "Calendar",
+      "href": "calendar/"
+    },
+    {
+      "label": "Colleges",
+      "href": "colleges/computer-studies/"
+    }
+  ],
+  "portals": [
+    {
+      "label": "Student portal",
+      "href": "https://student.tsu.edu.ph"
+    },
+    {
+      "label": "Library",
+      "href": "https://library.tsu.edu.ph/"
+    },
+    {
+      "label": "Scholarship application",
+      "href": "https://scholarship.tsu.edu.ph"
+    },
+    {
+      "label": "Clearance",
+      "href": "https://clearance.tsu.edu.ph"
+    },
+    {
+      "label": "Faculty portal",
+      "href": "https://faculty.tsu.edu.ph"
+    },
+    {
+      "label": "Employee portal",
+      "href": "https://employee.tsu.edu.ph"
+    }
+  ],
+  "campuses": {
+    "names": [
+      "Main",
+      "Lucinda",
+      "San Isidro",
+      "Capas",
+      "Concepcion",
+      "La Paz"
+    ],
+    "source": "https://www.tsu.edu.ph/",
+    "sourceNote": "Campus banner on the TSU home page"
+  },
+  "government": [
+    {
+      "label": "Transparency Seal",
+      "href": "https://www.tsu.edu.ph/good-governance/transparency-seal/"
+    },
+    {
+      "label": "Citizen's Charter",
+      "href": "https://www.tsu.edu.ph/good-governance/citizen-s-charter/"
+    },
+    {
+      "label": "Freedom of Information",
+      "href": "https://www.foi.gov.ph/agencies/tsu/"
+    },
+    {
+      "label": "Data Privacy Notice",
+      "href": "https://www.tsu.edu.ph/privacy/data-privacy-notice/"
+    },
+    {
+      "label": "Bid notices",
+      "href": "https://www.tsu.edu.ph/opportunities/bid-opportunities/"
+    },
+    {
+      "label": "GOV.PH",
+      "href": "https://www.gov.ph"
+    }
+  ],
+  "contact": {
+    "address": "Romulo Boulevard, San Vicente, Tarlac City, Tarlac 2300",
+    "phone": "+63 45 606 8110",
+    "phoneHref": "tel:+63456068110",
+    "email": "helpdesk@tsu.edu.ph",
+    "hours": [
+      [
+        "Monday",
+        "Closed"
+      ],
+      [
+        "Tuesday to Friday",
+        "7:00 AM to 6:00 PM"
+      ],
+      [
+        "Saturday and Sunday",
+        "Closed"
+      ]
+    ],
+    "source": "https://www.tsu.edu.ph/"
+  },
+  "realSite": "https://www.tsu.edu.ph/"
+}

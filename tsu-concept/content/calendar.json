@@ -1,0 +1,94 @@
+{
+  "title": "Collegiate academic calendar, academic year 2026-2027",
+  "issuer": "Office of Admission and Registration",
+  "source": "https://www.tsu.edu.ph/announcements/2026-announcements/collegiate-calendar-for-the-academic-year-2026-2027/",
+  "sourceNote": "Transcribed from the three calendar images TSU posted on 20 May 2026. TSU publishes no text version.",
+  "olderCalendars": "https://www.tsu.edu.ph/academics/offices/admission-and-registration-office/academic-calendar/",
+  "notes": [
+    "No student shall be registered in any subject after 12% of regular class meetings have been held.",
+    "Rectification for non-graduating students is within one month, for graduating students within one week from the date of posting.",
+    "Removal exam for non-graduating students is within one month, for graduating students within one week from the date of posting."
+  ],
+  "terms": [
+    {
+      "id": "first",
+      "name": "First semester",
+      "events": [
+        { "start": "2026-06-02", "end": "2026-06-11", "what": "Enrollment: first year" },
+        { "start": "2026-06-15", "end": "2026-06-20", "what": "Enrollment: online" },
+        { "start": "2026-06-23", "end": "2026-07-03", "what": "Enrollment: assisted" },
+        { "start": "2026-07-16", "end": "2026-07-17", "what": "Enrollment: returnees, shifters and transferees" },
+        { "start": "2026-07-20", "what": "Start of classes", "key": true },
+        { "start": "2026-07-21", "end": "2026-07-24", "what": "Re-assessment of subjects, late enrollees (adding, changing)" },
+        { "start": "2026-07-31", "what": "Deadline of withdrawal of enrollment" },
+        { "start": "2026-09-11", "what": "Deadline of dropping of subjects" },
+        { "start": "2026-09-14", "end": "2026-09-19", "what": "Midterm examination", "key": true },
+        { "start": "2026-10-01", "end": "2026-10-30", "what": "Filing of application for graduation" },
+        { "start": "2026-10-12", "end": "2026-10-17", "what": "Foundation Week" },
+        { "start": "2026-10-26", "end": "2026-10-30", "what": "College Academic Council" },
+        { "start": "2026-11-03", "end": "2026-11-06", "what": "University Academic Council" },
+        { "start": "2026-11-09", "end": "2026-11-14", "what": "Final exams for graduating students", "key": true },
+        { "start": "2026-11-13", "what": "Final oral defense" },
+        { "start": "2026-11-16", "end": "2026-11-21", "what": "Final exams for non-graduating students", "key": true },
+        { "start": "2026-11-20", "what": "Deadline for clearing of deficiencies of graduating students" },
+        { "start": "2026-11-21", "what": "End of classes", "key": true },
+        { "start": "2026-11-23", "what": "Semestral break", "key": true },
+        { "start": "2026-11-23", "end": "2026-11-24", "what": "Posting of grades for graduating students" },
+        { "start": "2026-11-27", "what": "Deadline for completion of INC grades for non-graduating students" },
+        { "start": "2026-11-29", "end": "2026-11-30", "what": "Posting of grades of all students" },
+        { "start": "2027-01-12", "end": "2027-01-15", "what": "Commencement exercises", "key": true }
+      ]
+    },
+    {
+      "id": "second",
+      "name": "Second semester",
+      "events": [
+        { "start": "2026-12-01", "end": "2026-12-04", "what": "Enrollment" },
+        { "start": "2026-12-07", "what": "Start of classes", "key": true },
+        { "start": "2026-12-09", "end": "2026-12-11", "what": "Re-assessment of subjects, late enrollees (adding, changing)" },
+        { "start": "2026-12-18", "what": "Deadline of withdrawal of enrollment" },
+        { "start": "2026-12-21", "end": "2027-01-03", "what": "Holiday break", "key": true },
+        { "start": "2027-02-12", "what": "Deadline of dropping of subjects" },
+        { "start": "2027-02-15", "end": "2027-02-20", "what": "Midterm examination", "key": true },
+        { "start": "2027-03-01", "end": "2027-03-30", "what": "Filing of application for graduation" },
+        { "start": "2027-03-22", "end": "2027-03-25", "what": "College Academic Council" },
+        { "start": "2027-03-28", "end": "2027-03-30", "what": "University Academic Council" },
+        { "start": "2027-04-12", "end": "2027-04-17", "what": "Final exams for graduating students", "key": true },
+        { "start": "2027-04-16", "what": "Final oral defense" },
+        { "start": "2027-04-16", "what": "Deadline for clearing of deficiencies of graduating students" },
+        { "start": "2027-04-19", "end": "2027-04-24", "what": "Final exams for non-graduating students", "key": true },
+        { "start": "2027-04-19", "end": "2027-04-20", "what": "Posting of grades for graduating students" },
+        { "start": "2027-04-24", "what": "End of classes", "key": true },
+        { "start": "2027-04-26", "what": "Semestral break", "key": true },
+        { "start": "2027-04-26", "end": "2027-04-27", "what": "Posting of grades of all students" },
+        { "start": "2027-04-27", "what": "Deadline for completion of INC grades for non-graduating students" },
+        { "start": "2027-06-08", "end": "2027-06-11", "what": "Commencement exercises", "key": true }
+      ]
+    },
+    {
+      "id": "midyear",
+      "name": "Midyear 2027",
+      "events": [
+        { "start": "2027-04-28", "end": "2027-04-30", "what": "Enrollment" },
+        { "start": "2027-05-03", "what": "Start of classes", "key": true },
+        { "start": "2027-05-04", "end": "2027-05-05", "what": "Re-assessment of subjects, late enrollees (adding, changing)" },
+        { "start": "2027-05-07", "what": "Deadline of withdrawal of enrollment" },
+        { "start": "2027-05-19", "what": "Deadline of dropping of subjects" },
+        { "start": "2027-05-20", "end": "2027-05-22", "what": "Midterm examination", "key": true },
+        { "start": "2027-05-25", "end": "2027-06-25", "what": "Filing of application for graduation" },
+        { "start": "2027-06-03", "end": "2027-06-05", "what": "Final exams for graduating students", "key": true },
+        { "start": "2027-06-04", "what": "Final oral defense" },
+        { "start": "2027-06-07", "end": "2027-06-09", "what": "Final exams for non-graduating students", "key": true },
+        { "start": "2027-06-11", "what": "Deadline for clearing of deficiencies of graduating students" },
+        { "start": "2027-06-11", "end": "2027-06-12", "what": "Posting of grades for graduating students" },
+        { "start": "2027-06-12", "what": "End of classes", "key": true },
+        { "start": "2027-06-13", "what": "Semestral break", "key": true },
+        { "start": "2027-06-14", "end": "2027-06-16", "what": "Posting of grades of all students" },
+        { "start": "2027-06-16", "what": "Deadline for completion of INC grades for non-graduating students" },
+        { "start": "2027-06-28", "end": "2027-06-30", "what": "College Academic Council" },
+        { "start": "2027-07-05", "end": "2027-07-09", "what": "University Academic Council" },
+        { "start": "2027-07-23", "what": "Commencement exercises", "key": true }
+      ]
+    }
+  ]
+}

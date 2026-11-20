@@ -1,0 +1,10 @@
+{
+  "name": "tsu-concept",
+  "private": true,
+  "type": "module",
+  "description": "Unofficial front-end rebuild concept of tsu.edu.ph (portfolio case study).",
+  "scripts": {
+    "build": "node build.mjs",
+    "qa": "node qa/check.mjs all"
+  }
+}
